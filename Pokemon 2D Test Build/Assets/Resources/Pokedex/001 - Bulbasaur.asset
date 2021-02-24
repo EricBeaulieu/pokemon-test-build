@@ -4,7 +4,8 @@
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
@@ -22,17 +23,27 @@ MonoBehaviour:
   _weightInKilograms: 0
   _captureRate: 0
   _rewardedEffortValue:
-  - _statAttribute: 0
-    _statValue: 0
-  _frontRegularSprite: {fileID: 0}
-  _frontIntroSprite: {fileID: 0}
-  _shinyFrontRegularSprite: {fileID: 0}
-  _shinyFrontIntroSprite: {fileID: 0}
-  _backRegularSprite: {fileID: 0}
-  _shinyBackIntroSprite: {fileID: 0}
-  _type1: 0
-  _type2: 0
-  _baseGroup: 0
+  - _statAttribute: 4
+    _statValue: 1
+  _frontRegularSprite: {fileID: -2254870784642594650, guid: 49cb5317686a4384eb4521092ad3d7cc,
+    type: 3}
+  _frontIntroSprite: {fileID: 4726197016896861450, guid: 49cb5317686a4384eb4521092ad3d7cc,
+    type: 3}
+  _backRegularSprite: {fileID: -6370906713115598673, guid: 49cb5317686a4384eb4521092ad3d7cc,
+    type: 3}
+  _backIntroSprite: {fileID: -8940828193000548407, guid: 49cb5317686a4384eb4521092ad3d7cc,
+    type: 3}
+  _shinyFrontRegularSprite: {fileID: -6827307981334382390, guid: 49cb5317686a4384eb4521092ad3d7cc,
+    type: 3}
+  _shinyFrontIntroSprite: {fileID: -8940828193000548407, guid: 49cb5317686a4384eb4521092ad3d7cc,
+    type: 3}
+  _shinyBackSprite: {fileID: -2634572815328827260, guid: 49cb5317686a4384eb4521092ad3d7cc,
+    type: 3}
+  _shinyBackIntroSprite: {fileID: -7622956329635982518, guid: 49cb5317686a4384eb4521092ad3d7cc,
+    type: 3}
+  _baseGroup: 3
+  _type1: 10
+  _type2: 14
   _eggGroup1: 11
   _eggGroup2: 7
   _maxHitPoints: 45

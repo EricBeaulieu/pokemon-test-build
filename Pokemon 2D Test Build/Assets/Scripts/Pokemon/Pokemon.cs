@@ -4,28 +4,32 @@ using UnityEngine;
 
 public class Pokemon{
 
-    PokemonBase _base;
-    IndividualValues _individualValues;
-    EffortValues _effortValues;
+    public PokemonBase pokemonBase { get; set; }
+    public IndividualValues individualValues { get; set; }
+    public EffortValues effortValues { get; set; }
     NatureBase _nature;
 
-    int _level;
-    int _currHitPoints;
+    public string currentName { get; set; }
+    public int currentLevel { get; set; }
+    public int currentHitPoints { get; set; }
+    public int currentExperiencePoints { get; set; }
 
     public List<Move> moves { get; set; }
 
 
-    Pokemon(PokemonBase pBase,int pLevel)
+    public Pokemon(PokemonBase pBase,int pLevel)
     {
-        _base = pBase;
-        _level = pLevel;
-        _individualValues = new IndividualValues();
-        _effortValues = new EffortValues();
+        pokemonBase = pBase;
+        currentName = pBase.GetPokedexName();
+        currentLevel = pLevel;
+        individualValues = new IndividualValues();
+        effortValues = new EffortValues();
+        currentHitPoints = maxHitPoints;
 
         moves = new List<Move>();
         foreach(LearnableMove move in pBase.LearnableMoves)
         {
-            if(move.levelLearned <= _level)
+            if(move.levelLearned <= currentLevel)
             {
                 if(moves.Count >=4)
                 {
@@ -38,43 +42,34 @@ public class Pokemon{
 
     #region Stats
 
-    public int currentHitPoints
-    {
-        get { return _currHitPoints; }
-        set
-        {
-            _currHitPoints = value;
-        }
-    }
-
     public int maxHitPoints
     {
-        get { return Mathf.FloorToInt(((_individualValues.maxHitPoints + 2 * _base.maxHitPoints + (_effortValues.maxHitPoints/4)) * _level/100) + 10 + _level); }
+        get { return Mathf.FloorToInt(((individualValues.maxHitPoints + 2 * pokemonBase.maxHitPoints + (effortValues.maxHitPoints/4)) * currentLevel/100) + 10 + currentLevel); }
     }
 
     public int attack
     {
-        get { return Mathf.FloorToInt((((_individualValues.attack + 2 * _base.attack + (_effortValues.attack / 4)) * _level/100) +5 ) * nature.NatureModifier(nature,StatAttribute.Attack)); }
+        get { return Mathf.FloorToInt((((individualValues.attack + 2 * pokemonBase.attack + (effortValues.attack / 4)) * currentLevel / 100) +5 ) * nature.NatureModifier(nature,StatAttribute.Attack)); }
     }
 
     public int defense
     {
-        get { return Mathf.FloorToInt((((_individualValues.defense + 2 * _base.defense + (_effortValues.defense / 4)) * _level / 100) + 5) * nature.NatureModifier(nature, StatAttribute.Defense)); }
+        get { return Mathf.FloorToInt((((individualValues.defense + 2 * pokemonBase.defense + (effortValues.defense / 4)) * currentLevel / 100) + 5) * nature.NatureModifier(nature, StatAttribute.Defense)); }
     }
 
     public int specialAttack
     {
-        get { return Mathf.FloorToInt((((_individualValues.specialAttack + 2 * _base.specialAttack + (_effortValues.specialAttack / 4)) * _level / 100) + 5) * nature.NatureModifier(nature, StatAttribute.SpecialAttack)); }
+        get { return Mathf.FloorToInt((((individualValues.specialAttack + 2 * pokemonBase.specialAttack + (effortValues.specialAttack / 4)) * currentLevel / 100) + 5) * nature.NatureModifier(nature, StatAttribute.SpecialAttack)); }
     }
 
     public int specialDefense
     {
-        get { return Mathf.FloorToInt((((_individualValues.specialDefense + 2 * _base.specialDefense + (_effortValues.specialDefense / 4)) * _level / 100) + 5) * nature.NatureModifier(nature, StatAttribute.SpecialDefense)); }
+        get { return Mathf.FloorToInt((((individualValues.specialDefense + 2 * pokemonBase.specialDefense + (effortValues.specialDefense / 4)) * currentLevel / 100) + 5) * nature.NatureModifier(nature, StatAttribute.SpecialDefense)); }
     }
 
     public int speed
     {
-        get { return Mathf.FloorToInt((((_individualValues.speed + 2 * _base.speed + (_effortValues.speed / 4)) * _level / 100) + 5) * nature.NatureModifier(nature, StatAttribute.Speed)); }
+        get { return Mathf.FloorToInt((((individualValues.speed + 2 * pokemonBase.speed + (effortValues.speed / 4)) * currentLevel / 100) + 5) * nature.NatureModifier(nature, StatAttribute.Speed)); }
     }
 
     #endregion

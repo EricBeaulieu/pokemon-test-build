@@ -37,13 +37,21 @@ public class PokemonBase : ScriptableObject {
     [SerializeField]
     Sprite _frontIntroSprite;
     [SerializeField]
+    Sprite _backRegularSprite;
+    [SerializeField]
+    Sprite _backIntroSprite;
+    [SerializeField]
     Sprite _shinyFrontRegularSprite;
     [SerializeField]
     Sprite _shinyFrontIntroSprite;
     [SerializeField]
-    Sprite _backRegularSprite;
+    Sprite _shinyBackSprite;
     [SerializeField]
     Sprite _shinyBackIntroSprite;
+
+    [Header("Experience Group")]
+    [SerializeField]
+    ExperienceGroup _baseGroup;
 
     [Header("PokemonTypes")]
     [SerializeField]
@@ -52,8 +60,6 @@ public class PokemonBase : ScriptableObject {
     ElementType _type2;
 
     [Header("Egg Information")]
-    [SerializeField]
-    ExperienceGroup _baseGroup;
     [SerializeField]
     EggGroup _eggGroup1;
     [SerializeField]
@@ -89,6 +95,38 @@ public class PokemonBase : ScriptableObject {
         }
     }
 
+    #region Getters/Setters
+
+    public string GetPokedexName()
+    {
+        return _pokedexName;
+    }
+
+    public Sprite[] GetFrontSprite(bool isShiny)
+    {
+        if(isShiny == false)
+        {
+            return new[] { _frontRegularSprite, _frontIntroSprite };
+        }
+        else
+        {
+            return new[] { _shinyFrontRegularSprite, _shinyFrontIntroSprite };
+        }
+    }
+
+    public Sprite[] GetBackSprite(bool isShiny)
+    {
+        if (isShiny == false)
+        {
+            return new[] { _backRegularSprite, _backIntroSprite };
+        }
+        else
+        {
+            return new[] { _shinyBackIntroSprite, _shinyBackIntroSprite };
+        }
+    }
+
+    #endregion
 
     #region Return Pokemon Type
 
