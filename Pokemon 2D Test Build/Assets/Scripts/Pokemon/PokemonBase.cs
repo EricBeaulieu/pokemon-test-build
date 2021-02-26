@@ -9,91 +9,49 @@ public enum ElementType { NA, Bug, Dark, Dragon, Electric, Fairy, Fighting, Fire
 public class PokemonBase : ScriptableObject {
 
     [Header("PokeDex Information")]
-    [SerializeField]
-    int _pokedexNumber;
-    [SerializeField]
-    string _pokedexName;
+    [SerializeField] int _pokedexNumber;
+    [SerializeField] string _pokedexName;
     [TextArea]
-    [SerializeField]
-    string _pokedexDescription;
-    [SerializeField]
-    string _classification;
-    [SerializeField]
-    float _heightInFeet;
-    [SerializeField]
-    float _heightInMeters;
-    [SerializeField]
-    float _weightInPounds;
-    [SerializeField]
-    float _weightInKilograms;
-    [SerializeField]
-    int _captureRate;
-    [SerializeField]
-    List<EarnableEV> _rewardedEffortValue;
+    [SerializeField] string _pokedexDescription;
+    [SerializeField] string _classification;
+    [SerializeField] float _heightInFeet;
+    [SerializeField] float _heightInMeters;
+    [SerializeField] float _weightInPounds;
+    [SerializeField] float _weightInKilograms;
+    [SerializeField] int _captureRate;
+    [SerializeField] List<EarnableEV> _rewardedEffortValue;    
 
     [Header("Sprites")]
-    [SerializeField]
-    Sprite _frontRegularSprite;
-    [SerializeField]
-    Sprite _frontIntroSprite;
-    [SerializeField]
-    Sprite _backRegularSprite;
-    [SerializeField]
-    Sprite _backIntroSprite;
-    [SerializeField]
-    Sprite _shinyFrontRegularSprite;
-    [SerializeField]
-    Sprite _shinyFrontIntroSprite;
-    [SerializeField]
-    Sprite _shinyBackSprite;
-    [SerializeField]
-    Sprite _shinyBackIntroSprite;
+    [SerializeField] Sprite _frontRegularSprite;
+    [SerializeField] Sprite _frontIntroSprite;
+    [SerializeField] Sprite _backRegularSprite;
+    [SerializeField] Sprite _backIntroSprite;
+    [SerializeField] Sprite _shinyFrontRegularSprite;
+    [SerializeField] Sprite _shinyFrontIntroSprite;
+    [SerializeField] Sprite _shinyBackSprite;
+    [SerializeField] Sprite _shinyBackIntroSprite;
 
     [Header("Experience Group")]
-    [SerializeField]
-    ExperienceGroup _baseGroup;
+    [SerializeField] ExperienceGroup _baseGroup;
 
     [Header("PokemonTypes")]
-    [SerializeField]
-    ElementType _type1;
-    [SerializeField]
-    ElementType _type2;
+    [SerializeField] ElementType _type1;
+    [SerializeField] ElementType _type2;
 
     [Header("Egg Information")]
-    [SerializeField]
-    EggGroup _eggGroup1;
-    [SerializeField]
-    EggGroup _eggGroup2;
+    [SerializeField] EggGroup _eggGroup1;
+    [SerializeField] EggGroup _eggGroup2;
 
     [Header("Base Stats")]
-    [SerializeField]
-    int _maxHitPoints;
-    [SerializeField]
-    int _attack;
-    [SerializeField]
-    int _defense;
-    [SerializeField]
-    int _specialAttack;
-    [SerializeField]
-    int _specialDefense;
-    [SerializeField]
-    int _speed;
+    [SerializeField] int _maxHitPoints;
+    [SerializeField] int _attack;
+    [SerializeField] int _defense;
+    [SerializeField] int _specialAttack;
+    [SerializeField] int _specialDefense;
+    [SerializeField] int _speed;
 
     [Header("Moveset")]
     [SerializeField] List<LearnableMove> _learnableMoves;
-
-    PokemonBase()
-    {
-        if(_eggGroup1 == EggGroup.BreedingSelection)
-        {
-            Debug.LogWarning("First Egg group not set", this);
-        }
-        
-        if(_type1 == ElementType.NA)
-        {
-            Debug.LogWarning("First type not set", this);
-        }
-    }
 
     #region Getters/Setters
 

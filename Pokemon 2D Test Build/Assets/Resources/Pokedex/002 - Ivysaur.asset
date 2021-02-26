@@ -14,31 +14,44 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _pokedexNumber: 2
   _pokedexName: Ivysaur
-  _pokedexDescription: 
+  _pokedexDescription: When the bulb on its back grows large, it appears to lose
+    the ability to stand on its hind legs.
   _classification: 
   _heightInFeet: 0
   _heightInMeters: 0
   _weightInPounds: 0
   _weightInKilograms: 0
   _captureRate: 0
-  _rewardedEffortValue: []
-  _frontRegularSprite: {fileID: 0}
-  _frontIntroSprite: {fileID: 0}
-  _backRegularSprite: {fileID: 0}
-  _backIntroSprite: {fileID: 0}
-  _shinyFrontRegularSprite: {fileID: 0}
-  _shinyFrontIntroSprite: {fileID: 0}
-  _shinyBackSprite: {fileID: 0}
-  _shinyBackIntroSprite: {fileID: 0}
-  _baseGroup: 0
-  _type1: 0
-  _type2: 0
-  _eggGroup1: 0
-  _eggGroup2: 0
-  _maxHitPoints: 0
-  _attack: 0
-  _defense: 0
-  _specialAttack: 0
-  _specialDefense: 0
-  _speed: 0
+  _rewardedEffortValue:
+  - _statAttribute: 4
+    _statValue: 1
+  - _statAttribute: 5
+    _statValue: 1
+  _frontRegularSprite: {fileID: -516230598532136055, guid: 49cb5317686a4384eb4521092ad3d7cc,
+    type: 3}
+  _frontIntroSprite: {fileID: 7557013428238602615, guid: 49cb5317686a4384eb4521092ad3d7cc,
+    type: 3}
+  _backRegularSprite: {fileID: -5734590821105790964, guid: 49cb5317686a4384eb4521092ad3d7cc,
+    type: 3}
+  _backIntroSprite: {fileID: -30418783818476046, guid: 49cb5317686a4384eb4521092ad3d7cc,
+    type: 3}
+  _shinyFrontRegularSprite: {fileID: 8058438864855421087, guid: 49cb5317686a4384eb4521092ad3d7cc,
+    type: 3}
+  _shinyFrontIntroSprite: {fileID: 5758312712206293989, guid: 49cb5317686a4384eb4521092ad3d7cc,
+    type: 3}
+  _shinyBackSprite: {fileID: 1080061704783189057, guid: 49cb5317686a4384eb4521092ad3d7cc,
+    type: 3}
+  _shinyBackIntroSprite: {fileID: 2173908319797530956, guid: 49cb5317686a4384eb4521092ad3d7cc,
+    type: 3}
+  _baseGroup: 3
+  _type1: 10
+  _type2: 14
+  _eggGroup1: 11
+  _eggGroup2: 7
+  _maxHitPoints: 60
+  _attack: 62
+  _defense: 63
+  _specialAttack: 80
+  _specialDefense: 80
+  _speed: 60
   _learnableMoves: []

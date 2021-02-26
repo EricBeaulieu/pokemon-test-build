@@ -24,7 +24,7 @@ public class BattleHUD : MonoBehaviour
         _nameText.text = currentPokemon.currentName;
         _levelText.text = currentPokemon.currentLevel.ToString();
         _hPBar.SetHP((float)currentPokemon.currentHitPoints / currentPokemon.maxHitPoints);
-        if(isEnemy)
+        if(isEnemy == false)
         {
             _currentHP.text = currentPokemon.currentHitPoints.ToString();
             _maxHP.text = currentPokemon.maxHitPoints.ToString();

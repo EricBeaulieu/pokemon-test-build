@@ -54,8 +54,10 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\Pokemon\IndividualValues.cs" />
+    <Compile Include="Assets\Scripts\Battle\BattleSystem.cs" />
     <Compile Include="Assets\Scripts\Pokemon\PokemonBase.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerController.cs" />
+    <Compile Include="Assets\Scripts\Battle\ActionSelectionEventSelector.cs" />
     <Compile Include="Assets\CuttableTree.cs" />
     <Compile Include="Assets\Scripts\Mechanics\NatureBase.cs" />
     <Compile Include="Assets\Scripts\Static Tables\ExperienceTable.cs" />
@@ -64,13 +66,15 @@
     <Compile Include="Assets\Scripts\Managers\LevelManager.cs" />
     <Compile Include="Assets\Scripts\Static Tables\EggTable.cs" />
     <Compile Include="Assets\Scripts\Pokemon\Pokemon.cs" />
+    <Compile Include="Assets\Scripts\Battle\BattleDialogBox.cs" />
+    <Compile Include="Assets\AttackSelectionEventSelector.cs" />
+    <Compile Include="Assets\Scripts\Battle\HPBar.cs" />
+    <Compile Include="Assets\Scripts\Battle\BattleHUD.cs" />
     <Compile Include="Assets\Scripts\Pokemon\Move.cs" />
     <Compile Include="Assets\Scripts\Pokemon\MoveBase.cs" />
     <Compile Include="Assets\Scripts\Pokemon\LearnableMove.cs" />
-    <Compile Include="Assets\Scripts\Battle\HPBar.cs" />
-    <Compile Include="Assets\Scripts\Battle\BattleHUD.cs" />
     <Compile Include="Assets\Scripts\Battle\BattleUnit.cs" />
-    <Compile Include="Assets\Scripts\Battle\BattleSystem.cs" />
+    <Compile Include="Assets\Scripts\Battle\AttackButton.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
