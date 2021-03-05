@@ -7,9 +7,14 @@ public class Test : MonoBehaviour {
     public ExperienceGroup testExperienceGroup;
     public NatureBase testNature;
 
-	// Use this for initialization
-	void Start () {
+    public ElementType attacktype = ElementType.Bug;
+    public ElementType defenderType = ElementType.Dark;
+    public ElementType defenderType2 = ElementType.NA;
+
+    // Use this for initialization
+    void Start () {
         TestNatureName(testNature);
+        //TestTypeChart();
 	}
 
     void TestNatureName(NatureBase currentNature)
@@ -17,6 +22,11 @@ public class Test : MonoBehaviour {
         Debug.Log(currentNature.natureName);
     }
 
+    //void TestTypeChart()
+    //{
+    //    float effectiveness = DamageModifiers.TypeChartEffectiveness(defenderType, attacktype);
+    //    Debug.Log($"{defenderType} DefenderType + {attacktype} AttackType = {effectiveness}");
+    //}
 
     void TestExpTable()
     {

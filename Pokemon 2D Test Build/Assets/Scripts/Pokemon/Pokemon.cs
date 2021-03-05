@@ -16,7 +16,6 @@ public class Pokemon{
 
     public List<Move> moves { get; set; }
 
-
     public Pokemon(PokemonBase pBase,int pLevel)
     {
         pokemonBase = pBase;
@@ -25,6 +24,7 @@ public class Pokemon{
         individualValues = new IndividualValues();
         effortValues = new EffortValues();
         currentHitPoints = maxHitPoints;
+        nature = SetNature();
 
         moves = new List<Move>();
         foreach(LearnableMove move in pBase.LearnableMoves)
@@ -81,5 +81,83 @@ public class Pokemon{
         {
             _nature = value;
         }
+    }
+
+    public NatureBase SetNature()
+    {
+        NatureBase[] natureBases;
+
+        natureBases = Resources.LoadAll<NatureBase>("Natures");
+        return natureBases[Random.Range(0, natureBases.Length)];
+    }
+
+    public DamageDetails TakeDamage(MoveBase move,Pokemon attackingPokemon)
+    {
+        DamageDetails damageDetails = new DamageDetails()
+        {
+            hasFainted =false,
+            criticalHit = 1,
+            typeEffectiveness = 1
+        };
+
+        damageDetails.typeEffectiveness = DamageModifiers.TypeChartEffectiveness(pokemonBase, move.type);
+
+        if(damageDetails.typeEffectiveness == 0)//If it doesnt effect the pokemon then just end it right here
+        {
+            return damageDetails;
+        }
+
+        if(Random.value * 100 <= 6.25f)
+        {
+            damageDetails.criticalHit = 1.5f;
+            //If sniper then make 2.25
+        }
+
+        float modifier = damageDetails.criticalHit * damageDetails.typeEffectiveness;
+        modifier *= DamageModifiers.StandardRandomAttackPowerModifier();
+        modifier *= DamageModifiers.SameTypeAttackBonus(move, attackingPokemon.pokemonBase);
+
+        float attackPower = 0;
+        float defendersDefense = 0;
+
+        switch (move.moveType)
+        {
+            case MoveType.Physical:
+                attackPower = attackingPokemon.attack;
+                defendersDefense = defense;
+                break;
+            case MoveType.Special:
+                attackPower = attackingPokemon.specialAttack;
+                defendersDefense = specialDefense;
+                break;
+            case MoveType.Status:
+                break;
+            default:
+                Debug.Log("BROKEN FORMULA");
+                break;
+        }
+
+        int damage = Mathf.FloorToInt((((((2 * attackingPokemon.currentLevel) / 5) + 2) * move.power * attackPower / defendersDefense / 50) + 2) * modifier);
+
+        if(damage <=0)
+        {
+            damage = 1;
+        }
+
+        currentHitPoints -= damage;
+
+        if(currentHitPoints <= 0)
+        {
+            currentHitPoints = 0;
+            damageDetails.hasFainted = true;
+        }
+
+        return damageDetails;
+    }
+
+    public Move ReturnRandomMove()
+    {
+        int r = Random.Range(0, moves.Count);
+        return moves[r];
     }
 }

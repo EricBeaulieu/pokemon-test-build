@@ -11,6 +11,9 @@ public class AttackSelectionEventSelector : MonoBehaviour
     [SerializeField] Text pPText;
     [SerializeField] Text typeText;
 
+    BattleUnit _battleUnit;
+    BattleSystem _battleSystem;//used for reference
+
     private void Awake()
     {
         if(_moveButton.Length != 4)
@@ -41,14 +44,31 @@ public class AttackSelectionEventSelector : MonoBehaviour
         {
             if(i < moves.Count)
             {
+                int k = i;
                 _moveButton[i].SetActive(true);
                 _moveButton[i].GetComponentInChildren<Text>().text = moves[i].moveBase.moveName;
-                _moveButton[i].GetComponentInChildren<AttackButton>().SetMove(moves[i]);
+                _moveButton[i].GetComponent<AttackButton>().SetMove(moves[i]);
+                _moveButton[i].GetComponent<Button>().onClick.RemoveAllListeners();
+                _moveButton[i].GetComponent<Button>().onClick.AddListener(() => 
+                {
+                    _battleSystem.AttackSelected(_battleUnit.pokemon, moves[k].moveBase);
+                    EventSystem.current.SetSelectedGameObject(null);
+                });
             }
             else
             {
                 _moveButton[i].SetActive(false);
             }
         }
+    }
+
+    public void SetReferenceToBattleSystem(BattleSystem battleSystem)
+    {
+        _battleSystem = battleSystem;
+    }
+
+    public void SetReferenceToCurrentPokemon(BattleUnit battleUnit)
+    {
+        _battleUnit = battleUnit;
     }
 }

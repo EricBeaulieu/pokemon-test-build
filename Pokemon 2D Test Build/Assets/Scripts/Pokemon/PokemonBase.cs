@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum ElementType { NA, Bug, Dark, Dragon, Electric, Fairy, Fighting, Fire, Flying, Ghost,
+public enum ElementType { NA = -1, Bug, Dark, Dragon, Electric, Fairy, Fighting, Fire, Flying, Ghost,
                           Grass, Ground, Ice, Normal, Poison, Psychic, Rock, Steel, Water}
 
 [CreateAssetMenu(menuName = "Pokedex/Create New Pokemon Entry")]

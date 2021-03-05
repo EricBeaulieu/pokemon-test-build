@@ -1232,6 +1232,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   testExperienceGroup: 0
   testNature: {fileID: 11400000, guid: f91abf718bd77a947b2b68471ca12d5d, type: 2}
+  attacktype: 16
+  defenderType: 0
+  defenderType2: -1
 --- !u!4 &383871176
 Transform:
   m_ObjectHideFlags: 0
@@ -2665,7 +2668,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _pBase: {fileID: 11400000, guid: a5077a98ad912594f8e38408d3ce9f02, type: 2}
   _level: 100
-  _pokemonSprite: {fileID: 1987468291}
   _isPlayersPokemon: 1
 --- !u!1 &801035829
 GameObject:
@@ -3228,8 +3230,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _pBase: {fileID: 11400000, guid: bade22afe7cd4784db56d42b0b18940e, type: 2}
-  _level: 100
-  _pokemonSprite: {fileID: 504798851}
+  _level: 1
   _isPlayersPokemon: 0
 --- !u!1 &1143419831
 GameObject:

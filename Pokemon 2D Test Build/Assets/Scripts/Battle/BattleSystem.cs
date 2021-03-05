@@ -17,6 +17,12 @@ public class BattleSystem : MonoBehaviour
 
     BattleState _state;
 
+    void Awake()
+    {
+        _attackSelectionEventSelector.SetReferenceToBattleSystem(this);
+
+    }
+
     void Start()
     {
         StartCoroutine(SetupBattle());
@@ -30,10 +36,10 @@ public class BattleSystem : MonoBehaviour
         _enemyBattleHud.SetData(_enemyBattleUnit.pokemon, true);
 
         _dialogBox.BattleStartSetup();
+        _attackSelectionEventSelector.SetReferenceToCurrentPokemon(_playerBattleUnit);
         _attackSelectionEventSelector.SetMovesList(_playerBattleUnit.pokemon.moves);
 
         yield return _dialogBox.TypeDialog($"A wild {_enemyBattleUnit.pokemon.currentName} has appeared!");
-        yield return new WaitForSeconds(1f);
 
         PlayerActions();
     }
@@ -56,9 +62,9 @@ public class BattleSystem : MonoBehaviour
         EnableMoveSelector(true);
     }
 
-    void EnableActionSelector(bool enable)
+    void EnableActionSelector(bool enabled)
     {
-        _dialogBox.EnableActionSelector(true);
+        _dialogBox.EnableActionSelector(enabled);
         if(enabled == true)
         {
             _actionSelectionEventSelector.SelectFirstBox();
@@ -67,10 +73,92 @@ public class BattleSystem : MonoBehaviour
 
     void EnableMoveSelector(bool enabled)
     {
-        _dialogBox.EnableMoveSelector(true);
+        _dialogBox.EnableMoveSelector(enabled);
         if (enabled == true)
         {
             _attackSelectionEventSelector.SelectFirstBox();
+        }
+    }
+
+    public void AttackSelected(Pokemon pokemon, MoveBase moveBase)
+    {
+        EnableMoveSelector(false);
+        StartCoroutine(AttackSelectedCoroutine(pokemon, moveBase));
+    }
+
+    public IEnumerator AttackSelectedCoroutine(Pokemon pokemon,MoveBase moveBase)
+    {
+        yield return _dialogBox.TypeDialog($"{pokemon.currentName} used {moveBase.moveName}");
+
+        _playerBattleUnit.PlayAttackAnimation();
+        yield return new WaitForSeconds(1f);
+
+        _enemyBattleUnit.PlayHitAnimation();
+        int hpPriorToAttack = _enemyBattleUnit.pokemon.currentHitPoints;//for the animator in UpdateHP
+        DamageDetails damageDetails = _enemyBattleUnit.pokemon.TakeDamage(moveBase, pokemon);
+
+        yield return _enemyBattleHud.UpdateHP(hpPriorToAttack);
+        yield return ShowDamageDetails(damageDetails, _enemyBattleUnit);
+
+        if(damageDetails.hasFainted == true)
+        {
+            yield return _dialogBox.TypeDialog($"{_enemyBattleUnit.pokemon.currentName} has fainted");
+            _enemyBattleUnit.PlayFaintAnimation();
+            //apply experience here
+        }
+        else
+        {
+            StartCoroutine(EnemyMove());
+        }
+    }
+
+    public IEnumerator EnemyMove()
+    {
+        Move currentAttack = _enemyBattleUnit.pokemon.ReturnRandomMove();
+
+        yield return _dialogBox.TypeDialog($"{_enemyBattleUnit.pokemon.currentName} used {currentAttack.moveBase.moveName}");
+
+        _enemyBattleUnit.PlayAttackAnimation();
+        yield return new WaitForSeconds(1f);
+
+        _playerBattleUnit.PlayHitAnimation();
+        int hpPriorToAttack = _playerBattleUnit.pokemon.currentHitPoints;
+        DamageDetails damageDetails = _playerBattleUnit.pokemon.TakeDamage(currentAttack.moveBase, _enemyBattleUnit.pokemon);
+
+        yield return _playerBattleHud.UpdateHP(hpPriorToAttack);
+        yield return ShowDamageDetails(damageDetails, _playerBattleUnit);
+
+        if (damageDetails.hasFainted == true)
+        {
+            yield return _dialogBox.TypeDialog($"{_playerBattleUnit.pokemon.currentName} has fainted");
+            _playerBattleUnit.PlayFaintAnimation();
+            //apply experience here
+        }
+        else
+        {
+            //End turn
+            PlayerActions();
+        }
+    }
+
+    IEnumerator ShowDamageDetails(DamageDetails damageDetails,BattleUnit battleUnit)
+    {
+        if(damageDetails.criticalHit > 1f)
+        {
+            yield return _dialogBox.TypeDialog("A Critical Hit!");
+        }
+
+        if(damageDetails.typeEffectiveness == 0)
+        {
+            yield return _dialogBox.TypeDialog($"It doesnt effect {battleUnit.pokemon.currentName}");
+        }
+        else if(damageDetails.typeEffectiveness <= 0.5f)
+        {
+            yield return _dialogBox.TypeDialog($"It's not very effective");
+        }
+        else if(damageDetails.typeEffectiveness > 1f)
+        {
+            yield return _dialogBox.TypeDialog($"It's super effective!");
         }
     }
 }
