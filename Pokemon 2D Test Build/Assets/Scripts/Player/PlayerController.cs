@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,6 +11,8 @@ public class PlayerController : MonoBehaviour
 
     bool _isMoving;
     bool _isRunning;
+
+    public event Action OnEncounter;
 
     Vector2 _currentInput;
 
@@ -48,7 +51,8 @@ public class PlayerController : MonoBehaviour
         solidObjectLayermask = LayerMask.GetMask("SolidObjects");
         grassLayer = LayerMask.GetMask("Grass");
     }
-    void Update()
+
+    public void HandleUpdate()
     {
         if(Input.GetKeyDown(KeyCode.Space))
         {
@@ -127,7 +131,8 @@ public class PlayerController : MonoBehaviour
     {
         if (Physics2D.OverlapCircle(transform.position, 0.25f, grassLayer) != null)
         {
-            Debug.Log("Wild pokemon encountered");
+            _anim.SetBool("isMoving", false);
+            OnEncounter();
         }
     }
 }

@@ -5,14 +5,6 @@ using UnityEngine.UI;
 
 public class BattleUnit : MonoBehaviour
 {
-
-    //Testing
-    [SerializeField]
-    PokemonBase _pBase;
-    [SerializeField]
-    int _level;
-    //
-
     Image _pokemonSprite;
     Vector3 originalPosition;
     [SerializeField]
@@ -26,10 +18,8 @@ public class BattleUnit : MonoBehaviour
         originalPosition = _pokemonSprite.rectTransform.localPosition;
     }
 
-    public void Setup()
+    public void Setup(Pokemon pokemon)
     {
-        pokemon = new Pokemon(_pBase, _level);
-
         if(_isPlayersPokemon)
         {
             _pokemonSprite.sprite = pokemon.pokemonBase.GetBackSprite(false)[0];
@@ -38,6 +28,8 @@ public class BattleUnit : MonoBehaviour
         {
             _pokemonSprite.sprite = pokemon.pokemonBase.GetFrontSprite(false)[0];
         }
+
+        this.pokemon = pokemon;
 
         PlayEnterAnimation();
     }

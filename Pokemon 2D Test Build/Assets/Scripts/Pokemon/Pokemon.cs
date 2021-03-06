@@ -2,32 +2,37 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[System.Serializable]
 public class Pokemon{
 
-    public PokemonBase pokemonBase { get; set; }
+    //Used for testing, will be fixed later
+    [SerializeField] PokemonBase _pokemonBase;
+    public PokemonBase pokemonBase { get { return _pokemonBase; } set { _pokemonBase = value; } }
     public IndividualValues individualValues { get; set; }
     public EffortValues effortValues { get; set; }
     NatureBase _nature;
 
-    public string currentName { get; set; }
-    public int currentLevel { get; set; }
+    string _currentName;
+    //Used for testing, will be fixed later
+    [SerializeField] int _level;
+    public int currentLevel { get { return _level; } set { _level = value; } }
     public int currentHitPoints { get; set; }
     public int currentExperiencePoints { get; set; }
 
     public List<Move> moves { get; set; }
 
-    public Pokemon(PokemonBase pBase,int pLevel)
+    public void Initialization()
     {
-        pokemonBase = pBase;
-        currentName = pBase.GetPokedexName();
-        currentLevel = pLevel;
+
+        currentName = currentName == null ? _pokemonBase.GetPokedexName() : currentName;
+
         individualValues = new IndividualValues();
         effortValues = new EffortValues();
         currentHitPoints = maxHitPoints;
         nature = SetNature();
 
         moves = new List<Move>();
-        foreach(LearnableMove move in pBase.LearnableMoves)
+        foreach(LearnableMove move in _pokemonBase.LearnableMoves)
         {
             if(move.levelLearned <= currentLevel)
             {
@@ -159,5 +164,14 @@ public class Pokemon{
     {
         int r = Random.Range(0, moves.Count);
         return moves[r];
+    }
+
+    public string currentName
+    {
+        get { return _currentName; }
+        set
+        {
+            _currentName = value;
+        }
     }
 }

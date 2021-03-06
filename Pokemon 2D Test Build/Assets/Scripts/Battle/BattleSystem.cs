@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,33 +12,43 @@ public class BattleSystem : MonoBehaviour
     [SerializeField] BattleUnit _enemyBattleUnit;
     [SerializeField] BattleHUD _enemyBattleHud;
 
+    public event Action<bool> OnBattleOver;
+
     [SerializeField] BattleDialogBox _dialogBox;
     [SerializeField] ActionSelectionEventSelector _actionSelectionEventSelector;
     [SerializeField] AttackSelectionEventSelector _attackSelectionEventSelector;
 
-    BattleState _state;
+    PokemonParty _playerParty;
+    Pokemon _wildPokemon;
 
-    void Awake()
+    void Update()
     {
-        _attackSelectionEventSelector.SetReferenceToBattleSystem(this);
-
+        if(Input.GetButtonDown("Fire2"))
+        {
+            if(_attackSelectionEventSelector.isActiveAndEnabled == true)
+            {
+                EnableActionSelector(true);
+                EnableMoveSelector(false);
+            }
+        }
     }
 
-    void Start()
+    public void StartBattle(PokemonParty playerParty,Pokemon wildPokemon)
     {
+        _playerParty = playerParty;
+        _wildPokemon = wildPokemon;
         StartCoroutine(SetupBattle());
     }
 
     IEnumerator SetupBattle()
     {
-        _playerBattleUnit.Setup();
+        _playerBattleUnit.Setup(_playerParty.GetFirstHealthyPokemon());
         _playerBattleHud.SetData(_playerBattleUnit.pokemon,false);
-        _enemyBattleUnit.Setup();
+        _enemyBattleUnit.Setup(_wildPokemon);
         _enemyBattleHud.SetData(_enemyBattleUnit.pokemon, true);
 
         _dialogBox.BattleStartSetup();
-        _attackSelectionEventSelector.SetReferenceToCurrentPokemon(_playerBattleUnit);
-        _attackSelectionEventSelector.SetMovesList(_playerBattleUnit.pokemon.moves);
+        _attackSelectionEventSelector.SetMovesList(_playerBattleUnit,_playerBattleUnit.pokemon.moves,this);
 
         yield return _dialogBox.TypeDialog($"A wild {_enemyBattleUnit.pokemon.currentName} has appeared!");
 
@@ -46,9 +57,7 @@ public class BattleSystem : MonoBehaviour
 
     void PlayerActions()
     {
-        _state = BattleState.PlayerAction;
-
-        StartCoroutine(_dialogBox.TypeDialog($"What will {_playerBattleUnit.pokemon.currentName} do?"));
+        _dialogBox.SetDialogText($"What will {_playerBattleUnit.pokemon.currentName} do?");
         EnableActionSelector(true);
 
         _actionSelectionEventSelector.ReturnFightButton().onClick.AddListener(delegate { PlayerFight(); });
@@ -56,7 +65,6 @@ public class BattleSystem : MonoBehaviour
 
     void PlayerFight()//Player Selected the Fight Button
     {
-        _state = BattleState.PlayerMove;
 
         EnableActionSelector(false);
         EnableMoveSelector(true);
@@ -80,10 +88,10 @@ public class BattleSystem : MonoBehaviour
         }
     }
 
-    public void AttackSelected(Pokemon pokemon, MoveBase moveBase)
+    public void AttackSelected(BattleUnit currentPokemon, MoveBase moveBase)
     {
         EnableMoveSelector(false);
-        StartCoroutine(AttackSelectedCoroutine(pokemon, moveBase));
+        StartCoroutine(AttackSelectedCoroutine(currentPokemon.pokemon, moveBase));
     }
 
     public IEnumerator AttackSelectedCoroutine(Pokemon pokemon,MoveBase moveBase)
@@ -105,6 +113,9 @@ public class BattleSystem : MonoBehaviour
             yield return _dialogBox.TypeDialog($"{_enemyBattleUnit.pokemon.currentName} has fainted");
             _enemyBattleUnit.PlayFaintAnimation();
             //apply experience here
+
+            yield return new WaitForSeconds(2f);
+            OnBattleOver(true);
         }
         else
         {
@@ -133,6 +144,26 @@ public class BattleSystem : MonoBehaviour
             yield return _dialogBox.TypeDialog($"{_playerBattleUnit.pokemon.currentName} has fainted");
             _playerBattleUnit.PlayFaintAnimation();
             //apply experience here
+
+            yield return new WaitForSeconds(2f);
+
+            Pokemon nextPokemon = _playerParty.GetFirstHealthyPokemon();
+            if(nextPokemon != null)
+            {
+                _playerBattleUnit.Setup(nextPokemon);
+                _playerBattleHud.SetData(nextPokemon, false);
+
+                _attackSelectionEventSelector.SetMovesList(_playerBattleUnit, _playerBattleUnit.pokemon.moves,this);
+
+                yield return _dialogBox.TypeDialog($"Go {nextPokemon.currentName}!");
+
+                PlayerActions();
+            }
+            else
+            {
+                OnBattleOver(false);
+            }
+
         }
         else
         {
