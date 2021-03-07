@@ -70,7 +70,8 @@
     <Compile Include="Assets\Scripts\Battle\AttackButton.cs" />
     <Compile Include="Assets\Scripts\Battle\BattleDialogBox.cs" />
     <Compile Include="Assets\Scripts\Battle\AttackSelectionEventSelector.cs" />
-    <Compile Include="Assets\Scripts\Battle\HPBar.cs" />
+    <Compile Include="Assets\Scripts\Pokemon\PokemonParty.cs" />
+    <Compile Include="Assets\Scripts\Mechanics\HPBar.cs" />
     <Compile Include="Assets\Scripts\Battle\BattleHUD.cs" />
     <Compile Include="Assets\Scripts\Static Tables\DamageModifiers.cs" />
     <Compile Include="Assets\Scripts\Pokemon\Move.cs" />
@@ -78,7 +79,8 @@
     <Compile Include="Assets\Scripts\Pokemon\LearnableMove.cs" />
     <Compile Include="Assets\Scripts\Battle\BattleUnit.cs" />
     <Compile Include="Assets\Scripts\Managers\GameController.cs" />
-    <Compile Include="Assets\Scripts\Pokemon\PokemonParty.cs" />
+    <Compile Include="Assets\Scripts\Party\PartyMemberUI.cs" />
+    <Compile Include="Assets\Scripts\Party\PartySystem.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
