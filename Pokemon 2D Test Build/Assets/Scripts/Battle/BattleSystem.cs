@@ -13,6 +13,7 @@ public class BattleSystem : MonoBehaviour
     [SerializeField] BattleHUD _enemyBattleHud;
 
     public event Action<bool> OnBattleOver;
+    public event Action<bool> OpenPokemonParty;
 
     [SerializeField] BattleDialogBox _dialogBox;
     [SerializeField] ActionSelectionEventSelector _actionSelectionEventSelector;
@@ -60,14 +61,20 @@ public class BattleSystem : MonoBehaviour
         _dialogBox.SetDialogText($"What will {_playerBattleUnit.pokemon.currentName} do?");
         EnableActionSelector(true);
 
-        _actionSelectionEventSelector.ReturnFightButton().onClick.AddListener(delegate { PlayerFight(); });
+        _actionSelectionEventSelector.ReturnFightButton().onClick.AddListener(delegate { PlayerActionFight(); });
+        _actionSelectionEventSelector.ReturnPokemonButton().onClick.AddListener(delegate { PlayerActionPokemon(); });
     }
 
-    void PlayerFight()//Player Selected the Fight Button
+    void PlayerActionFight()//Player Selected the Fight Button
     {
 
         EnableActionSelector(false);
         EnableMoveSelector(true);
+    }
+
+    void PlayerActionPokemon()
+    {
+        OpenPokemonParty(true);
     }
 
     void EnableActionSelector(bool enabled)

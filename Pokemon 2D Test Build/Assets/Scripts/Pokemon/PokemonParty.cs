@@ -19,4 +19,9 @@ public class PokemonParty : MonoBehaviour
     {
         return pokemonParty.Where(x => x.currentHitPoints > 0).FirstOrDefault();
     }
+
+    public List<Pokemon> CurrentPokemonList()
+    {
+        return pokemonParty;
+    }
 }

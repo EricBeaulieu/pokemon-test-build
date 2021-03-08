@@ -4,9 +4,10 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class PartyMemberUI : MonoBehaviour
+public class PartyMemberUI : MonoBehaviour, ISelectHandler, IDeselectHandler
 {
     Pokemon _pokemon;
+    bool _isFirstSlot = false;
 
     [SerializeField] Text nameText;
     [SerializeField] Text levelText;
@@ -19,25 +20,36 @@ public class PartyMemberUI : MonoBehaviour
 
     [SerializeField] Image background;
 
-    
-
-    public void SetData(Pokemon currentPokemon)
+    public void SetData(Pokemon currentPokemon,int slotPosition)
     {
         _pokemon = currentPokemon;
+        if(slotPosition == 0)
+        {
+            _isFirstSlot = true;
+        }
 
         nameText.text = currentPokemon.currentName;
         levelText.text = currentPokemon.currentLevel.ToString();
         hPBar.SetHP((float)currentPokemon.currentHitPoints / currentPokemon.maxHitPoints);
-        currentHP.text = $"PP {currentPokemon.currentHitPoints.ToString()}/{currentPokemon.maxHitPoints.ToString()}";
+        currentHP.text = $"{currentPokemon.currentHitPoints.ToString()}/{currentPokemon.maxHitPoints.ToString()}";
+
+
+        _animatedSprite = currentPokemon.pokemonBase.GetAnimatedSprites();
+        //Will be changed later on
+        pokemonSprite.sprite = _animatedSprite[0];
     }
 
     public void OnSelect(BaseEventData eventData)
     {
         Debug.Log(this.gameObject.name + " was selected", this.gameObject);
 
-        if(_pokemon.currentHitPoints > 0)
-        {
-            //background.sprite = StaticPartyBackgrounds.firstPartyMemberFaintedSelectedBackground;
-        }
+        background.sprite = PartyBackgroundArt.instance.ReturnBackgroundArt(_pokemon.currentHitPoints, _isFirstSlot, true);
+    }
+
+    public void OnDeselect(BaseEventData eventData)
+    {
+        Debug.Log(this.gameObject.name + " was Deselected", this.gameObject);
+
+        background.sprite = PartyBackgroundArt.instance.ReturnBackgroundArt(_pokemon.currentHitPoints, _isFirstSlot, false);
     }
 }

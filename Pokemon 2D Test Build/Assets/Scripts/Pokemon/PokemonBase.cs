@@ -30,6 +30,8 @@ public class PokemonBase : ScriptableObject {
     [SerializeField] Sprite _shinyFrontIntroSprite;
     [SerializeField] Sprite _shinyBackSprite;
     [SerializeField] Sprite _shinyBackIntroSprite;
+    [SerializeField] Sprite _standardSpriteA;
+    [SerializeField] Sprite _standardSpriteB;
 
     [Header("Experience Group")]
     [SerializeField] ExperienceGroup _baseGroup;
@@ -82,6 +84,15 @@ public class PokemonBase : ScriptableObject {
         {
             return new[] { _shinyBackIntroSprite, _shinyBackIntroSprite };
         }
+    }
+
+    /// <summary>
+    /// gets both animations of the sprite available
+    /// </summary>
+    /// <returns>returns an array of the animated sprite</returns>
+    public Sprite[] GetAnimatedSprites()
+    {
+        return new[] { _standardSpriteA, _standardSpriteB };
     }
 
     #endregion
