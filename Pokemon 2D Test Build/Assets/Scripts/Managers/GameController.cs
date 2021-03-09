@@ -18,6 +18,9 @@ public class GameController : MonoBehaviour
         playerController.OnEncounter += StartBattle;
         battleSystem.OnBattleOver += EndBattle;
         battleSystem.OpenPokemonParty += OpenParty;
+
+        //Clean this up later, just get it working for now and then clean up the code later
+        partySystem.battleSystemReference = battleSystem;
     }
 
     void Update()
@@ -60,8 +63,8 @@ public class GameController : MonoBehaviour
     {
         _state = GameState.Party;
         partySystem.gameObject.SetActive(true);
-        partySystem.SetPartyData(playerController.GetComponent<PokemonParty>().CurrentPokemonList());
-        partySystem.SelectFirstBox();
+        partySystem.SetPartyData(playerController.GetComponent<PokemonParty>().CurrentPokemonList(),inBattle);
+        partySystem.OpenPartySystem();
     }
 
     void CloseParty(bool inBattle)

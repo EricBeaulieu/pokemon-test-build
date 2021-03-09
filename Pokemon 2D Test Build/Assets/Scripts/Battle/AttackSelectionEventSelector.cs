@@ -25,6 +25,9 @@ public class AttackSelectionEventSelector : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// When the Fight Button is clicked this ensures that it is selected on the move 1 button
+    /// </summary>
     public void SelectFirstBox()
     {
         EventSystem.current.SetSelectedGameObject(null);
@@ -36,6 +39,12 @@ public class AttackSelectionEventSelector : MonoBehaviour
         return _moveButton[moveNumber].GetComponent<Button>();
     }
 
+    /// <summary>
+    /// Sets up the moves in the location for when the pokemon is going to fight
+    /// </summary>
+    /// <param name="currentPokemon">The current Battle Unit Pokemon</param>
+    /// <param name="moves">All available moves</param>
+    /// <param name="currentBattleSystem">A reference to the battle system that gets passed down</param>
     public void SetMovesList(BattleUnit currentPokemon, List<Move> moves,BattleSystem currentBattleSystem)
     {
         for (int i = 0; i < _moveButton.Length; i++)
@@ -60,14 +69,4 @@ public class AttackSelectionEventSelector : MonoBehaviour
             }
         }
     }
-
-    //public void SetReferenceToBattleSystem(BattleSystem battleSystem)
-    //{
-    //    _battleSystem = battleSystem;
-    //}
-
-    //public void SetReferenceToCurrentPokemon(BattleUnit battleUnit)
-    //{
-    //    _battleUnit = battleUnit;
-    //}
 }

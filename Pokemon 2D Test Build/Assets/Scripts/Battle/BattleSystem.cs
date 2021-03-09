@@ -24,12 +24,13 @@ public class BattleSystem : MonoBehaviour
 
     void Update()
     {
+        //If B button is pressed go back a menu
         if(Input.GetButtonDown("Fire2"))
         {
             if(_attackSelectionEventSelector.isActiveAndEnabled == true)
             {
                 EnableActionSelector(true);
-                EnableMoveSelector(false);
+                EnableAttackMoveSelector(false);
             }
         }
     }
@@ -41,6 +42,10 @@ public class BattleSystem : MonoBehaviour
         StartCoroutine(SetupBattle());
     }
 
+    /// <summary>
+    /// Goes through animations and sets up both the current pokemon and the enemy pokemon, 
+    /// all available attacks along with their PP and names
+    /// </summary>
     IEnumerator SetupBattle()
     {
         _playerBattleUnit.Setup(_playerParty.GetFirstHealthyPokemon());
@@ -56,6 +61,12 @@ public class BattleSystem : MonoBehaviour
         PlayerActions();
     }
 
+    #region Player Actions
+
+    /// <summary>
+    /// sets up the players action box, with the cursor/event system selected on the first box
+    /// Sets up the listeners for all the current selections
+    /// </summary>
     void PlayerActions()
     {
         _dialogBox.SetDialogText($"What will {_playerBattleUnit.pokemon.currentName} do?");
@@ -65,28 +76,44 @@ public class BattleSystem : MonoBehaviour
         _actionSelectionEventSelector.ReturnPokemonButton().onClick.AddListener(delegate { PlayerActionPokemon(); });
     }
 
-    void PlayerActionFight()//Player Selected the Fight Button
+    /// <summary>
+    /// Player Selected the Fight Button
+    /// </summary>
+    void PlayerActionFight()
     {
 
         EnableActionSelector(false);
-        EnableMoveSelector(true);
+        EnableAttackMoveSelector(true);
     }
 
+    /// <summary>
+    /// Player Selected The Pokemon Button
+    /// </summary>
     void PlayerActionPokemon()
     {
         OpenPokemonParty(true);
     }
 
+    /// <summary>
+    /// Turns on the Action Box, with all available buttons (Fight,Bag,Pokemon and Run) and selects the first option
+    /// </summary>
+    /// <param name="enabled"></param>
     void EnableActionSelector(bool enabled)
     {
         _dialogBox.EnableActionSelector(enabled);
-        if(enabled == true)
+        if (enabled == true)
         {
             _actionSelectionEventSelector.SelectFirstBox();
         }
     }
 
-    void EnableMoveSelector(bool enabled)
+    #endregion
+
+    /// <summary>
+    /// Turns on/off the current Dialog box and the updater for the PP system as well as the type of move it is
+    /// </summary>
+    /// <param name="enabled"></param>
+    void EnableAttackMoveSelector(bool enabled)
     {
         _dialogBox.EnableMoveSelector(enabled);
         if (enabled == true)
@@ -95,9 +122,14 @@ public class BattleSystem : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Called from the attack button listener passing the correct information to process through what pokemon did what attack
+    /// </summary>
+    /// <param name="currentPokemon">Current Battle Unit Pokemon</param>
+    /// <param name="moveBase">Current Move Being Used</param>
     public void AttackSelected(BattleUnit currentPokemon, MoveBase moveBase)
     {
-        EnableMoveSelector(false);
+        EnableAttackMoveSelector(false);
         StartCoroutine(AttackSelectedCoroutine(currentPokemon.pokemon, moveBase));
     }
 
@@ -157,12 +189,13 @@ public class BattleSystem : MonoBehaviour
             Pokemon nextPokemon = _playerParty.GetFirstHealthyPokemon();
             if(nextPokemon != null)
             {
-                _playerBattleUnit.Setup(nextPokemon);
-                _playerBattleHud.SetData(nextPokemon, false);
+                OpenPokemonParty(true);
+                //_playerBattleUnit.Setup(nextPokemon);
+                //_playerBattleHud.SetData(nextPokemon, false);
 
-                _attackSelectionEventSelector.SetMovesList(_playerBattleUnit, _playerBattleUnit.pokemon.moves,this);
+                //_attackSelectionEventSelector.SetMovesList(_playerBattleUnit, _playerBattleUnit.pokemon.moves,this);
 
-                yield return _dialogBox.TypeDialog($"Go {nextPokemon.currentName}!");
+                //yield return _dialogBox.TypeDialog($"Go {nextPokemon.currentName}!");
 
                 PlayerActions();
             }
@@ -198,5 +231,41 @@ public class BattleSystem : MonoBehaviour
         {
             yield return _dialogBox.TypeDialog($"It's super effective!");
         }
+    }
+
+    public Pokemon GetCurrentPokemonInBattle
+    {
+        get { return _playerBattleUnit.pokemon; }
+    }
+
+    public void SwitchPokemon(Pokemon newPokemon)
+    {
+        StartCoroutine(SwitchPokemonIEnumerator(newPokemon));
+        EnableActionSelector(false);
+    }
+
+    IEnumerator SwitchPokemonIEnumerator(Pokemon newPokemon)
+    {
+
+        if (_playerBattleUnit.pokemon.currentHitPoints > 0)
+        {
+            yield return _dialogBox.TypeDialog($"Come Back {_playerBattleUnit.pokemon.currentName}!");
+            _playerBattleUnit.PlayFaintAnimation();
+            yield return new WaitForSeconds(2f);
+        }
+
+        _playerBattleUnit.Setup(newPokemon);
+        _playerBattleHud.SetData(newPokemon, false);
+
+        _attackSelectionEventSelector.SetMovesList(_playerBattleUnit, _playerBattleUnit.pokemon.moves, this);
+
+        yield return _dialogBox.TypeDialog($"Go {newPokemon.currentName}!");
+
+        StartCoroutine(EnemyMove());
+    }
+
+    public void ReturnFromPokemonPartySystem()
+    {
+        _actionSelectionEventSelector.SelectPokemonButton();
     }
 }

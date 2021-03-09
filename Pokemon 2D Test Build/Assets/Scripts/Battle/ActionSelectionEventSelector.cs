@@ -17,6 +17,12 @@ public class ActionSelectionEventSelector : MonoBehaviour
         EventSystem.current.SetSelectedGameObject(_fightButton);
     }
 
+    public void SelectPokemonButton()
+    {
+        EventSystem.current.SetSelectedGameObject(null);
+        EventSystem.current.SetSelectedGameObject(_pokemonButton);
+    }
+
     public Button ReturnFightButton()
     {
         return _fightButton.GetComponent<Button>();

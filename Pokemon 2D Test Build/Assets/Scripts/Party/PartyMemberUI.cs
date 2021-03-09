@@ -41,15 +41,16 @@ public class PartyMemberUI : MonoBehaviour, ISelectHandler, IDeselectHandler
 
     public void OnSelect(BaseEventData eventData)
     {
-        Debug.Log(this.gameObject.name + " was selected", this.gameObject);
-
         background.sprite = PartyBackgroundArt.instance.ReturnBackgroundArt(_pokemon.currentHitPoints, _isFirstSlot, true);
     }
 
     public void OnDeselect(BaseEventData eventData)
     {
-        Debug.Log(this.gameObject.name + " was Deselected", this.gameObject);
-
         background.sprite = PartyBackgroundArt.instance.ReturnBackgroundArt(_pokemon.currentHitPoints, _isFirstSlot, false);
+    }
+
+    public Pokemon CurrentPokemon()
+    {
+        return _pokemon;
     }
 }

@@ -7,8 +7,7 @@ public class BattleUnit : MonoBehaviour
 {
     Image _pokemonSprite;
     Vector3 originalPosition;
-    [SerializeField]
-    bool _isPlayersPokemon;
+    [SerializeField] bool _isPlayersPokemon;
 
     public Pokemon pokemon {get;set;}
 
@@ -44,6 +43,8 @@ public class BattleUnit : MonoBehaviour
         {
             _pokemonSprite.transform.localPosition = new Vector3(originalPosition.x + 300f, originalPosition.y);
         }
+
+        _pokemonSprite.color = new Color(1, 1, 1, 1);
 
         StartCoroutine(SmoothTransitionToPosition(originalPosition, 1f));
     }
@@ -146,8 +147,6 @@ public class BattleUnit : MonoBehaviour
             elapsedTime += Time.deltaTime;
             yield return null;
         }
-
-        _pokemonSprite.color = new Color(1, 1, 1,1);
         tempTrans.localPosition = originalPosition;
     }
 }
