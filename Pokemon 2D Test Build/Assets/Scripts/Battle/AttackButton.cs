@@ -12,8 +12,8 @@ public class AttackButton : MonoBehaviour, ISelectHandler
 
     public void OnSelect(BaseEventData eventData)
     {
-        _pPText.text = $"PP {_move.pP.ToString()}/{_move.moveBase.powerPoints.ToString()}";
-        _typeText.text = $"Type { _move.moveBase.type}";
+        _pPText.text = $"PP {_move.pP.ToString()}/{_move.moveBase.PowerPoints.ToString()}";
+        _typeText.text = $"Type { _move.moveBase.Type}";
     }
 
     public void SetMove(Move move)

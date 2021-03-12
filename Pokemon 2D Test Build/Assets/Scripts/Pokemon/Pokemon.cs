@@ -20,6 +20,8 @@ public class Pokemon{
     public int currentExperiencePoints { get; set; }
 
     public List<Move> moves { get; set; }
+    public Dictionary<StatAttribute, int> baseStats { get; private set; }
+    public Dictionary<StatAttribute, int> statBoosts { get; private set; }
 
     public void Initialization()
     {
@@ -28,7 +30,6 @@ public class Pokemon{
 
         individualValues = new IndividualValues();
         effortValues = new EffortValues();
-        currentHitPoints = maxHitPoints;
         nature = SetNature();
 
         moves = new List<Move>();
@@ -43,38 +44,79 @@ public class Pokemon{
                 moves.Add(new Move(move.moveBase));
             }
         }
+
+        SetDataStats();
+        currentHitPoints = maxHitPoints;
+
+        statBoosts = new Dictionary<StatAttribute, int>()
+        {
+            {StatAttribute.Attack,0 },
+            {StatAttribute.Defense,0 },
+            {StatAttribute.SpecialAttack,0 },
+            {StatAttribute.SpecialDefense,0 },
+            {StatAttribute.Speed,0 }
+        };
+
     }
 
     #region Stats
 
-    public int maxHitPoints
+    void SetDataStats()
     {
-        get { return Mathf.FloorToInt(((individualValues.maxHitPoints + 2 * pokemonBase.maxHitPoints + (effortValues.maxHitPoints/4)) * currentLevel/100) + 10 + currentLevel); }
+        baseStats = new Dictionary<StatAttribute, int>();
+
+        maxHitPoints = Mathf.FloorToInt(((individualValues.maxHitPoints + 2 * pokemonBase.maxHitPoints + (effortValues.maxHitPoints / 4)) * currentLevel / 100) + 10 + currentLevel);
+        baseStats.Add(StatAttribute.Attack, Mathf.FloorToInt((((individualValues.attack + 2 * pokemonBase.attack + (effortValues.attack / 4)) * currentLevel / 100) + 5) * nature.NatureModifier(nature, StatAttribute.Attack)));
+        baseStats.Add(StatAttribute.Defense, Mathf.FloorToInt((((individualValues.defense + 2 * pokemonBase.defense + (effortValues.defense / 4)) * currentLevel / 100) + 5) * nature.NatureModifier(nature, StatAttribute.Defense)));
+        baseStats.Add(StatAttribute.SpecialAttack, Mathf.FloorToInt((((individualValues.specialAttack + 2 * pokemonBase.specialAttack + (effortValues.specialAttack / 4)) * currentLevel / 100) + 5) * nature.NatureModifier(nature, StatAttribute.SpecialAttack)));
+        baseStats.Add(StatAttribute.SpecialDefense, Mathf.FloorToInt((((individualValues.specialDefense + 2 * pokemonBase.specialDefense + (effortValues.specialDefense / 4)) * currentLevel / 100) + 5) * nature.NatureModifier(nature, StatAttribute.SpecialDefense)));
+        baseStats.Add(StatAttribute.Speed, Mathf.FloorToInt((((individualValues.speed + 2 * pokemonBase.speed + (effortValues.speed / 4)) * currentLevel / 100) + 5) * nature.NatureModifier(nature, StatAttribute.Speed)));
     }
+
+    int GetStatAfterModification(StatAttribute currentStat)
+    {
+        int statValue = baseStats[currentStat];
+
+        int boost = statBoosts[currentStat];
+        float[] boostValues = new float[] { 1f, 1.5f, 2f, 2.5f, 3f, 3.5f, 4f };
+
+        if(boost >= 0)
+        {
+            statValue = Mathf.FloorToInt(statValue * boostValues[boost]);
+        }
+        else
+        {
+            statValue = Mathf.FloorToInt(statValue / boostValues[-boost]);
+        }
+
+        return statValue;
+    }
+
+    public int maxHitPoints { get; private set; }
 
     public int attack
     {
-        get { return Mathf.FloorToInt((((individualValues.attack + 2 * pokemonBase.attack + (effortValues.attack / 4)) * currentLevel / 100) +5 ) * nature.NatureModifier(nature,StatAttribute.Attack)); }
+        get { return GetStatAfterModification(StatAttribute.Attack); }
     }
 
     public int defense
     {
-        get { return Mathf.FloorToInt((((individualValues.defense + 2 * pokemonBase.defense + (effortValues.defense / 4)) * currentLevel / 100) + 5) * nature.NatureModifier(nature, StatAttribute.Defense)); }
+        get { return GetStatAfterModification(StatAttribute.Defense); }
     }
 
     public int specialAttack
     {
-        get { return Mathf.FloorToInt((((individualValues.specialAttack + 2 * pokemonBase.specialAttack + (effortValues.specialAttack / 4)) * currentLevel / 100) + 5) * nature.NatureModifier(nature, StatAttribute.SpecialAttack)); }
+        get { return GetStatAfterModification(StatAttribute.SpecialAttack); }
     }
 
     public int specialDefense
     {
-        get { return Mathf.FloorToInt((((individualValues.specialDefense + 2 * pokemonBase.specialDefense + (effortValues.specialDefense / 4)) * currentLevel / 100) + 5) * nature.NatureModifier(nature, StatAttribute.SpecialDefense)); }
+        get { return GetStatAfterModification(StatAttribute.SpecialDefense); }
     }
 
     public int speed
     {
-        get { return Mathf.FloorToInt((((individualValues.speed + 2 * pokemonBase.speed + (effortValues.speed / 4)) * currentLevel / 100) + 5) * nature.NatureModifier(nature, StatAttribute.Speed)); }
+        get { return GetStatAfterModification(StatAttribute.Speed); }
     }
 
     #endregion
@@ -105,13 +147,15 @@ public class Pokemon{
             typeEffectiveness = 1
         };
 
-        damageDetails.typeEffectiveness = DamageModifiers.TypeChartEffectiveness(pokemonBase, move.type);
+        damageDetails.typeEffectiveness = DamageModifiers.TypeChartEffectiveness(pokemonBase, move.Type);
 
         if(damageDetails.typeEffectiveness == 0)//If it doesnt effect the pokemon then just end it right here
         {
             return damageDetails;
         }
 
+
+        //Critical Hit Chance
         if(Random.value * 100 <= 6.25f)
         {
             damageDetails.criticalHit = 1.5f;
@@ -122,27 +166,10 @@ public class Pokemon{
         modifier *= DamageModifiers.StandardRandomAttackPowerModifier();
         modifier *= DamageModifiers.SameTypeAttackBonus(move, attackingPokemon.pokemonBase);
 
-        float attackPower = 0;
-        float defendersDefense = 0;
+        float attackPower = (move.MoveType == MoveType.Physical) ? attackingPokemon.attack: attackingPokemon.specialAttack;
+        float defendersDefense = (move.MoveType == MoveType.Physical) ? defense : specialDefense;
 
-        switch (move.moveType)
-        {
-            case MoveType.Physical:
-                attackPower = attackingPokemon.attack;
-                defendersDefense = defense;
-                break;
-            case MoveType.Special:
-                attackPower = attackingPokemon.specialAttack;
-                defendersDefense = specialDefense;
-                break;
-            case MoveType.Status:
-                break;
-            default:
-                Debug.Log("BROKEN FORMULA");
-                break;
-        }
-
-        int damage = Mathf.FloorToInt((((((2 * attackingPokemon.currentLevel) / 5) + 2) * move.power * attackPower / defendersDefense / 50) + 2) * modifier);
+        int damage = Mathf.FloorToInt((((((2 * attackingPokemon.currentLevel) / 5) + 2) * move.MovePower * attackPower / defendersDefense / 50) + 2) * modifier);
 
         if(damage <=0)
         {
@@ -158,6 +185,19 @@ public class Pokemon{
         }
 
         return damageDetails;
+    }
+
+    public void ApplyStatModifier(List<StatBoost> currentBoostModifiers)
+    {
+        foreach (var modifier in currentBoostModifiers)
+        {
+            StatAttribute statModified = modifier.stat;
+            int boost = modifier.boost;
+
+            statBoosts[statModified] = Mathf.Clamp(statBoosts[statModified] + boost, -6, 6);
+
+            Debug.Log($"{currentName} {statModified} has been changed to {statBoosts[statModified]}");
+        }
     }
 
     public Move ReturnRandomMove()

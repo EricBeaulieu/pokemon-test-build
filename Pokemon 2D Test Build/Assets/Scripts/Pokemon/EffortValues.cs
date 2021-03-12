@@ -2,8 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum StatAttribute { NA, HitPoints,Attack,Defense,SpecialAttack,SpecialDefense,Speed}
-
 [System.Serializable]
 public class EarnableEV
 {

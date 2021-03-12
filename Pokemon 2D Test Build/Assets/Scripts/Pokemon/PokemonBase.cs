@@ -5,6 +5,8 @@ using UnityEngine;
 public enum ElementType { NA = -1, Bug, Dark, Dragon, Electric, Fairy, Fighting, Fire, Flying, Ghost,
                           Grass, Ground, Ice, Normal, Poison, Psychic, Rock, Steel, Water}
 
+public enum StatAttribute { NA, HitPoints, Attack, Defense, SpecialAttack, SpecialDefense, Speed, Evasion, Accuracy }
+
 [CreateAssetMenu(menuName = "Pokedex/Create New Pokemon Entry")]
 public class PokemonBase : ScriptableObject {
 

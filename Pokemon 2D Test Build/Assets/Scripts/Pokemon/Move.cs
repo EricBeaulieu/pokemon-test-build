@@ -11,7 +11,7 @@ public class Move{
     public Move(MoveBase mBase)
     {
         moveBase = mBase;
-        pP = mBase.powerPoints;
+        pP = mBase.PowerPoints;
     }
 
 }

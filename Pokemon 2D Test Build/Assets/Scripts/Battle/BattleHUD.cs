@@ -17,13 +17,13 @@ public class BattleHUD : MonoBehaviour
 
     Pokemon _pokemon;
 
-    public void SetData(Pokemon currentPokemon,bool isEnemy)
+    public void SetData(Pokemon currentPokemon,bool isPlayersPokemon)
     {
         _pokemon = currentPokemon;
         nameText.text = currentPokemon.currentName;
         levelText.text = currentPokemon.currentLevel.ToString();
         hPBar.SetHP((float)currentPokemon.currentHitPoints / currentPokemon.maxHitPoints);
-        if(isEnemy == false)
+        if(isPlayersPokemon == true)
         {
             currentHP.text = currentPokemon.currentHitPoints.ToString();
             maxHP.text = currentPokemon.maxHitPoints.ToString();

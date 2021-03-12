@@ -53,7 +53,7 @@ public class AttackSelectionEventSelector : MonoBehaviour
             {
                 int k = i;
                 _moveButton[i].SetActive(true);
-                _moveButton[i].GetComponentInChildren<Text>().text = moves[i].moveBase.moveName;
+                _moveButton[i].GetComponentInChildren<Text>().text = moves[i].moveBase.MoveName;
                 _moveButton[i].GetComponent<AttackButton>().SetMove(moves[i]);
                 _moveButton[i].GetComponent<Button>().onClick.RemoveAllListeners();
                 _moveButton[i].GetComponent<Button>().onClick.AddListener(() => 

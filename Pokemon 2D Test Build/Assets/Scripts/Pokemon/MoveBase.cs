@@ -4,59 +4,66 @@ using UnityEngine;
 
 public enum MoveType { Physical, Special, Status}
 
+public enum MoveTarget { Foe,Self}
+
 [CreateAssetMenu(menuName = "Pokedex/Create New Attack Entry")]
 public class MoveBase : ScriptableObject {
 
-    [SerializeField]
-    string _name;
+    [SerializeField] string moveName;
     [TextArea]
-    [SerializeField]
-    string _description;
+    [SerializeField] string moveDescription;
 
-    [SerializeField]
-    ElementType _elementType;
-    [SerializeField]
-    MoveType _moveType;
-    [SerializeField]
-    int _power;
-    [SerializeField]
-    int _accuracy;
-    [SerializeField]
-    int _powerPoints;
+    [SerializeField] ElementType elementType;
+    [SerializeField] MoveType moveType;
+    [SerializeField] MoveEffects moveEffects;
+    [SerializeField] MoveTarget target;
+
+    [SerializeField] int power;
+    [SerializeField] int accuracy;
+    [SerializeField] int powerPoints;
 
     #region Return Methods
 
-    public string moveName
+    public string MoveName
     {
-        get { return _name; }
+        get { return moveName; }
     }
 
-    public string description
+    public string MoveDescription
     {
-        get { return _description; }
+        get { return moveDescription; }
     }
 
-    public ElementType type
+    public ElementType Type
     {
-        get { return _elementType; }
+        get { return elementType; }
     }
 
-    public MoveType moveType
+    public MoveType MoveType
     {
-        get { return _moveType; }
+        get { return moveType; }
     }
 
-    public int power
+    public int MovePower
     {
-        get { return _power; }
+        get { return power; }
     }
-    public int accuracy
+    public int MoveAccuracy
     {
-        get { return _accuracy; }
+        get { return accuracy; }
     }
-    public int powerPoints
+    public int PowerPoints
     {
-        get { return _powerPoints; }
+        get { return powerPoints; }
+    }
+
+    public MoveEffects MoveEffects
+    {
+        get { return moveEffects; }
+    }
+    public MoveTarget Target
+    {
+        get { return target; }
     }
 
     #endregion

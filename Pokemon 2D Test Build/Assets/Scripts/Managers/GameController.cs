@@ -31,6 +31,7 @@ public class GameController : MonoBehaviour
                 playerController.HandleUpdate();
                 break;
             case GameState.Battle:
+                battleSystem.HandleUpdate();
                 break;
             case GameState.Party:
                 break;

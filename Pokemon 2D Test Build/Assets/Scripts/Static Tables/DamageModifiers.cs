@@ -38,7 +38,7 @@ public static class DamageModifiers
 
     public static float SameTypeAttackBonus(MoveBase move,PokemonBase attackingPokemon)
     {
-        if(move.type == attackingPokemon.pokemonType1 || move.type == attackingPokemon.pokemonType2)
+        if(move.Type == attackingPokemon.pokemonType1 || move.Type == attackingPokemon.pokemonType2)
         {
             return 1.5f;
         }

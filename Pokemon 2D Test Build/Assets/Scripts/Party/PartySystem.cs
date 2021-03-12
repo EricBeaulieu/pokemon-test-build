@@ -146,7 +146,7 @@ public class PartySystem : MonoBehaviour
 
     void ShiftBattleButton(PartyMemberUI currentPartyMember)
     {
-        if (currentPartyMember.CurrentPokemon().currentHitPoints < 0)
+        if (currentPartyMember.CurrentPokemon().currentHitPoints <= 0)
         {
             SetMessageText($"{currentPartyMember.CurrentPokemon().currentName} has no energy left to battle!");
             return;

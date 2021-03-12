@@ -4083,6 +4083,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _isPlayersPokemon: 1
+  hud: {fileID: 1890762429}
+  currentStatModifiers: {fileID: 0}
 --- !u!1 &801035829
 GameObject:
   m_ObjectHideFlags: 0
@@ -5249,9 +5251,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _playerBattleUnit: {fileID: 762965353}
-  _playerBattleHud: {fileID: 1890762429}
   _enemyBattleUnit: {fileID: 1102866118}
-  _enemyBattleHud: {fileID: 1512373102}
   _dialogBox: {fileID: 528452886}
   _actionSelectionEventSelector: {fileID: 2117401741}
   _attackSelectionEventSelector: {fileID: 353521179}
@@ -5382,6 +5382,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _isPlayersPokemon: 0
+  hud: {fileID: 1512373102}
+  currentStatModifiers: {fileID: 0}
 --- !u!1 &1143419831
 GameObject:
   m_ObjectHideFlags: 0

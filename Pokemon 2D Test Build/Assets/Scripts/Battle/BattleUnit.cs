@@ -7,9 +7,15 @@ public class BattleUnit : MonoBehaviour
 {
     Image _pokemonSprite;
     Vector3 originalPosition;
+
     [SerializeField] bool _isPlayersPokemon;
+    public bool isPlayerPokemon { get { return _isPlayersPokemon; } }
+
+    [SerializeField] BattleHUD hud;
+    public BattleHUD HUD { get { return hud; } }
 
     public Pokemon pokemon {get;set;}
+    public StatModifiers currentStatModifiers;
 
     void Awake()
     {
@@ -29,6 +35,7 @@ public class BattleUnit : MonoBehaviour
         }
 
         this.pokemon = pokemon;
+        hud.SetData(pokemon, _isPlayersPokemon);
 
         PlayEnterAnimation();
     }
