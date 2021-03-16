@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public enum BattleState { Start, ActionSelection, MoveSelection, PerformMove, Busy, BattleOver}
 
@@ -17,7 +18,7 @@ public class BattleSystem : MonoBehaviour
     [SerializeField] ActionSelectionEventSelector _actionSelectionEventSelector;
     [SerializeField] AttackSelectionEventSelector _attackSelectionEventSelector;
 
-    BattleState _state;
+    List<TurnAttackDetails> currentTurnDetails;
 
     PokemonParty _playerParty;
     Pokemon _wildPokemon;
@@ -40,6 +41,7 @@ public class BattleSystem : MonoBehaviour
         _playerParty = playerParty;
         _wildPokemon = wildPokemon;
         StartCoroutine(SetupBattle());
+        currentTurnDetails = new List<TurnAttackDetails>();
     }
 
     /// <summary>
@@ -69,7 +71,6 @@ public class BattleSystem : MonoBehaviour
     {
         _dialogBox.SetDialogText($"What will {_playerBattleUnit.pokemon.currentName} do?");
         EnableActionSelector(true);
-        _state = BattleState.ActionSelection;
 
         _actionSelectionEventSelector.ReturnFightButton().onClick.AddListener(delegate { PlayerActionFight(); });
         _actionSelectionEventSelector.ReturnPokemonButton().onClick.AddListener(delegate { PlayerActionPokemon(); });
@@ -82,7 +83,6 @@ public class BattleSystem : MonoBehaviour
     {
         EnableActionSelector(false);
         EnableAttackMoveSelector(true);
-        _state = BattleState.MoveSelection;
     }
 
     /// <summary>
@@ -129,38 +129,131 @@ public class BattleSystem : MonoBehaviour
     /// <param name="moveBase">Current Move Being Used</param>
     public void AttackSelected(BattleUnit currentPokemon, MoveBase moveBase)
     {
-        _state = BattleState.PerformMove;
         EnableAttackMoveSelector(false);
-        StartCoroutine(PlayerAttackSelectedCoroutine(currentPokemon, moveBase));
-    }
-
-    public IEnumerator PlayerAttackSelectedCoroutine(BattleUnit currentPokemon,MoveBase moveBase)
-    {
-        yield return RunMove(currentPokemon, _enemyBattleUnit, moveBase);
-
-        //If the Battle State was not changed by run move then perform the action
-        if(_state == BattleState.PerformMove)
+        TurnAttackDetails turnAttack = new TurnAttackDetails()
         {
-            StartCoroutine(EnemyMove());
-        }
+            currentMove = moveBase,
+            attackingPokemon = currentPokemon,
+            targetPokmeon = _enemyBattleUnit
+        };
+
+        currentTurnDetails.Add(turnAttack);
+        //StartCoroutine(PlayerAttackSelectedCoroutine(currentPokemon, moveBase));
+        StartCoroutine(EnemyMove());
     }
+
+    //public IEnumerator PlayerAttackSelectedCoroutine(BattleUnit currentPokemon,MoveBase moveBase)
+    //{
+    //    yield return RunMove(currentPokemon, _enemyBattleUnit, moveBase);
+    //    //StartCoroutine(EnemyMove());
+    //}
 
     public IEnumerator EnemyMove()
     {
-        _state = BattleState.PerformMove;
+
         //Create a check function to see if they have enough PP
         Move currentAttack = _enemyBattleUnit.pokemon.ReturnRandomMove();
 
-        yield return RunMove(_enemyBattleUnit, _playerBattleUnit, currentAttack.moveBase);
+        TurnAttackDetails turnAttack = new TurnAttackDetails()
+        {
+            currentMove = currentAttack.moveBase,
+            attackingPokemon = _enemyBattleUnit,
+            targetPokmeon = _playerBattleUnit
+        };
+        currentTurnDetails.Add(turnAttack);
+        //yield return RunMove(_enemyBattleUnit, _playerBattleUnit, currentAttack.moveBase);
 
-        if (_state == BattleState.PerformMove)
+        yield return ChoostFirstTurn(currentTurnDetails);
+
+        //If current pokemon has fainted then it goes to the party system and waits on the selector
+        if (_playerBattleUnit.pokemon.currentHitPoints > 0)
         {
             PlayerActions();
         }
     }
 
+    IEnumerator ChoostFirstTurn(List<TurnAttackDetails> attacksChosen)
+    {
+        TurnAttackDetails currentAttack;
+
+        while(attacksChosen.Count > 0)
+        {
+            currentAttack = attacksChosen[0];
+
+            if (attacksChosen.Count > 1)
+            {
+                foreach(TurnAttackDetails attack in attacksChosen)
+                {
+                    if(currentAttack == attack)
+                    {
+                        continue;
+                    }
+                    else
+                    {
+                        if(currentAttack.attackingPokemon.pokemon.speed > attack.attackingPokemon.pokemon.speed)
+                        {
+                            continue;
+                        }
+                        else if (currentAttack.attackingPokemon.pokemon.speed == attack.attackingPokemon.pokemon.speed)
+                        {
+                            bool coinFlip = (Random.value > 0.5f);
+                            if(coinFlip == true)
+                            {
+                                currentAttack = attack;
+                            }
+                            else
+                            {
+                                continue;
+                            }
+                        }
+                        else //currentAttack.attackingPokemon.pokemon.speed < attack.attackingPokemon.pokemon.speed
+                        {
+                            currentAttack = attack;
+                        }
+                    }
+                }
+            }
+            yield return RunMove(currentAttack.attackingPokemon, currentAttack.targetPokmeon, currentAttack.currentMove);
+            attacksChosen.Remove(currentAttack);
+        }
+
+        //Called after all attacks have been done
+
+        yield return ApplyEffectsOnEndTurn(_playerBattleUnit);
+        yield return ApplyEffectsOnEndTurn(_enemyBattleUnit);
+    }
+
+    IEnumerator ApplyEffectsOnEndTurn(BattleUnit sourceUnit)
+    {
+        int currentHP = sourceUnit.pokemon.currentHitPoints;
+
+        sourceUnit.pokemon.OnEndTurn();
+        yield return ShowStatusChanges(sourceUnit.pokemon);
+        yield return sourceUnit.HUD.UpdateHP(currentHP);
+
+        if (sourceUnit.pokemon.currentHitPoints <= 0)
+        {
+            yield return PokemonHasFainted(sourceUnit);
+        }
+    }
+
     IEnumerator RunMove(BattleUnit sourceUnit,BattleUnit targetUnit,MoveBase moveBase)
     {
+        //This is here incase the pokemon hits itself in confusion for the smooth animation
+        int previousHP = sourceUnit.pokemon.currentHitPoints;
+
+
+        bool canUseMove = sourceUnit.pokemon.OnBeforeMove();
+        if(canUseMove == false)
+        {
+            yield return ShowStatusChanges(sourceUnit.pokemon);
+            //If it hit itself in its confusion update the HUD
+            yield return sourceUnit.HUD.UpdateHP(previousHP);
+            yield break;
+        }
+        //This is here incase the pokemon has a status effect that ended such as being frozen
+        yield return ShowStatusChanges(sourceUnit.pokemon);
+
         yield return _dialogBox.TypeDialog($"{sourceUnit.pokemon.currentName} used {moveBase.MoveName}");
 
         sourceUnit.PlayAttackAnimation();
@@ -169,19 +262,7 @@ public class BattleSystem : MonoBehaviour
 
         if(moveBase.MoveType == MoveType.Status)
         {
-            var effects = moveBase.MoveEffects;
-            if (effects.Boosts != null)
-            {
-                if (moveBase.Target == MoveTarget.Foe)
-                {
-                    targetUnit.pokemon.ApplyStatModifier(effects.Boosts);
-                }
-                else if(moveBase.Target == MoveTarget.Self)
-                {
-                    sourceUnit.pokemon.ApplyStatModifier(effects.Boosts);
-                }
-            }
-
+            yield return RunMoveEffects(moveBase, sourceUnit.pokemon, targetUnit.pokemon);
         }
         else
         {
@@ -195,12 +276,20 @@ public class BattleSystem : MonoBehaviour
 
         if (targetUnit.pokemon.currentHitPoints <= 0)
         {
-            yield return _dialogBox.TypeDialog($"{targetUnit.pokemon.currentName} has fainted");
-            targetUnit.PlayFaintAnimation();
+            yield return PokemonHasFainted(targetUnit);
+        }
+    }
+
+    IEnumerator PokemonHasFainted(BattleUnit targetBattleUnit)
+    {
+        if (targetBattleUnit.pokemon.currentHitPoints <= 0)
+        {
+            yield return _dialogBox.TypeDialog($"{targetBattleUnit.pokemon.currentName} has fainted");
+            targetBattleUnit.PlayFaintAnimation();
             //apply experience here
 
             yield return new WaitForSeconds(2f);
-            CheckForBattleOver(targetUnit);
+            CheckForBattleOver(targetBattleUnit);
         }
     }
 
@@ -212,24 +301,16 @@ public class BattleSystem : MonoBehaviour
             if (nextPokemon != null)
             {
                 OpenPokemonParty(true);
-                _state = BattleState.Busy;
-                //PlayerActions();
             }
             else
             {
-                BattleOver(false);
+                OnBattleOver(false);
             }
         }
         else
         {
-            BattleOver(true);
+            OnBattleOver(true);
         }
-    }
-
-    void BattleOver(bool hasWon)
-    {
-        _state = BattleState.BattleOver;
-        OnBattleOver(hasWon);
     }
 
     IEnumerator ShowDamageDetails(DamageDetails damageDetails,BattleUnit battleUnit)
@@ -266,9 +347,10 @@ public class BattleSystem : MonoBehaviour
 
     IEnumerator SwitchPokemonIEnumerator(Pokemon newPokemon)
     {
-
+        bool currentPokemonFainted = true;
         if (_playerBattleUnit.pokemon.currentHitPoints > 0)
         {
+            currentPokemonFainted = false;
             yield return _dialogBox.TypeDialog($"Come Back {_playerBattleUnit.pokemon.currentName}!");
             _playerBattleUnit.PlayFaintAnimation();
             yield return new WaitForSeconds(2f);
@@ -280,7 +362,7 @@ public class BattleSystem : MonoBehaviour
 
         yield return _dialogBox.TypeDialog($"Go {newPokemon.currentName}!");
 
-        if(_state == BattleState.Busy)
+        if(currentPokemonFainted == true)
         {
             PlayerActions();
         }
@@ -293,5 +375,46 @@ public class BattleSystem : MonoBehaviour
     public void ReturnFromPokemonPartySystem()
     {
         _actionSelectionEventSelector.SelectPokemonButton();
+    }
+
+    IEnumerator RunMoveEffects(MoveBase currentMove, Pokemon source, Pokemon target)
+    {
+        //Status Boosting
+        var effects = currentMove.MoveEffects;
+        if (effects.Boosts != null)
+        {
+            if (currentMove.Target == MoveTarget.Foe)
+            {
+                target.ApplyStatModifier(effects.Boosts);
+            }
+            else if (currentMove.Target == MoveTarget.Self)
+            {
+                source.ApplyStatModifier(effects.Boosts);
+            }
+        }
+
+        //Status Condition
+        if(effects.Status != ConditionID.NA)
+        {
+            target.SetStatus(effects.Status);
+        }
+
+        //Volatile Status Condition
+        if (effects.Volatiletatus != ConditionID.NA)
+        {
+            target.SetVolatileStatus(effects.Volatiletatus);
+        }
+
+        yield return ShowStatusChanges(source);
+        yield return ShowStatusChanges(target);
+    }
+
+    IEnumerator ShowStatusChanges(Pokemon pokemon)
+    {
+        while(pokemon.statusChanges.Count > 0)
+        {
+            string message = pokemon.statusChanges.Dequeue();
+            yield return _dialogBox.TypeDialog(message);
+        }
     }
 }

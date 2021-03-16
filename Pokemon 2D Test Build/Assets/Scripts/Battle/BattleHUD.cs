@@ -7,6 +7,7 @@ public class BattleHUD : MonoBehaviour
 {
     [SerializeField] Text nameText;
     [SerializeField] Text levelText;
+    [SerializeField] Image statusCondition;
     [SerializeField] HPBar hPBar;
 
     //This is only here due to the background sprite not being cut right, naturally it would be cleaned up
@@ -27,6 +28,21 @@ public class BattleHUD : MonoBehaviour
         {
             currentHP.text = currentPokemon.currentHitPoints.ToString();
             maxHP.text = currentPokemon.maxHitPoints.ToString();
+        }
+
+        SetStatusSprite();
+        _pokemon.OnStatusChanged += SetStatusSprite;
+    }
+
+    void SetStatusSprite()
+    {
+        if(_pokemon.status == null)
+        {
+            statusCondition.sprite = StatusConditionArt.instance.ReturnStatusConditionArt(ConditionID.NA);
+        }
+        else
+        {
+            statusCondition.sprite = StatusConditionArt.instance.ReturnStatusConditionArt(_pokemon.status.Id);
         }
     }
 

@@ -21,6 +21,7 @@ public class GameController : MonoBehaviour
 
         //Clean this up later, just get it working for now and then clean up the code later
         partySystem.battleSystemReference = battleSystem;
+        ConditionsDB.Initialization();
     }
 
     void Update()

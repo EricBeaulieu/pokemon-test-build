@@ -15,7 +15,6 @@ public class BattleUnit : MonoBehaviour
     public BattleHUD HUD { get { return hud; } }
 
     public Pokemon pokemon {get;set;}
-    public StatModifiers currentStatModifiers;
 
     void Awake()
     {
@@ -36,6 +35,7 @@ public class BattleUnit : MonoBehaviour
 
         this.pokemon = pokemon;
         hud.SetData(pokemon, _isPlayersPokemon);
+        pokemon.Reset();
 
         PlayEnterAnimation();
     }

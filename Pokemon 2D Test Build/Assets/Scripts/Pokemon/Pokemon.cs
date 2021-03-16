@@ -22,6 +22,13 @@ public class Pokemon{
     public List<Move> moves { get; set; }
     public Dictionary<StatAttribute, int> baseStats { get; private set; }
     public Dictionary<StatAttribute, int> statBoosts { get; private set; }
+    public Queue<string> statusChanges { get; private set; } = new Queue<string>();
+
+    public Condition status { get; private set; }
+    public int statusTime { get; set; }
+    public Condition volatileStatus { get; private set; }
+    public int volatileStatusTime { get; set; }
+    public System.Action OnStatusChanged;
 
     public void Initialization()
     {
@@ -48,15 +55,18 @@ public class Pokemon{
         SetDataStats();
         currentHitPoints = maxHitPoints;
 
-        statBoosts = new Dictionary<StatAttribute, int>()
-        {
-            {StatAttribute.Attack,0 },
-            {StatAttribute.Defense,0 },
-            {StatAttribute.SpecialAttack,0 },
-            {StatAttribute.SpecialDefense,0 },
-            {StatAttribute.Speed,0 }
-        };
+        
 
+    }
+
+    /// <summary>
+    /// resets all pokemon stats and volatile status, this is for when the pokmon is sent out or 
+    /// when the battle is over to prevent bugs when pokemon is being viewed in the summary
+    /// </summary>
+    public void Reset()
+    {
+        ResetStatBoosts();
+        volatileStatus = null;
     }
 
     #region Stats
@@ -71,6 +81,45 @@ public class Pokemon{
         baseStats.Add(StatAttribute.SpecialAttack, Mathf.FloorToInt((((individualValues.specialAttack + 2 * pokemonBase.specialAttack + (effortValues.specialAttack / 4)) * currentLevel / 100) + 5) * nature.NatureModifier(nature, StatAttribute.SpecialAttack)));
         baseStats.Add(StatAttribute.SpecialDefense, Mathf.FloorToInt((((individualValues.specialDefense + 2 * pokemonBase.specialDefense + (effortValues.specialDefense / 4)) * currentLevel / 100) + 5) * nature.NatureModifier(nature, StatAttribute.SpecialDefense)));
         baseStats.Add(StatAttribute.Speed, Mathf.FloorToInt((((individualValues.speed + 2 * pokemonBase.speed + (effortValues.speed / 4)) * currentLevel / 100) + 5) * nature.NatureModifier(nature, StatAttribute.Speed)));
+    }
+
+    void ResetStatBoosts()
+    {
+        statBoosts = new Dictionary<StatAttribute, int>()
+        {
+            {StatAttribute.Attack,0 },
+            {StatAttribute.Defense,0 },
+            {StatAttribute.SpecialAttack,0 },
+            {StatAttribute.SpecialDefense,0 },
+            {StatAttribute.Speed,0 }
+        };
+    }
+
+    public void ApplyStatModifier(List<StatBoost> currentBoostModifiers)
+    {
+        foreach (var modifier in currentBoostModifiers)
+        {
+            if(modifier.stat == StatAttribute.NA)
+            {
+                continue;
+            }
+
+            StatAttribute statModified = modifier.stat;
+            int boost = modifier.boost;
+
+            statBoosts[statModified] = Mathf.Clamp(statBoosts[statModified] + boost, -6, 6);
+
+            if(boost > 0)
+            {
+                statusChanges.Enqueue($"{currentName}'s {statModified} rose!");
+            }
+            else
+            {
+                statusChanges.Enqueue($"{currentName}'s {statModified} fell!");
+            }
+
+            Debug.Log($"{currentName} {statModified} has been changed to {statBoosts[statModified]}");
+        }
     }
 
     int GetStatAfterModification(StatAttribute currentStat)
@@ -121,6 +170,8 @@ public class Pokemon{
 
     #endregion
 
+    #region Nature
+
     public NatureBase nature
     {
         get { return _nature; }
@@ -137,6 +188,8 @@ public class Pokemon{
         natureBases = Resources.LoadAll<NatureBase>("Natures");
         return natureBases[Random.Range(0, natureBases.Length)];
     }
+
+    #endregion
 
     public DamageDetails TakeDamage(MoveBase move,Pokemon attackingPokemon)
     {
@@ -176,28 +229,14 @@ public class Pokemon{
             damage = 1;
         }
 
-        currentHitPoints -= damage;
-
-        if(currentHitPoints <= 0)
-        {
-            currentHitPoints = 0;
-            damageDetails.hasFainted = true;
-        }
+        UpdateHP(damage);
 
         return damageDetails;
     }
 
-    public void ApplyStatModifier(List<StatBoost> currentBoostModifiers)
+    public void UpdateHP(int damage)
     {
-        foreach (var modifier in currentBoostModifiers)
-        {
-            StatAttribute statModified = modifier.stat;
-            int boost = modifier.boost;
-
-            statBoosts[statModified] = Mathf.Clamp(statBoosts[statModified] + boost, -6, 6);
-
-            Debug.Log($"{currentName} {statModified} has been changed to {statBoosts[statModified]}");
-        }
+        currentHitPoints = Mathf.Clamp(currentHitPoints - damage, 0, maxHitPoints);
     }
 
     public Move ReturnRandomMove()
@@ -213,5 +252,76 @@ public class Pokemon{
         {
             _currentName = value;
         }
+    }
+
+    public void SetStatus(ConditionID conditionID)
+    {
+        if(status != null)
+        {
+            statusChanges.Enqueue($"It doesnt affect {currentName}");
+            return;
+        }
+
+        status = ConditionsDB.Conditions[conditionID];
+        status?.OnStart?.Invoke(this);
+        statusChanges.Enqueue($"{currentName} {status.StartMessage}");
+
+        OnStatusChanged?.Invoke();
+    }
+
+    public void CureStatus()
+    {
+        status = null;
+        OnStatusChanged?.Invoke();
+    }
+
+    public void SetVolatileStatus(ConditionID conditionID)
+    {
+        if (volatileStatus != null)
+        {
+            statusChanges.Enqueue($"It doesnt affect {currentName}");
+            return;
+        }
+
+        volatileStatus = ConditionsDB.Conditions[conditionID];
+        volatileStatus?.OnStart?.Invoke(this);
+        statusChanges.Enqueue($"{currentName} {volatileStatus.StartMessage}");
+    }
+
+    public void CureVolatileStatus()
+    {
+        volatileStatus = null;
+    }
+
+    /// <summary>
+    /// Checks to see if the pokemon can attack or not
+    /// </summary>
+    /// <returns></returns>
+    public bool OnBeforeMove()
+    {
+        bool canPerformMove = true;
+
+        if(status?.OnBeforeMove != null)
+        {
+            if (status.OnBeforeMove(this) == false)
+            {
+                canPerformMove = false;
+            }
+        }
+
+        if (volatileStatus?.OnBeforeMove != null)
+        {
+            if (volatileStatus.OnBeforeMove(this) == false)
+            {
+                canPerformMove = false;
+            }
+        }
+
+        return canPerformMove;
+    }
+
+    public void OnEndTurn()
+    {
+        status?.OnEndTurn?.Invoke(this);
     }
 }
