@@ -8,10 +8,8 @@ public class LevelManager : MonoBehaviour
 
     public Pokemon WildPokemon()
     {
-        Pokemon temp = wildPokemon[Random.Range(0, wildPokemon.Count - 1)];
+        Pokemon temp = wildPokemon[Random.Range(0, wildPokemon.Count)];
         temp.Initialization();
         return temp;
     }
-
-
 }

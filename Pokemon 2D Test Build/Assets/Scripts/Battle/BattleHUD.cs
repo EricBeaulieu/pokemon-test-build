@@ -50,6 +50,4 @@ public class BattleHUD : MonoBehaviour
     {
         yield return hPBar.SetHPAnimation(_pokemon.currentHitPoints,hpBeforeDamage,_pokemon.maxHitPoints,currentHP);
     }
-
-    
 }

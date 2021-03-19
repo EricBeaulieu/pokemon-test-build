@@ -14,6 +14,7 @@ public class PartySystem : MonoBehaviour
 
     //Clean this up later, just get it working for now and then clean up the code later
     public BattleSystem battleSystemReference { get; set; }
+    public Action onCloseParty;
     Pokemon _currentlySelectedPokemon;
 
     [SerializeField] GameObject overworldSelections;
@@ -46,9 +47,10 @@ public class PartySystem : MonoBehaviour
         SetUpPartySystemCancelButton();
     }
 
-    public void ClosePartySystem()
+    void ClosePartySystem()
     {
-        this.gameObject.SetActive(false);
+        //this.gameObject.SetActive(false);
+        onCloseParty();
     }
 
     void SelectFirstBox()
@@ -158,7 +160,7 @@ public class PartySystem : MonoBehaviour
             return;
         }
 
-        battleSystemReference.SwitchPokemon(currentPartyMember.CurrentPokemon());
+        battleSystemReference.PlayerSwitchPokemon(currentPartyMember.CurrentPokemon());
         ClosePartySystem();
     }
 

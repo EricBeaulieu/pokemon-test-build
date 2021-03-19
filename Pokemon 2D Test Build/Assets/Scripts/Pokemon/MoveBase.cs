@@ -16,10 +16,13 @@ public class MoveBase : ScriptableObject {
     [SerializeField] ElementType elementType;
     [SerializeField] MoveType moveType;
     [SerializeField] MoveEffects moveEffects;
+    [SerializeField] List<MoveSecondaryEffects> secondaryEffects;
     [SerializeField] MoveTarget target;
 
     [SerializeField] int power;
     [SerializeField] int accuracy;
+    [SerializeField] bool alwaysHits;
+    [SerializeField] int priority;
     [SerializeField] int powerPoints;
 
     #region Return Methods
@@ -52,6 +55,14 @@ public class MoveBase : ScriptableObject {
     {
         get { return accuracy; }
     }
+    public bool AlwaysHits
+    {
+        get { return alwaysHits; }
+    }
+    public int Priority
+    {
+        get { return priority; }
+    }
     public int PowerPoints
     {
         get { return powerPoints; }
@@ -60,6 +71,10 @@ public class MoveBase : ScriptableObject {
     public MoveEffects MoveEffects
     {
         get { return moveEffects; }
+    }
+    public List<MoveSecondaryEffects> SecondaryEffects
+    {
+        get { return secondaryEffects; }
     }
     public MoveTarget Target
     {

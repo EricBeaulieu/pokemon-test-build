@@ -54,9 +54,6 @@ public class Pokemon{
 
         SetDataStats();
         currentHitPoints = maxHitPoints;
-
-        
-
     }
 
     /// <summary>
@@ -81,6 +78,8 @@ public class Pokemon{
         baseStats.Add(StatAttribute.SpecialAttack, Mathf.FloorToInt((((individualValues.specialAttack + 2 * pokemonBase.specialAttack + (effortValues.specialAttack / 4)) * currentLevel / 100) + 5) * nature.NatureModifier(nature, StatAttribute.SpecialAttack)));
         baseStats.Add(StatAttribute.SpecialDefense, Mathf.FloorToInt((((individualValues.specialDefense + 2 * pokemonBase.specialDefense + (effortValues.specialDefense / 4)) * currentLevel / 100) + 5) * nature.NatureModifier(nature, StatAttribute.SpecialDefense)));
         baseStats.Add(StatAttribute.Speed, Mathf.FloorToInt((((individualValues.speed + 2 * pokemonBase.speed + (effortValues.speed / 4)) * currentLevel / 100) + 5) * nature.NatureModifier(nature, StatAttribute.Speed)));
+        baseStats.Add(StatAttribute.Accuracy, 1);
+        baseStats.Add(StatAttribute.Evasion, 1);
     }
 
     void ResetStatBoosts()
@@ -91,7 +90,9 @@ public class Pokemon{
             {StatAttribute.Defense,0 },
             {StatAttribute.SpecialAttack,0 },
             {StatAttribute.SpecialDefense,0 },
-            {StatAttribute.Speed,0 }
+            {StatAttribute.Speed,0 },
+            {StatAttribute.Accuracy,0 },
+            {StatAttribute.Evasion,0 }
         };
     }
 
@@ -122,50 +123,84 @@ public class Pokemon{
         }
     }
 
-    int GetStatAfterModification(StatAttribute currentStat)
+    float GetStatAfterModification(StatAttribute currentStat)
     {
-        int statValue = baseStats[currentStat];
+        float statValue = baseStats[currentStat];
 
         int boost = statBoosts[currentStat];
-        float[] boostValues = new float[] { 1f, 1.5f, 2f, 2.5f, 3f, 3.5f, 4f };
+        float[] boostValues;
 
-        if(boost >= 0)
+        if (currentStat == StatAttribute.Accuracy || currentStat == StatAttribute.Evasion)
         {
-            statValue = Mathf.FloorToInt(statValue * boostValues[boost]);
+            boostValues = new float[] { 1f, 4f/3f, 5f / 3f, 6f / 3f, 7f / 3f, 8f / 3f, 9f / 3f };
         }
         else
         {
-            statValue = Mathf.FloorToInt(statValue / boostValues[-boost]);
+            boostValues = new float[] { 1f, 1.5f, 2f, 2.5f, 3f, 3.5f, 4f };
+        }
+
+        if (currentStat == StatAttribute.Accuracy || currentStat == StatAttribute.Evasion)
+        {
+            if (boost >= 0)
+            {
+                statValue = statValue * boostValues[boost];
+            }
+            else
+            {
+                statValue = statValue / boostValues[-boost];
+            }
+        }
+        else
+        {
+            if (boost >= 0)
+            {
+                statValue = Mathf.FloorToInt(statValue * boostValues[boost]);
+            }
+            else
+            {
+                statValue = Mathf.FloorToInt(statValue / boostValues[-boost]);
+            }
         }
 
         return statValue;
     }
 
+
     public int maxHitPoints { get; private set; }
 
     public int attack
     {
-        get { return GetStatAfterModification(StatAttribute.Attack); }
+        get { return (int)GetStatAfterModification(StatAttribute.Attack); }
     }
 
     public int defense
     {
-        get { return GetStatAfterModification(StatAttribute.Defense); }
+        get { return (int)GetStatAfterModification(StatAttribute.Defense); }
     }
 
     public int specialAttack
     {
-        get { return GetStatAfterModification(StatAttribute.SpecialAttack); }
+        get { return (int)GetStatAfterModification(StatAttribute.SpecialAttack); }
     }
 
     public int specialDefense
     {
-        get { return GetStatAfterModification(StatAttribute.SpecialDefense); }
+        get { return (int)GetStatAfterModification(StatAttribute.SpecialDefense); }
     }
 
     public int speed
     {
-        get { return GetStatAfterModification(StatAttribute.Speed); }
+        get { return (int)GetStatAfterModification(StatAttribute.Speed); }
+    }
+
+    public float accuracy
+    {
+        get { return GetStatAfterModification(StatAttribute.Accuracy); }
+    }
+
+    public float evasion
+    {
+        get { return GetStatAfterModification(StatAttribute.Evasion); }
     }
 
     #endregion

@@ -56,6 +56,7 @@
     <Compile Include="Assets\Scripts\Pokemon\IndividualValues.cs" />
     <Compile Include="Assets\Scripts\Battle\BattleSystem.cs" />
     <Compile Include="Assets\Scripts\Pokemon\PokemonBase.cs" />
+    <Compile Include="Assets\Scripts\Pokemon\Condition.cs" />
     <Compile Include="Assets\Scripts\Battle\DamageDetails.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerController.cs" />
     <Compile Include="Assets\Scripts\Battle\ActionSelectionEventSelector.cs" />
@@ -66,6 +67,7 @@
     <Compile Include="Assets\Scripts\Party\PartySystem.cs" />
     <Compile Include="Assets\Scripts\Party\PartyCancelUI.cs" />
     <Compile Include="Assets\Test.cs" />
+    <Compile Include="Assets\Scripts\Data\ConditionsDB.cs" />
     <Compile Include="Assets\Scripts\Managers\LevelManager.cs" />
     <Compile Include="Assets\Scripts\Static Tables\EggTable.cs" />
     <Compile Include="Assets\Scripts\Party\PartyBackgroundArt.cs" />
@@ -74,6 +76,7 @@
     <Compile Include="Assets\Scripts\Battle\BattleDialogBox.cs" />
     <Compile Include="Assets\Scripts\Battle\AttackSelectionEventSelector.cs" />
     <Compile Include="Assets\Scripts\Party\PartyMemberUI.cs" />
+    <Compile Include="Assets\StatusConditionArt.cs" />
     <Compile Include="Assets\Scripts\Pokemon\PokemonParty.cs" />
     <Compile Include="Assets\Scripts\Mechanics\HPBar.cs" />
     <Compile Include="Assets\Scripts\Battle\BattleHUD.cs" />
@@ -85,9 +88,9 @@
     <Compile Include="Assets\Scripts\Battle\BattleUnit.cs" />
     <Compile Include="Assets\Scripts\Managers\GameController.cs" />
     <Compile Include="Assets\Scripts\Battle\TurnAttackDetails.cs" />
-    <Compile Include="Assets\Scripts\Pokemon\Condition.cs" />
-    <Compile Include="Assets\Scripts\Data\ConditionsDB.cs" />
-    <Compile Include="Assets\StatusConditionArt.cs" />
+    <Compile Include="Assets\Scripts\Pokemon\MoveSecondaryEffects.cs" />
+    <Compile Include="Assets\Art\Pokemon\Gen1\BadSlicesList.cs" />
+    <Compile Include="Assets\Notes.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">

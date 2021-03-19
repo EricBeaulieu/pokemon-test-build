@@ -11,16 +11,20 @@ public class GameController : MonoBehaviour
     [SerializeField] Camera overWorldCamera;
     [SerializeField] PartySystem partySystem;
 
+    bool _inBattle = false;
+
     GameState _state = GameState.Overworld;
 
     void Start()
     {
         playerController.OnEncounter += StartBattle;
+        playerController.OnEncounter += (() => _inBattle = true);
         battleSystem.OnBattleOver += EndBattle;
         battleSystem.OpenPokemonParty += OpenParty;
 
         //Clean this up later, just get it working for now and then clean up the code later
         partySystem.battleSystemReference = battleSystem;
+        partySystem.onCloseParty += CloseParty;
         ConditionsDB.Initialization();
     }
 
@@ -57,6 +61,7 @@ public class GameController : MonoBehaviour
     void EndBattle(bool wasWon)
     {
         _state = GameState.Overworld;
+        _inBattle = false;
         battleSystem.gameObject.SetActive(false);
         overWorldCamera.gameObject.SetActive(true);
     }
@@ -69,9 +74,9 @@ public class GameController : MonoBehaviour
         partySystem.OpenPartySystem();
     }
 
-    void CloseParty(bool inBattle)
+    void CloseParty()
     {
-        if(inBattle == true)
+        if(_inBattle == true)
         {
             _state = GameState.Battle;
         }

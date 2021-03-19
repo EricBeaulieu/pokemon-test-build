@@ -158,7 +158,7 @@ public class ConditionsDB
                     pokemon.statusChanges.Enqueue($"{pokemon.currentName} is confused");
 
                     //50% chance to hurt itself
-                    if(Random.Range(1,3) == 1)
+                    if(Random.value > 0.5f)
                     {
                         //Did not hurt itself
                         return true;
@@ -172,7 +172,6 @@ public class ConditionsDB
                     return false;
                 }
             }
-
         },
     };
 }
