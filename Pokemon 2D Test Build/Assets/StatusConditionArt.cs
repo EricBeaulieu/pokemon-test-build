@@ -14,6 +14,9 @@ public class StatusConditionArt : MonoBehaviour
     [SerializeField] Sprite paralyzed;
     [SerializeField] Sprite frozen;
 
+    [SerializeField] Sprite male;
+    [SerializeField] Sprite female;
+
     public static StatusConditionArt instance
     {
         get { return _instance; }
@@ -48,6 +51,18 @@ public class StatusConditionArt : MonoBehaviour
                 return frozen;
             case ConditionID.toxicPoison:
                 return poison;
+        }
+        return nothing;
+    }
+
+    public Sprite ReturnGenderArt(Gender gender)
+    {
+        switch (gender)
+        {
+            case Gender.Male:
+                return male;
+            case Gender.Female:
+                return female;
         }
         return nothing;
     }

@@ -26,11 +26,11 @@ public class BattleUnit : MonoBehaviour
     {
         if(_isPlayersPokemon)
         {
-            _pokemonSprite.sprite = pokemon.pokemonBase.GetBackSprite(false)[0];
+            _pokemonSprite.sprite = pokemon.pokemonBase.GetBackSprite(false,pokemon.gender)[0];
         }
         else
         {
-            _pokemonSprite.sprite = pokemon.pokemonBase.GetFrontSprite(false)[0];
+            _pokemonSprite.sprite = pokemon.pokemonBase.GetFrontSprite(false, pokemon.gender)[0];
         }
 
         this.pokemon = pokemon;

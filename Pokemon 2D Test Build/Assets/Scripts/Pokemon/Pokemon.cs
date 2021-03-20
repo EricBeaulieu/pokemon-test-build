@@ -11,6 +11,7 @@ public class Pokemon{
     public IndividualValues individualValues { get; set; }
     public EffortValues effortValues { get; set; }
     NatureBase _nature;
+    public Gender gender { get; set; }
 
     string _currentName;
     //Used for testing, will be fixed later
@@ -32,7 +33,6 @@ public class Pokemon{
 
     public void Initialization()
     {
-
         currentName = currentName == null ? _pokemonBase.GetPokedexName() : currentName;
 
         individualValues = new IndividualValues();
@@ -54,6 +54,8 @@ public class Pokemon{
 
         SetDataStats();
         currentHitPoints = maxHitPoints;
+
+        gender = SetGender(_pokemonBase);
     }
 
     /// <summary>
@@ -205,7 +207,7 @@ public class Pokemon{
 
     #endregion
 
-    #region Nature
+    #region Nature/Gender
 
     public NatureBase nature
     {
@@ -222,6 +224,27 @@ public class Pokemon{
 
         natureBases = Resources.LoadAll<NatureBase>("Natures");
         return natureBases[Random.Range(0, natureBases.Length)];
+    }
+
+    Gender SetGender(PokemonBase pokemonBase)
+    {
+        Gender currentGender = Gender.NA;
+
+        if(pokemonBase.HasGender == true)
+        {
+            float checker = Random.Range(1, 101);
+
+            if (checker <= pokemonBase.MaleFemaleGenderRatio)//If true then male
+            {
+                currentGender = Gender.Male;
+            }
+            else
+            {
+                currentGender = Gender.Female;
+            }
+        }
+
+        return currentGender;
     }
 
     #endregion
@@ -299,7 +322,11 @@ public class Pokemon{
 
         status = ConditionsDB.Conditions[conditionID];
         status?.OnStart?.Invoke(this);
-        statusChanges.Enqueue($"{currentName} {status.StartMessage}");
+
+        if(status.StartMessage != null)
+        {
+            statusChanges.Enqueue($"{currentName} {status.StartMessage}");
+        }
 
         OnStatusChanged?.Invoke();
     }
@@ -320,7 +347,11 @@ public class Pokemon{
 
         volatileStatus = ConditionsDB.Conditions[conditionID];
         volatileStatus?.OnStart?.Invoke(this);
-        statusChanges.Enqueue($"{currentName} {volatileStatus.StartMessage}");
+
+        if(volatileStatus.StartMessage != null)
+        {
+            statusChanges.Enqueue($"{currentName} {volatileStatus.StartMessage}");
+        }
     }
 
     public void CureVolatileStatus()
@@ -358,5 +389,6 @@ public class Pokemon{
     public void OnEndTurn()
     {
         status?.OnEndTurn?.Invoke(this);
+        volatileStatus?.OnEndTurn?.Invoke(this);
     }
 }

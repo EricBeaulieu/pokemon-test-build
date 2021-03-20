@@ -12,4 +12,7 @@ public class Notes
     //Shiny Pokemon
     //Saving
 
+    //Gender on pokemon party
+    //Bug on when it first opens, if there is a dead pokemon it still shows the background as fainted
+
 }

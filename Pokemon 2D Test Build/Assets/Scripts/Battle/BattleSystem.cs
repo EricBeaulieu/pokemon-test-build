@@ -10,6 +10,8 @@ public class BattleSystem : MonoBehaviour
 {
     [SerializeField] BattleUnit _playerBattleUnit;
     [SerializeField] BattleUnit _enemyBattleUnit;
+    EntryHazard _playerSideEntryHazards;
+    EntryHazard _enemySideEntryHazards;
 
     public event Action<bool> OnBattleOver;
     public event Action<bool> OpenPokemonParty;
@@ -284,6 +286,11 @@ public class BattleSystem : MonoBehaviour
                     if(rnd <= secondaryEffect.PercentChance)
                     {
                         yield return RunMoveEffects(secondaryEffect, sourceUnit.pokemon, targetUnit.pokemon, secondaryEffect.Target);
+
+                        if(secondaryEffect.Volatiletatus == ConditionID.cursedUser)
+                        {
+                            yield return sourceUnit.HUD.UpdateHP(previousHP);
+                        }
                     }
                 }
             }
@@ -444,7 +451,14 @@ public class BattleSystem : MonoBehaviour
         //Volatile Status Condition
         if (effects.Volatiletatus != ConditionID.NA)
         {
-            target.SetVolatileStatus(effects.Volatiletatus);
+            if(moveTarget == MoveTarget.Foe)
+            {
+                target.SetVolatileStatus(effects.Volatiletatus);
+            }
+            else
+            {
+                source.SetVolatileStatus(effects.Volatiletatus);
+            }
         }
 
         yield return ShowStatusChanges(source);
@@ -459,4 +473,13 @@ public class BattleSystem : MonoBehaviour
             yield return _dialogBox.TypeDialog(message);
         }
     }
+
+    #region Entry Hazards
+
+    void ResetFieldOfHazards()
+    {
+
+    }
+
+    #endregion
 }

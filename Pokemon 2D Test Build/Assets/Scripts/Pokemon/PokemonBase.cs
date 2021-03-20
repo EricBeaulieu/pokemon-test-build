@@ -7,6 +7,8 @@ public enum ElementType { NA = -1, Bug, Dark, Dragon, Electric, Fairy, Fighting,
 
 public enum StatAttribute { NA, HitPoints, Attack, Defense, SpecialAttack, SpecialDefense, Speed, Evasion, Accuracy }
 
+public enum Gender { NA,Male,Female}
+
 [CreateAssetMenu(menuName = "Pokedex/Create New Pokemon Entry")]
 public class PokemonBase : ScriptableObject {
 
@@ -21,7 +23,7 @@ public class PokemonBase : ScriptableObject {
     [SerializeField] float _weightInPounds;
     [SerializeField] float _weightInKilograms;
     [SerializeField] int _captureRate;
-    [SerializeField] List<EarnableEV> _rewardedEffortValue;    
+    [SerializeField] List<EarnableEV> _rewardedEffortValue;
 
     [Header("Sprites")]
     [SerializeField] Sprite _frontRegularSprite;
@@ -30,10 +32,26 @@ public class PokemonBase : ScriptableObject {
     [SerializeField] Sprite _backIntroSprite;
     [SerializeField] Sprite _shinyFrontRegularSprite;
     [SerializeField] Sprite _shinyFrontIntroSprite;
-    [SerializeField] Sprite _shinyBackSprite;
+    [SerializeField] Sprite _shinyBackRegularSprite;
     [SerializeField] Sprite _shinyBackIntroSprite;
     [SerializeField] Sprite _standardSpriteA;
     [SerializeField] Sprite _standardSpriteB;
+
+    //Turned on through editor of script
+    bool differentGenderSprites;
+    Sprite _femaleFrontRegularSprite;
+    Sprite _femaleFrontIntroSprite;
+    Sprite _femaleBackRegularSprite;
+    Sprite _femaleBackIntroSprite;
+    Sprite _femaleShinyFrontRegularSprite;
+    Sprite _femaleShinyFrontIntroSprite;
+    Sprite _femaleShinyBackRegularSprite;
+    Sprite _femaleShinyBackIntroSprite;
+
+    [Header("Gender")]
+    [SerializeField] bool _hasGender = true;
+    [Range(0, 100)]
+    [SerializeField] float _maleFemaleRatio = 50f;
 
     [Header("Experience Group")]
     [SerializeField] ExperienceGroup _baseGroup;
@@ -57,6 +75,8 @@ public class PokemonBase : ScriptableObject {
     [Header("Moveset")]
     [SerializeField] List<LearnableMove> _learnableMoves;
 
+    //Editor Additions
+
     #region Getters/Setters
 
     public string GetPokedexName()
@@ -64,9 +84,25 @@ public class PokemonBase : ScriptableObject {
         return _pokedexName;
     }
 
-    public Sprite[] GetFrontSprite(bool isShiny)
+    public Sprite[] GetFrontSprite(bool isShiny,Gender gender)
     {
-        if(isShiny == false)
+        if(differentGenderSprites == true)
+        {
+            if (gender == Gender.Female)
+            {
+                if (isShiny == false)
+                {
+                    return new[] { _femaleFrontRegularSprite, _femaleFrontIntroSprite };
+                }
+                else
+                {
+                    return new[] { _femaleShinyFrontRegularSprite, _femaleShinyFrontIntroSprite };
+                }
+            }
+        }
+
+        //If no specialised gender
+        if (isShiny == false)
         {
             return new[] { _frontRegularSprite, _frontIntroSprite };
         }
@@ -76,8 +112,24 @@ public class PokemonBase : ScriptableObject {
         }
     }
 
-    public Sprite[] GetBackSprite(bool isShiny)
+    public Sprite[] GetBackSprite(bool isShiny, Gender gender)
     {
+        if (differentGenderSprites == true)
+        {
+            if (gender == Gender.Female)
+            {
+                if (isShiny == false)
+                {
+                    return new[] { _femaleBackRegularSprite, _femaleBackIntroSprite };
+                }
+                else
+                {
+                    return new[] { _femaleShinyBackRegularSprite, _femaleShinyBackIntroSprite };
+                }
+            }
+        }
+
+        //If no specialised gender
         if (isShiny == false)
         {
             return new[] { _backRegularSprite, _backIntroSprite };
@@ -95,6 +147,20 @@ public class PokemonBase : ScriptableObject {
     public Sprite[] GetAnimatedSprites()
     {
         return new[] { _standardSpriteA, _standardSpriteB };
+    }
+
+    #endregion
+
+    #region Gender
+
+    public bool HasGender
+    {
+        get { return _hasGender; }
+    }
+
+    public float MaleFemaleGenderRatio
+    {
+        get { return _maleFemaleRatio; }
     }
 
     #endregion
@@ -154,6 +220,91 @@ public class PokemonBase : ScriptableObject {
     {
         get { return _learnableMoves; }
     }
+
+    #region EditorFunctions
+
+    public bool DifferentGenderSprites
+    {
+        get { return differentGenderSprites; }
+        set
+        {
+            differentGenderSprites = value;
+        }
+    }
+
+    public Sprite FemaleFrontRegularSprite
+    {
+        get { return _femaleFrontRegularSprite; }
+        set
+        {
+            _femaleFrontRegularSprite = value;
+        }
+    }
+
+    public Sprite FemaleFrontIntroSprite
+    {
+        get { return _femaleFrontIntroSprite; }
+        set
+        {
+            _femaleFrontIntroSprite = value;
+        }
+    }
+
+    public Sprite FemaleBackRegularSprite
+    {
+        get { return _femaleBackRegularSprite; }
+        set
+        {
+            _femaleBackRegularSprite = value;
+        }
+    }
+
+    public Sprite FemaleBackIntroSprite
+    {
+        get { return _femaleBackIntroSprite; }
+        set
+        {
+            _femaleBackIntroSprite = value;
+        }
+    }
+
+    public Sprite FemaleShinyFrontRegularSprite
+    {
+        get { return _femaleShinyFrontRegularSprite; }
+        set
+        {
+            _femaleShinyFrontRegularSprite = value;
+        }
+    }
+
+    public Sprite FemaleShinyFrontIntroSprite
+    {
+        get { return _femaleShinyFrontIntroSprite; }
+        set
+        {
+            _femaleShinyFrontIntroSprite = value;
+        }
+    }
+
+    public Sprite FemaleShinyBackRegularSprite
+    {
+        get { return _femaleShinyBackRegularSprite; }
+        set
+        {
+            _femaleShinyBackRegularSprite = value;
+        }
+    }
+
+    public Sprite FemaleShinyBackIntroSprite
+    {
+        get { return _femaleShinyBackIntroSprite; }
+        set
+        {
+            _femaleShinyBackIntroSprite = value;
+        }
+    }
+
+    #endregion
 
     //void CheckPokemonEVs()
     //{

@@ -9,6 +9,7 @@ public class BattleHUD : MonoBehaviour
     [SerializeField] Text levelText;
     [SerializeField] Image statusCondition;
     [SerializeField] HPBar hPBar;
+    [SerializeField] Image gender;
 
     //This is only here due to the background sprite not being cut right, naturally it would be cleaned up
     [SerializeField] Text currentHP;
@@ -32,6 +33,8 @@ public class BattleHUD : MonoBehaviour
 
         SetStatusSprite();
         _pokemon.OnStatusChanged += SetStatusSprite;
+
+        gender.sprite = StatusConditionArt.instance.ReturnGenderArt(currentPokemon.gender);
     }
 
     void SetStatusSprite()

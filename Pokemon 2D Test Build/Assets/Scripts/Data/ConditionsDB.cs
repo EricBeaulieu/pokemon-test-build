@@ -2,6 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum ConditionID
+{
+    //Status
+    NA, poison, burn, sleep, paralyzed, frozen, toxicPoison,
+    //Volatile Status
+    confused,bound,cursed,cursedUser
+}
+
 public class ConditionsDB
 {
     public static void Initialization()
@@ -173,13 +181,29 @@ public class ConditionsDB
                 }
             }
         },
+        {
+            ConditionID.cursed,
+            new Condition()
+            {
+                Name = "Cursed",
+                OnEndTurn = (Pokemon pokemon) =>
+                {
+                    pokemon.UpdateHP(pokemon.maxHitPoints/4);
+                    pokemon.statusChanges.Enqueue($"{pokemon.currentName} is afflicted by the curse");
+                }
+            }
+        },
+        {
+            ConditionID.cursedUser,
+            new Condition()
+            {
+                Name = "CursedUser",
+                OnStart = (Pokemon pokemon) =>
+                {
+                    pokemon.UpdateHP(pokemon.maxHitPoints/2);
+                    pokemon.statusChanges.Enqueue($"{pokemon.currentName} cut its own HP to lay a curse on enemy Pokemon");
+                }
+            }
+        },
     };
-}
-
-public enum ConditionID
-{
-    //Status
-    NA, poison, burn, sleep, paralyzed, frozen, toxicPoison,
-    //Volatile Status
-    confused
 }
