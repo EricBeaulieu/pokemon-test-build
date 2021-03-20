@@ -15,6 +15,7 @@ public class BattleUnit : MonoBehaviour
     public BattleHUD HUD { get { return hud; } }
 
     public Pokemon pokemon {get;set;}
+    bool _sendOutPokemonOnTurnEnd = false;
 
     void Awake()
     {
@@ -26,16 +27,17 @@ public class BattleUnit : MonoBehaviour
     {
         if(_isPlayersPokemon)
         {
-            _pokemonSprite.sprite = pokemon.pokemonBase.GetBackSprite(false,pokemon.gender)[0];
+            _pokemonSprite.sprite = pokemon.pokemonBase.GetBackSprite(pokemon.isShiny,pokemon.gender)[0];
         }
         else
         {
-            _pokemonSprite.sprite = pokemon.pokemonBase.GetFrontSprite(false, pokemon.gender)[0];
+            _pokemonSprite.sprite = pokemon.pokemonBase.GetFrontSprite(pokemon.isShiny, pokemon.gender)[0];
         }
 
         this.pokemon = pokemon;
         hud.SetData(pokemon, _isPlayersPokemon);
         pokemon.Reset();
+        _sendOutPokemonOnTurnEnd = false;
 
         PlayEnterAnimation();
     }
@@ -156,4 +158,14 @@ public class BattleUnit : MonoBehaviour
         }
         tempTrans.localPosition = originalPosition;
     }
+
+    public bool SendOutPokemonOnTurnEnd
+    {
+        get { return _sendOutPokemonOnTurnEnd; }
+        set
+        {
+            _sendOutPokemonOnTurnEnd = value;
+        }
+    }
+
 }

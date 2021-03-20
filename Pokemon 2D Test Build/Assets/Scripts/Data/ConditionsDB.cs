@@ -31,6 +31,15 @@ public class ConditionsDB
             {
                 Name = "Poison",
                 StartMessage = "has been poisoned",
+                HasCondition = (ConditionID conditionID) =>
+                {
+                    if(conditionID == ConditionID.poison || conditionID == ConditionID.toxicPoison)
+                    {
+                        return true;
+                    }
+                    return false;
+                },
+                HasConditionMessage = "is already poisoned",
                 OnEndTurn = (Pokemon pokemon) =>
                 {
                     pokemon.UpdateHP(pokemon.maxHitPoints/8);
@@ -45,6 +54,15 @@ public class ConditionsDB
             {
                 Name = "Burn",
                 StartMessage = "has been burned",
+                HasCondition = (ConditionID conditionID) =>
+                {
+                    if(conditionID == ConditionID.burn)
+                    {
+                        return true;
+                    }
+                    return false;
+                },
+                HasConditionMessage = "is already burnt",
                 OnEndTurn = (Pokemon pokemon) =>
                 {
                     pokemon.UpdateHP(pokemon.maxHitPoints/16);
@@ -59,11 +77,19 @@ public class ConditionsDB
             {
                 Name = "Sleep",
                 StartMessage = "has fallen asleep",
+                HasCondition = (ConditionID conditionID) =>
+                {
+                    if(conditionID == ConditionID.sleep)
+                    {
+                        return true;
+                    }
+                    return false;
+                },
+                HasConditionMessage = "is already Asleep",
                 OnStart = (Pokemon pokemon) =>
                 {
                     //Sleep For 1-3 turns
                     pokemon.statusTime = Random.Range(1,4);
-                    Debug.Log($"{pokemon.currentName} will be asleep for {pokemon.statusTime} turns");
                 },
                 OnBeforeMove = (Pokemon pokemon) =>
                 {
@@ -87,6 +113,15 @@ public class ConditionsDB
             {
                 Name = "Paralyzed",
                 StartMessage = "has been paralyzed",
+                HasCondition = (ConditionID conditionID) =>
+                {
+                    if(conditionID == ConditionID.paralyzed)
+                    {
+                        return true;
+                    }
+                    return false;
+                },
+                HasConditionMessage = "is already paralyzed",
                 OnBeforeMove = (Pokemon pokemon) =>
                 {
                     if(Random.Range(1,5) == 1)
@@ -105,6 +140,15 @@ public class ConditionsDB
             {
                 Name = "Frozen",
                 StartMessage = "has been frozen",
+                HasCondition = (ConditionID conditionID) =>
+                {
+                    if(conditionID == ConditionID.frozen)
+                    {
+                        return true;
+                    }
+                    return false;
+                },
+                HasConditionMessage = "is already Frozen",
                 OnBeforeMove = (Pokemon pokemon) =>
                 {
                     if(Random.Range(1,6) == 1)
@@ -125,6 +169,15 @@ public class ConditionsDB
             {
                 Name = "ToxicPoison",
                 StartMessage = "has been badly poisoned",
+                HasCondition = (ConditionID conditionID) =>
+                {
+                    if(conditionID == ConditionID.poison || conditionID == ConditionID.toxicPoison)
+                    {
+                        return true;
+                    }
+                    return false;
+                },
+                HasConditionMessage = "is already poisoned",
                 OnStart = (Pokemon pokemon) =>
                 {
                     pokemon.statusTime = 0;
@@ -147,6 +200,15 @@ public class ConditionsDB
             {
                 Name = "Confused",
                 StartMessage = "has been confused",
+                HasCondition = (ConditionID conditionID) =>
+                {
+                    if(conditionID == ConditionID.confused)
+                    {
+                        return true;
+                    }
+                    return false;
+                },
+                HasConditionMessage = "is already Confused",
                 OnStart = (Pokemon pokemon) =>
                 {
                     pokemon.volatileStatusTime = Random.Range(2,6);
@@ -156,7 +218,7 @@ public class ConditionsDB
                 {
                     if(pokemon.volatileStatusTime <= 0)
                     {
-                        pokemon.CureVolatileStatus();
+                        pokemon.CureVolatileStatus(ConditionID.confused);
                         pokemon.statusChanges.Enqueue($"{pokemon.currentName} is no longer confused");
                         return true;
                     }
@@ -186,9 +248,18 @@ public class ConditionsDB
             new Condition()
             {
                 Name = "Cursed",
+                HasCondition = (ConditionID conditionID) =>
+                {
+                    if(conditionID == ConditionID.cursed)
+                    {
+                        return true;
+                    }
+                    return false;
+                },
+                HasConditionMessage = "is already Cursed",
                 OnEndTurn = (Pokemon pokemon) =>
                 {
-                    pokemon.UpdateHP(pokemon.maxHitPoints/4);
+                    pokemon.UpdateHP(Mathf.CeilToInt((float)pokemon.maxHitPoints/4f));
                     pokemon.statusChanges.Enqueue($"{pokemon.currentName} is afflicted by the curse");
                 }
             }
@@ -202,7 +273,8 @@ public class ConditionsDB
                 {
                     pokemon.UpdateHP(pokemon.maxHitPoints/2);
                     pokemon.statusChanges.Enqueue($"{pokemon.currentName} cut its own HP to lay a curse on enemy Pokemon");
-                }
+                    pokemon.CureVolatileStatus(ConditionID.cursedUser);
+                },
             }
         },
     };

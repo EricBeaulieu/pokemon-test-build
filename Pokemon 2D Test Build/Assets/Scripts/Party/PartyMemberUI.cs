@@ -32,7 +32,7 @@ public class PartyMemberUI : MonoBehaviour, ISelectHandler, IDeselectHandler
         levelText.text = currentPokemon.currentLevel.ToString();
         hPBar.SetHP((float)currentPokemon.currentHitPoints / currentPokemon.maxHitPoints);
         currentHP.text = $"{currentPokemon.currentHitPoints.ToString()}/{currentPokemon.maxHitPoints.ToString()}";
-
+        background.sprite = PartyBackgroundArt.instance.ReturnBackgroundArt(_pokemon.currentHitPoints, _isFirstSlot);
 
         _animatedSprite = currentPokemon.pokemonBase.GetAnimatedSprites();
         //Will be changed later on

@@ -8,6 +8,7 @@ public class Pokemon{
     //Used for testing, will be fixed later
     [SerializeField] PokemonBase _pokemonBase;
     public PokemonBase pokemonBase { get { return _pokemonBase; } set { _pokemonBase = value; } }
+    public bool isShiny { get; private set; }
     public IndividualValues individualValues { get; set; }
     public EffortValues effortValues { get; set; }
     NatureBase _nature;
@@ -27,7 +28,7 @@ public class Pokemon{
 
     public Condition status { get; private set; }
     public int statusTime { get; set; }
-    public Condition volatileStatus { get; private set; }
+    public List<Condition> volatileStatus { get; private set; }
     public int volatileStatusTime { get; set; }
     public System.Action OnStatusChanged;
 
@@ -35,6 +36,10 @@ public class Pokemon{
     {
         currentName = currentName == null ? _pokemonBase.GetPokedexName() : currentName;
 
+        if(Random.value > 0.5f)
+        {
+            isShiny = true;
+        }
         individualValues = new IndividualValues();
         effortValues = new EffortValues();
         nature = SetNature();
@@ -65,7 +70,7 @@ public class Pokemon{
     public void Reset()
     {
         ResetStatBoosts();
-        volatileStatus = null;
+        volatileStatus = new List<Condition>();
     }
 
     #region Stats
@@ -316,7 +321,13 @@ public class Pokemon{
     {
         if(status != null)
         {
-            statusChanges.Enqueue($"It doesnt affect {currentName}");
+            string currentStatusChange = $"{currentName} {status.HasConditionMessage}";
+
+            if(status.HasCondition(conditionID) == false)
+            {
+                currentStatusChange = $"It doesnt affect {currentName}";
+            }
+            statusChanges.Enqueue(currentStatusChange);
             return;
         }
 
@@ -339,24 +350,38 @@ public class Pokemon{
 
     public void SetVolatileStatus(ConditionID conditionID)
     {
-        if (volatileStatus != null)
+        Condition currentCondition = ConditionsDB.Conditions[conditionID];
+
+        if (volatileStatus.Contains(currentCondition) == true)
         {
-            statusChanges.Enqueue($"It doesnt affect {currentName}");
+            string currentStatusChange = $"{currentName} {currentCondition.HasConditionMessage}";
+
+            if (currentCondition.HasCondition(conditionID) == false)
+            {
+                currentStatusChange = $"It doesnt affect {currentName}";
+            }
+            statusChanges.Enqueue(currentStatusChange);
             return;
         }
 
-        volatileStatus = ConditionsDB.Conditions[conditionID];
-        volatileStatus?.OnStart?.Invoke(this);
+        Condition newVolatileStatus = ConditionsDB.Conditions[conditionID];
+        volatileStatus.Add(newVolatileStatus);
+        newVolatileStatus?.OnStart?.Invoke(this);
 
-        if(volatileStatus.StartMessage != null)
+        if(newVolatileStatus.StartMessage != null)
         {
-            statusChanges.Enqueue($"{currentName} {volatileStatus.StartMessage}");
+            statusChanges.Enqueue($"{currentName} {newVolatileStatus.StartMessage}");
         }
     }
 
-    public void CureVolatileStatus()
+    public void CureAllVolatileStatus()
     {
-        volatileStatus = null;
+        volatileStatus = new List<Condition>();
+    }
+
+    public void CureVolatileStatus(ConditionID conditionID)
+    {
+        volatileStatus.Remove(ConditionsDB.Conditions[conditionID]);
     }
 
     /// <summary>
@@ -375,11 +400,14 @@ public class Pokemon{
             }
         }
 
-        if (volatileStatus?.OnBeforeMove != null)
+        foreach (Condition currentVolatileStatus in volatileStatus)
         {
-            if (volatileStatus.OnBeforeMove(this) == false)
+            if (currentVolatileStatus?.OnBeforeMove != null)
             {
-                canPerformMove = false;
+                if (currentVolatileStatus.OnBeforeMove(this) == false)
+                {
+                    canPerformMove = false;
+                }
             }
         }
 
@@ -389,6 +417,10 @@ public class Pokemon{
     public void OnEndTurn()
     {
         status?.OnEndTurn?.Invoke(this);
-        volatileStatus?.OnEndTurn?.Invoke(this);
+
+        foreach (Condition currentVolatileStatus in volatileStatus)
+        {
+            currentVolatileStatus?.OnEndTurn?.Invoke(this);
+        }
     }
 }

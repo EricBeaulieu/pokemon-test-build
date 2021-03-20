@@ -90,6 +90,10 @@ public class PartySystem : MonoBehaviour
                     _partyMemberSlots[k].GetComponent<Button>().onClick.RemoveAllListeners();
                     _partyMemberSlots[k].GetComponent<Button>().onClick.AddListener(() => OpenBattleSelections(_partyMemberSlots[k]));
                 }
+                else
+                {
+                    //Open other selection menu and give all options available
+                }
 
                 if(i+1 == currentParty.Count)
                 {

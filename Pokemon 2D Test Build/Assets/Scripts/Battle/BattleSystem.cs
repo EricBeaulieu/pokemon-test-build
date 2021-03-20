@@ -217,7 +217,11 @@ public class BattleSystem : MonoBehaviour
         //Apply weather effects
 
         //If current pokemon has fainted then it goes to the party system and waits on the selector
-        if (_playerBattleUnit.pokemon.currentHitPoints > 0)
+        if (_playerBattleUnit.SendOutPokemonOnTurnEnd == true)
+        {
+            OpenPokemonParty(true);
+        }
+        else
         {
             PlayerActions();
         }
@@ -225,6 +229,11 @@ public class BattleSystem : MonoBehaviour
 
     IEnumerator ApplyEffectsOnEndTurn(BattleUnit sourceUnit)
     {
+        if(sourceUnit.pokemon.currentHitPoints <= 0)
+        {
+            yield break;
+        }
+
         int currentHP = sourceUnit.pokemon.currentHitPoints;
 
         sourceUnit.pokemon.OnEndTurn();
@@ -255,6 +264,11 @@ public class BattleSystem : MonoBehaviour
 
         yield return _dialogBox.TypeDialog($"{sourceUnit.pokemon.currentName} used {moveBase.MoveName}");
 
+        if(targetUnit.pokemon.currentHitPoints <=0 && moveBase.Target == MoveTarget.Foe)
+        {
+            yield return _dialogBox.TypeDialog($"There is no target Pokemon");
+            yield break;
+        }
 
         if(CheckIfMoveHits(moveBase,sourceUnit.pokemon,targetUnit.pokemon) == true)
         {
@@ -276,6 +290,12 @@ public class BattleSystem : MonoBehaviour
 
                 yield return targetUnit.HUD.UpdateHP(hpPriorToAttack);
                 yield return ShowDamageDetails(damageDetails, targetUnit);
+
+                //Shows that the damage does not effect them and then ends the move right there
+                if(damageDetails.typeEffectiveness == 0)
+                {
+                    yield break;
+                }
             }
 
             if(moveBase.SecondaryEffects != null && moveBase.SecondaryEffects.Count > 0 && targetUnit.pokemon.currentHitPoints > 0)
@@ -290,6 +310,10 @@ public class BattleSystem : MonoBehaviour
                         if(secondaryEffect.Volatiletatus == ConditionID.cursedUser)
                         {
                             yield return sourceUnit.HUD.UpdateHP(previousHP);
+                            if (sourceUnit.pokemon.currentHitPoints <= 0)
+                            {
+                                yield return PokemonHasFainted(sourceUnit);
+                            }
                         }
                     }
                 }
@@ -341,7 +365,7 @@ public class BattleSystem : MonoBehaviour
             Pokemon nextPokemon = _playerParty.GetFirstHealthyPokemon();
             if (nextPokemon != null)
             {
-                OpenPokemonParty(true);
+                faintedUnit.SendOutPokemonOnTurnEnd = true;
             }
             else
             {
