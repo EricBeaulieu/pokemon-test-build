@@ -5,7 +5,6 @@ using UnityEngine;
 public class Notes
 {
     //To do list
-    //PP
 
     //Add in
 
@@ -14,12 +13,11 @@ public class Notes
     //Weather effects
     //Saving
     //Gender on pokemon party
+    //loop for the NPC to walk as it will check the entire length rather then whats infront of them
 
     //Bugs
 
     //Remove hit animation when a pokemon is not effected by a move
     //Update party order
-    //If pokemon dies then make it faint and wait until the end of the turn to switch
-    //update it so if it kills itself to die then, not at the end of turn or after being attacked
 
 }

@@ -7,37 +7,47 @@ using UnityEngine.UI;
 
 public class AttackSelectionEventSelector : MonoBehaviour
 {
-    [SerializeField] GameObject [] _moveButton;
+    [SerializeField] GameObject [] moveButton;
 
     [SerializeField] Text pPText;
     [SerializeField] Text typeText;
 
+    GameObject _lastSelected;
+
     private void Awake()
     {
-        if(_moveButton.Length != 4)
+        if(moveButton.Length != 4)
         {
             Debug.LogError("the Amount of moves selectable is not set corretly!");
         }
 
         for (int i = 0; i < 4; i++)
         {
-            _moveButton[i].GetComponent<AttackButton>().SetPPValues(pPText, typeText);
+            moveButton[i].GetComponent<AttackButton>().SetPPValues(pPText, typeText);
         }
     }
 
     /// <summary>
-    /// When the Fight Button is clicked this ensures that it is selected on the move 1 button
+    /// When the Fight Button is clicked it shall select the last attack used
+    /// It shall select the first move if there have been no attacks used
     /// </summary>
-    public void SelectFirstBox()
+    public void SelectBox()
     {
         EventSystem.current.SetSelectedGameObject(null);
-        EventSystem.current.SetSelectedGameObject(_moveButton[0]);
+        if (_lastSelected == null)
+        {
+            EventSystem.current.SetSelectedGameObject(moveButton[0]);
+        }
+        else
+        {
+            EventSystem.current.SetSelectedGameObject(_lastSelected);
+        }
     }
 
-    public Button ReturnMoveButton(int moveNumber)
-    {
-        return _moveButton[moveNumber].GetComponent<Button>();
-    }
+    //public Button ReturnMoveButton(int moveNumber)
+    //{
+    //    return moveButton[moveNumber].GetComponent<Button>();
+    //}
 
     /// <summary>
     /// Sets up the moves in the location for when the pokemon is going to fight
@@ -47,25 +57,34 @@ public class AttackSelectionEventSelector : MonoBehaviour
     /// <param name="currentBattleSystem">A reference to the battle system that gets passed down</param>
     public void SetMovesList(BattleUnit currentPokemon, List<Move> moves,BattleSystem currentBattleSystem)
     {
-        for (int i = 0; i < _moveButton.Length; i++)
+        for (int i = 0; i < moveButton.Length; i++)
         {
             if(i < moves.Count)
             {
                 int k = i;
-                _moveButton[i].SetActive(true);
-                _moveButton[i].GetComponentInChildren<Text>().text = moves[i].moveBase.MoveName;
-                _moveButton[i].GetComponent<AttackButton>().SetMove(moves[i]);
-                _moveButton[i].GetComponent<Button>().onClick.RemoveAllListeners();
-                _moveButton[i].GetComponent<Button>().onClick.AddListener(() => 
+                moveButton[i].SetActive(true);
+                moveButton[i].GetComponentInChildren<Text>().text = moves[i].moveBase.MoveName;
+                moveButton[i].GetComponent<AttackButton>().SetMove(moves[i]);
+                moveButton[i].GetComponent<Button>().onClick.RemoveAllListeners();
+                moveButton[i].GetComponent<Button>().onClick.AddListener(() => 
                 {
-                    currentBattleSystem.AttackSelected(currentPokemon, moves[k].moveBase);
-                    moves[k].pP--;
+                    if(moves[k].pP > 0)
+                    {
+                        currentBattleSystem.AttackSelected(currentPokemon, moves[k].moveBase);
+                        moves[k].pP--;
+                    }
+                    else
+                    {
+                        currentBattleSystem.AttackHasRunOutOfPP();
+                    }
+
                     EventSystem.current.SetSelectedGameObject(null);
+                    _lastSelected = moveButton[k];
                 });
             }
             else
             {
-                _moveButton[i].SetActive(false);
+                moveButton[i].SetActive(false);
             }
         }
     }

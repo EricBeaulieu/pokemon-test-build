@@ -8,7 +8,7 @@ public class PokemonBaseEditor : Editor
 
     public override void OnInspectorGUI()
     {
-        DrawDefaultInspector(); // for other non-HideInInspector fields
+        DrawDefaultInspector();
 
         PokemonBase script = (PokemonBase)target;
 
@@ -28,6 +28,19 @@ public class PokemonBaseEditor : Editor
             script.FemaleShinyBackRegularSprite = EditorGUILayout.ObjectField("Female Back Shiny Regular Sprite", script.FemaleShinyBackRegularSprite, typeof(Sprite), true) as Sprite;
             script.FemaleShinyBackIntroSprite = EditorGUILayout.ObjectField("Female Back Shiny Intro Sprite", script.FemaleShinyBackIntroSprite, typeof(Sprite), true) as Sprite;
         }
+
+        EditorUtility.SetDirty(script);
+
     }
 
+    //private void OnDisable()
+    //{
+    //    AssetDatabase.SaveAssets();
+    //    AssetDatabase.Refresh();
+    //}
+
+    //private void OnEnable()
+    //{
+    //    AssetDatabase.Refresh();
+    //}
 }

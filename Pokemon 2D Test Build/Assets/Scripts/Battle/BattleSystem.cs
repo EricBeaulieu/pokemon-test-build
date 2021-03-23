@@ -60,10 +60,18 @@ public class BattleSystem : MonoBehaviour
 
         yield return _dialogBox.TypeDialog($"A wild {_enemyBattleUnit.pokemon.currentName} has appeared!");
 
+        SetupPlayerActions();
         PlayerActions();
     }
 
     #region Player Actions
+
+    void SetupPlayerActions()
+    {
+        _actionSelectionEventSelector.SetUp();
+        _actionSelectionEventSelector.ReturnFightButton().onClick.AddListener(delegate { PlayerActionFight(); });
+        _actionSelectionEventSelector.ReturnPokemonButton().onClick.AddListener(delegate { PlayerActionPokemon(); });
+    }
 
     /// <summary>
     /// sets up the players action box, with the cursor/event system selected on the first box
@@ -73,9 +81,6 @@ public class BattleSystem : MonoBehaviour
     {
         _dialogBox.SetDialogText($"What will {_playerBattleUnit.pokemon.currentName} do?");
         EnableActionSelector(true);
-
-        _actionSelectionEventSelector.ReturnFightButton().onClick.AddListener(delegate { PlayerActionFight(); });
-        _actionSelectionEventSelector.ReturnPokemonButton().onClick.AddListener(delegate { PlayerActionPokemon(); });
     }
 
     /// <summary>
@@ -104,12 +109,9 @@ public class BattleSystem : MonoBehaviour
         _dialogBox.EnableActionSelector(enabled);
         if (enabled == true)
         {
-            _actionSelectionEventSelector.SelectFirstBox();
+            _actionSelectionEventSelector.SelectBox();
         }
     }
-
-    #endregion
-
 
     /// <summary>
     /// Turns on/off the current Dialog box and the updater for the PP system as well as the type of move it is
@@ -120,7 +122,7 @@ public class BattleSystem : MonoBehaviour
         _dialogBox.EnableMoveSelector(enabled);
         if (enabled == true)
         {
-            _attackSelectionEventSelector.SelectFirstBox();
+            _attackSelectionEventSelector.SelectBox();
         }
     }
 
@@ -138,9 +140,23 @@ public class BattleSystem : MonoBehaviour
         StartCoroutine(EnemyMove());
     }
 
+    public void AttackHasRunOutOfPP()
+    {
+        StartCoroutine(AttackHasRunOutOfPPIEnumerator());
+    }
+
+    IEnumerator AttackHasRunOutOfPPIEnumerator()
+    {
+        EnableAttackMoveSelector(false);
+        yield return _dialogBox.TypeDialog("There's no PP left for this move!");
+        yield return new WaitForSeconds(1);
+        EnableAttackMoveSelector(true);
+    }
+
+    #endregion
+
     public IEnumerator EnemyMove()
     {
-        //Create a check function to see if they have enough PP
         Move currentAttack = _enemyBattleUnit.pokemon.ReturnRandomMove();
 
         TurnAttackDetails turnAttack = new TurnAttackDetails(currentAttack.moveBase, _enemyBattleUnit, _playerBattleUnit);
@@ -449,7 +465,7 @@ public class BattleSystem : MonoBehaviour
 
     public void ReturnFromPokemonPartySystem()
     {
-        _actionSelectionEventSelector.SelectPokemonButton();
+        _actionSelectionEventSelector.SelectBox();
     }
 
     IEnumerator RunMoveEffects(MoveEffects effects, Pokemon source, Pokemon target,MoveTarget moveTarget)

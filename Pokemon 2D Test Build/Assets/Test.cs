@@ -13,7 +13,7 @@ public class Test : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-        TestNatureName(testNature);
+        //TestNatureName(testNature);
         //TestTypeChart();
 	}
 

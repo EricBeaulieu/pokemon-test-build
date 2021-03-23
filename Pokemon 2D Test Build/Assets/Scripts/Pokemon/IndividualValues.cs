@@ -22,12 +22,7 @@ public class IndividualValues
     const int MINIMUM_IV_VALUE = 1;
     const int MAXIMUM_IV_VALUE = 31;
 
-    public IndividualValues()
-    {
-        GenerateIVs();
-    }
-
-    void GenerateIVs()
+    public void GenerateIVs()
     {
         maxHitPoints = Random.Range(MINIMUM_IV_VALUE, MAXIMUM_IV_VALUE);
         attack = Random.Range(MINIMUM_IV_VALUE, MAXIMUM_IV_VALUE);

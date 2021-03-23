@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum GameState { Overworld, Battle, Party}
+public enum GameState { Overworld, Battle, Party, Dialog}
 
 public class GameController : MonoBehaviour
 {
@@ -10,6 +10,7 @@ public class GameController : MonoBehaviour
     [SerializeField] BattleSystem battleSystem;
     [SerializeField] Camera overWorldCamera;
     [SerializeField] PartySystem partySystem;
+    DialogManager _dialogManager;
 
     bool _inBattle = false;
 
@@ -26,6 +27,23 @@ public class GameController : MonoBehaviour
         partySystem.battleSystemReference = battleSystem;
         partySystem.onCloseParty += CloseParty;
         ConditionsDB.Initialization();
+
+        _dialogManager = DialogManager.instance;
+        _dialogManager.OnShowDialog += () => { _state = GameState.Dialog; };
+        _dialogManager.OnCloseDialog += () => 
+        {
+            if(_state == GameState.Dialog)
+            {
+                if (_inBattle == true)
+                {
+                    _state = GameState.Battle;
+                }
+                else
+                {
+                    _state = GameState.Overworld;
+                }
+            }
+        };
     }
 
     void Update()
@@ -39,6 +57,9 @@ public class GameController : MonoBehaviour
                 battleSystem.HandleUpdate();
                 break;
             case GameState.Party:
+                break;
+            case GameState.Dialog:
+                _dialogManager.HandleUpdate();
                 break;
             default:
                 Debug.LogError("Broken");

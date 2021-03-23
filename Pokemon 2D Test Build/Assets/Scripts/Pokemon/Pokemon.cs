@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 [System.Serializable]
@@ -9,8 +10,8 @@ public class Pokemon{
     [SerializeField] PokemonBase _pokemonBase;
     public PokemonBase pokemonBase { get { return _pokemonBase; } set { _pokemonBase = value; } }
     public bool isShiny { get; private set; }
-    public IndividualValues individualValues { get; set; }
-    public EffortValues effortValues { get; set; }
+    public IndividualValues individualValues { get; set; } = new IndividualValues();
+    public EffortValues effortValues { get; set; } = new EffortValues();
     NatureBase _nature;
     public Gender gender { get; set; }
 
@@ -40,8 +41,7 @@ public class Pokemon{
         {
             isShiny = true;
         }
-        individualValues = new IndividualValues();
-        effortValues = new EffortValues();
+        individualValues.GenerateIVs();
         nature = SetNature();
 
         moves = new List<Move>();
@@ -304,8 +304,15 @@ public class Pokemon{
 
     public Move ReturnRandomMove()
     {
-        int r = Random.Range(0, moves.Count);
-        return moves[r];
+        List<Move> movesWithPp = moves.Where(x => x.pP > 0).ToList();
+
+        if(movesWithPp.Count == 0)
+        {
+            return null;
+        }
+
+        int r = Random.Range(0, movesWithPp.Count);
+        return movesWithPp[r];
     }
 
     public string currentName
@@ -400,7 +407,10 @@ public class Pokemon{
             }
         }
 
-        foreach (Condition currentVolatileStatus in volatileStatus)
+        //This copy is here because if it is iterating through it and removes an element while searching it shall break the for each loop
+        List<Condition> copyVolatileStatus = new List<Condition>(volatileStatus);
+
+        foreach (Condition currentVolatileStatus in copyVolatileStatus)
         {
             if (currentVolatileStatus?.OnBeforeMove != null)
             {
@@ -418,7 +428,10 @@ public class Pokemon{
     {
         status?.OnEndTurn?.Invoke(this);
 
-        foreach (Condition currentVolatileStatus in volatileStatus)
+        //This copy is here because if it is iterating through it and removes an element while searching it shall break the for each loop
+        List<Condition> copyVolatileStatus = new List<Condition>(volatileStatus);
+
+        foreach (Condition currentVolatileStatus in copyVolatileStatus)
         {
             currentVolatileStatus?.OnEndTurn?.Invoke(this);
         }
