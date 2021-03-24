@@ -19,5 +19,6 @@ public class Notes
 
     //Remove hit animation when a pokemon is not effected by a move
     //Update party order
+    //Pause NPC or end their movement when talking to another NPC
 
 }

@@ -12,4 +12,22 @@ public class LevelManager : MonoBehaviour
         temp.Initialization();
         return temp;
     }
+
+    public List<Entity> ReturnAllEntities()
+    {
+        //var gameObjects = (Entity)FindSceneObjectsOfType(typeof(Entity)) as Entity[]();
+        Entity[] gameObjects = Resources.FindObjectsOfTypeAll(typeof(Entity)) as Entity[];
+
+        List<Entity> allEntitiesInScene = new List<Entity>();
+
+        for (int i = 0; i < gameObjects.Length; i++)
+        {
+            if(gameObjects[i].gameObject.activeInHierarchy == true)
+            {
+                allEntitiesInScene.Add(gameObjects[i]);
+            }
+        }
+
+        return allEntitiesInScene;
+    }
 }

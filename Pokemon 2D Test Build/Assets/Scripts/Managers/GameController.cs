@@ -11,10 +11,13 @@ public class GameController : MonoBehaviour
     [SerializeField] Camera overWorldCamera;
     [SerializeField] PartySystem partySystem;
     DialogManager _dialogManager;
+    [SerializeField] LevelManager levelManager;
 
     bool _inBattle = false;
 
     GameState _state = GameState.Overworld;
+
+    List<Entity> allActiveEntities;
 
     void Start()
     {
@@ -44,6 +47,9 @@ public class GameController : MonoBehaviour
                 }
             }
         };
+
+        allActiveEntities = new List<Entity>();
+        allActiveEntities = levelManager.ReturnAllEntities();
     }
 
     void Update()
@@ -51,7 +57,7 @@ public class GameController : MonoBehaviour
         switch (_state)
         {
             case GameState.Overworld:
-                playerController.HandleUpdate();
+                RunAllEntities();
                 break;
             case GameState.Battle:
                 battleSystem.HandleUpdate();
@@ -106,5 +112,13 @@ public class GameController : MonoBehaviour
             _state = GameState.Overworld;
         }
         partySystem.gameObject.SetActive(false);
+    }
+
+    void RunAllEntities()
+    {
+        foreach (Entity entity in allActiveEntities)
+        {
+            entity.HandleUpdate();
+        }
     }
 }

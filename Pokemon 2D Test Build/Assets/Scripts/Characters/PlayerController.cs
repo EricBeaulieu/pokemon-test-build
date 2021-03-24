@@ -9,7 +9,7 @@ public class PlayerController : Entity
 
     Vector2 _currentInput;
 
-    public void HandleUpdate()
+    public override void HandleUpdate()
     {
         if(Input.GetKeyDown(KeyCode.Space))
         {
@@ -85,7 +85,7 @@ public class PlayerController : Entity
 
         if (collider != null)
         {
-            collider.GetComponent<IInteractable>()?.OnInteract();
+            collider.GetComponent<IInteractable>()?.OnInteract((Vector2)transform.position);
         }
     }
 }
