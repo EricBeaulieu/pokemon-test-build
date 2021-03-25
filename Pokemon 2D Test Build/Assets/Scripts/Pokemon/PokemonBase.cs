@@ -177,6 +177,15 @@ public class PokemonBase : ScriptableObject {
         get { return _type2; }
     }
 
+    public bool IsType(ElementType elementType)
+    {
+        if(elementType == _type1 || elementType == _type2)
+        {
+            return true;
+        }
+        return false;
+    }
+
     #endregion
 
     #region Return Base Stats

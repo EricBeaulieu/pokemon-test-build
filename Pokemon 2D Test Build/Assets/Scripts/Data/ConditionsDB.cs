@@ -42,7 +42,14 @@ public class ConditionsDB
                 HasConditionMessage = "is already poisoned",
                 OnEndTurn = (Pokemon pokemon) =>
                 {
-                    pokemon.UpdateHP(pokemon.maxHitPoints/8);
+                    int damage = Mathf.FloorToInt(pokemon.maxHitPoints/8);
+
+                    if(damage <=0)
+                    {
+                        damage = 1;
+                    }
+
+                    pokemon.UpdateHP(damage);
                     pokemon.statusChanges.Enqueue($"{pokemon.currentName} is hurt by poison");
                 }
             }
@@ -65,7 +72,14 @@ public class ConditionsDB
                 HasConditionMessage = "is already burnt",
                 OnEndTurn = (Pokemon pokemon) =>
                 {
-                    pokemon.UpdateHP(pokemon.maxHitPoints/16);
+                    int damage = pokemon.maxHitPoints/16;
+
+                    if(damage <=0)
+                    {
+                        damage = 1;
+                    }
+
+                    pokemon.UpdateHP(damage);
                     pokemon.statusChanges.Enqueue($"{pokemon.currentName} is hurt by burn");
                 }
             }
@@ -185,7 +199,14 @@ public class ConditionsDB
                 OnEndTurn = (Pokemon pokemon) =>
                 {
                     pokemon.statusTime++;
-                    pokemon.UpdateHP(pokemon.maxHitPoints/(16/pokemon.statusTime));
+                    int damage = pokemon.maxHitPoints/(16/pokemon.statusTime);
+
+                    if(damage <=0)
+                    {
+                        damage = 1;
+                    }
+
+                    pokemon.UpdateHP(damage);
                     pokemon.statusChanges.Enqueue($"{pokemon.currentName} is hurt by poison");
                 }
             }
@@ -235,8 +256,14 @@ public class ConditionsDB
                     }
 
                     //Hurt By Confusion
-                    int damageTaken = Mathf.FloorToInt(((((2 * pokemon.currentLevel) / 5) + 2) * 40 * pokemon.attack / pokemon.defense / 50) + 2);
-                    pokemon.UpdateHP(damageTaken);
+                    int damage = Mathf.FloorToInt(((((2 * pokemon.currentLevel) / 5) + 2) * 40 * pokemon.attack / pokemon.defense / 50) + 2);
+
+                    if(damage <=0)
+                    {
+                        damage = 1;
+                    }
+
+                    pokemon.UpdateHP(damage);
                     pokemon.statusChanges.Enqueue($"{pokemon.currentName} hurt itself in its confusion");
 
                     return false;

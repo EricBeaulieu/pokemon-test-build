@@ -15,6 +15,8 @@ public class MoveEffects
     [SerializeField] List<StatBoost> boosts;
     [SerializeField] ConditionID status;
     [SerializeField] ConditionID volatileStatus;
+    [SerializeField] WeatherEffectID weatherEffect;
+    [SerializeField] EntryHazardID entryHazard;
 
     public List<StatBoost> Boosts
     {
@@ -29,5 +31,15 @@ public class MoveEffects
     public ConditionID Volatiletatus
     {
         get { return volatileStatus; }
+    }
+
+    public WeatherEffectID WeatherEffect
+    {
+        get { return weatherEffect; }
+    }
+
+    public EntryHazardID EntryHazard
+    {
+        get { return entryHazard; }
     }
 }

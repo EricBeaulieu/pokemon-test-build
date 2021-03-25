@@ -85,6 +85,7 @@
     <Compile Include="Assets\StatusConditionArt.cs" />
     <Compile Include="Assets\Scripts\Managers\DialogManager.cs" />
     <Compile Include="Assets\Scripts\Pokemon\PokemonParty.cs" />
+    <Compile Include="Assets\Scripts\Characters\Entity.cs" />
     <Compile Include="Assets\Notes.cs" />
     <Compile Include="Assets\Scripts\Mechanics\HPBar.cs" />
     <Compile Include="Assets\Scripts\Battle\BattleHUD.cs" />
@@ -98,7 +99,9 @@
     <Compile Include="Assets\Scripts\Mechanics\IInteractable.cs" />
     <Compile Include="Assets\Scripts\Managers\GameController.cs" />
     <Compile Include="Assets\Scripts\Battle\TurnAttackDetails.cs" />
-    <Compile Include="Assets\Scripts\Characters\Entity.cs" />
+    <Compile Include="Assets\Scripts\Data\WeatherEffectDB.cs" />
+    <Compile Include="Assets\Scripts\Battle\WeatherEffect.cs" />
+    <Compile Include="Assets\Scripts\Characters\TrainerController.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">

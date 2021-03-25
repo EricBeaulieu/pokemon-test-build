@@ -21,6 +21,8 @@ public class GameController : MonoBehaviour
 
     void Start()
     {
+        InitializeAllDatabases();
+
         playerController.OnEncounter += StartBattle;
         playerController.OnEncounter += (() => _inBattle = true);
         battleSystem.OnBattleOver += EndBattle;
@@ -29,7 +31,6 @@ public class GameController : MonoBehaviour
         //Clean this up later, just get it working for now and then clean up the code later
         partySystem.battleSystemReference = battleSystem;
         partySystem.onCloseParty += CloseParty;
-        ConditionsDB.Initialization();
 
         _dialogManager = DialogManager.instance;
         _dialogManager.OnShowDialog += () => { _state = GameState.Dialog; };
@@ -120,5 +121,12 @@ public class GameController : MonoBehaviour
         {
             entity.HandleUpdate();
         }
+    }
+
+    void InitializeAllDatabases()
+    {
+        ConditionsDB.Initialization();
+        EntryHazardsDB.Initialization();
+        WeatherEffectDB.Initialization();
     }
 }

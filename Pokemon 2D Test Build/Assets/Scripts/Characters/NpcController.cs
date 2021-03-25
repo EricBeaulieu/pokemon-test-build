@@ -139,19 +139,4 @@ public class NpcController : Entity, IInteractable
             Debug.Log($"Obstruction detected in this NPC Path along start {hit.transform.gameObject}", gameObject);
         }
     }
-
-    //Vector2 CheckIfCurrentNPCPathWalkable(Vector2 targetDestination)
-    //{
-    //    Vector2 direction = targetDestination.normalized;
-
-    //    for (int i = 0; i < targetDestination.magnitude; i++)
-    //    {
-    //        if (Physics2D.Linecast((Vector2)transform.position + direction, targetDestination, solidObjectLayermask | interactableLayermask | playerLayerMask) == true)
-    //        {
-    //            return targetDestination - direction;
-    //        }
-    //    }
-
-    //    return targetDestination;
-    //}
 }

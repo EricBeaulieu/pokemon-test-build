@@ -10,8 +10,6 @@ public class BattleSystem : MonoBehaviour
 {
     [SerializeField] BattleUnit _playerBattleUnit;
     [SerializeField] BattleUnit _enemyBattleUnit;
-    EntryHazard _playerSideEntryHazards;
-    EntryHazard _enemySideEntryHazards;
 
     public event Action<bool> OnBattleOver;
     public event Action<bool> OpenPokemonParty;
@@ -24,6 +22,89 @@ public class BattleSystem : MonoBehaviour
 
     PokemonParty _playerParty;
     Pokemon _wildPokemon;
+
+    WeatherEffect _currentWeather;
+    public int weatherDuration {get; set;}
+
+    List<EntryHazard> _playerSideEntryHazards = new List<EntryHazard>();
+    List<EntryHazard> _enemySideEntryHazards = new List<EntryHazard>();
+
+    #region End of Turn effects Order reference as of GEN 5
+
+    //1.0 weather ends
+
+    //2.0 Sandstorm damage, Hail damage, Rain Dish, Dry Skin, Ice Body
+
+    //3.0 Future Sight, Doom Desire
+
+    //4.0 Wish
+
+    //5.0 Fire Pledge + Grass Pledge damage
+    //5.1 Shed Skin, Hydration, Healer
+    //5.2 Leftovers, Black Sludge
+
+    //6.0 Aqua Ring
+
+    //7.0 Ingrain
+
+    //8.0 Leech Seed
+
+    //9.0 (bad) poison damage, burn damage, Poison Heal
+    //9.1 Nightmare
+
+    //10.0 Curse(from a Ghost-type)
+
+    //11.0 Bind, Wrap, Fire Spin, Clamp, Whirlpool, Sand Tomb, Magma Storm
+
+    //12.0 Taunt ends
+
+    //13.0 Encore ends
+
+    //14.0 Disable ends, Cursed Body ends
+
+    //15.0 Magnet Rise ends
+
+    //16.0 Telekinesis ends
+
+    //17.0 Heal Block ends
+
+    //18.0 Embargo ends
+
+    //19.0 Yawn
+
+    //20.0 Perish Song
+
+    //21.0 Reflect ends
+    //21.1 Light Screen ends
+    //21.2 Safeguard ends
+    //21.3 Mist ends
+    //21.4 Tailwind ends
+    //21.5 Lucky Chant ends
+    //21.6 Water Pledge + Fire Pledge ends, Fire Pledge + Grass Pledge ends, Grass Pledge + Water Pledge ends
+
+    //22.0 Gravity ends
+
+    //23.0 Trick Room ends
+
+    //24.0 Wonder Room ends
+
+    //25.0 Magic Room ends
+
+    //26.0 Uproar message
+    //26.1 Speed Boost, Bad Dreams, Harvest, Moody
+    //26.2 Toxic Orb activation, Flame Orb activation, Sticky Barb
+
+    //27.0 Zen Mode
+
+    //28.0 Pokémon is switched in (if previous Pokémon fainted)
+    //28.1 Healing Wish, Lunar Dance
+    //28.2 Spikes, Toxic Spikes, Stealth Rock(hurt in the order they are first used)
+
+    //29.0 Slow Start
+
+    //40.0 Roost
+
+    #endregion
 
     public void HandleUpdate()
     {
@@ -225,12 +306,18 @@ public class BattleSystem : MonoBehaviour
             attacksChosen.Remove(currentAttack);
         }
 
+        if(_currentWeather != null)
+        {
+            yield return ShowWeatherEffect(_currentWeather);
+
+            yield return ApplyWeatherEffectsOnEndTurn(_currentWeather, _playerBattleUnit);
+            yield return ApplyWeatherEffectsOnEndTurn(_currentWeather, _enemyBattleUnit);
+        }
+
         //Called after all attacks have been done
 
         yield return ApplyEffectsOnEndTurn(_playerBattleUnit);
         yield return ApplyEffectsOnEndTurn(_enemyBattleUnit);
-
-        //Apply weather effects
 
         //If current pokemon has fainted then it goes to the party system and waits on the selector
         if (_playerBattleUnit.SendOutPokemonOnTurnEnd == true)
@@ -297,7 +384,7 @@ public class BattleSystem : MonoBehaviour
 
             if (moveBase.MoveType == MoveType.Status)
             {
-                yield return RunMoveEffects(moveBase.MoveEffects, sourceUnit.pokemon, targetUnit.pokemon,moveBase.Target);
+                yield return RunMoveEffects(moveBase.MoveEffects, sourceUnit, targetUnit,moveBase.Target);
             }
             else
             {
@@ -321,7 +408,7 @@ public class BattleSystem : MonoBehaviour
                     int rnd = Random.Range(1, 101);
                     if(rnd <= secondaryEffect.PercentChance)
                     {
-                        yield return RunMoveEffects(secondaryEffect, sourceUnit.pokemon, targetUnit.pokemon, secondaryEffect.Target);
+                        yield return RunMoveEffects(secondaryEffect, sourceUnit, targetUnit, secondaryEffect.Target);
 
                         if(secondaryEffect.Volatiletatus == ConditionID.cursedUser)
                         {
@@ -446,6 +533,8 @@ public class BattleSystem : MonoBehaviour
 
         yield return _dialogBox.TypeDialog($"Go {battleUnit.pokemon.currentName}!");
 
+        yield return ApplyEntryHazardOnSentOut(battleUnit);
+
         if (battleUnit.isPlayerPokemon)
         {
             if (currentPokemonFainted == true)
@@ -468,24 +557,24 @@ public class BattleSystem : MonoBehaviour
         _actionSelectionEventSelector.SelectBox();
     }
 
-    IEnumerator RunMoveEffects(MoveEffects effects, Pokemon source, Pokemon target,MoveTarget moveTarget)
+    IEnumerator RunMoveEffects(MoveEffects effects, BattleUnit source, BattleUnit target,MoveTarget moveTarget)
     {
         if (effects.Boosts != null)
         {
             if (moveTarget == MoveTarget.Foe)
             {
-                target.ApplyStatModifier(effects.Boosts);
+                target.pokemon.ApplyStatModifier(effects.Boosts);
             }
             else if (moveTarget == MoveTarget.Self)
             {
-                source.ApplyStatModifier(effects.Boosts);
+                source.pokemon.ApplyStatModifier(effects.Boosts);
             }
         }
 
         //Status Condition
         if(effects.Status != ConditionID.NA)
         {
-            target.SetStatus(effects.Status);
+            target.pokemon.SetStatus(effects.Status);
         }
 
         //Volatile Status Condition
@@ -493,16 +582,69 @@ public class BattleSystem : MonoBehaviour
         {
             if(moveTarget == MoveTarget.Foe)
             {
-                target.SetVolatileStatus(effects.Volatiletatus);
+                target.pokemon.SetVolatileStatus(effects.Volatiletatus);
             }
             else
             {
-                source.SetVolatileStatus(effects.Volatiletatus);
+                source.pokemon.SetVolatileStatus(effects.Volatiletatus);
             }
         }
 
-        yield return ShowStatusChanges(source);
-        yield return ShowStatusChanges(target);
+        if (effects.WeatherEffect != WeatherEffectID.NA)
+        {
+            if (_currentWeather != null)
+            {
+                if (_currentWeather.Id == effects.WeatherEffect)
+                {
+                    yield return _dialogBox.TypeDialog("But it failed");
+                    yield break;
+                }
+            }
+
+            _currentWeather = WeatherEffectDB.WeatherEffects[effects.WeatherEffect];
+            if (_currentWeather.StartMessage != null)
+            {
+                weatherDuration = _currentWeather.OnStartDuration;
+                yield return _dialogBox.TypeDialog(_currentWeather?.StartMessage);
+            }
+        }
+
+        if (effects.EntryHazard != EntryHazardID.NA)
+        {
+            if (moveTarget == MoveTarget.Foe)
+            {
+                List<EntryHazard> currentEntrySide = (target.isPlayerPokemon) ? _playerSideEntryHazards: _enemySideEntryHazards;
+                EntryHazard currentHazard = EntryHazardsDB.EntryHazards[effects.EntryHazard];
+
+                if (currentEntrySide.Contains(currentHazard) == true)
+                {
+                    currentHazard = currentEntrySide.Find(x => x.Id == effects.EntryHazard);
+                    if (currentHazard.CanBeUsed() == false)
+                    {
+                        yield return _dialogBox.TypeDialog("But it failed");
+                        yield break;
+                    }
+                    else
+                    {
+                        yield return _dialogBox.TypeDialog(currentHazard?.StartMessage(target));
+                        currentHazard?.OnStart?.Invoke(currentHazard);
+                    }
+                }
+                else
+                {
+                    currentEntrySide.Add(currentHazard);
+                    yield return _dialogBox.TypeDialog(currentHazard?.StartMessage(target));
+                    currentHazard?.OnStart?.Invoke(currentHazard);
+                }
+            }
+            else
+            {
+                Debug.Log($"Entry hazard is trying to be set on own side of field {effects}");
+            }
+        }
+
+        yield return ShowStatusChanges(source.pokemon);
+        yield return ShowStatusChanges(target.pokemon);
     }
 
     IEnumerator ShowStatusChanges(Pokemon pokemon)
@@ -516,10 +658,79 @@ public class BattleSystem : MonoBehaviour
 
     #region Entry Hazards
 
-    void ResetFieldOfHazards()
+    IEnumerator ApplyEntryHazardOnSentOut(BattleUnit target)
     {
+        if (target.pokemon.currentHitPoints <= 0)
+        {
+            yield break;
+        }
 
+        List<EntryHazard> currentEntrySide = (target.isPlayerPokemon) ? _playerSideEntryHazards : _enemySideEntryHazards;
+
+        foreach (EntryHazard entryHazard in currentEntrySide)
+        {
+            int currentHP = target.pokemon.currentHitPoints;
+            if (entryHazard?.OnEntry != null)
+            {
+                entryHazard?.OnEntry?.Invoke(target.pokemon);
+            }
+
+            yield return ShowStatusChanges(target.pokemon);
+
+            if (currentHP != target.pokemon.currentHitPoints)
+            {
+                target.PlayHitAnimation();
+            }
+            yield return target.HUD.UpdateHP(currentHP);
+
+            if (target.pokemon.currentHitPoints <= 0)
+            {
+                yield return PokemonHasFainted(target);
+                yield break;
+            }
+        }
     }
 
     #endregion
+
+    IEnumerator ShowWeatherEffect(WeatherEffect weather)
+    {
+        string message = weather?.OnEndTurn?.Invoke(this);
+        yield return _dialogBox.TypeDialog(message);
+    }
+
+    public void RemoveWeatherEffect()
+    {
+        _currentWeather = null;
+    }
+
+    IEnumerator ApplyWeatherEffectsOnEndTurn(WeatherEffect weather,BattleUnit sourceUnit)
+    {
+        if (sourceUnit.pokemon.currentHitPoints <= 0)
+        {
+            yield break;
+        }
+
+        if(weather?.OnEndTurnDamage == null)
+        {
+            yield break;
+        }
+
+        int currentHP = sourceUnit.pokemon.currentHitPoints;
+
+        weather?.OnEndTurnDamage?.Invoke(sourceUnit.pokemon);
+        yield return ShowStatusChanges(sourceUnit.pokemon);
+
+        if(currentHP != sourceUnit.pokemon.currentHitPoints)
+        {
+            sourceUnit.PlayHitAnimation();
+        }
+
+        yield return sourceUnit.HUD.UpdateHP(currentHP);
+
+        if (sourceUnit.pokemon.currentHitPoints <= 0)
+        {
+            yield return PokemonHasFainted(sourceUnit);
+        }
+    }
 }

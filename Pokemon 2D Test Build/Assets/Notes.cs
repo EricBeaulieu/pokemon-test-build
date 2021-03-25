@@ -9,16 +9,16 @@ public class Notes
     //Add in
 
     //Recoil
-    //Entry Hazards
-    //Weather effects
     //Saving
     //Gender on pokemon party
-    //loop for the NPC to walk as it will check the entire length rather then whats infront of them
+    //look into mud sport, it weakens electrical attacks
+    //When items are added in that effect the weather duration update teh weather duration
 
     //Bugs
 
     //Remove hit animation when a pokemon is not effected by a move
     //Update party order
     //Pause NPC or end their movement when talking to another NPC
+    //immunities to particular statuses
 
 }

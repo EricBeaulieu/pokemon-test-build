@@ -126,7 +126,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5864479954145141587}
-  - component: {fileID: 5864479954145141598}
+  - component: {fileID: 5937812492033838737}
+  - component: {fileID: 2072594005822930160}
   - component: {fileID: 5864479954145141597}
   - component: {fileID: 5864479954145141596}
   m_Layer: 8
@@ -151,7 +152,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5864479954145141598
+--- !u!114 &5937812492033838737
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -160,16 +161,28 @@ MonoBehaviour:
   m_GameObject: {fileID: 5864479954145141585}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ecfb531b4c5daf541ab46f1df09ffcce, type: 3}
+  m_Script: {fileID: 11500000, guid: 4200d31043e085144be783934744a7b1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   movementSpeed: 5
   dialog:
-    lines:
-    - Im here to fuck you up
+    lines: []
   movementPattern: []
   timeUntilMoveMin: 0
   timeUntilMoveMax: 0
+--- !u!114 &2072594005822930160
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5864479954145141585}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 44f364b7adb6caa47b33c1bf8cf2f3fa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pokemonParty: []
 --- !u!50 &5864479954145141597
 Rigidbody2D:
   serializedVersion: 4

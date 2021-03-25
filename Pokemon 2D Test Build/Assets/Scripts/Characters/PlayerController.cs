@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(PokemonParty))]
 public class PlayerController : Entity
 {
     public event Action OnEncounter;
