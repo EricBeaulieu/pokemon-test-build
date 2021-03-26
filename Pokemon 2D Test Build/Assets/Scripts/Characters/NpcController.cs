@@ -69,6 +69,9 @@ public class NpcController : Entity, IInteractable
         }
         _currentMovementPattern = (_currentMovementPattern + 1) % movementPattern.Count;
 
+        _anim.SetBool("isMoving", _isMoving);
+        _anim.SetBool("isRunning", isRunning);
+
         _state = NpcState.Idle;
     }
 

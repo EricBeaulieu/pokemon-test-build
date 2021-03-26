@@ -15,12 +15,14 @@ public class BattleDialogBox : MonoBehaviour
     [SerializeField] List<Text> actionsText;
     [SerializeField] List<Text> moveText;
 
+    bool _waitingOnUserInput = false;
+
     public void SetDialogText(string dialog)
     {
         _dialogBox.text = dialog;
     }
 
-    public IEnumerator TypeDialog(string dialog)
+    public IEnumerator TypeDialog(string dialog,bool makeUserWait = false)
     {
         _dialogBox.text = "";
 
@@ -30,6 +32,15 @@ public class BattleDialogBox : MonoBehaviour
             yield return new WaitForSeconds(1f / lettersPerSecond);
         }
         yield return new WaitForSeconds(1f);
+        if (makeUserWait)
+        {
+            _waitingOnUserInput = true;
+
+            while (_waitingOnUserInput == true)
+            {
+                yield return null;
+            }
+        }
     }
 
     public void BattleStartSetup()
@@ -47,5 +58,14 @@ public class BattleDialogBox : MonoBehaviour
     {
         moveSelector.SetActive(enabled);
         moveDetails.SetActive(enabled);
+    }
+
+    public bool WaitingOnUserInput
+    {
+        get { return _waitingOnUserInput; }
+        set
+        {
+            _waitingOnUserInput = value;
+        }
     }
 }

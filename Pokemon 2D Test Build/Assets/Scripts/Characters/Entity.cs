@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum FacingDirections { Up,Down,Left,Right}
+
 public abstract class Entity : MonoBehaviour
 {
     [SerializeField] protected float movementSpeed = 5f;
@@ -58,6 +60,11 @@ public abstract class Entity : MonoBehaviour
 
     virtual protected IEnumerator MoveToPosition(Vector2 moveVector)
     {
+        if( moveVector == Vector2.zero)
+        {
+            yield break;
+        }
+
         Vector3 targetPos = transform.position;
 
         targetPos.x += Mathf.RoundToInt(moveVector.x);
@@ -81,6 +88,10 @@ public abstract class Entity : MonoBehaviour
 
         transform.position = targetPos;
         _isMoving = false;
+        //_isRunning = false;
+
+        //_anim.SetBool("isMoving", _isMoving);
+        //_anim.SetBool("isRunning", isRunning);
     }
 
     protected bool CheckIfWalkable(Vector3 targetPos)
@@ -95,8 +106,13 @@ public abstract class Entity : MonoBehaviour
         return true;
     }
 
-    protected void FaceTowardsDirection(Vector2 targetPos)
+    protected virtual void FaceTowardsDirection(Vector2 targetPos)
     {
+        if (targetPos == Vector2.zero)
+        {
+            return;
+        }
+
         Vector2 dirToFace = targetPos - (Vector2)transform.position;
         dirToFace = dirToFace.normalized;
 
@@ -109,6 +125,19 @@ public abstract class Entity : MonoBehaviour
         {
             Debug.Log($"Error, cannot look at a diagnal target at {targetPos}", gameObject);
         }
+    }
+
+    protected virtual void FaceTowardsDirection(FacingDirections dir)
+    {
+        Vector2 targetDir = new Vector2().GetDirection(dir);
+
+        if(targetDir == Vector2.zero)
+        {
+            return;
+        }
+
+        _anim.SetFloat("moveX", targetDir.x);
+        _anim.SetFloat("moveY", targetDir.y);
     }
 
     void CorrectStartingPlacement()

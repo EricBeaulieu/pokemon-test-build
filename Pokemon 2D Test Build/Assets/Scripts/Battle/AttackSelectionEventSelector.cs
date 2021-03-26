@@ -87,5 +87,6 @@ public class AttackSelectionEventSelector : MonoBehaviour
                 moveButton[i].SetActive(false);
             }
         }
+        _lastSelected = null;
     }
 }

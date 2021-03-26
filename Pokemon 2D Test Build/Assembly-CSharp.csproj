@@ -79,9 +79,11 @@
     <Compile Include="Assets\Scripts\Battle\BattleDialogBox.cs" />
     <Compile Include="Assets\Scripts\Battle\AttackSelectionEventSelector.cs" />
     <Compile Include="Assets\Scripts\Party\PartyMemberUI.cs" />
+    <Compile Include="Assets\Scripts\Data\WeatherEffectDB.cs" />
     <Compile Include="Assets\Scripts\Characters\NpcController.cs" />
     <Compile Include="Assets\Scripts\Managers\Dialog.cs" />
     <Compile Include="Assets\Scripts\Data\EntryHazardsDB.cs" />
+    <Compile Include="Assets\Scripts\Battle\WeatherEffect.cs" />
     <Compile Include="Assets\StatusConditionArt.cs" />
     <Compile Include="Assets\Scripts\Managers\DialogManager.cs" />
     <Compile Include="Assets\Scripts\Pokemon\PokemonParty.cs" />
@@ -92,16 +94,16 @@
     <Compile Include="Assets\Scripts\Static Tables\DamageModifiers.cs" />
     <Compile Include="Assets\Scripts\Pokemon\Move.cs" />
     <Compile Include="Assets\Scripts\Pokemon\MoveEffects.cs" />
+    <Compile Include="Assets\Scripts\Characters\TrainerController.cs" />
     <Compile Include="Assets\Scripts\Characters\SpriteSheetSwap.cs" />
     <Compile Include="Assets\Scripts\Pokemon\MoveBase.cs" />
     <Compile Include="Assets\Scripts\Pokemon\LearnableMove.cs" />
     <Compile Include="Assets\Scripts\Battle\BattleUnit.cs" />
     <Compile Include="Assets\Scripts\Mechanics\IInteractable.cs" />
-    <Compile Include="Assets\Scripts\Managers\GameController.cs" />
+    <Compile Include="Assets\Scripts\Managers\GameManager.cs" />
     <Compile Include="Assets\Scripts\Battle\TurnAttackDetails.cs" />
-    <Compile Include="Assets\Scripts\Data\WeatherEffectDB.cs" />
-    <Compile Include="Assets\Scripts\Battle\WeatherEffect.cs" />
-    <Compile Include="Assets\Scripts\Characters\TrainerController.cs" />
+    <Compile Include="Assets\Scripts\ExtensionMethods\Vector2Extensions.cs" />
+    <Compile Include="Assets\Scripts\ExtensionMethods\ColorExtensions.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">

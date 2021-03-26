@@ -34,4 +34,9 @@ public class HPBar : MonoBehaviour
 
         SetHP((float)healthAfterDamage / maxHP);
     }
+
+    public Image healthBarImage
+    {
+        get { return _healthbar; }
+    }
 }

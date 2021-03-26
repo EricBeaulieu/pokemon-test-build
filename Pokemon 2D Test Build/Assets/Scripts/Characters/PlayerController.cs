@@ -6,54 +6,78 @@ using UnityEngine;
 [RequireComponent(typeof(PokemonParty))]
 public class PlayerController : Entity
 {
+    [SerializeField] string playerName;
+    [SerializeField] Sprite[] playerBackSprite;
+
     public event Action OnEncounter;
 
     Vector2 _currentInput;
 
+    public bool spottedByTrainer;
+
+    protected override void Awake()
+    {
+        base.Awake();
+
+
+        //Debug
+
+        if(playerName == "")
+        {
+            Debug.Log("Players Name is missing");
+        }
+        if(playerBackSprite.Length <=0)
+        {
+            Debug.LogWarning("Current Player is missing their battle back sprite Sheet");
+        }
+    }
+
     public override void HandleUpdate()
     {
-        if(Input.GetKeyDown(KeyCode.Space))
+        if(spottedByTrainer == false)
         {
-            isRunning = true;
-        }
-
-        if (Input.GetKeyUp(KeyCode.Space))
-        {
-            isRunning = false;
-        }
-
-        if (_isMoving == false)
-        {
-            _currentInput.x = Input.GetAxisRaw("Horizontal");
-            _currentInput.y = Input.GetAxisRaw("Vertical");
-
-            //For Xbox controller since raw doesnt work and will still give range values for some reason
-            //Also to clamp the NPC incase theyre value is above 1
-            if(_currentInput.x != 0)
+            if(Input.GetKeyDown(KeyCode.Space))
             {
-                _currentInput.x = _currentInput.x > 0 ? 1 : -1;
+                isRunning = true;
             }
 
-            if(_currentInput.y != 0)
+            if (Input.GetKeyUp(KeyCode.Space))
             {
-                _currentInput.y = _currentInput.y > 0 ? 1 : -1;
-            }
-
-            //Removes Diagnol Input
-            if (_currentInput.x != 0) _currentInput.y = 0;
-
-            if (_currentInput != Vector2.zero)
-            {
-                StartCoroutine(MoveToPosition(_currentInput));                
-            }
-
-            if (Input.GetButtonDown("Fire1"))
-            {
-                Interact();
                 isRunning = false;
             }
-        }
 
+            if (_isMoving == false)
+            {
+                _currentInput.x = Input.GetAxisRaw("Horizontal");
+                _currentInput.y = Input.GetAxisRaw("Vertical");
+
+                //For Xbox controller since raw doesnt work and will still give range values for some reason
+                //Also to clamp the NPC incase theyre value is above 1
+                if(_currentInput.x != 0)
+                {
+                    _currentInput.x = _currentInput.x > 0 ? 1 : -1;
+                }
+
+                if(_currentInput.y != 0)
+                {
+                    _currentInput.y = _currentInput.y > 0 ? 1 : -1;
+                }
+
+                //Removes Diagnol Input
+                if (_currentInput.x != 0) _currentInput.y = 0;
+
+                if (_currentInput != Vector2.zero)
+                {
+                    StartCoroutine(MoveToPosition(_currentInput));                
+                }
+
+                if (Input.GetButtonDown("Fire1"))
+                {
+                    Interact();
+                    isRunning = false;
+                }
+            }
+        }
         _anim.SetBool("isMoving", _isMoving);
         _anim.SetBool("isRunning", isRunning);
     }
@@ -88,5 +112,20 @@ public class PlayerController : Entity
         {
             collider.GetComponent<IInteractable>()?.OnInteract((Vector2)transform.position);
         }
+    }
+
+    public void LookAtTrainer(Vector2 trainerPos)
+    {
+        FaceTowardsDirection(trainerPos);
+    }
+
+    public Sprite[] BackBattleSprite
+    {
+        get { return playerBackSprite; }
+    }
+
+    public string TrainerName
+    {
+        get { return playerName; }
     }
 }

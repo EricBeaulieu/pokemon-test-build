@@ -53,7 +53,7 @@ public class BattleUnit : MonoBehaviour
             _pokemonSprite.transform.localPosition = new Vector3(originalPosition.x + 300f, originalPosition.y);
         }
 
-        _pokemonSprite.color = new Color(1, 1, 1, 1);
+        _pokemonSprite.color = _pokemonSprite.color.ResetAlpha();
 
         StartCoroutine(SmoothTransitionToPosition(originalPosition, 1f));
     }
@@ -78,6 +78,7 @@ public class BattleUnit : MonoBehaviour
         {
             StartCoroutine(calledWhenFinished);
         }
+        hud.PlayEnterAnimation(0.5f);
     }
 
     public void PlayAttackAnimation()
@@ -138,6 +139,7 @@ public class BattleUnit : MonoBehaviour
     public void PlayFaintAnimation()
     {
         StartCoroutine(FaintAnimation());
+        StartCoroutine(hud.FaintedPokemonHUDAnimation(_isPlayersPokemon));
     }
 
     IEnumerator FaintAnimation()
