@@ -42,6 +42,8 @@ public class BattleSystem : MonoBehaviour
     Vector2 inGameItemoffScreenPos;
     public event Action<Pokemon> OnPokemonCaptured;
 
+    int _escapeAttempts;
+
     #region End of Turn effects Order reference as of GEN 5
 
     //1.0 weather ends
@@ -214,7 +216,8 @@ public class BattleSystem : MonoBehaviour
 
             yield return dialogBox.TypeDialog($"A wild {enemyBattleUnit.pokemon.currentName} has appeared!");
         }
-
+        
+        _escapeAttempts = 0;
         dialogBox.BattleStartSetup();
         attackSelectionEventSelector.SetMovesList(playerBattleUnit,playerBattleUnit.pokemon.moves,this);
 
@@ -230,6 +233,7 @@ public class BattleSystem : MonoBehaviour
         actionSelectionEventSelector.ReturnFightButton().onClick.AddListener(delegate { PlayerActionFight(); });
         actionSelectionEventSelector.ReturnPokemonButton().onClick.AddListener(delegate { PlayerActionPokemon(); });
         actionSelectionEventSelector.ReturnBagButton().onClick.AddListener(delegate { PlayerActionBag(); });
+        actionSelectionEventSelector.ReturnRunButton().onClick.AddListener(delegate { PlayerActionRun(); });
     }
 
     /// <summary>
@@ -270,6 +274,15 @@ public class BattleSystem : MonoBehaviour
     }
 
     /// <summary>
+    /// Player Selected the Run Button
+    /// </summary>
+    void PlayerActionRun()
+    {
+        EnableActionSelector(false);
+        StartCoroutine(RunFromBattle());
+    }
+
+    /// <summary>
     /// Turns on the Action Box, with all available buttons (Fight,Bag,Pokemon and Run) and selects the first option
     /// </summary>
     /// <param name="enabled"></param>
@@ -305,6 +318,7 @@ public class BattleSystem : MonoBehaviour
         EnableAttackMoveSelector(false);
         TurnAttackDetails turnAttack = new TurnAttackDetails(moveBase, currentPokemon, enemyBattleUnit);
 
+        _escapeAttempts = 0;
         _currentTurnDetails.Add(turnAttack);
         StartCoroutine(EnemyMove());
     }
@@ -965,6 +979,45 @@ public class BattleSystem : MonoBehaviour
                 yield return dialogBox.TypeDialog($"Gah! It was so close, too!",true);
             }
             StartCoroutine(EnemyMove());
+        }
+    }
+
+    IEnumerator RunFromBattle()
+    {
+        if (_isTrainerBattle == true)
+        {
+            yield return dialogBox.TypeDialog($"You cant run from a trainer battle", true);
+            PlayerActions();
+            yield break;
+        }
+
+        _escapeAttempts++;
+        int playerSpeed = playerBattleUnit.pokemon.speed;
+        int enemySpeed = enemyBattleUnit.pokemon.speed;
+
+        if(playerSpeed > enemySpeed)
+        {
+            yield return dialogBox.TypeDialog($"You got away safely", true);
+            OnBattleOver(true);
+            yield break;
+        }
+        else
+        {
+            float f = ((playerSpeed * 128) / enemySpeed) + (30 * _escapeAttempts);
+            f = f % 256;
+
+            int rnd = Random.Range(0, 256);
+            if(rnd < f)
+            {
+                yield return dialogBox.TypeDialog($"You got away safely", true);
+                OnBattleOver(true);
+                yield break;
+            }
+            else
+            {
+                yield return dialogBox.TypeDialog($"You were unable to escape!", true);
+                StartCoroutine(EnemyMove());
+            }
         }
     }
 }

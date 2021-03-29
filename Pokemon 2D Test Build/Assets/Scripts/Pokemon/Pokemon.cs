@@ -84,15 +84,15 @@ public class Pokemon{
             }
         }
 
+        individualValues = new IndividualValues();
+        individualValues.GenerateIVs();
+        effortValues = new EffortValues();
+
         SetDataStats();
         currentHitPoints = maxHitPoints;
 
         gender = SetGender(_pokemonBase);
         statusChanges = new Queue<string>();
-
-        individualValues = new IndividualValues();
-        individualValues.GenerateIVs();
-        effortValues = new EffortValues();
     }
 
     /// <summary>

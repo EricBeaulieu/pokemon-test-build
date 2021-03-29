@@ -16,15 +16,16 @@ public class PokemonParty : MonoBehaviour
 
         foreach (Pokemon pokemon in pokemonParty)
         {
-            currentCount++;
             if(currentCount < MAX_PARTY_POKEMON_SIZE)
             {
                 copyOfParty.Add(new Pokemon(pokemon.pokemonBase, pokemon.currentLevel));
             }
             else
             {
+                Debug.LogWarning("This trainer has more pokemon in his party then it is allowed", gameObject);
                 break;
             }
+            currentCount++;
         }
         pokemonParty = new List<Pokemon>(copyOfParty);
     }
