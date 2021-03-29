@@ -73,7 +73,7 @@ public class BattleHUD : MonoBehaviour
         float tempAlpha = 1;
         float animationTime = 1.5f;
 
-        while (tempAlpha > 0f)
+        while (tempAlpha > 0)
         {
             tempAlpha -= (0.01f * animationTime);
             hudBackground.color = hudBackground.color.SetAlpha(tempAlpha);
@@ -118,9 +118,9 @@ public class BattleHUD : MonoBehaviour
         }
     }
 
-    public void PlayEnterAnimation(float duration)
+    public IEnumerator PlayEnterAnimation(float duration)
     {
-        StartCoroutine(SmoothTransitionToPosition(_originalPos, duration));
+        yield return SmoothTransitionToPosition(_originalPos, duration);
     }
 
     IEnumerator SmoothTransitionToPosition(Vector3 endPos, float duration)

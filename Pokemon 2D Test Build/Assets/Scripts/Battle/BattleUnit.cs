@@ -7,6 +7,7 @@ public class BattleUnit : MonoBehaviour
 {
     Image _pokemonSprite;
     Vector3 originalPosition;
+    float _imageSize;
 
     [SerializeField] bool _isPlayersPokemon;
     public bool isPlayerPokemon { get { return _isPlayersPokemon; } }
@@ -21,11 +22,13 @@ public class BattleUnit : MonoBehaviour
     {
         _pokemonSprite = GetComponentInChildren<Image>();
         originalPosition = _pokemonSprite.rectTransform.localPosition;
+        _imageSize = _pokemonSprite.rectTransform.sizeDelta.x;
     }
 
     public void Setup(Pokemon pokemon)
     {
-        if(_isPlayersPokemon)
+        _pokemonSprite.rectTransform.sizeDelta = new Vector2(_imageSize, _imageSize);
+        if (_isPlayersPokemon)
         {
             _pokemonSprite.sprite = pokemon.pokemonBase.GetBackSprite(pokemon.isShiny,pokemon.gender)[0];
         }
@@ -55,7 +58,7 @@ public class BattleUnit : MonoBehaviour
 
         _pokemonSprite.color = _pokemonSprite.color.ResetAlpha();
 
-        StartCoroutine(SmoothTransitionToPosition(originalPosition, 1f));
+        StartCoroutine(SmoothTransitionToPosition(originalPosition, 1f, hud.PlayEnterAnimation(0.75f)));        
     }
 
     IEnumerator SmoothTransitionToPosition(Vector3 endPos, float duration,IEnumerator calledWhenFinished = null)
@@ -78,7 +81,6 @@ public class BattleUnit : MonoBehaviour
         {
             StartCoroutine(calledWhenFinished);
         }
-        hud.PlayEnterAnimation(0.5f);
     }
 
     public void PlayAttackAnimation()
@@ -168,6 +170,50 @@ public class BattleUnit : MonoBehaviour
         {
             _sendOutPokemonOnTurnEnd = value;
         }
+    }
+
+    public IEnumerator CaptureAnimation(Vector3 ballposition)
+    {
+        float tempAlpha = 1;
+        float animationTime = 1.5f;
+
+        Vector3 difference = ballposition - _pokemonSprite.transform.localPosition;
+        float minimumSizeDuringCapture = 50f;
+
+        while (tempAlpha > 0)
+        {
+            tempAlpha -= (0.01f * animationTime);
+            _pokemonSprite.color = _pokemonSprite.color.SetAlpha(tempAlpha);
+
+            _pokemonSprite.rectTransform.localPosition = originalPosition + (difference * (-tempAlpha +1));
+            float currentSize = (_imageSize * tempAlpha) + (minimumSizeDuringCapture * (-tempAlpha + 1));
+            _pokemonSprite.rectTransform.sizeDelta = new Vector2(currentSize,currentSize);
+
+            yield return new WaitForSeconds(0.01f);
+        }
+    }
+
+    public IEnumerator EscapeCaptureAnimation(Vector3 ballposition)
+    {
+        float tempAlpha = 0;
+        float animationTime = 1.5f;
+
+        Vector3 difference = originalPosition - ballposition;
+        float minimumSizeDuringCapture = 50f;
+
+        while (tempAlpha < 1)
+        {
+            tempAlpha += (0.01f * animationTime);
+            _pokemonSprite.color = _pokemonSprite.color.SetAlpha(tempAlpha);
+
+            _pokemonSprite.rectTransform.localPosition = ballposition + (difference * (tempAlpha));
+            float currentSize = (minimumSizeDuringCapture * (-tempAlpha + 1)) + (_imageSize * tempAlpha);
+            _pokemonSprite.rectTransform.sizeDelta = new Vector2(currentSize, currentSize);
+
+            yield return new WaitForSeconds(0.01f);
+        }
+        _pokemonSprite.rectTransform.localPosition = originalPosition;
+        _pokemonSprite.rectTransform.sizeDelta = new Vector2(_imageSize, _imageSize);
     }
 
 }

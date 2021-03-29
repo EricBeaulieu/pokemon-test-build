@@ -36,7 +36,7 @@ public class PartySystem : MonoBehaviour
         _partyMemberSlots = GetComponentsInChildren<PartyMemberUI>();
     }
 
-    public void OpenPartySystem()
+    public void OpenPartySystem(bool wasShiftSwap)
     {
         SelectFirstBox();
         overworldSelections.SetActive(false);
@@ -44,7 +44,7 @@ public class PartySystem : MonoBehaviour
         AdjustMessageBoxWidthSize(MESSAGEBOX_STANDARD_SIZE);
         SetMessageText("Choose a Pokemon");
 
-        SetUpPartySystemCancelButton();
+        SetUpPartySystemCancelButton(wasShiftSwap);
     }
 
     void ClosePartySystem()
@@ -59,14 +59,21 @@ public class PartySystem : MonoBehaviour
         EventSystem.current.SetSelectedGameObject(_partyMemberSlots[0].gameObject);
     }
 
-    void SetUpPartySystemCancelButton()
+    void SetUpPartySystemCancelButton(bool wasShiftSwap)
     {
         if(battleSystemReference.GetCurrentPokemonInBattle.currentHitPoints > 0 || battleSystemReference.GetCurrentPokemonInBattle == null)
         {
             cancelButton.onClick.AddListener(() => 
             {
                 ClosePartySystem();
-                battleSystemReference.ReturnFromPokemonPartySystem();
+                if(wasShiftSwap == false)
+                {
+                    battleSystemReference.ReturnFromPokemonPartySystem();
+                }
+                else
+                {
+                    battleSystemReference.PlayerContinueAfterPartyShiftSelection();
+                }
             });
         }
         else

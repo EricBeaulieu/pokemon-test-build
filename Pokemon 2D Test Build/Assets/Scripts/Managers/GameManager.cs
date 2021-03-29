@@ -48,6 +48,7 @@ public class GameManager : MonoBehaviour
         playerController.OnEncounter += (() => _inBattle = true);
         battleSystem.OnBattleOver += EndBattle;
         battleSystem.OpenPokemonParty += OpenParty;
+        battleSystem.OnPokemonCaptured += CapturedNewPokemon;
 
         //Clean this up later, just get it working for now and then clean up the code later
         partySystem.battleSystemReference = battleSystem;
@@ -127,10 +128,15 @@ public class GameManager : MonoBehaviour
 
     void EndBattle(bool wasWon)
     {
-        if(trainerController != null)
+        if(trainerController != null && wasWon == true)
         {
             trainerController.HasLostBattleToPlayer();
             trainerController = null;
+        }
+
+        if (wasWon == false)
+        {
+            playerController.PlayerHasLostBattle();
         }
 
         _state = GameState.Overworld;
@@ -139,12 +145,12 @@ public class GameManager : MonoBehaviour
         overWorldCamera.gameObject.SetActive(true);
     }
 
-    void OpenParty(bool inBattle)
+    void OpenParty(bool inBattle,bool wasShiftSwap)
     {
         _state = GameState.Party;
         partySystem.gameObject.SetActive(true);
         partySystem.SetPartyData(playerController.GetComponent<PokemonParty>().CurrentPokemonList(),inBattle);
-        partySystem.OpenPartySystem();
+        partySystem.OpenPartySystem(wasShiftSwap);
     }
 
     void CloseParty()
@@ -173,5 +179,24 @@ public class GameManager : MonoBehaviour
         ConditionsDB.Initialization();
         EntryHazardsDB.Initialization();
         WeatherEffectDB.Initialization();
+    }
+
+    void CapturedNewPokemon(Pokemon capturedPokemon)
+    {
+        //If pokemon was new then show it in the pokedex being added
+        //show the pokemon info pop up and light up the sprite animating through the pokedex
+        //animate the talking
+        //Ask if the you would like to name the new pokemon
+
+        //Add the new pokemon to either the party or PC
+        bool addedToParty = playerController.GetComponent<PokemonParty>().AddCapturedPokemon(capturedPokemon);
+        if (addedToParty == true)
+        {
+            //return dialog stating that it was added to your party
+        }
+        else
+        {
+            // add to PC
+        }
     }
 }

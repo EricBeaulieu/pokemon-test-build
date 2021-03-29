@@ -10,22 +10,22 @@ public class Pokemon{
     [SerializeField] PokemonBase _pokemonBase;
     public PokemonBase pokemonBase { get { return _pokemonBase; } set { _pokemonBase = value; } }
     public bool isShiny { get; private set; }
-    public IndividualValues individualValues { get; set; } = new IndividualValues();
-    public EffortValues effortValues { get; set; } = new EffortValues();
+    public IndividualValues individualValues { get; set; }
+    public EffortValues effortValues { get; set; }
     NatureBase _nature;
     public Gender gender { get; set; }
 
     string _currentName;
     //Used for testing, will be fixed later
     [SerializeField] int _level;
-    public int currentLevel { get { return _level; } set { _level = value; } }
+    public int currentLevel { get { return _level; } private set { _level = value; } }
     public int currentHitPoints { get; set; }
     public int currentExperiencePoints { get; set; }
 
     public List<Move> moves { get; set; }
     public Dictionary<StatAttribute, int> baseStats { get; private set; }
     public Dictionary<StatAttribute, int> statBoosts { get; private set; }
-    public Queue<string> statusChanges { get; private set; } = new Queue<string>();
+    public Queue<string> statusChanges { get; private set; }
 
     public Condition status { get; private set; }
     public int statusTime { get; set; }
@@ -33,15 +33,42 @@ public class Pokemon{
     public int volatileStatusTime { get; set; }
     public System.Action OnStatusChanged;
 
-    public void Initialization()
+    public Pokemon(PokemonBase pokemonBase,int level)
     {
-        currentName = currentName == null ? _pokemonBase.GetPokedexName() : currentName;
+        _pokemonBase = pokemonBase;
+        currentLevel = level;
+
+        NewInitialization();
+    }
+
+    public Pokemon(PokemonBase pokemonBase, int level,Gender savedGender,NatureBase nature, IndividualValues iV,EffortValues eV, string nickname = null,bool shiny = false)
+    {
+        _pokemonBase = pokemonBase;
+        currentLevel = level;
+
+        gender = savedGender;
+        _nature = nature;
+
+        statusChanges = new Queue<string>();
+
+        individualValues = iV;
+        individualValues.GenerateIVs();
+        effortValues = eV;
+
+        currentName = currentName == null ? _pokemonBase.GetPokedexName() : nickname;
+        isShiny = shiny;
+        LoadedInitialization();
+    }
+
+    void NewInitialization()
+    {
+        _currentName = null;
 
         if(Random.value > 0.5f)
         {
             isShiny = true;
         }
-        individualValues.GenerateIVs();
+        
         nature = SetNature();
 
         moves = new List<Move>();
@@ -61,6 +88,19 @@ public class Pokemon{
         currentHitPoints = maxHitPoints;
 
         gender = SetGender(_pokemonBase);
+        statusChanges = new Queue<string>();
+
+        individualValues = new IndividualValues();
+        individualValues.GenerateIVs();
+        effortValues = new EffortValues();
+    }
+
+    /// <summary>
+    /// If the pokemon was loaded this will be called instead
+    /// </summary>
+    void LoadedInitialization()
+    {
+
     }
 
     /// <summary>
@@ -317,7 +357,14 @@ public class Pokemon{
 
     public string currentName
     {
-        get { return _currentName; }
+        get
+        {
+            if(_currentName == null)
+            {
+                return pokemonBase.GetPokedexName();
+            }
+            return _currentName;
+        }
         set
         {
             _currentName = value;
@@ -435,5 +482,19 @@ public class Pokemon{
         {
             currentVolatileStatus?.OnEndTurn?.Invoke(this);
         }
+    }
+
+    public ConditionID GetCurrentStatus()
+    {
+        if(status == null)
+        {
+            return ConditionID.NA;
+        }
+        else if(status.Id > ConditionID.toxicPoison)
+        {
+            return ConditionID.NA;
+        }
+
+        return status.Id;
     }
 }

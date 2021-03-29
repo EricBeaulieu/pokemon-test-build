@@ -22,5 +22,8 @@ public class Notes
     //Remove hit animation when a pokemon is not effected by a move
     //Update party order
     //immunities to particular statuses
-
+    //Status does not change with fainted animation
+    //If the player is standing in a position where the NPC is trying to walk to then they cannot talk due to them being in a walking state
+    //Pokemon on start of battle kept updating, the captured pidgey had full health but kept the status issue
+    //new enemy pokemon did not have full health and status
 }

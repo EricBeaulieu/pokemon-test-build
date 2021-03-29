@@ -84,6 +84,11 @@ public class PokemonBase : ScriptableObject {
         return _pokedexName;
     }
 
+    public int GetCatchRate()
+    {
+        return _captureRate;
+    }
+
     public Sprite[] GetFrontSprite(bool isShiny,Gender gender)
     {
         if(differentGenderSprites == true)

@@ -61,6 +61,4 @@ public class ActionSelectionEventSelector : MonoBehaviour
     {
         return runButton.GetComponent<Button>();
     }
-
-
 }

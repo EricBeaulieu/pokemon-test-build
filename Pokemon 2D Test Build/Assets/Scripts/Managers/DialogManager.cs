@@ -126,6 +126,7 @@ public class DialogManager : MonoBehaviour
         _currentlyTyping = false;
         _playerSpedUp = false;
         yield return new WaitForSeconds(0.5f);
+        dialogText.text += " v";
         _waitingOnUserInput = true;
     }
 }

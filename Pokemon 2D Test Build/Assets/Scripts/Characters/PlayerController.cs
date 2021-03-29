@@ -128,4 +128,12 @@ public class PlayerController : Entity
     {
         get { return playerName; }
     }
+
+    public void PlayerHasLostBattle()
+    {
+        transform.position = new Vector2(10.5f, .5f);
+        Debug.Log("player Has Lost");
+        //Go to pokemon center mechanic
+        FaceTowardsDirection(FacingDirections.Down);
+    }
 }

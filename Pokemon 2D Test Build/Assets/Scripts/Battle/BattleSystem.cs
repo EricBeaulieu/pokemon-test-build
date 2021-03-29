@@ -15,7 +15,8 @@ public class BattleSystem : MonoBehaviour
     [SerializeField] Image trainerImage;
 
     public event Action<bool> OnBattleOver;
-    public event Action<bool> OpenPokemonParty;
+    //inbattle,wasShift
+    public event Action<bool,bool> OpenPokemonParty;
 
     [SerializeField] BattleDialogBox dialogBox;
     [SerializeField] ActionSelectionEventSelector actionSelectionEventSelector;
@@ -29,12 +30,17 @@ public class BattleSystem : MonoBehaviour
     PokemonParty _trainerParty;
     Pokemon _wildPokemon;
     bool _isTrainerBattle;
+    bool _playerPokemonShift;
 
     WeatherEffect _currentWeather;
     public int weatherDuration {get; set;}
 
     List<EntryHazard> _playerSideEntryHazards = new List<EntryHazard>();
     List<EntryHazard> _enemySideEntryHazards = new List<EntryHazard>();
+
+    [SerializeField] GameObject inGameItem;
+    Vector2 inGameItemoffScreenPos;
+    public event Action<Pokemon> OnPokemonCaptured;
 
     #region End of Turn effects Order reference as of GEN 5
 
@@ -113,6 +119,11 @@ public class BattleSystem : MonoBehaviour
 
     #endregion
 
+    void Start()
+    {
+        inGameItemoffScreenPos = inGameItem.transform.localPosition;
+    }
+
     public void HandleUpdate()
     {
         //If B button is pressed go back a menu
@@ -137,8 +148,13 @@ public class BattleSystem : MonoBehaviour
     public void StartBattle(PokemonParty playerParty,Pokemon wildPokemon)
     {
         _playerParty = playerParty;
-        _wildPokemon = wildPokemon;
+        _playerController = playerParty.GetComponent<PlayerController>();
+
+        Pokemon newWildPokemon = new Pokemon(wildPokemon.pokemonBase,wildPokemon.currentLevel);
+
+        _wildPokemon = newWildPokemon;
         _isTrainerBattle = false;
+
         StartCoroutine(SetupBattle());
         _currentTurnDetails = new List<TurnAttackDetails>();
     }
@@ -146,10 +162,12 @@ public class BattleSystem : MonoBehaviour
     public void StartBattle(PokemonParty playerParty, PokemonParty trainerParty)
     {
         _playerParty = playerParty;
-        _trainerParty = trainerParty;
         _playerController = playerParty.GetComponent<PlayerController>();
+
+        _trainerParty = trainerParty;
         _trainerController = trainerParty.GetComponent<TrainerController>();
         _isTrainerBattle = true;
+
         StartCoroutine(SetupBattle());
         _currentTurnDetails = new List<TurnAttackDetails>();
     }
@@ -211,6 +229,7 @@ public class BattleSystem : MonoBehaviour
         actionSelectionEventSelector.SetUp();
         actionSelectionEventSelector.ReturnFightButton().onClick.AddListener(delegate { PlayerActionFight(); });
         actionSelectionEventSelector.ReturnPokemonButton().onClick.AddListener(delegate { PlayerActionPokemon(); });
+        actionSelectionEventSelector.ReturnBagButton().onClick.AddListener(delegate { PlayerActionBag(); });
     }
 
     /// <summary>
@@ -237,7 +256,17 @@ public class BattleSystem : MonoBehaviour
     /// </summary>
     void PlayerActionPokemon()
     {
-        OpenPokemonParty(true);
+        OpenPokemonParty(true,false);
+    }
+
+    /// <summary>
+    /// Player Selected The Bag Button
+    /// </summary>
+    void PlayerActionBag()
+    {
+        //Open Bag button
+        EnableActionSelector(false);
+        StartCoroutine(PlayerThrewPokeball(enemyBattleUnit));
     }
 
     /// <summary>
@@ -381,7 +410,7 @@ public class BattleSystem : MonoBehaviour
         //If current pokemon has fainted then it goes to the party system and waits on the selector
         if (playerBattleUnit.SendOutPokemonOnTurnEnd == true)
         {
-            OpenPokemonParty(true);
+            OpenPokemonParty(true,false);
         }
         else
         {
@@ -390,7 +419,8 @@ public class BattleSystem : MonoBehaviour
                 //This will be updated with a better AI later
                 Pokemon nextEnemyPokemon = _trainerParty.GetFirstHealthyPokemon();
 
-                yield return SwitchPokemonIEnumerator(enemyBattleUnit, nextEnemyPokemon);
+                _playerPokemonShift = true;
+                yield return TrainerAboutToUsePokemonFeature(nextEnemyPokemon);
             }
             PlayerActions();
         }
@@ -592,18 +622,34 @@ public class BattleSystem : MonoBehaviour
         get { return playerBattleUnit.pokemon; }
     }
 
+    IEnumerator TrainerAboutToUsePokemonFeature(Pokemon nextPokemon)
+    {
+        yield return dialogBox.TypeDialog($"{_trainerController.TrainerName} is about to use {nextPokemon.pokemonBase.GetPokedexName()}", true);
+
+        yield return dialogBox.TypeDialog($"Will {_playerController.TrainerName} change Pokemon?");
+
+        yield return dialogBox.SetChoiceBox(() => 
+        {
+            OpenPokemonParty(true,true);
+        }
+        , ()=> 
+        {
+            _playerPokemonShift = false;
+        });
+
+        yield return SwitchPokemonIEnumerator(enemyBattleUnit, nextPokemon);
+    }
+
+    public void PlayerContinueAfterPartyShiftSelection()
+    {
+        dialogBox.WaitingOnUserChoice = false;
+        _playerPokemonShift = false;
+    }
+
     public void PlayerSwitchPokemon(Pokemon newPokemon)
     {
         StartCoroutine(SwitchPokemonIEnumerator(playerBattleUnit,newPokemon));
         EnableActionSelector(false);
-
-        if (enemyBattleUnit.SendOutPokemonOnTurnEnd == true)
-        {
-            //This will be updated with a better AI later
-            Pokemon nextEnemyPokemon = _trainerParty.GetFirstHealthyPokemon();
-
-            StartCoroutine(SwitchPokemonIEnumerator(enemyBattleUnit, nextEnemyPokemon));
-        }
     }
 
 
@@ -631,6 +677,13 @@ public class BattleSystem : MonoBehaviour
         }
 
         yield return ApplyEntryHazardOnSentOut(battleUnit);
+
+        if(_playerPokemonShift == true)
+        {
+            yield return new WaitForSeconds(0.5f);
+            PlayerContinueAfterPartyShiftSelection();
+            yield break;
+        }
 
         if (battleUnit.isPlayerPokemon)
         {
@@ -828,6 +881,90 @@ public class BattleSystem : MonoBehaviour
         if (sourceUnit.pokemon.currentHitPoints <= 0)
         {
             yield return PokemonHasFainted(sourceUnit);
+        }
+    }
+
+    IEnumerator PlayerThrewPokeball(BattleUnit targetUnit)
+    {
+        if(_isTrainerBattle == true)
+        {
+            EnableActionSelector(false);
+            yield return dialogBox.TypeDialog($"You cant capture Trainers Pokemon", true);
+            PlayerActions();
+            yield break;
+        }
+
+        yield return dialogBox.TypeDialog($"{_playerController.TrainerName} used Pokeball");
+
+        inGameItem.SetActive(true);
+        InBattleItem currentBall = inGameItem.GetComponent<InBattleItem>();
+        Vector3 ballHeightJump = new Vector3(0, 75, 0);
+
+        //SetPokeball to its closed art
+        currentBall.SetItemArt();
+
+        //Pokeball gets thrown to desired position
+        yield return currentBall.FollowTheRoute();
+
+        //Bounce up slightly
+        yield return currentBall.MoveToPosition(currentBall.transform.localPosition + ballHeightJump, 0.25f);
+
+        //Animate PokeBall opening
+        yield return currentBall.PokeballAnimation(true);
+
+        //animate enemy sprite going into pokeball
+        yield return targetUnit.CaptureAnimation(currentBall.transform.localPosition);
+
+        //Pokeball Closes
+        yield return currentBall.PokeballAnimation(false);
+
+        //pokeball drops to location
+        yield return currentBall.MoveToPosition(currentBall.transform.localPosition + new Vector3(0, -135, 0), 0.5f);
+        yield return new WaitForSeconds(1f);
+
+        // start capture mechanics of it rocking
+        int shakeCount = CatchingMechanics.CatchRate(targetUnit.pokemon, currentBall.currentPokeball);
+
+        for (int i = 0; i < Mathf.Min(shakeCount,3); i++)
+        {
+            bool shakeRight = Random.value > 0.5f;
+            yield return currentBall.ShakePokeball(shakeRight);
+            yield return new WaitForSeconds(0.75f);
+        }
+
+        //pokemon captured or broken free
+        if(shakeCount == 4)
+        {
+            //pokemon is caught
+            yield return dialogBox.TypeDialog($"{targetUnit.pokemon.currentName} was Caught!",true);
+            yield return currentBall.FadeItem(false);
+            OnPokemonCaptured(enemyBattleUnit.pokemon);
+            OnBattleOver(true);
+        }
+        else
+        {
+            //pokemon is set free
+            yield return currentBall.PokeballAnimation(true);
+            yield return targetUnit.EscapeCaptureAnimation(currentBall.transform.localPosition);
+            inGameItem.transform.localPosition = inGameItemoffScreenPos;
+
+            if(shakeCount == 0)
+            {
+                yield return dialogBox.TypeDialog($"Oh no! The Pokémon broke free!",true);
+            }
+            else if(shakeCount == 1)
+            {
+                yield return dialogBox.TypeDialog($"Aww! It appeared to be caught!",true);
+            }
+            else if (shakeCount == 2)
+            {
+                yield return dialogBox.TypeDialog($"Aargh! Almost had it!",true);
+            }
+            else if (shakeCount == 3)
+            {
+                yield return dialogBox.TypeDialog($"Gah! It was so close, too!",true);
+            }
+            StartCoroutine(EnemyMove());
         }
     }
 }

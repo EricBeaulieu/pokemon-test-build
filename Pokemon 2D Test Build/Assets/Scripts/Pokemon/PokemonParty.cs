@@ -7,12 +7,26 @@ public class PokemonParty : MonoBehaviour
 {
     [SerializeField] List<Pokemon> pokemonParty;
 
+    const int MAX_PARTY_POKEMON_SIZE = 6;
+
     void Start()
     {
-        foreach(Pokemon pokemon in pokemonParty)
+        int currentCount = 0;
+        List<Pokemon> copyOfParty = new List<Pokemon>();
+
+        foreach (Pokemon pokemon in pokemonParty)
         {
-            pokemon.Initialization();
+            currentCount++;
+            if(currentCount < MAX_PARTY_POKEMON_SIZE)
+            {
+                copyOfParty.Add(new Pokemon(pokemon.pokemonBase, pokemon.currentLevel));
+            }
+            else
+            {
+                break;
+            }
         }
+        pokemonParty = new List<Pokemon>(copyOfParty);
     }
 
     public Pokemon GetFirstHealthyPokemon()
@@ -23,5 +37,19 @@ public class PokemonParty : MonoBehaviour
     public List<Pokemon> CurrentPokemonList()
     {
         return pokemonParty;
+    }
+
+    public bool AddCapturedPokemon(Pokemon capturedPokemon)
+    {
+        if(pokemonParty.Count < MAX_PARTY_POKEMON_SIZE)
+        {
+            pokemonParty.Add(capturedPokemon);
+            return true;
+        }
+        else
+        {
+            //Send to PC
+            return false;
+        }
     }
 }
