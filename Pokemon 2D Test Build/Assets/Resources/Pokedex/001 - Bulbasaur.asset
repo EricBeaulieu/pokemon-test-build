@@ -22,31 +22,40 @@ MonoBehaviour:
   _weightInPounds: 0
   _weightInKilograms: 0
   _captureRate: 45
-  _rewardedEffortValue:
-  - _statAttribute: 4
-    _statValue: 1
-  _frontRegularSprite: {fileID: -2254870784642594650, guid: 49cb5317686a4384eb4521092ad3d7cc,
+  rewardedEffortValue: []
+  frontRegularSprite: {fileID: -2254870784642594650, guid: 49cb5317686a4384eb4521092ad3d7cc,
     type: 3}
-  _frontIntroSprite: {fileID: 4726197016896861450, guid: 49cb5317686a4384eb4521092ad3d7cc,
+  frontIntroSprite: {fileID: 4726197016896861450, guid: 49cb5317686a4384eb4521092ad3d7cc,
     type: 3}
-  _backRegularSprite: {fileID: -6370906713115598673, guid: 49cb5317686a4384eb4521092ad3d7cc,
+  backRegularSprite: {fileID: -6370906713115598673, guid: 49cb5317686a4384eb4521092ad3d7cc,
     type: 3}
-  _backIntroSprite: {fileID: -8940828193000548407, guid: 49cb5317686a4384eb4521092ad3d7cc,
+  backIntroSprite: {fileID: -8940828193000548407, guid: 49cb5317686a4384eb4521092ad3d7cc,
     type: 3}
-  _shinyFrontRegularSprite: {fileID: -6827307981334382390, guid: 49cb5317686a4384eb4521092ad3d7cc,
+  shinyFrontRegularSprite: {fileID: -6338541398844308691, guid: 49cb5317686a4384eb4521092ad3d7cc,
     type: 3}
-  _shinyFrontIntroSprite: {fileID: -8940828193000548407, guid: 49cb5317686a4384eb4521092ad3d7cc,
+  shinyFrontIntroSprite: {fileID: -6827307981334382390, guid: 49cb5317686a4384eb4521092ad3d7cc,
     type: 3}
-  _shinyBackRegularSprite: {fileID: 0}
-  _shinyBackIntroSprite: {fileID: -7622956329635982518, guid: 49cb5317686a4384eb4521092ad3d7cc,
+  shinyBackRegularSprite: {fileID: -2634572815328827260, guid: 49cb5317686a4384eb4521092ad3d7cc,
     type: 3}
-  _standardSpriteA: {fileID: -7938149792871028702, guid: 49cb5317686a4384eb4521092ad3d7cc,
+  shinyBackIntroSprite: {fileID: -7622956329635982518, guid: 49cb5317686a4384eb4521092ad3d7cc,
     type: 3}
-  _standardSpriteB: {fileID: 2380364821384675985, guid: 49cb5317686a4384eb4521092ad3d7cc,
+  standardSpriteA: {fileID: -7938149792871028702, guid: 49cb5317686a4384eb4521092ad3d7cc,
     type: 3}
+  standardSpriteB: {fileID: 2380364821384675985, guid: 49cb5317686a4384eb4521092ad3d7cc,
+    type: 3}
+  differentGenderSprites: 0
+  femaleFrontRegularSprite: {fileID: 0}
+  femaleFrontIntroSprite: {fileID: 0}
+  femaleBackRegularSprite: {fileID: 0}
+  femaleBackIntroSprite: {fileID: 0}
+  femaleShinyFrontRegularSprite: {fileID: 0}
+  femaleShinyFrontIntroSprite: {fileID: 0}
+  femaleShinyBackRegularSprite: {fileID: 0}
+  femaleShinyBackIntroSprite: {fileID: 0}
   _hasGender: 1
   _maleFemaleRatio: 50
   _baseGroup: 3
+  rewardedBaseExp: 64
   _type1: 9
   _type2: 13
   _eggGroup1: 11

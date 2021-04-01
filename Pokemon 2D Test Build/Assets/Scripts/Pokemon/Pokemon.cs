@@ -4,7 +4,7 @@ using System.Linq;
 using UnityEngine;
 
 [System.Serializable]
-public class Pokemon{
+public class Pokemon {
 
     //Used for testing, will be fixed later
     [SerializeField] PokemonBase _pokemonBase;
@@ -16,11 +16,10 @@ public class Pokemon{
     public Gender gender { get; set; }
 
     string _currentName;
-    //Used for testing, will be fixed later
     [SerializeField] int _level;
     public int currentLevel { get { return _level; } private set { _level = value; } }
     public int currentHitPoints { get; set; }
-    public int currentExperiencePoints { get; set; }
+    public int currentExp { get; set; }
 
     public List<Move> moves { get; set; }
     public Dictionary<StatAttribute, int> baseStats { get; private set; }
@@ -76,13 +75,15 @@ public class Pokemon{
         {
             if(move.levelLearned <= currentLevel)
             {
-                if(moves.Count >=4)
+                if(moves.Count >=PokemonBase.MAX_NUMBER_OF_MOVES)
                 {
                     moves.RemoveAt(0);
                 }
                 moves.Add(new Move(move.moveBase));
             }
         }
+
+        currentExp = _pokemonBase.GetExpForLevel(currentLevel);
 
         individualValues = new IndividualValues();
         individualValues.GenerateIVs();
@@ -496,5 +497,47 @@ public class Pokemon{
         }
 
         return status.Id;
+    }
+
+    public bool LevelUpCheck()
+    {
+        if(currentLevel >=100)
+        {
+            currentExp = _pokemonBase.GetExpForLevel(currentLevel);
+            return false;
+        }
+        else if(currentExp > _pokemonBase.GetExpForLevel(currentLevel + 1))
+        {
+            currentLevel++;
+            return true;
+        }
+        return false;
+    }
+
+    public List<LearnableMove> GetLeranableMoveAtCurrentLevel()
+    {
+        List<LearnableMove> copyOfLearnableMoves = _pokemonBase.LearnableMoves.FindAll(x => x.levelLearned == currentLevel);
+        List<LearnableMove> learnableMoves = new List<LearnableMove>();
+
+        foreach (LearnableMove move in copyOfLearnableMoves)
+        {
+            if(moves.Exists(x => x.moveBase == move.moveBase)|| learnableMoves.Exists(x => x.moveBase == move.moveBase))
+            {
+                continue;
+            }
+            learnableMoves.Add(move);
+        }
+
+        return learnableMoves;
+    }
+
+    public void LearnMove(LearnableMove moveLearned)
+    {
+        if(moves.Count > PokemonBase.MAX_NUMBER_OF_MOVES)
+        {
+            Debug.LogError($"{currentName} tried to add a move when it was beyond 4");
+            return;
+        }
+        moves.Add(new Move(moveLearned.moveBase));
     }
 }

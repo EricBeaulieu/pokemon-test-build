@@ -5,16 +5,16 @@ using UnityEngine.UI;
 
 public class HPBar : MonoBehaviour
 {
-    Image _healthbar;
+    Image _healthBar;
 
     void Awake()
     {
-        _healthbar = GetComponent<Image>();
+        _healthBar = GetComponent<Image>();
     }
 
     public void SetHP(float hpNormalized)
     {
-        _healthbar.fillAmount = hpNormalized;
+        _healthBar.fillAmount = hpNormalized;
     }
 
     public IEnumerator SetHPAnimation(int healthAfterDamage,int healthBeforeDamage,int maxHP,Text currentHpText = null)
@@ -24,7 +24,7 @@ public class HPBar : MonoBehaviour
         while(curHP - healthAfterDamage > Mathf.Epsilon)
         {
             curHP -= changeAmount * Time.deltaTime;
-            _healthbar.fillAmount = (float)curHP/maxHP;
+            _healthBar.fillAmount = (float)curHP/maxHP;
             if(currentHpText != null)
             {
                 currentHpText.text = curHP.ToString("0");
@@ -37,6 +37,6 @@ public class HPBar : MonoBehaviour
 
     public Image healthBarImage
     {
-        get { return _healthbar; }
+        get { return _healthBar; }
     }
 }

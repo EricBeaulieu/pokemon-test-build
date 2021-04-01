@@ -23,30 +23,28 @@ public class PokemonBase : ScriptableObject {
     [SerializeField] float _weightInPounds;
     [SerializeField] float _weightInKilograms;
     [SerializeField] int _captureRate;
-    [SerializeField] List<EarnableEV> _rewardedEffortValue;
+    [SerializeField] List<EarnableEV> rewardedEffortValue;
 
     [Header("Sprites")]
-    [SerializeField] Sprite _frontRegularSprite;
-    [SerializeField] Sprite _frontIntroSprite;
-    [SerializeField] Sprite _backRegularSprite;
-    [SerializeField] Sprite _backIntroSprite;
-    [SerializeField] Sprite _shinyFrontRegularSprite;
-    [SerializeField] Sprite _shinyFrontIntroSprite;
-    [SerializeField] Sprite _shinyBackRegularSprite;
-    [SerializeField] Sprite _shinyBackIntroSprite;
-    [SerializeField] Sprite _standardSpriteA;
-    [SerializeField] Sprite _standardSpriteB;
-
-    //Turned on through editor of script
-    bool differentGenderSprites;
-    Sprite _femaleFrontRegularSprite;
-    Sprite _femaleFrontIntroSprite;
-    Sprite _femaleBackRegularSprite;
-    Sprite _femaleBackIntroSprite;
-    Sprite _femaleShinyFrontRegularSprite;
-    Sprite _femaleShinyFrontIntroSprite;
-    Sprite _femaleShinyBackRegularSprite;
-    Sprite _femaleShinyBackIntroSprite;
+    [SerializeField] Sprite frontRegularSprite;
+    [SerializeField] Sprite frontIntroSprite;
+    [SerializeField] Sprite backRegularSprite;
+    [SerializeField] Sprite backIntroSprite;
+    [SerializeField] Sprite shinyFrontRegularSprite;
+    [SerializeField] Sprite shinyFrontIntroSprite;
+    [SerializeField] Sprite shinyBackRegularSprite;
+    [SerializeField] Sprite shinyBackIntroSprite;
+    [SerializeField] Sprite standardSpriteA;
+    [SerializeField] Sprite standardSpriteB;
+    [SerializeField] bool differentGenderSprites;
+    [SerializeField] Sprite femaleFrontRegularSprite;
+    [SerializeField] Sprite femaleFrontIntroSprite;
+    [SerializeField] Sprite femaleBackRegularSprite;
+    [SerializeField] Sprite femaleBackIntroSprite;
+    [SerializeField] Sprite femaleShinyFrontRegularSprite;
+    [SerializeField] Sprite femaleShinyFrontIntroSprite;
+    [SerializeField] Sprite femaleShinyBackRegularSprite;
+    [SerializeField] Sprite femaleShinyBackIntroSprite;
 
     [Header("Gender")]
     [SerializeField] bool _hasGender = true;
@@ -55,6 +53,7 @@ public class PokemonBase : ScriptableObject {
 
     [Header("Experience Group")]
     [SerializeField] ExperienceGroup _baseGroup;
+    [SerializeField] int rewardedBaseExp;
 
     [Header("PokemonTypes")]
     [SerializeField] ElementType _type1;
@@ -74,6 +73,7 @@ public class PokemonBase : ScriptableObject {
 
     [Header("Moveset")]
     [SerializeField] List<LearnableMove> _learnableMoves;
+    public static int MAX_NUMBER_OF_MOVES { get; } = 4;
 
     //Editor Additions
 
@@ -97,11 +97,11 @@ public class PokemonBase : ScriptableObject {
             {
                 if (isShiny == false)
                 {
-                    return new[] { _femaleFrontRegularSprite, _femaleFrontIntroSprite };
+                    return new[] { femaleFrontRegularSprite, femaleFrontIntroSprite };
                 }
                 else
                 {
-                    return new[] { _femaleShinyFrontRegularSprite, _femaleShinyFrontIntroSprite };
+                    return new[] { femaleShinyFrontRegularSprite, femaleShinyFrontIntroSprite };
                 }
             }
         }
@@ -109,11 +109,11 @@ public class PokemonBase : ScriptableObject {
         //If no specialised gender
         if (isShiny == false)
         {
-            return new[] { _frontRegularSprite, _frontIntroSprite };
+            return new[] { frontRegularSprite, frontIntroSprite };
         }
         else
         {
-            return new[] { _shinyFrontRegularSprite, _shinyFrontIntroSprite };
+            return new[] { shinyFrontRegularSprite, shinyFrontIntroSprite };
         }
     }
 
@@ -125,11 +125,11 @@ public class PokemonBase : ScriptableObject {
             {
                 if (isShiny == false)
                 {
-                    return new[] { _femaleBackRegularSprite, _femaleBackIntroSprite };
+                    return new[] { femaleBackRegularSprite, femaleBackIntroSprite };
                 }
                 else
                 {
-                    return new[] { _femaleShinyBackRegularSprite, _femaleShinyBackIntroSprite };
+                    return new[] { femaleShinyBackRegularSprite, femaleShinyBackIntroSprite };
                 }
             }
         }
@@ -137,11 +137,11 @@ public class PokemonBase : ScriptableObject {
         //If no specialised gender
         if (isShiny == false)
         {
-            return new[] { _backRegularSprite, _backIntroSprite };
+            return new[] { backRegularSprite, backIntroSprite };
         }
         else
         {
-            return new[] { _shinyBackIntroSprite, _shinyBackIntroSprite };
+            return new[] { shinyBackRegularSprite, shinyBackIntroSprite };
         }
     }
 
@@ -151,7 +151,7 @@ public class PokemonBase : ScriptableObject {
     /// <returns>returns an array of the animated sprite</returns>
     public Sprite[] GetAnimatedSprites()
     {
-        return new[] { _standardSpriteA, _standardSpriteB };
+        return new[] { standardSpriteA, standardSpriteB };
     }
 
     #endregion
@@ -227,7 +227,17 @@ public class PokemonBase : ScriptableObject {
 
     public List<EarnableEV> rewardedEfforValue
     {
-        get { return _rewardedEffortValue; }
+        get { return rewardedEffortValue; }
+    }
+
+    public int GetExpForLevel(int level)
+    {
+        return ExperienceTable.ReturnExperienceRequiredForLevel(level, _baseGroup);
+    }
+
+    public int RewardedExperienceYield
+    {
+        get { return rewardedBaseExp; }
     }
 
     public List<LearnableMove> LearnableMoves
@@ -237,86 +247,86 @@ public class PokemonBase : ScriptableObject {
 
     #region EditorFunctions
 
-    public bool DifferentGenderSprites
-    {
-        get { return differentGenderSprites; }
-        set
-        {
-            differentGenderSprites = value;
-        }
-    }
+    //public bool DifferentGenderSprites
+    //{
+    //    get { return differentGenderSprites; }
+    //    set
+    //    {
+    //        differentGenderSprites = value;
+    //    }
+    //}
 
-    public Sprite FemaleFrontRegularSprite
-    {
-        get { return _femaleFrontRegularSprite; }
-        set
-        {
-            _femaleFrontRegularSprite = value;
-        }
-    }
+    //public Sprite FemaleFrontRegularSprite
+    //{
+    //    get { return _femaleFrontRegularSprite; }
+    //    set
+    //    {
+    //        _femaleFrontRegularSprite = value;
+    //    }
+    //}
 
-    public Sprite FemaleFrontIntroSprite
-    {
-        get { return _femaleFrontIntroSprite; }
-        set
-        {
-            _femaleFrontIntroSprite = value;
-        }
-    }
+    //public Sprite FemaleFrontIntroSprite
+    //{
+    //    get { return _femaleFrontIntroSprite; }
+    //    set
+    //    {
+    //        _femaleFrontIntroSprite = value;
+    //    }
+    //}
 
-    public Sprite FemaleBackRegularSprite
-    {
-        get { return _femaleBackRegularSprite; }
-        set
-        {
-            _femaleBackRegularSprite = value;
-        }
-    }
+    //public Sprite FemaleBackRegularSprite
+    //{
+    //    get { return _femaleBackRegularSprite; }
+    //    set
+    //    {
+    //        _femaleBackRegularSprite = value;
+    //    }
+    //}
 
-    public Sprite FemaleBackIntroSprite
-    {
-        get { return _femaleBackIntroSprite; }
-        set
-        {
-            _femaleBackIntroSprite = value;
-        }
-    }
+    //public Sprite FemaleBackIntroSprite
+    //{
+    //    get { return _femaleBackIntroSprite; }
+    //    set
+    //    {
+    //        _femaleBackIntroSprite = value;
+    //    }
+    //}
 
-    public Sprite FemaleShinyFrontRegularSprite
-    {
-        get { return _femaleShinyFrontRegularSprite; }
-        set
-        {
-            _femaleShinyFrontRegularSprite = value;
-        }
-    }
+    //public Sprite FemaleShinyFrontRegularSprite
+    //{
+    //    get { return _femaleShinyFrontRegularSprite; }
+    //    set
+    //    {
+    //        _femaleShinyFrontRegularSprite = value;
+    //    }
+    //}
 
-    public Sprite FemaleShinyFrontIntroSprite
-    {
-        get { return _femaleShinyFrontIntroSprite; }
-        set
-        {
-            _femaleShinyFrontIntroSprite = value;
-        }
-    }
+    //public Sprite FemaleShinyFrontIntroSprite
+    //{
+    //    get { return _femaleShinyFrontIntroSprite; }
+    //    set
+    //    {
+    //        _femaleShinyFrontIntroSprite = value;
+    //    }
+    //}
 
-    public Sprite FemaleShinyBackRegularSprite
-    {
-        get { return _femaleShinyBackRegularSprite; }
-        set
-        {
-            _femaleShinyBackRegularSprite = value;
-        }
-    }
+    //public Sprite FemaleShinyBackRegularSprite
+    //{
+    //    get { return _femaleShinyBackRegularSprite; }
+    //    set
+    //    {
+    //        _femaleShinyBackRegularSprite = value;
+    //    }
+    //}
 
-    public Sprite FemaleShinyBackIntroSprite
-    {
-        get { return _femaleShinyBackIntroSprite; }
-        set
-        {
-            _femaleShinyBackIntroSprite = value;
-        }
-    }
+    //public Sprite FemaleShinyBackIntroSprite
+    //{
+    //    get { return _femaleShinyBackIntroSprite; }
+    //    set
+    //    {
+    //        _femaleShinyBackIntroSprite = value;
+    //    }
+    //}
 
     #endregion
 

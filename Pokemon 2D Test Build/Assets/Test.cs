@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Test : MonoBehaviour {
-
+    public bool testEXPGroup;
     public ExperienceGroup testExperienceGroup;
     public NatureBase testNature;
 
@@ -13,6 +13,11 @@ public class Test : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
+
+        if (testEXPGroup)
+        {
+            TestExpTable();
+        }
         //TestNatureName(testNature);
         //TestTypeChart();
 	}
@@ -30,9 +35,9 @@ public class Test : MonoBehaviour {
 
     void TestExpTable()
     {
-        for (int i = 1; i < 100; i++)
+        for (int i = 1; i < 101; i++)
         {
-            Debug.Log("Level " + i + "EXP to next level " + ExperienceTable.ReturnExperienceRequiredToNextLevel(i, testExperienceGroup));
+            Debug.Log("Level " + i + "EXP to level " + ExperienceTable.ReturnExperienceRequiredForLevel(i, testExperienceGroup));
         }
     }
 }

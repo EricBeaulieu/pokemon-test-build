@@ -44,6 +44,9 @@ public class BattleSystem : MonoBehaviour
 
     int _escapeAttempts;
 
+    [SerializeField] LearnNewMoveManager learnNewMoveManager;
+
+
     #region End of Turn effects Order reference as of GEN 5
 
     //1.0 weather ends
@@ -568,7 +571,72 @@ public class BattleSystem : MonoBehaviour
         {
             yield return dialogBox.TypeDialog($"{targetBattleUnit.pokemon.currentName} has fainted");
             targetBattleUnit.PlayFaintAnimation();
-            //apply experience here
+            
+            if(targetBattleUnit.isPlayerPokemon == false)
+            {
+                int expYield = targetBattleUnit.pokemon.pokemonBase.RewardedExperienceYield;
+                int level = targetBattleUnit.pokemon.currentLevel;
+                float trainerBonus = (_isTrainerBattle==true) ? 1.5f : 1;
+
+                //This shall add all the pokemon that were in battle with this current pokemon
+                if (playerBattleUnit.pokemon.currentLevel < 100)
+                {
+                    //int expGained = Mathf.FloorToInt(expYield * level * trainerBonus) / 7;
+                    int expGained = 150;
+
+                    int expBeforeAnim = playerBattleUnit.pokemon.currentExp;
+                    playerBattleUnit.pokemon.currentExp += expGained;
+                    yield return dialogBox.TypeDialog($"{playerBattleUnit.pokemon.currentName} gained {expGained} exp", true);
+                    yield return playerBattleUnit.HUD.GainExpAnimation(expGained, expBeforeAnim);
+
+                    //Level up Here
+
+                    while (playerBattleUnit.pokemon.LevelUpCheck() == true)
+                    {
+                        expGained -= playerBattleUnit.pokemon.pokemonBase.GetExpForLevel(playerBattleUnit.pokemon.currentLevel) - expBeforeAnim;
+                        expBeforeAnim = playerBattleUnit.pokemon.pokemonBase.GetExpForLevel(playerBattleUnit.pokemon.currentLevel);
+                        yield return dialogBox.TypeDialog($"{playerBattleUnit.pokemon.currentName} grew to level {playerBattleUnit.pokemon.currentLevel}!", true);
+                        playerBattleUnit.HUD.SetLevel();
+                        //Play level up animation
+                        //Show stats
+
+                        //Learn new moves
+                        List<LearnableMove> newMove = playerBattleUnit.pokemon.GetLeranableMoveAtCurrentLevel();
+
+                        foreach(LearnableMove learnableMove in newMove)
+                        {
+                            if (playerBattleUnit.pokemon.moves.Count < PokemonBase.MAX_NUMBER_OF_MOVES)
+                            {
+                                playerBattleUnit.pokemon.LearnMove(learnableMove);
+                                yield return dialogBox.TypeDialog($"{playerBattleUnit.pokemon.currentName} learned {learnableMove.moveBase.MoveName}!", true);
+                                attackSelectionEventSelector.SetMovesList(playerBattleUnit, playerBattleUnit.pokemon.moves, this);
+                            }
+                            else
+                            {
+                                yield return dialogBox.TypeDialog($"{playerBattleUnit.pokemon.currentName} is trying to learn {learnableMove.moveBase.MoveName}.", true);
+                                yield return dialogBox.TypeDialog($"But {playerBattleUnit.pokemon.currentName} can't learn more than four moves.", true);
+                                yield return dialogBox.TypeDialog($"Delete a move to make room for {learnableMove.moveBase.MoveName}?");
+
+                                yield return dialogBox.SetChoiceBox(() =>
+                                {
+                                    learnNewMoveManager.OpenToLearnNewMove(playerBattleUnit.pokemon, learnableMove.moveBase);
+                                }
+                                , () =>
+                                {
+                                    
+                                });
+                                
+                            }
+                        }
+
+                        if(playerBattleUnit.pokemon.currentLevel >= 100)
+                        {
+                            break;
+                        }
+                        yield return playerBattleUnit.HUD.GainExpAnimation(expGained, playerBattleUnit.pokemon.pokemonBase.GetExpForLevel(playerBattleUnit.pokemon.currentLevel));
+                    }
+                }
+            }
 
             yield return new WaitForSeconds(2f);
             CheckForBattleOver(targetBattleUnit);

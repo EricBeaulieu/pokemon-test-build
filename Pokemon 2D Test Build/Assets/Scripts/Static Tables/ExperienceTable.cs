@@ -11,75 +11,60 @@ public static class ExperienceTable {
     /// <summary>
     /// 
     /// </summary>
-    /// <param name="cL">Current Level</param>
+    /// <param name="currentLevel">Current Level</param>
     /// <param name="group">Current Experience Group this belongs in</param>
     /// <returns></returns>
-    public static int ReturnExperienceRequiredToNextLevel(int cL, ExperienceGroup group)
+    public static int ReturnExperienceRequiredForLevel(int currentLevel, ExperienceGroup group)
     {
-        cL++;
-        int expForNextLevel;
-
         switch (group)
         {
             case ExperienceGroup.Erratic:
-                if (cL < 100)
+                if (currentLevel < 100)
                 {
-                    expForNextLevel = ErraticFormula(cL);
+                    return ErraticFormula(currentLevel);
                 }
                 else
                     return 600000;
-                break;
             case ExperienceGroup.Fast:
-                if (cL < 100)
+                if (currentLevel < 100)
                 {
-                    expForNextLevel = FastFormula(cL);
+                    return FastFormula(currentLevel);
                 }
                 else
                     return 800000;
-                break;
             case ExperienceGroup.MediumFast:
-                if (cL < 100)
+                if (currentLevel < 100)
                 {
-                    expForNextLevel = FastFormula(cL);
+                    return MediumFastFormula(currentLevel);
                 }
                 else
                     return 1000000;
-                expForNextLevel = MediumFastFormula(cL);
-                break;
             case ExperienceGroup.MediumSlow:
-                if (cL < 100)
+                if (currentLevel < 100)
                 {
-                    expForNextLevel = FastFormula(cL);
+                    return MediumSlowFormula(currentLevel);
                 }
                 else
                     return 1059860;
-                expForNextLevel = MediumSlowFormula(cL);
-                break;
             case ExperienceGroup.Slow:
-                if (cL < 100)
+                if (currentLevel < 100)
                 {
-                    expForNextLevel = FastFormula(cL);
+                    return SlowFormula(currentLevel);
                 }
                 else
                     return 1250000;
-                expForNextLevel = SlowFormula(cL);
-                break;
             case ExperienceGroup.VerySlow:
-                if (cL < 100)
+                if (currentLevel < 100)
                 {
-                    expForNextLevel = FastFormula(cL);
+                    return VerySlow(currentLevel);
                 }
                 else
                     return 1640000;
-                expForNextLevel = VerySlow(cL);
-                break;
             default:
-                expForNextLevel = 10000000;//To Prevent endless Loop
                 Debug.LogError("Out of bounds Error");
                 break;
         }
-
-        return expForNextLevel;
+        return -1;
     }
 
     static int ErraticFormula(int cL)

@@ -64,11 +64,13 @@
     <Compile Include="Assets\CuttableTree.cs" />
     <Compile Include="Assets\Scripts\Mechanics\NatureBase.cs" />
     <Compile Include="Assets\Scripts\Static Tables\ExperienceTable.cs" />
+    <Compile Include="Assets\Scripts\Static Tables\CatchingMechanics.cs" />
     <Compile Include="Assets\Scripts\Pokemon\EffortValues.cs" />
     <Compile Include="Assets\Scripts\Party\PartySystem.cs" />
     <Compile Include="Assets\Scripts\Party\PartyCancelUI.cs" />
     <Compile Include="Assets\Scripts\Pokemon\MoveSecondaryEffects.cs" />
     <Compile Include="Assets\Test.cs" />
+    <Compile Include="Assets\Scripts\Items\ItemBase.cs" />
     <Compile Include="Assets\Scripts\Battle\EntryHazard.cs" />
     <Compile Include="Assets\Scripts\Data\ConditionsDB.cs" />
     <Compile Include="Assets\Scripts\Managers\LevelManager.cs" />
@@ -80,11 +82,14 @@
     <Compile Include="Assets\Scripts\Battle\AttackSelectionEventSelector.cs" />
     <Compile Include="Assets\Scripts\ExtensionMethods\ColorExtensions.cs" />
     <Compile Include="Assets\Scripts\Party\PartyMemberUI.cs" />
+    <Compile Include="Assets\Scripts\Items\PokeballItem.cs" />
     <Compile Include="Assets\Scripts\Data\WeatherEffectDB.cs" />
+    <Compile Include="Assets\Scripts\Mechanics\CaptureBallRoute.cs" />
     <Compile Include="Assets\Scripts\Characters\NpcController.cs" />
     <Compile Include="Assets\Scripts\Managers\Dialog.cs" />
     <Compile Include="Assets\Scripts\Data\EntryHazardsDB.cs" />
     <Compile Include="Assets\Scripts\Battle\WeatherEffect.cs" />
+    <Compile Include="Assets\Scripts\Mechanics\ExpBar.cs" />
     <Compile Include="Assets\StatusConditionArt.cs" />
     <Compile Include="Assets\Scripts\Managers\DialogManager.cs" />
     <Compile Include="Assets\Scripts\Pokemon\PokemonParty.cs" />
@@ -100,15 +105,13 @@
     <Compile Include="Assets\Scripts\Pokemon\MoveBase.cs" />
     <Compile Include="Assets\Scripts\Pokemon\LearnableMove.cs" />
     <Compile Include="Assets\Scripts\Battle\BattleUnit.cs" />
+    <Compile Include="Assets\Scripts\Mechanics\InBattleItem.cs" />
     <Compile Include="Assets\Scripts\Mechanics\IInteractable.cs" />
     <Compile Include="Assets\Scripts\ExtensionMethods\Vector2Extensions.cs" />
     <Compile Include="Assets\Scripts\Managers\GameManager.cs" />
     <Compile Include="Assets\Scripts\Battle\TurnAttackDetails.cs" />
-    <Compile Include="Assets\Scripts\Mechanics\CaptureBallRoute.cs" />
-    <Compile Include="Assets\Scripts\Mechanics\InBattleItem.cs" />
-    <Compile Include="Assets\Scripts\Items\ItemBase.cs" />
-    <Compile Include="Assets\Scripts\Items\PokeballItem.cs" />
-    <Compile Include="Assets\Scripts\Static Tables\CatchingMechanics.cs" />
+    <Compile Include="Assets\Scripts\Managers\LearnNewMoveManager.cs" />
+    <Compile Include="Assets\Scripts\Party\SummaryAttackButton.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">

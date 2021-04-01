@@ -19,8 +19,8 @@ public class BattleHUD : MonoBehaviour
     [SerializeField] Text currentHP;
     [SerializeField] Text maxHP;
 
-    //[SerializeField] HPBar experienceBar;
-    //[SerializeField] Image experienceBackground;
+    [SerializeField] ExpBar expBar;
+    [SerializeField] Image experienceBarBackground;
 
     Pokemon _pokemon;
 
@@ -34,12 +34,14 @@ public class BattleHUD : MonoBehaviour
     {
         _pokemon = currentPokemon;
         nameText.text = currentPokemon.currentName;
-        levelText.text = currentPokemon.currentLevel.ToString();
+        SetLevel();
         hPBar.SetHP((float)currentPokemon.currentHitPoints / currentPokemon.maxHitPoints);
+
         if(isPlayersPokemon == true)
         {
             currentHP.text = currentPokemon.currentHitPoints.ToString();
             maxHP.text = currentPokemon.maxHitPoints.ToString();
+            expBar.SetExpereince(currentPokemon);
         }
 
         SetStatusSprite();
@@ -48,7 +50,7 @@ public class BattleHUD : MonoBehaviour
         gender.sprite = StatusConditionArt.instance.ReturnGenderArt(currentPokemon.gender);
 
         SetHudOffScreen(isPlayersPokemon);
-        ResetHUD(isPlayersPokemon);
+        ResetAlphaHUD(isPlayersPokemon);
     }
 
     void SetStatusSprite()
@@ -63,9 +65,19 @@ public class BattleHUD : MonoBehaviour
         }
     }
 
+    public void SetLevel()
+    {
+        levelText.text = _pokemon.currentLevel.ToString();
+    }
+
     public IEnumerator UpdateHP(int hpBeforeDamage)
     {
         yield return hPBar.SetHPAnimation(_pokemon.currentHitPoints,hpBeforeDamage,_pokemon.maxHitPoints,currentHP);
+    }
+
+    public IEnumerator GainExpAnimation(int expGained, int expBeforeAnim)
+    {
+        yield return expBar.SetExpAnimation(expGained,expBeforeAnim, _pokemon.pokemonBase.GetExpForLevel(_pokemon.currentLevel), _pokemon.pokemonBase.GetExpForLevel(_pokemon.currentLevel+1));
     }
 
     public IEnumerator FaintedPokemonHUDAnimation(bool isPlayers)
@@ -79,6 +91,7 @@ public class BattleHUD : MonoBehaviour
             hudBackground.color = hudBackground.color.SetAlpha(tempAlpha);
             nameText.color = nameText.color.SetAlpha(tempAlpha);
             levelText.color = levelText.color.SetAlpha(tempAlpha);
+            statusCondition.color = statusCondition.color.SetAlpha(tempAlpha);
             gender.color = gender.color.SetAlpha(tempAlpha);
             healthBarBackground.color = healthBarBackground.color.SetAlpha(tempAlpha);
             hPBar.healthBarImage.color = hPBar.healthBarImage.color.SetAlpha(tempAlpha);
@@ -86,6 +99,8 @@ public class BattleHUD : MonoBehaviour
             {
                 currentHP.color = currentHP.color.SetAlpha(tempAlpha);
                 maxHP.color = maxHP.color.SetAlpha(tempAlpha);
+                experienceBarBackground.color = experienceBarBackground.color.SetAlpha(tempAlpha);
+                expBar.expBarImage.color = expBar.expBarImage.color.SetAlpha(tempAlpha);
             }
             yield return new WaitForSeconds(0.01f);
         }
@@ -103,11 +118,12 @@ public class BattleHUD : MonoBehaviour
         }
     }
 
-    void ResetHUD(bool isPlayers)
+    void ResetAlphaHUD(bool isPlayers)
     {
         hudBackground.color = hudBackground.color.ResetAlpha();
         nameText.color = nameText.color.ResetAlpha();
         levelText.color = levelText.color.ResetAlpha();
+        statusCondition.color = statusCondition.color.ResetAlpha();
         gender.color = gender.color.ResetAlpha();
         healthBarBackground.color = healthBarBackground.color.ResetAlpha();
         hPBar.healthBarImage.color = hPBar.healthBarImage.color.ResetAlpha();
@@ -115,6 +131,8 @@ public class BattleHUD : MonoBehaviour
         {
             currentHP.color = currentHP.color.ResetAlpha();
             maxHP.color = maxHP.color.ResetAlpha();
+            experienceBarBackground.color = experienceBarBackground.color.ResetAlpha();
+            expBar.expBarImage.color = expBar.expBarImage.color.ResetAlpha();
         }
     }
 
