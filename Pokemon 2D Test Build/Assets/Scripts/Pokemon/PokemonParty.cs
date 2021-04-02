@@ -6,6 +6,7 @@ using UnityEngine;
 public class PokemonParty : MonoBehaviour
 {
     [SerializeField] List<Pokemon> pokemonParty;
+    List<Pokemon> _originalPos;
 
     const int MAX_PARTY_POKEMON_SIZE = 6;
 
@@ -52,5 +53,40 @@ public class PokemonParty : MonoBehaviour
             //Send to PC
             return false;
         }
+    }
+
+    public void SwitchPokemonPositions(Pokemon currentPokemon, Pokemon newPokemon)
+    {
+        int currentIndex = pokemonParty.IndexOf(currentPokemon);
+        int newIndex = pokemonParty.IndexOf(newPokemon);
+
+        pokemonParty.RemoveAt(currentIndex);
+
+        if (newIndex > currentIndex)
+        {
+            //If the index could have shifted due to the removal
+            newIndex--;
+        }
+
+        pokemonParty.RemoveAt(newIndex);
+        pokemonParty.Insert(newIndex, currentPokemon);
+
+        //if (newIndex > currentIndex)
+        //{
+        //    //If the index could have shifted due to the removal
+        //    newIndex++;
+        //}
+
+        pokemonParty.Insert(currentIndex, newPokemon);
+    }
+
+    public void SetOriginalPositions()
+    {
+        _originalPos = new List<Pokemon>(pokemonParty);
+    }
+
+    public void SetPositionstoBeforeBattle()
+    {
+        pokemonParty = _originalPos;
     }
 }

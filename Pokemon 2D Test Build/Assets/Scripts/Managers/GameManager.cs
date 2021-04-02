@@ -71,10 +71,13 @@ public class GameManager : MonoBehaviour
             }
         };
 
-        if(battleSystem.gameObject.activeInHierarchy == true)
+        battleSystem.HandleAwake();
+
+        if(partySystem.gameObject.activeInHierarchy == true)
         {
-            battleSystem.gameObject.SetActive(false);
+            partySystem.gameObject.SetActive(false);
         }
+
         allActiveEntities = new List<Entity>();
         allActiveEntities = levelManager.ReturnAllEntities();
     }
@@ -109,6 +112,7 @@ public class GameManager : MonoBehaviour
         PokemonParty currentParty = playerController.GetComponent<PokemonParty>();
         Pokemon currentWildPokemon = FindObjectOfType<LevelManager>().GetComponent<LevelManager>().WildPokemon();
 
+        battleSystem.SetupBattleArt(levelManager.GetBattleEnvironmentArt);
         battleSystem.StartBattle(currentParty,currentWildPokemon);
     }
 
@@ -123,6 +127,7 @@ public class GameManager : MonoBehaviour
         PokemonParty currentParty = playerController.GetComponent<PokemonParty>();
         PokemonParty trainerParty = currentTrainer.GetComponent<PokemonParty>();
 
+        battleSystem.SetupBattleArt(levelManager.GetBattleEnvironmentArt);
         battleSystem.StartBattle(currentParty, trainerParty);
     }
 
@@ -143,6 +148,7 @@ public class GameManager : MonoBehaviour
         _inBattle = false;
         battleSystem.gameObject.SetActive(false);
         overWorldCamera.gameObject.SetActive(true);
+        playerController.GetComponent<PokemonParty>().SetPositionstoBeforeBattle();
     }
 
     void OpenParty(bool inBattle,bool wasShiftSwap)

@@ -9,6 +9,7 @@ public enum BattleState { Start, ActionSelection, MoveSelection, PerformMove, Bu
 
 public class BattleSystem : MonoBehaviour
 {
+    [SerializeField] Image backgroundArt;
     [SerializeField] BattleUnit playerBattleUnit;
     [SerializeField] BattleUnit enemyBattleUnit;
     [SerializeField] Image playerImage;
@@ -44,7 +45,7 @@ public class BattleSystem : MonoBehaviour
 
     int _escapeAttempts;
 
-    [SerializeField] LearnNewMoveManager learnNewMoveManager;
+    [SerializeField] LearnNewMoveUI learnNewMoveUI;
 
 
     #region End of Turn effects Order reference as of GEN 5
@@ -124,9 +125,55 @@ public class BattleSystem : MonoBehaviour
 
     #endregion
 
-    void Start()
+    public void HandleAwake()
     {
+        gameObject.SetActive(false);
         inGameItemoffScreenPos = inGameItem.transform.localPosition;
+
+        if(playerBattleUnit == null)
+        {
+            Debug.LogWarning($"playerBattleUnit has not been set");
+        }
+
+        if (enemyBattleUnit == null)
+        {
+            Debug.LogWarning($"enemyBattleUnit has not been set");
+        }
+
+        if (playerImage == null)
+        {
+            Debug.LogWarning($"playerImage has not been set");
+        }
+
+        if (trainerImage == null)
+        {
+            Debug.LogWarning($"trainerImage has not been set");
+        }
+
+        if (dialogBox == null)
+        {
+            Debug.LogWarning($"dialogBox has not been set");
+        }
+
+        if (actionSelectionEventSelector == null)
+        {
+            Debug.LogWarning($"actionSelectionEventSelector has not been set");
+        }
+
+        if (attackSelectionEventSelector == null)
+        {
+            Debug.LogWarning($"attackSelectionEventSelector has not been set");
+        }
+
+        if (inGameItem == null)
+        {
+            Debug.LogWarning($"inGameItem has not been set");
+        }
+
+        if (learnNewMoveUI == null)
+        {
+            Debug.LogWarning($"learnNewMoveManager has not been set");
+        }
     }
 
     public void HandleUpdate()
@@ -148,6 +195,13 @@ public class BattleSystem : MonoBehaviour
                 dialogBox.WaitingOnUserInput = false;
             }
         }
+    }
+
+    public void SetupBattleArt(LevelArtDetails levelArt)
+    {
+        backgroundArt.sprite = levelArt.background;
+        playerBattleUnit.SetBattlePositionArt(levelArt.playerPosition);
+        enemyBattleUnit.SetBattlePositionArt(levelArt.enemyPosition);
     }
 
     public void StartBattle(PokemonParty playerParty,Pokemon wildPokemon)
@@ -183,7 +237,7 @@ public class BattleSystem : MonoBehaviour
     /// </summary>
     IEnumerator SetupBattle()
     {
-        if(_isTrainerBattle == true)
+        if (_isTrainerBattle == true)
         {
             playerBattleUnit.gameObject.SetActive(false);
             enemyBattleUnit.gameObject.SetActive(false);
@@ -219,7 +273,8 @@ public class BattleSystem : MonoBehaviour
 
             yield return dialogBox.TypeDialog($"A wild {enemyBattleUnit.pokemon.currentName} has appeared!");
         }
-        
+
+        _playerParty.SetOriginalPositions();
         _escapeAttempts = 0;
         dialogBox.BattleStartSetup();
         attackSelectionEventSelector.SetMovesList(playerBattleUnit,playerBattleUnit.pokemon.moves,this);
@@ -581,60 +636,8 @@ public class BattleSystem : MonoBehaviour
                 //This shall add all the pokemon that were in battle with this current pokemon
                 if (playerBattleUnit.pokemon.currentLevel < 100)
                 {
-                    //int expGained = Mathf.FloorToInt(expYield * level * trainerBonus) / 7;
-                    int expGained = 150;
-
-                    int expBeforeAnim = playerBattleUnit.pokemon.currentExp;
-                    playerBattleUnit.pokemon.currentExp += expGained;
-                    yield return dialogBox.TypeDialog($"{playerBattleUnit.pokemon.currentName} gained {expGained} exp", true);
-                    yield return playerBattleUnit.HUD.GainExpAnimation(expGained, expBeforeAnim);
-
-                    //Level up Here
-
-                    while (playerBattleUnit.pokemon.LevelUpCheck() == true)
-                    {
-                        expGained -= playerBattleUnit.pokemon.pokemonBase.GetExpForLevel(playerBattleUnit.pokemon.currentLevel) - expBeforeAnim;
-                        expBeforeAnim = playerBattleUnit.pokemon.pokemonBase.GetExpForLevel(playerBattleUnit.pokemon.currentLevel);
-                        yield return dialogBox.TypeDialog($"{playerBattleUnit.pokemon.currentName} grew to level {playerBattleUnit.pokemon.currentLevel}!", true);
-                        playerBattleUnit.HUD.SetLevel();
-                        //Play level up animation
-                        //Show stats
-
-                        //Learn new moves
-                        List<LearnableMove> newMove = playerBattleUnit.pokemon.GetLeranableMoveAtCurrentLevel();
-
-                        foreach(LearnableMove learnableMove in newMove)
-                        {
-                            if (playerBattleUnit.pokemon.moves.Count < PokemonBase.MAX_NUMBER_OF_MOVES)
-                            {
-                                playerBattleUnit.pokemon.LearnMove(learnableMove);
-                                yield return dialogBox.TypeDialog($"{playerBattleUnit.pokemon.currentName} learned {learnableMove.moveBase.MoveName}!", true);
-                                attackSelectionEventSelector.SetMovesList(playerBattleUnit, playerBattleUnit.pokemon.moves, this);
-                            }
-                            else
-                            {
-                                yield return dialogBox.TypeDialog($"{playerBattleUnit.pokemon.currentName} is trying to learn {learnableMove.moveBase.MoveName}.", true);
-                                yield return dialogBox.TypeDialog($"But {playerBattleUnit.pokemon.currentName} can't learn more than four moves.", true);
-                                yield return dialogBox.TypeDialog($"Delete a move to make room for {learnableMove.moveBase.MoveName}?");
-
-                                yield return dialogBox.SetChoiceBox(() =>
-                                {
-                                    learnNewMoveManager.OpenToLearnNewMove(playerBattleUnit.pokemon, learnableMove.moveBase);
-                                }
-                                , () =>
-                                {
-                                    
-                                });
-                                
-                            }
-                        }
-
-                        if(playerBattleUnit.pokemon.currentLevel >= 100)
-                        {
-                            break;
-                        }
-                        yield return playerBattleUnit.HUD.GainExpAnimation(expGained, playerBattleUnit.pokemon.pokemonBase.GetExpForLevel(playerBattleUnit.pokemon.currentLevel));
-                    }
+                    yield return GainExperience(playerBattleUnit, expYield, level, trainerBonus);
+                    playerBattleUnit.pokemon.GainEffortValue(targetBattleUnit.pokemon.pokemonBase.rewardedEfforValue);
                 }
             }
 
@@ -746,6 +749,11 @@ public class BattleSystem : MonoBehaviour
             yield return new WaitForSeconds(2f);
         }
 
+        if (battleUnit.isPlayerPokemon)
+        {
+            _playerParty.SwitchPokemonPositions(battleUnit.pokemon, newPokemon);
+        }
+
         battleUnit.Setup(newPokemon);
 
         if(battleUnit.isPlayerPokemon == true)
@@ -769,6 +777,7 @@ public class BattleSystem : MonoBehaviour
 
         if (battleUnit.isPlayerPokemon)
         {
+
             if (currentPokemonFainted == true)
             {
                 PlayerActions();
@@ -1085,6 +1094,114 @@ public class BattleSystem : MonoBehaviour
             {
                 yield return dialogBox.TypeDialog($"You were unable to escape!", true);
                 StartCoroutine(EnemyMove());
+            }
+        }
+    }
+
+    IEnumerator GainExperience(BattleUnit targetUnit,int expYield,int enemyLevel,float trainerBonus)
+    {
+        int expGained = Mathf.FloorToInt(expYield * enemyLevel * trainerBonus) / 7;
+
+        int expBeforeAnim = targetUnit.pokemon.currentExp;
+        targetUnit.pokemon.currentExp += expGained;
+        yield return dialogBox.TypeDialog($"{targetUnit.pokemon.currentName} gained {expGained} exp", true);
+        yield return targetUnit.HUD.GainExpAnimation(expGained, expBeforeAnim);
+
+        //Level up Here
+
+        while (targetUnit.pokemon.LevelUpCheck() == true)
+        {
+            expGained -= targetUnit.pokemon.pokemonBase.GetExpForLevel(targetUnit.pokemon.currentLevel) - expBeforeAnim;
+            expBeforeAnim = targetUnit.pokemon.pokemonBase.GetExpForLevel(targetUnit.pokemon.currentLevel);
+            yield return dialogBox.TypeDialog($"{targetUnit.pokemon.currentName} grew to level {targetUnit.pokemon.currentLevel}!", true);
+            targetUnit.HUD.SetLevel();
+            //Play level up animation
+            //Show stats
+
+            //Learn new moves
+            List<LearnableMove> newMove = targetUnit.pokemon.GetLeranableMoveAtCurrentLevel();
+
+            if (newMove.Count > 0)
+            {
+                yield return LearnNewMove(targetUnit,newMove);
+            }
+
+            if (targetUnit.pokemon.currentLevel >= 100)
+            {
+                break;
+            }
+            yield return targetUnit.HUD.GainExpAnimation(expGained, targetUnit.pokemon.pokemonBase.GetExpForLevel(targetUnit.pokemon.currentLevel));
+        }
+    }
+
+    IEnumerator LearnNewMove(BattleUnit currentUnit,List<LearnableMove> newMoves)
+    {
+        foreach (LearnableMove learnableMove in newMoves)
+        {
+            if (currentUnit.pokemon.moves.Count < PokemonBase.MAX_NUMBER_OF_MOVES)
+            {
+                currentUnit.pokemon.LearnMove(learnableMove);
+                yield return dialogBox.TypeDialog($"{currentUnit.pokemon.currentName} learned {learnableMove.moveBase.MoveName}!", true);
+                attackSelectionEventSelector.SetMovesList(currentUnit, currentUnit.pokemon.moves, this);
+            }
+            else
+            {
+
+                bool playerSelectingNewMove = true;
+
+                while (playerSelectingNewMove == true)
+                {
+                    yield return dialogBox.TypeDialog($"{currentUnit.pokemon.currentName} is trying to learn {learnableMove.moveBase.MoveName}.", true);
+                    yield return dialogBox.TypeDialog($"But {currentUnit.pokemon.currentName} can't learn more than four moves.", true);
+                    yield return dialogBox.TypeDialog($"Delete a move to make room for {learnableMove.moveBase.MoveName}?");
+
+                    bool ifPlayerSelectsNo = false;
+
+                    yield return dialogBox.SetChoiceBox(() =>
+                    {
+                        learnNewMoveUI.OpenToLearnNewMove(currentUnit.pokemon, learnableMove.moveBase, () =>
+                        {
+                            dialogBox.WaitingOnUserChoice = false;
+                            playerSelectingNewMove = false;
+                        });
+                        learnNewMoveUI.SelectBox();
+                    }
+                    , () =>
+                    {
+                        ifPlayerSelectsNo = true;
+                        dialogBox.WaitingOnUserChoice = false;
+                    });
+
+                    if (ifPlayerSelectsNo == false)
+                    {
+                        ifPlayerSelectsNo = learnNewMoveUI.PlayerDoesNotWantToLearnMove;
+                    }
+
+                    if (ifPlayerSelectsNo == true)
+                    {
+                        yield return dialogBox.TypeDialog($"Stop Learning {learnableMove.moveBase.MoveName}?");
+                        yield return dialogBox.SetChoiceBox(() =>
+                        {
+                            playerSelectingNewMove = false;
+                            dialogBox.WaitingOnUserChoice = false;
+                        }
+                        , () =>
+                        {
+                            playerSelectingNewMove = true;
+                            dialogBox.WaitingOnUserChoice = false;
+                        });
+
+                        if (playerSelectingNewMove == false)
+                        {
+                            yield return dialogBox.TypeDialog($"{currentUnit.pokemon.currentName} did not learn {learnableMove.moveBase.MoveName}");
+                        }
+                    }
+                    else if (ifPlayerSelectsNo == false && playerSelectingNewMove == false)
+                    {
+                        yield return dialogBox.TypeDialog($"{currentUnit.pokemon.currentName} forgot how to use {learnNewMoveUI.previousMoveName}", true);
+                        yield return dialogBox.TypeDialog($"{currentUnit.pokemon.currentName} learned {learnableMove.moveBase.MoveName}!", true);
+                    }
+                }
             }
         }
     }

@@ -86,7 +86,7 @@ public static class CatchingMechanics
         while(shakeCount < 4)
         {
             int rnd = Random.Range(0, 65535);
-            if (rnd <= catchValue)
+            if (rnd >= catchValue)
             {
                 break;
             }

@@ -46,7 +46,7 @@ public class StatusConditionArt : MonoBehaviour
         set { _instance = value; }
     }
 
-    private void Awake()
+    void Awake()
     {
         if (instance == null)
         {

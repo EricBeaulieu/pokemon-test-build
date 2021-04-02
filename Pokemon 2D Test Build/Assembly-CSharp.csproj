@@ -80,10 +80,12 @@
     <Compile Include="Assets\Scripts\Battle\AttackButton.cs" />
     <Compile Include="Assets\Scripts\Battle\BattleDialogBox.cs" />
     <Compile Include="Assets\Scripts\Battle\AttackSelectionEventSelector.cs" />
+    <Compile Include="Assets\Scripts\Battle\LearningMoves\LearnNewMoveUI.cs" />
     <Compile Include="Assets\Scripts\ExtensionMethods\ColorExtensions.cs" />
     <Compile Include="Assets\Scripts\Party\PartyMemberUI.cs" />
     <Compile Include="Assets\Scripts\Items\PokeballItem.cs" />
     <Compile Include="Assets\Scripts\Data\WeatherEffectDB.cs" />
+    <Compile Include="Assets\Scripts\Battle\LearningMoves\SummaryAttackButton.cs" />
     <Compile Include="Assets\Scripts\Mechanics\CaptureBallRoute.cs" />
     <Compile Include="Assets\Scripts\Characters\NpcController.cs" />
     <Compile Include="Assets\Scripts\Managers\Dialog.cs" />
@@ -110,8 +112,7 @@
     <Compile Include="Assets\Scripts\ExtensionMethods\Vector2Extensions.cs" />
     <Compile Include="Assets\Scripts\Managers\GameManager.cs" />
     <Compile Include="Assets\Scripts\Battle\TurnAttackDetails.cs" />
-    <Compile Include="Assets\Scripts\Managers\LearnNewMoveManager.cs" />
-    <Compile Include="Assets\Scripts\Party\SummaryAttackButton.cs" />
+    <Compile Include="Assets\LevelManagerArt.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">

@@ -51,7 +51,6 @@ public class Pokemon {
         statusChanges = new Queue<string>();
 
         individualValues = iV;
-        individualValues.GenerateIVs();
         effortValues = eV;
 
         currentName = currentName == null ? _pokemonBase.GetPokedexName() : nickname;
@@ -120,7 +119,7 @@ public class Pokemon {
     {
         baseStats = new Dictionary<StatAttribute, int>();
 
-        maxHitPoints = Mathf.FloorToInt(((individualValues.maxHitPoints + 2 * pokemonBase.maxHitPoints + (effortValues.maxHitPoints / 4)) * currentLevel / 100) + 10 + currentLevel);
+        maxHitPoints = Mathf.FloorToInt(((individualValues.maxHitPoints + 2 * pokemonBase.maxHitPoints + (effortValues.hitPoints / 4)) * currentLevel / 100) + 10 + currentLevel);
         baseStats.Add(StatAttribute.Attack, Mathf.FloorToInt((((individualValues.attack + 2 * pokemonBase.attack + (effortValues.attack / 4)) * currentLevel / 100) + 5) * nature.NatureModifier(nature, StatAttribute.Attack)));
         baseStats.Add(StatAttribute.Defense, Mathf.FloorToInt((((individualValues.defense + 2 * pokemonBase.defense + (effortValues.defense / 4)) * currentLevel / 100) + 5) * nature.NatureModifier(nature, StatAttribute.Defense)));
         baseStats.Add(StatAttribute.SpecialAttack, Mathf.FloorToInt((((individualValues.specialAttack + 2 * pokemonBase.specialAttack + (effortValues.specialAttack / 4)) * currentLevel / 100) + 5) * nature.NatureModifier(nature, StatAttribute.SpecialAttack)));
@@ -539,5 +538,13 @@ public class Pokemon {
             return;
         }
         moves.Add(new Move(moveLearned.moveBase));
+    }
+
+    public void GainEffortValue(List<EarnableEV> effortValuesEarned)
+    {
+        foreach (EarnableEV eV in effortValuesEarned)
+        {
+            effortValues.AddEffortValue(eV);
+        }
     }
 }

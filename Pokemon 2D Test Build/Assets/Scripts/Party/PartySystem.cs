@@ -49,7 +49,6 @@ public class PartySystem : MonoBehaviour
 
     void ClosePartySystem()
     {
-        //this.gameObject.SetActive(false);
         onCloseParty();
     }
 
@@ -148,9 +147,6 @@ public class PartySystem : MonoBehaviour
 
         battleSelectionShiftButton.GetComponent<Button>().onClick.RemoveAllListeners();
         battleSelectionShiftButton.GetComponent<Button>().onClick.AddListener(() => ShiftBattleButton(currentPartyMember));
-        //Set Shift Button Here
-        //if they choose the same pokemon thats out then they cannot switch them
-        //If they choose a fainted pokemon they cannot switch them
 
         //Set Summary Button Here
         battleSelectionCancelButton.GetComponent<Button>().onClick.RemoveAllListeners();
