@@ -5,10 +5,8 @@ using UnityEngine;
 [System.Serializable]
 public class EarnableEV
 {
-    [SerializeField]
-    StatAttribute _statAttribute;
-    [SerializeField]
-    int _statValue;
+    [SerializeField] StatAttribute _statAttribute;
+    [SerializeField] int _statValue;
 
     public StatAttribute statAttribute
     {

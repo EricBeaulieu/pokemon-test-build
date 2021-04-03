@@ -1,39 +1,51 @@
 fileFormatVersion: 2
-guid: 28036e8dec4434d46b8950a3840a67c7
+guid: abdf0e45e1a1c8147aca07e4e20a4aea
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 3434788511002967468
-    second: EnemyHUD
+      213: 7334271649902727714
+    second: EnemyHudBody
   - first:
-      213: 6102750231462903098
+      213: -9095988604331809985
+    second: Level
+  - first:
+      213: 7097639058443379529
     second: Male
   - first:
-      213: -416326724799080903
+      213: 275905749900780960
     second: Female
   - first:
-      213: -5632367161698899782
-    second: HPGreen
+      213: 4721561191215024035
+    second: HitPoints
   - first:
-      213: -4838686884383960449
+      213: -4197889149677769770
     second: StatusBurn
   - first:
-      213: 484613953792593249
-    second: PlayerHUD
+      213: 3019413132095326678
+    second: PlayerHud
   - first:
-      213: 4739365767190756497
+      213: -8820797535756217992
     second: StatusFrozen
   - first:
-      213: 6604635997044421795
+      213: 8829009581156860972
+    second: PointerRight
+  - first:
+      213: -3249014827017175959
     second: StatusPoison
   - first:
-      213: 7490544210039139200
-    second: StatusParalyze
+      213: -8515364069629921821
+    second: PointerLeft
   - first:
-      213: 7430334896034196986
+      213: 7131327713309342936
+    second: StatusParalyzed
+  - first:
+      213: -4980187446895009416
+    second: PointerBody
+  - first:
+      213: 6723786191103165301
     second: StatusSleep
   - first:
-      213: 6308172276865516428
+      213: -5460788302523036599
     second: Nothing
   externalObjects: {}
   serializedVersion: 11
@@ -75,7 +87,7 @@ TextureImporter:
   lightmap: 0
   compressionQuality: 50
   spriteMode: 2
-  spriteExtrude: 1
+  spriteExtrude: 0
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
@@ -101,7 +113,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -113,7 +125,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -125,7 +137,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -137,7 +149,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -148,12 +160,12 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: EnemyHUD
+      name: EnemyHudBody
       rect:
         serializedVersion: 2
         x: 0
         y: 42
-        width: 121
+        width: 110
         height: 31
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
@@ -162,8 +174,29 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: cadbce4d3f1daaf20800000000000000
-      internalID: 3434788511002967468
+      spriteID: 2229baaf43198c560800000000000000
+      internalID: 7334271649902727714
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Level
+      rect:
+        serializedVersion: 2
+        x: 125
+        y: 66
+        width: 9
+        height: 7
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f332dc59e8e84c180800000000000000
+      internalID: -9095988604331809985
       vertices: []
       indices: 
       edges: []
@@ -183,8 +216,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a3d7743700351b450800000000000000
-      internalID: 6102750231462903098
+      spriteID: 943a4766e11ef7260800000000000000
+      internalID: 7097639058443379529
       vertices: []
       indices: 
       edges: []
@@ -204,19 +237,19 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 93659d1bc09e83af0800000000000000
-      internalID: -416326724799080903
+      spriteID: 0a5e25651d634d300800000000000000
+      internalID: 275905749900780960
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: HPGreen
+      name: HitPoints
       rect:
         serializedVersion: 2
-        x: 139
-        y: 54
-        width: 5
+        x: 125
+        y: 60
+        width: 12
         height: 5
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
@@ -225,8 +258,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ab8ac5278efc5d1b0800000000000000
-      internalID: -5632367161698899782
+      spriteID: 3a744a333ea568140800000000000000
+      internalID: 4721561191215024035
       vertices: []
       indices: 
       edges: []
@@ -246,19 +279,19 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f72d3f44ae789dcb0800000000000000
-      internalID: -4838686884383960449
+      spriteID: 6db6dfa4f0a1eb5c0800000000000000
+      internalID: -4197889149677769770
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: PlayerHUD
+      name: PlayerHud
       rect:
         serializedVersion: 2
-        x: 0
+        x: 17
         y: 0
-        width: 127
+        width: 110
         height: 40
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
@@ -267,8 +300,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 16d4109c2d1b9b600800000000000000
-      internalID: 484613953792593249
+      spriteID: 6d901b00f3c17e920800000000000000
+      internalID: 3019413132095326678
       vertices: []
       indices: 
       edges: []
@@ -288,8 +321,29 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 19c3d061e0c95c140800000000000000
-      internalID: 4739365767190756497
+      spriteID: 8711c95306b369580800000000000000
+      internalID: -8820797535756217992
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PointerRight
+      rect:
+        serializedVersion: 2
+        x: 2
+        y: 23
+        width: 11
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c24006b9f61f68a70800000000000000
+      internalID: 8829009581156860972
       vertices: []
       indices: 
       edges: []
@@ -309,14 +363,35 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3a4379a427168ab50800000000000000
-      internalID: 6604635997044421795
+      spriteID: 96cf9a59a3e29e2d0800000000000000
+      internalID: -3249014827017175959
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: StatusParalyze
+      name: PointerLeft
+      rect:
+        serializedVersion: 2
+        x: 2
+        y: 13
+        width: 11
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3e57598be7953d980800000000000000
+      internalID: -8515364069629921821
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: StatusParalyzed
       rect:
         serializedVersion: 2
         x: 137
@@ -330,8 +405,29 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 08bedbdb542c3f760800000000000000
-      internalID: 7490544210039139200
+      spriteID: 8dcb3b895c097f260800000000000000
+      internalID: 7131327713309342936
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PointerBody
+      rect:
+        serializedVersion: 2
+        x: 3
+        y: 3
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 871a6f837e1d2eab0800000000000000
+      internalID: -4980187446895009416
       vertices: []
       indices: 
       edges: []
@@ -351,50 +447,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: afdae48683add1760800000000000000
-      internalID: 7430334896034196986
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: HPYellow
-      rect:
-        serializedVersion: 2
-        x: 144
-        y: 54
-        width: 5
-        height: 5
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 21fc63f3de0e34870800000000000000
-      internalID: 8666017417563393810
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: HPRed
-      rect:
-        serializedVersion: 2
-        x: 149
-        y: 54
-        width: 5
-        height: 5
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: a5fabc2be953b7490800000000000000
-      internalID: -7747539778240008358
+      spriteID: 573816aaaefaf4d50800000000000000
+      internalID: 6723786191103165301
       vertices: []
       indices: 
       edges: []
@@ -403,19 +457,19 @@ TextureImporter:
       name: Nothing
       rect:
         serializedVersion: 2
-        x: 124
-        y: 66
+        x: 142
+        y: 57
         width: 1
         height: 1
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c83498083412b8750800000000000000
-      internalID: 6308172276865516428
+      spriteID: 94c818aa8f16734b0800000000000000
+      internalID: -5460788302523036599
       vertices: []
       indices: 
       edges: []

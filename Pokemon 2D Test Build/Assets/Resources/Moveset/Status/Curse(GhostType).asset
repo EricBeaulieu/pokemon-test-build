@@ -15,21 +15,27 @@ MonoBehaviour:
   moveName: Curse
   moveDescription: A move that works differently for the Ghost type than for all
     other types.
-  elementType: -1
+  elementType: 8
   moveType: 2
   moveEffects:
     boosts: []
     status: 0
     volatileStatus: 0
+    weatherEffect: 0
+    entryHazard: 0
   secondaryEffects:
   - boosts: []
     status: 0
     volatileStatus: 10
+    weatherEffect: 0
+    entryHazard: 0
     percentChance: 100
     target: 1
   - boosts: []
     status: 0
     volatileStatus: 9
+    weatherEffect: 0
+    entryHazard: 0
     percentChance: 100
     target: 0
   target: 0

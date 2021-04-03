@@ -40,6 +40,21 @@ public class StatusConditionArt : MonoBehaviour
     [SerializeField] Sprite steel;
     [SerializeField] Sprite water;
 
+    [Header("Stat Effects")]
+    [SerializeField] Sprite attack;
+    [SerializeField] Sprite defense;
+    [SerializeField] Sprite specialAttack;
+    [SerializeField] Sprite specialDefense;
+    [SerializeField] Sprite speed;
+    [SerializeField] Sprite mix;
+    [SerializeField] Sprite accuracy;
+    [SerializeField] Sprite evasion;
+
+    [Header("HitPoint Colours")]
+    [SerializeField] Color highHP;
+    [SerializeField] Color mediumHP;
+    [SerializeField] Color lowHP;
+
     public static StatusConditionArt instance
     {
         get { return _instance; }
@@ -55,6 +70,155 @@ public class StatusConditionArt : MonoBehaviour
         else if (instance != this)
         {
             Destroy(gameObject);
+        }
+
+        if(nothing == null)
+        {
+            Debug.LogWarning($"{this.gameObject}'s StatusConditionArt is missing nothing");
+        }
+
+        //Status
+        if (conditionPoison == null)
+        {
+            Debug.LogWarning($"{this.gameObject}'s StatusConditionArt is missing conditionPoison");
+        }
+        if (conditionBurn == null)
+        {
+            Debug.LogWarning($"{this.gameObject}'s StatusConditionArt is missing conditionBurn");
+        }
+        if (conditionSleep == null)
+        {
+            Debug.LogWarning($"{this.gameObject}'s StatusConditionArt is missing conditionSleep");
+        }
+        if (conditionParalyzed == null)
+        {
+            Debug.LogWarning($"{this.gameObject}'s StatusConditionArt is missing conditionParalyzed");
+        }
+        if (conditionFrozen == null)
+        {
+            Debug.LogWarning($"{this.gameObject}'s StatusConditionArt is missing conditionFrozen");
+        }
+
+        //Gender
+        if (male == null)
+        {
+            Debug.LogWarning($"{this.gameObject}'s StatusConditionArt is missing male");
+        }
+        if (female == null)
+        {
+            Debug.LogWarning($"{this.gameObject}'s StatusConditionArt is missing female");
+        }
+
+        //Elemenet
+        if (nA == null)
+        {
+            Debug.LogWarning($"{this.gameObject}'s StatusConditionArt is missing nA");
+        }
+        if (bug == null)
+        {
+            Debug.LogWarning($"{this.gameObject}'s StatusConditionArt is missing bug");
+        }
+        if (dark == null)
+        {
+            Debug.LogWarning($"{this.gameObject}'s StatusConditionArt is missing dark");
+        }
+        if (dragon == null)
+        {
+            Debug.LogWarning($"{this.gameObject}'s StatusConditionArt is missing dragon");
+        }
+        if (electric == null)
+        {
+            Debug.LogWarning($"{this.gameObject}'s StatusConditionArt is missing electric");
+        }
+        if (fairy == null)
+        {
+            Debug.LogWarning($"{this.gameObject}'s StatusConditionArt is missing fairy");
+        }
+        if (fighting == null)
+        {
+            Debug.LogWarning($"{this.gameObject}'s StatusConditionArt is missing fighting");
+        }
+        if (fire == null)
+        {
+            Debug.LogWarning($"{this.gameObject}'s StatusConditionArt is missing fire");
+        }
+        if (flying == null)
+        {
+            Debug.LogWarning($"{this.gameObject}'s StatusConditionArt is missing flying");
+        }
+        if (ghost == null)
+        {
+            Debug.LogWarning($"{this.gameObject}'s StatusConditionArt is missing ghost");
+        }
+        if (grass == null)
+        {
+            Debug.LogWarning($"{this.gameObject}'s StatusConditionArt is missing grass");
+        }
+        if (ground == null)
+        {
+            Debug.LogWarning($"{this.gameObject}'s StatusConditionArt is missing ground");
+        }
+        if (ice == null)
+        {
+            Debug.LogWarning($"{this.gameObject}'s StatusConditionArt is missing ice");
+        }
+        if (normal == null)
+        {
+            Debug.LogWarning($"{this.gameObject}'s StatusConditionArt is missing normal");
+        }
+        if (poison == null)
+        {
+            Debug.LogWarning($"{this.gameObject}'s StatusConditionArt is missing poison");
+        }
+        if (psychic == null)
+        {
+            Debug.LogWarning($"{this.gameObject}'s StatusConditionArt is missing psychic");
+        }
+        if (rock == null)
+        {
+            Debug.LogWarning($"{this.gameObject}'s StatusConditionArt is missing rock");
+        }
+        if (steel == null)
+        {
+            Debug.LogWarning($"{this.gameObject}'s StatusConditionArt is missing steel");
+        }
+        if (water == null)
+        {
+            Debug.LogWarning($"{this.gameObject}'s StatusConditionArt is missing water");
+        }
+
+        //Stat Effects
+        if (attack == null)
+        {
+            Debug.LogWarning($"{this.gameObject}'s StatusConditionArt is missing attack");
+        }
+        if (defense == null)
+        {
+            Debug.LogWarning($"{this.gameObject}'s StatusConditionArt is missing defense");
+        }
+        if (specialAttack == null)
+        {
+            Debug.LogWarning($"{this.gameObject}'s StatusConditionArt is missing specialAttack");
+        }
+        if (specialDefense == null)
+        {
+            Debug.LogWarning($"{this.gameObject}'s StatusConditionArt is missing specialDefense");
+        }
+        if (speed == null)
+        {
+            Debug.LogWarning($"{this.gameObject}'s StatusConditionArt is missing speed");
+        }
+        if (mix == null)
+        {
+            Debug.LogWarning($"{this.gameObject}'s StatusConditionArt is missing mix");
+        }
+        if (accuracy == null)
+        {
+            Debug.LogWarning($"{this.gameObject}'s StatusConditionArt is missing accuracy");
+        }
+        if (evasion == null)
+        {
+            Debug.LogWarning($"{this.gameObject}'s StatusConditionArt is missing evasion");
         }
     }
 
@@ -137,6 +301,50 @@ public class StatusConditionArt : MonoBehaviour
                 return water;
             default:
                 return nA;
+        }
+    }
+
+    /// <summary>
+    /// if it is mixed pass in NA/HP
+    /// </summary>
+    /// <param name="stat">Current Stat being Changed</param>
+    /// <returns></returns>
+    public Sprite ReturnStatusChangesArt(StatAttribute stat)
+    {
+        switch (stat)
+        {
+            case StatAttribute.Attack:
+                return attack;
+            case StatAttribute.Defense:
+                return defense;
+            case StatAttribute.SpecialAttack:
+                return specialAttack;
+            case StatAttribute.SpecialDefense:
+                return specialDefense;
+            case StatAttribute.Speed:
+                return speed;
+            case StatAttribute.Evasion:
+                return evasion;
+            case StatAttribute.Accuracy:
+                return accuracy;
+            default:
+                return mix;
+        }
+    }
+
+    public Color ReturnHitPointsColor(float healthNormalized)
+    {
+        if(healthNormalized >= HPBar.meduimColourThreshold)
+        {
+            return highHP;
+        }
+        else if(healthNormalized < HPBar.meduimColourThreshold && healthNormalized >= HPBar.lowColourThreshold)
+        {
+            return mediumHP;
+        }
+        else //healthNormalized < HPBar.lowColourThreshold
+        {
+            return lowHP;
         }
     }
 }

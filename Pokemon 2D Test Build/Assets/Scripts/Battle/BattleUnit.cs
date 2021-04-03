@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -11,8 +12,8 @@ public class BattleUnit : MonoBehaviour
     Vector3 pokemonSpriteOriginalPosition;
     float _imageSize;
 
-    [SerializeField] bool _isPlayersPokemon;
-    public bool isPlayerPokemon { get { return _isPlayersPokemon; } }
+    [SerializeField] bool isPlayersPokemon;
+    public bool isPlayerPokemon { get { return isPlayersPokemon; } }
 
     [SerializeField] BattleHUD hud;
     public BattleHUD HUD { get { return hud; } }
@@ -20,9 +21,40 @@ public class BattleUnit : MonoBehaviour
     public Pokemon pokemon {get;set;}
     bool _sendOutPokemonOnTurnEnd = false;
 
+    [SerializeField] Image statusEffectA;
+    [SerializeField] Image statusEffectB;
+    const float STATUS_EFFECT_ANIMATION_SPEED = 1f;
+
     void Awake()
     {
-        
+        if (battleFloor == null)
+        {
+            Debug.LogWarning($"battleFloor has not been set", gameObject);
+        }
+        if (pokemonSprite == null)
+        {
+            Debug.LogWarning($"pokemonSprite has not been set", gameObject);
+        }
+        if (hud == null)
+        {
+            Debug.LogWarning($"hud has not been set", gameObject);
+        }
+        if (statusEffectA == null)
+        {
+            Debug.LogWarning($"statusEffectA has not been set", gameObject);
+        }
+        if (statusEffectB == null)
+        {
+            Debug.LogWarning($"statusEffectB has not been set", gameObject);
+        }
+
+        hud.PrecautionsCheck(isPlayersPokemon);
+
+        statusEffectA.transform.localPosition = Vector3.zero;
+        statusEffectB.transform.localPosition = Vector3.zero;
+        statusEffectA.color = statusEffectA.color.SetAlpha(0);
+        statusEffectB.color = statusEffectA.color.SetAlpha(0);
+
         pokemonSpriteOriginalPosition = pokemonSprite.rectTransform.localPosition;
         _imageSize = pokemonSprite.rectTransform.sizeDelta.x;
     }
@@ -30,7 +62,7 @@ public class BattleUnit : MonoBehaviour
     public void Setup(Pokemon pokemon)
     {
         pokemonSprite.rectTransform.sizeDelta = new Vector2(_imageSize, _imageSize);
-        if (_isPlayersPokemon)
+        if (isPlayersPokemon)
         {
             pokemonSprite.sprite = pokemon.pokemonBase.GetBackSprite(pokemon.isShiny,pokemon.gender)[0];
         }
@@ -40,7 +72,7 @@ public class BattleUnit : MonoBehaviour
         }
 
         this.pokemon = pokemon;
-        hud.SetData(pokemon, _isPlayersPokemon);
+        hud.SetData(pokemon, isPlayersPokemon);
         pokemon.Reset();
         _sendOutPokemonOnTurnEnd = false;
 
@@ -49,7 +81,7 @@ public class BattleUnit : MonoBehaviour
 
     void PlayEnterAnimation()
     {
-        if (_isPlayersPokemon)
+        if (isPlayersPokemon)
         {
             pokemonSprite.transform.localPosition = new Vector3(pokemonSpriteOriginalPosition.x -400f, pokemonSpriteOriginalPosition.y);
         }
@@ -89,7 +121,7 @@ public class BattleUnit : MonoBehaviour
     {
         Vector3 targetLocation = pokemonSprite.transform.localPosition;
 
-        if(_isPlayersPokemon == true)
+        if(isPlayersPokemon == true)
         {
             targetLocation.x += 50f;
         }
@@ -143,7 +175,7 @@ public class BattleUnit : MonoBehaviour
     public void PlayFaintAnimation()
     {
         StartCoroutine(FaintAnimation());
-        StartCoroutine(hud.FaintedPokemonHUDAnimation(_isPlayersPokemon));
+        StartCoroutine(hud.FaintedPokemonHUDAnimation(isPlayersPokemon));
     }
 
     IEnumerator FaintAnimation()
@@ -221,5 +253,129 @@ public class BattleUnit : MonoBehaviour
     public void SetBattlePositionArt(Sprite positionArt)
     {
         battleFloor.sprite = positionArt;
+    }
+
+    public IEnumerator ShowStatChanges(List<StatBoost> statChanges,bool increased)
+    {
+        if(statChanges.Count == 0)
+        {
+            yield break;
+        }
+
+        bool isMixed = false;
+
+        if (statChanges.Count > 1)
+        {
+            StatAttribute currentStat;
+            //isMixed = statChanges.First(x => x.stat != currentStat) != null;
+            foreach (StatBoost stat in statChanges)
+            {
+                currentStat = stat.stat;
+                isMixed = statChanges.First(x => x.stat != currentStat) != null;
+
+                if(isMixed == true)
+                {
+                    break;
+                }  
+            }
+        }
+
+        if(isMixed == true)
+        {
+            statusEffectA.sprite = StatusConditionArt.instance.ReturnStatusChangesArt(StatAttribute.NA);
+            statusEffectB.sprite = StatusConditionArt.instance.ReturnStatusChangesArt(StatAttribute.NA);
+        }
+        else
+        {
+            statusEffectA.sprite = StatusConditionArt.instance.ReturnStatusChangesArt(statChanges.First().stat);
+            statusEffectB.sprite = StatusConditionArt.instance.ReturnStatusChangesArt(statChanges.First().stat);
+        }
+
+        int direction = (increased == true) ? 1 : -1;
+
+        float size = statusEffectA.rectTransform.sizeDelta.y;
+        statusEffectB.rectTransform.localPosition += new Vector3(0, (direction * size), 0);
+
+        Vector3 startingPos = pokemonSprite.transform.localPosition;
+        float elapsedTime = 0;
+        float duration = STATUS_EFFECT_ANIMATION_SPEED;
+
+        while (elapsedTime < duration)
+        {
+            statusEffectA.rectTransform.localPosition += new Vector3(0, ((direction * size) * Time.deltaTime), 0);
+            statusEffectB.rectTransform.localPosition += new Vector3(0, ((direction * size)* Time.deltaTime), 0);
+
+            statusEffectA.color = statusEffectA.color.SetAlpha(elapsedTime / duration);
+            statusEffectB.color = statusEffectA.color.SetAlpha(elapsedTime / duration);
+
+            if(increased == true)
+            {
+                if(statusEffectA.rectTransform.localPosition.y > direction * size)
+                {
+                    statusEffectA.rectTransform.localPosition -= new Vector3(0, size * 2, 0);
+                }
+                if (statusEffectB.rectTransform.localPosition.y > direction * size)
+                {
+                    statusEffectB.rectTransform.localPosition -= new Vector3(0, size * 2, 0);
+                }
+            }
+            else
+            {
+                if (statusEffectA.rectTransform.localPosition.y < direction * size)
+                {
+                    statusEffectA.rectTransform.localPosition += new Vector3(0, size * 2, 0);
+                }
+                if (statusEffectB.rectTransform.localPosition.y < direction * size)
+                {
+                    statusEffectB.rectTransform.localPosition += new Vector3(0, size * 2, 0);
+                }
+            }
+
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+
+        elapsedTime = 0;
+
+        while (elapsedTime < duration)
+        {
+            statusEffectA.rectTransform.localPosition += new Vector3(0, ((direction * size) * Time.deltaTime), 0);
+            statusEffectB.rectTransform.localPosition += new Vector3(0, ((direction * size) * Time.deltaTime), 0);
+
+            statusEffectA.color = statusEffectA.color.SetAlpha(1 - (elapsedTime / duration));
+            statusEffectB.color = statusEffectA.color.SetAlpha(1 - (elapsedTime / duration));
+
+            if (increased == true)
+            {
+                if (statusEffectA.rectTransform.localPosition.y > direction * size)
+                {
+                    statusEffectA.rectTransform.localPosition -= new Vector3(0, size * 2, 0);
+                }
+                if (statusEffectB.rectTransform.localPosition.y > direction * size)
+                {
+                    statusEffectB.rectTransform.localPosition -= new Vector3(0, size * 2, 0);
+                }
+            }
+            else
+            {
+                if (statusEffectA.rectTransform.localPosition.y < direction * size)
+                {
+                    statusEffectA.rectTransform.localPosition += new Vector3(0, size * 2, 0);
+                }
+                if (statusEffectB.rectTransform.localPosition.y < direction * size)
+                {
+                    statusEffectB.rectTransform.localPosition += new Vector3(0, size * 2, 0);
+                }
+            }
+
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+
+        statusEffectA.color = statusEffectA.color.SetAlpha(0);
+        statusEffectB.color = statusEffectA.color.SetAlpha(0);
+
+        statusEffectA.transform.localPosition = Vector3.zero;
+        statusEffectB.transform.localPosition = Vector3.zero;
     }
 }

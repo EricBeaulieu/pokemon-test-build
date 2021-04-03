@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Random = UnityEngine.Random;
 using UnityEngine.UI;
+using System.Linq;
 
 public enum BattleState { Start, ActionSelection, MoveSelection, PerformMove, Busy, BattleOver}
 
@@ -802,13 +803,45 @@ public class BattleSystem : MonoBehaviour
     {
         if (effects.Boosts != null)
         {
+            //Check to see if one is up and one is down
+            List<StatBoost> positiveEffects = new List<StatBoost>();
+            List<StatBoost> negativeEffects = new List<StatBoost>();
+
+            foreach (StatBoost currentStat in effects.Boosts)
+            {
+                if(currentStat.boost == 0)
+                {
+                    continue;
+                }
+                else if(currentStat.boost > 0)
+                {
+                    positiveEffects.Add(currentStat);
+                }
+                else
+                {
+                    negativeEffects.Add(currentStat);
+                }
+            }
+
             if (moveTarget == MoveTarget.Foe)
             {
-                target.pokemon.ApplyStatModifier(effects.Boosts);
+                target.pokemon.ApplyStatModifier(positiveEffects);
+                yield return target.ShowStatChanges(positiveEffects, true);
+                yield return ShowStatusChanges(target.pokemon);
+
+                target.pokemon.ApplyStatModifier(negativeEffects);
+                yield return target.ShowStatChanges(negativeEffects, false);
+                yield return ShowStatusChanges(target.pokemon);
             }
             else if (moveTarget == MoveTarget.Self)
             {
-                source.pokemon.ApplyStatModifier(effects.Boosts);
+                source.pokemon.ApplyStatModifier(positiveEffects);
+                yield return source.ShowStatChanges(positiveEffects,true);
+                yield return ShowStatusChanges(source.pokemon);
+
+                source.pokemon.ApplyStatModifier(negativeEffects);
+                yield return source.ShowStatChanges(negativeEffects,false);
+                yield return ShowStatusChanges(source.pokemon);
             }
         }
 
@@ -1142,7 +1175,6 @@ public class BattleSystem : MonoBehaviour
             {
                 currentUnit.pokemon.LearnMove(learnableMove);
                 yield return dialogBox.TypeDialog($"{currentUnit.pokemon.currentName} learned {learnableMove.moveBase.MoveName}!", true);
-                attackSelectionEventSelector.SetMovesList(currentUnit, currentUnit.pokemon.moves, this);
             }
             else
             {
@@ -1204,5 +1236,7 @@ public class BattleSystem : MonoBehaviour
                 }
             }
         }
+
+        attackSelectionEventSelector.SetMovesList(currentUnit, currentUnit.pokemon.moves, this);
     }
 }

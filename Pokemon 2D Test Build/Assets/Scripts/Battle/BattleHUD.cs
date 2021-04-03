@@ -10,17 +10,22 @@ public class BattleHUD : MonoBehaviour
     Image hudBackground;
     [SerializeField] Text nameText;
     [SerializeField] Text levelText;
+    [SerializeField] Image levelImageText;
     [SerializeField] Image statusCondition;
     [SerializeField] HPBar hPBar;
     [SerializeField] Image healthBarBackground;
+    [SerializeField] Image healthBarFrame;
+    [SerializeField] Image healthBarInsideBackground;
+    [SerializeField] Image healthBarImageText;
     [SerializeField] Image gender;
 
-    //This is only here due to the background sprite not being cut right, naturally it would be cleaned up
+    [Header("PlayerSpecific")]
     [SerializeField] Text currentHP;
-    [SerializeField] Text maxHP;
-
     [SerializeField] ExpBar expBar;
     [SerializeField] Image experienceBarBackground;
+
+    [SerializeField] Image pointerBody;
+    [SerializeField] Image pointerHead;
 
     Pokemon _pokemon;
 
@@ -39,8 +44,7 @@ public class BattleHUD : MonoBehaviour
 
         if(isPlayersPokemon == true)
         {
-            currentHP.text = currentPokemon.currentHitPoints.ToString();
-            maxHP.text = currentPokemon.maxHitPoints.ToString();
+            currentHP.text = $"{currentPokemon.currentHitPoints.ToString()} / {currentPokemon.maxHitPoints.ToString()}";
             expBar.SetExpereince(currentPokemon);
         }
 
@@ -88,20 +92,8 @@ public class BattleHUD : MonoBehaviour
         while (tempAlpha > 0)
         {
             tempAlpha -= (0.01f * animationTime);
-            hudBackground.color = hudBackground.color.SetAlpha(tempAlpha);
-            nameText.color = nameText.color.SetAlpha(tempAlpha);
-            levelText.color = levelText.color.SetAlpha(tempAlpha);
-            statusCondition.color = statusCondition.color.SetAlpha(tempAlpha);
-            gender.color = gender.color.SetAlpha(tempAlpha);
-            healthBarBackground.color = healthBarBackground.color.SetAlpha(tempAlpha);
-            hPBar.healthBarImage.color = hPBar.healthBarImage.color.SetAlpha(tempAlpha);
-            if(isPlayers == true)
-            {
-                currentHP.color = currentHP.color.SetAlpha(tempAlpha);
-                maxHP.color = maxHP.color.SetAlpha(tempAlpha);
-                experienceBarBackground.color = experienceBarBackground.color.SetAlpha(tempAlpha);
-                expBar.expBarImage.color = expBar.expBarImage.color.SetAlpha(tempAlpha);
-            }
+
+            SetAllHudAlphas(tempAlpha,isPlayers);
             yield return new WaitForSeconds(0.01f);
         }
     }
@@ -120,20 +112,7 @@ public class BattleHUD : MonoBehaviour
 
     void ResetAlphaHUD(bool isPlayers)
     {
-        hudBackground.color = hudBackground.color.ResetAlpha();
-        nameText.color = nameText.color.ResetAlpha();
-        levelText.color = levelText.color.ResetAlpha();
-        statusCondition.color = statusCondition.color.ResetAlpha();
-        gender.color = gender.color.ResetAlpha();
-        healthBarBackground.color = healthBarBackground.color.ResetAlpha();
-        hPBar.healthBarImage.color = hPBar.healthBarImage.color.ResetAlpha();
-        if (isPlayers == true)
-        {
-            currentHP.color = currentHP.color.ResetAlpha();
-            maxHP.color = maxHP.color.ResetAlpha();
-            experienceBarBackground.color = experienceBarBackground.color.ResetAlpha();
-            expBar.expBarImage.color = expBar.expBarImage.color.ResetAlpha();
-        }
+        SetAllHudAlphas(1,isPlayers);
     }
 
     public IEnumerator PlayEnterAnimation(float duration)
@@ -156,5 +135,99 @@ public class BattleHUD : MonoBehaviour
         }
 
         tempTrans.localPosition = _originalPos;
+    }
+
+    void SetAllHudAlphas(float tempAlpha,bool isPlayers)
+    {
+        hudBackground.color = hudBackground.color.SetAlpha(tempAlpha);
+        nameText.color = nameText.color.SetAlpha(tempAlpha);
+        levelText.color = levelText.color.SetAlpha(tempAlpha);
+        levelImageText.color = levelImageText.color.SetAlpha(tempAlpha);
+        statusCondition.color = statusCondition.color.SetAlpha(tempAlpha);
+        gender.color = gender.color.SetAlpha(tempAlpha);
+        healthBarBackground.color = healthBarBackground.color.SetAlpha(tempAlpha);
+        healthBarFrame.color = healthBarFrame.color.SetAlpha(tempAlpha);
+        healthBarImageText.color = healthBarImageText.color.SetAlpha(tempAlpha);
+        healthBarInsideBackground.color = healthBarInsideBackground.color.SetAlpha(tempAlpha);
+        hPBar.healthBarImage.color = hPBar.healthBarImage.color.SetAlpha(tempAlpha);
+
+        if (isPlayers == true)
+        {
+            currentHP.color = currentHP.color.SetAlpha(tempAlpha);
+            experienceBarBackground.color = experienceBarBackground.color.SetAlpha(tempAlpha);
+            expBar.expBarImage.color = expBar.expBarImage.color.SetAlpha(tempAlpha);
+        }
+
+        pointerBody.color = pointerBody.color.SetAlpha(tempAlpha);
+        pointerHead.color = pointerHead.color.SetAlpha(tempAlpha);
+    }
+
+    /// <summary>
+    /// called from battle unit, it passes if its the players pokemon as well ontop of it,
+    /// this is due to some of the enemy stats being null
+    /// </summary>
+    public void PrecautionsCheck(bool isPlayersHUD)
+    {
+        if (nameText == null)
+        {
+            Debug.LogWarning($"nameText has not been set",gameObject);
+        }
+        if (levelText == null)
+        {
+            Debug.LogWarning($"levelText has not been set", gameObject);
+        }
+        if (levelImageText == null)
+        {
+            Debug.LogWarning($"levelImageText has not been set", gameObject);
+        }
+        if (statusCondition == null)
+        {
+            Debug.LogWarning($"statusCondition has not been set", gameObject);
+        }
+        if (hPBar == null)
+        {
+            Debug.LogWarning($"hPBar has not been set", gameObject);
+        }
+        if (healthBarBackground == null)
+        {
+            Debug.LogWarning($"healthBarBackground has not been set", gameObject);
+        }
+        if (healthBarFrame == null)
+        {
+            Debug.LogWarning($"healthBarFrame has not been set", gameObject);
+        }
+        if (healthBarImageText == null)
+        {
+            Debug.LogWarning($"healthBarImageText has not been set", gameObject);
+        }
+        if (gender == null)
+        {
+            Debug.LogWarning($"gender has not been set", gameObject);
+        }
+
+        if(isPlayersHUD == true)
+        {
+            if (currentHP == null)
+            {
+                Debug.LogWarning($"currentHP has not been set", gameObject);
+            }
+            if (expBar == null)
+            {
+                Debug.LogWarning($"expBar has not been set", gameObject);
+            }
+            if (experienceBarBackground == null)
+            {
+                Debug.LogWarning($"experienceBarBackground has not been set", gameObject);
+            }
+        }
+
+        if (pointerBody == null)
+        {
+            Debug.LogWarning($"pointerBody has not been set", gameObject);
+        }
+        if (pointerHead == null)
+        {
+            Debug.LogWarning($"pointerHead has not been set", gameObject);
+        }
     }
 }

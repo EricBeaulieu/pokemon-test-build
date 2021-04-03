@@ -5,19 +5,12 @@ using UnityEngine;
 [System.Serializable]
 public class IndividualValues
 {
-
-    [SerializeField]
-    int _maxHitPoints;
-    [SerializeField]
-    int _attack;
-    [SerializeField]
-    int _defense;
-    [SerializeField]
-    int _specialAttack;
-    [SerializeField]
-    int _specialDefense;
-    [SerializeField]
-    int _speed;
+    [SerializeField] int _maxHitPoints;
+    [SerializeField] int _attack;
+    [SerializeField] int _defense;
+    [SerializeField] int _specialAttack;
+    [SerializeField] int _specialDefense;
+    [SerializeField] int _speed;
 
     const int MINIMUM_IV_VALUE = 1;
     const int MAXIMUM_IV_VALUE = 31;
