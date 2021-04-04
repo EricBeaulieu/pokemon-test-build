@@ -1,0 +1,39 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 60a83619553a27641bfeb93370b0ce89, type: 3}
+  m_Name: Thunder Shock
+  m_EditorClassIdentifier: 
+  moveName: Thunder Shock
+  moveDescription: A jolt of electricity crashes down on the target to inflict damage.
+    This may also leave the target with paralysis.
+  elementType: 3
+  moveType: 1
+  moveEffects:
+    boosts: []
+    status: 0
+    volatileStatus: 0
+    weatherEffect: 0
+    entryHazard: 0
+  secondaryEffects:
+  - boosts: []
+    status: 4
+    volatileStatus: 0
+    weatherEffect: 0
+    entryHazard: 0
+    percentChance: 100
+    target: 0
+  target: 0
+  power: 40
+  accuracy: 100
+  alwaysHits: 0
+  priority: 0
+  powerPoints: 30

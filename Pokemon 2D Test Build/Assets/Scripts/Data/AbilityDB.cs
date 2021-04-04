@@ -5,7 +5,7 @@ using UnityEngine;
 public enum AbilityID
 {
     NA,
-    Blaze,Guts,Torrent,Overgrown
+    Blaze,Guts,Swarm,Torrent,Overgrown,QuickFeet
 }
 
 public class AbilityDB
@@ -13,13 +13,25 @@ public class AbilityDB
 
     public static void Initialization()
     {
-        //foreach (var kvp in AbilityDex)
-        //{
-        //    var abilityID = kvp.Key;
-        //    var ability = kvp.Value;
+        foreach (var kvp in AbilityDex)
+        {
+            var abilityID = kvp.Key;
+            var ability = kvp.Value;
 
-        //    ability.Id = abilityID;
-        //}
+            ability.Id = abilityID;
+
+            if(ability.Name == null)
+            {
+                Debug.LogWarning($"{ability.Id} name is not preset");
+            }
+
+            if (ability.Description == null)
+            {
+                Debug.LogWarning($"{ability.Id} Description is not preset");
+            }
+
+
+        }
     }
 
     public static Dictionary<AbilityID, Ability> AbilityDex = new Dictionary<AbilityID, Ability>()
@@ -58,9 +70,17 @@ public class AbilityDB
             new Ability()//Status Condition: Any, excluding Freeze
             {
                 Name = "Guts",
-                BoostsAStatWhenAffectedWithAStatusCondition = (ConditionID condition) =>
+                BoostsAStatWhenAffectedWithAStatusCondition = (ConditionID condition,StatAttribute benefitialStat) =>
                 {
-                    if(condition != ConditionID.NA)
+                    if(condition != ConditionID.NA && benefitialStat == StatAttribute.Attack)
+                    {
+                        return 1.5f;
+                    }
+                    return 1;
+                },
+                NegatesStatusEffectStatDropFromCondition = (ConditionID condition,StatAttribute stat) =>
+                {
+                    if(condition == ConditionID.burn && stat == StatAttribute.Attack)
                     {
                         return true;
                     }
@@ -101,8 +121,54 @@ public class AbilityDB
         },
         //P
         //Q
+        {
+            AbilityID.QuickFeet,//Boosts a stat by 50% when affected with a status condition
+            new Ability()//Status Condition: Any
+            {
+                Name = "Quick Feet",
+                BoostsAStatWhenAffectedWithAStatusCondition = (ConditionID condition,StatAttribute benefitialStat) =>
+                {
+                    if(condition != ConditionID.NA && benefitialStat == StatAttribute.Speed)
+                    {
+                        return 1.5f;
+                    }
+                    return 1;
+                },
+                NegatesStatusEffectStatDropFromCondition = (ConditionID condition,StatAttribute stat) =>
+                {
+                    if(condition == ConditionID.paralyzed && stat == StatAttribute.Speed)
+                    {
+                        return true;
+                    }
+                    return false;
+                }
+            }
+
+        },
         //R
         //S
+        {
+            AbilityID.Swarm,//When HP is below 1/3rd its maximum, power of Water-type moves is increased by 50%.
+            new Ability()
+            {
+                Name = "Swarm",
+                Description = "Powers up Bug-type moves when the Pokémon's HP is low.",
+                BoostACertainTypeInAPinch = (Pokemon attackingPokemon,ElementType attackType) => {
+                    if(attackType != ElementType.Bug)
+                    {
+                        return 1;
+                    }
+
+                    if(attackingPokemon.currentHitPoints/attackingPokemon.maxHitPoints <= 1 / 3)
+                    {
+                        return 1.5f;
+                    }
+
+                    return 1;
+                }
+            }
+
+        },
         //T
         {
             AbilityID.Torrent,//When HP is below 1/3rd its maximum, power of Water-type moves is increased by 50%.

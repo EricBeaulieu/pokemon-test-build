@@ -3,14 +3,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Ability : MonoBehaviour
+public class Ability
 {
     public AbilityID Id { get; set; }
     public string Name { get; set; }
     public string Description { get; set; }
-    public string StartMessage { get; set; }
-    public Func<ConditionID, bool> BoostsAStatWhenAffectedWithAStatusCondition { get; set; }
-    public Action<Pokemon> OnStart { get; set; }
+    //public string StartMessage { get; set; }
+    public Func<ConditionID, StatAttribute,float> BoostsAStatWhenAffectedWithAStatusCondition { get; set; }
+    public Func<ConditionID, StatAttribute, bool> NegatesStatusEffectStatDropFromCondition { get; set; }
+    //public Action<Pokemon> OnStart { get; set; }
     /// <summary>
     /// Checks the pokemons health if it is 1/3 or less
     ///Checks the type of move it is, if true then give it a bonus of 50%

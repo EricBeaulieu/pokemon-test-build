@@ -10,6 +10,7 @@ public class Condition
     public string Description { get; set; }
     public string StartMessage { get; set; }
     public Func<ConditionID, bool> HasCondition { get; set; }
+    public Func<ConditionID,StatAttribute,float> StatEffectedByCondition { get; set; }
     public string HasConditionMessage { get; set; }
     public Action<Pokemon> OnStart { get; set; }
     public Func<Pokemon,bool> OnBeforeMove { get; set; }

@@ -75,7 +75,12 @@ public class Pokemon {
         {
             if(move.levelLearned <= currentLevel)
             {
-                if(moves.Count >=PokemonBase.MAX_NUMBER_OF_MOVES)
+                if (moves.Exists(x => x.moveBase == move.moveBase) == true)
+                {
+                    continue;
+                }
+
+                if (moves.Count >=PokemonBase.MAX_NUMBER_OF_MOVES)
                 {
                     moves.RemoveAt(0);
                 }
@@ -212,6 +217,28 @@ public class Pokemon {
             }
         }
 
+        if(status != null)
+        {
+            bool? negated = ability?.NegatesStatusEffectStatDropFromCondition?.Invoke(status.Id, currentStat);
+
+            float? reduction = status?.StatEffectedByCondition?.Invoke(status.Id,currentStat);
+            if (reduction.HasValue == true && negated == false)
+            {
+                statValue *= reduction.Value;
+            }
+
+            negated = ability?.BoostsAStatWhenAffectedWithAStatusCondition != null;
+            if(negated == true)
+            {
+                reduction = ability?.BoostsAStatWhenAffectedWithAStatusCondition?.Invoke(status.Id, currentStat);
+                if(reduction.Value <= 1)
+                {
+                    reduction = 1;
+                }
+                statValue *= reduction.Value;
+            }
+        }
+
         return statValue;
     }
 
@@ -323,11 +350,12 @@ public class Pokemon {
         float modifier = damageDetails.criticalHit * damageDetails.typeEffectiveness;
         modifier *= DamageModifiers.StandardRandomAttackPowerModifier();
         modifier *= DamageModifiers.SameTypeAttackBonus(move, attackingPokemon.pokemonBase);
-        //modifier *= attackingPokemon.ability?.BoostACertainTypeInAPinch?.Invoke(attackingPokemon, move.Type)
-        if (attackingPokemon.ability?.BoostACertainTypeInAPinch?.Invoke(attackingPokemon, move.Type) != null)
+
+        //Ability
+        float? pinchBonus = attackingPokemon.ability?.BoostACertainTypeInAPinch?.Invoke(attackingPokemon, move.Type);
+        if (pinchBonus.HasValue)
         {
-            float pinchBonus = attackingPokemon.ability.BoostACertainTypeInAPinch.Invoke(attackingPokemon, move.Type);
-            modifier *= pinchBonus;
+            modifier *= pinchBonus.Value;
         }
 
         float attackPower = (move.MoveType == MoveType.Physical) ? attackingPokemon.attack: attackingPokemon.specialAttack;

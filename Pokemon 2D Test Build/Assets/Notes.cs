@@ -7,12 +7,15 @@ public class Notes
     //To do list
 
     //update pokemon stats upon level up
-    //hit points color change
     //camera effects when entering battle either with trainers,wild pokemon or specialized pokemon
     //when multiple pokemon have battled split the experience with them
 
     //Add in
 
+    //Roar 
+    //intimidate and hyper cutter type abilities
+    //Placing pokemon ability like intimidate right before player actions
+    //Ball on pokemon when caught and get rid of defensive bonus on critical hits
     //Trainer dialog when they lost the battle inside the battle scene
     //set/Shift option, if set just keep pokemon out
     //Recoil

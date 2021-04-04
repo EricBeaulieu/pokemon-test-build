@@ -69,6 +69,14 @@ public class ConditionsDB
                     }
                     return false;
                 },
+                StatEffectedByCondition = (ConditionID condition,StatAttribute currentStat) =>
+                {
+                    if(condition == ConditionID.burn && currentStat == StatAttribute.Attack)
+                    {
+                        return 0.5f;
+                    }
+                    return 1;
+                },
                 HasConditionMessage = "is already burnt",
                 OnEndTurn = (Pokemon pokemon) =>
                 {
@@ -134,6 +142,14 @@ public class ConditionsDB
                         return true;
                     }
                     return false;
+                },
+                StatEffectedByCondition = (ConditionID condition,StatAttribute currentStat) =>
+                {
+                    if(condition == ConditionID.paralyzed && currentStat == StatAttribute.Speed)
+                    {
+                        return 0.5f;
+                    }
+                    return 1;
                 },
                 HasConditionMessage = "is already paralyzed",
                 OnBeforeMove = (Pokemon pokemon) =>
