@@ -1,0 +1,21 @@
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class Ability : MonoBehaviour
+{
+    public AbilityID Id { get; set; }
+    public string Name { get; set; }
+    public string Description { get; set; }
+    public string StartMessage { get; set; }
+    public Func<ConditionID, bool> BoostsAStatWhenAffectedWithAStatusCondition { get; set; }
+    public Action<Pokemon> OnStart { get; set; }
+    /// <summary>
+    /// Checks the pokemons health if it is 1/3 or less
+    ///Checks the type of move it is, if true then give it a bonus of 50%
+    /// </summary>
+    public Func<Pokemon, ElementType, float> BoostACertainTypeInAPinch { get; set; }
+    public Func<WeatherEffectID, float> DoublesSpeedInAWeatherEffect { get; set; }
+    public Action<Pokemon> OnEndTurn { get; set; }
+}

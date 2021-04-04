@@ -185,6 +185,7 @@ public class GameManager : MonoBehaviour
         ConditionsDB.Initialization();
         EntryHazardsDB.Initialization();
         WeatherEffectDB.Initialization();
+        AbilityDB.Initialization();
     }
 
     void CapturedNewPokemon(Pokemon capturedPokemon)

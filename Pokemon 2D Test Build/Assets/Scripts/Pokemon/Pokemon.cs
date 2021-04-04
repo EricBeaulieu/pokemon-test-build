@@ -13,6 +13,7 @@ public class Pokemon {
     public IndividualValues individualValues { get; set; }
     public EffortValues effortValues { get; set; }
     NatureBase _nature;
+    public Ability ability { get; private set; }
     public Gender gender { get; set; }
 
     string _currentName;
@@ -93,6 +94,8 @@ public class Pokemon {
 
         gender = SetGender(_pokemonBase);
         statusChanges = new Queue<string>();
+
+        SetAbility();
     }
 
     /// <summary>
@@ -310,7 +313,6 @@ public class Pokemon {
             return damageDetails;
         }
 
-
         //Critical Hit Chance
         if(Random.value * 100 <= 6.25f)
         {
@@ -321,6 +323,12 @@ public class Pokemon {
         float modifier = damageDetails.criticalHit * damageDetails.typeEffectiveness;
         modifier *= DamageModifiers.StandardRandomAttackPowerModifier();
         modifier *= DamageModifiers.SameTypeAttackBonus(move, attackingPokemon.pokemonBase);
+        //modifier *= attackingPokemon.ability?.BoostACertainTypeInAPinch?.Invoke(attackingPokemon, move.Type)
+        if (attackingPokemon.ability?.BoostACertainTypeInAPinch?.Invoke(attackingPokemon, move.Type) != null)
+        {
+            float pinchBonus = attackingPokemon.ability.BoostACertainTypeInAPinch.Invoke(attackingPokemon, move.Type);
+            modifier *= pinchBonus;
+        }
 
         float attackPower = (move.MoveType == MoveType.Physical) ? attackingPokemon.attack: attackingPokemon.specialAttack;
         float defendersDefense = (move.MoveType == MoveType.Physical) ? defense : specialDefense;
@@ -546,5 +554,27 @@ public class Pokemon {
         {
             effortValues.AddEffortValue(eV);
         }
+    }
+
+    void SetAbility()
+    {
+        List<Ability> abilities = new List<Ability>();
+
+        if(pokemonBase.FirstAbility != AbilityID.NA)
+        {
+            abilities.Add(AbilityDB.AbilityDex[pokemonBase.FirstAbility]);
+        }
+
+        if (pokemonBase.SecondAbility != AbilityID.NA)
+        {
+            abilities.Add(AbilityDB.AbilityDex[pokemonBase.SecondAbility]);
+        }
+
+        if (pokemonBase.HiddenAbility != AbilityID.NA)
+        {
+            abilities.Add(AbilityDB.AbilityDex[pokemonBase.HiddenAbility]);
+        }
+
+        ability = abilities[Random.Range(0, abilities.Count)];
     }
 }

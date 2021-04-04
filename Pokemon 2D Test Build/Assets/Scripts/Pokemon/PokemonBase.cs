@@ -71,6 +71,11 @@ public class PokemonBase : ScriptableObject {
     [SerializeField] int _specialDefense;
     [SerializeField] int _speed;
 
+    [Header("Abilities")]
+    [SerializeField] AbilityID firstAbility;
+    [SerializeField] AbilityID secondAbility;
+    [SerializeField] AbilityID hiddenAbility;
+
     [Header("Moveset")]
     [SerializeField] List<LearnableMove> _learnableMoves;
     public static int MAX_NUMBER_OF_MOVES { get; } = 4;
@@ -243,6 +248,19 @@ public class PokemonBase : ScriptableObject {
     public List<LearnableMove> LearnableMoves
     {
         get { return _learnableMoves; }
+    }
+
+    public AbilityID FirstAbility
+    {
+        get { return firstAbility; }
+    }
+    public AbilityID SecondAbility
+    {
+        get { return secondAbility; }
+    }
+    public AbilityID HiddenAbility
+    {
+        get { return hiddenAbility; }
     }
 
     #region EditorFunctions
