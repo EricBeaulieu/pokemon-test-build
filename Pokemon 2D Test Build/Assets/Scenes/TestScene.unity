@@ -1644,18 +1644,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6385de74ed555c74e925fbf7118e9a3c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nothing: {fileID: -5460788302523036599, guid: abdf0e45e1a1c8147aca07e4e20a4aea,
-    type: 3}
-  conditionPoison: {fileID: -3249014827017175959, guid: abdf0e45e1a1c8147aca07e4e20a4aea,
-    type: 3}
-  conditionBurn: {fileID: -4197889149677769770, guid: abdf0e45e1a1c8147aca07e4e20a4aea,
-    type: 3}
-  conditionSleep: {fileID: 6723786191103165301, guid: abdf0e45e1a1c8147aca07e4e20a4aea,
-    type: 3}
-  conditionParalyzed: {fileID: 7131327713309342936, guid: abdf0e45e1a1c8147aca07e4e20a4aea,
-    type: 3}
-  conditionFrozen: {fileID: -8820797535756217992, guid: abdf0e45e1a1c8147aca07e4e20a4aea,
-    type: 3}
+  nothing: {fileID: 0}
+  conditionPoison: {fileID: 0}
+  conditionBurn: {fileID: 0}
+  conditionSleep: {fileID: 0}
+  conditionParalyzed: {fileID: 0}
+  conditionFrozen: {fileID: 0}
   male: {fileID: 7097639058443379529, guid: abdf0e45e1a1c8147aca07e4e20a4aea, type: 3}
   female: {fileID: 275905749900780960, guid: abdf0e45e1a1c8147aca07e4e20a4aea, type: 3}
   nA: {fileID: -1824744838453294235, guid: eba446c0c36df1e45975967dfa7595e9, type: 3}
@@ -2085,7 +2079,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pokemonParty:
   - _pokemonBase: {fileID: 11400000, guid: c4dd55ad047f5cb4d9c167f439657170, type: 2}
-    _level: 6
+    _level: 1
   - _pokemonBase: {fileID: 11400000, guid: 62729574f1ca7a3409f565d032330e1a, type: 2}
     _level: 1
   - _pokemonBase: {fileID: 11400000, guid: a8626c7192bf21240bc0904861af2800, type: 2}
@@ -2725,6 +2719,7 @@ MonoBehaviour:
   testEXPGroup: 0
   testExperienceGroup: 4
   testNature: {fileID: 11400000, guid: f91abf718bd77a947b2b68471ca12d5d, type: 2}
+  sprite: {fileID: 0}
   attacktype: 16
   defenderType: 0
   defenderType2: -1
@@ -15051,7 +15046,7 @@ MonoBehaviour:
   expBar: {fileID: 772536875}
   experienceBarBackground: {fileID: 123457248}
   pointerBody: {fileID: 532398211}
-  pointerHead: {fileID: 532398211}
+  pointerHead: {fileID: 1014753785}
 --- !u!114 &1543227439
 MonoBehaviour:
   m_ObjectHideFlags: 0

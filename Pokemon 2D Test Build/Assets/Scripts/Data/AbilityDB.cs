@@ -7,20 +7,23 @@ public enum AbilityID
     NA,
     //A
     //B
-    Blaze,
+    BigPecks,Blaze,
     //C
+    Chlorophyll, ClearBody, 
     //D
     Drizzle, Drought,
     //E
     //F
-    FlareBoost,
+    FlareBoost,FullMetalBody,
     //G
     Guts,
     //H
     HyperCutter,
     //I
+    Intimidate,
     //J
     //K
+    KeenEye,
     //L
     //M
     MarvelScale,
@@ -38,6 +41,7 @@ public enum AbilityID
     //U
     //V
     //W
+    WhiteSmoke,
     //X
     //Y
     //Z
@@ -65,8 +69,6 @@ public class AbilityDB
             {
                 Debug.LogWarning($"{ability.Id} Description is not preset");
             }
-
-
         }
     }
 
@@ -74,6 +76,26 @@ public class AbilityDB
     {
         //A
         //B
+        {
+            AbilityID.BigPecks,
+            new Ability()
+            {
+                Name = "Big Pecks",
+                Description = "Protects the Pokémon from Defense-lowering effects.",
+                PreventStatFromBeingLowered = (StatAttribute currentStat)=>
+                {
+                    if(currentStat == StatAttribute.Defense)
+                    {
+                        return true;
+                    }
+                    return false;
+                },
+                OnAbilitityActivation = (Pokemon pokemon) =>
+                {
+                    return $"{pokemon.currentName}'s Big Pecks prevents Defense loss";
+                }
+            }
+        },
         {
             AbilityID.Blaze,//When HP is below 1/3rd its maximum, power of Fire-type moves is increased by 50%.
             new Ability()
@@ -97,6 +119,42 @@ public class AbilityDB
 
         },
         //C
+        {
+            AbilityID.Chlorophyll,
+            new Ability()
+            {
+                Name = "Chlorophyll",
+                Description = "Boosts the Pokémon's Speed stat in sunshine.",
+                DoublesSpeedInAWeatherEffect = (WeatherEffectID currentWeather) =>
+                {
+                    if(currentWeather == WeatherEffectID.Sunshine)
+                    {
+                        return 2;
+                    }
+                    return 1;
+                }
+            }
+        },
+        {
+            AbilityID.ClearBody,
+            new Ability()
+            {
+                Name = "Clear Body",
+                Description = "Prevents other Pokémon's moves or Abilities from lowering the Pokémon's stats.",
+                PreventStatFromBeingLowered = (StatAttribute currentStat)=>
+                {
+                    if(currentStat != StatAttribute.NA)
+                    {
+                        return true;
+                    }
+                    return false;
+                },
+                OnAbilitityActivation = (Pokemon pokemon) =>
+                {
+                    return $"{pokemon.currentName}'s Clear Body prevents stat loss";
+                }
+            }
+        },
         //D
         {
             AbilityID.Drizzle,//Activates a weather effect for five turns upon entry
@@ -134,6 +192,26 @@ public class AbilityDB
                 },
             }
         },
+        {
+            AbilityID.FullMetalBody,
+            new Ability()
+            {
+                Name = "Full Metal Body",
+                Description = "Prevents other Pokémon's moves or Abilities from lowering the Pokémon's stats.",
+                PreventStatFromBeingLowered = (StatAttribute currentStat)=>
+                {
+                    if(currentStat != StatAttribute.NA)
+                    {
+                        return true;
+                    }
+                    return false;
+                },
+                OnAbilitityActivation = (Pokemon pokemon) =>
+                {
+                    return $"{pokemon.currentName}'s Full Metal Body prevents stat loss";
+                }
+            }
+        },
         //G
         {
             AbilityID.Guts,//Boosts a stat by 50% when affected with a status condition
@@ -165,7 +243,7 @@ public class AbilityDB
             AbilityID.HyperCutter,
             new Ability()
             {
-                Name = "HyperCutter",
+                Name = "Hyper Cutter",
                 Description = "The Pokémon's proud of its powerful pincers. They prevent other Pokémon from lowering its Attack stat.",
                 PreventStatFromBeingLowered = (StatAttribute currentStat)=>
                 {
@@ -174,12 +252,53 @@ public class AbilityDB
                         return true;
                     }
                     return false;
+                },
+                OnAbilitityActivation = (Pokemon pokemon) =>
+                {
+                    return $"{pokemon.currentName}'s Hyper Cutter prevents Attack loss";
                 }
             }
         },
         //I
+        {
+            AbilityID.Intimidate,
+            new Ability()
+            {
+                Name = "Intimidate",
+                Description = "The Pokémon intimidates opposing Pokémon upon entering battle, lowering their Attack stat.",
+                OnStartLowerStat = new StatBoost() { stat = StatAttribute.Attack, boost = -1 }
+            }
+        },
         //J
         //K
+        {
+            AbilityID.KeenEye,
+            new Ability()
+            {
+                Name = "Keen Eye",
+                Description = "Keen eyes prevent other Pokémon from lowering this Pokémon's accuracy.",
+                PreventStatFromBeingLowered = (StatAttribute currentStat)=>
+                {
+                    if(currentStat == StatAttribute.Accuracy)
+                    {
+                        return true;
+                    }
+                    return false;
+                },
+                IgnoreStatIncreases = (StatAttribute currentStat) =>
+                {
+                    if(currentStat == StatAttribute.Evasion)
+                    {
+                        return true;
+                    }
+                    return false;
+                },
+                OnAbilitityActivation = (Pokemon pokemon) =>
+                {
+                    return $"{pokemon.currentName}'s Keen Eye prevents Accuracy loss";
+                }
+            }
+        },
         //L
         //M
         {
@@ -329,9 +448,28 @@ public class AbilityDB
         //U
         //V
         //W
+        {
+            AbilityID.WhiteSmoke,
+            new Ability()
+            {
+                Name = "White Smoke",
+                Description = "The Pokémon is protected by its white smoke, which prevents other Pokémon from lowering its stats.",
+                PreventStatFromBeingLowered = (StatAttribute currentStat)=>
+                {
+                    if(currentStat != StatAttribute.NA)
+                    {
+                        return true;
+                    }
+                    return false;
+                },
+                OnAbilitityActivation = (Pokemon pokemon) =>
+                {
+                    return $"{pokemon.currentName}'s White Smoke prevents stat loss";
+                }
+            }
+        },
         //X
         //Y
         //Z
     };
-
 }

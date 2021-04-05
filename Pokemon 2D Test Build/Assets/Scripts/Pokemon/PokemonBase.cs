@@ -80,8 +80,6 @@ public class PokemonBase : ScriptableObject {
     [SerializeField] List<LearnableMove> _learnableMoves;
     public static int MAX_NUMBER_OF_MOVES { get; } = 4;
 
-    //Editor Additions
-
     #region Getters/Setters
 
     public string GetPokedexName()
@@ -254,111 +252,14 @@ public class PokemonBase : ScriptableObject {
     {
         get { return firstAbility; }
     }
+
     public AbilityID SecondAbility
     {
         get { return secondAbility; }
     }
+
     public AbilityID HiddenAbility
     {
         get { return hiddenAbility; }
     }
-
-    #region EditorFunctions
-
-    //public bool DifferentGenderSprites
-    //{
-    //    get { return differentGenderSprites; }
-    //    set
-    //    {
-    //        differentGenderSprites = value;
-    //    }
-    //}
-
-    //public Sprite FemaleFrontRegularSprite
-    //{
-    //    get { return _femaleFrontRegularSprite; }
-    //    set
-    //    {
-    //        _femaleFrontRegularSprite = value;
-    //    }
-    //}
-
-    //public Sprite FemaleFrontIntroSprite
-    //{
-    //    get { return _femaleFrontIntroSprite; }
-    //    set
-    //    {
-    //        _femaleFrontIntroSprite = value;
-    //    }
-    //}
-
-    //public Sprite FemaleBackRegularSprite
-    //{
-    //    get { return _femaleBackRegularSprite; }
-    //    set
-    //    {
-    //        _femaleBackRegularSprite = value;
-    //    }
-    //}
-
-    //public Sprite FemaleBackIntroSprite
-    //{
-    //    get { return _femaleBackIntroSprite; }
-    //    set
-    //    {
-    //        _femaleBackIntroSprite = value;
-    //    }
-    //}
-
-    //public Sprite FemaleShinyFrontRegularSprite
-    //{
-    //    get { return _femaleShinyFrontRegularSprite; }
-    //    set
-    //    {
-    //        _femaleShinyFrontRegularSprite = value;
-    //    }
-    //}
-
-    //public Sprite FemaleShinyFrontIntroSprite
-    //{
-    //    get { return _femaleShinyFrontIntroSprite; }
-    //    set
-    //    {
-    //        _femaleShinyFrontIntroSprite = value;
-    //    }
-    //}
-
-    //public Sprite FemaleShinyBackRegularSprite
-    //{
-    //    get { return _femaleShinyBackRegularSprite; }
-    //    set
-    //    {
-    //        _femaleShinyBackRegularSprite = value;
-    //    }
-    //}
-
-    //public Sprite FemaleShinyBackIntroSprite
-    //{
-    //    get { return _femaleShinyBackIntroSprite; }
-    //    set
-    //    {
-    //        _femaleShinyBackIntroSprite = value;
-    //    }
-    //}
-
-    #endregion
-
-    //void CheckPokemonEVs()
-    //{
-    //    int effortValueTotal = 0;
-    //    foreach (EarnableEV ev in _rewardedEffortValue)
-    //    {
-    //        effortValueTotal += ev.statValue;
-    //    }
-    //    if (effortValueTotal > 3)
-    //    {
-    //        Debug.LogError("MaxAmount of Effort Values given Exceeds Given Amount", this);
-    //    }
-    //}
-
 }

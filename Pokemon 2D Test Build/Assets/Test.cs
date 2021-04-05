@@ -6,6 +6,8 @@ public class Test : MonoBehaviour {
     public bool testEXPGroup;
     public ExperienceGroup testExperienceGroup;
     public NatureBase testNature;
+    public Sprite sprite;
+
 
     public ElementType attacktype = ElementType.Bug;
     public ElementType defenderType = ElementType.Dark;

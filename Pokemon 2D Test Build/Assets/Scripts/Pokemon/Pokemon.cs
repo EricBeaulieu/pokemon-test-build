@@ -239,6 +239,11 @@ public class Pokemon {
             }
         }
 
+        if(ability?.DoublesSpeedInAWeatherEffect != null && currentStat == StatAttribute.Speed)
+        {
+            statValue *= ability.DoublesSpeedInAWeatherEffect(BattleSystem.GetCurrentWeather);
+        }
+
         return statValue;
     }
 
@@ -507,6 +512,9 @@ public class Pokemon {
         return canPerformMove;
     }
 
+    /// <summary>
+    /// Applies any Effects on the pokemons turn end that it may have through Status Effects or Volatile Status
+    /// </summary>
     public void OnEndTurn()
     {
         status?.OnEndTurn?.Invoke(this);
@@ -603,6 +611,11 @@ public class Pokemon {
             abilities.Add(AbilityDB.AbilityDex[pokemonBase.HiddenAbility]);
         }
 
+        if(abilities.Count == 0)
+        {
+            Debug.LogWarning($"{this.pokemonBase.GetPokedexName()} doesnt have any abilities set");
+            return;
+        }
         ability = abilities[Random.Range(0, abilities.Count)];
     }
 }

@@ -34,7 +34,7 @@ public class BattleSystem : MonoBehaviour
     bool _isTrainerBattle;
     bool _playerPokemonShift;
 
-    WeatherEffect _currentWeather;
+    static WeatherEffect _currentWeather;
     public int weatherDuration {get; set;}
 
     List<EntryHazard> _playerSideEntryHazards = new List<EntryHazard>();
@@ -280,9 +280,10 @@ public class BattleSystem : MonoBehaviour
         dialogBox.BattleStartSetup();
         attackSelectionEventSelector.SetMovesList(playerBattleUnit,playerBattleUnit.pokemon.moves,this);
 
-        //Weather effects here
-        yield return ActivatePokemonAbilityUponEntry(playerBattleUnit.pokemon);
-        yield return ActivatePokemonAbilityUponEntry(enemyBattleUnit.pokemon);
+        _currentWeather = null;//will be expanded upon here
+
+        yield return ActivatePokemonAbilityUponEntry(playerBattleUnit,enemyBattleUnit);
+        yield return ActivatePokemonAbilityUponEntry(enemyBattleUnit,playerBattleUnit);
 
         SetupPlayerActions();
         PlayerActions();
@@ -620,7 +621,17 @@ public class BattleSystem : MonoBehaviour
         float moveAccuracy = move.MoveAccuracy;
 
         moveAccuracy *= source.accuracy;
-        moveAccuracy /= target.evasion;
+
+        float targetEvasion = target.evasion;
+
+        if (target.ability?.IgnoreStatIncreases != null)
+        {
+            if (target.ability.IgnoreStatIncreases.Invoke(StatAttribute.Evasion) == true && targetEvasion > 1)
+            {
+                targetEvasion = 1;
+            }
+        }
+        moveAccuracy /= targetEvasion;
 
         return Random.Range(1, 101) <= moveAccuracy;
     }
@@ -807,46 +818,7 @@ public class BattleSystem : MonoBehaviour
     {
         if (effects.Boosts != null)
         {
-            //Check to see if one is up and one is down
-            List<StatBoost> positiveEffects = new List<StatBoost>();
-            List<StatBoost> negativeEffects = new List<StatBoost>();
-
-            foreach (StatBoost currentStat in effects.Boosts)
-            {
-                if(currentStat.boost == 0)
-                {
-                    continue;
-                }
-                else if(currentStat.boost > 0)
-                {
-                    positiveEffects.Add(currentStat);
-                }
-                else
-                {
-                    negativeEffects.Add(currentStat);
-                }
-            }
-
-            if (moveTarget == MoveTarget.Foe)
-            {
-                target.pokemon.ApplyStatModifier(positiveEffects);
-                yield return target.ShowStatChanges(positiveEffects, true);
-                yield return ShowStatusChanges(target.pokemon);
-
-                target.pokemon.ApplyStatModifier(negativeEffects);
-                yield return target.ShowStatChanges(negativeEffects, false);
-                yield return ShowStatusChanges(target.pokemon);
-            }
-            else if (moveTarget == MoveTarget.Self)
-            {
-                source.pokemon.ApplyStatModifier(positiveEffects);
-                yield return source.ShowStatChanges(positiveEffects,true);
-                yield return ShowStatusChanges(source.pokemon);
-
-                source.pokemon.ApplyStatModifier(negativeEffects);
-                yield return source.ShowStatChanges(negativeEffects,false);
-                yield return ShowStatusChanges(source.pokemon);
-            }
+            yield return ApplyStatChanges(effects.Boosts, source, target, moveTarget);
         }
 
         //Status Condition
@@ -1252,17 +1224,102 @@ public class BattleSystem : MonoBehaviour
         attackSelectionEventSelector.SetMovesList(currentUnit, currentUnit.pokemon.moves, this);
     }
 
-    IEnumerator ActivatePokemonAbilityUponEntry(Pokemon pokemon)
+    IEnumerator ActivatePokemonAbilityUponEntry(BattleUnit sourceUnit,BattleUnit targetUnit)
     {
-        if(pokemon.ability == null)
+        if(sourceUnit.pokemon.ability == null)
         {
             yield break;
         }
 
-        if(pokemon.ability.OnStartWeatherEffect != WeatherEffectID.NA)
+        if(sourceUnit.pokemon.ability.OnStartWeatherEffect != WeatherEffectID.NA)
         {
-            yield return StartWeatherEffect(pokemon.ability.OnStartWeatherEffect, true);
+            yield return StartWeatherEffect(sourceUnit.pokemon.ability.OnStartWeatherEffect, true);
             yield break;
+        }
+
+        if(sourceUnit.pokemon.ability?.OnStartLowerStat != null)
+        {
+            List<StatBoost> abilityStatBoosts = new List<StatBoost>() { sourceUnit.pokemon.ability.OnStartLowerStat };
+            yield return ApplyStatChanges(abilityStatBoosts, sourceUnit, targetUnit, MoveTarget.Foe);
+        }
+    }
+
+    IEnumerator ApplyStatChanges(List<StatBoost> statBoosts,BattleUnit sourceUnit,BattleUnit targetUnit,MoveTarget moveTarget)
+    {
+        //Check to see if one is up and one is down
+        List<StatBoost> positiveEffects = new List<StatBoost>();
+        List<StatBoost> negativeEffects = new List<StatBoost>();
+
+        foreach (StatBoost currentStat in statBoosts)
+        {
+            if (currentStat.boost == 0)
+            {
+                continue;
+            }
+            else if (currentStat.boost > 0)
+            {
+                positiveEffects.Add(currentStat);
+            }
+            else
+            {
+                negativeEffects.Add(currentStat);
+            }
+        }
+
+        if (moveTarget == MoveTarget.Foe)
+        {
+            targetUnit.pokemon.ApplyStatModifier(positiveEffects);
+            yield return targetUnit.ShowStatChanges(positiveEffects, true);
+            yield return ShowStatusChanges(targetUnit.pokemon);
+
+            if (targetUnit.pokemon.ability?.PreventStatFromBeingLowered != null)
+            {
+                bool abilityActivated = false;//This is for multiple stats prevented from being lowered so it doesnt stack the Queue
+
+                List<StatBoost> negativeEffectsCopy = new List<StatBoost>(negativeEffects);
+                foreach (StatBoost stat in negativeEffectsCopy)
+                {
+                    if (stat.boost < 0)
+                    {
+                        bool? negated = targetUnit.pokemon.ability.PreventStatFromBeingLowered.Invoke(stat.stat);
+                        if (negated == true)
+                        {
+                            if (abilityActivated == false)
+                            {
+                                targetUnit.pokemon.statusChanges.Enqueue(targetUnit.pokemon.ability.OnAbilitityActivation(targetUnit.pokemon));
+                                abilityActivated = true;
+                            }
+                            negativeEffects.Remove(stat);
+                        }
+                    }
+                }
+            }
+
+            targetUnit.pokemon.ApplyStatModifier(negativeEffects);
+            yield return targetUnit.ShowStatChanges(negativeEffects, false);
+            yield return ShowStatusChanges(targetUnit.pokemon);
+        }
+        else if (moveTarget == MoveTarget.Self)
+        {
+            sourceUnit.pokemon.ApplyStatModifier(positiveEffects);
+            yield return sourceUnit.ShowStatChanges(positiveEffects, true);
+            yield return ShowStatusChanges(sourceUnit.pokemon);
+
+            sourceUnit.pokemon.ApplyStatModifier(negativeEffects);
+            yield return sourceUnit.ShowStatChanges(negativeEffects, false);
+            yield return ShowStatusChanges(sourceUnit.pokemon);
+        }
+    }
+
+    public static WeatherEffectID GetCurrentWeather
+    {
+        get
+        {
+            if(_currentWeather != null)
+            {
+                return _currentWeather.Id;
+            }
+            return WeatherEffectID.NA;
         }
     }
 }

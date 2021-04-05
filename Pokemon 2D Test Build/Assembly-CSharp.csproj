@@ -100,8 +100,10 @@
     <Compile Include="Assets\Notes.cs" />
     <Compile Include="Assets\Scripts\Mechanics\HPBar.cs" />
     <Compile Include="Assets\Scripts\Battle\BattleHUD.cs" />
+    <Compile Include="Assets\Scripts\Pokemon\Ability.cs" />
     <Compile Include="Assets\Scripts\Static Tables\DamageModifiers.cs" />
     <Compile Include="Assets\Scripts\Pokemon\Move.cs" />
+    <Compile Include="Assets\Scripts\Data\AbilityDB.cs" />
     <Compile Include="Assets\Scripts\Pokemon\MoveEffects.cs" />
     <Compile Include="Assets\Scripts\Characters\TrainerController.cs" />
     <Compile Include="Assets\Scripts\Characters\SpriteSheetSwap.cs" />
@@ -113,8 +115,6 @@
     <Compile Include="Assets\Scripts\ExtensionMethods\Vector2Extensions.cs" />
     <Compile Include="Assets\Scripts\Managers\GameManager.cs" />
     <Compile Include="Assets\Scripts\Battle\TurnAttackDetails.cs" />
-    <Compile Include="Assets\Scripts\Data\AbilityDB.cs" />
-    <Compile Include="Assets\Scripts\Pokemon\Ability.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
