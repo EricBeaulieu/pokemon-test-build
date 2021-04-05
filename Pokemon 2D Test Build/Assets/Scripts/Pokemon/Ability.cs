@@ -11,7 +11,8 @@ public class Ability
     //public string StartMessage { get; set; }
     public Func<ConditionID, StatAttribute,float> BoostsAStatWhenAffectedWithAStatusCondition { get; set; }
     public Func<ConditionID, StatAttribute, bool> NegatesStatusEffectStatDropFromCondition { get; set; }
-    //public Action<Pokemon> OnStart { get; set; }
+    public Func<StatAttribute, bool> PreventStatFromBeingLowered { get; set; }
+    public WeatherEffectID OnStartWeatherEffect { get; set; }
     /// <summary>
     /// Checks the pokemons health if it is 1/3 or less
     ///Checks the type of move it is, if true then give it a bonus of 50%

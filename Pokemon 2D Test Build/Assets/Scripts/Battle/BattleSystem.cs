@@ -280,6 +280,10 @@ public class BattleSystem : MonoBehaviour
         dialogBox.BattleStartSetup();
         attackSelectionEventSelector.SetMovesList(playerBattleUnit,playerBattleUnit.pokemon.moves,this);
 
+        //Weather effects here
+        yield return ActivatePokemonAbilityUponEntry(playerBattleUnit.pokemon);
+        yield return ActivatePokemonAbilityUponEntry(enemyBattleUnit.pokemon);
+
         SetupPlayerActions();
         PlayerActions();
     }
@@ -866,21 +870,7 @@ public class BattleSystem : MonoBehaviour
 
         if (effects.WeatherEffect != WeatherEffectID.NA)
         {
-            if (_currentWeather != null)
-            {
-                if (_currentWeather.Id == effects.WeatherEffect)
-                {
-                    yield return dialogBox.TypeDialog("But it failed");
-                    yield break;
-                }
-            }
-
-            _currentWeather = WeatherEffectDB.WeatherEffects[effects.WeatherEffect];
-            if (_currentWeather.StartMessage != null)
-            {
-                weatherDuration = _currentWeather.OnStartDuration;
-                yield return dialogBox.TypeDialog(_currentWeather?.StartMessage);
-            }
+            yield return StartWeatherEffect(effects.WeatherEffect);
         }
 
         if (effects.EntryHazard != EntryHazardID.NA)
@@ -971,6 +961,28 @@ public class BattleSystem : MonoBehaviour
     {
         string message = weather?.OnEndTurn?.Invoke(this);
         yield return dialogBox.TypeDialog(message);
+    }
+
+    IEnumerator StartWeatherEffect(WeatherEffectID weatherID,bool wasAbility = false)
+    {
+        if (_currentWeather != null)
+        {
+            if (_currentWeather.Id == weatherID)
+            {
+                if(wasAbility == false)
+                {
+                    yield return dialogBox.TypeDialog("But it failed");
+                }
+                yield break;
+            }
+        }
+
+        _currentWeather = WeatherEffectDB.WeatherEffects[weatherID];
+        if (_currentWeather.StartMessage != null)
+        {
+            weatherDuration = _currentWeather.OnStartDuration;
+            yield return dialogBox.TypeDialog(_currentWeather?.StartMessage);
+        }
     }
 
     public void RemoveWeatherEffect()
@@ -1238,5 +1250,19 @@ public class BattleSystem : MonoBehaviour
         }
 
         attackSelectionEventSelector.SetMovesList(currentUnit, currentUnit.pokemon.moves, this);
+    }
+
+    IEnumerator ActivatePokemonAbilityUponEntry(Pokemon pokemon)
+    {
+        if(pokemon.ability == null)
+        {
+            yield break;
+        }
+
+        if(pokemon.ability.OnStartWeatherEffect != WeatherEffectID.NA)
+        {
+            yield return StartWeatherEffect(pokemon.ability.OnStartWeatherEffect, true);
+            yield break;
+        }
     }
 }

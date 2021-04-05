@@ -23,11 +23,14 @@ public class Notes
     //look into mud sport, it weakens electrical attacks
     //When items are added in that effect the weather duration update the weather duration
     //Multi hit moves, like double kick
-    //abilities
+
+    //Wishes
+    //Overworld effects with abilitities
 
     //Bugs
 
     //on first healthy pokemon sent out it did not switch positions
+    //when a pokemon is inflicted with a status condition skip the secondary effects
     //Remove hit animation when a pokemon is not effected by a move
     //immunities to particular statuses
     //If the player is standing in a position where the NPC is trying to walk to then they cannot talk due to them being in a walking state
