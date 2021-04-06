@@ -6,17 +6,13 @@ public class Notes
 {
     //To do list
 
-    //update pokemon stats upon level up
     //camera effects when entering battle either with trainers,wild pokemon or specialized pokemon
     //when multiple pokemon have battled split the experience with them
     //When level manager has overowlrd weather effects to pass them into the battles
 
     //Add in
 
-    //Keen Eye ignore opponents evasion increase
     //Roar 
-    //intimidate and hyper cutter type abilities
-    //Placing pokemon ability like intimidate right before player actions
     //Ball on pokemon when caught and get rid of defensive bonus on critical hits
     //Trainer dialog when they lost the battle inside the battle scene
     //set/Shift option, if set just keep pokemon out
@@ -25,12 +21,15 @@ public class Notes
     //look into mud sport, it weakens electrical attacks
     //When items are added in that effect the weather duration update the weather duration
     //Multi hit moves, like double kick
+    //learning new moves for a non battle unit partner
 
     //Wishes
     //Overworld effects with abilitities
 
     //Bugs
 
+    //Fix the list of enemy pokemon that they have battled with, currently if a pokemon goes out twice it will add it again and give them more XP
+    //Trainer was turning when he seen me and ended up going to one space down of where his position would be
     //on first healthy pokemon sent out it did not switch positions
     //when a pokemon is inflicted with a status condition skip the secondary effects
     //Remove hit animation when a pokemon is not effected by a move

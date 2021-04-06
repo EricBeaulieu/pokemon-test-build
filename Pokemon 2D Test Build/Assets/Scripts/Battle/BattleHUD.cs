@@ -40,7 +40,7 @@ public class BattleHUD : MonoBehaviour
         _pokemon = currentPokemon;
         nameText.text = currentPokemon.currentName;
         SetLevel();
-        hPBar.SetHP((float)currentPokemon.currentHitPoints / currentPokemon.maxHitPoints);
+        hPBar.SetHPWithoutAnimation(currentPokemon.currentHitPoints,currentPokemon.maxHitPoints);
 
         if(isPlayersPokemon == true)
         {
@@ -77,6 +77,11 @@ public class BattleHUD : MonoBehaviour
     public IEnumerator UpdateHP(int hpBeforeDamage)
     {
         yield return hPBar.SetHPAnimation(_pokemon.currentHitPoints,hpBeforeDamage,_pokemon.maxHitPoints,currentHP);
+    }
+
+    public void UpdateHPWithoutAnimation()
+    {
+        hPBar.SetHPWithoutAnimation(_pokemon.currentHitPoints,_pokemon.maxHitPoints,currentHP);
     }
 
     public IEnumerator GainExpAnimation(int expGained, int expBeforeAnim)

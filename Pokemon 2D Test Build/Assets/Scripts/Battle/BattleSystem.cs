@@ -47,6 +47,7 @@ public class BattleSystem : MonoBehaviour
     int _escapeAttempts;
 
     [SerializeField] LearnNewMoveUI learnNewMoveUI;
+    [SerializeField] LevelUpUI levelUpUI;
 
 
     #region End of Turn effects Order reference as of GEN 5
@@ -277,6 +278,7 @@ public class BattleSystem : MonoBehaviour
 
         _playerParty.SetOriginalPositions();
         _escapeAttempts = 0;
+        enemyBattleUnit.pokemonBattledAgainst.Add(playerBattleUnit.pokemon);
         dialogBox.BattleStartSetup();
         attackSelectionEventSelector.SetMovesList(playerBattleUnit,playerBattleUnit.pokemon.moves,this);
 
@@ -624,9 +626,9 @@ public class BattleSystem : MonoBehaviour
 
         float targetEvasion = target.evasion;
 
-        if (target.ability?.IgnoreStatIncreases != null)
+        if (source.ability?.IgnoreStatIncreases != null)
         {
-            if (target.ability.IgnoreStatIncreases.Invoke(StatAttribute.Evasion) == true && targetEvasion > 1)
+            if (source.ability.IgnoreStatIncreases.Invoke(StatAttribute.Evasion) == true && targetEvasion > 1)
             {
                 targetEvasion = 1;
             }
@@ -648,13 +650,45 @@ public class BattleSystem : MonoBehaviour
                 int expYield = targetBattleUnit.pokemon.pokemonBase.RewardedExperienceYield;
                 int level = targetBattleUnit.pokemon.currentLevel;
                 float trainerBonus = (_isTrainerBattle==true) ? 1.5f : 1;
+                float pokemonSharingExp = 1;
+
+                if(targetBattleUnit.pokemonBattledAgainst.Count > 1)
+                {
+                    int sharing = 0;
+                    List<Pokemon> copyPokemonBattledAgainst = new List<Pokemon>(targetBattleUnit.pokemonBattledAgainst);
+                    foreach (Pokemon pokemon in copyPokemonBattledAgainst)
+                    {
+                        if (pokemon.currentLevel >= 100 && pokemon.currentHitPoints <= 0)
+                        {
+                            targetBattleUnit.pokemonBattledAgainst.Remove(pokemon);
+                            continue;
+                        }
+                        sharing++;
+                    }
+                    if(sharing > 1)
+                    {
+                        pokemonSharingExp /= sharing;
+                    }
+                }
+
+                int expGained = Mathf.FloorToInt(expYield * level * trainerBonus / pokemonSharingExp) / 7;
+
+                foreach (Pokemon pokemon in targetBattleUnit.pokemonBattledAgainst)
+                {
+                    if(pokemon == playerBattleUnit.pokemon)
+                    {
+                        yield return GainExperience(playerBattleUnit,expGained);
+                    }
+                    else
+                    {
+                        yield return GainExperience(pokemon, expGained);
+                    }
+                    pokemon.GainEffortValue(targetBattleUnit.pokemon.pokemonBase.rewardedEfforValue);
+                }
 
                 //This shall add all the pokemon that were in battle with this current pokemon
-                if (playerBattleUnit.pokemon.currentLevel < 100)
-                {
-                    yield return GainExperience(playerBattleUnit, expYield, level, trainerBonus);
-                    playerBattleUnit.pokemon.GainEffortValue(targetBattleUnit.pokemon.pokemonBase.rewardedEfforValue);
-                }
+                //yield return GainExperience(playerBattleUnit, expYield, level, trainerBonus);
+                //playerBattleUnit.pokemon.GainEffortValue(targetBattleUnit.pokemon.pokemonBase.rewardedEfforValue);
             }
 
             yield return new WaitForSeconds(2f);
@@ -768,6 +802,7 @@ public class BattleSystem : MonoBehaviour
         if (battleUnit.isPlayerPokemon)
         {
             _playerParty.SwitchPokemonPositions(battleUnit.pokemon, newPokemon);
+            enemyBattleUnit.pokemonBattledAgainst.Add(newPokemon);
         }
 
         battleUnit.Setup(newPokemon);
@@ -1115,16 +1150,16 @@ public class BattleSystem : MonoBehaviour
         }
     }
 
-    IEnumerator GainExperience(BattleUnit targetUnit,int expYield,int enemyLevel,float trainerBonus)
+    IEnumerator GainExperience(BattleUnit targetUnit,int expGained)
     {
-        int expGained = Mathf.FloorToInt(expYield * enemyLevel * trainerBonus) / 7;
-
         int expBeforeAnim = targetUnit.pokemon.currentExp;
         targetUnit.pokemon.currentExp += expGained;
         yield return dialogBox.TypeDialog($"{targetUnit.pokemon.currentName} gained {expGained} exp", true);
         yield return targetUnit.HUD.GainExpAnimation(expGained, expBeforeAnim);
 
         //Level up Here
+
+        StandardStats StatsBeforeLevel = targetUnit.pokemon.GetStandardStats();
 
         while (targetUnit.pokemon.LevelUpCheck() == true)
         {
@@ -1133,9 +1168,10 @@ public class BattleSystem : MonoBehaviour
             yield return dialogBox.TypeDialog($"{targetUnit.pokemon.currentName} grew to level {targetUnit.pokemon.currentLevel}!", true);
             targetUnit.HUD.SetLevel();
             //Play level up animation
-            //Show stats
 
-            //Learn new moves
+            yield return levelUpUI.DisplayLevelUp(StatsBeforeLevel, targetUnit.pokemon.GetStandardStats());
+            targetUnit.HUD.UpdateHPWithoutAnimation();
+
             List<LearnableMove> newMove = targetUnit.pokemon.GetLeranableMoveAtCurrentLevel();
 
             if (newMove.Count > 0)
@@ -1148,6 +1184,35 @@ public class BattleSystem : MonoBehaviour
                 break;
             }
             yield return targetUnit.HUD.GainExpAnimation(expGained, targetUnit.pokemon.pokemonBase.GetExpForLevel(targetUnit.pokemon.currentLevel));
+
+            StatsBeforeLevel = targetUnit.pokemon.GetStandardStats();
+        }
+    }
+
+    IEnumerator GainExperience(Pokemon pokemon, int expGained)
+    {
+        int expBeforeAnim = pokemon.currentExp;
+        pokemon.currentExp += expGained;
+        yield return dialogBox.TypeDialog($"{pokemon.currentName} gained {expGained} exp", true);
+
+        while (pokemon.LevelUpCheck() == true)
+        {
+            expGained -= pokemon.pokemonBase.GetExpForLevel(pokemon.currentLevel) - expBeforeAnim;
+            expBeforeAnim = pokemon.pokemonBase.GetExpForLevel(pokemon.currentLevel);
+            yield return dialogBox.TypeDialog($"{pokemon.currentName} grew to level {pokemon.currentLevel}!", true);
+
+            List<LearnableMove> newMove = pokemon.GetLeranableMoveAtCurrentLevel();
+
+            //if (newMove.Count > 0)
+            //{
+            //    yield return LearnNewMove(targetUnit, newMove);
+            //}
+
+            if (pokemon.currentLevel >= 100)
+            {
+                break;
+            }
+
         }
     }
 

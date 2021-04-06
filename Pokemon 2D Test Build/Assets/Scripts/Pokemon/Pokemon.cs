@@ -552,6 +552,7 @@ public class Pokemon {
         else if(currentExp > _pokemonBase.GetExpForLevel(currentLevel + 1))
         {
             currentLevel++;
+            UpdateStatsUponLevel();
             return true;
         }
         return false;
@@ -617,5 +618,25 @@ public class Pokemon {
             return;
         }
         ability = abilities[Random.Range(0, abilities.Count)];
+    }
+
+    public StandardStats GetStandardStats()
+    {
+        return new StandardStats(maxHitPoints, baseStats[StatAttribute.Attack], baseStats[StatAttribute.Defense], 
+            baseStats[StatAttribute.SpecialAttack], baseStats[StatAttribute.SpecialDefense], baseStats[StatAttribute.Speed]);
+    }
+
+    void UpdateStatsUponLevel()
+    {
+        int diffInHP = maxHitPoints;
+
+        maxHitPoints = Mathf.FloorToInt(((individualValues.maxHitPoints + 2 * pokemonBase.maxHitPoints + (effortValues.hitPoints / 4)) * currentLevel / 100) + 10 + currentLevel);
+        baseStats[StatAttribute.Attack] = Mathf.FloorToInt((((individualValues.attack + 2 * pokemonBase.attack + (effortValues.attack / 4)) * currentLevel / 100) + 5) * nature.NatureModifier(nature, StatAttribute.Attack));
+        baseStats[StatAttribute.Defense] = Mathf.FloorToInt((((individualValues.defense + 2 * pokemonBase.defense + (effortValues.defense / 4)) * currentLevel / 100) + 5) * nature.NatureModifier(nature, StatAttribute.Defense));
+        baseStats[StatAttribute.SpecialAttack] =Mathf.FloorToInt((((individualValues.specialAttack + 2 * pokemonBase.specialAttack + (effortValues.specialAttack / 4)) * currentLevel / 100) + 5) * nature.NatureModifier(nature, StatAttribute.SpecialAttack));
+        baseStats[StatAttribute.SpecialDefense] =Mathf.FloorToInt((((individualValues.specialDefense + 2 * pokemonBase.specialDefense + (effortValues.specialDefense / 4)) * currentLevel / 100) + 5) * nature.NatureModifier(nature, StatAttribute.SpecialDefense));
+        baseStats[StatAttribute.Speed] = Mathf.FloorToInt((((individualValues.speed + 2 * pokemonBase.speed + (effortValues.speed / 4)) * currentLevel / 100) + 5) * nature.NatureModifier(nature, StatAttribute.Speed));
+
+        currentHitPoints += maxHitPoints - diffInHP;
     }
 }

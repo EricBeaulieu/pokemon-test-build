@@ -48,7 +48,7 @@ public class PartyMemberUI : MonoBehaviour, ISelectHandler, IDeselectHandler
 
         nameText.text = currentPokemon.currentName;
         levelText.text = currentPokemon.currentLevel.ToString();
-        hPBar.SetHP((float)currentPokemon.currentHitPoints / currentPokemon.maxHitPoints);
+        hPBar.SetHPWithoutAnimation(currentPokemon.currentHitPoints,currentPokemon.maxHitPoints);
         currentHP.text = $"{currentPokemon.currentHitPoints.ToString()}/{currentPokemon.maxHitPoints.ToString()}";
         background.sprite = PartyBackgroundArt.instance.ReturnBackgroundArt(_pokemon.currentHitPoints, _isFirstSlot);
         gender.sprite = StatusConditionArt.instance.ReturnGenderArt(currentPokemon.gender);

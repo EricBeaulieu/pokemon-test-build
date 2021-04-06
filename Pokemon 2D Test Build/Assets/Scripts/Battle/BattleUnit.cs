@@ -25,6 +25,9 @@ public class BattleUnit : MonoBehaviour
     [SerializeField] Image statusEffectB;
     const float STATUS_EFFECT_ANIMATION_SPEED = 1f;
 
+    //This is mainly for the enemy pokemon, so they gain XP
+    public List<Pokemon> pokemonBattledAgainst { get; set; }
+
     void Awake()
     {
         if (battleFloor == null)
@@ -75,6 +78,8 @@ public class BattleUnit : MonoBehaviour
         hud.SetData(pokemon, isPlayersPokemon);
         pokemon.Reset();
         _sendOutPokemonOnTurnEnd = false;
+
+        pokemonBattledAgainst = new List<Pokemon>();
 
         PlayEnterAnimation();
     }

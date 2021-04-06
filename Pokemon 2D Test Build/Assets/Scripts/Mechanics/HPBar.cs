@@ -15,7 +15,7 @@ public class HPBar : MonoBehaviour
         _healthBar = GetComponent<Image>();
     }
 
-    public void SetHP(float hpNormalized)
+    void SetHP(float hpNormalized)
     {
         _healthBar.fillAmount = hpNormalized;
         _healthBar.color = StatusConditionArt.instance.ReturnHitPointsColor(hpNormalized);
@@ -41,6 +41,16 @@ public class HPBar : MonoBehaviour
         if (currentHpText != null)
         {
             currentHpText.text = $"{healthAfterDamage.ToString("0")} / {maxHP.ToString()}";
+        }
+    }
+
+    public void SetHPWithoutAnimation(int currentHp, int maxHP, Text currentHpText = null)
+    {
+        float hpNormalized = (float)currentHp / (float)maxHP;
+        SetHP(hpNormalized);
+        if (currentHpText != null)
+        {
+            currentHpText.text = $"{currentHp.ToString("0")} / {maxHP.ToString()}";
         }
     }
 
