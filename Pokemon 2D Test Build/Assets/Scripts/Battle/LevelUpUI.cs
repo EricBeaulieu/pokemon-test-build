@@ -5,21 +5,17 @@ using UnityEngine.UI;
 
 public struct StandardStats
 {
-    public int MaxHp { get; private set; }
-    public int attack { get; private set; }
-    public int defense { get; private set; }
-    public int specialAttack { get; private set; }
-    public int specialDefense { get; private set; }
-    public int speed { get; private set; }
+    public List<int> stats { get; private set; }
 
     public StandardStats(int hp,int att,int def,int spAtt,int spDef,int spd)
     {
-        MaxHp = hp;
-        attack = att;
-        defense = def;
-        specialAttack = spDef;
-        specialDefense = spDef;
-        speed = spd;
+        stats = new List<int>();
+        stats.Add(hp);
+        stats.Add(att);
+        stats.Add(def);
+        stats.Add(spAtt);
+        stats.Add(spDef);
+        stats.Add(spd);
     }
 }
 
@@ -29,11 +25,18 @@ public class LevelUpUI : MonoBehaviour
     [SerializeField] Text[] statPlus;
     [SerializeField] Text[] statNumber;
 
+    [SerializeField] GameObject alternativePokemon;
+    [SerializeField] Image pokemonSprite;
+    [SerializeField] Text pokemonName;
+    [SerializeField] Text pokemonLevel;
+    [SerializeField] Image pokemonGender;
+
     bool _waitingOnUserInput = false;
 
-    private void Awake()
+    public void HandleStart()
     {
         levelUpUI.SetActive(false);
+        alternativePokemon.SetActive(false);
     }
 
     void Update()
@@ -44,30 +47,22 @@ public class LevelUpUI : MonoBehaviour
         }
     }
 
-    public IEnumerator DisplayLevelUp(StandardStats StatsBeforeLevelUp,StandardStats StatsAfterLevelUp)
+    public IEnumerator DisplayLevelUp(StandardStats StatsBeforeLevelUp,StandardStats StatsAfterLevelUp,Pokemon pokemon = null)
     {
         _waitingOnUserInput = true;
 
-        int difHp = StatsAfterLevelUp.MaxHp - StatsBeforeLevelUp.MaxHp;
-        int difAttack = StatsAfterLevelUp.attack - StatsBeforeLevelUp.attack;
-        int difDefense = StatsAfterLevelUp.defense - StatsBeforeLevelUp.defense;
-        int difSpAttack = StatsAfterLevelUp.specialAttack - StatsBeforeLevelUp.specialAttack;
-        int difSpDefense = StatsAfterLevelUp.specialDefense - StatsBeforeLevelUp.specialDefense;
-        int difSpeed = StatsAfterLevelUp.speed - StatsBeforeLevelUp.speed;
+        List<int> diffInStats = new List<int>();
 
-        SetStatPlus(0, difHp);
-        SetStatPlus(1, difAttack);
-        SetStatPlus(2, difDefense);
-        SetStatPlus(3, difSpAttack);
-        SetStatPlus(4, difSpDefense);
-        SetStatPlus(5, difSpeed);
+        for (int i = 0; i < StatsAfterLevelUp.stats.Count; i++)
+        {
+            SetStat(i, StatsAfterLevelUp.stats[i] - StatsBeforeLevelUp.stats[i],true);
+        }
 
-        SetStatNumber(0, difHp);
-        SetStatNumber(1, difAttack);
-        SetStatNumber(2, difDefense);
-        SetStatNumber(3, difSpAttack);
-        SetStatNumber(4, difSpDefense);
-        SetStatNumber(5, difSpeed);
+        if(pokemon != null)
+        {
+            SetDataAlternativePokemon(pokemon);
+            alternativePokemon.SetActive(true);
+        }
 
         levelUpUI.SetActive(true);
 
@@ -78,19 +73,10 @@ public class LevelUpUI : MonoBehaviour
 
         _waitingOnUserInput = true;
 
-        SetStatPlus(0, 0);
-        SetStatPlus(1, 0);
-        SetStatPlus(2, 0);
-        SetStatPlus(3, 0);
-        SetStatPlus(4, 0);
-        SetStatPlus(5, 0);
-
-        SetStatNumber(0, StatsAfterLevelUp.MaxHp);
-        SetStatNumber(1, StatsAfterLevelUp.attack);
-        SetStatNumber(2, StatsAfterLevelUp.defense);
-        SetStatNumber(3, StatsAfterLevelUp.specialAttack);
-        SetStatNumber(4, StatsAfterLevelUp.specialDefense);
-        SetStatNumber(5, StatsAfterLevelUp.speed);
+        for (int i = 0; i < StatsAfterLevelUp.stats.Count; i++)
+        {
+            SetStat(i, StatsAfterLevelUp.stats[i]);
+        }
 
         while (_waitingOnUserInput == true)
         {
@@ -98,11 +84,12 @@ public class LevelUpUI : MonoBehaviour
         }
 
         levelUpUI.SetActive(false);
+        alternativePokemon.SetActive(false);
     }
 
-    void SetStatPlus(int Pos,int dif)
+    void SetStat(int Pos,int dif,bool showingDif = false)
     {
-        if (dif > 0)
+        if (dif > 0 && showingDif == true)
         {
             statPlus[Pos].text = "+";
         }
@@ -110,10 +97,14 @@ public class LevelUpUI : MonoBehaviour
         {
             statPlus[Pos].text = "";
         }
+        statNumber[Pos].text = $"{dif}";
     }
 
-    void SetStatNumber(int Pos, int dif)
+    void SetDataAlternativePokemon(Pokemon pokemon)
     {
-        statNumber[Pos].text = $"{dif}";
+        pokemonSprite.sprite = pokemon.pokemonBase.GetAnimatedSprites()[0];
+        pokemonName.text = pokemon.currentName;
+        pokemonLevel.text = pokemon.currentLevel.ToString();
+        pokemonGender.sprite = StatusConditionArt.instance.ReturnGenderArt(pokemon.gender);
     }
 }

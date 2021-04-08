@@ -131,6 +131,7 @@ public class BattleSystem : MonoBehaviour
     {
         gameObject.SetActive(false);
         inGameItemoffScreenPos = inGameItem.transform.localPosition;
+        levelUpUI.HandleStart();
 
         if(playerBattleUnit == null)
         {
@@ -277,8 +278,9 @@ public class BattleSystem : MonoBehaviour
         }
 
         _playerParty.SetOriginalPositions();
+        _playerParty.CleanUpPartyOrderOnStart(playerBattleUnit.pokemon);
         _escapeAttempts = 0;
-        enemyBattleUnit.pokemonBattledAgainst.Add(playerBattleUnit.pokemon);
+        enemyBattleUnit.AddPokemonToBattleList(playerBattleUnit.pokemon);
         dialogBox.BattleStartSetup();
         attackSelectionEventSelector.SetMovesList(playerBattleUnit,playerBattleUnit.pokemon.moves,this);
 
@@ -555,8 +557,7 @@ public class BattleSystem : MonoBehaviour
 
         if(CheckIfMoveHits(moveBase,sourceUnit.pokemon,targetUnit.pokemon) == true)
         {
-            sourceUnit.PlayAttackAnimation();
-            yield return new WaitForSeconds(1f);
+            yield return sourceUnit.PlayAttackAnimation();
             if(moveBase.Target == MoveTarget.Foe)
             {
                 targetUnit.PlayHitAnimation();
@@ -652,28 +653,28 @@ public class BattleSystem : MonoBehaviour
                 float trainerBonus = (_isTrainerBattle==true) ? 1.5f : 1;
                 float pokemonSharingExp = 1;
 
-                if(targetBattleUnit.pokemonBattledAgainst.Count > 1)
+                if(targetBattleUnit.GetListOfPokemonBattledAgainst.Count > 1)
                 {
                     int sharing = 0;
-                    List<Pokemon> copyPokemonBattledAgainst = new List<Pokemon>(targetBattleUnit.pokemonBattledAgainst);
+                    List<Pokemon> copyPokemonBattledAgainst = new List<Pokemon>(targetBattleUnit.GetListOfPokemonBattledAgainst);
                     foreach (Pokemon pokemon in copyPokemonBattledAgainst)
                     {
-                        if (pokemon.currentLevel >= 100 && pokemon.currentHitPoints <= 0)
+                        if (pokemon.currentLevel >= 100 || pokemon.currentHitPoints <= 0)
                         {
-                            targetBattleUnit.pokemonBattledAgainst.Remove(pokemon);
+                            targetBattleUnit.GetListOfPokemonBattledAgainst.Remove(pokemon);
                             continue;
                         }
                         sharing++;
                     }
                     if(sharing > 1)
                     {
-                        pokemonSharingExp /= sharing;
+                        pokemonSharingExp = sharing;
                     }
                 }
 
                 int expGained = Mathf.FloorToInt(expYield * level * trainerBonus / pokemonSharingExp) / 7;
 
-                foreach (Pokemon pokemon in targetBattleUnit.pokemonBattledAgainst)
+                foreach (Pokemon pokemon in targetBattleUnit.GetListOfPokemonBattledAgainst)
                 {
                     if(pokemon == playerBattleUnit.pokemon)
                     {
@@ -685,10 +686,6 @@ public class BattleSystem : MonoBehaviour
                     }
                     pokemon.GainEffortValue(targetBattleUnit.pokemon.pokemonBase.rewardedEfforValue);
                 }
-
-                //This shall add all the pokemon that were in battle with this current pokemon
-                //yield return GainExperience(playerBattleUnit, expYield, level, trainerBonus);
-                //playerBattleUnit.pokemon.GainEffortValue(targetBattleUnit.pokemon.pokemonBase.rewardedEfforValue);
             }
 
             yield return new WaitForSeconds(2f);
@@ -802,7 +799,7 @@ public class BattleSystem : MonoBehaviour
         if (battleUnit.isPlayerPokemon)
         {
             _playerParty.SwitchPokemonPositions(battleUnit.pokemon, newPokemon);
-            enemyBattleUnit.pokemonBattledAgainst.Add(newPokemon);
+            enemyBattleUnit.AddPokemonToBattleList(newPokemon);
         }
 
         battleUnit.Setup(newPokemon);
@@ -815,6 +812,7 @@ public class BattleSystem : MonoBehaviour
         else
         {
             yield return dialogBox.TypeDialog($"{_trainerController.TrainerName} sent out {battleUnit.pokemon.currentName}");
+            battleUnit.AddPokemonToBattleList(playerBattleUnit.pokemon);
         }
 
         yield return ApplyEntryHazardOnSentOut(battleUnit);
@@ -1176,7 +1174,8 @@ public class BattleSystem : MonoBehaviour
 
             if (newMove.Count > 0)
             {
-                yield return LearnNewMove(targetUnit,newMove);
+                yield return LearnNewMove(targetUnit.pokemon,newMove);
+                attackSelectionEventSelector.SetMovesList(targetUnit, targetUnit.pokemon.moves, this);
             }
 
             if (targetUnit.pokemon.currentLevel >= 100)
@@ -1195,35 +1194,39 @@ public class BattleSystem : MonoBehaviour
         pokemon.currentExp += expGained;
         yield return dialogBox.TypeDialog($"{pokemon.currentName} gained {expGained} exp", true);
 
+        StandardStats StatsBeforeLevel = pokemon.GetStandardStats();
+
         while (pokemon.LevelUpCheck() == true)
         {
             expGained -= pokemon.pokemonBase.GetExpForLevel(pokemon.currentLevel) - expBeforeAnim;
             expBeforeAnim = pokemon.pokemonBase.GetExpForLevel(pokemon.currentLevel);
             yield return dialogBox.TypeDialog($"{pokemon.currentName} grew to level {pokemon.currentLevel}!", true);
 
+            yield return levelUpUI.DisplayLevelUp(StatsBeforeLevel, pokemon.GetStandardStats(),pokemon);
+
             List<LearnableMove> newMove = pokemon.GetLeranableMoveAtCurrentLevel();
 
-            //if (newMove.Count > 0)
-            //{
-            //    yield return LearnNewMove(targetUnit, newMove);
-            //}
+            if (newMove.Count > 0)
+            {
+                yield return LearnNewMove(pokemon, newMove);
+            }
 
             if (pokemon.currentLevel >= 100)
             {
                 break;
             }
-
+            StatsBeforeLevel = pokemon.GetStandardStats();
         }
     }
 
-    IEnumerator LearnNewMove(BattleUnit currentUnit,List<LearnableMove> newMoves)
+    IEnumerator LearnNewMove(Pokemon currentPokemon,List<LearnableMove> newMoves)
     {
         foreach (LearnableMove learnableMove in newMoves)
         {
-            if (currentUnit.pokemon.moves.Count < PokemonBase.MAX_NUMBER_OF_MOVES)
+            if (currentPokemon.moves.Count < PokemonBase.MAX_NUMBER_OF_MOVES)
             {
-                currentUnit.pokemon.LearnMove(learnableMove);
-                yield return dialogBox.TypeDialog($"{currentUnit.pokemon.currentName} learned {learnableMove.moveBase.MoveName}!", true);
+                currentPokemon.LearnMove(learnableMove);
+                yield return dialogBox.TypeDialog($"{currentPokemon.currentName} learned {learnableMove.moveBase.MoveName}!", true);
             }
             else
             {
@@ -1232,15 +1235,15 @@ public class BattleSystem : MonoBehaviour
 
                 while (playerSelectingNewMove == true)
                 {
-                    yield return dialogBox.TypeDialog($"{currentUnit.pokemon.currentName} is trying to learn {learnableMove.moveBase.MoveName}.", true);
-                    yield return dialogBox.TypeDialog($"But {currentUnit.pokemon.currentName} can't learn more than four moves.", true);
+                    yield return dialogBox.TypeDialog($"{currentPokemon.currentName} is trying to learn {learnableMove.moveBase.MoveName}.", true);
+                    yield return dialogBox.TypeDialog($"But {currentPokemon.currentName} can't learn more than four moves.", true);
                     yield return dialogBox.TypeDialog($"Delete a move to make room for {learnableMove.moveBase.MoveName}?");
 
                     bool ifPlayerSelectsNo = false;
 
                     yield return dialogBox.SetChoiceBox(() =>
                     {
-                        learnNewMoveUI.OpenToLearnNewMove(currentUnit.pokemon, learnableMove.moveBase, () =>
+                        learnNewMoveUI.OpenToLearnNewMove(currentPokemon, learnableMove.moveBase, () =>
                         {
                             dialogBox.WaitingOnUserChoice = false;
                             playerSelectingNewMove = false;
@@ -1274,19 +1277,17 @@ public class BattleSystem : MonoBehaviour
 
                         if (playerSelectingNewMove == false)
                         {
-                            yield return dialogBox.TypeDialog($"{currentUnit.pokemon.currentName} did not learn {learnableMove.moveBase.MoveName}");
+                            yield return dialogBox.TypeDialog($"{currentPokemon.currentName} did not learn {learnableMove.moveBase.MoveName}");
                         }
                     }
                     else if (ifPlayerSelectsNo == false && playerSelectingNewMove == false)
                     {
-                        yield return dialogBox.TypeDialog($"{currentUnit.pokemon.currentName} forgot how to use {learnNewMoveUI.previousMoveName}", true);
-                        yield return dialogBox.TypeDialog($"{currentUnit.pokemon.currentName} learned {learnableMove.moveBase.MoveName}!", true);
+                        yield return dialogBox.TypeDialog($"{currentPokemon.currentName} forgot how to use {learnNewMoveUI.previousMoveName}", true);
+                        yield return dialogBox.TypeDialog($"{currentPokemon.currentName} learned {learnableMove.moveBase.MoveName}!", true);
                     }
                 }
             }
         }
-
-        attackSelectionEventSelector.SetMovesList(currentUnit, currentUnit.pokemon.moves, this);
     }
 
     IEnumerator ActivatePokemonAbilityUponEntry(BattleUnit sourceUnit,BattleUnit targetUnit)

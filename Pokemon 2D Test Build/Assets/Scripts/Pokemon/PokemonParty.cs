@@ -71,12 +71,6 @@ public class PokemonParty : MonoBehaviour
         pokemonParty.RemoveAt(newIndex);
         pokemonParty.Insert(newIndex, currentPokemon);
 
-        //if (newIndex > currentIndex)
-        //{
-        //    //If the index could have shifted due to the removal
-        //    newIndex++;
-        //}
-
         pokemonParty.Insert(currentIndex, newPokemon);
     }
 
@@ -88,5 +82,13 @@ public class PokemonParty : MonoBehaviour
     public void SetPositionstoBeforeBattle()
     {
         pokemonParty = _originalPos;
+    }
+
+    public void CleanUpPartyOrderOnStart(Pokemon startPokemon)
+    {
+        if (startPokemon != pokemonParty[0])
+        {
+            SwitchPokemonPositions(pokemonParty[0], startPokemon);
+        }
     }
 }

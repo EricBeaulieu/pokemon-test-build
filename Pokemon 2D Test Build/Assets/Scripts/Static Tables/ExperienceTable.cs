@@ -21,42 +21,42 @@ public static class ExperienceTable {
             case ExperienceGroup.Erratic:
                 if (currentLevel < 100)
                 {
-                    return ErraticFormula(currentLevel);
+                    return Mathf.Clamp(ErraticFormula(currentLevel), 0, 600000);
                 }
                 else
                     return 600000;
             case ExperienceGroup.Fast:
                 if (currentLevel < 100)
                 {
-                    return FastFormula(currentLevel);
+                    return Mathf.Clamp(FastFormula(currentLevel),0, 800000);
                 }
                 else
                     return 800000;
             case ExperienceGroup.MediumFast:
                 if (currentLevel < 100)
                 {
-                    return MediumFastFormula(currentLevel);
+                    return Mathf.Clamp(MediumFastFormula(currentLevel),0,1000000);
                 }
                 else
                     return 1000000;
             case ExperienceGroup.MediumSlow:
                 if (currentLevel < 100)
                 {
-                    return MediumSlowFormula(currentLevel);
+                    return Mathf.Clamp(MediumSlowFormula(currentLevel),0, 1059860);
                 }
                 else
                     return 1059860;
             case ExperienceGroup.Slow:
                 if (currentLevel < 100)
                 {
-                    return SlowFormula(currentLevel);
+                    return Mathf.Clamp(SlowFormula(currentLevel),0, 1250000);
                 }
                 else
                     return 1250000;
             case ExperienceGroup.VerySlow:
                 if (currentLevel < 100)
                 {
-                    return VerySlow(currentLevel);
+                    return Mathf.Clamp(VerySlow(currentLevel),0, 1640000);
                 }
                 else
                     return 1640000;
@@ -117,15 +117,16 @@ public static class ExperienceTable {
     {
         if(cL <= 15)
         {
-            return Mathf.CeilToInt(Mathf.Pow(cL, 3) * ((cL + 73) / 150));
+            return Mathf.CeilToInt(Mathf.Pow(cL, 3) * ((cL + 73f) / 150f));
         }
         else if(cL > 15 && cL<= 36)
         {
-            return Mathf.CeilToInt(Mathf.Pow(cL, 3) * ((cL + 14) / 50));
+            int number = Mathf.CeilToInt(Mathf.Pow(cL, 3) * ((cL + 14f) / 50f));
+            return number;
         }
         else//37 - 100
         {
-            return Mathf.CeilToInt(_expMultiplier * Mathf.Pow(cL, 3));
+            return Mathf.CeilToInt(Mathf.Pow(cL, 3) * (((0.5f * cL) + 32)/50));
         }
     }
 }

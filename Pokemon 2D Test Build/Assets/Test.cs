@@ -39,7 +39,7 @@ public class Test : MonoBehaviour {
     {
         for (int i = 1; i < 101; i++)
         {
-            Debug.Log("Level " + i + "EXP to level " + ExperienceTable.ReturnExperienceRequiredForLevel(i, testExperienceGroup));
+            Debug.Log($"Level {i} EXP to level {ExperienceTable.ReturnExperienceRequiredForLevel(i, testExperienceGroup)}");
         }
     }
 }

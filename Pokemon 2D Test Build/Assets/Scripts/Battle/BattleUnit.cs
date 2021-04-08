@@ -9,6 +9,7 @@ public class BattleUnit : MonoBehaviour
     [SerializeField] Image battleFloor;
     Vector3 battleFloorOriginalPosition;
     [SerializeField] Image pokemonSprite;
+    Sprite[] _pokemonSpriteAnimations;
     Vector3 pokemonSpriteOriginalPosition;
     float _imageSize;
 
@@ -24,9 +25,10 @@ public class BattleUnit : MonoBehaviour
     [SerializeField] Image statusEffectA;
     [SerializeField] Image statusEffectB;
     const float STATUS_EFFECT_ANIMATION_SPEED = 1f;
+    const float ENTER_ANIMATION_SPEED = 0.8f;
 
     //This is mainly for the enemy pokemon, so they gain XP
-    public List<Pokemon> pokemonBattledAgainst { get; set; }
+    List<Pokemon> pokemonBattledAgainst;
 
     void Awake()
     {
@@ -67,13 +69,14 @@ public class BattleUnit : MonoBehaviour
         pokemonSprite.rectTransform.sizeDelta = new Vector2(_imageSize, _imageSize);
         if (isPlayersPokemon)
         {
-            pokemonSprite.sprite = pokemon.pokemonBase.GetBackSprite(pokemon.isShiny,pokemon.gender)[0];
+            _pokemonSpriteAnimations = pokemon.pokemonBase.GetBackSprite(pokemon.isShiny,pokemon.gender);
         }
         else
         {
-            pokemonSprite.sprite = pokemon.pokemonBase.GetFrontSprite(pokemon.isShiny, pokemon.gender)[0];
+            _pokemonSpriteAnimations = pokemon.pokemonBase.GetFrontSprite(pokemon.isShiny, pokemon.gender);
         }
 
+        pokemonSprite.sprite = _pokemonSpriteAnimations[0];
         this.pokemon = pokemon;
         hud.SetData(pokemon, isPlayersPokemon);
         pokemon.Reset();
@@ -81,10 +84,10 @@ public class BattleUnit : MonoBehaviour
 
         pokemonBattledAgainst = new List<Pokemon>();
 
-        PlayEnterAnimation();
+        StartCoroutine(PlayEnterAnimation());
     }
 
-    void PlayEnterAnimation()
+    IEnumerator PlayEnterAnimation()
     {
         if (isPlayersPokemon)
         {
@@ -97,10 +100,12 @@ public class BattleUnit : MonoBehaviour
 
         pokemonSprite.color = pokemonSprite.color.ResetAlpha();
 
-        StartCoroutine(SmoothTransitionToPosition(pokemonSpriteOriginalPosition, 1f, hud.PlayEnterAnimation(0.75f)));        
+        yield return SmoothTransitionToPosition(pokemonSpriteOriginalPosition, 1f);
+        yield return AnimateSpriteUponEntry();
+        yield return hud.PlayEnterAnimation(0.75f);
     }
 
-    IEnumerator SmoothTransitionToPosition(Vector3 endPos, float duration,IEnumerator calledWhenFinished = null)
+    IEnumerator SmoothTransitionToPosition(Vector3 endPos, float duration)
     {
         Transform tempTrans = pokemonSprite.transform;
 
@@ -115,14 +120,9 @@ public class BattleUnit : MonoBehaviour
         }
 
         tempTrans.localPosition = pokemonSpriteOriginalPosition;
-
-        if(calledWhenFinished != null)
-        {
-            StartCoroutine(calledWhenFinished);
-        }
     }
 
-    public void PlayAttackAnimation()
+    public IEnumerator PlayAttackAnimation()
     {
         Vector3 targetLocation = pokemonSprite.transform.localPosition;
 
@@ -135,7 +135,8 @@ public class BattleUnit : MonoBehaviour
             targetLocation.x -= 50f;
         }
 
-        StartCoroutine(SmoothTransitionToPosition(targetLocation, 0.25f, SmoothTransitionToPosition(pokemonSpriteOriginalPosition, 0.5f)));
+        yield return SmoothTransitionToPosition(targetLocation, 0.25f);
+        yield return SmoothTransitionToPosition(pokemonSpriteOriginalPosition, 0.5f);
     }
 
     public void PlayHitAnimation()
@@ -382,5 +383,35 @@ public class BattleUnit : MonoBehaviour
 
         statusEffectA.transform.localPosition = Vector3.zero;
         statusEffectB.transform.localPosition = Vector3.zero;
+    }
+
+    public List<Pokemon> GetListOfPokemonBattledAgainst
+    {
+        get { return pokemonBattledAgainst; }
+    }
+
+    public void AddPokemonToBattleList(Pokemon enemyPokemon)
+    {
+        if(pokemonBattledAgainst.Contains(enemyPokemon) == true)
+        {
+            return;
+        }
+        else
+        {
+            pokemonBattledAgainst.Add(enemyPokemon);
+        }
+    }
+
+    IEnumerator AnimateSpriteUponEntry()
+    {
+        pokemonSprite.sprite = _pokemonSpriteAnimations[1];
+        float timer = 0;
+
+        while(timer < ENTER_ANIMATION_SPEED)
+        {
+            timer += Time.deltaTime;
+            yield return null;
+        }
+        pokemonSprite.sprite = _pokemonSpriteAnimations[0];
     }
 }

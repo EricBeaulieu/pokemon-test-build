@@ -113,7 +113,7 @@ public class EntryHazardsDB : MonoBehaviour
                         return;
                     }
 
-                    if(pokemon.pokemonBase.IsType(ElementType.Poison) || pokemon.pokemonBase.IsType(ElementType.Poison))
+                    if(pokemon.pokemonBase.IsType(ElementType.Poison) || pokemon.pokemonBase.IsType(ElementType.Steel))
                     {
                         pokemon.statusChanges.Enqueue($"{pokemon.currentName} is uneffected by the toxic spikes");
                         return;
@@ -184,7 +184,7 @@ public class EntryHazardsDB : MonoBehaviour
                 Name = "Sticky Web",
                 StartMessage = (BattleUnit battleUnit) =>
                 {
-                    string message = "A sticky web has been laid out all arount the ";
+                    string message = "A sticky web has been laid out all around the ";
 
                     if(battleUnit.isPlayerPokemon)
                     {

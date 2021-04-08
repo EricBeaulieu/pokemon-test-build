@@ -346,10 +346,10 @@ public class Pokemon {
         }
 
         //Critical Hit Chance
-        if(Random.value * 100 <= 6.25f)
+        if (Random.value * 100 <= 6.25f)
         {
             damageDetails.criticalHit = 1.5f;
-            //If sniper then make 2.25
+            //If sniper then make 2.
         }
 
         float modifier = damageDetails.criticalHit * damageDetails.typeEffectiveness;
@@ -365,6 +365,22 @@ public class Pokemon {
 
         float attackPower = (move.MoveType == MoveType.Physical) ? attackingPokemon.attack: attackingPokemon.specialAttack;
         float defendersDefense = (move.MoveType == MoveType.Physical) ? defense : specialDefense;
+
+        //If Critical hit ignore the negative effects on attack and positive effects on the defense
+        if(damageDetails.criticalHit > 1)
+        {
+            StatAttribute currentStat = (move.MoveType == MoveType.Physical) ? StatAttribute.Attack : StatAttribute.SpecialAttack;
+            if (attackingPokemon.statBoosts[currentStat] < 0)
+            {
+                attackPower = attackingPokemon.baseStats[currentStat];
+            }
+
+            currentStat = (move.MoveType == MoveType.Physical) ? StatAttribute.Defense : StatAttribute.SpecialDefense;
+            if (statBoosts[currentStat] > 0)
+            {
+                defendersDefense = baseStats[currentStat];
+            }
+        }
 
         int damage = Mathf.FloorToInt((((((2 * attackingPokemon.currentLevel) / 5) + 2) * move.MovePower * attackPower / defendersDefense / 50) + 2) * modifier);
 
@@ -547,9 +563,11 @@ public class Pokemon {
         if(currentLevel >=100)
         {
             currentExp = _pokemonBase.GetExpForLevel(currentLevel);
+            //This is incase of changes in Ev's
+            UpdateStatsUponLevel();
             return false;
         }
-        else if(currentExp > _pokemonBase.GetExpForLevel(currentLevel + 1))
+        else if(currentExp >= _pokemonBase.GetExpForLevel(currentLevel + 1))
         {
             currentLevel++;
             UpdateStatsUponLevel();
