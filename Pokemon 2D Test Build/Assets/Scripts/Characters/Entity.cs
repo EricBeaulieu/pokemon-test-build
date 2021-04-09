@@ -6,16 +6,20 @@ public enum FacingDirections { Up,Down,Left,Right}
 
 public abstract class Entity : MonoBehaviour
 {
-    [SerializeField] protected float movementSpeed = 5f;
+    [SerializeField] protected float movementSpeed = STANDARD_WALKING_SPEED;
     protected LayerMask solidObjectLayermask;
     protected LayerMask interactableLayermask;
     protected LayerMask grassLayermask;
     protected LayerMask playerLayerMask;
 
-    protected bool _isMoving;
+    bool _isMoving;
     bool _isRunning;
 
     protected Animator _anim;
+    /// <summary>
+    /// this is here to prevent some entities walking through eachother stating that someone is currently moving to this position
+    /// </summary>
+    [SerializeField] protected GameObject positionMovingTo;
 
     protected const float TILE_CENTER_OFFSET = 0.5f;
     protected const float STANDARD_WALKING_SPEED = 5f;
@@ -42,6 +46,15 @@ public abstract class Entity : MonoBehaviour
         }
     }
 
+    public bool IsMoving
+    {
+        get { return _isMoving; }
+        set
+        {
+            _isMoving = value;
+        }
+    }
+
     #endregion
 
     protected virtual void Awake()
@@ -54,13 +67,18 @@ public abstract class Entity : MonoBehaviour
         playerLayerMask = LayerMask.GetMask("Player");
 
         CorrectStartingPlacement();
+
+        if(positionMovingTo == null)
+        {
+            Debug.Log("positionMovingTo is missing its reference", gameObject);
+        }
     }
 
     public abstract void HandleUpdate();
 
     virtual protected IEnumerator MoveToPosition(Vector2 moveVector)
     {
-        if( moveVector == Vector2.zero)
+        if(moveVector == (Vector2)transform.position)
         {
             yield break;
         }
@@ -78,20 +96,17 @@ public abstract class Entity : MonoBehaviour
             yield break;
         }
 
-        _isMoving = true;
+        IsMoving = true;
 
         while ((targetPos - transform.position).sqrMagnitude > Mathf.Epsilon)
         {
             transform.position = Vector3.MoveTowards(transform.position, targetPos, movementSpeed * Time.deltaTime);
+            positionMovingTo.transform.position = targetPos;
             yield return null;
         }
 
         transform.position = targetPos;
-        _isMoving = false;
-        //_isRunning = false;
-
-        //_anim.SetBool("isMoving", _isMoving);
-        //_anim.SetBool("isRunning", isRunning);
+        IsMoving = false;
     }
 
     protected bool CheckIfWalkable(Vector3 targetPos)
@@ -103,6 +118,7 @@ public abstract class Entity : MonoBehaviour
             return false;
         }
 
+        positionMovingTo.transform.position = targetPositionFixed;
         return true;
     }
 
@@ -149,6 +165,14 @@ public abstract class Entity : MonoBehaviour
         currentPos.z = 0;
 
         transform.position = currentPos;
+        positionMovingTo.transform.localPosition = Vector3.zero;
     }
 
+    public Vector2 CurrentWalkingToPos()
+    {
+        return positionMovingTo.transform.position;
+    }
+
+    public virtual void PlayerInteractingWithWhenDoneMoving() { }
+    
 }

@@ -6,8 +6,9 @@ using UnityEngine;
 public class TrainerController : Entity,IInteractable
 {
     [SerializeField] Dialog preBattleDialog;
+    [SerializeField] Dialog inBattleDialogOnDefeat;
     bool _hasLostToPlayer = false;
-    [SerializeField] Dialog postDefeatDialog;
+    [SerializeField] Dialog postDefeatOverworldDialog;
 
     [SerializeField] string trainerName;
     [SerializeField] Sprite[] frontBattleSprite;
@@ -16,13 +17,14 @@ public class TrainerController : Entity,IInteractable
     [Range(1,7)]
     [SerializeField] int lineOfSightSize = 1;
     [SerializeField]BoxCollider2D lineofSight;
+    bool _changingSight;
     const float BOX_STANDARD_SIZE = 0.25f;
     bool _playerSpotted = false;
 
     float _idleTimer = 0f;
     float _idleTimerLimit = 0f;
 
-    [Tooltip("This is the amount of tim e the NPC will sit and when finished they will move")]
+    [Tooltip("This is the amount of time the NPC will sit and when finished they will move")]
     [SerializeField] float timeUntilMoveMin;
     [Tooltip("This is to add a random timer to the Idle amount time, if this is less then the min then there will be no random range timer")]
     [SerializeField] float timeUntilMoveMax;
@@ -61,7 +63,7 @@ public class TrainerController : Entity,IInteractable
         }
         else
         {
-            StartCoroutine(DialogManager.instance.ShowDialogBox(postDefeatDialog));
+            StartCoroutine(DialogManager.instance.ShowDialogBox(postDefeatOverworldDialog));
         }
     }
 
@@ -78,12 +80,13 @@ public class TrainerController : Entity,IInteractable
             }
         }
 
-        _anim.SetBool("isMoving", _isMoving);
+        _anim.SetBool("isMoving", IsMoving);
         _anim.SetBool("isRunning", isRunning);
     }
 
     protected override void FaceTowardsDirection(Vector2 targetPos)
     {
+        _changingSight = true;
         base.FaceTowardsDirection(targetPos);
 
         AdjustSight(targetPos);
@@ -91,6 +94,7 @@ public class TrainerController : Entity,IInteractable
 
     protected override void FaceTowardsDirection(FacingDirections dir)
     {
+        _changingSight = true;
         base.FaceTowardsDirection(dir);
 
         Vector2 targetDir = new Vector2().GetDirection(dir);
@@ -115,6 +119,7 @@ public class TrainerController : Entity,IInteractable
         float Ysize = ((Mathf.Abs(dirToFace.y) * lineOfSightSize) - Mathf.Abs(dirToFace.y)) + BOX_STANDARD_SIZE;
 
         lineofSight.size = new Vector2(Xsize, Ysize);
+        _changingSight = false;
     }
 
     float SetNewIdleTimer()
@@ -131,29 +136,35 @@ public class TrainerController : Entity,IInteractable
 
     void OnTriggerEnter2D(Collider2D col)
     {
-        if(col.CompareTag("Player")&& _playerSpotted == false && _hasLostToPlayer == false)
+        if(col.CompareTag("Player")&& _playerSpotted == false && _hasLostToPlayer == false && _changingSight == false)
         {
             _playerSpotted = true;
             PlayerController player = col.GetComponent<PlayerController>();
-            StartCoroutine(TriggerTrainerBattle((Vector2)col.transform.position,player));
+            StartCoroutine(TriggerTrainerBattle(player));
         }
     }
 
-    public IEnumerator TriggerTrainerBattle(Vector2 playerPos,PlayerController player)
+    public IEnumerator TriggerTrainerBattle(PlayerController player)
     {
         player.spottedByTrainer = true;
         exclamationMark.SetActive(true);
         yield return new WaitForSeconds(1.5f);
         exclamationMark.SetActive(false);
 
+        while(player.IsMoving == true)
+        {
+            yield return null;
+        }
+
         //Walk toward player
+        Vector2 playerPos = player.transform.position;
         Vector2 targetPos = playerPos - (Vector2)transform.position;
         targetPos -= targetPos.normalized;
         targetPos = new Vector2(Mathf.Round(targetPos.x), Mathf.Round(targetPos.y));
 
         yield return MoveToPosition(targetPos);
 
-        _anim.SetBool("isMoving", _isMoving);
+        _anim.SetBool("isMoving", IsMoving);
         _anim.SetBool("isRunning", isRunning);
 
         player.LookAtTrainer(transform.position);

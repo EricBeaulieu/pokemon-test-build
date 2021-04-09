@@ -544,7 +544,7 @@ public class BattleSystem : MonoBehaviour
             }
             yield break;
         }
-        //This is here incase the pokemon has a status effect that ended such as being frozen
+        //This is here incase the pokemon has a status effect that ended such as being frozen/Sleep
         yield return ShowStatusChanges(sourceUnit.pokemon);
 
         yield return dialogBox.TypeDialog($"{sourceUnit.pokemon.currentName} used {moveBase.MoveName}");
@@ -554,15 +554,11 @@ public class BattleSystem : MonoBehaviour
             yield return dialogBox.TypeDialog($"There is no target Pokemon");
             yield break;
         }
+        //Moved here so it shows an attack animation, just skips out on the pokemon recieving the hit animation
+        yield return sourceUnit.PlayAttackAnimation();
 
-        if(CheckIfMoveHits(moveBase,sourceUnit.pokemon,targetUnit.pokemon) == true)
+        if (CheckIfMoveHits(moveBase,sourceUnit.pokemon,targetUnit.pokemon) == true)
         {
-            yield return sourceUnit.PlayAttackAnimation();
-            if(moveBase.Target == MoveTarget.Foe)
-            {
-                targetUnit.PlayHitAnimation();
-            }
-
             if (moveBase.MoveType == MoveType.Status)
             {
                 yield return RunMoveEffects(moveBase.MoveEffects, sourceUnit, targetUnit,moveBase.Target);
@@ -571,6 +567,11 @@ public class BattleSystem : MonoBehaviour
             {
                 int hpPriorToAttack = targetUnit.pokemon.currentHitPoints;//for the animator in UpdateHP
                 DamageDetails damageDetails = targetUnit.pokemon.TakeDamage(moveBase, sourceUnit.pokemon);
+
+                if (moveBase.Target == MoveTarget.Foe && damageDetails.typeEffectiveness == 0)
+                {
+                    targetUnit.PlayHitAnimation();
+                }
 
                 yield return targetUnit.HUD.UpdateHP(hpPriorToAttack);
                 yield return ShowDamageDetails(damageDetails, targetUnit);
@@ -589,7 +590,7 @@ public class BattleSystem : MonoBehaviour
                     int rnd = Random.Range(1, 101);
                     if(rnd <= secondaryEffect.PercentChance)
                     {
-                        yield return RunMoveEffects(secondaryEffect, sourceUnit, targetUnit, secondaryEffect.Target);
+                        yield return RunMoveEffects(secondaryEffect, sourceUnit, targetUnit, secondaryEffect.Target,true);
 
                         if(secondaryEffect.Volatiletatus == ConditionID.cursedUser)
                         {
@@ -847,7 +848,7 @@ public class BattleSystem : MonoBehaviour
         actionSelectionEventSelector.SelectBox();
     }
 
-    IEnumerator RunMoveEffects(MoveEffects effects, BattleUnit source, BattleUnit target,MoveTarget moveTarget)
+    IEnumerator RunMoveEffects(MoveEffects effects, BattleUnit source, BattleUnit target,MoveTarget moveTarget,bool wasSecondaryEffect = false)
     {
         if (effects.Boosts != null)
         {
@@ -857,7 +858,7 @@ public class BattleSystem : MonoBehaviour
         //Status Condition
         if(effects.Status != ConditionID.NA)
         {
-            target.pokemon.SetStatus(effects.Status);
+            target.pokemon.SetStatus(effects.Status,wasSecondaryEffect);
         }
 
         //Volatile Status Condition

@@ -287,6 +287,63 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 17298108}
   m_CullTransparentMesh: 1
+--- !u!1 &24030369
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 24030371}
+  - component: {fileID: 24030370}
+  m_Layer: 8
+  m_Name: PositionMovingTo
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!61 &24030370
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 24030369}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.25, y: 0.25}
+  m_EdgeRadius: 0
+--- !u!4 &24030371
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 24030369}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 311556542}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &51284713
 GameObject:
   m_ObjectHideFlags: 0
@@ -2313,6 +2370,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   movementSpeed: 5
+  positionMovingTo: {fileID: 24030369}
   playerName: Eric
   playerBackSprite:
   - {fileID: -5090759732118122712, guid: 5036c2d9f98e75f43a690ea1440afff1, type: 3}
@@ -2360,6 +2418,7 @@ Transform:
   m_Children:
   - {fileID: 293397766}
   - {fileID: 801655834}
+  - {fileID: 24030371}
   m_Father: {fileID: 0}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2397,10 +2456,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pokemonParty:
+  - _pokemonBase: {fileID: 11400000, guid: c4dd55ad047f5cb4d9c167f439657170, type: 2}
+    _level: 1
   - _pokemonBase: {fileID: 11400000, guid: 62729574f1ca7a3409f565d032330e1a, type: 2}
     _level: 3
-  - _pokemonBase: {fileID: 11400000, guid: c4dd55ad047f5cb4d9c167f439657170, type: 2}
-    _level: 10
   - _pokemonBase: {fileID: 11400000, guid: a8626c7192bf21240bc0904861af2800, type: 2}
     _level: 14
   - _pokemonBase: {fileID: 11400000, guid: d2d598222a9f08f41bf9b00c66f94a61, type: 2}
@@ -3967,7 +4026,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   wildPokemon:
-  - _pokemonBase: {fileID: 11400000, guid: a8626c7192bf21240bc0904861af2800, type: 2}
+  - _pokemonBase: {fileID: 11400000, guid: 035955532a56c544eba76cdb240c24e3, type: 2}
     _level: 1
 --- !u!4 &484863757
 Transform:
@@ -21017,6 +21076,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2133970087045245651, guid: f0740af1cde89f8448b17d03a616512b,
+        type: 3}
+      propertyPath: movementSpeed
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2133970087045245651, guid: f0740af1cde89f8448b17d03a616512b,
+        type: 3}
+      propertyPath: timeUntilMoveMin
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 2133970087045245660, guid: f0740af1cde89f8448b17d03a616512b,
         type: 3}
       propertyPath: m_Name
@@ -21129,10 +21198,20 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: 035955532a56c544eba76cdb240c24e3,
         type: 2}
+    - target: {fileID: 4292511139321701667, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: m_Offset.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5864479954145141585, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
         type: 3}
       propertyPath: m_Name
       value: Trainer_ClownTrainer
+      objectReference: {fileID: 0}
+    - target: {fileID: 5864479954145141585, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5864479954145141587, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
         type: 3}

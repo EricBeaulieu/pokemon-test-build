@@ -14,6 +14,7 @@ public class PlayerController : Entity
     Vector2 _currentInput;
 
     public bool spottedByTrainer;
+    bool _ignorePlayerInput;
 
     protected override void Awake()
     {
@@ -30,11 +31,13 @@ public class PlayerController : Entity
         {
             Debug.LogWarning("Current Player is missing their battle back sprite Sheet");
         }
+
+        _ignorePlayerInput = false;
     }
 
     public override void HandleUpdate()
     {
-        if(spottedByTrainer == false)
+        if(spottedByTrainer == false && _ignorePlayerInput == false)
         {
             if(Input.GetKeyDown(KeyCode.Space))
             {
@@ -46,7 +49,7 @@ public class PlayerController : Entity
                 isRunning = false;
             }
 
-            if (_isMoving == false)
+            if (IsMoving == false)
             {
                 _currentInput.x = Input.GetAxisRaw("Horizontal");
                 _currentInput.y = Input.GetAxisRaw("Vertical");
@@ -78,7 +81,7 @@ public class PlayerController : Entity
                 }
             }
         }
-        _anim.SetBool("isMoving", _isMoving);
+        _anim.SetBool("isMoving", IsMoving);
         _anim.SetBool("isRunning", isRunning);
     }
 
@@ -102,7 +105,6 @@ public class PlayerController : Entity
     {
         Vector2 facingDirection = new Vector2(_anim.GetFloat("moveX"), _anim.GetFloat("moveY"));
         Vector2 interactablePOS = (Vector2)transform.position + facingDirection;
-        //Vector2 interactablePOS = new Vector2(transform.position.x + facingDirection.x, transform.position.y + facingDirection.y + PLAYER_Y_OFFSET);
 
         Debug.DrawLine(transform.position, interactablePOS,Color.red,1f);
 
@@ -110,8 +112,40 @@ public class PlayerController : Entity
 
         if (collider != null)
         {
-            collider.GetComponent<IInteractable>()?.OnInteract((Vector2)transform.position);
+            if(collider.transform.root.GetComponent<Entity>() == true)
+            {
+                Entity currentInteractable = collider.transform.root.GetComponent<Entity>();
+                if (currentInteractable.IsMoving == true)
+                {
+                    if(interactablePOS == currentInteractable.CurrentWalkingToPos())
+                    {
+                        _ignorePlayerInput = true;
+                        StartCoroutine(InteractWhenPossible(currentInteractable));
+                    }
+                }
+                else
+                {
+                    currentInteractable.GetComponent<IInteractable>()?.OnInteract((Vector2)transform.position);
+                }
+            }
+            else
+            {
+                collider.GetComponent<IInteractable>()?.OnInteract((Vector2)transform.position);
+            }
         }
+    }
+
+    IEnumerator InteractWhenPossible(Entity currentNPC)
+    {
+        currentNPC.PlayerInteractingWithWhenDoneMoving();
+
+        while (currentNPC.IsMoving == true)
+        {
+            yield return null;
+        }
+
+        currentNPC.GetComponent<IInteractable>()?.OnInteract((Vector2)transform.position);
+        _ignorePlayerInput = false;
     }
 
     public void LookAtTrainer(Vector2 trainerPos)

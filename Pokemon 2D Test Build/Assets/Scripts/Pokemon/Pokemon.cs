@@ -428,10 +428,15 @@ public class Pokemon {
         }
     }
 
-    public void SetStatus(ConditionID conditionID)
+    public void SetStatus(ConditionID conditionID,bool secondaryEffect)
     {
         if(status != null)
         {
+            if (secondaryEffect == true)
+            {
+                return;
+            }
+
             string currentStatusChange = $"{currentName} {status.HasConditionMessage}";
 
             if(status.HasCondition(conditionID) == false)
@@ -439,6 +444,18 @@ public class Pokemon {
                 currentStatusChange = $"It doesnt affect {currentName}";
             }
             statusChanges.Enqueue(currentStatusChange);
+            return;
+        }
+
+        if(CheckStatusImmunities(conditionID) == true)
+        {
+            if (secondaryEffect == true)
+            {
+                return;
+            }
+
+            string currentStatusImmunity = $"It doesnt affect {currentName}";
+            statusChanges.Enqueue(currentStatusImmunity);
             return;
         }
 
@@ -457,6 +474,43 @@ public class Pokemon {
     {
         status = null;
         OnStatusChanged?.Invoke();
+    }
+
+    bool CheckStatusImmunities(ConditionID conditionID)
+    {
+        if(conditionID == ConditionID.poison || conditionID == ConditionID.toxicPoison)
+        {
+            if(pokemonBase.IsType(ElementType.Poison) || pokemonBase.IsType(ElementType.Steel))
+            {
+                return true;
+            }
+        }
+
+        if (conditionID == ConditionID.burn)
+        {
+            if (pokemonBase.IsType(ElementType.Fire))
+            {
+                return true;
+            }
+        }
+
+        if (conditionID == ConditionID.paralyzed)
+        {
+            if (pokemonBase.IsType(ElementType.Electric))
+            {
+                return true;
+            }
+        }
+
+        if (conditionID == ConditionID.frozen)
+        {
+            if (pokemonBase.IsType(ElementType.Ice))
+            {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     public void SetVolatileStatus(ConditionID conditionID)
