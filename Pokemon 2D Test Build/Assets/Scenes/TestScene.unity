@@ -6201,7 +6201,7 @@ RectTransform:
   - {fileID: 1987468290}
   - {fileID: 1543227437}
   m_Father: {fileID: 1645902273}
-  m_RootOrder: 5
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -6220,6 +6220,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5bb0c7603422c894aa431f1dd25f72f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  trainerImage: {fileID: 1903869495}
   battleFloor: {fileID: 1655499687}
   pokemonSprite: {fileID: 1987468291}
   isPlayersPokemon: 1
@@ -8538,8 +8539,6 @@ MonoBehaviour:
   backgroundArt: {fileID: 1926108305}
   playerBattleUnit: {fileID: 762965353}
   enemyBattleUnit: {fileID: 1102866118}
-  playerImage: {fileID: 1903869495}
-  trainerImage: {fileID: 1134670093}
   dialogBox: {fileID: 528452886}
   actionSelectionEventSelector: {fileID: 2117401741}
   attackSelectionEventSelector: {fileID: 353521179}
@@ -8810,7 +8809,7 @@ RectTransform:
   - {fileID: 504798850}
   - {fileID: 489267536}
   m_Father: {fileID: 1645902273}
-  m_RootOrder: 4
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -8829,6 +8828,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5bb0c7603422c894aa431f1dd25f72f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  trainerImage: {fileID: 1134670093}
   battleFloor: {fileID: 942591143}
   pokemonSprite: {fileID: 504798851}
   isPlayersPokemon: 0
@@ -8944,11 +8944,11 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1645902273}
-  m_RootOrder: 3
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 217, y: 99}
+  m_AnchoredPosition: {x: 217, y: 112.5}
   m_SizeDelta: {x: 225, y: 225}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1134670092
@@ -17299,10 +17299,10 @@ RectTransform:
   m_Children:
   - {fileID: 55922251}
   - {fileID: 1926108304}
-  - {fileID: 1903869494}
-  - {fileID: 1134670091}
   - {fileID: 1102866117}
   - {fileID: 762965352}
+  - {fileID: 1903869494}
+  - {fileID: 1134670091}
   - {fileID: 97717253}
   - {fileID: 185559768}
   - {fileID: 528452883}
@@ -18877,7 +18877,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1645902273}
-  m_RootOrder: 2
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -21076,25 +21076,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 2133970087045245651, guid: f0740af1cde89f8448b17d03a616512b,
-        type: 3}
-      propertyPath: movementSpeed
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 2133970087045245651, guid: f0740af1cde89f8448b17d03a616512b,
-        type: 3}
-      propertyPath: timeUntilMoveMin
-      value: 5
-      objectReference: {fileID: 0}
     - target: {fileID: 2133970087045245660, guid: f0740af1cde89f8448b17d03a616512b,
         type: 3}
       propertyPath: m_Name
       value: NPC_FemaleDiamond
-      objectReference: {fileID: 0}
-    - target: {fileID: 2133970087045245660, guid: f0740af1cde89f8448b17d03a616512b,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2133970087045245662, guid: f0740af1cde89f8448b17d03a616512b,
         type: 3}

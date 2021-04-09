@@ -6,7 +6,7 @@ public class NpcController : Entity, IInteractable
 {
     [SerializeField] Dialog dialog;
 
-    [SerializeField] List<Vector2> movementPattern;
+    [SerializeField] List<AIDecision> aiDecisionList;
     int _currentMovementPattern = 0;
 
     float _idleTimer = 0f;
@@ -29,7 +29,7 @@ public class NpcController : Entity, IInteractable
             timeUntilMoveMin = 0;
         }
 
-        movementPattern = CheckNPCStartingPath(movementPattern);
+        aiDecisionList = CheckNPCStartingDecisions(aiDecisionList);
         _interactWhenPossible = false;
     }
 
@@ -42,11 +42,32 @@ public class NpcController : Entity, IInteractable
             if(_idleTimer >= _idleTimerLimit)
             {
                 _idleTimer = 0;
-                _idleTimerLimit = SetNewIdleTimer();
 
-                if(movementPattern.Count >0)
+                if(aiDecisionList.Count >0)
                 {
-                    StartCoroutine(Walk());
+                    if(aiDecisionList[_currentMovementPattern].movement != Vector2.zero)
+                    {
+                        StartCoroutine(Walk());
+                    }
+                    else if(aiDecisionList[_currentMovementPattern].directionToFace != Vector2.zero)
+                    {
+                        base.FaceTowardsDirection(aiDecisionList[_currentMovementPattern].directionToFace + (Vector2)transform.position);
+                        _currentMovementPattern = (_currentMovementPattern + 1) % aiDecisionList.Count;
+                    }
+
+                    if(aiDecisionList[_currentMovementPattern].specificTimeUniltNextExecution > 0)
+                    {
+                        _idleTimerLimit = aiDecisionList[_currentMovementPattern].specificTimeUniltNextExecution;
+                        _currentMovementPattern = (_currentMovementPattern + 1) % aiDecisionList.Count;
+                    }
+                    else
+                    {
+                        _idleTimerLimit = SetNewIdleTimer();
+                    }
+                }
+                else
+                {
+                    _idleTimerLimit = SetNewIdleTimer();
                 }
             }
         }
@@ -57,9 +78,9 @@ public class NpcController : Entity, IInteractable
 
     IEnumerator Walk()
     {
-        Vector2 desiredPosition = movementPattern[_currentMovementPattern] - (Vector2)transform.position;
+        Vector2 desiredPosition = aiDecisionList[_currentMovementPattern].movement - (Vector2)transform.position;
 
-        while ((Vector2)transform.position != movementPattern[_currentMovementPattern])
+        while ((Vector2)transform.position != aiDecisionList[_currentMovementPattern].movement)
         {
             if (_interactWhenPossible == true)
             {
@@ -72,13 +93,11 @@ public class NpcController : Entity, IInteractable
             }
             yield return MoveToPosition(desiredPosition.normalized);
         }
-        _currentMovementPattern = (_currentMovementPattern + 1) % movementPattern.Count;
+        _currentMovementPattern = (_currentMovementPattern + 1) % aiDecisionList.Count;
 
         _anim.SetBool("isMoving", IsMoving);
         _anim.SetBool("isRunning", isRunning);
     }
-
-
 
     void IInteractable.OnInteract(Vector2 initiator)
     {
@@ -104,44 +123,75 @@ public class NpcController : Entity, IInteractable
         }
     }
 
-    List<Vector2> CheckNPCStartingPath(List<Vector2> currentPath)
+    List<AIDecision> CheckNPCStartingDecisions(List<AIDecision> currentDecisions)
     {
-        List<Vector2> copyOfCurrentPath = new List<Vector2>();
+        List<AIDecision> copyOfCurrentPath = new List<AIDecision>();
 
         Vector2 currentPos = (Vector2)transform.position;
 
-        //AIDecision splitDecisions;
-        //Vector2 path;
-        //Vector2 directionToFace;
-        //float specificTime;
+        Vector2 path;
+        Vector2 directionToFace;
+        float specificTime;
 
-        foreach (Vector2 path in currentPath)
+        foreach (AIDecision decision in currentDecisions)
         {
+            path = decision.movement;
+            directionToFace = decision.directionToFace;
+            specificTime = decision.specificTimeUniltNextExecution;
 
-            if (path.x != 0 && path.y != 0)
+            if(path != Vector2.zero)
             {
-                Vector2 pathX = new Vector2(path.x, 0);
-                currentPos += pathX;
-                copyOfCurrentPath.Add(currentPos);
+                if (path.x != 0 && path.y != 0)
+                {
+                    Vector2 pathX = new Vector2(path.x, 0);
+                    currentPos += pathX;
+                    copyOfCurrentPath.Add(new AIDecision(currentPos));
 
-                Vector2 pathY = new Vector2(0, path.y);
-                currentPos += pathY;
-                copyOfCurrentPath.Add(currentPos);
-                continue;
+                    Vector2 pathY = new Vector2(0, path.y);
+                    currentPos += pathY;
+                    copyOfCurrentPath.Add(new AIDecision(currentPos));
+                }
+                else
+                {
+                    currentPos += path;
+                    copyOfCurrentPath.Add(new AIDecision(currentPos));
+                }
             }
-            currentPos += path;
-            copyOfCurrentPath.Add(currentPos);
+
+            if(directionToFace != Vector2.zero)
+            {
+                if (directionToFace.x > 0)
+                {
+                    copyOfCurrentPath.Add(new AIDecision(FacingDirections.Right));
+                }
+                else if (directionToFace.x < 0)
+                {
+                    copyOfCurrentPath.Add(new AIDecision(FacingDirections.Left));
+                }
+
+                if (directionToFace.y > 0)
+                {
+                    copyOfCurrentPath.Add(new AIDecision(FacingDirections.Up));
+                }
+                else if (directionToFace.y < 0)
+                {
+                    copyOfCurrentPath.Add(new AIDecision(FacingDirections.Down));
+                }
+            }
+
+            if(specificTime > 0)
+            {
+                copyOfCurrentPath.Add(new AIDecision(specificTime));
+            }
         }
 
+        Vector2 previousMovement = transform.position;
         for (int i = 0; i < copyOfCurrentPath.Count; i++)
         {
-            if(i == 0)
+            if(copyOfCurrentPath[i].movement != Vector2.zero)
             {
-                isPathClear(transform.position, copyOfCurrentPath[i]);
-            }
-            else
-            {
-                isPathClear(copyOfCurrentPath[i-1], copyOfCurrentPath[i]);
+                isPathClear(previousMovement, copyOfCurrentPath[i].movement);
+                previousMovement = copyOfCurrentPath[i].movement;
             }
         }
 

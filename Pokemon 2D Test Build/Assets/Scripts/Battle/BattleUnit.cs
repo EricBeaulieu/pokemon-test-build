@@ -6,6 +6,9 @@ using UnityEngine.UI;
 
 public class BattleUnit : MonoBehaviour
 {
+    [SerializeField] Image trainerImage;
+    Vector3 trainerImageOriginalPosition;
+    public bool startingAnimationsActive { get; private set; }
     [SerializeField] Image battleFloor;
     Vector3 battleFloorOriginalPosition;
     [SerializeField] Image pokemonSprite;
@@ -25,7 +28,9 @@ public class BattleUnit : MonoBehaviour
     [SerializeField] Image statusEffectA;
     [SerializeField] Image statusEffectB;
     const float STATUS_EFFECT_ANIMATION_SPEED = 1f;
-    const float ENTER_ANIMATION_SPEED = 0.8f;
+    const float ENTRY_SPRITE_ANIMATION_SPEED = 0.8f;
+    const float START_ANIMATION_SPEED = 2.25f;
+    const float HUD_ANIMATION_SPEED = 0.75f;
 
     //This is mainly for the enemy pokemon, so they gain XP
     List<Pokemon> pokemonBattledAgainst;
@@ -60,12 +65,16 @@ public class BattleUnit : MonoBehaviour
         statusEffectA.color = statusEffectA.color.SetAlpha(0);
         statusEffectB.color = statusEffectA.color.SetAlpha(0);
 
+        trainerImageOriginalPosition = trainerImage.rectTransform.localPosition;
+        battleFloorOriginalPosition = battleFloor.rectTransform.localPosition;
         pokemonSpriteOriginalPosition = pokemonSprite.rectTransform.localPosition;
         _imageSize = pokemonSprite.rectTransform.sizeDelta.x;
     }
 
-    public void Setup(Pokemon pokemon)
+    public void Setup(Pokemon pokemon,bool startSetup,bool hasTrainer)
     {
+        startingAnimationsActive = startSetup;
+
         pokemonSprite.rectTransform.sizeDelta = new Vector2(_imageSize, _imageSize);
         if (isPlayersPokemon)
         {
@@ -84,32 +93,92 @@ public class BattleUnit : MonoBehaviour
 
         pokemonBattledAgainst = new List<Pokemon>();
 
-        StartCoroutine(PlayEnterAnimation());
+        if(startSetup == false)
+        {
+            StartCoroutine(PlayEnterAnimation());
+        }
+        else
+        {
+            StartCoroutine(PlayStartingAnimation(hasTrainer));
+        }
+        
+    }
+
+    IEnumerator PlayStartingAnimation(bool hasTrainer)
+    {
+        GameObject temp;
+        Vector3 tempEndPos;
+
+        if(isPlayersPokemon)
+        {
+            trainerImage.transform.localPosition = new Vector3(trainerImageOriginalPosition.x + 800f, trainerImageOriginalPosition.y);
+            battleFloor.transform.localPosition = new Vector3(battleFloorOriginalPosition.x + 800f, battleFloorOriginalPosition.y);
+            temp = trainerImage.gameObject;
+            tempEndPos = trainerImageOriginalPosition;
+        }
+        else
+        {
+            if (hasTrainer == true)
+            {
+                trainerImage.transform.localPosition = new Vector3(trainerImageOriginalPosition.x - 800f, trainerImageOriginalPosition.y);
+                battleFloor.transform.localPosition = new Vector3(battleFloorOriginalPosition.x - 800f, battleFloorOriginalPosition.y);
+                temp = trainerImage.gameObject;
+                tempEndPos = trainerImageOriginalPosition;
+            }
+            else
+            {
+                pokemonSprite.transform.localPosition = new Vector3(pokemonSpriteOriginalPosition.x - 800f, pokemonSpriteOriginalPosition.y);
+                battleFloor.transform.localPosition = new Vector3(battleFloorOriginalPosition.x - 800f, battleFloorOriginalPosition.y);
+                temp = pokemonSprite.gameObject;
+                tempEndPos = pokemonSpriteOriginalPosition;
+            }
+        }
+
+        StartCoroutine(SmoothTransitionToPosition(temp, tempEndPos, 3f));
+        yield return SmoothTransitionToPosition(battleFloor.gameObject, battleFloorOriginalPosition, 3f);
+
+        if (hasTrainer == true)
+        {
+            if (isPlayersPokemon)
+            {
+                trainerImage.transform.localPosition = new Vector3(trainerImageOriginalPosition.x -350f, trainerImageOriginalPosition.y);
+                yield return SmoothTransitionToPosition(temp, tempEndPos, 1f);
+            }
+            else
+            {
+                trainerImage.transform.localPosition = new Vector3(trainerImageOriginalPosition.x + 350f, trainerImageOriginalPosition.y);
+                yield return SmoothTransitionToPosition(temp, tempEndPos, 1f);
+            }
+
+            yield return PlayEnterAnimation();
+        }
+        startingAnimationsActive = false;
     }
 
     IEnumerator PlayEnterAnimation()
     {
+        pokemonSprite.color = pokemonSprite.color.ResetAlpha();
+
         if (isPlayersPokemon)
         {
-            pokemonSprite.transform.localPosition = new Vector3(pokemonSpriteOriginalPosition.x -400f, pokemonSpriteOriginalPosition.y);
+            pokemonSprite.transform.localPosition = new Vector3(pokemonSpriteOriginalPosition.x - 400f, pokemonSpriteOriginalPosition.y);
+            yield return SmoothTransitionToPosition(pokemonSprite.gameObject, pokemonSpriteOriginalPosition, 1f);
         }
         else
         {
-            pokemonSprite.transform.localPosition = new Vector3(pokemonSpriteOriginalPosition.x + 300f, pokemonSpriteOriginalPosition.y);
+            pokemonSprite.transform.localPosition = new Vector3(pokemonSpriteOriginalPosition.x - 800f, pokemonSpriteOriginalPosition.y);
+            yield return SmoothTransitionToPosition(pokemonSprite.gameObject, pokemonSpriteOriginalPosition, 1f);
         }
 
-        pokemonSprite.color = pokemonSprite.color.ResetAlpha();
-
-        yield return SmoothTransitionToPosition(pokemonSpriteOriginalPosition, 1f);
         yield return AnimateSpriteUponEntry();
-        yield return hud.PlayEnterAnimation(0.75f);
+        yield return hud.PlayEnterAnimation(HUD_ANIMATION_SPEED);
     }
 
-    IEnumerator SmoothTransitionToPosition(Vector3 endPos, float duration)
+    IEnumerator SmoothTransitionToPosition(GameObject gameobject,Vector3 endPos, float duration)
     {
-        Transform tempTrans = pokemonSprite.transform;
+        Transform tempTrans = gameobject.transform;
 
-        Vector3 startingPos = pokemonSprite.transform.localPosition;
+        Vector3 startingPos = gameobject.transform.localPosition;
         float elapsedTime = 0;
 
         while (elapsedTime < duration)
@@ -119,7 +188,7 @@ public class BattleUnit : MonoBehaviour
             yield return null;
         }
 
-        tempTrans.localPosition = pokemonSpriteOriginalPosition;
+        tempTrans.localPosition = endPos;
     }
 
     public IEnumerator PlayAttackAnimation()
@@ -135,8 +204,8 @@ public class BattleUnit : MonoBehaviour
             targetLocation.x -= 50f;
         }
 
-        yield return SmoothTransitionToPosition(targetLocation, 0.25f);
-        yield return SmoothTransitionToPosition(pokemonSpriteOriginalPosition, 0.5f);
+        yield return SmoothTransitionToPosition(pokemonSprite.gameObject,targetLocation, 0.25f);
+        yield return SmoothTransitionToPosition(pokemonSprite.gameObject, pokemonSpriteOriginalPosition, 0.5f);
     }
 
     public void PlayHitAnimation()
@@ -407,11 +476,25 @@ public class BattleUnit : MonoBehaviour
         pokemonSprite.sprite = _pokemonSpriteAnimations[1];
         float timer = 0;
 
-        while(timer < ENTER_ANIMATION_SPEED)
+        while(timer < ENTRY_SPRITE_ANIMATION_SPEED)
         {
             timer += Time.deltaTime;
             yield return null;
         }
         pokemonSprite.sprite = _pokemonSpriteAnimations[0];
+    }
+
+    public Image Trainer
+    {
+        get { return trainerImage; }
+        set
+        {
+            trainerImage = value;
+        }
+    }
+
+    public void ShowPokemonImage(bool enabled)
+    {
+        pokemonSprite.gameObject.SetActive(enabled);
     }
 }

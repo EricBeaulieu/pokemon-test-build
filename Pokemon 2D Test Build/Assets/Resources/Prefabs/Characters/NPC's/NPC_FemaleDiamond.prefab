@@ -222,17 +222,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ecfb531b4c5daf541ab46f1df09ffcce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movementSpeed: 0.5
+  movementSpeed: 5
   positionMovingTo: {fileID: 607308306}
   dialog:
     lines:
     - Hello World
     - Welcome to Eric's Redesign of Pokemon
-  movementPattern:
-  - {x: 2, y: -2}
-  - {x: -2, y: 0}
-  - {x: 0, y: 2}
-  timeUntilMoveMin: 1
+  aiDecisionList:
+  - movement: {x: 2, y: 0}
+    directionToFace: {x: -1, y: 0}
+    specificTimeUniltNextExecution: 0
+  - movement: {x: 0, y: -2}
+    directionToFace: {x: 0, y: 1}
+    specificTimeUniltNextExecution: 0
+  - movement: {x: -2, y: 0}
+    directionToFace: {x: 0, y: -1}
+    specificTimeUniltNextExecution: 0
+  - movement: {x: 0, y: 2}
+    directionToFace: {x: 0, y: 0}
+    specificTimeUniltNextExecution: 10
+  timeUntilMoveMin: 5
   timeUntilMoveMax: 0
 --- !u!50 &2133970087045245648
 Rigidbody2D:

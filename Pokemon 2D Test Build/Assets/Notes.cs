@@ -14,7 +14,6 @@ public class Notes
     //Roar 
     //Ball on pokemon when caught
     //Trainer dialog when they lost the battle inside the battle scene
-
     //Recoil
     //Saving
     //look into mud sport, it weakens electrical attacks

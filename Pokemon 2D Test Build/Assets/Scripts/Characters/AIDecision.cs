@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[System.Serializable]
 public struct AIDecision
 {
     public Vector2 movement;
@@ -26,6 +27,6 @@ public struct AIDecision
     {
         movement = Vector2.zero;
         directionToFace = Vector2.zero;
-        specificTimeUniltNextExecution = 0;
+        specificTimeUniltNextExecution = TimeUniltNextExecution;
     }
 }

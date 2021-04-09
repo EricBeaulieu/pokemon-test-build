@@ -13,8 +13,6 @@ public class BattleSystem : MonoBehaviour
     [SerializeField] Image backgroundArt;
     [SerializeField] BattleUnit playerBattleUnit;
     [SerializeField] BattleUnit enemyBattleUnit;
-    [SerializeField] Image playerImage;
-    [SerializeField] Image trainerImage;
 
     public event Action<bool> OnBattleOver;
     //inbattle,wasShift
@@ -143,16 +141,6 @@ public class BattleSystem : MonoBehaviour
             Debug.LogWarning($"enemyBattleUnit has not been set");
         }
 
-        if (playerImage == null)
-        {
-            Debug.LogWarning($"playerImage has not been set");
-        }
-
-        if (trainerImage == null)
-        {
-            Debug.LogWarning($"trainerImage has not been set");
-        }
-
         if (dialogBox == null)
         {
             Debug.LogWarning($"dialogBox has not been set");
@@ -214,6 +202,7 @@ public class BattleSystem : MonoBehaviour
 
         Pokemon newWildPokemon = new Pokemon(wildPokemon.pokemonBase,wildPokemon.currentLevel);
 
+        _trainerController = null;
         _wildPokemon = newWildPokemon;
         _isTrainerBattle = false;
 
@@ -242,37 +231,45 @@ public class BattleSystem : MonoBehaviour
     {
         if (_isTrainerBattle == true)
         {
-            playerBattleUnit.gameObject.SetActive(false);
-            enemyBattleUnit.gameObject.SetActive(false);
+            playerBattleUnit.ShowPokemonImage(false);
+            enemyBattleUnit.ShowPokemonImage(false);
 
-            playerImage.gameObject.SetActive(true);
-            trainerImage.gameObject.SetActive(true);
+            playerBattleUnit.Trainer.gameObject.SetActive(true);
+            enemyBattleUnit.Trainer.gameObject.SetActive(true);
 
-            playerImage.sprite = _playerController.BackBattleSprite[0];
-            trainerImage.sprite = _trainerController.FrontBattleSprite[0];
+            playerBattleUnit.Trainer.sprite = _playerController.BackBattleSprite[0];
+            enemyBattleUnit.Trainer.sprite = _trainerController.FrontBattleSprite[0];
 
             yield return dialogBox.TypeDialog($"{_trainerController.TrainerName} wants to battle!",true);
 
-            enemyBattleUnit.gameObject.SetActive(true);
-            trainerImage.gameObject.SetActive(false);
+            enemyBattleUnit.ShowPokemonImage(true);
+            enemyBattleUnit.Trainer.gameObject.SetActive(false);
             Pokemon enemyPokemon = _trainerParty.GetFirstHealthyPokemon();
-            enemyBattleUnit.Setup(enemyPokemon);
+            enemyBattleUnit.Setup(enemyPokemon,true,_trainerController != null);
             yield return dialogBox.TypeDialog($"{_trainerController.TrainerName} sent out {enemyPokemon.currentName}");
 
             yield return new WaitForSeconds(0.5f);
 
-            playerBattleUnit.gameObject.SetActive(true);
-            playerImage.gameObject.SetActive(false);
+            playerBattleUnit.ShowPokemonImage(true);
+            playerBattleUnit.Trainer.gameObject.SetActive(false);
             Pokemon playerPokemon = _playerParty.GetFirstHealthyPokemon();
-            playerBattleUnit.Setup(playerPokemon);
+            playerBattleUnit.Setup(playerPokemon,true, _playerController != null);
             yield return dialogBox.TypeDialog($"Go {playerPokemon.currentName}");
 
             yield return new WaitForSeconds(0.5f);
         }
         else //WildPokemon
         {
-            playerBattleUnit.Setup(_playerParty.GetFirstHealthyPokemon());
-            enemyBattleUnit.Setup(_wildPokemon);
+            playerBattleUnit.ShowPokemonImage(false);
+            playerBattleUnit.Trainer.gameObject.SetActive(true);
+
+            playerBattleUnit.Setup(_playerParty.GetFirstHealthyPokemon(),true, _playerController != null);
+            enemyBattleUnit.Setup(_wildPokemon,true,_trainerController != null);
+
+            while(playerBattleUnit.startingAnimationsActive == true && enemyBattleUnit.startingAnimationsActive == true)
+            {
+                yield return null;
+            }
 
             yield return dialogBox.TypeDialog($"A wild {enemyBattleUnit.pokemon.currentName} has appeared!");
         }
@@ -284,7 +281,7 @@ public class BattleSystem : MonoBehaviour
         dialogBox.BattleStartSetup();
         attackSelectionEventSelector.SetMovesList(playerBattleUnit,playerBattleUnit.pokemon.moves,this);
 
-        _currentWeather = null;//will be expanded upon here
+        _currentWeather = null;
 
         yield return ActivatePokemonAbilityUponEntry(playerBattleUnit,enemyBattleUnit);
         yield return ActivatePokemonAbilityUponEntry(enemyBattleUnit,playerBattleUnit);
@@ -803,7 +800,7 @@ public class BattleSystem : MonoBehaviour
             enemyBattleUnit.AddPokemonToBattleList(newPokemon);
         }
 
-        battleUnit.Setup(newPokemon);
+        battleUnit.Setup(newPokemon,false,true);
 
         if(battleUnit.isPlayerPokemon == true)
         {
