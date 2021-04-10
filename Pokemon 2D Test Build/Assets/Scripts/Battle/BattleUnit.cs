@@ -71,11 +71,8 @@ public class BattleUnit : MonoBehaviour
         _imageSize = pokemonSprite.rectTransform.sizeDelta.x;
     }
 
-    public void Setup(Pokemon pokemon,bool startSetup,bool hasTrainer)
+    public void SetupAndSendOut(Pokemon pokemon)
     {
-        startingAnimationsActive = startSetup;
-
-        pokemonSprite.rectTransform.sizeDelta = new Vector2(_imageSize, _imageSize);
         if (isPlayersPokemon)
         {
             _pokemonSpriteAnimations = pokemon.pokemonBase.GetBackSprite(pokemon.isShiny,pokemon.gender);
@@ -93,18 +90,47 @@ public class BattleUnit : MonoBehaviour
 
         pokemonBattledAgainst = new List<Pokemon>();
 
-        if(startSetup == false)
+        StartCoroutine(PlayEnterAnimation());
+    }
+
+    public void SendOut()
+    {
+        EnablePokemon(true);
+        EnableTrainer(false);
+        StartCoroutine(PlayEnterAnimation());
+    }
+
+    public void SetDataBattleStart(Pokemon pokemon,Sprite trainerSprite)
+    {
+        pokemonSprite.rectTransform.sizeDelta = new Vector2(_imageSize, _imageSize);
+        if (isPlayersPokemon)
         {
-            StartCoroutine(PlayEnterAnimation());
+            _pokemonSpriteAnimations = pokemon.pokemonBase.GetBackSprite(pokemon.isShiny, pokemon.gender);
         }
         else
         {
-            StartCoroutine(PlayStartingAnimation(hasTrainer));
+            _pokemonSpriteAnimations = pokemon.pokemonBase.GetFrontSprite(pokemon.isShiny, pokemon.gender);
         }
-        
+
+        pokemonSprite.sprite = _pokemonSpriteAnimations[0];
+        this.pokemon = pokemon;
+        hud.SetData(pokemon, isPlayersPokemon);
+        pokemon.Reset();
+        _sendOutPokemonOnTurnEnd = false;
+
+        pokemonBattledAgainst = new List<Pokemon>();
+
+        if (trainerSprite != null)
+        {
+            trainerImage.sprite = trainerSprite;
+            EnablePokemon(false);
+            EnableTrainer(true);
+        }
+
+        StartCoroutine(PlayBattleOpeningAnimation(trainerSprite != null));
     }
 
-    IEnumerator PlayStartingAnimation(bool hasTrainer)
+    IEnumerator PlayBattleOpeningAnimation(bool hasTrainer)
     {
         GameObject temp;
         Vector3 tempEndPos;
@@ -127,6 +153,7 @@ public class BattleUnit : MonoBehaviour
             }
             else
             {
+                EnablePokemon(true);
                 pokemonSprite.transform.localPosition = new Vector3(pokemonSpriteOriginalPosition.x - 800f, pokemonSpriteOriginalPosition.y);
                 battleFloor.transform.localPosition = new Vector3(battleFloorOriginalPosition.x - 800f, battleFloorOriginalPosition.y);
                 temp = pokemonSprite.gameObject;
@@ -134,25 +161,33 @@ public class BattleUnit : MonoBehaviour
             }
         }
 
-        StartCoroutine(SmoothTransitionToPosition(temp, tempEndPos, 3f));
-        yield return SmoothTransitionToPosition(battleFloor.gameObject, battleFloorOriginalPosition, 3f);
+        StartCoroutine(SmoothTransitionToPosition(temp, tempEndPos, 2f));
+        yield return SmoothTransitionToPosition(battleFloor.gameObject, battleFloorOriginalPosition, 2f);
+    }
 
+    public IEnumerator PlayTrainerExitAnimation(bool hasTrainer)
+    {
         if (hasTrainer == true)
         {
+            GameObject temp = trainerImage.gameObject;
+            Vector3 tempEndPos;
+
             if (isPlayersPokemon)
             {
-                trainerImage.transform.localPosition = new Vector3(trainerImageOriginalPosition.x -350f, trainerImageOriginalPosition.y);
+                tempEndPos = new Vector3(trainerImageOriginalPosition.x - 350f, trainerImageOriginalPosition.y);
                 yield return SmoothTransitionToPosition(temp, tempEndPos, 1f);
             }
             else
             {
-                trainerImage.transform.localPosition = new Vector3(trainerImageOriginalPosition.x + 350f, trainerImageOriginalPosition.y);
+                tempEndPos = new Vector3(trainerImageOriginalPosition.x + 350f, trainerImageOriginalPosition.y);
                 yield return SmoothTransitionToPosition(temp, tempEndPos, 1f);
             }
-
-            yield return PlayEnterAnimation();
         }
-        startingAnimationsActive = false;
+        else
+        {
+            yield return AnimateSpriteUponEntry();
+            yield return hud.PlayEnterAnimation(HUD_ANIMATION_SPEED);
+        }
     }
 
     IEnumerator PlayEnterAnimation()
@@ -162,12 +197,12 @@ public class BattleUnit : MonoBehaviour
         if (isPlayersPokemon)
         {
             pokemonSprite.transform.localPosition = new Vector3(pokemonSpriteOriginalPosition.x - 400f, pokemonSpriteOriginalPosition.y);
-            yield return SmoothTransitionToPosition(pokemonSprite.gameObject, pokemonSpriteOriginalPosition, 1f);
+            yield return SmoothTransitionToPosition(pokemonSprite.gameObject, pokemonSpriteOriginalPosition, 0.75f);
         }
         else
         {
-            pokemonSprite.transform.localPosition = new Vector3(pokemonSpriteOriginalPosition.x - 800f, pokemonSpriteOriginalPosition.y);
-            yield return SmoothTransitionToPosition(pokemonSprite.gameObject, pokemonSpriteOriginalPosition, 1f);
+            pokemonSprite.transform.localPosition = new Vector3(pokemonSpriteOriginalPosition.x + 400f, pokemonSpriteOriginalPosition.y);
+            yield return SmoothTransitionToPosition(pokemonSprite.gameObject, pokemonSpriteOriginalPosition, 0.75f);
         }
 
         yield return AnimateSpriteUponEntry();
@@ -204,8 +239,8 @@ public class BattleUnit : MonoBehaviour
             targetLocation.x -= 50f;
         }
 
-        yield return SmoothTransitionToPosition(pokemonSprite.gameObject,targetLocation, 0.25f);
-        yield return SmoothTransitionToPosition(pokemonSprite.gameObject, pokemonSpriteOriginalPosition, 0.5f);
+        yield return SmoothTransitionToPosition(pokemonSprite.gameObject,targetLocation, 0.15f);
+        yield return SmoothTransitionToPosition(pokemonSprite.gameObject, pokemonSpriteOriginalPosition, 0.3f);
     }
 
     public void PlayHitAnimation()
@@ -484,17 +519,13 @@ public class BattleUnit : MonoBehaviour
         pokemonSprite.sprite = _pokemonSpriteAnimations[0];
     }
 
-    public Image Trainer
-    {
-        get { return trainerImage; }
-        set
-        {
-            trainerImage = value;
-        }
-    }
-
-    public void ShowPokemonImage(bool enabled)
+    void EnablePokemon(bool enabled)
     {
         pokemonSprite.gameObject.SetActive(enabled);
+    }
+
+    void EnableTrainer(bool enabled)
+    {
+        trainerImage.gameObject.SetActive(enabled);
     }
 }

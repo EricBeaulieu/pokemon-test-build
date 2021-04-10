@@ -229,49 +229,43 @@ public class BattleSystem : MonoBehaviour
     /// </summary>
     IEnumerator SetupBattle()
     {
+        Pokemon playerPokemon = _playerParty.GetFirstHealthyPokemon();
         if (_isTrainerBattle == true)
         {
-            playerBattleUnit.ShowPokemonImage(false);
-            enemyBattleUnit.ShowPokemonImage(false);
-
-            playerBattleUnit.Trainer.gameObject.SetActive(true);
-            enemyBattleUnit.Trainer.gameObject.SetActive(true);
-
-            playerBattleUnit.Trainer.sprite = _playerController.BackBattleSprite[0];
-            enemyBattleUnit.Trainer.sprite = _trainerController.FrontBattleSprite[0];
+            Pokemon enemyPokemon = _trainerParty.GetFirstHealthyPokemon();
+            playerBattleUnit.SetDataBattleStart(_playerParty.GetFirstHealthyPokemon(), _playerController.BackBattleSprite[0]);
+            enemyBattleUnit.SetDataBattleStart(enemyPokemon, _trainerController.FrontBattleSprite[0]);
 
             yield return dialogBox.TypeDialog($"{_trainerController.TrainerName} wants to battle!",true);
 
-            enemyBattleUnit.ShowPokemonImage(true);
-            enemyBattleUnit.Trainer.gameObject.SetActive(false);
-            Pokemon enemyPokemon = _trainerParty.GetFirstHealthyPokemon();
-            enemyBattleUnit.Setup(enemyPokemon,true,_trainerController != null);
+            yield return enemyBattleUnit.PlayTrainerExitAnimation(true);
+
             yield return dialogBox.TypeDialog($"{_trainerController.TrainerName} sent out {enemyPokemon.currentName}");
 
+            enemyBattleUnit.SendOut();
+
             yield return new WaitForSeconds(0.5f);
 
-            playerBattleUnit.ShowPokemonImage(true);
-            playerBattleUnit.Trainer.gameObject.SetActive(false);
-            Pokemon playerPokemon = _playerParty.GetFirstHealthyPokemon();
-            playerBattleUnit.Setup(playerPokemon,true, _playerController != null);
             yield return dialogBox.TypeDialog($"Go {playerPokemon.currentName}");
 
-            yield return new WaitForSeconds(0.5f);
+            yield return playerBattleUnit.PlayTrainerExitAnimation(true);
+            playerBattleUnit.SendOut();
+
+            yield return new WaitForSeconds(1f);
         }
         else //WildPokemon
         {
-            playerBattleUnit.ShowPokemonImage(false);
-            playerBattleUnit.Trainer.gameObject.SetActive(true);
-
-            playerBattleUnit.Setup(_playerParty.GetFirstHealthyPokemon(),true, _playerController != null);
-            enemyBattleUnit.Setup(_wildPokemon,true,_trainerController != null);
-
-            while(playerBattleUnit.startingAnimationsActive == true && enemyBattleUnit.startingAnimationsActive == true)
-            {
-                yield return null;
-            }
+            playerBattleUnit.SetDataBattleStart(playerPokemon, _playerController.BackBattleSprite[0]);
+            enemyBattleUnit.SetDataBattleStart(_wildPokemon,null);
 
             yield return dialogBox.TypeDialog($"A wild {enemyBattleUnit.pokemon.currentName} has appeared!");
+            yield return enemyBattleUnit.PlayTrainerExitAnimation(false);
+
+            yield return dialogBox.TypeDialog($"Go {playerPokemon.currentName}");
+            yield return playerBattleUnit.PlayTrainerExitAnimation(true);
+            playerBattleUnit.SendOut();
+
+            yield return new WaitForSeconds(1f);
         }
 
         _playerParty.SetOriginalPositions();
@@ -800,7 +794,7 @@ public class BattleSystem : MonoBehaviour
             enemyBattleUnit.AddPokemonToBattleList(newPokemon);
         }
 
-        battleUnit.Setup(newPokemon,false,true);
+        battleUnit.SetupAndSendOut(newPokemon);
 
         if(battleUnit.isPlayerPokemon == true)
         {

@@ -6,6 +6,7 @@ public class Notes
 {
     //To do list
 
+    //OnBattle End enemy trainer comes and says his defeated dialog
     //camera effects when entering battle either with trainers,wild pokemon or specialized pokemon
     //When level manager has overowlrd weather effects to pass them into the battles
 
