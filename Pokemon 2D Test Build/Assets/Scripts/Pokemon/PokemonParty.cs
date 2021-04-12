@@ -91,4 +91,12 @@ public class PokemonParty : MonoBehaviour
             SwitchPokemonPositions(pokemonParty[0], startPokemon);
         }
     }
+
+    public void HealAllPokemonInParty()
+    {
+        for (int i = 0; i < pokemonParty.Count; i++)
+        {
+            pokemonParty[i].FullyHeal();
+        }
+    }
 }

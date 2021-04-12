@@ -7,6 +7,8 @@ public class StatusConditionArt : MonoBehaviour
     static StatusConditionArt _instance = null;
 
     [SerializeField] Sprite nothing;
+    [SerializeField] Sprite blankWhite;
+    [SerializeField] Color white;
 
     [Header("Status")]
     [SerializeField] Sprite conditionPoison;
@@ -14,6 +16,16 @@ public class StatusConditionArt : MonoBehaviour
     [SerializeField] Sprite conditionSleep;
     [SerializeField] Sprite conditionParalyzed;
     [SerializeField] Sprite conditionFrozen;
+
+    [Header("Status Animations")]
+    [SerializeField] Color conditionPoisonColour;
+    [SerializeField] Sprite conditionPoisonBubbles;
+    [SerializeField] Color conditionBurnColour;
+    [SerializeField] Sprite conditionBurnFlames;
+    [SerializeField] Sprite conditionSleepZs;
+    [SerializeField] Color conditionParalyzedColour;
+    [SerializeField] Sprite[] conditionParalyzedStatic;
+    [SerializeField] Color conditionFrozenColour;
 
     [Header("Gender")]
     [SerializeField] Sprite male;
@@ -227,6 +239,16 @@ public class StatusConditionArt : MonoBehaviour
         get { return nothing; }
     }
 
+    public Sprite BlankWhite
+    {
+        get { return blankWhite; }
+    }
+
+    public Color PlainWhite
+    {
+        get { return white; }
+    }
+
     public Sprite ReturnStatusConditionArt(ConditionID currentCondition)
     {
         switch (currentCondition)
@@ -245,6 +267,29 @@ public class StatusConditionArt : MonoBehaviour
                 return conditionPoison;
         }
         return nothing;
+    }
+
+    public Color GetStatusConditionAnimationColour(ConditionID conditionID)
+    {
+        switch (conditionID)
+        {
+            case ConditionID.poison:
+                return conditionPoisonColour;
+            case ConditionID.burn:
+                return conditionBurnColour;
+            case ConditionID.paralyzed:
+                return conditionParalyzedColour;
+            case ConditionID.frozen:
+                return conditionFrozenColour;
+            case ConditionID.toxicPoison:
+                return conditionPoisonColour;
+        }
+        return white;
+    }
+
+    public Sprite GetRandomParalzedConditionAnimationArt()
+    {
+        return conditionParalyzedStatic[Random.Range(0, conditionParalyzedStatic.Length)];
     }
 
     public Sprite ReturnGenderArt(Gender gender)

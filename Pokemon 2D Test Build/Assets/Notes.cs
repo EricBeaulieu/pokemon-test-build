@@ -6,12 +6,15 @@ public class Notes
 {
     //To do list
 
-    //OnBattle End enemy trainer comes and says his defeated dialog
+    //Start menu items
+    //finish all different types of animations with conditions
+    //money set for trainer
     //camera effects when entering battle either with trainers,wild pokemon or specialized pokemon
     //When level manager has overowlrd weather effects to pass them into the battles
 
     //Add in
 
+    //On receiving a status play animation, nothing set yet possibly same as the enqueue string thing but with condition ID's as an addition and on show changes have it play the animation
     //Roar 
     //Ball on pokemon when caught
     //Trainer dialog when they lost the battle inside the battle scene
@@ -25,7 +28,7 @@ public class Notes
 
     //Bugs
 
-
+    //trainer when walking for some reason got into a half positionand stuck while walking. no idea how i created the bug
 
     //Others
     //if reflect/light screen are added in then make sure that crits cut through it

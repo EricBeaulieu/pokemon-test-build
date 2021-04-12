@@ -8,7 +8,6 @@ public class Ability
     public AbilityID Id { get; set; }
     public string Name { get; set; }
     public string Description { get; set; }
-    //public string StartMessage { get; set; }
     public Func<ConditionID, StatAttribute,float> BoostsAStatWhenAffectedWithAStatusCondition { get; set; }
     public Func<ConditionID, StatAttribute, bool> NegatesStatusEffectStatDropFromCondition { get; set; }
     public Func<StatAttribute, bool> PreventStatFromBeingLowered { get; set; }

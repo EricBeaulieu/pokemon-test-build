@@ -8,19 +8,22 @@ public class PlayerController : Entity
 {
     [SerializeField] string playerName;
     [SerializeField] Sprite[] playerBackSprite;
+    PokemonParty _pokemonParty;
 
     public event Action OnEncounter;
+    public event Action OpenStartMenu;
 
     Vector2 _currentInput;
 
     public bool spottedByTrainer;
     bool _ignorePlayerInput;
+    bool _ignoreMenuOpen;
 
     protected override void Awake()
     {
         base.Awake();
 
-
+        _pokemonParty = GetComponent<PokemonParty>();
         //Debug
 
         if(playerName == "")
@@ -33,12 +36,28 @@ public class PlayerController : Entity
         }
 
         _ignorePlayerInput = false;
+        _ignoreMenuOpen = false;
     }
 
     public override void HandleUpdate()
     {
         if(spottedByTrainer == false && _ignorePlayerInput == false)
         {
+            if(_ignoreMenuOpen == false)
+            {
+                if (Input.GetButtonDown("Submit") && IsMoving == false && isRunning == false)
+                {
+                    OpenStartMenu();
+                    _ignorePlayerInput = true;
+                    Debug.Log("Menu Open");
+                }
+            }
+            else
+            {
+                _ignoreMenuOpen = false;
+            }
+
+
             if(Input.GetKeyDown(KeyCode.Space))
             {
                 isRunning = true;
@@ -97,6 +116,7 @@ public class PlayerController : Entity
         if (Physics2D.OverlapCircle(transform.position, 0.25f, grassLayermask) != null)
         {
             _anim.SetBool("isMoving", false);
+            isRunning = false;
             OnEncounter();
         }
     }
@@ -151,6 +171,7 @@ public class PlayerController : Entity
     public void LookAtTrainer(Vector2 trainerPos)
     {
         FaceTowardsDirection(trainerPos);
+        isRunning = false;
     }
 
     public Sprite[] BackBattleSprite
@@ -168,6 +189,13 @@ public class PlayerController : Entity
         transform.position = new Vector2(10.5f, .5f);
         Debug.Log("player Has Lost");
         //Go to pokemon center mechanic
+        _pokemonParty.HealAllPokemonInParty();
         FaceTowardsDirection(FacingDirections.Down);
+    }
+
+    public void ReturnFromStartMenu()
+    {
+        _ignorePlayerInput = false;
+        _ignoreMenuOpen = true;
     }
 }

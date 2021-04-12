@@ -188,6 +188,8 @@ public class BattleSystem : MonoBehaviour
         }
     }
 
+    #region Battle Setup
+
     public void SetupBattleArt(LevelArtDetails levelArt)
     {
         backgroundArt.sprite = levelArt.background;
@@ -237,6 +239,9 @@ public class BattleSystem : MonoBehaviour
             enemyBattleUnit.SetDataBattleStart(enemyPokemon, _trainerController.FrontBattleSprite[0]);
 
             yield return dialogBox.TypeDialog($"{_trainerController.TrainerName} wants to battle!",true);
+            yield return new WaitUntil(() => playerBattleUnit.startingAnimationsActive == false && enemyBattleUnit.startingAnimationsActive == false);
+            yield return new WaitForSeconds(0.5f);
+            dialogBox.AfterDialogWait();
 
             yield return enemyBattleUnit.PlayTrainerExitAnimation(true);
 
@@ -283,6 +288,8 @@ public class BattleSystem : MonoBehaviour
         SetupPlayerActions();
         PlayerActions();
     }
+
+    #endregion
 
     #region Player Actions
 
@@ -395,7 +402,53 @@ public class BattleSystem : MonoBehaviour
         EnableAttackMoveSelector(true);
     }
 
+    public void ReturnFromPokemonPartySystem()
+    {
+        actionSelectionEventSelector.SelectBox();
+    }
+
+    IEnumerator RunFromBattle()
+    {
+        if (_isTrainerBattle == true)
+        {
+            yield return dialogBox.TypeDialog($"You cant run from a trainer battle", true);
+            PlayerActions();
+            yield break;
+        }
+
+        _escapeAttempts++;
+        int playerSpeed = playerBattleUnit.pokemon.speed;
+        int enemySpeed = enemyBattleUnit.pokemon.speed;
+
+        if (playerSpeed > enemySpeed)
+        {
+            yield return dialogBox.TypeDialog($"You got away safely", true);
+            OnBattleOver(true);
+            yield break;
+        }
+        else
+        {
+            float f = ((playerSpeed * 128) / enemySpeed) + (30 * _escapeAttempts);
+            f = f % 256;
+
+            int rnd = Random.Range(0, 256);
+            if (rnd < f)
+            {
+                yield return dialogBox.TypeDialog($"You got away safely", true);
+                OnBattleOver(true);
+                yield break;
+            }
+            else
+            {
+                yield return dialogBox.TypeDialog($"You were unable to escape!", true);
+                StartCoroutine(EnemyMove());
+            }
+        }
+    }
+
     #endregion
+
+    #region Enemy Actions
 
     public IEnumerator EnemyMove()
     {
@@ -407,6 +460,50 @@ public class BattleSystem : MonoBehaviour
 
         yield return RunThroughTurns(_currentTurnDetails);
     }
+
+    IEnumerator TrainerAboutToUsePokemonFeature(Pokemon nextPokemon)
+    {
+        yield return dialogBox.TypeDialog($"{_trainerController.TrainerName} is about to use {nextPokemon.pokemonBase.GetPokedexName()}", true);
+
+        yield return dialogBox.TypeDialog($"Will {_playerController.TrainerName} change Pokemon?");
+
+        yield return dialogBox.SetChoiceBox(() =>
+        {
+            OpenPokemonParty(true, true);
+        }
+        , () =>
+        {
+            _playerPokemonShift = false;
+        });
+
+        yield return SwitchPokemonIEnumerator(enemyBattleUnit, nextPokemon);
+    }
+
+    IEnumerator TrainerBattleOver(bool playerHasWon)
+    {
+        if (playerHasWon == false)
+        {
+            enemyBattleUnit.PlayFaintAnimation();
+            yield return new WaitForSeconds(0.75f);
+        }
+
+        yield return enemyBattleUnit.TrainerToField();
+        List<string> trainerLines = _trainerController.OnBattleOverDialog(playerHasWon);
+
+        for (int i = 0; i < trainerLines.Count; i++)
+        {
+            yield return dialogBox.TypeDialog($"{trainerLines[i]}", true);
+        }
+
+        if (playerHasWon == true)
+        {
+            //Show dialog of player recieving money
+        }
+    }
+
+    #endregion
+
+    #region Battle Cycle
 
     IEnumerator RunThroughTurns(List<TurnAttackDetails> attacksChosen)
     {
@@ -499,34 +596,20 @@ public class BattleSystem : MonoBehaviour
         }
     }
 
-    IEnumerator ApplyEffectsOnEndTurn(BattleUnit sourceUnit)
-    {
-        if(sourceUnit.pokemon.currentHitPoints <= 0)
-        {
-            yield break;
-        }
-
-        int currentHP = sourceUnit.pokemon.currentHitPoints;
-
-        sourceUnit.pokemon.OnEndTurn();
-        yield return ShowStatusChanges(sourceUnit.pokemon);
-        yield return sourceUnit.HUD.UpdateHP(currentHP);
-
-        if (sourceUnit.pokemon.currentHitPoints <= 0)
-        {
-            yield return PokemonHasFainted(sourceUnit);
-        }
-    }
-
-    IEnumerator RunMove(BattleUnit sourceUnit,BattleUnit targetUnit,MoveBase moveBase)
+    IEnumerator RunMove(BattleUnit sourceUnit, BattleUnit targetUnit, MoveBase moveBase)
     {
         //This is here incase the pokemon hits itself in confusion for the smooth animation
         int previousHP = sourceUnit.pokemon.currentHitPoints;
 
-        bool canUseMove = sourceUnit.pokemon.OnBeforeMove();
-        if(canUseMove == false)
+        //due to animations instead of it returning a bool it will return the animation
+        ConditionID canUseMove = sourceUnit.pokemon.OnBeforeMove();
+        //If confused play pre animation
+
+
+        if (canUseMove != ConditionID.NA)
         {
             yield return ShowStatusChanges(sourceUnit.pokemon);
+            yield return sourceUnit.StatusConditionAnimation(canUseMove);
             //If it hit itself in its confusion update the HUD
             yield return sourceUnit.HUD.UpdateHP(previousHP);
             if (sourceUnit.pokemon.currentHitPoints <= 0)
@@ -540,7 +623,7 @@ public class BattleSystem : MonoBehaviour
 
         yield return dialogBox.TypeDialog($"{sourceUnit.pokemon.currentName} used {moveBase.MoveName}");
 
-        if(targetUnit.pokemon.currentHitPoints <=0 && moveBase.Target == MoveTarget.Foe)
+        if (targetUnit.pokemon.currentHitPoints <= 0 && moveBase.Target == MoveTarget.Foe)
         {
             yield return dialogBox.TypeDialog($"There is no target Pokemon");
             yield break;
@@ -548,11 +631,11 @@ public class BattleSystem : MonoBehaviour
         //Moved here so it shows an attack animation, just skips out on the pokemon recieving the hit animation
         yield return sourceUnit.PlayAttackAnimation();
 
-        if (CheckIfMoveHits(moveBase,sourceUnit.pokemon,targetUnit.pokemon) == true)
+        if (CheckIfMoveHits(moveBase, sourceUnit.pokemon, targetUnit.pokemon) == true)
         {
             if (moveBase.MoveType == MoveType.Status)
             {
-                yield return RunMoveEffects(moveBase.MoveEffects, sourceUnit, targetUnit,moveBase.Target);
+                yield return RunMoveEffects(moveBase.MoveEffects, sourceUnit, targetUnit, moveBase.Target);
             }
             else
             {
@@ -568,22 +651,22 @@ public class BattleSystem : MonoBehaviour
                 yield return ShowDamageDetails(damageDetails, targetUnit);
 
                 //Shows that the damage does not effect them and then ends the move right there
-                if(damageDetails.typeEffectiveness == 0)
+                if (damageDetails.typeEffectiveness == 0)
                 {
                     yield break;
                 }
             }
 
-            if(moveBase.SecondaryEffects != null && moveBase.SecondaryEffects.Count > 0 && targetUnit.pokemon.currentHitPoints > 0)
+            if (moveBase.SecondaryEffects != null && moveBase.SecondaryEffects.Count > 0 && targetUnit.pokemon.currentHitPoints > 0)
             {
                 foreach (var secondaryEffect in moveBase.SecondaryEffects)
                 {
                     int rnd = Random.Range(1, 101);
-                    if(rnd <= secondaryEffect.PercentChance)
+                    if (rnd <= secondaryEffect.PercentChance)
                     {
-                        yield return RunMoveEffects(secondaryEffect, sourceUnit, targetUnit, secondaryEffect.Target,true);
+                        yield return RunMoveEffects(secondaryEffect, sourceUnit, targetUnit, secondaryEffect.Target, true);
 
-                        if(secondaryEffect.Volatiletatus == ConditionID.cursedUser)
+                        if (secondaryEffect.Volatiletatus == ConditionID.cursedUser)
                         {
                             yield return sourceUnit.HUD.UpdateHP(previousHP);
                             if (sourceUnit.pokemon.currentHitPoints <= 0)
@@ -606,9 +689,78 @@ public class BattleSystem : MonoBehaviour
         }
     }
 
-    bool CheckIfMoveHits(MoveBase move,Pokemon source,Pokemon target)
+    IEnumerator RunMoveEffects(MoveEffects effects, BattleUnit source, BattleUnit target, MoveTarget moveTarget, bool wasSecondaryEffect = false)
     {
-        if(move.AlwaysHits == true)
+        if (effects.Boosts != null)
+        {
+            yield return ApplyStatChanges(effects.Boosts, source, target, moveTarget);
+        }
+
+        //Status Condition
+        if (effects.Status != ConditionID.NA)
+        {
+            target.pokemon.SetStatus(effects.Status, wasSecondaryEffect);
+        }
+
+        //Volatile Status Condition
+        if (effects.Volatiletatus != ConditionID.NA)
+        {
+            if (moveTarget == MoveTarget.Foe)
+            {
+                target.pokemon.SetVolatileStatus(effects.Volatiletatus);
+            }
+            else
+            {
+                source.pokemon.SetVolatileStatus(effects.Volatiletatus);
+            }
+        }
+
+        if (effects.WeatherEffect != WeatherEffectID.NA)
+        {
+            yield return StartWeatherEffect(effects.WeatherEffect);
+        }
+
+        if (effects.EntryHazard != EntryHazardID.NA)
+        {
+            if (moveTarget == MoveTarget.Foe)
+            {
+                List<EntryHazard> currentEntrySide = (target.isPlayerPokemon) ? _playerSideEntryHazards : _enemySideEntryHazards;
+                EntryHazard currentHazard = EntryHazardsDB.EntryHazards[effects.EntryHazard];
+
+                if (currentEntrySide.Contains(currentHazard) == true)
+                {
+                    currentHazard = currentEntrySide.Find(x => x.Id == effects.EntryHazard);
+                    if (currentHazard.CanBeUsed() == false)
+                    {
+                        yield return dialogBox.TypeDialog("But it failed");
+                        yield break;
+                    }
+                    else
+                    {
+                        yield return dialogBox.TypeDialog(currentHazard?.StartMessage(target));
+                        currentHazard?.OnStart?.Invoke(currentHazard);
+                    }
+                }
+                else
+                {
+                    currentEntrySide.Add(currentHazard);
+                    yield return dialogBox.TypeDialog(currentHazard?.StartMessage(target));
+                    currentHazard?.OnStart?.Invoke(currentHazard);
+                }
+            }
+            else
+            {
+                Debug.Log($"Entry hazard is trying to be set on own side of field {effects}");
+            }
+        }
+
+        yield return ShowStatusChanges(source.pokemon);
+        yield return ShowStatusChanges(target.pokemon);
+    }
+
+    bool CheckIfMoveHits(MoveBase move, Pokemon source, Pokemon target)
+    {
+        if (move.AlwaysHits == true)
         {
             return true;
         }
@@ -631,21 +783,191 @@ public class BattleSystem : MonoBehaviour
         return Random.Range(1, 101) <= moveAccuracy;
     }
 
+    IEnumerator ApplyEffectsOnEndTurn(BattleUnit sourceUnit)
+    {
+        if(sourceUnit.pokemon.currentHitPoints <= 0)
+        {
+            yield break;
+        }
+
+        int currentHP = sourceUnit.pokemon.currentHitPoints;
+
+        List<Condition> allConditionsOnPokemon = new List<Condition>();
+        if(sourceUnit.pokemon.status != null)
+        {
+            allConditionsOnPokemon.Add(sourceUnit.pokemon.status);
+        }
+
+        foreach (Condition volatileStatus in sourceUnit.pokemon.volatileStatus)
+        {
+            allConditionsOnPokemon.Add(volatileStatus);
+        }
+
+        ////This copy is here because if it is iterating through it and removes an element while searching it shall break the for each loop
+        List<Condition> copyAllConditionsOnPokemon = new List<Condition>(allConditionsOnPokemon);
+
+        foreach (Condition currentCondition in copyAllConditionsOnPokemon)
+        {
+            if (sourceUnit.pokemon.currentHitPoints <= 0)
+            {
+                break;
+            }
+            currentHP = sourceUnit.pokemon.currentHitPoints;
+
+            sourceUnit.pokemon.OnEndTurn(currentCondition);
+            if(currentCondition.OnEndTurn != null)
+            {
+                yield return sourceUnit.StatusConditionAnimation(currentCondition.Id);
+            }
+            yield return ShowStatusChanges(sourceUnit.pokemon);
+            yield return sourceUnit.HUD.UpdateHP(currentHP);
+        }
+
+        if (sourceUnit.pokemon.currentHitPoints <= 0)
+        {
+            yield return PokemonHasFainted(sourceUnit);
+        }
+    }
+
+    IEnumerator ShowStatusChanges(Pokemon pokemon)
+    {
+        while (pokemon.statusChanges.Count > 0)
+        {
+            string message = pokemon.statusChanges.Dequeue();
+            yield return dialogBox.TypeDialog(message);
+        }
+    }
+
+    IEnumerator ShowDamageDetails(DamageDetails damageDetails, BattleUnit battleUnit)
+    {
+        if (damageDetails.criticalHit > 1f)
+        {
+            yield return dialogBox.TypeDialog("A Critical Hit!");
+        }
+
+        if (damageDetails.typeEffectiveness == 0)
+        {
+            yield return dialogBox.TypeDialog($"It doesnt effect {battleUnit.pokemon.currentName}");
+        }
+        else if (damageDetails.typeEffectiveness <= 0.5f)
+        {
+            yield return dialogBox.TypeDialog($"It's not very effective");
+        }
+        else if (damageDetails.typeEffectiveness > 1f)
+        {
+            yield return dialogBox.TypeDialog($"It's super effective!");
+        }
+    }
+
+    IEnumerator ApplyStatChanges(List<StatBoost> statBoosts, BattleUnit sourceUnit, BattleUnit targetUnit, MoveTarget moveTarget)
+    {
+        //Check to see if one is up and one is down
+        List<StatBoost> positiveEffects = new List<StatBoost>();
+        List<StatBoost> negativeEffects = new List<StatBoost>();
+
+        foreach (StatBoost currentStat in statBoosts)
+        {
+            if (currentStat.boost == 0)
+            {
+                continue;
+            }
+            else if (currentStat.boost > 0)
+            {
+                positiveEffects.Add(currentStat);
+            }
+            else
+            {
+                negativeEffects.Add(currentStat);
+            }
+        }
+
+        if (moveTarget == MoveTarget.Foe)
+        {
+            targetUnit.pokemon.ApplyStatModifier(positiveEffects);
+            yield return targetUnit.ShowStatChanges(positiveEffects, true);
+            yield return ShowStatusChanges(targetUnit.pokemon);
+
+            if (targetUnit.pokemon.ability?.PreventStatFromBeingLowered != null)
+            {
+                bool abilityActivated = false;//This is for multiple stats prevented from being lowered so it doesnt stack the Queue
+
+                List<StatBoost> negativeEffectsCopy = new List<StatBoost>(negativeEffects);
+                foreach (StatBoost stat in negativeEffectsCopy)
+                {
+                    if (stat.boost < 0)
+                    {
+                        bool? negated = targetUnit.pokemon.ability.PreventStatFromBeingLowered.Invoke(stat.stat);
+                        if (negated == true)
+                        {
+                            if (abilityActivated == false)
+                            {
+                                targetUnit.OnAbilityActivation();
+                                targetUnit.pokemon.statusChanges.Enqueue(targetUnit.pokemon.ability.OnAbilitityActivation(targetUnit.pokemon));
+                                abilityActivated = true;
+                            }
+                            negativeEffects.Remove(stat);
+                        }
+                    }
+                }
+            }
+
+            targetUnit.pokemon.ApplyStatModifier(negativeEffects);
+            yield return targetUnit.ShowStatChanges(negativeEffects, false);
+            yield return ShowStatusChanges(targetUnit.pokemon);
+        }
+        else if (moveTarget == MoveTarget.Self)
+        {
+            sourceUnit.pokemon.ApplyStatModifier(positiveEffects);
+            yield return sourceUnit.ShowStatChanges(positiveEffects, true);
+            yield return ShowStatusChanges(sourceUnit.pokemon);
+
+            sourceUnit.pokemon.ApplyStatModifier(negativeEffects);
+            yield return sourceUnit.ShowStatChanges(negativeEffects, false);
+            yield return ShowStatusChanges(sourceUnit.pokemon);
+        }
+    }
+
+    IEnumerator ActivatePokemonAbilityUponEntry(BattleUnit sourceUnit, BattleUnit targetUnit)
+    {
+        if (sourceUnit.pokemon.ability == null)
+        {
+            yield break;
+        }
+
+        if (sourceUnit.pokemon.ability.OnStartWeatherEffect != WeatherEffectID.NA)
+        {
+            sourceUnit.OnAbilityActivation();
+            yield return StartWeatherEffect(sourceUnit.pokemon.ability.OnStartWeatherEffect, true);
+            yield break;
+        }
+
+        if (sourceUnit.pokemon.ability?.OnStartLowerStat != null)
+        {
+            sourceUnit.OnAbilityActivation();
+            List<StatBoost> abilityStatBoosts = new List<StatBoost>() { sourceUnit.pokemon.ability.OnStartLowerStat };
+            yield return ApplyStatChanges(abilityStatBoosts, sourceUnit, targetUnit, MoveTarget.Foe);
+        }
+    }
+
+    #endregion
+
+    #region PokemonFaint/Switching
+
     IEnumerator PokemonHasFainted(BattleUnit targetBattleUnit)
     {
         if (targetBattleUnit.pokemon.currentHitPoints <= 0)
         {
             yield return dialogBox.TypeDialog($"{targetBattleUnit.pokemon.currentName} has fainted");
             targetBattleUnit.PlayFaintAnimation();
-            
-            if(targetBattleUnit.isPlayerPokemon == false)
+
+            if (targetBattleUnit.isPlayerPokemon == false)
             {
                 int expYield = targetBattleUnit.pokemon.pokemonBase.RewardedExperienceYield;
                 int level = targetBattleUnit.pokemon.currentLevel;
-                float trainerBonus = (_isTrainerBattle==true) ? 1.5f : 1;
+                float trainerBonus = (_isTrainerBattle == true) ? 1.5f : 1;
                 float pokemonSharingExp = 1;
 
-                if(targetBattleUnit.GetListOfPokemonBattledAgainst.Count > 1)
+                if (targetBattleUnit.GetListOfPokemonBattledAgainst.Count > 1)
                 {
                     int sharing = 0;
                     List<Pokemon> copyPokemonBattledAgainst = new List<Pokemon>(targetBattleUnit.GetListOfPokemonBattledAgainst);
@@ -658,7 +980,7 @@ public class BattleSystem : MonoBehaviour
                         }
                         sharing++;
                     }
-                    if(sharing > 1)
+                    if (sharing > 1)
                     {
                         pokemonSharingExp = sharing;
                     }
@@ -668,9 +990,9 @@ public class BattleSystem : MonoBehaviour
 
                 foreach (Pokemon pokemon in targetBattleUnit.GetListOfPokemonBattledAgainst)
                 {
-                    if(pokemon == playerBattleUnit.pokemon)
+                    if (pokemon == playerBattleUnit.pokemon)
                     {
-                        yield return GainExperience(playerBattleUnit,expGained);
+                        yield return GainExperience(playerBattleUnit, expGained);
                     }
                     else
                     {
@@ -681,11 +1003,11 @@ public class BattleSystem : MonoBehaviour
             }
 
             yield return new WaitForSeconds(2f);
-            CheckForBattleOver(targetBattleUnit);
+            yield return CheckForBattleOver(targetBattleUnit);
         }
     }
 
-    void CheckForBattleOver(BattleUnit faintedUnit)
+    IEnumerator CheckForBattleOver(BattleUnit faintedUnit)
     {
         if (faintedUnit.isPlayerPokemon)
         {
@@ -696,6 +1018,11 @@ public class BattleSystem : MonoBehaviour
             }
             else
             {
+                if(_isTrainerBattle == true)
+                {
+                    yield return TrainerBattleOver(false);
+                }
+
                 OnBattleOver(false);
             }
         }
@@ -710,6 +1037,7 @@ public class BattleSystem : MonoBehaviour
                 }
                 else
                 {
+                    yield return TrainerBattleOver(true);
                     OnBattleOver(true);
                 }
             }
@@ -718,50 +1046,16 @@ public class BattleSystem : MonoBehaviour
                 OnBattleOver(true);
             }
         }
+        yield return null;
     }
 
-    IEnumerator ShowDamageDetails(DamageDetails damageDetails,BattleUnit battleUnit)
-    {
-        if(damageDetails.criticalHit > 1f)
-        {
-            yield return dialogBox.TypeDialog("A Critical Hit!");
-        }
 
-        if(damageDetails.typeEffectiveness == 0)
-        {
-            yield return dialogBox.TypeDialog($"It doesnt effect {battleUnit.pokemon.currentName}");
-        }
-        else if(damageDetails.typeEffectiveness <= 0.5f)
-        {
-            yield return dialogBox.TypeDialog($"It's not very effective");
-        }
-        else if(damageDetails.typeEffectiveness > 1f)
-        {
-            yield return dialogBox.TypeDialog($"It's super effective!");
-        }
-    }
-
+    /// <summary>
+    /// Used in party selection
+    /// </summary>
     public Pokemon GetCurrentPokemonInBattle
     {
         get { return playerBattleUnit.pokemon; }
-    }
-
-    IEnumerator TrainerAboutToUsePokemonFeature(Pokemon nextPokemon)
-    {
-        yield return dialogBox.TypeDialog($"{_trainerController.TrainerName} is about to use {nextPokemon.pokemonBase.GetPokedexName()}", true);
-
-        yield return dialogBox.TypeDialog($"Will {_playerController.TrainerName} change Pokemon?");
-
-        yield return dialogBox.SetChoiceBox(() => 
-        {
-            OpenPokemonParty(true,true);
-        }
-        , ()=> 
-        {
-            _playerPokemonShift = false;
-        });
-
-        yield return SwitchPokemonIEnumerator(enemyBattleUnit, nextPokemon);
     }
 
     public void PlayerContinueAfterPartyShiftSelection()
@@ -834,88 +1128,7 @@ public class BattleSystem : MonoBehaviour
         }
     }
 
-    public void ReturnFromPokemonPartySystem()
-    {
-        actionSelectionEventSelector.SelectBox();
-    }
-
-    IEnumerator RunMoveEffects(MoveEffects effects, BattleUnit source, BattleUnit target,MoveTarget moveTarget,bool wasSecondaryEffect = false)
-    {
-        if (effects.Boosts != null)
-        {
-            yield return ApplyStatChanges(effects.Boosts, source, target, moveTarget);
-        }
-
-        //Status Condition
-        if(effects.Status != ConditionID.NA)
-        {
-            target.pokemon.SetStatus(effects.Status,wasSecondaryEffect);
-        }
-
-        //Volatile Status Condition
-        if (effects.Volatiletatus != ConditionID.NA)
-        {
-            if(moveTarget == MoveTarget.Foe)
-            {
-                target.pokemon.SetVolatileStatus(effects.Volatiletatus);
-            }
-            else
-            {
-                source.pokemon.SetVolatileStatus(effects.Volatiletatus);
-            }
-        }
-
-        if (effects.WeatherEffect != WeatherEffectID.NA)
-        {
-            yield return StartWeatherEffect(effects.WeatherEffect);
-        }
-
-        if (effects.EntryHazard != EntryHazardID.NA)
-        {
-            if (moveTarget == MoveTarget.Foe)
-            {
-                List<EntryHazard> currentEntrySide = (target.isPlayerPokemon) ? _playerSideEntryHazards: _enemySideEntryHazards;
-                EntryHazard currentHazard = EntryHazardsDB.EntryHazards[effects.EntryHazard];
-
-                if (currentEntrySide.Contains(currentHazard) == true)
-                {
-                    currentHazard = currentEntrySide.Find(x => x.Id == effects.EntryHazard);
-                    if (currentHazard.CanBeUsed() == false)
-                    {
-                        yield return dialogBox.TypeDialog("But it failed");
-                        yield break;
-                    }
-                    else
-                    {
-                        yield return dialogBox.TypeDialog(currentHazard?.StartMessage(target));
-                        currentHazard?.OnStart?.Invoke(currentHazard);
-                    }
-                }
-                else
-                {
-                    currentEntrySide.Add(currentHazard);
-                    yield return dialogBox.TypeDialog(currentHazard?.StartMessage(target));
-                    currentHazard?.OnStart?.Invoke(currentHazard);
-                }
-            }
-            else
-            {
-                Debug.Log($"Entry hazard is trying to be set on own side of field {effects}");
-            }
-        }
-
-        yield return ShowStatusChanges(source.pokemon);
-        yield return ShowStatusChanges(target.pokemon);
-    }
-
-    IEnumerator ShowStatusChanges(Pokemon pokemon)
-    {
-        while(pokemon.statusChanges.Count > 0)
-        {
-            string message = pokemon.statusChanges.Dequeue();
-            yield return dialogBox.TypeDialog(message);
-        }
-    }
+    #endregion
 
     #region Entry Hazards
 
@@ -953,6 +1166,8 @@ public class BattleSystem : MonoBehaviour
     }
 
     #endregion
+
+    #region Weather Effects
 
     IEnumerator ShowWeatherEffect(WeatherEffect weather)
     {
@@ -1016,6 +1231,22 @@ public class BattleSystem : MonoBehaviour
             yield return PokemonHasFainted(sourceUnit);
         }
     }
+
+    public static WeatherEffectID GetCurrentWeather
+    {
+        get
+        {
+            if (_currentWeather != null)
+            {
+                return _currentWeather.Id;
+            }
+            return WeatherEffectID.NA;
+        }
+    }
+
+    #endregion
+
+    #region Items/Catching Pokemon
 
     IEnumerator PlayerThrewPokeball(BattleUnit targetUnit)
     {
@@ -1101,44 +1332,9 @@ public class BattleSystem : MonoBehaviour
         }
     }
 
-    IEnumerator RunFromBattle()
-    {
-        if (_isTrainerBattle == true)
-        {
-            yield return dialogBox.TypeDialog($"You cant run from a trainer battle", true);
-            PlayerActions();
-            yield break;
-        }
+    #endregion
 
-        _escapeAttempts++;
-        int playerSpeed = playerBattleUnit.pokemon.speed;
-        int enemySpeed = enemyBattleUnit.pokemon.speed;
-
-        if(playerSpeed > enemySpeed)
-        {
-            yield return dialogBox.TypeDialog($"You got away safely", true);
-            OnBattleOver(true);
-            yield break;
-        }
-        else
-        {
-            float f = ((playerSpeed * 128) / enemySpeed) + (30 * _escapeAttempts);
-            f = f % 256;
-
-            int rnd = Random.Range(0, 256);
-            if(rnd < f)
-            {
-                yield return dialogBox.TypeDialog($"You got away safely", true);
-                OnBattleOver(true);
-                yield break;
-            }
-            else
-            {
-                yield return dialogBox.TypeDialog($"You were unable to escape!", true);
-                StartCoroutine(EnemyMove());
-            }
-        }
-    }
+    #region Experience and Leveling Mechanics
 
     IEnumerator GainExperience(BattleUnit targetUnit,int expGained)
     {
@@ -1282,102 +1478,6 @@ public class BattleSystem : MonoBehaviour
         }
     }
 
-    IEnumerator ActivatePokemonAbilityUponEntry(BattleUnit sourceUnit,BattleUnit targetUnit)
-    {
-        if(sourceUnit.pokemon.ability == null)
-        {
-            yield break;
-        }
+    #endregion
 
-        if(sourceUnit.pokemon.ability.OnStartWeatherEffect != WeatherEffectID.NA)
-        {
-            yield return StartWeatherEffect(sourceUnit.pokemon.ability.OnStartWeatherEffect, true);
-            yield break;
-        }
-
-        if(sourceUnit.pokemon.ability?.OnStartLowerStat != null)
-        {
-            List<StatBoost> abilityStatBoosts = new List<StatBoost>() { sourceUnit.pokemon.ability.OnStartLowerStat };
-            yield return ApplyStatChanges(abilityStatBoosts, sourceUnit, targetUnit, MoveTarget.Foe);
-        }
-    }
-
-    IEnumerator ApplyStatChanges(List<StatBoost> statBoosts,BattleUnit sourceUnit,BattleUnit targetUnit,MoveTarget moveTarget)
-    {
-        //Check to see if one is up and one is down
-        List<StatBoost> positiveEffects = new List<StatBoost>();
-        List<StatBoost> negativeEffects = new List<StatBoost>();
-
-        foreach (StatBoost currentStat in statBoosts)
-        {
-            if (currentStat.boost == 0)
-            {
-                continue;
-            }
-            else if (currentStat.boost > 0)
-            {
-                positiveEffects.Add(currentStat);
-            }
-            else
-            {
-                negativeEffects.Add(currentStat);
-            }
-        }
-
-        if (moveTarget == MoveTarget.Foe)
-        {
-            targetUnit.pokemon.ApplyStatModifier(positiveEffects);
-            yield return targetUnit.ShowStatChanges(positiveEffects, true);
-            yield return ShowStatusChanges(targetUnit.pokemon);
-
-            if (targetUnit.pokemon.ability?.PreventStatFromBeingLowered != null)
-            {
-                bool abilityActivated = false;//This is for multiple stats prevented from being lowered so it doesnt stack the Queue
-
-                List<StatBoost> negativeEffectsCopy = new List<StatBoost>(negativeEffects);
-                foreach (StatBoost stat in negativeEffectsCopy)
-                {
-                    if (stat.boost < 0)
-                    {
-                        bool? negated = targetUnit.pokemon.ability.PreventStatFromBeingLowered.Invoke(stat.stat);
-                        if (negated == true)
-                        {
-                            if (abilityActivated == false)
-                            {
-                                targetUnit.pokemon.statusChanges.Enqueue(targetUnit.pokemon.ability.OnAbilitityActivation(targetUnit.pokemon));
-                                abilityActivated = true;
-                            }
-                            negativeEffects.Remove(stat);
-                        }
-                    }
-                }
-            }
-
-            targetUnit.pokemon.ApplyStatModifier(negativeEffects);
-            yield return targetUnit.ShowStatChanges(negativeEffects, false);
-            yield return ShowStatusChanges(targetUnit.pokemon);
-        }
-        else if (moveTarget == MoveTarget.Self)
-        {
-            sourceUnit.pokemon.ApplyStatModifier(positiveEffects);
-            yield return sourceUnit.ShowStatChanges(positiveEffects, true);
-            yield return ShowStatusChanges(sourceUnit.pokemon);
-
-            sourceUnit.pokemon.ApplyStatModifier(negativeEffects);
-            yield return sourceUnit.ShowStatChanges(negativeEffects, false);
-            yield return ShowStatusChanges(sourceUnit.pokemon);
-        }
-    }
-
-    public static WeatherEffectID GetCurrentWeather
-    {
-        get
-        {
-            if(_currentWeather != null)
-            {
-                return _currentWeather.Id;
-            }
-            return WeatherEffectID.NA;
-        }
-    }
 }

@@ -7,6 +7,7 @@ public class TrainerController : Entity,IInteractable
 {
     [SerializeField] Dialog preBattleDialog;
     [SerializeField] Dialog inBattleDialogOnDefeat;
+    [SerializeField] Dialog inBattleDialogOnVictory;
     bool _hasLostToPlayer = false;
     [SerializeField] Dialog postDefeatOverworldDialog;
 
@@ -177,12 +178,6 @@ public class TrainerController : Entity,IInteractable
         player.spottedByTrainer = false;
     }
 
-    public void HasLostBattleToPlayer()
-    {
-        _hasLostToPlayer = true;
-        _playerSpotted = false;
-    }
-
     public Sprite[] FrontBattleSprite
     {
         get { return frontBattleSprite; }
@@ -231,6 +226,26 @@ public class TrainerController : Entity,IInteractable
         }
 
         return FacingDirections.Down;
+    }
+
+    /// <summary>
+    /// This sets the players dialog as well as sets all the variables upon defeat
+    /// </summary>
+    /// <param name="trainerHasWon">If this trainer has won the battle or not</param>
+    /// <returns></returns>
+    public List<string> OnBattleOverDialog(bool playerHasWon)
+    {
+        _hasLostToPlayer = playerHasWon;
+        _playerSpotted = false;
+
+        if (playerHasWon == true)
+        {
+            return inBattleDialogOnDefeat.Lines;
+        }
+        else
+        {
+            return inBattleDialogOnVictory.Lines;
+        }
     }
 
 }

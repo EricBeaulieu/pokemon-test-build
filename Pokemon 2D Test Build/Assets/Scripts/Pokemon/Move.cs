@@ -13,5 +13,4 @@ public class Move{
         moveBase = mBase;
         pP = mBase.PowerPoints;
     }
-
 }

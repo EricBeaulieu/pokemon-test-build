@@ -24,6 +24,8 @@ public class DialogManager : MonoBehaviour
     bool _currentlyTyping;
     bool _waitingOnUserInput;
 
+    public static string indicatorWhenWaitingOnInput = " >";
+
     public static DialogManager instance
     {
         get { return _instance; }
@@ -126,7 +128,7 @@ public class DialogManager : MonoBehaviour
         _currentlyTyping = false;
         _playerSpedUp = false;
         yield return new WaitForSeconds(0.5f);
-        dialogText.text += " v";
+        dialogText.text += indicatorWhenWaitingOnInput;
         _waitingOnUserInput = true;
     }
 }

@@ -553,15 +553,14 @@ public class Pokemon {
     /// Checks to see if the pokemon can attack or not
     /// </summary>
     /// <returns></returns>
-    public bool OnBeforeMove()
+    public ConditionID OnBeforeMove()
     {
-        bool canPerformMove = true;
 
         if(status?.OnBeforeMove != null)
         {
             if (status.OnBeforeMove(this) == false)
             {
-                canPerformMove = false;
+                return status.Id;
             }
         }
 
@@ -574,28 +573,30 @@ public class Pokemon {
             {
                 if (currentVolatileStatus.OnBeforeMove(this) == false)
                 {
-                    canPerformMove = false;
+                    return currentVolatileStatus.Id;
                 }
             }
         }
 
-        return canPerformMove;
+        return ConditionID.NA;
     }
 
     /// <summary>
     /// Applies any Effects on the pokemons turn end that it may have through Status Effects or Volatile Status
     /// </summary>
-    public void OnEndTurn()
+    public void OnEndTurn(Condition condition)
     {
-        status?.OnEndTurn?.Invoke(this);
+        condition?.OnEndTurn?.Invoke(this);
 
-        //This copy is here because if it is iterating through it and removes an element while searching it shall break the for each loop
-        List<Condition> copyVolatileStatus = new List<Condition>(volatileStatus);
+        //status?.OnEndTurn?.Invoke(this);
 
-        foreach (Condition currentVolatileStatus in copyVolatileStatus)
-        {
-            currentVolatileStatus?.OnEndTurn?.Invoke(this);
-        }
+        ////This copy is here because if it is iterating through it and removes an element while searching it shall break the for each loop
+        //List<Condition> copyVolatileStatus = new List<Condition>(volatileStatus);
+
+        //foreach (Condition currentVolatileStatus in copyVolatileStatus)
+        //{
+        //    currentVolatileStatus?.OnEndTurn?.Invoke(this);
+        //}
     }
 
     public ConditionID GetCurrentStatus()
@@ -710,5 +711,15 @@ public class Pokemon {
         baseStats[StatAttribute.Speed] = Mathf.FloorToInt((((individualValues.speed + 2 * pokemonBase.speed + (effortValues.speed / 4)) * currentLevel / 100) + 5) * nature.NatureModifier(nature, StatAttribute.Speed));
 
         currentHitPoints += maxHitPoints - diffInHP;
+    }
+
+    public void FullyHeal()
+    {
+        currentHitPoints = maxHitPoints;
+        status = null;
+        for (int i = 0; i < moves.Count; i++)
+        {
+            moves[i].pP = moves[i].moveBase.PowerPoints;
+        }
     }
 }

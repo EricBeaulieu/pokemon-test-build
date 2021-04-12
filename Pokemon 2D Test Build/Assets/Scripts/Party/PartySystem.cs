@@ -36,7 +36,7 @@ public class PartySystem : MonoBehaviour
         _partyMemberSlots = GetComponentsInChildren<PartyMemberUI>();
     }
 
-    public void OpenPartySystem(bool wasShiftSwap)
+    public void OpenPartySystem(bool inBattle,bool wasShiftSwap)
     {
         SelectFirstBox();
         overworldSelections.SetActive(false);
@@ -44,7 +44,7 @@ public class PartySystem : MonoBehaviour
         AdjustMessageBoxWidthSize(MESSAGEBOX_STANDARD_SIZE);
         SetMessageText("Choose a Pokemon");
 
-        SetUpPartySystemCancelButton(wasShiftSwap);
+        SetUpPartySystemCancelButton(inBattle,wasShiftSwap);
     }
 
     void ClosePartySystem()
@@ -58,26 +58,33 @@ public class PartySystem : MonoBehaviour
         EventSystem.current.SetSelectedGameObject(_partyMemberSlots[0].gameObject);
     }
 
-    void SetUpPartySystemCancelButton(bool wasShiftSwap)
+    void SetUpPartySystemCancelButton(bool inBattle,bool wasShiftSwap)
     {
-        if(battleSystemReference.GetCurrentPokemonInBattle.currentHitPoints > 0 || battleSystemReference.GetCurrentPokemonInBattle == null)
+        if(inBattle == true)
         {
-            cancelButton.onClick.AddListener(() => 
+            if(battleSystemReference.GetCurrentPokemonInBattle.currentHitPoints > 0 || battleSystemReference.GetCurrentPokemonInBattle == null)
             {
-                ClosePartySystem();
-                if(wasShiftSwap == false)
+                cancelButton.onClick.AddListener(() => 
                 {
-                    battleSystemReference.ReturnFromPokemonPartySystem();
-                }
-                else
-                {
-                    battleSystemReference.PlayerContinueAfterPartyShiftSelection();
-                }
-            });
+                    ClosePartySystem();
+                    if(wasShiftSwap == false)
+                    {
+                        battleSystemReference.ReturnFromPokemonPartySystem();
+                    }
+                    else
+                    {
+                        battleSystemReference.PlayerContinueAfterPartyShiftSelection();
+                    }
+                });
+            }
+            else
+            {
+                cancelButton.onClick.AddListener(() => SetMessageText($"{battleSystemReference.GetCurrentPokemonInBattle.currentName} can no longer battle"));
+            }
         }
         else
         {
-            cancelButton.onClick.AddListener(() => SetMessageText($"{battleSystemReference.GetCurrentPokemonInBattle.currentName} can no longer battle"));
+            cancelButton.onClick.AddListener(() => { ClosePartySystem(); });
         }
     }
 
@@ -90,15 +97,16 @@ public class PartySystem : MonoBehaviour
                 _partyMemberSlots[i].gameObject.SetActive(true);
                 _partyMemberSlots[i].SetData(currentParty[i], i);
 
+                int k = i;
                 if (inBattle)
                 {
-                    int k = i;
                     _partyMemberSlots[k].GetComponent<Button>().onClick.RemoveAllListeners();
                     _partyMemberSlots[k].GetComponent<Button>().onClick.AddListener(() => OpenBattleSelections(_partyMemberSlots[k]));
                 }
                 else
                 {
-                    //Open other selection menu and give all options available
+                    _partyMemberSlots[k].GetComponent<Button>().onClick.RemoveAllListeners();
+                    _partyMemberSlots[k].GetComponent<Button>().onClick.AddListener(() => OpenOverworldSelections(_partyMemberSlots[k]));
                 }
 
                 if(i+1 == currentParty.Count)
@@ -150,7 +158,20 @@ public class PartySystem : MonoBehaviour
 
         //Set Summary Button Here
         battleSelectionCancelButton.GetComponent<Button>().onClick.RemoveAllListeners();
-        battleSelectionCancelButton.GetComponent<Button>().onClick.AddListener(() => CancelBattleButton(currentPartyMember));
+        battleSelectionCancelButton.GetComponent<Button>().onClick.AddListener(() => CancelSubMenuButton(currentPartyMember));
+    }
+
+    void OpenOverworldSelections(PartyMemberUI currentPartyMember)
+    {
+        overworldSelections.SetActive(true);
+        EventSystem.current.SetSelectedGameObject(overworldSelectionsSummaryButton);
+        AdjustMessageBoxWidthSize(MESSAGEBOX_SELECTED_SIZE);
+
+        //overworldSelectionsSummaryButton.GetComponent<Button>().onClick.RemoveAllListeners();
+        //overworldSelectionsSummaryButton.GetComponent<Button>().onClick.AddListener(() => );
+
+        overworldSelectionsCancelButton.GetComponent<Button>().onClick.RemoveAllListeners();
+        overworldSelectionsCancelButton.GetComponent<Button>().onClick.AddListener(() => CancelSubMenuButton(currentPartyMember));
     }
 
     void ShiftBattleButton(PartyMemberUI currentPartyMember)
@@ -171,9 +192,10 @@ public class PartySystem : MonoBehaviour
         ClosePartySystem();
     }
 
-    void CancelBattleButton(PartyMemberUI previousSelection)
+    void CancelSubMenuButton(PartyMemberUI previousSelection)
     {
         battleSelections.SetActive(false);
+        overworldSelections.SetActive(false);
         EventSystem.current.SetSelectedGameObject(previousSelection.gameObject);
     }
 }

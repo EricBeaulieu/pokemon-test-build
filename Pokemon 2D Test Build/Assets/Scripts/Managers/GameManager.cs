@@ -15,6 +15,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] PartySystem partySystem;
     DialogManager _dialogManager;
     [SerializeField] LevelManager levelManager;
+    [SerializeField] StartMenu startMenu;
 
     bool _inBattle = false;
 
@@ -46,6 +47,12 @@ public class GameManager : MonoBehaviour
 
         playerController.OnEncounter += StartWildPokemonBattle;
         playerController.OnEncounter += (() => _inBattle = true);
+        playerController.OpenStartMenu += () => 
+        {
+            _state = GameState.Dialog;
+            startMenu.EnableStartMenu(true);
+        };
+
         battleSystem.OnBattleOver += EndBattle;
         battleSystem.OpenPokemonParty += OpenParty;
         battleSystem.OnPokemonCaptured += CapturedNewPokemon;
@@ -71,7 +78,15 @@ public class GameManager : MonoBehaviour
             }
         };
 
+        startMenu.OpenPokemonParty += (() => OpenParty(false,false));
+        startMenu.StartMenuClosed += () =>
+        {
+            _state = GameState.Overworld;
+            playerController.ReturnFromStartMenu();
+        };
+
         battleSystem.HandleAwake();
+        startMenu.HandleAwake();
 
         if(partySystem.gameObject.activeInHierarchy == true)
         {
@@ -126,6 +141,7 @@ public class GameManager : MonoBehaviour
 
         PokemonParty currentParty = playerController.GetComponent<PokemonParty>();
         PokemonParty trainerParty = currentTrainer.GetComponent<PokemonParty>();
+        trainerParty.HealAllPokemonInParty();
 
         battleSystem.SetupBattleArt(levelManager.GetBattleEnvironmentArt);
         battleSystem.StartBattle(currentParty, trainerParty);
@@ -133,11 +149,7 @@ public class GameManager : MonoBehaviour
 
     void EndBattle(bool wasWon)
     {
-        if(trainerController != null && wasWon == true)
-        {
-            trainerController.HasLostBattleToPlayer();
-            trainerController = null;
-        }
+        trainerController = null;
 
         if (wasWon == false)
         {
@@ -153,10 +165,11 @@ public class GameManager : MonoBehaviour
 
     void OpenParty(bool inBattle,bool wasShiftSwap)
     {
+        _inBattle = inBattle;
         _state = GameState.Party;
         partySystem.gameObject.SetActive(true);
         partySystem.SetPartyData(playerController.GetComponent<PokemonParty>().CurrentPokemonList(),inBattle);
-        partySystem.OpenPartySystem(wasShiftSwap);
+        partySystem.OpenPartySystem(inBattle,wasShiftSwap);
     }
 
     void CloseParty()

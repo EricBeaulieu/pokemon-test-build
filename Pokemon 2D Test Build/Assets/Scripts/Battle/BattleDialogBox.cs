@@ -41,7 +41,7 @@ public class BattleDialogBox : MonoBehaviour
         yield return new WaitForSeconds(1f);
         if (makeUserWait)
         {
-            _dialogBox.text += " v";
+            _dialogBox.text += DialogManager.indicatorWhenWaitingOnInput;
             _waitingOnUserInput = true;
 
             while (_waitingOnUserInput == true)
@@ -120,6 +120,17 @@ public class BattleDialogBox : MonoBehaviour
         });
 
         while (WaitingOnUserChoice == true)
+        {
+            yield return null;
+        }
+    }
+
+    public IEnumerator AfterDialogWait()
+    {
+        _dialogBox.text += DialogManager.indicatorWhenWaitingOnInput;
+        _waitingOnUserInput = true;
+
+        while (_waitingOnUserInput == true)
         {
             yield return null;
         }

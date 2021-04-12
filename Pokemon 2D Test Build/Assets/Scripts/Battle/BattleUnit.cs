@@ -24,9 +24,11 @@ public class BattleUnit : MonoBehaviour
 
     public Pokemon pokemon {get;set;}
     bool _sendOutPokemonOnTurnEnd = false;
+    [SerializeField] BattleAbilityUI abilityUI;
 
     [SerializeField] Image statusEffectA;
     [SerializeField] Image statusEffectB;
+    [SerializeField] Image overtopImage;
     const float STATUS_EFFECT_ANIMATION_SPEED = 1f;
     const float ENTRY_SPRITE_ANIMATION_SPEED = 0.8f;
     const float START_ANIMATION_SPEED = 2.25f;
@@ -68,27 +70,14 @@ public class BattleUnit : MonoBehaviour
         trainerImageOriginalPosition = trainerImage.rectTransform.localPosition;
         battleFloorOriginalPosition = battleFloor.rectTransform.localPosition;
         pokemonSpriteOriginalPosition = pokemonSprite.rectTransform.localPosition;
+        abilityUI.OnStart(isPlayersPokemon);
         _imageSize = pokemonSprite.rectTransform.sizeDelta.x;
+        overtopImage.sprite = StatusConditionArt.instance.Nothing;
     }
 
     public void SetupAndSendOut(Pokemon pokemon)
     {
-        if (isPlayersPokemon)
-        {
-            _pokemonSpriteAnimations = pokemon.pokemonBase.GetBackSprite(pokemon.isShiny,pokemon.gender);
-        }
-        else
-        {
-            _pokemonSpriteAnimations = pokemon.pokemonBase.GetFrontSprite(pokemon.isShiny, pokemon.gender);
-        }
-
-        pokemonSprite.sprite = _pokemonSpriteAnimations[0];
-        this.pokemon = pokemon;
-        hud.SetData(pokemon, isPlayersPokemon);
-        pokemon.Reset();
-        _sendOutPokemonOnTurnEnd = false;
-
-        pokemonBattledAgainst = new List<Pokemon>();
+        StandardSetupProcedure(pokemon);
 
         StartCoroutine(PlayEnterAnimation());
     }
@@ -102,7 +91,23 @@ public class BattleUnit : MonoBehaviour
 
     public void SetDataBattleStart(Pokemon pokemon,Sprite trainerSprite)
     {
+        startingAnimationsActive = true;
         pokemonSprite.rectTransform.sizeDelta = new Vector2(_imageSize, _imageSize);
+
+        StandardSetupProcedure(pokemon);
+
+        if (trainerSprite != null)
+        {
+            trainerImage.sprite = trainerSprite;
+            EnablePokemon(false);
+            EnableTrainer(true);
+        }
+
+        StartCoroutine(PlayBattleOpeningAnimation(trainerSprite != null));
+    }
+
+    void StandardSetupProcedure(Pokemon pokemon)
+    {
         if (isPlayersPokemon)
         {
             _pokemonSpriteAnimations = pokemon.pokemonBase.GetBackSprite(pokemon.isShiny, pokemon.gender);
@@ -119,15 +124,6 @@ public class BattleUnit : MonoBehaviour
         _sendOutPokemonOnTurnEnd = false;
 
         pokemonBattledAgainst = new List<Pokemon>();
-
-        if (trainerSprite != null)
-        {
-            trainerImage.sprite = trainerSprite;
-            EnablePokemon(false);
-            EnableTrainer(true);
-        }
-
-        StartCoroutine(PlayBattleOpeningAnimation(trainerSprite != null));
     }
 
     IEnumerator PlayBattleOpeningAnimation(bool hasTrainer)
@@ -163,6 +159,7 @@ public class BattleUnit : MonoBehaviour
 
         StartCoroutine(SmoothTransitionToPosition(temp, tempEndPos, 2f));
         yield return SmoothTransitionToPosition(battleFloor.gameObject, battleFloorOriginalPosition, 2f);
+        startingAnimationsActive = false;
     }
 
     public IEnumerator PlayTrainerExitAnimation(bool hasTrainer)
@@ -406,6 +403,9 @@ public class BattleUnit : MonoBehaviour
         float size = statusEffectA.rectTransform.sizeDelta.y;
         statusEffectB.rectTransform.localPosition += new Vector3(0, (direction * size), 0);
 
+        statusEffectA.color = StatusConditionArt.instance.PlainWhite.SetAlpha(0);
+        statusEffectB.color = StatusConditionArt.instance.PlainWhite.SetAlpha(0);
+
         Vector3 startingPos = pokemonSprite.transform.localPosition;
         float elapsedTime = 0;
         float duration = STATUS_EFFECT_ANIMATION_SPEED;
@@ -527,5 +527,97 @@ public class BattleUnit : MonoBehaviour
     void EnableTrainer(bool enabled)
     {
         trainerImage.gameObject.SetActive(enabled);
+    }
+
+    public IEnumerator TrainerToField()
+    {
+        EnableTrainer(true);
+        yield return SmoothTransitionToPosition(trainerImage.gameObject, trainerImageOriginalPosition, ENTRY_SPRITE_ANIMATION_SPEED);
+    }
+
+    public void OnAbilityActivation()
+    {
+        abilityUI.OnAbilityActivation(pokemon, pokemon.ability.Name,isPlayersPokemon);
+    }
+
+    public IEnumerator StatusConditionAnimation(ConditionID condition)
+    {
+        switch (condition)
+        {
+            case ConditionID.poison:
+                yield return PlayPoisonAnimation();
+                break;
+            case ConditionID.burn:
+                break;
+            case ConditionID.sleep:
+                break;
+            case ConditionID.paralyzed:
+                yield return PlayParalyzedAnimation();
+                break;
+            case ConditionID.frozen:
+                break;
+            case ConditionID.toxicPoison:
+                yield return PlayPoisonAnimation();
+                break;
+            case ConditionID.confused:
+                break;
+            case ConditionID.cursed:
+                break;
+            default:
+                break;
+        }
+        yield return null;
+    }
+
+    IEnumerator ShowStatusAnimationConditionColor(Color currentColour)
+    {
+        statusEffectA.sprite = StatusConditionArt.instance.BlankWhite;
+
+        float elapsedTime = 0;
+        float duration = STATUS_EFFECT_ANIMATION_SPEED;
+
+        while (elapsedTime < duration)
+        {
+            statusEffectA.color = currentColour.SetAlpha(elapsedTime / duration);
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+
+        elapsedTime = 0;
+
+        while (elapsedTime < duration)
+        {
+            statusEffectA.color = currentColour.SetAlpha(1 - (elapsedTime / duration));
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+
+        statusEffectA.color = StatusConditionArt.instance.PlainWhite.SetAlpha(0);
+    }
+
+    IEnumerator PlayPoisonAnimation()
+    {
+        yield return ShowStatusAnimationConditionColor(StatusConditionArt.instance.GetStatusConditionAnimationColour(ConditionID.poison).SetAlpha(0));
+        yield return null;
+    }
+
+    IEnumerator PlayParalyzedAnimation()
+    {
+        float duration = 0.2f;
+
+        for (int i = 0; i < 5; i++)
+        {
+            yield return SmoothTransitionToPosition(pokemonSprite.gameObject, GenerateOffestPosition(pokemonSpriteOriginalPosition), duration);
+            overtopImage.sprite = StatusConditionArt.instance.GetRandomParalzedConditionAnimationArt();
+        }
+
+        yield return new WaitForSeconds(duration);
+        yield return SmoothTransitionToPosition(pokemonSprite.gameObject, pokemonSpriteOriginalPosition, duration);
+        overtopImage.sprite = StatusConditionArt.instance.Nothing;
+    }
+
+    Vector3 GenerateOffestPosition(Vector3 offsetSpot)
+    {
+        return new Vector3(offsetSpot.x + Random.Range(-5,6), offsetSpot.y + Random.Range(-5, 6));
     }
 }
