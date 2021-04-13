@@ -82,6 +82,11 @@ public class PokemonBase : ScriptableObject {
 
     #region Getters/Setters
 
+    public int GetPokedexNumber()
+    {
+        return _pokedexNumber;
+    }
+
     public string GetPokedexName()
     {
         return _pokedexName;
