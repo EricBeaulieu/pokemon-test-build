@@ -29,6 +29,15 @@ public class PokemonParty : MonoBehaviour
             currentCount++;
         }
         pokemonParty = new List<Pokemon>(copyOfParty);
+
+        ///This is just to set the players pokemon in his party ID
+        if(GetComponent<PlayerController>() != null)
+        {
+            for (int i = 0; i < pokemonParty.Count; i++)
+            {
+                pokemonParty[i].Obtained(GetComponent<PlayerController>());
+            }
+        }
     }
 
     public Pokemon GetFirstHealthyPokemon()
@@ -43,9 +52,10 @@ public class PokemonParty : MonoBehaviour
 
     public bool AddCapturedPokemon(Pokemon capturedPokemon)
     {
+        capturedPokemon.Obtained(GetComponent<PlayerController>());
         if(pokemonParty.Count < MAX_PARTY_POKEMON_SIZE)
         {
-            pokemonParty.Add(capturedPokemon);
+            _originalPos.Add(capturedPokemon);
             return true;
         }
         else
@@ -98,5 +108,19 @@ public class PokemonParty : MonoBehaviour
         {
             pokemonParty[i].FullyHeal();
         }
+    }
+
+    public int HealthyPokemonCount()
+    {
+        int currentCount = 0;
+
+        for (int i = 0; i < pokemonParty.Count; i++)
+        {
+            if(pokemonParty[i].currentHitPoints> 0)
+            {
+                currentCount++;
+            }
+        }
+        return currentCount;
     }
 }

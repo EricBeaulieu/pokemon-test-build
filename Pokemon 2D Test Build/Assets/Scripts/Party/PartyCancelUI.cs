@@ -16,12 +16,22 @@ public class PartyCancelUI : MonoBehaviour, ISelectHandler, IDeselectHandler
         _backgroundSprite = GetComponent<Image>();
     }
 
+    public void OnHandleStart()
+    {
+        Deselected();
+    }
+
     public void OnSelect(BaseEventData eventData)
     {
         _backgroundSprite.sprite = onSelectBackground;
     }
 
     public void OnDeselect(BaseEventData eventData)
+    {
+        Deselected();
+    }
+
+    void Deselected()
     {
         _backgroundSprite.sprite = onDeselectBackground;
     }

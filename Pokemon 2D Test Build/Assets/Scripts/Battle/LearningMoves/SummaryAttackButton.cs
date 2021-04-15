@@ -13,13 +13,24 @@ public class SummaryAttackButton : MonoBehaviour, ISelectHandler, IDeselectHandl
     [SerializeField] Text pPText;
     [SerializeField] Image typeSprite;
 
-    public void SetMove(Move move)
+    public void SetMove(Move move = null)
     {
-        _move = move.moveBase;
-        moveNameText.text = move.moveBase.MoveName;
-        pPText.text = $"PP{move.pP.ToString()}/{move.moveBase.PowerPoints}";
-        typeSprite.sprite = StatusConditionArt.instance.ReturnElementArt(move.moveBase.Type);
-        EnableSelector(false);
+        if(move == null)
+        {
+            _move = null;
+            moveNameText.text = "--";
+            pPText.text = $"PP--";
+            typeSprite.sprite = StatusConditionArt.instance.Nothing;
+            EnableSelector(false);
+        }
+        else
+        {
+            _move = move.moveBase;
+            moveNameText.text = move.moveBase.MoveName;
+            pPText.text = $"PP{move.pP.ToString()}/{move.moveBase.PowerPoints}";
+            typeSprite.sprite = StatusConditionArt.instance.ReturnElementArt(move.moveBase.Type);
+            EnableSelector(false);
+        }
     }
 
     public void SetMove(MoveBase newMove)

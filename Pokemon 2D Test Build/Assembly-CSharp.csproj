@@ -85,18 +85,20 @@
     <Compile Include="Assets\Scripts\ExtensionMethods\ColorExtensions.cs" />
     <Compile Include="Assets\Scripts\Party\PartyMemberUI.cs" />
     <Compile Include="Assets\Scripts\Items\PokeballItem.cs" />
-    <Compile Include="Assets\LevelManagerArt.cs" />
+    <Compile Include="Assets\Scripts\ArtHolders\LevelManagerArt.cs" />
     <Compile Include="Assets\Scripts\Data\WeatherEffectDB.cs" />
     <Compile Include="Assets\Scripts\Battle\LearningMoves\SummaryAttackButton.cs" />
     <Compile Include="Assets\Scripts\Mechanics\CaptureBallRoute.cs" />
     <Compile Include="Assets\Scripts\Characters\NpcController.cs" />
+    <Compile Include="Assets\Scripts\Party\SummaryDisplay.cs" />
+    <Compile Include="Assets\Scripts\Party\SummaryInfo.cs" />
     <Compile Include="Assets\Scripts\Battle\BattleAbilityUI.cs" />
     <Compile Include="Assets\Scripts\Battle\LevelUpUI.cs" />
     <Compile Include="Assets\Scripts\Managers\Dialog.cs" />
     <Compile Include="Assets\Scripts\Data\EntryHazardsDB.cs" />
     <Compile Include="Assets\Scripts\Battle\WeatherEffect.cs" />
     <Compile Include="Assets\Scripts\Mechanics\ExpBar.cs" />
-    <Compile Include="Assets\StatusConditionArt.cs" />
+    <Compile Include="Assets\Scripts\ArtHolders\StatusConditionArt.cs" />
     <Compile Include="Assets\Scripts\Managers\DialogManager.cs" />
     <Compile Include="Assets\Scripts\Characters\AIDecision.cs" />
     <Compile Include="Assets\Scripts\Pokemon\PokemonParty.cs" />
@@ -105,6 +107,7 @@
     <Compile Include="Assets\Scripts\Mechanics\HPBar.cs" />
     <Compile Include="Assets\Scripts\Battle\BattleHUD.cs" />
     <Compile Include="Assets\Scripts\Pokemon\Ability.cs" />
+    <Compile Include="Assets\Scripts\Party\SummarySkills.cs" />
     <Compile Include="Assets\Scripts\Static Tables\DamageModifiers.cs" />
     <Compile Include="Assets\Scripts\Pokemon\Move.cs" />
     <Compile Include="Assets\Scripts\Data\AbilityDB.cs" />
@@ -119,9 +122,10 @@
     <Compile Include="Assets\Scripts\ExtensionMethods\Vector2Extensions.cs" />
     <Compile Include="Assets\Scripts\Managers\GameManager.cs" />
     <Compile Include="Assets\Scripts\Battle\TurnAttackDetails.cs" />
-    <Compile Include="Assets\Scripts\Party\SummaryDisplay.cs" />
-    <Compile Include="Assets\Scripts\Party\SummaryInfo.cs" />
-    <Compile Include="Assets\Scripts\Party\SummarySkills.cs" />
+    <Compile Include="Assets\Scripts\ExtensionMethods\GlobalTools.cs" />
+    <Compile Include="Assets\Scripts\Party\SummaryUIBase.cs" />
+    <Compile Include="Assets\Scripts\Party\SummaryMoves.cs" />
+    <Compile Include="Assets\Scripts\Party\SummarySystem.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">

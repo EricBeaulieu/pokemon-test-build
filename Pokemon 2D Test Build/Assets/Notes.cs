@@ -7,6 +7,8 @@ public class Notes
     //To do list
 
     //Start menu items
+    //Create a pkeball that the pomemon was caught in
+    //add in trainer details to said pokemon and trainer
     //finish all different types of animations with conditions
     //money set for trainer
     //camera effects when entering battle either with trainers,wild pokemon or specialized pokemon

@@ -6,7 +6,8 @@ using UnityEngine;
 [RequireComponent(typeof(PokemonParty))]
 public class PlayerController : Entity
 {
-    [SerializeField] string playerName;
+    [SerializeField] string trainerName;
+    int trainerIDNumber;
     [SerializeField] Sprite[] playerBackSprite;
     PokemonParty _pokemonParty;
 
@@ -15,6 +16,7 @@ public class PlayerController : Entity
 
     Vector2 _currentInput;
 
+    [HideInInspector]
     public bool spottedByTrainer;
     bool _ignorePlayerInput;
     bool _ignoreMenuOpen;
@@ -26,7 +28,7 @@ public class PlayerController : Entity
         _pokemonParty = GetComponent<PokemonParty>();
         //Debug
 
-        if(playerName == "")
+        if(trainerName == "")
         {
             Debug.Log("Players Name is missing");
         }
@@ -34,6 +36,8 @@ public class PlayerController : Entity
         {
             Debug.LogWarning("Current Player is missing their battle back sprite Sheet");
         }
+
+        trainerIDNumber = UnityEngine.Random.Range(0, 99999);
 
         _ignorePlayerInput = false;
         _ignoreMenuOpen = false;
@@ -45,7 +49,7 @@ public class PlayerController : Entity
         {
             if(_ignoreMenuOpen == false)
             {
-                if (Input.GetButtonDown("Submit") && IsMoving == false && isRunning == false)
+                if (Input.GetButtonDown("Cancel") && IsMoving == false && isRunning == false)
                 {
                     OpenStartMenu();
                     _ignorePlayerInput = true;
@@ -181,7 +185,12 @@ public class PlayerController : Entity
 
     public string TrainerName
     {
-        get { return playerName; }
+        get { return trainerName; }
+    }
+
+    public string TrainerIDNumber
+    {
+        get { return trainerIDNumber.ToString("00000"); }
     }
 
     public void PlayerHasLostBattle()

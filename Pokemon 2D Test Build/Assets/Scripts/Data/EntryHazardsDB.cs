@@ -213,16 +213,16 @@ public class EntryHazardsDB : MonoBehaviour
                         return;
                     }
 
-                    List<StatBoost> speedDown = new List<StatBoost>()
-                    {
-                        new StatBoost
-                        {
-                            stat = StatAttribute.Speed,
-                            boost = -1
-                        }
-                    };
-                    pokemon.ApplyStatModifier(speedDown);
                     pokemon.statusChanges.Enqueue($"{pokemon.currentName} was caught in the sticky web");
+                },
+                OnEntryLowerStat = (Pokemon pokemon) => 
+                {
+                    if (pokemon.pokemonBase.IsType(ElementType.Flying))
+                    {
+                        return new StatBoost() { stat = StatAttribute.Speed, boost = 0 };;
+                    }
+
+                    return new StatBoost() { stat = StatAttribute.Speed, boost = -1 };
                 }
             }
         }

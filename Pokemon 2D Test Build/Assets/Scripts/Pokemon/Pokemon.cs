@@ -21,6 +21,8 @@ public class Pokemon {
     public int currentLevel { get { return _level; } private set { _level = value; } }
     public int currentHitPoints { get; set; }
     public int currentExp { get; set; }
+    public string originalTrainer { get; private set; }
+    public string originalTrainerID { get; private set; }
 
     public List<Move> moves { get; set; }
     public Dictionary<StatAttribute, int> baseStats { get; private set; }
@@ -100,7 +102,11 @@ public class Pokemon {
         gender = SetGender(_pokemonBase);
         statusChanges = new Queue<string>();
 
+        originalTrainer = null;
+        originalTrainerID = null;
+
         SetAbility();
+        Reset();
     }
 
     /// <summary>
@@ -119,6 +125,12 @@ public class Pokemon {
     {
         ResetStatBoosts();
         volatileStatus = new List<Condition>();
+    }
+
+    public void Obtained(PlayerController player)
+    {
+        originalTrainer = player.TrainerName;
+        originalTrainerID = player.TrainerIDNumber;
     }
 
     #region Stats
@@ -587,16 +599,6 @@ public class Pokemon {
     public void OnEndTurn(Condition condition)
     {
         condition?.OnEndTurn?.Invoke(this);
-
-        //status?.OnEndTurn?.Invoke(this);
-
-        ////This copy is here because if it is iterating through it and removes an element while searching it shall break the for each loop
-        //List<Condition> copyVolatileStatus = new List<Condition>(volatileStatus);
-
-        //foreach (Condition currentVolatileStatus in copyVolatileStatus)
-        //{
-        //    currentVolatileStatus?.OnEndTurn?.Invoke(this);
-        //}
     }
 
     public ConditionID GetCurrentStatus()
@@ -722,4 +724,9 @@ public class Pokemon {
             moves[i].pP = moves[i].moveBase.PowerPoints;
         }
     }
+
+    //public int GetTotalExperience
+    //{
+    //    get {  return currentExp + ExperienceTable.ReturnExperienceRequiredForLevel(currentLevel,pokemonBase.ex)}
+    //}
 }

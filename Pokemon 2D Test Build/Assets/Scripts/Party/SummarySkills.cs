@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class SummarySkills : MonoBehaviour
+public class SummarySkills : SummaryUIBase
 {
     [SerializeField] Text hitPoints;
     [SerializeField] HPBar hPBar;
@@ -20,9 +20,26 @@ public class SummarySkills : MonoBehaviour
     [SerializeField] Text abilityName;
     [SerializeField] Text abilityDescription;
 
-    public void SetupData(Pokemon pokemon)
+    public override float offsetXPosDifference()
     {
-
-        //pokeballSprite.sprite =
+        return GetComponent<RectTransform>().sizeDelta.x;
     }
+
+    public override void SetupData(Pokemon pokemon)
+    {
+        hPBar.SetHPWithoutAnimation(pokemon.currentHitPoints, pokemon.maxHitPoints, hitPoints);
+        attack.text = $"{pokemon.attack}";
+        defense.text = $"{pokemon.defense}";
+        specialAttack.text = $"{pokemon.specialAttack}";
+        specialDefense.text = $"{pokemon.specialDefense}";
+        speed.text = $"{pokemon.speed}";
+
+        totalExperience.text = $"{pokemon.currentExp}";
+        experienceRequiredToNextLevel.text = $"{pokemon.pokemonBase.GetExpForLevel(pokemon.currentLevel+1) - pokemon.currentExp}";
+        expBar.SetExpereince(pokemon);
+
+        abilityName.text = pokemon.ability.Name;
+        abilityDescription.text = pokemon.ability.Description;
+    }
+
 }

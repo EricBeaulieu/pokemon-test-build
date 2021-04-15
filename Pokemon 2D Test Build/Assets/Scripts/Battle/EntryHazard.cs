@@ -19,6 +19,7 @@ public class EntryHazard
     int _maxLayers;
     public Action<EntryHazard> OnStart { get; set; }
     public Action<Pokemon> OnEntry { get; set; }
+    public Func<Pokemon,StatBoost> OnEntryLowerStat { get; set; }
 
     public int layers
     {

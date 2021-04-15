@@ -102,6 +102,11 @@ public class BattleUnit : MonoBehaviour
             EnablePokemon(false);
             EnableTrainer(true);
         }
+        else
+        {
+            EnablePokemon(true);
+            EnableTrainer(false);
+        }
 
         StartCoroutine(PlayBattleOpeningAnimation(trainerSprite != null));
     }
@@ -150,6 +155,7 @@ public class BattleUnit : MonoBehaviour
             else
             {
                 EnablePokemon(true);
+                pokemonSprite.color = pokemonSprite.color.SetAlpha(1);
                 pokemonSprite.transform.localPosition = new Vector3(pokemonSpriteOriginalPosition.x - 800f, pokemonSpriteOriginalPosition.y);
                 battleFloor.transform.localPosition = new Vector3(battleFloorOriginalPosition.x - 800f, battleFloorOriginalPosition.y);
                 temp = pokemonSprite.gameObject;
@@ -189,7 +195,7 @@ public class BattleUnit : MonoBehaviour
 
     IEnumerator PlayEnterAnimation()
     {
-        pokemonSprite.color = pokemonSprite.color.ResetAlpha();
+        pokemonSprite.color = pokemonSprite.color.SetAlpha(1);
 
         if (isPlayersPokemon)
         {
@@ -509,13 +515,7 @@ public class BattleUnit : MonoBehaviour
     IEnumerator AnimateSpriteUponEntry()
     {
         pokemonSprite.sprite = _pokemonSpriteAnimations[1];
-        float timer = 0;
-
-        while(timer < ENTRY_SPRITE_ANIMATION_SPEED)
-        {
-            timer += Time.deltaTime;
-            yield return null;
-        }
+        yield return new WaitForSeconds(ENTRY_SPRITE_ANIMATION_SPEED);
         pokemonSprite.sprite = _pokemonSpriteAnimations[0];
     }
 
@@ -560,6 +560,7 @@ public class BattleUnit : MonoBehaviour
                 yield return PlayPoisonAnimation();
                 break;
             case ConditionID.confused:
+                PlayHitAnimation();
                 break;
             case ConditionID.cursed:
                 break;

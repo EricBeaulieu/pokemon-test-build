@@ -70,8 +70,7 @@ public class AttackSelectionEventSelector : MonoBehaviour
                 {
                     if(moves[k].pP > 0)
                     {
-                        currentBattleSystem.AttackSelected(currentPokemon, moves[k].moveBase);
-                        moves[k].pP--;
+                        currentBattleSystem.AttackSelected(currentPokemon, moves[k]);
                     }
                     else
                     {
