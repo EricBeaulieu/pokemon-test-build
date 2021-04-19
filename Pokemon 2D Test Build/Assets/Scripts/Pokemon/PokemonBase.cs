@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public enum ElementType { NA = -1, Bug, Dark, Dragon, Electric, Fairy, Fighting, Fire, Flying, Ghost,
@@ -14,7 +15,6 @@ public class PokemonBase : ScriptableObject {
 
     [Header("PokeDex Information")]
     [SerializeField] int _pokedexNumber;
-    [SerializeField] string _pokedexName;
     [TextArea]
     [SerializeField] string _pokedexDescription;
     [SerializeField] string _classification;
@@ -24,27 +24,6 @@ public class PokemonBase : ScriptableObject {
     [SerializeField] float _weightInKilograms;
     [SerializeField] int _captureRate;
     [SerializeField] List<EarnableEV> rewardedEffortValue;
-
-    [Header("Sprites")]
-    [SerializeField] Sprite frontRegularSprite;
-    [SerializeField] Sprite frontIntroSprite;
-    [SerializeField] Sprite backRegularSprite;
-    [SerializeField] Sprite backIntroSprite;
-    [SerializeField] Sprite shinyFrontRegularSprite;
-    [SerializeField] Sprite shinyFrontIntroSprite;
-    [SerializeField] Sprite shinyBackRegularSprite;
-    [SerializeField] Sprite shinyBackIntroSprite;
-    [SerializeField] Sprite standardSpriteA;
-    [SerializeField] Sprite standardSpriteB;
-    [SerializeField] bool differentGenderSprites;
-    [SerializeField] Sprite femaleFrontRegularSprite;
-    [SerializeField] Sprite femaleFrontIntroSprite;
-    [SerializeField] Sprite femaleBackRegularSprite;
-    [SerializeField] Sprite femaleBackIntroSprite;
-    [SerializeField] Sprite femaleShinyFrontRegularSprite;
-    [SerializeField] Sprite femaleShinyFrontIntroSprite;
-    [SerializeField] Sprite femaleShinyBackRegularSprite;
-    [SerializeField] Sprite femaleShinyBackIntroSprite;
 
     [Header("Gender")]
     [SerializeField] bool _hasGender = true;
@@ -89,7 +68,7 @@ public class PokemonBase : ScriptableObject {
 
     public string GetPokedexName()
     {
-        return _pokedexName;
+        return PokemonNameList.PokemonNameKanto1to151[_pokedexNumber-1];
     }
 
     public int GetCatchRate()
@@ -99,58 +78,16 @@ public class PokemonBase : ScriptableObject {
 
     public Sprite[] GetFrontSprite(bool isShiny,Gender gender)
     {
-        if(differentGenderSprites == true)
-        {
-            if (gender == Gender.Female)
-            {
-                if (isShiny == false)
-                {
-                    return new[] { femaleFrontRegularSprite, femaleFrontIntroSprite };
-                }
-                else
-                {
-                    return new[] { femaleShinyFrontRegularSprite, femaleShinyFrontIntroSprite };
-                }
-            }
-        }
+        string spriteName = GetStartingSpriteNameEntry(isShiny, gender);
 
-        //If no specialised gender
-        if (isShiny == false)
-        {
-            return new[] { frontRegularSprite, frontIntroSprite };
-        }
-        else
-        {
-            return new[] { shinyFrontRegularSprite, shinyFrontIntroSprite };
-        }
+        return new[] { GameManager.instance.SpriteAtlas.GetSprite(spriteName + "FrontA"), GameManager.instance.SpriteAtlas.GetSprite(spriteName + "FrontB") };
     }
 
     public Sprite[] GetBackSprite(bool isShiny, Gender gender)
     {
-        if (differentGenderSprites == true)
-        {
-            if (gender == Gender.Female)
-            {
-                if (isShiny == false)
-                {
-                    return new[] { femaleBackRegularSprite, femaleBackIntroSprite };
-                }
-                else
-                {
-                    return new[] { femaleShinyBackRegularSprite, femaleShinyBackIntroSprite };
-                }
-            }
-        }
+        string spriteName = GetStartingSpriteNameEntry(isShiny, gender);
 
-        //If no specialised gender
-        if (isShiny == false)
-        {
-            return new[] { backRegularSprite, backIntroSprite };
-        }
-        else
-        {
-            return new[] { shinyBackRegularSprite, shinyBackIntroSprite };
-        }
+        return new[] { GameManager.instance.SpriteAtlas.GetSprite(spriteName + "BackA"), GameManager.instance.SpriteAtlas.GetSprite(spriteName + "BackB") };
     }
 
     /// <summary>
@@ -159,7 +96,9 @@ public class PokemonBase : ScriptableObject {
     /// <returns>returns an array of the animated sprite</returns>
     public Sprite[] GetAnimatedSprites()
     {
-        return new[] { standardSpriteA, standardSpriteB };
+        string spriteName = GetStartingSpriteNameEntry(false);
+
+        return new[] { GameManager.instance.SpriteAtlas.GetSprite(spriteName + "SpriteA"), GameManager.instance.SpriteAtlas.GetSprite(spriteName + "SpriteB") };
     }
 
     #endregion
@@ -266,5 +205,29 @@ public class PokemonBase : ScriptableObject {
     public AbilityID HiddenAbility
     {
         get { return hiddenAbility; }
+    }
+
+    string GetStartingSpriteNameEntry(bool isShiny,Gender gender = Gender.NA)
+    {
+        string spriteName = $"{GetPokedexNumber().ToString("000")}_{PokemonNameList.PokemonNameKanto1to151[_pokedexNumber - 1]}_";
+
+        if (isShiny == true)
+        {
+            spriteName += "Shiny_";
+        }
+
+        if (PokemonNameList.PokemonKantoDifferentGenderSprites.Contains(GetPokedexNumber()) == true)
+        {
+            if (gender == Gender.Male)
+            {
+                spriteName += "Male_";
+            }
+            else if(gender == Gender.Female)
+            {
+                spriteName += "Female_";
+            }
+        }
+
+        return spriteName;
     }
 }

@@ -14,6 +14,7 @@ public class PartyMemberUI : MonoBehaviour, ISelectHandler, IDeselectHandler
     [SerializeField] HPBar hPBar;
     [SerializeField] Text currentHP;
     [SerializeField] Image gender;
+    [SerializeField] Image status;
 
     [SerializeField] Image pokemonSprite;
     Sprite[] _animatedSprite;
@@ -52,6 +53,19 @@ public class PartyMemberUI : MonoBehaviour, ISelectHandler, IDeselectHandler
         currentHP.text = $"{currentPokemon.currentHitPoints.ToString()}/{currentPokemon.maxHitPoints.ToString()}";
         background.sprite = PartyBackgroundArt.instance.ReturnBackgroundArt(_pokemon.currentHitPoints, _isFirstSlot);
         gender.sprite = StatusConditionArt.instance.ReturnGenderArt(currentPokemon.gender);
+
+        if(currentPokemon.currentHitPoints <= 0)
+        {
+            status.sprite = StatusConditionArt.instance.FaintedStatus;
+        }
+        else if(currentPokemon.status != null)
+        {
+            status.sprite = StatusConditionArt.instance.ReturnStatusConditionArt(currentPokemon.status.Id);
+        }
+        else
+        {
+            status.sprite = StatusConditionArt.instance.Nothing;
+        }
 
         _animatedSprite = currentPokemon.pokemonBase.GetAnimatedSprites();
         _currentIndex = 0;

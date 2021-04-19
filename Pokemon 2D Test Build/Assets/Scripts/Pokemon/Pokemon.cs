@@ -23,6 +23,7 @@ public class Pokemon {
     public int currentExp { get; set; }
     public string originalTrainer { get; private set; }
     public string originalTrainerID { get; private set; }
+    public PokeballItem pokeballCapturedIn { get; private set; }
 
     public List<Move> moves { get; set; }
     public Dictionary<StatAttribute, int> baseStats { get; private set; }
@@ -104,6 +105,7 @@ public class Pokemon {
 
         originalTrainer = null;
         originalTrainerID = null;
+        pokeballCapturedIn = null;
 
         SetAbility();
         Reset();
@@ -127,10 +129,11 @@ public class Pokemon {
         volatileStatus = new List<Condition>();
     }
 
-    public void Obtained(PlayerController player)
+    public void Obtained(PlayerController player,PokeballItem pokeball)
     {
         originalTrainer = player.TrainerName;
         originalTrainerID = player.TrainerIDNumber;
+        pokeballCapturedIn = pokeball;
     }
 
     #region Stats
@@ -724,9 +727,4 @@ public class Pokemon {
             moves[i].pP = moves[i].moveBase.PowerPoints;
         }
     }
-
-    //public int GetTotalExperience
-    //{
-    //    get {  return currentExp + ExperienceTable.ReturnExperienceRequiredForLevel(currentLevel,pokemonBase.ex)}
-    //}
 }

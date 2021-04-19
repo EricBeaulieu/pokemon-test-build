@@ -40,9 +40,10 @@ public class BattleSystem : MonoBehaviour
 
     [SerializeField] GameObject inGameItem;
     Vector2 inGameItemoffScreenPos;
-    public event Action<Pokemon> OnPokemonCaptured;
+    public event Action<Pokemon,PokeballItem> OnPokemonCaptured;
 
     int _escapeAttempts;
+    public int battleDuration { get; private set; }
 
     [SerializeField] LearnNewMoveUI learnNewMoveUI;
     [SerializeField] LevelUpUI levelUpUI;
@@ -277,6 +278,7 @@ public class BattleSystem : MonoBehaviour
         _playerParty.SetOriginalPositions();
         _playerParty.CleanUpPartyOrderOnStart(playerBattleUnit.pokemon);
         _escapeAttempts = 0;
+        battleDuration = 0;
         enemyBattleUnit.AddPokemonToBattleList(playerBattleUnit.pokemon);
         dialogBox.BattleStartSetup();
         attackSelectionEventSelector.SetMovesList(playerBattleUnit,playerBattleUnit.pokemon.moves,this);
@@ -602,6 +604,7 @@ public class BattleSystem : MonoBehaviour
             }
             PlayerActions();
         }
+        battleDuration++;
     }
 
     IEnumerator RunMove(BattleUnit sourceUnit, BattleUnit targetUnit, Move move)
@@ -1282,12 +1285,13 @@ public class BattleSystem : MonoBehaviour
             yield break;
         }
 
-        yield return dialogBox.TypeDialog($"{_playerController.TrainerName} used Pokeball");
+        
 
         inGameItem.SetActive(true);
         InBattleItem currentBall = inGameItem.GetComponent<InBattleItem>();
         Vector3 ballHeightJump = new Vector3(0, 75, 0);
 
+        yield return dialogBox.TypeDialog($"{_playerController.TrainerName} used {currentBall.GetItemName}");
         //SetPokeball to its closed art
         currentBall.SetItemArt();
 
@@ -1311,9 +1315,7 @@ public class BattleSystem : MonoBehaviour
         yield return new WaitForSeconds(1f);
 
         // start capture mechanics of it rocking
-        int shakeCount = CatchingMechanics.CatchRate(targetUnit.pokemon, currentBall.currentPokeball);
-
-        shakeCount = 4;
+        int shakeCount = CatchingMechanics.CatchRate(targetUnit.pokemon, currentBall.CurrentPokeball,battleDuration);
 
         for (int i = 0; i < Mathf.Min(shakeCount,3); i++)
         {
@@ -1328,7 +1330,7 @@ public class BattleSystem : MonoBehaviour
             //pokemon is caught
             yield return dialogBox.TypeDialog($"{targetUnit.pokemon.currentName} was Caught!",true);
             yield return currentBall.FadeItem(false);
-            OnPokemonCaptured(enemyBattleUnit.pokemon);
+            OnPokemonCaptured(enemyBattleUnit.pokemon,currentBall.CurrentPokeball);
             OnBattleOver(true);
         }
         else

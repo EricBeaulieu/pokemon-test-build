@@ -10,7 +10,11 @@ public class SummaryDisplay : SummaryUIBase
     Sprite[] _pokemonSpriteAnimations;
     [SerializeField] Image pokemonSprite;
     [SerializeField] Image gender;
+    [SerializeField] Image status;
+    [SerializeField] Image shinyStar;
     [SerializeField] Image pokeballSprite;
+
+    Coroutine _animatedCoroutine = null;
 
     const float ENTRY_SPRITE_ANIMATION_SPEED = 0.5f;
 
@@ -25,9 +29,28 @@ public class SummaryDisplay : SummaryUIBase
         currentName.text = $"{pokemon.currentName}";
         _pokemonSpriteAnimations = pokemon.pokemonBase.GetFrontSprite(pokemon.isShiny, pokemon.gender);
         gender.sprite = StatusConditionArt.instance.ReturnGenderArt(pokemon.gender);
-        //pokeballSprite.sprite =
-        StopCoroutine(AnimateSprite());
-        StartCoroutine(AnimateSprite());
+
+        if (pokemon.currentHitPoints <= 0)
+        {
+            status.sprite = StatusConditionArt.instance.FaintedStatus;
+        }
+        else if (pokemon.status != null)
+        {
+            status.sprite = StatusConditionArt.instance.ReturnStatusConditionArt(pokemon.status.Id);
+        }
+        else
+        {
+            status.sprite = StatusConditionArt.instance.Nothing;
+        }
+
+        shinyStar.sprite = StatusConditionArt.instance.ReturnShinyStatus(pokemon.isShiny);
+        pokeballSprite.sprite = pokemon.pokeballCapturedIn.ItemSprite;
+
+        if (_animatedCoroutine != null)
+        {
+            StopCoroutine(_animatedCoroutine);
+        }
+        _animatedCoroutine = StartCoroutine(AnimateSprite());
     }
     
     IEnumerator AnimateSprite()

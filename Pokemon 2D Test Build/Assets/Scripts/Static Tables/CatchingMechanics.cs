@@ -26,7 +26,7 @@ public static class CatchingMechanics
         }
     }
 
-    static float captureRate(PokeballCaptureID pokeballCaptureID, Pokemon currentPokemon)
+    static float captureRate(PokeballCaptureID pokeballCaptureID, Pokemon currentPokemon,int battleDuration)
     {
         switch (pokeballCaptureID)
         {
@@ -57,18 +57,24 @@ public static class CatchingMechanics
                 return 1f;
             case PokeballCaptureID.Timer:
                 return 1f;
+            case PokeballCaptureID.Quick:
+                if(battleDuration == 0)
+                {
+                    return 4f;
+                }
+                return 1f;
         }
         return 1f;
     }
 
-    public static int CatchRate(Pokemon currentPokemon,PokeballItem pokeball)
+    public static int CatchRate(Pokemon currentPokemon,PokeballItem pokeball,int battleDuration)
     {
         if(pokeball.CaptureRate == PokeballCaptureID.Master)
         {
             return 4;
         }
 
-        float pokeballCaptureRate = captureRate(pokeball.CaptureRate,currentPokemon);
+        float pokeballCaptureRate = captureRate(pokeball.CaptureRate,currentPokemon,battleDuration);
 
         float catchValue = (((3 * currentPokemon.maxHitPoints - 2 * currentPokemon.currentHitPoints)
             * (currentPokemon.pokemonBase.GetCatchRate() * pokeballCaptureRate) / (3 * currentPokemon.maxHitPoints)) 

@@ -53,7 +53,6 @@ public class PlayerController : Entity
                 {
                     OpenStartMenu();
                     _ignorePlayerInput = true;
-                    Debug.Log("Menu Open");
                 }
             }
             else

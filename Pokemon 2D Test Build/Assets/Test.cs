@@ -22,6 +22,8 @@ public class Test : MonoBehaviour {
         }
         //TestNatureName(testNature);
         //TestTypeChart();
+
+        //sprite = GameManager.instance.SpriteAtlas.GetSprite("075_Graveler_FrontB");
 	}
 
     void TestNatureName(NatureBase currentNature)

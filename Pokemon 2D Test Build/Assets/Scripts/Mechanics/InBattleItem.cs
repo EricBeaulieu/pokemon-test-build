@@ -123,7 +123,7 @@ public class InBattleItem : MonoBehaviour
         transform.eulerAngles = Vector3.zero;
     }
 
-    public PokeballItem currentPokeball
+    public PokeballItem CurrentPokeball
     {
         get { return (PokeballItem)_itemBase; }
     }
@@ -165,9 +165,15 @@ public class InBattleItem : MonoBehaviour
                 PokeballItem pokeball = (PokeballItem)_itemBase;
                 Sprite[] pokeballAnimations = pokeball.CaptureSprites();
                 _spriteRenderer.sprite = pokeballAnimations[0];
+                _spriteRenderer.color = _spriteRenderer.color.SetAlpha(1);
                 break;
             default:
                 break;
         }
+    }
+
+    public string GetItemName
+    {
+        get { return _itemBase.ItemName; }
     }
 }

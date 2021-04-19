@@ -53,10 +53,11 @@
     <UnityVersion>2020.2.5f1</UnityVersion>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Assets\Art\Pokemon\Gen1\BadSlicesList.cs" />
+    <Compile Include="Assets\Art\Pokemon\BadSlicesList.cs" />
     <Compile Include="Assets\Scripts\Pokemon\IndividualValues.cs" />
     <Compile Include="Assets\Scripts\Battle\BattleSystem.cs" />
     <Compile Include="Assets\Scripts\Pokemon\PokemonBase.cs" />
+    <Compile Include="Assets\Scripts\Party\SummarySystem.cs" />
     <Compile Include="Assets\Scripts\Pokemon\Condition.cs" />
     <Compile Include="Assets\Scripts\Battle\DamageDetails.cs" />
     <Compile Include="Assets\Scripts\Characters\PlayerController.cs" />
@@ -83,6 +84,7 @@
     <Compile Include="Assets\Scripts\Battle\AttackSelectionEventSelector.cs" />
     <Compile Include="Assets\Scripts\Battle\LearningMoves\LearnNewMoveUI.cs" />
     <Compile Include="Assets\Scripts\ExtensionMethods\ColorExtensions.cs" />
+    <Compile Include="Assets\Scripts\Party\SummaryMoves.cs" />
     <Compile Include="Assets\Scripts\Party\PartyMemberUI.cs" />
     <Compile Include="Assets\Scripts\Items\PokeballItem.cs" />
     <Compile Include="Assets\Scripts\ArtHolders\LevelManagerArt.cs" />
@@ -94,6 +96,7 @@
     <Compile Include="Assets\Scripts\Party\SummaryInfo.cs" />
     <Compile Include="Assets\Scripts\Battle\BattleAbilityUI.cs" />
     <Compile Include="Assets\Scripts\Battle\LevelUpUI.cs" />
+    <Compile Include="Assets\Scripts\Party\SummaryUIBase.cs" />
     <Compile Include="Assets\Scripts\Managers\Dialog.cs" />
     <Compile Include="Assets\Scripts\Data\EntryHazardsDB.cs" />
     <Compile Include="Assets\Scripts\Battle\WeatherEffect.cs" />
@@ -109,6 +112,7 @@
     <Compile Include="Assets\Scripts\Pokemon\Ability.cs" />
     <Compile Include="Assets\Scripts\Party\SummarySkills.cs" />
     <Compile Include="Assets\Scripts\Static Tables\DamageModifiers.cs" />
+    <Compile Include="Assets\Scripts\ExtensionMethods\GlobalTools.cs" />
     <Compile Include="Assets\Scripts\Pokemon\Move.cs" />
     <Compile Include="Assets\Scripts\Data\AbilityDB.cs" />
     <Compile Include="Assets\Scripts\Pokemon\MoveEffects.cs" />
@@ -122,10 +126,8 @@
     <Compile Include="Assets\Scripts\ExtensionMethods\Vector2Extensions.cs" />
     <Compile Include="Assets\Scripts\Managers\GameManager.cs" />
     <Compile Include="Assets\Scripts\Battle\TurnAttackDetails.cs" />
-    <Compile Include="Assets\Scripts\ExtensionMethods\GlobalTools.cs" />
-    <Compile Include="Assets\Scripts\Party\SummaryUIBase.cs" />
-    <Compile Include="Assets\Scripts\Party\SummaryMoves.cs" />
-    <Compile Include="Assets\Scripts\Party\SummarySystem.cs" />
+    <Compile Include="Assets\Scripts\Static Tables\PokemonNameList.cs" />
+    <Compile Include="Assets\Scripts\Managers\SpriteAtlas.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">

@@ -32,6 +32,6 @@ public abstract class ItemBase : ScriptableObject
 
     public Sprite ItemSprite
     {
-        get { return ItemSprite; }
+        get { return itemSprite; }
     }
 }

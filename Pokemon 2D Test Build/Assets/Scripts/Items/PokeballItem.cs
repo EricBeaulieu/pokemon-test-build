@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum PokeballCaptureID { Regular, Great,Ultra,Master,Net,Dive,Nest,Repeat,Timer}
+public enum PokeballCaptureID { Poke, Great,Ultra,Master,Net,Dive,Nest,Repeat,Timer,Quick}
 
 [CreateAssetMenu(menuName = "Item/Create New PokeBall Entry")]
 public class PokeballItem : ItemBase
@@ -15,7 +15,6 @@ public class PokeballItem : ItemBase
     [SerializeField] PokeballCaptureID currentPokeball;
 
     [SerializeField] Sprite closed;
-    [SerializeField] Sprite halfopen;
     [SerializeField] Sprite open;
 
     public override void UseItem()
@@ -30,7 +29,7 @@ public class PokeballItem : ItemBase
 
     public Sprite[] CaptureSprites()
     {
-        return new[] {closed, halfopen, open};
+        return new[] {closed, open};
     }
 
 }

@@ -35,7 +35,7 @@ public class PokemonParty : MonoBehaviour
         {
             for (int i = 0; i < pokemonParty.Count; i++)
             {
-                pokemonParty[i].Obtained(GetComponent<PlayerController>());
+                pokemonParty[i].Obtained(GetComponent<PlayerController>(),GameManager.instance.StandardPokeball);
             }
         }
     }
@@ -50,9 +50,9 @@ public class PokemonParty : MonoBehaviour
         return pokemonParty;
     }
 
-    public bool AddCapturedPokemon(Pokemon capturedPokemon)
+    public bool AddCapturedPokemon(Pokemon capturedPokemon,PokeballItem currentPokeball)
     {
-        capturedPokemon.Obtained(GetComponent<PlayerController>());
+        capturedPokemon.Obtained(GetComponent<PlayerController>(),currentPokeball);
         if(pokemonParty.Count < MAX_PARTY_POKEMON_SIZE)
         {
             _originalPos.Add(capturedPokemon);

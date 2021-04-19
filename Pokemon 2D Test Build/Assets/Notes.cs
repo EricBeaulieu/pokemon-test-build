@@ -6,8 +6,9 @@ public class Notes
 {
     //To do list
 
+    //test out bug on new pokemon, in summary
     //Start menu items
-    //Create a pkeball that the pomemon was caught in
+    //Create a pokeball that the pokemon was caught in
     //add in trainer details to said pokemon and trainer
     //finish all different types of animations with conditions
     //money set for trainer
@@ -16,6 +17,7 @@ public class Notes
 
     //Add in
 
+    //create a observer on recieved and when they do call the starting animation
     //On receiving a status play animation, nothing set yet possibly same as the enqueue string thing but with condition ID's as an addition and on show changes have it play the animation
     //Roar 
     //Ball on pokemon when caught

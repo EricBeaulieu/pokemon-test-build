@@ -10,6 +10,9 @@ public class StatusConditionArt : MonoBehaviour
     [SerializeField] Sprite blankWhite;
     [SerializeField] Color white;
 
+    [SerializeField] Sprite faintedStatus;
+    [SerializeField] Sprite shinyStar;
+
     [Header("Status")]
     [SerializeField] Sprite conditionPoison;
     [SerializeField] Sprite conditionBurn;
@@ -249,6 +252,11 @@ public class StatusConditionArt : MonoBehaviour
         get { return white; }
     }
 
+    public Sprite FaintedStatus
+    {
+        get { return faintedStatus; }
+    }
+
     public Sprite ReturnStatusConditionArt(ConditionID currentCondition)
     {
         switch (currentCondition)
@@ -390,6 +398,18 @@ public class StatusConditionArt : MonoBehaviour
         else //healthNormalized < HPBar.lowColourThreshold
         {
             return lowHP;
+        }
+    }
+
+    public Sprite ReturnShinyStatus(bool shiny)
+    {
+        if(shiny == true)
+        {
+            return shinyStar;
+        }
+        else
+        {
+            return nothing;
         }
     }
 }

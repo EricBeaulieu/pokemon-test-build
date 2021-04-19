@@ -2137,7 +2137,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &185559768
 Transform:
   m_ObjectHideFlags: 0
@@ -2147,7 +2147,7 @@ Transform:
   m_GameObject: {fileID: 185559767}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -432, y: -175, z: 0}
-  m_LocalScale: {x: 45.046474, y: 45.046474, z: 45.046474}
+  m_LocalScale: {x: 45, y: 45.046474, z: 0}
   m_Children: []
   m_Father: {fileID: 1645902273}
   m_RootOrder: 7
@@ -2192,7 +2192,7 @@ SpriteRenderer:
   m_SortingLayerID: 724681323
   m_SortingLayer: 2
   m_SortingOrder: 0
-  m_Sprite: {fileID: 6549527070120827039, guid: 39a30c96aa7147a43a66f79cae7f2352,
+  m_Sprite: {fileID: 2097883433226141563, guid: 3b9f57e3714054b418e604739462c2d7,
     type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -2217,7 +2217,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pokeballRoute: {fileID: 97717253}
-  _itemBase: {fileID: 11400000, guid: 3395b9ef550dcc645829bf2659fe0166, type: 2}
+  _itemBase: {fileID: 11400000, guid: dd4241d0be49d27489948770c324a825, type: 2}
   speedModifier: 1.5
 --- !u!1 &189520556
 GameObject:
@@ -2551,6 +2551,82 @@ CanvasRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 265331643}
+  m_CullTransparentMesh: 1
+--- !u!1 &266024267
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 266024268}
+  - component: {fileID: 266024270}
+  - component: {fileID: 266024269}
+  m_Layer: 5
+  m_Name: Shiny
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &266024268
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 266024267}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: -20.80143}
+  m_LocalScale: {x: 0.99974406, y: 0.99974406, z: 0.99974406}
+  m_Children: []
+  m_Father: {fileID: 1425563844}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 171.5, y: 55}
+  m_SizeDelta: {x: 25, y: 25}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &266024269
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 266024267}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: -5460788302523036599, guid: abdf0e45e1a1c8147aca07e4e20a4aea,
+    type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &266024270
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 266024267}
   m_CullTransparentMesh: 1
 --- !u!1001 &266085231
 PrefabInstance:
@@ -2928,6 +3004,7 @@ GameObject:
   - component: {fileID: 291317941}
   - component: {fileID: 291317942}
   - component: {fileID: 291317943}
+  - component: {fileID: 291317944}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -2953,6 +3030,8 @@ MonoBehaviour:
   partySystem: {fileID: 997842080}
   levelManager: {fileID: 484863756}
   startMenu: {fileID: 1705877135}
+  standardPokeball: {fileID: 11400000, guid: 3395b9ef550dcc645829bf2659fe0166, type: 2}
+  spriteAtlas: {fileID: 291317944}
 --- !u!4 &291317940
 Transform:
   m_ObjectHideFlags: 0
@@ -2983,6 +3062,8 @@ MonoBehaviour:
     type: 3}
   blankWhite: {fileID: 21300000, guid: ebd250ac1fbe2db428bd49b83b66cb10, type: 3}
   white: {r: 1, g: 1, b: 1, a: 1}
+  faintedStatus: {fileID: 21300000, guid: c842fc3d912cf014b900ef60070d5a36, type: 3}
+  shinyStar: {fileID: 21300000, guid: 9441a5288f756624cbcb3cff4e622139, type: 3}
   conditionPoison: {fileID: -3249014827017175959, guid: abdf0e45e1a1c8147aca07e4e20a4aea,
     type: 3}
   conditionBurn: {fileID: -4197889149677769770, guid: abdf0e45e1a1c8147aca07e4e20a4aea,
@@ -3074,6 +3155,19 @@ MonoBehaviour:
     type: 3}
   grassyFieldEnemyPosition: {fileID: -4683779063094240487, guid: 3d4d1efd1880eec4fa026c44031639da,
     type: 3}
+--- !u!114 &291317944
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 291317938}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e9cbdc059126dc4286f9508f758c83f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gen1: {fileID: 2800000, guid: 8d6d91a8c389b6d4296a3b1e53aace78, type: 3}
 --- !u!1 &293397763
 GameObject:
   m_ObjectHideFlags: 0
@@ -3587,13 +3681,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pokemonParty:
   - _pokemonBase: {fileID: 11400000, guid: 699cdb8144bb5e546bd7c06c113ccb97, type: 2}
-    _level: 8
+    _level: 1
   - _pokemonBase: {fileID: 11400000, guid: a5077a98ad912594f8e38408d3ce9f02, type: 2}
     _level: 15
   - _pokemonBase: {fileID: 11400000, guid: c4dd55ad047f5cb4d9c167f439657170, type: 2}
     _level: 8
   - _pokemonBase: {fileID: 11400000, guid: 43b86e842137c924aa868272bd5d0f45, type: 2}
-    _level: 9
+    _level: 7
 --- !u!1 &314426141
 GameObject:
   m_ObjectHideFlags: 0
@@ -4454,7 +4548,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   testEXPGroup: 0
-  testExperienceGroup: 5
+  testExperienceGroup: 2
   testNature: {fileID: 11400000, guid: f91abf718bd77a947b2b68471ca12d5d, type: 2}
   sprite: {fileID: 0}
   attacktype: 16
@@ -6116,7 +6210,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 4145937620305998043, guid: 49cb5317686a4384eb4521092ad3d7cc,
+  m_Sprite: {fileID: -2736537494941629510, guid: 8d6d91a8c389b6d4296a3b1e53aace78,
     type: 3}
   m_Type: 0
   m_PreserveAspect: 0
@@ -6408,6 +6502,82 @@ CanvasRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 514210020}
+  m_CullTransparentMesh: 1
+--- !u!1 &517560527
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 517560528}
+  - component: {fileID: 517560530}
+  - component: {fileID: 517560529}
+  m_Layer: 5
+  m_Name: Status
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &517560528
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 517560527}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: -20.80143}
+  m_LocalScale: {x: 0.99974406, y: 0.99974406, z: 0.99974406}
+  m_Children: []
+  m_Father: {fileID: 1425563844}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -154.4, y: 58.2}
+  m_SizeDelta: {x: 60, y: 18}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &517560529
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 517560527}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: -5460788302523036599, guid: abdf0e45e1a1c8147aca07e4e20a4aea,
+    type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &517560530
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 517560527}
   m_CullTransparentMesh: 1
 --- !u!1 &528452882
 GameObject:
@@ -12174,7 +12344,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1063938018
 Transform:
   m_ObjectHideFlags: 0
@@ -19981,6 +20151,8 @@ RectTransform:
   - {fileID: 1019013740}
   - {fileID: 1984618132}
   - {fileID: 297961707}
+  - {fileID: 517560528}
+  - {fileID: 266024268}
   m_Father: {fileID: 763564129}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -20005,6 +20177,8 @@ MonoBehaviour:
   currentName: {fileID: 67401638}
   pokemonSprite: {fileID: 1019013741}
   gender: {fileID: 1984618133}
+  status: {fileID: 517560529}
+  shinyStar: {fileID: 266024269}
   pokeballSprite: {fileID: 297961708}
 --- !u!114 &1425563846
 MonoBehaviour:
@@ -25497,7 +25671,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 2753999836024180387, guid: 49cb5317686a4384eb4521092ad3d7cc,
+  m_Sprite: {fileID: -697430678483147830, guid: 8d6d91a8c389b6d4296a3b1e53aace78,
     type: 3}
   m_Type: 0
   m_PreserveAspect: 0

@@ -16,6 +16,9 @@ public class GameManager : MonoBehaviour
     DialogManager _dialogManager;
     [SerializeField] LevelManager levelManager;
     [SerializeField] StartMenu startMenu;
+    //used as a null reference and to return from here
+    [SerializeField] PokeballItem standardPokeball;
+    [SerializeField] SpriteAtlas spriteAtlas;
 
     bool _inBattle = false;
 
@@ -201,7 +204,7 @@ public class GameManager : MonoBehaviour
         AbilityDB.Initialization();
     }
 
-    void CapturedNewPokemon(Pokemon capturedPokemon)
+    void CapturedNewPokemon(Pokemon capturedPokemon,PokeballItem pokeball)
     {
         //If pokemon was new then show it in the pokedex being added
         //show the pokemon info pop up and light up the sprite animating through the pokedex
@@ -209,7 +212,7 @@ public class GameManager : MonoBehaviour
         //Ask if the you would like to name the new pokemon
 
         //Add the new pokemon to either the party or PC
-        bool addedToParty = playerController.GetComponent<PokemonParty>().AddCapturedPokemon(capturedPokemon);
+        bool addedToParty = playerController.GetComponent<PokemonParty>().AddCapturedPokemon(capturedPokemon,pokeball);
         if (addedToParty == true)
         {
             //return dialog stating that it was added to your party
@@ -218,5 +221,15 @@ public class GameManager : MonoBehaviour
         {
             // add to PC
         }
+    }
+
+    public PokeballItem StandardPokeball
+    {
+        get { return standardPokeball; }
+    }
+
+    public SpriteAtlas SpriteAtlas
+    {
+        get { return spriteAtlas; }
     }
 }
