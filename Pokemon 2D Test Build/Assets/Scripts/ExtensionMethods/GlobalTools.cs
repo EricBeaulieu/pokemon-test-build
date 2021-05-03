@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Text.RegularExpressions;
 using UnityEngine;
 
 public static class GlobalTools
@@ -16,5 +17,11 @@ public static class GlobalTools
         }
 
         curTransform.localPosition = endPos;
+    }
+
+    public static string SplitCamelCase(string inputCamelCaseString)
+    {
+        string sTemp = Regex.Replace(inputCamelCaseString, "([A-Z][a-z])", " $1", RegexOptions.Compiled).Trim();
+        return Regex.Replace(sTemp, "([A-Z][A-Z])", " $1", RegexOptions.Compiled).Trim();
     }
 }

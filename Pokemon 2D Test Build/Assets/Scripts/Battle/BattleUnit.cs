@@ -380,7 +380,7 @@ public class BattleUnit : MonoBehaviour
         if (statChanges.Count > 1)
         {
             StatAttribute currentStat;
-            //isMixed = statChanges.First(x => x.stat != currentStat) != null;
+
             foreach (StatBoost stat in statChanges)
             {
                 currentStat = stat.stat;

@@ -180,14 +180,7 @@ public class Pokemon {
 
             statBoosts[statModified] = Mathf.Clamp(statBoosts[statModified] + boost, -6, 6);
 
-            if(boost > 0)
-            {
-                statusChanges.Enqueue($"{currentName}'s {statModified} rose!");
-            }
-            else
-            {
-                statusChanges.Enqueue($"{currentName}'s {statModified} fell!");
-            }
+            statusChanges.Enqueue(StatChangesMessage(currentName, statModified,boost));
 
             Debug.Log($"{currentName} {statModified} has been changed to {statBoosts[statModified]}");
         }
@@ -257,6 +250,11 @@ public class Pokemon {
         if(ability?.DoublesSpeedInAWeatherEffect != null && currentStat == StatAttribute.Speed)
         {
             statValue *= ability.DoublesSpeedInAWeatherEffect(BattleSystem.GetCurrentWeather);
+        }
+
+        if(ability?.DoublesAStat != null)
+        {
+            statValue *= ability.DoublesAStat(currentStat);
         }
 
         return statValue;
@@ -364,7 +362,13 @@ public class Pokemon {
         if (Random.value * 100 <= 6.25f)
         {
             damageDetails.criticalHit = 1.5f;
+
             //If sniper then make 2.
+
+            if (ability?.PreventsCriticalHits == true)
+            {
+                damageDetails.criticalHit = 1f;
+            }
         }
 
         float modifier = damageDetails.criticalHit * damageDetails.typeEffectiveness;
@@ -726,5 +730,21 @@ public class Pokemon {
         {
             moves[i].pP = moves[i].moveBase.PowerPoints;
         }
+    }
+
+    string StatChangesMessage(string currentPokemonName,StatAttribute statAttribute,int boost)
+    {
+        string statMessage;
+
+        statMessage = $"{currentName}'s {GlobalTools.SplitCamelCase(statAttribute.ToString())} ";
+
+        if (Mathf.Abs(boost) > 1)
+        {
+            statMessage += "sharply ";
+        }
+
+        statMessage += (boost > 0) ? "rose!": "fell!";
+
+        return statMessage;
     }
 }

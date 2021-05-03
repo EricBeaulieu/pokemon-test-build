@@ -7,20 +7,20 @@ public enum AbilityID
     NA,
     //A
     //B
-    BigPecks,Blaze,
+    BattleArmor, BigPecks, Blaze,
     //C
-    Chlorophyll, ClearBody, 
+    Chlorophyll, ClearBody, Competitive,
     //D
-    Drizzle, Drought,
+    Defiant, Drizzle, Drought,
     //E
     //F
-    FlareBoost,FullMetalBody,
+    FlareBoost,FullMetalBody, FurCoat,
     //G
     Guts,
     //H
-    HyperCutter,
+    HugePower, HyperCutter,
     //I
-    Intimidate,
+    IceScales, Intimidate,
     //J
     //K
     KeenEye,
@@ -31,11 +31,12 @@ public enum AbilityID
     //O
     Overgrown,
     //P
+    PurePower,
     //Q
     QuickFeet,
     //R
     //S
-    SandStream, SnowWarning, Swarm,
+    SandStream, ShellArmor, SnowWarning, Swarm,
     //T
     Torrent,ToxicBoost,
     //U
@@ -76,6 +77,15 @@ public class AbilityDB
     {
         //A
         //B
+        {
+            AbilityID.BattleArmor,
+            new Ability()
+            {
+                Name = "Battle Armor",
+                Description = "Hard armor protects the Pokémon from critical hits.",
+                PreventsCriticalHits = true
+            }
+        },
         {
             AbilityID.BigPecks,
             new Ability()
@@ -155,7 +165,25 @@ public class AbilityDB
                 }
             }
         },
+        {
+            AbilityID.Competitive,
+            new Ability()
+            {
+                Name = "Competitive",
+                Description = "Boosts the Pokémon's Special Attack stat sharply when its stats are lowered.",
+                BoostStatSharplyIfAnyStatLowered = new StatBoost() { stat = StatAttribute.SpecialAttack, boost = 2 }
+            }
+        },
         //D
+        {
+            AbilityID.Defiant,
+            new Ability()
+            {
+                Name = "Defiant",
+                Description = "Boosts the Pokémon's Attack stat sharply when its stats are lowered.",
+                BoostStatSharplyIfAnyStatLowered = new StatBoost() { stat = StatAttribute.Attack, boost = 2 }
+            }
+        },
         {
             AbilityID.Drizzle,//Activates a weather effect for five turns upon entry
             new Ability()
@@ -178,7 +206,7 @@ public class AbilityDB
         //F
         {
             AbilityID.FlareBoost,//Boosts a stat by 50% when affected with a status condition
-            new Ability()//Status Condition: Any
+            new Ability()//Status Condition: Burn
             {
                 Name = "Flare Boost",
                 Description = "Powers up special attacks when the Pokémon is burned.",
@@ -212,6 +240,22 @@ public class AbilityDB
                 }
             }
         },
+        {
+            AbilityID.FurCoat,//Doubles the Pokémon's Attack stat.
+            new Ability()
+            {
+                Name = "Fur Coat",
+                Description = "Halves the damage from physical moves.",
+                DoublesAStat = (StatAttribute stat) =>
+                {
+                    if(stat == StatAttribute.Defense)
+                    {
+                        return 2;
+                    }
+                    return 1;
+                }
+            }
+        },
         //G
         {
             AbilityID.Guts,//Boosts a stat by 50% when affected with a status condition
@@ -240,6 +284,22 @@ public class AbilityDB
         },
         //H
         {
+            AbilityID.HugePower,//Doubles the Pokémon's Attack stat.
+            new Ability()
+            {
+                Name = "Huge Power",
+                Description = "Doubles the Pokémon's Attack stat.",
+                DoublesAStat = (StatAttribute stat) =>
+                {
+                    if(stat == StatAttribute.Attack)
+                    {
+                        return 2;
+                    }
+                    return 1;
+                }
+            }
+        },
+        {
             AbilityID.HyperCutter,
             new Ability()
             {
@@ -261,12 +321,28 @@ public class AbilityDB
         },
         //I
         {
+            AbilityID.IceScales,//Doubles the Pokémon's Special Defense stat.
+            new Ability()
+            {
+                Name = "Ice Scales",
+                Description = "The Pokémon is protected by ice scales, which halve the damage taken from special moves.",
+                DoublesAStat = (StatAttribute stat) =>
+                {
+                    if(stat == StatAttribute.SpecialDefense)
+                    {
+                        return 2;
+                    }
+                    return 1;
+                }
+            }
+        },
+        {
             AbilityID.Intimidate,
             new Ability()
             {
                 Name = "Intimidate",
                 Description = "The Pokémon intimidates opposing Pokémon upon entering battle, lowering their Attack stat.",
-                OnStartLowerStat = new StatBoost() { stat = StatAttribute.Attack, boost = -1 }
+                OnEntryLowerStat = new StatBoost() { stat = StatAttribute.Attack, boost = -1 }
             }
         },
         //J
@@ -341,6 +417,22 @@ public class AbilityDB
             }
         },
         //P
+        {
+            AbilityID.PurePower,//Doubles the Pokémon's Attack stat.
+            new Ability()
+            {
+                Name = "Pure Power",
+                Description = "Using its pure power, the Pokémon doubles its Attack stat.",
+                DoublesAStat = (StatAttribute stat) =>
+                {
+                    if(stat == StatAttribute.Attack)
+                    {
+                        return 2;
+                    }
+                    return 1;
+                }
+            }
+        },
         //Q
         {
             AbilityID.QuickFeet,//Boosts a stat by 50% when affected with a status condition
@@ -375,6 +467,15 @@ public class AbilityDB
                 Name = "Sand Stream",
                 Description = "The Pokémon summons a sandstorm when it enters a battle.",
                 OnStartWeatherEffect = WeatherEffectID.Sandstorm
+            }
+        },
+        {
+            AbilityID.ShellArmor,
+            new Ability()
+            {
+                Name = "Shell Armor",
+                Description = "A hard shell protects the Pokémon from critical hits.",
+                PreventsCriticalHits = true
             }
         },
         {

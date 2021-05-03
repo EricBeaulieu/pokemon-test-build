@@ -38,8 +38,17 @@ public class SummarySkills : SummaryUIBase
         experienceRequiredToNextLevel.text = $"{pokemon.pokemonBase.GetExpForLevel(pokemon.currentLevel+1) - pokemon.currentExp}";
         expBar.SetExpereince(pokemon);
 
-        abilityName.text = pokemon.ability.Name;
-        abilityDescription.text = pokemon.ability.Description;
+        if(pokemon.ability != null)
+        {
+            abilityName.text = pokemon.ability.Name;
+            abilityDescription.text = pokemon.ability.Description;
+        }
+        else
+        {
+            abilityName.text = "ABILITY NOT SET";
+            abilityDescription.text = "ABILITY NOT SET";
+        }
+
     }
 
 }

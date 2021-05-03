@@ -872,6 +872,33 @@ public class BattleSystem : MonoBehaviour
 
     IEnumerator ApplyStatChanges(List<StatBoost> statBoosts,BattleUnit targetUnit, MoveTarget moveTarget,BattleUnit sourceUnit = null)
     {
+        if (statBoosts.Count == 0)
+        {
+            yield break;
+        }
+        else
+        {
+            if(statBoosts.Count >= 2)
+            {
+                for (int i = statBoosts.Count - 1; i >= 0; i--)
+                {
+                    for (int j = statBoosts.Count - 1; j >= 0; j--)
+                    {
+                        if(i == j)
+                        {
+                            continue;
+                        }
+
+                        if(statBoosts[i].stat == statBoosts[j].stat)// && i != j)
+                        {
+                            statBoosts[i].boost += statBoosts[j].boost;
+                            statBoosts.RemoveAt(j);
+                        }
+                    }
+                }
+            }
+        }
+
         //Check to see if one is up and one is down
         List<StatBoost> positiveEffects = new List<StatBoost>();
         List<StatBoost> negativeEffects = new List<StatBoost>();
@@ -896,6 +923,9 @@ public class BattleSystem : MonoBehaviour
         {
             yield break;
         }
+
+        bool targetBoostedAStat = false;
+        List<StatBoost> boostedStats = new List<StatBoost>();
 
         if (moveTarget == MoveTarget.Foe)
         {
@@ -927,6 +957,15 @@ public class BattleSystem : MonoBehaviour
                 }
             }
 
+            if (targetUnit.pokemon.ability?.BoostStatSharplyIfAnyStatLowered != null)
+            {
+                targetBoostedAStat = true;
+                for (int i = 0; i < negativeEffects.Count; i++)
+                {
+                    boostedStats.Add(targetUnit.pokemon.ability.BoostStatSharplyIfAnyStatLowered);
+                }
+            }
+
             targetUnit.pokemon.ApplyStatModifier(negativeEffects);
             yield return targetUnit.ShowStatChanges(negativeEffects, false);
             yield return ShowStatusChanges(targetUnit.pokemon);
@@ -940,6 +979,12 @@ public class BattleSystem : MonoBehaviour
             sourceUnit.pokemon.ApplyStatModifier(negativeEffects);
             yield return sourceUnit.ShowStatChanges(negativeEffects, false);
             yield return ShowStatusChanges(sourceUnit.pokemon);
+        }
+
+        if(targetBoostedAStat == true)
+        {
+            targetUnit.OnAbilityActivation();
+            yield return ApplyStatChanges(boostedStats, targetUnit, MoveTarget.Self,targetUnit);
         }
     }
 
@@ -957,10 +1002,10 @@ public class BattleSystem : MonoBehaviour
             yield break;
         }
 
-        if (sourceUnit.pokemon.ability?.OnStartLowerStat != null)
+        if (sourceUnit.pokemon.ability?.OnEntryLowerStat != null)
         {
             sourceUnit.OnAbilityActivation();
-            List<StatBoost> abilityStatBoosts = new List<StatBoost>() { sourceUnit.pokemon.ability.OnStartLowerStat };
+            List<StatBoost> abilityStatBoosts = new List<StatBoost>() { sourceUnit.pokemon.ability.OnEntryLowerStat };
             yield return ApplyStatChanges(abilityStatBoosts, targetUnit, MoveTarget.Foe, sourceUnit);
         }
     }

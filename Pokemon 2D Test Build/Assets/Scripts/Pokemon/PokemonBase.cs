@@ -68,7 +68,7 @@ public class PokemonBase : ScriptableObject {
 
     public string GetPokedexName()
     {
-        return PokemonNameList.PokemonNameKanto1to151[_pokedexNumber-1];
+        return PokemonNameList.GetPokemonName(_pokedexNumber);
     }
 
     public int GetCatchRate()
@@ -209,7 +209,7 @@ public class PokemonBase : ScriptableObject {
 
     string GetStartingSpriteNameEntry(bool isShiny,Gender gender = Gender.NA)
     {
-        string spriteName = $"{GetPokedexNumber().ToString("000")}_{PokemonNameList.PokemonNameKanto1to151[_pokedexNumber - 1]}_";
+        string spriteName = $"{GetPokedexNumber().ToString("000")}_{PokemonNameList.GetPokemonName(_pokedexNumber)}_";
 
         if (isShiny == true)
         {
