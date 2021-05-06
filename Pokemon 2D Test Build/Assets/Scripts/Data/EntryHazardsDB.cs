@@ -127,11 +127,11 @@ public class EntryHazardsDB : MonoBehaviour
                     }
                     else if(currentLayers == 1)
                     {
-                        pokemon.SetStatus(ConditionID.poison,false);
+                        pokemon.SetStatus(ConditionID.Poison,false);
                     }
                     else
                     {
-                        pokemon.SetStatus(ConditionID.toxicPoison,false);
+                        pokemon.SetStatus(ConditionID.ToxicPoison,false);
                     }
                 }
             }

@@ -544,25 +544,25 @@ public class BattleUnit : MonoBehaviour
     {
         switch (condition)
         {
-            case ConditionID.poison:
+            case ConditionID.Poison:
                 yield return PlayPoisonAnimation();
                 break;
-            case ConditionID.burn:
+            case ConditionID.Burn:
                 break;
-            case ConditionID.sleep:
+            case ConditionID.Sleep:
                 break;
-            case ConditionID.paralyzed:
+            case ConditionID.Paralyzed:
                 yield return PlayParalyzedAnimation();
                 break;
-            case ConditionID.frozen:
+            case ConditionID.Frozen:
                 break;
-            case ConditionID.toxicPoison:
+            case ConditionID.ToxicPoison:
                 yield return PlayPoisonAnimation();
                 break;
-            case ConditionID.confused:
+            case ConditionID.Confused:
                 PlayHitAnimation();
                 break;
-            case ConditionID.cursed:
+            case ConditionID.Cursed:
                 break;
             default:
                 break;
@@ -598,7 +598,7 @@ public class BattleUnit : MonoBehaviour
 
     IEnumerator PlayPoisonAnimation()
     {
-        yield return ShowStatusAnimationConditionColor(StatusConditionArt.instance.GetStatusConditionAnimationColour(ConditionID.poison).SetAlpha(0));
+        yield return ShowStatusAnimationConditionColor(StatusConditionArt.instance.GetStatusConditionAnimationColour(ConditionID.Poison).SetAlpha(0));
         yield return null;
     }
 

@@ -6,15 +6,17 @@ public enum AbilityID
 {
     NA,
     //A
+    AirLock,
     //B
     BattleArmor, BigPecks, Blaze,
     //C
-    Chlorophyll, ClearBody, Competitive,
+    Chlorophyll, ClearBody, CloudNine, Competitive, CuteCharm,
     //D
     Defiant, Drizzle, Drought,
     //E
+    EffectSpore,
     //F
-    FlareBoost,FullMetalBody, FurCoat,
+    FlameBody, FlareBoost, FullMetalBody, FurCoat,
     //G
     Guts,
     //H
@@ -31,12 +33,13 @@ public enum AbilityID
     //O
     Overgrown,
     //P
-    PurePower,
+    PoisonPoint, PurePower,
     //Q
     QuickFeet,
     //R
     //S
-    SandStream, ShellArmor, SnowWarning, Swarm,
+    SandRush, SandStream, ShellArmor, SlushRush, SnowWarning,
+    Static, Swarm, SwiftSwim,
     //T
     Torrent,ToxicBoost,
     //U
@@ -76,6 +79,15 @@ public class AbilityDB
     public static Dictionary<AbilityID, Ability> AbilityDex = new Dictionary<AbilityID, Ability>()
     {
         //A
+        {
+            AbilityID.AirLock,
+            new Ability()
+            {
+                Name = "Air Lock",
+                Description = "Eliminates the effects of weather.",
+                NegatesWeatherEffects = true
+            }
+        },
         //B
         {
             AbilityID.BattleArmor,
@@ -166,12 +178,47 @@ public class AbilityDB
             }
         },
         {
+            AbilityID.CloudNine,
+            new Ability()
+            {
+                Name = "Cloud Nine",
+                Description = "Eliminates the effects of weather.",
+                NegatesWeatherEffects = true
+            }
+        },
+        {
             AbilityID.Competitive,
             new Ability()
             {
                 Name = "Competitive",
                 Description = "Boosts the Pokémon's Special Attack stat sharply when its stats are lowered.",
                 BoostStatSharplyIfAnyStatLowered = new StatBoost() { stat = StatAttribute.SpecialAttack, boost = 2 }
+            }
+        },
+        {
+            AbilityID.CuteCharm,
+            new Ability()//30% chance
+            {
+                Name = "Cute Charm",
+                Description = "Contact with the Pokémon may cause infatuation.",
+                ContactMoveMayCauseStatusEffect = (Pokemon defendingPokemon,Pokemon attackingPokemon,MoveBase currentAttack) =>
+                {
+                    if(currentAttack.PhysicalContact == true)
+                    {
+                        if (attackingPokemon.CheckStatusImmunities(ConditionID.Infatuation) == false)
+                        {
+                            if(BattleSystem.CheckIfInflatuated(defendingPokemon,attackingPokemon) == true)
+                            {
+                                if(Random.value < 0.3f)
+                                {
+                                    return ConditionID.Infatuation;
+                                }
+                                    
+                            }
+                        }
+                    }
+                    return ConditionID.NA;
+                }
             }
         },
         //D
@@ -203,7 +250,70 @@ public class AbilityDB
             }
         },
         //E
+        {
+            AbilityID.EffectSpore,
+            new Ability()//30% chance
+            {
+                Name = "Effect Spore",
+                Description = "Contact with the Pokémon may inflict poison, sleep, or paralysis on its attacker.",
+                ContactMoveMayCauseStatusEffect = (Pokemon defendingPokemon,Pokemon attackingPokemon,MoveBase currentAttack) =>
+                {
+                    if(currentAttack.PhysicalContact == true)
+                    {
+                        float rnd = Random.Range(0,100)/100;
+                        ConditionID rndCondition = ConditionID.NA;
+
+                        if(rnd <= 0.09f)
+                        {
+                            rndCondition = ConditionID.Poison;
+                        }
+                        else if (rnd > 0.09f && rnd < 0.2f)
+                        {
+                            rndCondition = ConditionID.Paralyzed;
+                        }
+                        else if (rnd >= 0.2f && rnd <= 0.3f)
+                        {
+                            rndCondition = ConditionID.Sleep;
+                        }
+                        else
+                        {
+                            return rndCondition;
+                        }
+
+
+                        if (attackingPokemon.CheckStatusImmunities(rndCondition) == false)
+                        {
+                            return rndCondition;
+                        }
+                    }
+
+                    return ConditionID.NA;
+                }
+            }
+        },
         //F
+        {
+            AbilityID.FlameBody,
+            new Ability()//30% chance
+            {
+                Name = "Flame Body",
+                Description = "Contact with the Pokémon may burn the attacker.",
+                ContactMoveMayCauseStatusEffect = (Pokemon defendingPokemon,Pokemon attackingPokemon,MoveBase currentAttack) =>
+                {
+                    if(currentAttack.PhysicalContact == true)
+                    {
+                        if (attackingPokemon.CheckStatusImmunities(ConditionID.Burn) == false)
+                        {
+                            if(Random.value < 0.3f)
+                            {
+                                return ConditionID.Burn;
+                            }
+                        }
+                    }
+                    return ConditionID.NA;
+                }
+            }
+        },
         {
             AbilityID.FlareBoost,//Boosts a stat by 50% when affected with a status condition
             new Ability()//Status Condition: Burn
@@ -212,7 +322,7 @@ public class AbilityDB
                 Description = "Powers up special attacks when the Pokémon is burned.",
                 BoostsAStatWhenAffectedWithAStatusCondition = (ConditionID condition,StatAttribute benefitialStat) =>
                 {
-                    if(condition == ConditionID.burn && benefitialStat == StatAttribute.SpecialAttack)
+                    if(condition == ConditionID.Burn && benefitialStat == StatAttribute.SpecialAttack)
                     {
                         return 1.5f;
                     }
@@ -265,7 +375,7 @@ public class AbilityDB
                 Description = "It's so gutsy that having a status condition boosts the Pokémon's Attack stat.",
                 BoostsAStatWhenAffectedWithAStatusCondition = (ConditionID condition,StatAttribute benefitialStat) =>
                 {
-                    if(condition != ConditionID.NA && condition != ConditionID.frozen && benefitialStat == StatAttribute.Attack)
+                    if(condition != ConditionID.NA && condition != ConditionID.Frozen && benefitialStat == StatAttribute.Attack)
                     {
                         return 1.5f;
                     }
@@ -273,7 +383,7 @@ public class AbilityDB
                 },
                 NegatesStatusEffectStatDropFromCondition = (ConditionID condition,StatAttribute stat) =>
                 {
-                    if(condition == ConditionID.burn && stat == StatAttribute.Attack)
+                    if(condition == ConditionID.Burn && stat == StatAttribute.Attack)
                     {
                         return true;
                     }
@@ -418,6 +528,28 @@ public class AbilityDB
         },
         //P
         {
+            AbilityID.PoisonPoint,
+            new Ability()//30% chance
+            {
+                Name = "Poison Point",
+                Description = "Contact with the Pokémon may poison the attacker.",
+                ContactMoveMayCauseStatusEffect = (Pokemon defendingPokemon,Pokemon attackingPokemon,MoveBase currentAttack) =>
+                {
+                    if(currentAttack.PhysicalContact == true)
+                    {
+                        if (attackingPokemon.CheckStatusImmunities(ConditionID.Poison) == false)
+                        {
+                            if(Random.value < 0.3f)
+                            {
+                                return ConditionID.Poison;
+                            }
+                        }
+                    }
+                    return ConditionID.NA;
+                }
+            }
+        },
+        {
             AbilityID.PurePower,//Doubles the Pokémon's Attack stat.
             new Ability()
             {
@@ -450,7 +582,7 @@ public class AbilityDB
                 },
                 NegatesStatusEffectStatDropFromCondition = (ConditionID condition,StatAttribute stat) =>
                 {
-                    if(condition == ConditionID.paralyzed && stat == StatAttribute.Speed)
+                    if(condition == ConditionID.Paralyzed && stat == StatAttribute.Speed)
                     {
                         return true;
                     }
@@ -460,6 +592,22 @@ public class AbilityDB
         },
         //R
         //S
+        {
+            AbilityID.SandRush,
+            new Ability()
+            {
+                Name = "Sand Rush",
+                Description = "Boosts the Pokémon's Speed stat in a sandstorm.",
+                DoublesSpeedInAWeatherEffect = (WeatherEffectID currentWeather) =>
+                {
+                    if(currentWeather == WeatherEffectID.Sandstorm)
+                    {
+                        return 2;
+                    }
+                    return 1;
+                }
+            }
+        },
         {
             AbilityID.SandStream,//Activates a weather effect for five turns upon entry
             new Ability()
@@ -479,12 +627,50 @@ public class AbilityDB
             }
         },
         {
+            AbilityID.SlushRush,
+            new Ability()
+            {
+                Name = "Slush Rush",
+                Description = "Boosts the Pokémon's Speed stat in a hailstorm.",
+                DoublesSpeedInAWeatherEffect = (WeatherEffectID currentWeather) =>
+                {
+                    if(currentWeather == WeatherEffectID.Hail)
+                    {
+                        return 2;
+                    }
+                    return 1;
+                }
+            }
+        },
+        {
             AbilityID.SnowWarning,//Activates a weather effect for five turns upon entry
             new Ability()
             {
                 Name = "Snow Warning",
                 Description = "The Pokémon summons a hailstorm when it enters a battle.",
                 OnStartWeatherEffect = WeatherEffectID.Hail
+            }
+        },
+        {
+            AbilityID.Static,
+            new Ability()//30% chance
+            {
+                Name = "Static",
+                Description = "The Pokémon is charged with static electricity, so contact with it may cause paralysis.",
+                ContactMoveMayCauseStatusEffect = (Pokemon defendingPokemon,Pokemon attackingPokemon,MoveBase currentAttack) =>
+                {
+                    if(currentAttack.PhysicalContact == true)
+                    {
+                        if (attackingPokemon.CheckStatusImmunities(ConditionID.Paralyzed) == false)
+                        {
+                            if(Random.value < 0.3f)
+                            {
+                                return ConditionID.Paralyzed;
+                            }
+                        }
+                    }
+                    return ConditionID.NA;
+                }
             }
         },
         {
@@ -504,6 +690,22 @@ public class AbilityDB
                         return 1.5f;
                     }
 
+                    return 1;
+                }
+            }
+        },
+        {
+            AbilityID.SwiftSwim,
+            new Ability()
+            {
+                Name = "Swift Swim",
+                Description = "Boosts the Pokémon's Speed stat in rain.",
+                DoublesSpeedInAWeatherEffect = (WeatherEffectID currentWeather) =>
+                {
+                    if(currentWeather == WeatherEffectID.Rain)
+                    {
+                        return 2;
+                    }
                     return 1;
                 }
             }
@@ -538,7 +740,7 @@ public class AbilityDB
                 Description = "Powers up physical attacks when the Pokémon is poisoned.",
                 BoostsAStatWhenAffectedWithAStatusCondition = (ConditionID condition,StatAttribute benefitialStat) =>
                 {
-                    if(condition == ConditionID.poison || condition == ConditionID.toxicPoison && benefitialStat == StatAttribute.Attack)
+                    if(condition == ConditionID.Poison || condition == ConditionID.ToxicPoison && benefitialStat == StatAttribute.Attack)
                     {
                         return 1.5f;
                     }

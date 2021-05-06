@@ -24,6 +24,18 @@ public class MoveBase : ScriptableObject {
     [SerializeField] bool alwaysHits;
     [SerializeField] int priority;
     [SerializeField] int powerPoints;
+    [SerializeField] float baseCriticalHitRate;
+
+    [SerializeField] bool physicalContact;
+    [SerializeField] bool soundType;
+    [SerializeField] bool punchMove;
+    [SerializeField] bool bitingMove;
+    [SerializeField] bool snatchable;
+    [SerializeField] bool affectedByGravity;
+    [SerializeField] bool defrostsWhenUsed;
+    [SerializeField] bool reflectedByMagicCoatMagicBounce;
+    [SerializeField] bool blockedByProtectDetect;
+    [SerializeField] bool copyableByMirrorMove;
 
     #region Return Methods
 
@@ -79,6 +91,59 @@ public class MoveBase : ScriptableObject {
     public MoveTarget Target
     {
         get { return target; }
+    }
+
+    public float BaseCriticalHitRate
+    {
+        get { return baseCriticalHitRate; }
+    }
+
+    public bool PhysicalContact
+    {
+        get { return physicalContact; }
+    }
+
+    public bool SoundType
+    {
+        get { return soundType; }
+    }
+
+    public bool PunchMove
+    {
+        get { return punchMove; }
+    }
+
+    public bool BitingMove
+    {
+        get { return bitingMove; }
+    }
+    public bool Snatchable
+    {
+        get { return snatchable; }
+    }
+    public bool AffectedByGravity
+    {
+        get { return affectedByGravity; }
+    }
+
+    public bool DefrostsWhenUsed
+    {
+        get { return defrostsWhenUsed; }
+    }
+
+    public bool ReflectedByMagicCoatMagicBounce
+    {
+        get { return reflectedByMagicCoatMagicBounce; }
+    }
+
+    public bool BlockedByProtectDetect
+    {
+        get { return blockedByProtectDetect; }
+    }
+
+    public bool CopyableByMirrorMove
+    {
+        get { return copyableByMirrorMove; }
     }
 
     #endregion

@@ -261,17 +261,17 @@ public class StatusConditionArt : MonoBehaviour
     {
         switch (currentCondition)
         {
-            case ConditionID.poison:
+            case ConditionID.Poison:
                 return conditionPoison;
-            case ConditionID.burn:
+            case ConditionID.Burn:
                 return conditionBurn;
-            case ConditionID.sleep:
+            case ConditionID.Sleep:
                 return conditionSleep;
-            case ConditionID.paralyzed:
+            case ConditionID.Paralyzed:
                 return conditionParalyzed;
-            case ConditionID.frozen:
+            case ConditionID.Frozen:
                 return conditionFrozen;
-            case ConditionID.toxicPoison:
+            case ConditionID.ToxicPoison:
                 return conditionPoison;
         }
         return nothing;
@@ -281,15 +281,15 @@ public class StatusConditionArt : MonoBehaviour
     {
         switch (conditionID)
         {
-            case ConditionID.poison:
+            case ConditionID.Poison:
                 return conditionPoisonColour;
-            case ConditionID.burn:
+            case ConditionID.Burn:
                 return conditionBurnColour;
-            case ConditionID.paralyzed:
+            case ConditionID.Paralyzed:
                 return conditionParalyzedColour;
-            case ConditionID.frozen:
+            case ConditionID.Frozen:
                 return conditionFrozenColour;
-            case ConditionID.toxicPoison:
+            case ConditionID.ToxicPoison:
                 return conditionPoisonColour;
         }
         return white;

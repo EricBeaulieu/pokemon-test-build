@@ -677,7 +677,7 @@ public class BattleSystem : MonoBehaviour
                     {
                         yield return RunMoveEffects(secondaryEffect, sourceUnit, targetUnit, secondaryEffect.Target, true);
 
-                        if (secondaryEffect.Volatiletatus == ConditionID.cursedUser)
+                        if (secondaryEffect.Volatiletatus == ConditionID.CursedUser)
                         {
                             yield return sourceUnit.HUD.UpdateHP(previousHP);
                             if (sourceUnit.pokemon.currentHitPoints <= 0)
@@ -687,6 +687,31 @@ public class BattleSystem : MonoBehaviour
                         }
                     }
                 }
+            }
+
+            if(targetUnit.pokemon.ability?.ContactMoveMayCauseStatusEffect != null)
+            {
+                ConditionID newCondition = targetUnit.pokemon.ability.ContactMoveMayCauseStatusEffect(targetUnit.pokemon,sourceUnit.pokemon, move.moveBase);
+
+                if(newCondition > ConditionID.NA && newCondition <= ConditionID.ToxicPoison)
+                {
+                    if(sourceUnit.pokemon.status == null)
+                    {
+                        targetUnit.OnAbilityActivation();
+                        sourceUnit.pokemon.SetStatus(newCondition,false);
+                        yield return ShowStatusChanges(sourceUnit.pokemon);
+                    }
+                }
+                else if(newCondition > ConditionID.ToxicPoison && targetUnit.pokemon.currentHitPoints > 0)
+                {
+                    if(sourceUnit.pokemon.HasCurrentVolatileStatus(newCondition) == false)
+                    {
+                        targetUnit.OnAbilityActivation();
+                        sourceUnit.pokemon.SetVolatileStatus(newCondition);
+                        yield return ShowStatusChanges(sourceUnit.pokemon);
+                    }
+                }
+
             }
         }
         else
@@ -718,7 +743,22 @@ public class BattleSystem : MonoBehaviour
         {
             if (moveTarget == MoveTarget.Foe)
             {
-                target.pokemon.SetVolatileStatus(effects.Volatiletatus);
+                if (effects.Volatiletatus == ConditionID.Infatuation)
+                {
+                    if (CheckIfInflatuated(source.pokemon, target.pokemon) == true)
+                    {
+                        target.pokemon.SetVolatileStatus(effects.Volatiletatus);
+                    }
+                    else
+                    {
+                        yield return dialogBox.TypeDialog("But it failed");
+                        yield break;
+                    }
+                }
+                else
+                {
+                    target.pokemon.SetVolatileStatus(effects.Volatiletatus);
+                }
             }
             else
             {
@@ -1008,6 +1048,17 @@ public class BattleSystem : MonoBehaviour
             List<StatBoost> abilityStatBoosts = new List<StatBoost>() { sourceUnit.pokemon.ability.OnEntryLowerStat };
             yield return ApplyStatChanges(abilityStatBoosts, targetUnit, MoveTarget.Foe, sourceUnit);
         }
+
+        if (sourceUnit.pokemon.ability.NegatesWeatherEffects == true)
+        {
+            if(_currentWeather != null || _currentWeather?.Id == WeatherEffectID.NA)
+            {
+                sourceUnit.OnAbilityActivation();
+                _currentWeather = null;
+                yield return dialogBox.TypeDialog($"{sourceUnit.pokemon.currentName}'s {sourceUnit.pokemon.ability.Name} cleared the battlefield");
+                yield break;
+            }
+        }
     }
 
     #endregion
@@ -1136,7 +1187,6 @@ public class BattleSystem : MonoBehaviour
         EnableActionSelector(false);
     }
 
-
     IEnumerator SwitchPokemonIEnumerator(BattleUnit battleUnit,Pokemon newPokemon)
     {
         bool currentPokemonFainted = true;
@@ -1152,7 +1202,11 @@ public class BattleSystem : MonoBehaviour
         {
             _playerParty.SwitchPokemonPositions(battleUnit.pokemon, newPokemon);
             enemyBattleUnit.AddPokemonToBattleList(newPokemon);
+            enemyBattleUnit.pokemon.CureVolatileStatus(ConditionID.Infatuation);
         }
+
+        enemyBattleUnit.pokemon.CureVolatileStatus(ConditionID.Infatuation);
+        playerBattleUnit.pokemon.CureVolatileStatus(ConditionID.Infatuation);
 
         battleUnit.SetupAndSendOut(newPokemon);
 
@@ -1259,6 +1313,34 @@ public class BattleSystem : MonoBehaviour
                 }
                 yield break;
             }
+        }
+
+        if(enemyBattleUnit.pokemon.ability?.NegatesWeatherEffects == true)
+        {
+            enemyBattleUnit.OnAbilityActivation();
+
+            if(wasAbility == true)
+            {
+                yield return dialogBox.TypeDialog($"{playerBattleUnit.pokemon.currentName}'s {playerBattleUnit.pokemon.ability.Name} was negated by {enemyBattleUnit.pokemon.currentName}'s {enemyBattleUnit.pokemon.ability.Name}");
+            }
+            else
+            {
+                yield return dialogBox.TypeDialog("But it failed");
+            }
+            yield break;
+        }
+        else if(playerBattleUnit.pokemon.ability?.NegatesWeatherEffects == true)
+        {
+            playerBattleUnit.OnAbilityActivation();
+            if (wasAbility == true)
+            {
+                yield return dialogBox.TypeDialog($"{enemyBattleUnit.pokemon.currentName}'s {enemyBattleUnit.pokemon.ability.Name} was negated by {playerBattleUnit.pokemon.currentName}'s {playerBattleUnit.pokemon.ability.Name}");
+            }
+            else
+            {
+                yield return dialogBox.TypeDialog("But it failed");
+            }
+            yield break;
         }
 
         _currentWeather = WeatherEffectDB.WeatherEffects[weatherID];
@@ -1549,6 +1631,27 @@ public class BattleSystem : MonoBehaviour
                 }
             }
         }
+    }
+
+    #endregion
+
+    #region Specialized Attacks
+
+    public static bool CheckIfInflatuated(Pokemon sourcePokemon, Pokemon targetPokemon)
+    {
+        if(sourcePokemon.gender == targetPokemon.gender)
+        {
+            return false;
+        }
+        else if(targetPokemon.gender == Gender.NA)
+        {
+            return false;
+        }
+        else if(targetPokemon.HasCurrentVolatileStatus(ConditionID.Infatuation) == true)
+        {
+            return false;
+        }
+        return true;
     }
 
     #endregion

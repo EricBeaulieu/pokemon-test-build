@@ -9,17 +9,17 @@ public static class CatchingMechanics
     {
         switch (currentCondition)
         {
-            case ConditionID.poison:
+            case ConditionID.Poison:
                 return 1.5f;
-            case ConditionID.burn:
+            case ConditionID.Burn:
                 return 1.5f;
-            case ConditionID.sleep:
+            case ConditionID.Sleep:
                 return 2.5f;
-            case ConditionID.paralyzed:
+            case ConditionID.Paralyzed:
                 return 1.5f;
-            case ConditionID.frozen:
+            case ConditionID.Frozen:
                 return 2.5f;
-            case ConditionID.toxicPoison:
+            case ConditionID.ToxicPoison:
                 return 1.5f;
             default:
                 return 1;

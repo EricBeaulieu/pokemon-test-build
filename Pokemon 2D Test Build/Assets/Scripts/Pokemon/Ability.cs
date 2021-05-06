@@ -24,5 +24,7 @@ public class Ability
     public Func<WeatherEffectID, float> DoublesSpeedInAWeatherEffect { get; set; }
     public StatBoost BoostStatSharplyIfAnyStatLowered { get; set; }
     public Func<StatAttribute, int> DoublesAStat { get; set; }
-
+    public bool NegatesWeatherEffects { get; set; }
+    public Func<Pokemon,Pokemon, MoveBase, ConditionID> ContactMoveMayCauseStatusEffect { get; set; }
+    //Contact moves may cause a status effect
 }

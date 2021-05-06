@@ -495,9 +495,9 @@ public class Pokemon {
         OnStatusChanged?.Invoke();
     }
 
-    bool CheckStatusImmunities(ConditionID conditionID)
+    public bool CheckStatusImmunities(ConditionID conditionID)
     {
-        if(conditionID == ConditionID.poison || conditionID == ConditionID.toxicPoison)
+        if(conditionID == ConditionID.Poison || conditionID == ConditionID.ToxicPoison)
         {
             if(pokemonBase.IsType(ElementType.Poison) || pokemonBase.IsType(ElementType.Steel))
             {
@@ -505,7 +505,7 @@ public class Pokemon {
             }
         }
 
-        if (conditionID == ConditionID.burn)
+        if (conditionID == ConditionID.Burn)
         {
             if (pokemonBase.IsType(ElementType.Fire))
             {
@@ -513,7 +513,7 @@ public class Pokemon {
             }
         }
 
-        if (conditionID == ConditionID.paralyzed)
+        if (conditionID == ConditionID.Paralyzed)
         {
             if (pokemonBase.IsType(ElementType.Electric))
             {
@@ -521,7 +521,7 @@ public class Pokemon {
             }
         }
 
-        if (conditionID == ConditionID.frozen)
+        if (conditionID == ConditionID.Frozen)
         {
             if (pokemonBase.IsType(ElementType.Ice))
             {
@@ -566,6 +566,11 @@ public class Pokemon {
     public void CureVolatileStatus(ConditionID conditionID)
     {
         volatileStatus.Remove(ConditionsDB.Conditions[conditionID]);
+    }
+
+    public bool HasCurrentVolatileStatus(ConditionID conditionID)
+    {
+        return volatileStatus.Exists(x => x.Id == conditionID);
     }
 
     /// <summary>
@@ -614,7 +619,7 @@ public class Pokemon {
         {
             return ConditionID.NA;
         }
-        else if(status.Id > ConditionID.toxicPoison)
+        else if(status.Id > ConditionID.ToxicPoison)
         {
             return ConditionID.NA;
         }

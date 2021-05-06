@@ -5,9 +5,10 @@ using UnityEngine;
 public enum ConditionID
 {
     //Status
-    NA, poison, burn, sleep, paralyzed, frozen, toxicPoison,
+    NA, Poison, Burn, Sleep, Paralyzed, Frozen, ToxicPoison,
     //Volatile Status
-    confused,bound,cursed,cursedUser
+    Confused, Bound, Cursed, CursedUser, Flinch,
+    Infatuation,
 }
 
 public class ConditionsDB
@@ -26,14 +27,14 @@ public class ConditionsDB
     public static Dictionary<ConditionID, Condition> Conditions = new Dictionary<ConditionID, Condition>()
     {
         {
-            ConditionID.poison,
+            ConditionID.Poison,
             new Condition()
             {
                 Name = "Poison",
                 StartMessage = "has been poisoned",
                 HasCondition = (ConditionID conditionID) =>
                 {
-                    if(conditionID == ConditionID.poison || conditionID == ConditionID.toxicPoison)
+                    if(conditionID == ConditionID.Poison || conditionID == ConditionID.ToxicPoison)
                     {
                         return true;
                     }
@@ -56,14 +57,14 @@ public class ConditionsDB
 
         },
         {
-            ConditionID.burn,
+            ConditionID.Burn,
             new Condition()
             {
                 Name = "Burn",
                 StartMessage = "has been burned",
                 HasCondition = (ConditionID conditionID) =>
                 {
-                    if(conditionID == ConditionID.burn)
+                    if(conditionID == ConditionID.Burn)
                     {
                         return true;
                     }
@@ -71,7 +72,7 @@ public class ConditionsDB
                 },
                 StatEffectedByCondition = (ConditionID condition,StatAttribute currentStat) =>
                 {
-                    if(condition == ConditionID.burn && currentStat == StatAttribute.Attack)
+                    if(condition == ConditionID.Burn && currentStat == StatAttribute.Attack)
                     {
                         return 0.5f;
                     }
@@ -94,14 +95,14 @@ public class ConditionsDB
 
         },
         {
-            ConditionID.sleep,
+            ConditionID.Sleep,
             new Condition()
             {
                 Name = "Sleep",
                 StartMessage = "has fallen asleep",
                 HasCondition = (ConditionID conditionID) =>
                 {
-                    if(conditionID == ConditionID.sleep)
+                    if(conditionID == ConditionID.Sleep)
                     {
                         return true;
                     }
@@ -130,14 +131,14 @@ public class ConditionsDB
 
         },
         {
-            ConditionID.paralyzed,
+            ConditionID.Paralyzed,
             new Condition()
             {
                 Name = "Paralyzed",
                 StartMessage = "has been paralyzed",
                 HasCondition = (ConditionID conditionID) =>
                 {
-                    if(conditionID == ConditionID.paralyzed)
+                    if(conditionID == ConditionID.Paralyzed)
                     {
                         return true;
                     }
@@ -145,7 +146,7 @@ public class ConditionsDB
                 },
                 StatEffectedByCondition = (ConditionID condition,StatAttribute currentStat) =>
                 {
-                    if(condition == ConditionID.paralyzed && currentStat == StatAttribute.Speed)
+                    if(condition == ConditionID.Paralyzed && currentStat == StatAttribute.Speed)
                     {
                         return 0.5f;
                     }
@@ -165,14 +166,14 @@ public class ConditionsDB
 
         },
         {
-            ConditionID.frozen,
+            ConditionID.Frozen,
             new Condition()
             {
                 Name = "Frozen",
                 StartMessage = "has been frozen",
                 HasCondition = (ConditionID conditionID) =>
                 {
-                    if(conditionID == ConditionID.frozen)
+                    if(conditionID == ConditionID.Frozen)
                     {
                         return true;
                     }
@@ -194,14 +195,14 @@ public class ConditionsDB
 
         },
         {
-            ConditionID.toxicPoison,
+            ConditionID.ToxicPoison,
             new Condition()
             {
                 Name = "ToxicPoison",
                 StartMessage = "has been badly poisoned",
                 HasCondition = (ConditionID conditionID) =>
                 {
-                    if(conditionID == ConditionID.poison || conditionID == ConditionID.toxicPoison)
+                    if(conditionID == ConditionID.Poison || conditionID == ConditionID.ToxicPoison)
                     {
                         return true;
                     }
@@ -232,14 +233,14 @@ public class ConditionsDB
         //Volatile Status Conditions
 
         {
-            ConditionID.confused,
+            ConditionID.Confused,
             new Condition()
             {
                 Name = "Confused",
                 StartMessage = "has been confused",
                 HasCondition = (ConditionID conditionID) =>
                 {
-                    if(conditionID == ConditionID.confused)
+                    if(conditionID == ConditionID.Confused)
                     {
                         return true;
                     }
@@ -255,7 +256,7 @@ public class ConditionsDB
                 {
                     if(pokemon.volatileStatusTime <= 0)
                     {
-                        pokemon.CureVolatileStatus(ConditionID.confused);
+                        pokemon.CureVolatileStatus(ConditionID.Confused);
                         pokemon.statusChanges.Enqueue($"{pokemon.currentName} is no longer confused");
                         return true;
                     }
@@ -287,13 +288,13 @@ public class ConditionsDB
             }
         },
         {
-            ConditionID.cursed,
+            ConditionID.Cursed,
             new Condition()
             {
                 Name = "Cursed",
                 HasCondition = (ConditionID conditionID) =>
                 {
-                    if(conditionID == ConditionID.cursed)
+                    if(conditionID == ConditionID.Cursed)
                     {
                         return true;
                     }
@@ -308,7 +309,7 @@ public class ConditionsDB
             }
         },
         {
-            ConditionID.cursedUser,
+            ConditionID.CursedUser,
             new Condition()
             {
                 Name = "CursedUser",
@@ -316,8 +317,45 @@ public class ConditionsDB
                 {
                     pokemon.UpdateHP(pokemon.maxHitPoints/2);
                     pokemon.statusChanges.Enqueue($"{pokemon.currentName} cut its own HP to lay a curse on enemy Pokemon");
-                    pokemon.CureVolatileStatus(ConditionID.cursedUser);
+                    pokemon.CureVolatileStatus(ConditionID.CursedUser);
                 },
+            }
+        },
+        {
+            ConditionID.Flinch,
+            new Condition()
+            {
+                Name = "Flinch",
+                OnBeforeMove = (Pokemon pokemon) =>
+                {
+                        pokemon.statusChanges.Enqueue($"{pokemon.currentName} flinched and couldn't move");
+                        return false;
+                },
+                OnEndTurn = (Pokemon pokemon) =>
+                {
+                    pokemon.CureVolatileStatus(ConditionID.Flinch);
+                }
+            }
+        },
+        {
+            ConditionID.Infatuation,
+            new Condition()
+            {
+                Name = "Infatuation",
+                StartMessage = "fell in love!",
+                OnBeforeMove = (Pokemon pokemon) =>
+                {
+                    pokemon.statusChanges.Enqueue($"{pokemon.currentName} is in love");
+
+                    //50% chance to not attack
+                    if(Random.value > 0.5f)
+                    {
+                        return true;
+                    }
+
+                    pokemon.statusChanges.Enqueue($"{pokemon.currentName} is immobilized by love ");
+                    return false;
+                }
             }
         },
     };
