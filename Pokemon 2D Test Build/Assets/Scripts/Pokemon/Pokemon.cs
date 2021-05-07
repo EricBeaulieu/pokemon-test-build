@@ -346,7 +346,7 @@ public class Pokemon {
     {
         DamageDetails damageDetails = new DamageDetails()
         {
-            hasFainted =false,
+            hasFainted = false,
             criticalHit = 1,
             typeEffectiveness = 1
         };
@@ -376,13 +376,15 @@ public class Pokemon {
         modifier *= DamageModifiers.SameTypeAttackBonus(move, attackingPokemon.pokemonBase);
 
         //Ability
-        float? pinchBonus = attackingPokemon.ability?.BoostACertainTypeInAPinch?.Invoke(attackingPokemon, move.Type);
-        if (pinchBonus.HasValue)
+        float? abilityBonus = attackingPokemon.ability?.BoostACertainTypeInAPinch?.Invoke(attackingPokemon, move.Type);
+        abilityBonus = (abilityBonus.HasValue == true) ? abilityBonus : attackingPokemon.ability?.PowerUpCertainMoves?.Invoke(attackingPokemon, move);
+
+        if (abilityBonus.HasValue == true)
         {
-            modifier *= pinchBonus.Value;
+            modifier *= abilityBonus.Value;
         }
 
-        float attackPower = (move.MoveType == MoveType.Physical) ? attackingPokemon.attack: attackingPokemon.specialAttack;
+        float attackPower = (move.MoveType == MoveType.Physical) ? attackingPokemon.attack : attackingPokemon.specialAttack;
         float defendersDefense = (move.MoveType == MoveType.Physical) ? defense : specialDefense;
 
         //If Critical hit ignore the negative effects on attack and positive effects on the defense

@@ -6,6 +6,7 @@ public class Notes
 {
     //To do list
 
+    //impliment struggle
     //add in specific moves
     //hidden power
     //multi hit moves
@@ -43,6 +44,7 @@ public class Notes
     //Bugs
 
     //trainer when walking for some reason got into a half positionand stuck while walking. no idea how i created the bug
+    //place trainer in path off start, let them stand and hit them and recreate this bug
 
     //Others
     //if reflect/light screen are added in then make sure that crits cut through it

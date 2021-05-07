@@ -42,6 +42,7 @@ public class BattleSystem : MonoBehaviour
     Vector2 inGameItemoffScreenPos;
     public event Action<Pokemon,PokeballItem> OnPokemonCaptured;
 
+    [SerializeField] MoveBase struggle;
     int _escapeAttempts;
     public int battleDuration { get; private set; }
 
@@ -641,6 +642,7 @@ public class BattleSystem : MonoBehaviour
         }
         //Moved here so it shows an attack animation, just skips out on the pokemon recieving the hit animation
         yield return sourceUnit.PlayAttackAnimation();
+        int hpPriorToAttack = targetUnit.pokemon.currentHitPoints;//for the animator in UpdateHP and recoil
 
         if (CheckIfMoveHits(move.moveBase, sourceUnit.pokemon, targetUnit.pokemon) == true)
         {
@@ -650,7 +652,6 @@ public class BattleSystem : MonoBehaviour
             }
             else
             {
-                int hpPriorToAttack = targetUnit.pokemon.currentHitPoints;//for the animator in UpdateHP
                 DamageDetails damageDetails = targetUnit.pokemon.TakeDamage(move.moveBase, sourceUnit.pokemon);
 
                 if (move.moveBase.Target == MoveTarget.Foe && damageDetails.typeEffectiveness != 0)
@@ -711,7 +712,38 @@ public class BattleSystem : MonoBehaviour
                         yield return ShowStatusChanges(sourceUnit.pokemon);
                     }
                 }
+            }
 
+            //Recoil
+            if(move.moveBase.RecoilType != Recoil.NA)
+            {
+                int recoilDamage = 0;
+
+                if(move.moveBase.RecoilType == Recoil.DamageDealt)
+                {
+                    recoilDamage = hpPriorToAttack - targetUnit.pokemon.currentHitPoints;
+                    recoilDamage = Mathf.CeilToInt(recoilDamage * move.moveBase.RecoilPercentage);
+                }
+                else if(move.moveBase.RecoilType == Recoil.UsersCurrentHP)
+                {
+                    recoilDamage = sourceUnit.pokemon.currentHitPoints;
+                    recoilDamage = Mathf.CeilToInt(recoilDamage * move.moveBase.RecoilPercentage);
+                }
+                else//users max hp
+                {
+                    recoilDamage = sourceUnit.pokemon.maxHitPoints;
+                    recoilDamage = Mathf.CeilToInt(recoilDamage * move.moveBase.RecoilPercentage);
+                }
+                
+                previousHP = sourceUnit.pokemon.currentHitPoints;
+                sourceUnit.pokemon.UpdateHP(recoilDamage);
+                yield return sourceUnit.HUD.UpdateHP(previousHP);
+                yield return dialogBox.TypeDialog($"{sourceUnit.pokemon.currentName} is hit with recoil!");
+
+                if (sourceUnit.pokemon.currentHitPoints <= 0)
+                {
+                    yield return PokemonHasFainted(sourceUnit);
+                }
             }
         }
         else

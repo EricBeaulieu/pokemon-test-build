@@ -6,6 +6,8 @@ public enum MoveType { Physical, Special, Status}
 
 public enum MoveTarget { Foe,Self}
 
+public enum Recoil { NA, DamageDealt, UsersMaximumHP, UsersCurrentHP }
+
 [CreateAssetMenu(menuName = "Pokedex/Create New Attack Entry")]
 public class MoveBase : ScriptableObject {
 
@@ -36,6 +38,9 @@ public class MoveBase : ScriptableObject {
     [SerializeField] bool reflectedByMagicCoatMagicBounce;
     [SerializeField] bool blockedByProtectDetect;
     [SerializeField] bool copyableByMirrorMove;
+
+    [SerializeField] Recoil recoilType;
+    [SerializeField] float recoilPercentage;
 
     #region Return Methods
 
@@ -144,6 +149,16 @@ public class MoveBase : ScriptableObject {
     public bool CopyableByMirrorMove
     {
         get { return copyableByMirrorMove; }
+    }
+    
+    public Recoil RecoilType
+    {
+        get { return recoilType; }
+    }
+
+    public float RecoilPercentage
+    {
+        get { return recoilPercentage; }
     }
 
     #endregion

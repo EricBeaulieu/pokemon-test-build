@@ -6,7 +6,7 @@ public enum AbilityID
 {
     NA,
     //A
-    AirLock,
+    Adaptability, AirLock,
     //B
     BattleArmor, BigPecks, Blaze,
     //C
@@ -22,7 +22,7 @@ public enum AbilityID
     //H
     HugePower, HyperCutter,
     //I
-    IceScales, Intimidate,
+    IceScales, Intimidate, IronFist,
     //J
     //K
     KeenEye,
@@ -79,6 +79,22 @@ public class AbilityDB
     public static Dictionary<AbilityID, Ability> AbilityDex = new Dictionary<AbilityID, Ability>()
     {
         //A
+        {
+            AbilityID.Adaptability,
+            new Ability()
+            {
+                Name = "Adaptability",
+                Description = "Powers up moves of the same type as the Pokémon.",
+                PowerUpCertainMoves = (Pokemon attackingPokemon,MoveBase currentMove) =>
+                {
+                    if(attackingPokemon.pokemonBase.IsType(currentMove.Type) == true)
+                    {
+                        return 1.33f;
+                    }
+                    return 1f;
+                }
+            }
+        },
         {
             AbilityID.AirLock,
             new Ability()
@@ -453,6 +469,22 @@ public class AbilityDB
                 Name = "Intimidate",
                 Description = "The Pokémon intimidates opposing Pokémon upon entering battle, lowering their Attack stat.",
                 OnEntryLowerStat = new StatBoost() { stat = StatAttribute.Attack, boost = -1 }
+            }
+        },
+        {
+            AbilityID.IronFist,
+            new Ability()
+            {
+                Name = "Iron Fist",
+                Description = "Powers up punching moves.",
+                PowerUpCertainMoves = (Pokemon attackingPokemon,MoveBase currentMove) =>
+                {
+                    if(currentMove.PunchMove == true)
+                    {
+                        return 1.2f;
+                    }
+                    return 1f;
+                }
             }
         },
         //J

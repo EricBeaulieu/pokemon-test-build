@@ -26,5 +26,5 @@ public class Ability
     public Func<StatAttribute, int> DoublesAStat { get; set; }
     public bool NegatesWeatherEffects { get; set; }
     public Func<Pokemon,Pokemon, MoveBase, ConditionID> ContactMoveMayCauseStatusEffect { get; set; }
-    //Contact moves may cause a status effect
+    public Func<Pokemon,MoveBase,float> PowerUpCertainMoves { get; set; }
 }
