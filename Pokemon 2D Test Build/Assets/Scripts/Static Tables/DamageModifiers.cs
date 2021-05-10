@@ -4,7 +4,9 @@ using UnityEngine;
 
 public static class DamageModifiers
 {
-    static float[,] TypeChart =
+    static List<MoveBase> _movesThatLeavesTargetWithOneHP = new List<MoveBase>();
+
+    static float[,] _typeChart =
     {
 
         //Attack Type -> Bug    Dark    Dragon  Elect   Fairy   Fight    Fire    Flying  Ghost   Grass   Ground  Ice     Normal  Poison  Psychic Rock    Steel   Water
@@ -49,13 +51,27 @@ public static class DamageModifiers
     {
         float damageMultiplier = 1f;
 
-        damageMultiplier *= TypeChart[(int)defendingPokemon.pokemonType1, (int)attackType];
+        damageMultiplier *= _typeChart[(int)defendingPokemon.pokemonType1, (int)attackType];
         
         if(defendingPokemon.pokemonType2 != ElementType.NA)
         {
-            damageMultiplier *= TypeChart[(int)defendingPokemon.pokemonType2, (int)attackType];
+            damageMultiplier *= _typeChart[(int)defendingPokemon.pokemonType2, (int)attackType];
         }
 
         return damageMultiplier;
+    }
+
+    public static void AddMovesThatLeavesTargetWithOneHP(MoveBase moveBase)
+    {
+        _movesThatLeavesTargetWithOneHP.Add(moveBase);
+    }
+
+    public static bool LeavesTargetWithOneHP(MoveBase moveBase)
+    {
+        if (_movesThatLeavesTargetWithOneHP.Contains(moveBase) == true)
+        {
+            return true;
+        }
+        return false;
     }
 }

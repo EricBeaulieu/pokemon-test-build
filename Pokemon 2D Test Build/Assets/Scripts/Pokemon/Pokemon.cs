@@ -351,6 +351,11 @@ public class Pokemon {
             typeEffectiveness = 1
         };
 
+        if(attackingPokemon.ability?.ChangeMovesToDifferentTypeAndIncreasesTheirPower?.Invoke(move) != null)
+        {
+            move = attackingPokemon.ability?.ChangeMovesToDifferentTypeAndIncreasesTheirPower.Invoke(move);
+        }
+
         damageDetails.typeEffectiveness = DamageModifiers.TypeChartEffectiveness(pokemonBase, move.Type);
 
         if(damageDetails.typeEffectiveness == 0)//If it doesnt effect the pokemon then just end it right here
@@ -377,7 +382,7 @@ public class Pokemon {
 
         //Ability
         float? abilityBonus = attackingPokemon.ability?.BoostACertainTypeInAPinch?.Invoke(attackingPokemon, move.Type);
-        abilityBonus = (abilityBonus.HasValue == true) ? abilityBonus : attackingPokemon.ability?.PowerUpCertainMoves?.Invoke(attackingPokemon, move);
+        abilityBonus = (abilityBonus.HasValue == true) ? abilityBonus : attackingPokemon.ability?.PowerUpCertainMoves?.Invoke(attackingPokemon,this, move);
 
         if (abilityBonus.HasValue == true)
         {
@@ -408,6 +413,14 @@ public class Pokemon {
         if(damage <=0)
         {
             damage = 1;
+        }
+
+        if(DamageModifiers.LeavesTargetWithOneHP(move) == true)
+        {
+            if(damage >= currentHitPoints)
+            {
+                damage = currentHitPoints - 1;
+            }
         }
 
         UpdateHP(damage);

@@ -20,6 +20,9 @@ public class GameManager : MonoBehaviour
     [SerializeField] PokeballItem standardPokeball;
     [SerializeField] SpriteAtlas spriteAtlas;
 
+    [Header("Specialized Battle Moves")]
+    [SerializeField] List<MoveBase> movesThatLeavesTargetWithOneHP;
+
     bool _inBattle = false;
 
     GameState _state = GameState.Overworld;
@@ -98,6 +101,11 @@ public class GameManager : MonoBehaviour
 
         allActiveEntities = new List<Entity>();
         allActiveEntities = levelManager.ReturnAllEntities();
+
+        foreach (MoveBase move in movesThatLeavesTargetWithOneHP)
+        {
+            DamageModifiers.AddMovesThatLeavesTargetWithOneHP(move);
+        }
     }
 
     void Update()

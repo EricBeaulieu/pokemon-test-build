@@ -6,46 +6,53 @@ public enum AbilityID
 {
     NA,
     //A
-    Adaptability, AirLock,
+    Adaptability, Aerilate, AirLock,
     //B
     BattleArmor, BigPecks, Blaze,
     //C
     Chlorophyll, ClearBody, CloudNine, Competitive, CuteCharm,
     //D
-    Defiant, Drizzle, Drought,
+    Defiant, DragonsMaw, Drizzle, Drought,
     //E
     EffectSpore,
     //F
     FlameBody, FlareBoost, FullMetalBody, FurCoat,
     //G
-    Guts,
+    Galvanize, Guts,
     //H
     HugePower, HyperCutter,
     //I
-    IceScales, Intimidate, IronFist,
+    IceScales, Immunity, InnerFocus, Insomnia, Intimidate,
+    IronFist,
     //J
     //K
     KeenEye,
     //L
+    Limber,
     //M
-    MarvelScale,
+    MagmaArmor, MarvelScale, MegaLauncher,
     //N
+    Neuroforce, Normalize,
     //O
-    Overgrown,
+    Oblivious, Overgrown, OwnTempo,
     //P
-    PoisonPoint, PurePower,
+    Pixilate, PoisonPoint, PunkRock, PurePower,
     //Q
     QuickFeet,
     //R
+    Reckless, Refrigerate,
     //S
-    SandRush, SandStream, ShellArmor, SlushRush, SnowWarning,
-    Static, Swarm, SwiftSwim,
+    SandRush, SandStream, ShellArmor, SkillLink, SlushRush,
+    SnowWarning, Static, Steelworker, StrongJaw, Swarm,
+    SwiftSwim,
     //T
-    Torrent,ToxicBoost,
+    Technician, TintedLens,Torrent, ToughClaws, Transistor,
+    ToxicBoost,
     //U
     //V
+    VitalSpirit,
     //W
-    WhiteSmoke,
+    WaterVeil, WhiteSmoke,
     //X
     //Y
     //Z
@@ -85,13 +92,29 @@ public class AbilityDB
             {
                 Name = "Adaptability",
                 Description = "Powers up moves of the same type as the Pokémon.",
-                PowerUpCertainMoves = (Pokemon attackingPokemon,MoveBase currentMove) =>
+                PowerUpCertainMoves = (Pokemon attackingPokemon,Pokemon defendingPokemon,MoveBase currentMove) =>
                 {
                     if(attackingPokemon.pokemonBase.IsType(currentMove.Type) == true)
                     {
                         return 1.33f;
                     }
                     return 1f;
+                }
+            }
+        },
+        {
+            AbilityID.Aerilate,
+            new Ability()
+            {
+                Name = "Aerilate",
+                Description = "Normal-type moves become Flying-type moves. The power of those moves is boosted a little.",
+                ChangeMovesToDifferentTypeAndIncreasesTheirPower = (MoveBase currentMove) =>
+                {
+                    if(currentMove.Type == ElementType.Normal)
+                    {
+                        return currentMove.adjustedMove(ElementType.Flying,0.2f);
+                    }
+                    return currentMove;
                 }
             }
         },
@@ -248,6 +271,22 @@ public class AbilityDB
             }
         },
         {
+            AbilityID.DragonsMaw,
+            new Ability()
+            {
+                Name = "Dragon's Maw",
+                Description = "Powers up Dragon-type moves.",
+                PowerUpCertainMoves = (Pokemon attackingPokemon,Pokemon defendingPokemon,MoveBase currentMove) =>
+                {
+                    if(currentMove.Type == ElementType.Dragon)
+                    {
+                        return 1.5f;
+                    }
+                    return 1f;
+                }
+            }
+        },
+        {
             AbilityID.Drizzle,//Activates a weather effect for five turns upon entry
             new Ability()
             {
@@ -384,6 +423,22 @@ public class AbilityDB
         },
         //G
         {
+            AbilityID.Galvanize,
+            new Ability()
+            {
+                Name = "Galvanize",
+                Description = "Normal-type moves become Electric-type moves. The power of those moves is boosted a little.",
+                ChangeMovesToDifferentTypeAndIncreasesTheirPower = (MoveBase currentMove) =>
+                {
+                    if(currentMove.Type == ElementType.Normal)
+                    {
+                        return currentMove.adjustedMove(ElementType.Electric,0.2f);
+                    }
+                    return currentMove;
+                }
+            }
+        },
+        {
             AbilityID.Guts,//Boosts a stat by 50% when affected with a status condition
             new Ability()//Status Condition: Any, excluding Freeze
             {
@@ -463,6 +518,66 @@ public class AbilityDB
             }
         },
         {
+            AbilityID.Immunity,
+            new Ability()
+            {
+                Name = "Immunity",
+                Description = "The immune system of the Pokémon prevents it from getting poisoned.",
+                PreventCertainStatusCondition = (ConditionID condition) =>
+                {
+                    if(condition == ConditionID.Poison || condition == ConditionID.ToxicPoison)
+                    {
+                        return true;
+                    }
+                    return false;
+                },
+                OnAbilitityActivation = (Pokemon pokemon) =>
+                {
+                    return $"{pokemon.currentName}'s Immunity prevents poisoning";
+                }
+            }
+        },
+        {
+            AbilityID.InnerFocus,
+            new Ability()
+            {
+                Name = "Inner Focus",
+                Description = "The Pokémon's intensely focused, and that protects the Pokémon from flinching.",
+                PreventCertainStatusCondition = (ConditionID condition) =>
+                {
+                    if(condition == ConditionID.Flinch)
+                    {
+                        return true;
+                    }
+                    return false;
+                },
+                OnAbilitityActivation = (Pokemon pokemon) =>
+                {
+                    return $"{pokemon.currentName} won't flinch because of its Inner Focus!";
+                }
+            }
+        },
+        {
+            AbilityID.Insomnia,
+            new Ability()
+            {
+                Name = "Insomnia",
+                Description = "The Pokémon is suffering from insomnia and cannot fall asleep.",
+                PreventCertainStatusCondition = (ConditionID condition) =>
+                {
+                    if(condition == ConditionID.Sleep)
+                    {
+                        return true;
+                    }
+                    return false;
+                },
+                OnAbilitityActivation = (Pokemon pokemon) =>
+                {
+                    return $"{pokemon.currentName} can't sleep due to Insomnia";
+                }
+            }
+        },
+        {
             AbilityID.Intimidate,
             new Ability()
             {
@@ -477,7 +592,7 @@ public class AbilityDB
             {
                 Name = "Iron Fist",
                 Description = "Powers up punching moves.",
-                PowerUpCertainMoves = (Pokemon attackingPokemon,MoveBase currentMove) =>
+                PowerUpCertainMoves = (Pokemon attackingPokemon,Pokemon defendingPokemon,MoveBase currentMove) =>
                 {
                     if(currentMove.PunchMove == true)
                     {
@@ -518,7 +633,47 @@ public class AbilityDB
             }
         },
         //L
+        {
+            AbilityID.Limber,
+            new Ability()
+            {
+                Name = "Limber",
+                Description = "Its limber body protects the Pokémon from paralysis.",
+                PreventCertainStatusCondition = (ConditionID condition) =>
+                {
+                    if(condition == ConditionID.Paralyzed)
+                    {
+                        return true;
+                    }
+                    return false;
+                },
+                OnAbilitityActivation = (Pokemon pokemon) =>
+                {
+                    return $"{pokemon.currentName}'s Limber protects it from paralysis";
+                }
+            }
+        },
         //M
+        {
+            AbilityID.MagmaArmor,
+            new Ability()
+            {
+                Name = "Magma Armor",
+                Description = "The Pokémon is covered with hot magma, which prevents the Pokémon from becoming frozen.",
+                PreventCertainStatusCondition = (ConditionID condition) =>
+                {
+                    if(condition == ConditionID.Frozen)
+                    {
+                        return true;
+                    }
+                    return false;
+                },
+                OnAbilitityActivation = (Pokemon pokemon) =>
+                {
+                    return $"{pokemon.currentName} Magma Armor prevents freezing";
+                }
+            }
+        },
         {
             AbilityID.MarvelScale,//Boosts a stat by 50% when affected with a status condition
             new Ability()//Status Condition: Any
@@ -535,8 +690,72 @@ public class AbilityDB
                 },
             }
         },
+        {
+            AbilityID.MegaLauncher,
+            new Ability()
+            {
+                Name = "Mega Launcher",
+                Description = "Powers up aura and pulse moves.",
+                PowerUpCertainMoves = (Pokemon attackingPokemon,Pokemon defendingPokemon,MoveBase currentMove) =>
+                {
+                    if(currentMove.MoveName.Contains("Pulse")||currentMove.MoveName.Contains("Aura"))
+                    {
+                        return 1.5f;
+                    }
+                    return 1f;
+                }
+            }
+        },
         //N
+        {
+            AbilityID.Neuroforce,
+            new Ability()
+            {
+                Name = "Neuroforce",
+                Description = "Powers up moves that are super effective.",
+                PowerUpCertainMoves = (Pokemon attackingPokemon,Pokemon defendingPokemon,MoveBase currentMove) =>
+                {
+                    if(DamageModifiers.TypeChartEffectiveness(defendingPokemon.pokemonBase, currentMove.Type) > 1)
+                    {
+                        return 1.25f;
+                    }
+                    return 1f;
+                }
+            }
+        },
+        {
+            AbilityID.Normalize,
+            new Ability()
+            {
+                Name = "Normalize",
+                Description = "All the Pokémon's moves become Normal type. The power of those moves is boosted a little.",
+                ChangeMovesToDifferentTypeAndIncreasesTheirPower = (MoveBase currentMove) =>
+                {
+                    return currentMove.adjustedMove(ElementType.Normal,0.2f);
+                }
+            }
+        },
         //O
+        {
+            AbilityID.Oblivious,
+            new Ability()
+            {
+                Name = "Oblivious",
+                Description = "The Pokémon is oblivious, and that keeps it from being infatuated or falling for taunts.",
+                PreventCertainStatusCondition = (ConditionID condition) =>
+                {
+                    if(condition == ConditionID.Infatuation)
+                    {
+                        return true;
+                    }
+                    return false;
+                },
+                OnAbilitityActivation = (Pokemon pokemon) =>
+                {
+                    return $"{pokemon.currentName} is Oblivious to Inflantuation and Taunts";
+                }
+            }
+        },
         {
             AbilityID.Overgrown,//When HP is below 1/3rd its maximum, power of Grass-type moves is increased by 50%.
             new Ability()
@@ -558,7 +777,43 @@ public class AbilityDB
                 }
             }
         },
+        {
+            AbilityID.OwnTempo,
+            new Ability()
+            {
+                Name = "Own Tempo",
+                Description = "This Pokémon has its own tempo, and that prevents it from becoming confused.",
+                PreventCertainStatusCondition = (ConditionID condition) =>
+                {
+                    if(condition == ConditionID.Confused)
+                    {
+                        return true;
+                    }
+                    return false;
+                },
+                OnAbilitityActivation = (Pokemon pokemon) =>
+                {
+                    return $"{pokemon.currentName}'s Own Tempo prevents Confusion";
+                }
+            }
+        },
         //P
+        {
+            AbilityID.Pixilate,
+            new Ability()
+            {
+                Name = "Pixilate",
+                Description = "Normal-type moves become Fairy-type moves. The power of those moves is boosted a little.",
+                ChangeMovesToDifferentTypeAndIncreasesTheirPower = (MoveBase currentMove) =>
+                {
+                    if(currentMove.Type == ElementType.Normal)
+                    {
+                        return currentMove.adjustedMove(ElementType.Fairy,0.2f);
+                    }
+                    return currentMove;
+                }
+            }
+        },
         {
             AbilityID.PoisonPoint,
             new Ability()//30% chance
@@ -578,6 +833,22 @@ public class AbilityDB
                         }
                     }
                     return ConditionID.NA;
+                }
+            }
+        },
+        {
+            AbilityID.PunkRock,
+            new Ability()
+            {
+                Name = "Punk Rock",
+                Description = "Boosts the power of sound-based moves. The Pokémon also takes half the damage from these kinds of moves.",
+                PowerUpCertainMoves = (Pokemon attackingPokemon,Pokemon defendingPokemon,MoveBase currentMove) =>
+                {
+                    if(currentMove.SoundType == true)
+                    {
+                        return 1.3f;
+                    }
+                    return 1f;
                 }
             }
         },
@@ -623,6 +894,38 @@ public class AbilityDB
             }
         },
         //R
+        {
+            AbilityID.Reckless,
+            new Ability()
+            {
+                Name = "Reckless",
+                Description = "Powers up moves that have recoil damage.",
+                PowerUpCertainMoves = (Pokemon attackingPokemon,Pokemon defendingPokemon,MoveBase currentMove) =>
+                {
+                    if(currentMove.RecoilType != Recoil.NA)
+                    {
+                        return 1.2f;
+                    }
+                    return 1f;
+                }
+            }
+        },
+        {
+            AbilityID.Refrigerate,
+            new Ability()
+            {
+                Name = "Refrigerate",
+                Description = "Normal-type moves become Ice-type moves. The power of those moves is boosted a little.",
+                ChangeMovesToDifferentTypeAndIncreasesTheirPower = (MoveBase currentMove) =>
+                {
+                    if(currentMove.Type == ElementType.Normal)
+                    {
+                        return currentMove.adjustedMove(ElementType.Ice,0.2f);
+                    }
+                    return currentMove;
+                }
+            }
+        },
         //S
         {
             AbilityID.SandRush,
@@ -656,6 +959,15 @@ public class AbilityDB
                 Name = "Shell Armor",
                 Description = "A hard shell protects the Pokémon from critical hits.",
                 PreventsCriticalHits = true
+            }
+        },
+        {
+            AbilityID.SkillLink,
+            new Ability()
+            {
+                Name = "Skill Link",
+                Description = "Maximizes the number of times multistrike moves hit.",
+                MaximizeMultistrikeMovesHit = true
             }
         },
         {
@@ -706,6 +1018,38 @@ public class AbilityDB
             }
         },
         {
+            AbilityID.Steelworker,
+            new Ability()
+            {
+                Name = "Steelworker",
+                Description = "Powers up Steel-type moves.",
+                PowerUpCertainMoves = (Pokemon attackingPokemon,Pokemon defendingPokemon,MoveBase currentMove) =>
+                {
+                    if(currentMove.Type == ElementType.Steel)
+                    {
+                        return 1.5f;
+                    }
+                    return 1f;
+                }
+            }
+        },
+        {
+            AbilityID.StrongJaw,
+            new Ability()
+            {
+                Name = "Strong Jaw",
+                Description = "The Pokémon's strong jaw boosts the power of its biting moves.",
+                PowerUpCertainMoves = (Pokemon attackingPokemon,Pokemon defendingPokemon,MoveBase currentMove) =>
+                {
+                    if(currentMove.BitingMove == true)
+                    {
+                        return 1.5f;
+                    }
+                    return 1f;
+                }
+            }
+        },
+        {
             AbilityID.Swarm,//When HP is below 1/3rd its maximum, power of Bug-type moves is increased by 50%.
             new Ability()
             {
@@ -744,6 +1088,38 @@ public class AbilityDB
         },
         //T
         {
+            AbilityID.Technician,
+            new Ability()
+            {
+                Name = "Technician",
+                Description = "Powers up the Pokémon's weaker moves.",
+                PowerUpCertainMoves = (Pokemon attackingPokemon,Pokemon defendingPokemon,MoveBase currentMove) =>
+                {
+                    if(currentMove.MovePower <= 60)
+                    {
+                        return 1.5f;
+                    }
+                    return 1f;
+                }
+            }
+        },
+        {
+            AbilityID.TintedLens,
+            new Ability()
+            {
+                Name = "TintedLens",
+                Description = "The Pokémon can use \"not very effective\" moves to deal regular damage.",
+                PowerUpCertainMoves = (Pokemon attackingPokemon,Pokemon defendingPokemon,MoveBase currentMove) =>
+                {
+                    if(DamageModifiers.TypeChartEffectiveness(defendingPokemon.pokemonBase, currentMove.Type) < 1)
+                    {
+                        return 2f;
+                    }
+                    return 1f;
+                }
+            }
+        },
+        {
             AbilityID.Torrent,//When HP is below 1/3rd its maximum, power of Water-type moves is increased by 50%.
             new Ability()
             {
@@ -765,6 +1141,38 @@ public class AbilityDB
             }
         },
         {
+            AbilityID.ToughClaws,
+            new Ability()
+            {
+                Name = "Tough Claws",
+                Description = "Powers up moves that make direct contact.",
+                PowerUpCertainMoves = (Pokemon attackingPokemon,Pokemon defendingPokemon,MoveBase currentMove) =>
+                {
+                    if(currentMove.PhysicalContact == true)
+                    {
+                        return 1.3f;
+                    }
+                    return 1f;
+                }
+            }
+        },
+        {
+            AbilityID.Transistor,
+            new Ability()
+            {
+                Name = "Transistor",
+                Description = "Powers up Electric-type moves.",
+                PowerUpCertainMoves = (Pokemon attackingPokemon,Pokemon defendingPokemon,MoveBase currentMove) =>
+                {
+                    if(currentMove.Type == ElementType.Electric)
+                    {
+                        return 1.5f;
+                    }
+                    return 1f;
+                }
+            }
+        },
+        {
             AbilityID.ToxicBoost,//Boosts a stat by 50% when affected with a status condition
             new Ability()//Status Condition: Any
             {
@@ -782,7 +1190,47 @@ public class AbilityDB
         },
         //U
         //V
+        {
+            AbilityID.VitalSpirit,
+            new Ability()
+            {
+                Name = "Vital Spirit",
+                Description = "The Pokémon is full of vitality, and that prevents it from falling asleep.",
+                PreventCertainStatusCondition = (ConditionID condition) =>
+                {
+                    if(condition == ConditionID.Sleep)
+                    {
+                        return true;
+                    }
+                    return false;
+                },
+                OnAbilitityActivation = (Pokemon pokemon) =>
+                {
+                    return $"{pokemon.currentName} can't sleep due to Vital Spirit";
+                }
+            }
+        },
         //W
+        {
+            AbilityID.WaterVeil,
+            new Ability()
+            {
+                Name = "Water Veil",
+                Description = "The Pokémon is covered with a water veil, which prevents the Pokémon from getting a burn.",
+                PreventCertainStatusCondition = (ConditionID condition) =>
+                {
+                    if(condition == ConditionID.Burn)
+                    {
+                        return true;
+                    }
+                    return false;
+                },
+                OnAbilitityActivation = (Pokemon pokemon) =>
+                {
+                    return $"{pokemon.currentName}'s Water Veil prevents burning";
+                }
+            }
+        },
         {
             AbilityID.WhiteSmoke,
             new Ability()

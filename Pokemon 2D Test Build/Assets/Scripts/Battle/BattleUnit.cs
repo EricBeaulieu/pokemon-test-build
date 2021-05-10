@@ -621,4 +621,19 @@ public class BattleUnit : MonoBehaviour
     {
         return new Vector3(offsetSpot.x + Random.Range(-5,6), offsetSpot.y + Random.Range(-5, 6));
     }
+
+    public bool NoMovesAvailable()
+    {
+        List<Move> currentMoveList = new List<Move>(pokemon.moves);
+
+        foreach (Move move in currentMoveList)
+        {
+            if(move.pP > 0 || move.disabled == false)
+            {
+                return false;
+            }
+        }
+
+        return true;
+    }
 }

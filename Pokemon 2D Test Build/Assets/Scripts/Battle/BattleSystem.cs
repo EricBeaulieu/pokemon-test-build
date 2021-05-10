@@ -45,6 +45,7 @@ public class BattleSystem : MonoBehaviour
     [SerializeField] MoveBase struggle;
     int _escapeAttempts;
     public int battleDuration { get; private set; }
+    [SerializeField] static List<MoveBase> movesThatLeaveTargetWithOneHP;
 
     [SerializeField] LearnNewMoveUI learnNewMoveUI;
     [SerializeField] LevelUpUI levelUpUI;
@@ -322,7 +323,15 @@ public class BattleSystem : MonoBehaviour
     void PlayerActionFight()
     {
         EnableActionSelector(false);
-        EnableAttackMoveSelector(true);
+
+        if(playerBattleUnit.NoMovesAvailable() == true)
+        {
+            PlayerPokemonHasNoMovesLeft();
+        }
+        else
+        {
+            EnableAttackMoveSelector(true);
+        }
     }
 
     /// <summary>
@@ -406,6 +415,19 @@ public class BattleSystem : MonoBehaviour
         EnableAttackMoveSelector(true);
     }
 
+    public void PlayerPokemonHasNoMovesLeft()
+    {
+        StartCoroutine(PlayerPokemonHasNoMovesLeftIEnumerator());
+    }
+
+    IEnumerator PlayerPokemonHasNoMovesLeftIEnumerator()
+    {
+        EnableAttackMoveSelector(false);
+        yield return dialogBox.TypeDialog($"{playerBattleUnit.pokemon.currentName} has no available moves left");
+        yield return new WaitForSeconds(1);
+        AttackSelected(playerBattleUnit, new Move(struggle));
+    }
+
     public void ReturnFromPokemonPartySystem()
     {
         actionSelectionEventSelector.SelectBox();
@@ -458,9 +480,13 @@ public class BattleSystem : MonoBehaviour
     {
         Move currentAttack = enemyBattleUnit.pokemon.ReturnRandomMove();
 
+        if(currentAttack == null)
+        {
+            currentAttack = new Move(struggle);
+        }
+
         TurnAttackDetails turnAttack = new TurnAttackDetails(currentAttack, enemyBattleUnit, playerBattleUnit);
         _currentTurnDetails.Add(turnAttack);
-        //yield return RunMove(_enemyBattleUnit, _playerBattleUnit, currentAttack.moveBase);
 
         yield return RunThroughTurns(_currentTurnDetails);
     }
@@ -652,15 +678,84 @@ public class BattleSystem : MonoBehaviour
             }
             else
             {
-                DamageDetails damageDetails = targetUnit.pokemon.TakeDamage(move.moveBase, sourceUnit.pokemon);
+                int attackLoop = 1;
 
-                if (move.moveBase.Target == MoveTarget.Foe && damageDetails.typeEffectiveness != 0)
+                if(move.moveBase.MultiStrikeMove == true)
                 {
-                    targetUnit.PlayHitAnimation();
+                    if(move.moveBase.FixedNumberOfStrikes > 0)
+                    {
+                        attackLoop = move.moveBase.FixedNumberOfStrikes;
+                    }
+                    else
+                    {
+                        if (sourceUnit.pokemon.ability?.MaximizeMultistrikeMovesHit == true)
+                        {
+                            attackLoop = 5;
+                        }
+                        else
+                        {
+                            attackLoop = VariableNumberOfStrikes();
+                        }
+                    }
                 }
 
-                yield return targetUnit.HUD.UpdateHP(hpPriorToAttack);
+                DamageDetails damageDetails = targetUnit.pokemon.TakeDamage(move.moveBase, sourceUnit.pokemon);
+
+                if (attackLoop > 1)
+                {
+                    dialogBox.SetDialogText("");
+
+                    for (int i = 0; i < attackLoop; i++)
+                    {
+                        if (i > 0)
+                        {
+                            damageDetails = targetUnit.pokemon.TakeDamage(move.moveBase, sourceUnit.pokemon);
+                        }
+
+                        if (move.moveBase.Target == MoveTarget.Foe && damageDetails.typeEffectiveness != 0)
+                        {
+                            targetUnit.PlayHitAnimation();
+                        }
+
+                        yield return targetUnit.HUD.UpdateHP(hpPriorToAttack);
+
+                        if(damageDetails.criticalHit > 1 && i < attackLoop)
+                        {
+                            yield return dialogBox.TypeDialog("A Critical Hit!");
+                        }
+
+                        if (damageDetails.typeEffectiveness == 0)
+                        {
+                            break;
+                        }
+
+                        if(targetUnit.pokemon.currentHitPoints <=0)
+                        {
+                            attackLoop = i +1;
+                            break;
+                        }
+
+                        hpPriorToAttack = targetUnit.pokemon.currentHitPoints;
+
+                        yield return new WaitForSeconds(1f);
+                    }
+                }
+                else
+                {
+                    if (move.moveBase.Target == MoveTarget.Foe && damageDetails.typeEffectiveness != 0)
+                    {
+                        targetUnit.PlayHitAnimation();
+                    }
+
+                    yield return targetUnit.HUD.UpdateHP(hpPriorToAttack);
+                }
+                
                 yield return ShowDamageDetails(damageDetails, targetUnit);
+
+                if (move.moveBase.MultiStrikeMove == true && damageDetails.typeEffectiveness != 0)
+                {
+                    yield return dialogBox.TypeDialog($"Hit {attackLoop} time(s)!");
+                }
 
                 //Shows that the damage does not effect them and then ends the move right there
                 if (damageDetails.typeEffectiveness == 0)
@@ -676,7 +771,7 @@ public class BattleSystem : MonoBehaviour
                     int rnd = Random.Range(1, 101);
                     if (rnd <= secondaryEffect.PercentChance)
                     {
-                        yield return RunMoveEffects(secondaryEffect, sourceUnit, targetUnit, secondaryEffect.Target, true);
+                        yield return RunMoveEffects(secondaryEffect, sourceUnit, targetUnit, secondaryEffect.Target, (secondaryEffect.PercentChance<100)) ;
 
                         if (secondaryEffect.Volatiletatus == ConditionID.CursedUser)
                         {
@@ -767,7 +862,25 @@ public class BattleSystem : MonoBehaviour
         //Status Condition
         if (effects.Status != ConditionID.NA)
         {
-            target.pokemon.SetStatus(effects.Status, wasSecondaryEffect);
+            if(target.pokemon.ability?.PreventCertainStatusCondition.Invoke(effects.Status) != null)
+            {
+                if (target.pokemon.ability.PreventCertainStatusCondition.Invoke(effects.Status) == true)
+                {
+                    if(wasSecondaryEffect == false)
+                    {
+                        target.OnAbilityActivation();
+                        target.pokemon.statusChanges.Enqueue(target.pokemon.ability.OnAbilitityActivation(target.pokemon));
+                    }
+                }
+                else
+                {
+                    target.pokemon.SetStatus(effects.Status, wasSecondaryEffect);
+                }
+            }
+            else
+            {
+                target.pokemon.SetStatus(effects.Status, wasSecondaryEffect);
+            }
         }
 
         //Volatile Status Condition
@@ -1684,6 +1797,23 @@ public class BattleSystem : MonoBehaviour
             return false;
         }
         return true;
+    }
+
+    int VariableNumberOfStrikes()
+    {
+        int randomNumber = Random.Range(0, 8);
+
+        switch (randomNumber)
+        {
+            case int n when (n <= 2):
+                return 2;
+            case int n when (n > 2 && n <= 5):
+                return 3;
+            case int n when (n == 6):
+                return 4;
+            default:
+                return 5;
+        }
     }
 
     #endregion

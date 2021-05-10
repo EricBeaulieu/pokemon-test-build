@@ -5,22 +5,26 @@ using UnityEngine;
 public class Notes
 {
     //To do list
-
-    //impliment struggle
+    
     //add in specific moves
     //hidden power
-    //multi hit moves
-    // false swipe
-    //elemental punches
     //transform
     //barrier moves, reflect, brick break etc
     //wrap moves
+    //variations of arena trap
+    //clean up the way it enques ability actvation 
+    //inner focus and oblivious prevents intimidation from working
+    //oblivious taunts
+
+    //punk rock sounds reduction based
+    //Steely Spirit not implimented due to not having ally boost moves implimented and steel worker does the same thing
+    //normalize to change the type of status moves as well
 
     //Add in specific abilities
     //levitate
     //scrappy
 
-    //double chack abilities dropping or raising higher then stated
+    //double check abilities dropping or raising higher then stated
     //change indimitimate ability styles, instread of it saying it lowered the stat say it was caused by the entry
     //test out bug on new pokemon, in summary
     //Start menu items
@@ -33,10 +37,8 @@ public class Notes
     //Add in
 
     //On receiving a status play animation, nothing set yet possibly same as the enqueue string thing but with condition ID's as an addition and on show changes have it play the animation
-    //Roar 
-    //Recoil
+    //Roar
     //Saving
-    //Multi hit moves, like double kick
 
     //Wishes
     //Overworld effects with abilitities

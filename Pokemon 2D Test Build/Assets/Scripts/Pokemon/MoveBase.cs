@@ -28,6 +28,9 @@ public class MoveBase : ScriptableObject {
     [SerializeField] int powerPoints;
     [SerializeField] float baseCriticalHitRate;
 
+    [SerializeField] bool multiStrikeMove;
+    [SerializeField] int fixedNumberOfStrikes;
+
     [SerializeField] bool physicalContact;
     [SerializeField] bool soundType;
     [SerializeField] bool punchMove;
@@ -41,6 +44,51 @@ public class MoveBase : ScriptableObject {
 
     [SerializeField] Recoil recoilType;
     [SerializeField] float recoilPercentage;
+
+    public MoveBase adjustedMove(ElementType newType,float powerIncrease)
+    {
+        MoveBase updatedMove = MoveBase.Instantiate(this);
+
+        updatedMove.elementType = newType;
+        updatedMove.power += Mathf.RoundToInt(updatedMove.power * powerIncrease);
+        return updatedMove;
+    }
+
+//    MoveBase(MoveBase originalMove)
+//    {
+//        moveName = originalMove.moveName;
+//        moveDescription = originalMove.moveDescription;
+
+//        elementType = originalMove.elementType;
+//        moveType = originalMove.moveType;
+//        moveEffects = originalMove.moveEffects;
+//        secondaryEffects = originalMove.secondaryEffects;
+//        target = originalMove.target;
+
+//    [SerializeField] int power;
+//    [SerializeField] int accuracy;
+//    [SerializeField] bool alwaysHits;
+//    [SerializeField] int priority;
+//    [SerializeField] int powerPoints;
+//    [SerializeField] float baseCriticalHitRate;
+
+//    [SerializeField] bool multiStrikeMove;
+//    [SerializeField] int fixedNumberOfStrikes;
+
+//    [SerializeField] bool physicalContact;
+//    [SerializeField] bool soundType;
+//    [SerializeField] bool punchMove;
+//    [SerializeField] bool bitingMove;
+//    [SerializeField] bool snatchable;
+//    [SerializeField] bool affectedByGravity;
+//    [SerializeField] bool defrostsWhenUsed;
+//    [SerializeField] bool reflectedByMagicCoatMagicBounce;
+//    [SerializeField] bool blockedByProtectDetect;
+//    [SerializeField] bool copyableByMirrorMove;
+
+//    [SerializeField] Recoil recoilType;
+//    [SerializeField] float recoilPercentage;
+//}
 
     #region Return Methods
 
@@ -159,6 +207,16 @@ public class MoveBase : ScriptableObject {
     public float RecoilPercentage
     {
         get { return recoilPercentage; }
+    }
+
+    public bool MultiStrikeMove
+    {
+        get { return multiStrikeMove; }
+    }
+
+    public int FixedNumberOfStrikes
+    {
+        get { return fixedNumberOfStrikes; }
     }
 
     #endregion
