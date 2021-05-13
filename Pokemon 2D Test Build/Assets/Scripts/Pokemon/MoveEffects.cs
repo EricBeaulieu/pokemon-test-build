@@ -17,6 +17,8 @@ public class MoveEffects
     [SerializeField] ConditionID volatileStatus;
     [SerializeField] WeatherEffectID weatherEffect;
     [SerializeField] EntryHazardID entryHazard;
+    [SerializeField] string specialStartMessage;
+    [SerializeField] string specialEndTurnMessage;
 
     public List<StatBoost> Boosts
     {
@@ -41,5 +43,15 @@ public class MoveEffects
     public EntryHazardID EntryHazard
     {
         get { return entryHazard; }
+    }
+
+    public string SpecialStartMessage
+    {
+        get { return specialStartMessage; }
+    }
+
+    public string SpecialEndTurnMessage
+    {
+        get { return specialEndTurnMessage; }
     }
 }

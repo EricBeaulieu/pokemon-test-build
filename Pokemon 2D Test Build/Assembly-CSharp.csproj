@@ -58,8 +58,9 @@
     <Compile Include="Assets\Scripts\Battle\BattleSystem.cs" />
     <Compile Include="Assets\Scripts\Pokemon\PokemonBase.cs" />
     <Compile Include="Assets\Scripts\Party\SummarySystem.cs" />
-    <Compile Include="Assets\Scripts\Pokemon\Condition.cs" />
+    <Compile Include="Assets\Scripts\Data\Conditions\ConditionBase.cs" />
     <Compile Include="Assets\Scripts\Battle\DamageDetails.cs" />
+    <Compile Include="Assets\Scripts\Managers\SpriteAtlas.cs" />
     <Compile Include="Assets\Scripts\Characters\PlayerController.cs" />
     <Compile Include="Assets\Scripts\Battle\ActionSelectionEventSelector.cs" />
     <Compile Include="Assets\CuttableTree.cs" />
@@ -73,7 +74,7 @@
     <Compile Include="Assets\Test.cs" />
     <Compile Include="Assets\Scripts\Items\ItemBase.cs" />
     <Compile Include="Assets\Scripts\Battle\EntryHazard.cs" />
-    <Compile Include="Assets\Scripts\Data\ConditionsDB.cs" />
+    <Compile Include="Assets\Scripts\Data\Conditions\ConditionsDB.cs" />
     <Compile Include="Assets\Scripts\Managers\LevelManager.cs" />
     <Compile Include="Assets\Scripts\Static Tables\EggTable.cs" />
     <Compile Include="Assets\Scripts\Party\PartyBackgroundArt.cs" />
@@ -121,13 +122,24 @@
     <Compile Include="Assets\Scripts\Pokemon\MoveBase.cs" />
     <Compile Include="Assets\Scripts\Pokemon\LearnableMove.cs" />
     <Compile Include="Assets\Scripts\Battle\BattleUnit.cs" />
+    <Compile Include="Assets\Scripts\Static Tables\PokemonNameList.cs" />
     <Compile Include="Assets\Scripts\Mechanics\InBattleItem.cs" />
     <Compile Include="Assets\Scripts\Mechanics\IInteractable.cs" />
     <Compile Include="Assets\Scripts\ExtensionMethods\Vector2Extensions.cs" />
     <Compile Include="Assets\Scripts\Managers\GameManager.cs" />
     <Compile Include="Assets\Scripts\Battle\TurnAttackDetails.cs" />
-    <Compile Include="Assets\Scripts\Static Tables\PokemonNameList.cs" />
-    <Compile Include="Assets\Scripts\Managers\SpriteAtlas.cs" />
+    <Compile Include="Assets\Scripts\Data\Conditions\Status\Poison.cs" />
+    <Compile Include="Assets\Scripts\Data\Conditions\Status\Sleep.cs" />
+    <Compile Include="Assets\Scripts\Data\Conditions\Status\Burn.cs" />
+    <Compile Include="Assets\Scripts\Data\Conditions\Status\Frozen.cs" />
+    <Compile Include="Assets\Scripts\Data\Conditions\Status\Paralyzed.cs" />
+    <Compile Include="Assets\Scripts\Data\Conditions\Status\ToxicPoison.cs" />
+    <Compile Include="Assets\Scripts\Data\Conditions\VolatileStatus\Confused.cs" />
+    <Compile Include="Assets\Scripts\Data\Conditions\VolatileStatus\Bound.cs" />
+    <Compile Include="Assets\Scripts\Data\Conditions\VolatileStatus\Cursed.cs" />
+    <Compile Include="Assets\Scripts\Data\Conditions\VolatileStatus\CursedUser.cs" />
+    <Compile Include="Assets\Scripts\Data\Conditions\VolatileStatus\Flinch.cs" />
+    <Compile Include="Assets\Scripts\Data\Conditions\VolatileStatus\Infatuation.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">

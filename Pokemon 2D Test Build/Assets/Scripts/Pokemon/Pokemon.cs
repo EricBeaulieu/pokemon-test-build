@@ -30,9 +30,9 @@ public class Pokemon {
     public Dictionary<StatAttribute, int> statBoosts { get; private set; }
     public Queue<string> statusChanges { get; private set; }
 
-    public Condition status { get; private set; }
+    public ConditionBase status { get; private set; }
     public int statusTime { get; set; }
-    public List<Condition> volatileStatus { get; private set; }
+    public List<ConditionBase> volatileStatus { get; private set; }
     public int volatileStatusTime { get; set; }
     public System.Action OnStatusChanged;
 
@@ -126,7 +126,7 @@ public class Pokemon {
     public void Reset()
     {
         ResetStatBoosts();
-        volatileStatus = new List<Condition>();
+        volatileStatus = new List<ConditionBase>();
     }
 
     public void Obtained(PlayerController player,PokeballItem pokeball)
@@ -229,8 +229,8 @@ public class Pokemon {
         {
             bool? negated = ability?.NegatesStatusEffectStatDropFromCondition?.Invoke(status.Id, currentStat);
 
-            float? reduction = status?.StatEffectedByCondition?.Invoke(status.Id,currentStat);
-            if (reduction.HasValue == true && negated == false)
+            float? reduction = status?.StatEffectedByCondition(currentStat);
+            if(reduction.HasValue == true && negated == false)
             {
                 statValue *= reduction.Value;
             }
@@ -471,7 +471,7 @@ public class Pokemon {
                 return;
             }
 
-            string currentStatusChange = $"{currentName} {status.HasConditionMessage}";
+            string currentStatusChange = $"{status.HasConditionMessage(this)}";
 
             if(status.HasCondition(conditionID) == false)
             {
@@ -494,11 +494,11 @@ public class Pokemon {
         }
 
         status = ConditionsDB.Conditions[conditionID];
-        status?.OnStart?.Invoke(this);
+        status?.OnStart(this);
 
-        if(status.StartMessage != null)
+        if(status.StartMessage(this) != "")
         {
-            statusChanges.Enqueue($"{currentName} {status.StartMessage}");
+            statusChanges.Enqueue(status.StartMessage(this));
         }
 
         OnStatusChanged?.Invoke();
@@ -547,35 +547,50 @@ public class Pokemon {
         return false;
     }
 
-    public void SetVolatileStatus(ConditionID conditionID)
+    public void SetVolatileStatus(ConditionID conditionID,MoveBase currentMove)
     {
-        Condition currentCondition = ConditionsDB.Conditions[conditionID];
+        ConditionBase currentCondition = ConditionsDB.Conditions[conditionID];
 
         if (volatileStatus.Contains(currentCondition) == true)
         {
-            string currentStatusChange = $"{currentName} {currentCondition.HasConditionMessage}";
+            string currentStatusChange = null;
+
+            if (currentCondition.HasConditionMessage(this) != "")
+            {
+                currentStatusChange = $"{currentCondition.HasConditionMessage(this)}";
+            }
 
             if (currentCondition.HasCondition(conditionID) == false)
             {
                 currentStatusChange = $"It doesnt affect {currentName}";
             }
-            statusChanges.Enqueue(currentStatusChange);
+
+            if(currentStatusChange != null || currentStatusChange != "")
+            {
+                statusChanges.Enqueue(currentStatusChange);
+            }
             return;
         }
 
-        Condition newVolatileStatus = ConditionsDB.Conditions[conditionID];
+        ConditionBase newVolatileStatus = ConditionsDB.Conditions[conditionID];
         volatileStatus.Add(newVolatileStatus);
-        newVolatileStatus?.OnStart?.Invoke(this);
+        newVolatileStatus?.OnStart(this);
 
-        if(newVolatileStatus.StartMessage != null)
+        if(newVolatileStatus.Id == ConditionID.Bound)
         {
-            statusChanges.Enqueue($"{currentName} {newVolatileStatus.StartMessage}");
+            Bound boundStatus = (Bound)newVolatileStatus;
+            boundStatus.SetBoundMove = currentMove;
+        }
+
+        if(newVolatileStatus.StartMessage(this) != "")
+        {
+            statusChanges.Enqueue(newVolatileStatus.StartMessage(this));
         }
     }
 
     public void CureAllVolatileStatus()
     {
-        volatileStatus = new List<Condition>();
+        volatileStatus = new List<ConditionBase>();
     }
 
     public void CureVolatileStatus(ConditionID conditionID)
@@ -592,28 +607,22 @@ public class Pokemon {
     /// Checks to see if the pokemon can attack or not
     /// </summary>
     /// <returns></returns>
-    public ConditionID OnBeforeMove()
+    public ConditionID OnBeforeMove(Pokemon targetPokemon)
     {
 
-        if(status?.OnBeforeMove != null)
+        if (status?.OnBeforeMove(this, targetPokemon) == false)
         {
-            if (status.OnBeforeMove(this) == false)
-            {
-                return status.Id;
-            }
+            return status.Id;
         }
 
         //This copy is here because if it is iterating through it and removes an element while searching it shall break the for each loop
-        List<Condition> copyVolatileStatus = new List<Condition>(volatileStatus);
+        List<ConditionBase> copyVolatileStatus = new List<ConditionBase>(volatileStatus);
 
-        foreach (Condition currentVolatileStatus in copyVolatileStatus)
+        foreach (ConditionBase currentVolatileStatus in copyVolatileStatus)
         {
-            if (currentVolatileStatus?.OnBeforeMove != null)
+            if (currentVolatileStatus.OnBeforeMove(this, targetPokemon) == false)
             {
-                if (currentVolatileStatus.OnBeforeMove(this) == false)
-                {
-                    return currentVolatileStatus.Id;
-                }
+                return currentVolatileStatus.Id;
             }
         }
 
@@ -623,9 +632,9 @@ public class Pokemon {
     /// <summary>
     /// Applies any Effects on the pokemons turn end that it may have through Status Effects or Volatile Status
     /// </summary>
-    public void OnEndTurn(Condition condition)
+    public void OnEndTurn(ConditionBase condition)
     {
-        condition?.OnEndTurn?.Invoke(this);
+        condition?.OnEndTurn(this);
     }
 
     public ConditionID GetCurrentStatus()

@@ -54,42 +54,6 @@ public class MoveBase : ScriptableObject {
         return updatedMove;
     }
 
-//    MoveBase(MoveBase originalMove)
-//    {
-//        moveName = originalMove.moveName;
-//        moveDescription = originalMove.moveDescription;
-
-//        elementType = originalMove.elementType;
-//        moveType = originalMove.moveType;
-//        moveEffects = originalMove.moveEffects;
-//        secondaryEffects = originalMove.secondaryEffects;
-//        target = originalMove.target;
-
-//    [SerializeField] int power;
-//    [SerializeField] int accuracy;
-//    [SerializeField] bool alwaysHits;
-//    [SerializeField] int priority;
-//    [SerializeField] int powerPoints;
-//    [SerializeField] float baseCriticalHitRate;
-
-//    [SerializeField] bool multiStrikeMove;
-//    [SerializeField] int fixedNumberOfStrikes;
-
-//    [SerializeField] bool physicalContact;
-//    [SerializeField] bool soundType;
-//    [SerializeField] bool punchMove;
-//    [SerializeField] bool bitingMove;
-//    [SerializeField] bool snatchable;
-//    [SerializeField] bool affectedByGravity;
-//    [SerializeField] bool defrostsWhenUsed;
-//    [SerializeField] bool reflectedByMagicCoatMagicBounce;
-//    [SerializeField] bool blockedByProtectDetect;
-//    [SerializeField] bool copyableByMirrorMove;
-
-//    [SerializeField] Recoil recoilType;
-//    [SerializeField] float recoilPercentage;
-//}
-
     #region Return Methods
 
     public string MoveName

@@ -45,7 +45,6 @@ public class BattleSystem : MonoBehaviour
     [SerializeField] MoveBase struggle;
     int _escapeAttempts;
     public int battleDuration { get; private set; }
-    [SerializeField] static List<MoveBase> movesThatLeaveTargetWithOneHP;
 
     [SerializeField] LearnNewMoveUI learnNewMoveUI;
     [SerializeField] LevelUpUI levelUpUI;
@@ -640,7 +639,7 @@ public class BattleSystem : MonoBehaviour
         int previousHP = sourceUnit.pokemon.currentHitPoints;
 
         //due to animations instead of it returning a bool it will return the animation
-        ConditionID canUseMove = sourceUnit.pokemon.OnBeforeMove();
+        ConditionID canUseMove = sourceUnit.pokemon.OnBeforeMove(targetUnit.pokemon);
         //If confused play pre animation
 
         if (canUseMove != ConditionID.NA)
@@ -674,7 +673,7 @@ public class BattleSystem : MonoBehaviour
         {
             if (move.moveBase.MoveType == MoveType.Status)
             {
-                yield return RunMoveEffects(move.moveBase.MoveEffects, sourceUnit, targetUnit, move.moveBase.Target);
+                yield return RunMoveEffects(move.moveBase.MoveEffects, sourceUnit, targetUnit, move.moveBase, move.moveBase.Target);
             }
             else
             {
@@ -771,7 +770,7 @@ public class BattleSystem : MonoBehaviour
                     int rnd = Random.Range(1, 101);
                     if (rnd <= secondaryEffect.PercentChance)
                     {
-                        yield return RunMoveEffects(secondaryEffect, sourceUnit, targetUnit, secondaryEffect.Target, (secondaryEffect.PercentChance<100)) ;
+                        yield return RunMoveEffects(secondaryEffect, sourceUnit, targetUnit, move.moveBase, secondaryEffect.Target, (secondaryEffect.PercentChance<100)) ;
 
                         if (secondaryEffect.Volatiletatus == ConditionID.CursedUser)
                         {
@@ -803,7 +802,7 @@ public class BattleSystem : MonoBehaviour
                     if(sourceUnit.pokemon.HasCurrentVolatileStatus(newCondition) == false)
                     {
                         targetUnit.OnAbilityActivation();
-                        sourceUnit.pokemon.SetVolatileStatus(newCondition);
+                        sourceUnit.pokemon.SetVolatileStatus(newCondition, move.moveBase);
                         yield return ShowStatusChanges(sourceUnit.pokemon);
                     }
                 }
@@ -852,7 +851,7 @@ public class BattleSystem : MonoBehaviour
         }
     }
 
-    IEnumerator RunMoveEffects(MoveEffects effects, BattleUnit source, BattleUnit target, MoveTarget moveTarget, bool wasSecondaryEffect = false)
+    IEnumerator RunMoveEffects(MoveEffects effects, BattleUnit source, BattleUnit target, MoveBase currentMove,MoveTarget moveTarget, bool wasSecondaryEffect = false)
     {
         if (effects.Boosts != null)
         {
@@ -862,7 +861,7 @@ public class BattleSystem : MonoBehaviour
         //Status Condition
         if (effects.Status != ConditionID.NA)
         {
-            if(target.pokemon.ability?.PreventCertainStatusCondition.Invoke(effects.Status) != null)
+            if(target.pokemon.ability?.PreventCertainStatusCondition != null)
             {
                 if (target.pokemon.ability.PreventCertainStatusCondition.Invoke(effects.Status) == true)
                 {
@@ -892,7 +891,7 @@ public class BattleSystem : MonoBehaviour
                 {
                     if (CheckIfInflatuated(source.pokemon, target.pokemon) == true)
                     {
-                        target.pokemon.SetVolatileStatus(effects.Volatiletatus);
+                        target.pokemon.SetVolatileStatus(effects.Volatiletatus, currentMove);
                     }
                     else
                     {
@@ -902,12 +901,12 @@ public class BattleSystem : MonoBehaviour
                 }
                 else
                 {
-                    target.pokemon.SetVolatileStatus(effects.Volatiletatus);
+                    target.pokemon.SetVolatileStatus(effects.Volatiletatus, currentMove);
                 }
             }
             else
             {
-                source.pokemon.SetVolatileStatus(effects.Volatiletatus);
+                source.pokemon.SetVolatileStatus(effects.Volatiletatus, currentMove);
             }
         }
 
@@ -988,21 +987,21 @@ public class BattleSystem : MonoBehaviour
 
         int currentHP = sourceUnit.pokemon.currentHitPoints;
 
-        List<Condition> allConditionsOnPokemon = new List<Condition>();
+        List<ConditionBase> allConditionsOnPokemon = new List<ConditionBase>();
         if(sourceUnit.pokemon.status != null)
         {
             allConditionsOnPokemon.Add(sourceUnit.pokemon.status);
         }
 
-        foreach (Condition volatileStatus in sourceUnit.pokemon.volatileStatus)
+        foreach (ConditionBase volatileStatus in sourceUnit.pokemon.volatileStatus)
         {
             allConditionsOnPokemon.Add(volatileStatus);
         }
 
         ////This copy is here because if it is iterating through it and removes an element while searching it shall break the for each loop
-        List<Condition> copyAllConditionsOnPokemon = new List<Condition>(allConditionsOnPokemon);
+        List<ConditionBase> copyAllConditionsOnPokemon = new List<ConditionBase>(allConditionsOnPokemon);
 
-        foreach (Condition currentCondition in copyAllConditionsOnPokemon)
+        foreach (ConditionBase currentCondition in copyAllConditionsOnPokemon)
         {
             if (sourceUnit.pokemon.currentHitPoints <= 0)
             {
@@ -1011,10 +1010,8 @@ public class BattleSystem : MonoBehaviour
             currentHP = sourceUnit.pokemon.currentHitPoints;
 
             sourceUnit.pokemon.OnEndTurn(currentCondition);
-            if(currentCondition.OnEndTurn != null)
-            {
-                yield return sourceUnit.StatusConditionAnimation(currentCondition.Id);
-            }
+            yield return sourceUnit.StatusConditionAnimation(currentCondition.Id);
+
             yield return ShowStatusChanges(sourceUnit.pokemon);
             yield return sourceUnit.HUD.UpdateHP(currentHP);
         }

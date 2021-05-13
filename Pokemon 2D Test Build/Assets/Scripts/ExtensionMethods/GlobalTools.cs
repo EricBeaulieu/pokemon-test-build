@@ -24,4 +24,13 @@ public static class GlobalTools
         string sTemp = Regex.Replace(inputCamelCaseString, "([A-Z][a-z])", " $1", RegexOptions.Compiled).Trim();
         return Regex.Replace(sTemp, "([A-Z][A-Z])", " $1", RegexOptions.Compiled).Trim();
     }
+
+    public static string ReplaceUserWithPokemonName(string original,Pokemon user)
+    {
+        if(original.Contains("<user>") == true)
+        {
+            return original.Replace("<user>", user.currentName);
+        }
+        return original;
+    }
 }

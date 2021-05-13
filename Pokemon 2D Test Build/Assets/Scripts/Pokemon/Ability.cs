@@ -30,4 +30,5 @@ public class Ability
     public bool MaximizeMultistrikeMovesHit { get; set; }
     public Func<MoveBase,MoveBase> ChangeMovesToDifferentTypeAndIncreasesTheirPower { get; set; }
     public Func<ConditionID,bool> PreventCertainStatusCondition { get; set; }
+    public bool PreventFoeFromEscapingBattle { get; set; }
 }

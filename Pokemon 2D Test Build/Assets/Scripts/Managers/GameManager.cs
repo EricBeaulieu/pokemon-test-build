@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public enum GameState { Overworld, Battle, Party, Dialog}
@@ -206,7 +208,7 @@ public class GameManager : MonoBehaviour
 
     void InitializeAllDatabases()
     {
-        ConditionsDB.Initialization();
+        ConditionsDB.Initialization(GetAllConditionBases().ToList());
         EntryHazardsDB.Initialization();
         WeatherEffectDB.Initialization();
         AbilityDB.Initialization();
@@ -239,5 +241,13 @@ public class GameManager : MonoBehaviour
     public SpriteAtlas SpriteAtlas
     {
         get { return spriteAtlas; }
+    }
+
+    IEnumerable<ConditionBase> GetAllConditionBases()
+    {
+        return AppDomain.CurrentDomain.GetAssemblies()
+            .SelectMany(assembly => assembly.GetTypes())
+            .Where(type => type.IsSubclassOf(typeof(ConditionBase)))
+            .Select(type => Activator.CreateInstance(type) as ConditionBase);
     }
 }
