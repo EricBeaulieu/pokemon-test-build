@@ -487,19 +487,13 @@ public class Pokemon {
             {
                 return;
             }
-
-            string currentStatusImmunity = $"It doesnt affect {currentName}";
-            statusChanges.Enqueue(currentStatusImmunity);
+            
+            statusChanges.Enqueue($"It doesnt affect {currentName}");
             return;
         }
 
         status = ConditionsDB.Conditions[conditionID];
-        status?.OnStart(this);
-
-        if(status.StartMessage(this) != "")
-        {
-            statusChanges.Enqueue(status.StartMessage(this));
-        }
+        statusChanges.Enqueue(status.StartMessage(this));
 
         OnStatusChanged?.Invoke();
     }
@@ -574,18 +568,13 @@ public class Pokemon {
 
         ConditionBase newVolatileStatus = ConditionsDB.Conditions[conditionID];
         volatileStatus.Add(newVolatileStatus);
-        newVolatileStatus?.OnStart(this);
 
         if(newVolatileStatus.Id == ConditionID.Bound)
         {
-            Bound boundStatus = (Bound)newVolatileStatus;
-            boundStatus.SetBoundMove = currentMove;
+            ((Bound)newVolatileStatus).SetBoundMove = currentMove;
         }
 
-        if(newVolatileStatus.StartMessage(this) != "")
-        {
-            statusChanges.Enqueue(newVolatileStatus.StartMessage(this));
-        }
+        statusChanges.Enqueue(newVolatileStatus.StartMessage(this));
     }
 
     public void CureAllVolatileStatus()

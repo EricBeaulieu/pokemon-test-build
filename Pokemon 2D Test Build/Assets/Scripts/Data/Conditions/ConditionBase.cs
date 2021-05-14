@@ -11,7 +11,6 @@ public abstract class ConditionBase
     public virtual bool HasCondition(ConditionID conditionID) { return (conditionID == Id); }
     public virtual string HasConditionMessage(Pokemon pokemon) { return ""; }
     public virtual float StatEffectedByCondition(StatAttribute statAttribute) { return 1f; }
-    public virtual void OnStart(Pokemon pokemon) { }
     /// <summary>
     /// checks to see if the source pokemon can attack
     /// </summary>
@@ -21,5 +20,9 @@ public abstract class ConditionBase
     public virtual bool OnBeforeMove(Pokemon source, Pokemon target = null) { return true; }
     public virtual void OnEndTurn(Pokemon pokemon) { }
     public int StatusTime { get; set; }
-    public virtual bool HasStatusConditionAnimation() { return false; }
+    public virtual bool PreventsEscape() { return false; }
+    public virtual bool PreventsItemUse() { return false; }
+    public virtual bool PreventsHealing() { return false; }
+    public virtual ElementType IdentifiedAndRemovesImmunityFromType(Pokemon pokemon) { return ElementType.NA; }
+    public virtual bool RequiredConditionToWork(ConditionID iD) { return true; }
 }

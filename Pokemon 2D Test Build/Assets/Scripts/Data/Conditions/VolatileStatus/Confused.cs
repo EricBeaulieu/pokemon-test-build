@@ -7,21 +7,18 @@ public class Confused : ConditionBase
     public override ConditionID Id { get { return ConditionID.Confused; } }
     public override string StartMessage(Pokemon pokemon)
     {
+        StatusTime = Random.Range(2, 6);
         return $"{pokemon.currentName} has been confused";
     }
     public override string HasConditionMessage(Pokemon pokemon)
     {
         return $"{pokemon.currentName} is already Confused";
     }
-    public override void OnStart(Pokemon pokemon)
-    {
-        StatusTime = Random.Range(2, 6);
-    }
     public override bool OnBeforeMove(Pokemon source, Pokemon target = null)
     {
         if (StatusTime <= 0)
         {
-            source.CureVolatileStatus(ConditionID.Confused);
+            source.CureVolatileStatus(Id);
             source.statusChanges.Enqueue($"{source.currentName} is no longer confused");
             return true;
         }

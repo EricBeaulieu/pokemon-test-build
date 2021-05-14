@@ -32,11 +32,10 @@ public class BattleSystem : MonoBehaviour
     bool _isTrainerBattle;
     bool _playerPokemonShift;
 
-    static WeatherEffect _currentWeather;
-    public int weatherDuration {get; set;}
+    static WeatherEffectBase _currentWeather;
 
-    List<EntryHazard> _playerSideEntryHazards = new List<EntryHazard>();
-    List<EntryHazard> _enemySideEntryHazards = new List<EntryHazard>();
+    List<EntryHazardBase> _playerSideEntryHazards = new List<EntryHazardBase>();
+    List<EntryHazardBase> _enemySideEntryHazards = new List<EntryHazardBase>();
 
     [SerializeField] GameObject inGameItem;
     Vector2 inGameItemoffScreenPos;
@@ -232,8 +231,8 @@ public class BattleSystem : MonoBehaviour
     /// </summary>
     IEnumerator SetupBattle()
     {
-        _playerSideEntryHazards = new List<EntryHazard>();
-        _enemySideEntryHazards = new List<EntryHazard>();
+        _playerSideEntryHazards = new List<EntryHazardBase>();
+        _enemySideEntryHazards = new List<EntryHazardBase>();
         Pokemon playerPokemon = _playerParty.GetFirstHealthyPokemon();
         if (_isTrainerBattle == true)
         {
@@ -904,8 +903,18 @@ public class BattleSystem : MonoBehaviour
                     target.pokemon.SetVolatileStatus(effects.Volatiletatus, currentMove);
                 }
             }
-            else
+            else if(moveTarget == MoveTarget.Self)
             {
+                source.pokemon.SetVolatileStatus(effects.Volatiletatus, currentMove);
+            }
+            else if(moveTarget == MoveTarget.All)
+            {
+                if(effects.Volatiletatus == ConditionID.PerishSong)
+                {
+                    yield return dialogBox.TypeDialog("All Pokemon that heard the song will faint in 3 turns");
+                }
+
+                target.pokemon.SetVolatileStatus(effects.Volatiletatus, currentMove);
                 source.pokemon.SetVolatileStatus(effects.Volatiletatus, currentMove);
             }
         }
@@ -919,8 +928,8 @@ public class BattleSystem : MonoBehaviour
         {
             if (moveTarget == MoveTarget.Foe)
             {
-                List<EntryHazard> currentEntrySide = (target.isPlayerPokemon) ? _playerSideEntryHazards : _enemySideEntryHazards;
-                EntryHazard currentHazard = EntryHazardsDB.EntryHazards[effects.EntryHazard];
+                List<EntryHazardBase> currentEntrySide = (target.isPlayerPokemon) ? _playerSideEntryHazards : _enemySideEntryHazards;
+                EntryHazardBase currentHazard = EntryHazardsDB.EntryHazards[effects.EntryHazard];
 
                 if (currentEntrySide.Contains(currentHazard) == true)
                 {
@@ -932,15 +941,13 @@ public class BattleSystem : MonoBehaviour
                     }
                     else
                     {
-                        yield return dialogBox.TypeDialog(currentHazard?.StartMessage(target));
-                        currentHazard?.OnStart?.Invoke(currentHazard);
+                        yield return dialogBox.TypeDialog(currentHazard.StartMessage(target));
                     }
                 }
                 else
                 {
                     currentEntrySide.Add(currentHazard);
-                    yield return dialogBox.TypeDialog(currentHazard?.StartMessage(target));
-                    currentHazard?.OnStart?.Invoke(currentHazard);
+                    yield return dialogBox.TypeDialog(currentHazard.StartMessage(target));
                 }
             }
             else
@@ -1027,7 +1034,10 @@ public class BattleSystem : MonoBehaviour
         while (pokemon.statusChanges.Count > 0)
         {
             string message = pokemon.statusChanges.Dequeue();
-            yield return dialogBox.TypeDialog(message);
+            if(message != "")
+            {
+                yield return dialogBox.TypeDialog(message);
+            }
         }
     }
 
@@ -1402,20 +1412,15 @@ public class BattleSystem : MonoBehaviour
             yield break;
         }
 
-        List<EntryHazard> currentEntrySide = (target.isPlayerPokemon) ? _playerSideEntryHazards : _enemySideEntryHazards;
+        List<EntryHazardBase> currentEntrySide = (target.isPlayerPokemon) ? _playerSideEntryHazards : _enemySideEntryHazards;
 
-        foreach (EntryHazard entryHazard in currentEntrySide)
+        foreach (EntryHazardBase entryHazard in currentEntrySide)
         {
             int currentHP = target.pokemon.currentHitPoints;
-            if (entryHazard?.OnEntry != null)
-            {
-                if(entryHazard?.OnEntryLowerStat != null)
-                {
-                    List<StatBoost> entryHazardStatBoosts = new List<StatBoost>() { entryHazard.OnEntryLowerStat(target.pokemon) };
-                    yield return ApplyStatChanges(entryHazardStatBoosts, target, MoveTarget.Foe);
-                }
-                entryHazard?.OnEntry?.Invoke(target.pokemon);
-            }
+
+            List<StatBoost> entryHazardStatBoosts = new List<StatBoost>() { entryHazard.OnEntryLowerStat(target.pokemon) };
+            yield return ApplyStatChanges(entryHazardStatBoosts, target, MoveTarget.Foe);
+            entryHazard.OnEntry(target.pokemon);
 
             yield return ShowStatusChanges(target.pokemon);
 
@@ -1437,9 +1442,9 @@ public class BattleSystem : MonoBehaviour
 
     #region Weather Effects
 
-    IEnumerator ShowWeatherEffect(WeatherEffect weather)
+    IEnumerator ShowWeatherEffect(WeatherEffectBase weather)
     {
-        string message = weather?.OnEndTurn?.Invoke(this);
+        string message = weather.OnEndTurn(this);
         yield return dialogBox.TypeDialog(message);
     }
 
@@ -1486,11 +1491,7 @@ public class BattleSystem : MonoBehaviour
         }
 
         _currentWeather = WeatherEffectDB.WeatherEffects[weatherID];
-        if (_currentWeather.StartMessage != null)
-        {
-            weatherDuration = _currentWeather.OnStartDuration;
-            yield return dialogBox.TypeDialog(_currentWeather?.StartMessage);
-        }
+        yield return dialogBox.TypeDialog(_currentWeather.StartMessage());
     }
 
     public void RemoveWeatherEffect()
@@ -1498,21 +1499,16 @@ public class BattleSystem : MonoBehaviour
         _currentWeather = null;
     }
 
-    IEnumerator ApplyWeatherEffectsOnEndTurn(WeatherEffect weather,BattleUnit sourceUnit)
+    IEnumerator ApplyWeatherEffectsOnEndTurn(WeatherEffectBase weather,BattleUnit sourceUnit)
     {
         if (sourceUnit.pokemon.currentHitPoints <= 0)
         {
             yield break;
         }
 
-        if(weather?.OnEndTurnDamage == null)
-        {
-            yield break;
-        }
-
         int currentHP = sourceUnit.pokemon.currentHitPoints;
 
-        weather?.OnEndTurnDamage?.Invoke(sourceUnit.pokemon);
+        weather.OnEndTurnDamage(sourceUnit.pokemon);
         yield return ShowStatusChanges(sourceUnit.pokemon);
 
         if(currentHP != sourceUnit.pokemon.currentHitPoints)

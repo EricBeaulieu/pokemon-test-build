@@ -8,7 +8,8 @@ public enum ConditionID
     NA, Poison, Burn, Sleep, Paralyzed, Frozen, ToxicPoison,
     //Volatile Status
     Confused, Bound, Cursed, CursedUser, Flinch,
-    Infatuation,
+    Infatuation,CantEscape, Embargo, Encore, HealBlock,
+    Identified, LeechSeed, Nightmare,PerishSong
 }
 
 public class ConditionsDB

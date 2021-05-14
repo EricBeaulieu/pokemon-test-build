@@ -208,9 +208,9 @@ public class GameManager : MonoBehaviour
 
     void InitializeAllDatabases()
     {
-        ConditionsDB.Initialization(GetAllConditionBases().ToList());
-        EntryHazardsDB.Initialization();
-        WeatherEffectDB.Initialization();
+        ConditionsDB.Initialization(GetAllConditions().ToList());
+        EntryHazardsDB.Initialization(GetAllEntryHazards().ToList());
+        WeatherEffectDB.Initialization(GetAllWeatherEffects().ToList());
         AbilityDB.Initialization();
     }
 
@@ -243,11 +243,27 @@ public class GameManager : MonoBehaviour
         get { return spriteAtlas; }
     }
 
-    IEnumerable<ConditionBase> GetAllConditionBases()
+    IEnumerable<ConditionBase> GetAllConditions()
     {
         return AppDomain.CurrentDomain.GetAssemblies()
             .SelectMany(assembly => assembly.GetTypes())
             .Where(type => type.IsSubclassOf(typeof(ConditionBase)))
             .Select(type => Activator.CreateInstance(type) as ConditionBase);
+    }
+
+    IEnumerable<EntryHazardBase> GetAllEntryHazards()
+    {
+        return AppDomain.CurrentDomain.GetAssemblies()
+            .SelectMany(assembly => assembly.GetTypes())
+            .Where(type => type.IsSubclassOf(typeof(EntryHazardBase)))
+            .Select(type => Activator.CreateInstance(type) as EntryHazardBase);
+    }
+
+    IEnumerable<WeatherEffectBase> GetAllWeatherEffects()
+    {
+        return AppDomain.CurrentDomain.GetAssemblies()
+            .SelectMany(assembly => assembly.GetTypes())
+            .Where(type => type.IsSubclassOf(typeof(WeatherEffectBase)))
+            .Select(type => Activator.CreateInstance(type) as WeatherEffectBase);
     }
 }

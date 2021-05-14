@@ -6,6 +6,8 @@ public class Notes
 {
     //To do list
     
+    //continue to make the dictionary return a new class
+
     //add in specific moves
     //hidden power
     //transform
@@ -15,6 +17,7 @@ public class Notes
     //clean up the way it enques ability actvation 
     //inner focus and oblivious prevents intimidation from working
     //oblivious taunts
+    //Encore, Embargo, Cant escape all implimented but needs to be put into battle system
 
     //punk rock sounds reduction based
     //Steely Spirit not implimented due to not having ally boost moves implimented and steel worker does the same thing

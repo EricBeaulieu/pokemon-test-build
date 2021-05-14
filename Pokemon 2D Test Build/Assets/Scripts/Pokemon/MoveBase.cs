@@ -4,7 +4,7 @@ using UnityEngine;
 
 public enum MoveType { Physical, Special, Status}
 
-public enum MoveTarget { Foe,Self}
+public enum MoveTarget { Foe,Self,All}
 
 public enum Recoil { NA, DamageDealt, UsersMaximumHP, UsersCurrentHP }
 
