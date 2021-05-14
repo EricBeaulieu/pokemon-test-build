@@ -929,7 +929,7 @@ public class BattleSystem : MonoBehaviour
             if (moveTarget == MoveTarget.Foe)
             {
                 List<EntryHazardBase> currentEntrySide = (target.isPlayerPokemon) ? _playerSideEntryHazards : _enemySideEntryHazards;
-                EntryHazardBase currentHazard = EntryHazardsDB.EntryHazards[effects.EntryHazard];
+                EntryHazardBase currentHazard = EntryHazardsDB.GetEntryHazardBase(effects.EntryHazard);
 
                 if (currentEntrySide.Contains(currentHazard) == true)
                 {

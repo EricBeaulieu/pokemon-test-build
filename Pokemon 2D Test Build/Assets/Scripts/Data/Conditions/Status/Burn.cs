@@ -5,6 +5,7 @@ using UnityEngine;
 public class Burn : ConditionBase
 {
     public override ConditionID Id { get { return ConditionID.Burn; } }
+    public override ConditionBase ReturnDerivedClassAsNew(){ return new Burn();}
     public override string StartMessage(Pokemon pokemon)
     {
         return $"{pokemon.currentName} has been burned";

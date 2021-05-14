@@ -5,6 +5,7 @@ using UnityEngine;
 public class Nightmare : ConditionBase
 {
     public override ConditionID Id { get { return ConditionID.Nightmare; } }
+    public override ConditionBase ReturnDerivedClassAsNew() { return new Nightmare(); }
     public override string StartMessage(Pokemon pokemon)
     {
         return $"{pokemon.currentName} began having a Nightmare";

@@ -5,6 +5,7 @@ using UnityEngine;
 public class Infatuation : ConditionBase
 {
     public override ConditionID Id { get { return ConditionID.Infatuation; } }
+    public override ConditionBase ReturnDerivedClassAsNew() { return new Infatuation(); }
     public override string StartMessage(Pokemon pokemon)
     {
         return $"{pokemon.currentName} fell in love!";

@@ -5,6 +5,7 @@ using UnityEngine;
 public class Encore : ConditionBase
 {
     public override ConditionID Id { get { return ConditionID.Encore; } }
+    public override ConditionBase ReturnDerivedClassAsNew() { return new Encore(); }
     public override string StartMessage(Pokemon pokemon)
     {
         StatusTime = 3;

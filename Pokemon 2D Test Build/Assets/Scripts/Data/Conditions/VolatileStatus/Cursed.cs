@@ -5,6 +5,7 @@ using UnityEngine;
 public class Cursed : ConditionBase
 {
     public override ConditionID Id { get { return ConditionID.Cursed; } }
+    public override ConditionBase ReturnDerivedClassAsNew() { return new Cursed(); }
     public override string HasConditionMessage(Pokemon pokemon)
     {
         return $"{pokemon.currentName} is already Cursed";

@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Ability
+public class AbilityBase
 {
     public AbilityID Id { get; set; }
     public string Name { get; set; }

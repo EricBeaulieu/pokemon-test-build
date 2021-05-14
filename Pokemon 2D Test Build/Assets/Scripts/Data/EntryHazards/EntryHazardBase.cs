@@ -6,6 +6,7 @@ using UnityEngine;
 public abstract class EntryHazardBase
 {
     public abstract EntryHazardID Id { get; }
+    public abstract EntryHazardBase ReturnDerivedClassAsNew();
     public string Name { get { return Id.ToString(); } }
     public abstract string StartMessage(BattleUnit battleUnit);
     protected int layers { get { return _currentLayers; } set { _currentLayers = Mathf.Clamp(value, 0, _maxLayers()); } }

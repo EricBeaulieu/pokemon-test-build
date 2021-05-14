@@ -83,12 +83,12 @@ public class AbilityDB
         }
     }
 
-    public static Dictionary<AbilityID, Ability> AbilityDex = new Dictionary<AbilityID, Ability>()
+    public static Dictionary<AbilityID, AbilityBase> AbilityDex = new Dictionary<AbilityID, AbilityBase>()
     {
         //A
         {
             AbilityID.Adaptability,
-            new Ability()
+            new AbilityBase()
             {
                 Name = "Adaptability",
                 Description = "Powers up moves of the same type as the Pokémon.",
@@ -104,7 +104,7 @@ public class AbilityDB
         },
         {
             AbilityID.Aerilate,
-            new Ability()
+            new AbilityBase()
             {
                 Name = "Aerilate",
                 Description = "Normal-type moves become Flying-type moves. The power of those moves is boosted a little.",
@@ -120,7 +120,7 @@ public class AbilityDB
         },
         {
             AbilityID.AirLock,
-            new Ability()
+            new AbilityBase()
             {
                 Name = "Air Lock",
                 Description = "Eliminates the effects of weather.",
@@ -130,7 +130,7 @@ public class AbilityDB
         //B
         {
             AbilityID.BattleArmor,
-            new Ability()
+            new AbilityBase()
             {
                 Name = "Battle Armor",
                 Description = "Hard armor protects the Pokémon from critical hits.",
@@ -139,7 +139,7 @@ public class AbilityDB
         },
         {
             AbilityID.BigPecks,
-            new Ability()
+            new AbilityBase()
             {
                 Name = "Big Pecks",
                 Description = "Protects the Pokémon from Defense-lowering effects.",
@@ -159,7 +159,7 @@ public class AbilityDB
         },
         {
             AbilityID.Blaze,//When HP is below 1/3rd its maximum, power of Fire-type moves is increased by 50%.
-            new Ability()
+            new AbilityBase()
             {
                 Name = "Blaze",
                 Description = "Powers up Fire-type moves when the Pokémon's HP is low.",
@@ -182,7 +182,7 @@ public class AbilityDB
         //C
         {
             AbilityID.Chlorophyll,
-            new Ability()
+            new AbilityBase()
             {
                 Name = "Chlorophyll",
                 Description = "Boosts the Pokémon's Speed stat in sunshine.",
@@ -198,7 +198,7 @@ public class AbilityDB
         },
         {
             AbilityID.ClearBody,
-            new Ability()
+            new AbilityBase()
             {
                 Name = "Clear Body",
                 Description = "Prevents other Pokémon's moves or Abilities from lowering the Pokémon's stats.",
@@ -218,7 +218,7 @@ public class AbilityDB
         },
         {
             AbilityID.CloudNine,
-            new Ability()
+            new AbilityBase()
             {
                 Name = "Cloud Nine",
                 Description = "Eliminates the effects of weather.",
@@ -227,7 +227,7 @@ public class AbilityDB
         },
         {
             AbilityID.Competitive,
-            new Ability()
+            new AbilityBase()
             {
                 Name = "Competitive",
                 Description = "Boosts the Pokémon's Special Attack stat sharply when its stats are lowered.",
@@ -236,7 +236,7 @@ public class AbilityDB
         },
         {
             AbilityID.CuteCharm,
-            new Ability()//30% chance
+            new AbilityBase()//30% chance
             {
                 Name = "Cute Charm",
                 Description = "Contact with the Pokémon may cause infatuation.",
@@ -263,7 +263,7 @@ public class AbilityDB
         //D
         {
             AbilityID.Defiant,
-            new Ability()
+            new AbilityBase()
             {
                 Name = "Defiant",
                 Description = "Boosts the Pokémon's Attack stat sharply when its stats are lowered.",
@@ -272,7 +272,7 @@ public class AbilityDB
         },
         {
             AbilityID.DragonsMaw,
-            new Ability()
+            new AbilityBase()
             {
                 Name = "Dragon's Maw",
                 Description = "Powers up Dragon-type moves.",
@@ -288,7 +288,7 @@ public class AbilityDB
         },
         {
             AbilityID.Drizzle,//Activates a weather effect for five turns upon entry
-            new Ability()
+            new AbilityBase()
             {
                 Name = "Drizzle",
                 Description = "The Pokémon makes it rain when it enters a battle.",
@@ -297,7 +297,7 @@ public class AbilityDB
         },
         {
             AbilityID.Drought,//Activates a weather effect for five turns upon entry
-            new Ability()
+            new AbilityBase()
             {
                 Name = "Drought",
                 Description = "Turns the sunlight harsh when the Pokémon enters a battle.",
@@ -307,7 +307,7 @@ public class AbilityDB
         //E
         {
             AbilityID.EffectSpore,
-            new Ability()//30% chance
+            new AbilityBase()//30% chance
             {
                 Name = "Effect Spore",
                 Description = "Contact with the Pokémon may inflict poison, sleep, or paralysis on its attacker.",
@@ -349,7 +349,7 @@ public class AbilityDB
         //F
         {
             AbilityID.FlameBody,
-            new Ability()//30% chance
+            new AbilityBase()//30% chance
             {
                 Name = "Flame Body",
                 Description = "Contact with the Pokémon may burn the attacker.",
@@ -371,7 +371,7 @@ public class AbilityDB
         },
         {
             AbilityID.FlareBoost,//Boosts a stat by 50% when affected with a status condition
-            new Ability()//Status Condition: Burn
+            new AbilityBase()//Status Condition: Burn
             {
                 Name = "Flare Boost",
                 Description = "Powers up special attacks when the Pokémon is burned.",
@@ -387,7 +387,7 @@ public class AbilityDB
         },
         {
             AbilityID.FullMetalBody,
-            new Ability()
+            new AbilityBase()
             {
                 Name = "Full Metal Body",
                 Description = "Prevents other Pokémon's moves or Abilities from lowering the Pokémon's stats.",
@@ -407,7 +407,7 @@ public class AbilityDB
         },
         {
             AbilityID.FurCoat,//Doubles the Pokémon's Attack stat.
-            new Ability()
+            new AbilityBase()
             {
                 Name = "Fur Coat",
                 Description = "Halves the damage from physical moves.",
@@ -424,7 +424,7 @@ public class AbilityDB
         //G
         {
             AbilityID.Galvanize,
-            new Ability()
+            new AbilityBase()
             {
                 Name = "Galvanize",
                 Description = "Normal-type moves become Electric-type moves. The power of those moves is boosted a little.",
@@ -440,7 +440,7 @@ public class AbilityDB
         },
         {
             AbilityID.Guts,//Boosts a stat by 50% when affected with a status condition
-            new Ability()//Status Condition: Any, excluding Freeze
+            new AbilityBase()//Status Condition: Any, excluding Freeze
             {
                 Name = "Guts",
                 Description = "It's so gutsy that having a status condition boosts the Pokémon's Attack stat.",
@@ -466,7 +466,7 @@ public class AbilityDB
         //H
         {
             AbilityID.HugePower,//Doubles the Pokémon's Attack stat.
-            new Ability()
+            new AbilityBase()
             {
                 Name = "Huge Power",
                 Description = "Doubles the Pokémon's Attack stat.",
@@ -482,7 +482,7 @@ public class AbilityDB
         },
         {
             AbilityID.HyperCutter,
-            new Ability()
+            new AbilityBase()
             {
                 Name = "Hyper Cutter",
                 Description = "The Pokémon's proud of its powerful pincers. They prevent other Pokémon from lowering its Attack stat.",
@@ -503,7 +503,7 @@ public class AbilityDB
         //I
         {
             AbilityID.IceScales,//Doubles the Pokémon's Special Defense stat.
-            new Ability()
+            new AbilityBase()
             {
                 Name = "Ice Scales",
                 Description = "The Pokémon is protected by ice scales, which halve the damage taken from special moves.",
@@ -519,7 +519,7 @@ public class AbilityDB
         },
         {
             AbilityID.Immunity,
-            new Ability()
+            new AbilityBase()
             {
                 Name = "Immunity",
                 Description = "The immune system of the Pokémon prevents it from getting poisoned.",
@@ -539,7 +539,7 @@ public class AbilityDB
         },
         {
             AbilityID.InnerFocus,
-            new Ability()
+            new AbilityBase()
             {
                 Name = "Inner Focus",
                 Description = "The Pokémon's intensely focused, and that protects the Pokémon from flinching.",
@@ -559,7 +559,7 @@ public class AbilityDB
         },
         {
             AbilityID.Insomnia,
-            new Ability()
+            new AbilityBase()
             {
                 Name = "Insomnia",
                 Description = "The Pokémon is suffering from insomnia and cannot fall asleep.",
@@ -579,7 +579,7 @@ public class AbilityDB
         },
         {
             AbilityID.Intimidate,
-            new Ability()
+            new AbilityBase()
             {
                 Name = "Intimidate",
                 Description = "The Pokémon intimidates opposing Pokémon upon entering battle, lowering their Attack stat.",
@@ -588,7 +588,7 @@ public class AbilityDB
         },
         {
             AbilityID.IronFist,
-            new Ability()
+            new AbilityBase()
             {
                 Name = "Iron Fist",
                 Description = "Powers up punching moves.",
@@ -606,7 +606,7 @@ public class AbilityDB
         //K
         {
             AbilityID.KeenEye,
-            new Ability()
+            new AbilityBase()
             {
                 Name = "Keen Eye",
                 Description = "Keen eyes prevent other Pokémon from lowering this Pokémon's accuracy.",
@@ -635,7 +635,7 @@ public class AbilityDB
         //L
         {
             AbilityID.Limber,
-            new Ability()
+            new AbilityBase()
             {
                 Name = "Limber",
                 Description = "Its limber body protects the Pokémon from paralysis.",
@@ -656,7 +656,7 @@ public class AbilityDB
         //M
         {
             AbilityID.MagmaArmor,
-            new Ability()
+            new AbilityBase()
             {
                 Name = "Magma Armor",
                 Description = "The Pokémon is covered with hot magma, which prevents the Pokémon from becoming frozen.",
@@ -676,7 +676,7 @@ public class AbilityDB
         },
         {
             AbilityID.MarvelScale,//Boosts a stat by 50% when affected with a status condition
-            new Ability()//Status Condition: Any
+            new AbilityBase()//Status Condition: Any
             {
                 Name = "Marvel Scale",
                 Description = "The Pokémon's marvelous scales boost the Defense stat if it has a status condition.",
@@ -692,7 +692,7 @@ public class AbilityDB
         },
         {
             AbilityID.MegaLauncher,
-            new Ability()
+            new AbilityBase()
             {
                 Name = "Mega Launcher",
                 Description = "Powers up aura and pulse moves.",
@@ -709,7 +709,7 @@ public class AbilityDB
         //N
         {
             AbilityID.Neuroforce,
-            new Ability()
+            new AbilityBase()
             {
                 Name = "Neuroforce",
                 Description = "Powers up moves that are super effective.",
@@ -725,7 +725,7 @@ public class AbilityDB
         },
         {
             AbilityID.Normalize,
-            new Ability()
+            new AbilityBase()
             {
                 Name = "Normalize",
                 Description = "All the Pokémon's moves become Normal type. The power of those moves is boosted a little.",
@@ -738,7 +738,7 @@ public class AbilityDB
         //O
         {
             AbilityID.Oblivious,
-            new Ability()
+            new AbilityBase()
             {
                 Name = "Oblivious",
                 Description = "The Pokémon is oblivious, and that keeps it from being infatuated or falling for taunts.",
@@ -758,7 +758,7 @@ public class AbilityDB
         },
         {
             AbilityID.Overgrown,//When HP is below 1/3rd its maximum, power of Grass-type moves is increased by 50%.
-            new Ability()
+            new AbilityBase()
             {
                 Name = "Overgrow",
                 Description = "Powers up Grass-type moves when the Pokémon's HP is low.",
@@ -779,7 +779,7 @@ public class AbilityDB
         },
         {
             AbilityID.OwnTempo,
-            new Ability()
+            new AbilityBase()
             {
                 Name = "Own Tempo",
                 Description = "This Pokémon has its own tempo, and that prevents it from becoming confused.",
@@ -800,7 +800,7 @@ public class AbilityDB
         //P
         {
             AbilityID.Pixilate,
-            new Ability()
+            new AbilityBase()
             {
                 Name = "Pixilate",
                 Description = "Normal-type moves become Fairy-type moves. The power of those moves is boosted a little.",
@@ -816,7 +816,7 @@ public class AbilityDB
         },
         {
             AbilityID.PoisonPoint,
-            new Ability()//30% chance
+            new AbilityBase()//30% chance
             {
                 Name = "Poison Point",
                 Description = "Contact with the Pokémon may poison the attacker.",
@@ -838,7 +838,7 @@ public class AbilityDB
         },
         {
             AbilityID.PunkRock,
-            new Ability()
+            new AbilityBase()
             {
                 Name = "Punk Rock",
                 Description = "Boosts the power of sound-based moves. The Pokémon also takes half the damage from these kinds of moves.",
@@ -854,7 +854,7 @@ public class AbilityDB
         },
         {
             AbilityID.PurePower,//Doubles the Pokémon's Attack stat.
-            new Ability()
+            new AbilityBase()
             {
                 Name = "Pure Power",
                 Description = "Using its pure power, the Pokémon doubles its Attack stat.",
@@ -871,7 +871,7 @@ public class AbilityDB
         //Q
         {
             AbilityID.QuickFeet,//Boosts a stat by 50% when affected with a status condition
-            new Ability()//Status Condition: Any
+            new AbilityBase()//Status Condition: Any
             {
                 Name = "Quick Feet",
                 Description = "Boosts the Speed stat if the Pokémon has a status condition.",
@@ -896,7 +896,7 @@ public class AbilityDB
         //R
         {
             AbilityID.Reckless,
-            new Ability()
+            new AbilityBase()
             {
                 Name = "Reckless",
                 Description = "Powers up moves that have recoil damage.",
@@ -912,7 +912,7 @@ public class AbilityDB
         },
         {
             AbilityID.Refrigerate,
-            new Ability()
+            new AbilityBase()
             {
                 Name = "Refrigerate",
                 Description = "Normal-type moves become Ice-type moves. The power of those moves is boosted a little.",
@@ -929,7 +929,7 @@ public class AbilityDB
         //S
         {
             AbilityID.SandRush,
-            new Ability()
+            new AbilityBase()
             {
                 Name = "Sand Rush",
                 Description = "Boosts the Pokémon's Speed stat in a sandstorm.",
@@ -945,7 +945,7 @@ public class AbilityDB
         },
         {
             AbilityID.SandStream,//Activates a weather effect for five turns upon entry
-            new Ability()
+            new AbilityBase()
             {
                 Name = "Sand Stream",
                 Description = "The Pokémon summons a sandstorm when it enters a battle.",
@@ -954,7 +954,7 @@ public class AbilityDB
         },
         {
             AbilityID.ShellArmor,
-            new Ability()
+            new AbilityBase()
             {
                 Name = "Shell Armor",
                 Description = "A hard shell protects the Pokémon from critical hits.",
@@ -963,7 +963,7 @@ public class AbilityDB
         },
         {
             AbilityID.SkillLink,
-            new Ability()
+            new AbilityBase()
             {
                 Name = "Skill Link",
                 Description = "Maximizes the number of times multistrike moves hit.",
@@ -972,7 +972,7 @@ public class AbilityDB
         },
         {
             AbilityID.SlushRush,
-            new Ability()
+            new AbilityBase()
             {
                 Name = "Slush Rush",
                 Description = "Boosts the Pokémon's Speed stat in a hailstorm.",
@@ -988,7 +988,7 @@ public class AbilityDB
         },
         {
             AbilityID.SnowWarning,//Activates a weather effect for five turns upon entry
-            new Ability()
+            new AbilityBase()
             {
                 Name = "Snow Warning",
                 Description = "The Pokémon summons a hailstorm when it enters a battle.",
@@ -997,7 +997,7 @@ public class AbilityDB
         },
         {
             AbilityID.Static,
-            new Ability()//30% chance
+            new AbilityBase()//30% chance
             {
                 Name = "Static",
                 Description = "The Pokémon is charged with static electricity, so contact with it may cause paralysis.",
@@ -1019,7 +1019,7 @@ public class AbilityDB
         },
         {
             AbilityID.Steelworker,
-            new Ability()
+            new AbilityBase()
             {
                 Name = "Steelworker",
                 Description = "Powers up Steel-type moves.",
@@ -1035,7 +1035,7 @@ public class AbilityDB
         },
         {
             AbilityID.StrongJaw,
-            new Ability()
+            new AbilityBase()
             {
                 Name = "Strong Jaw",
                 Description = "The Pokémon's strong jaw boosts the power of its biting moves.",
@@ -1051,7 +1051,7 @@ public class AbilityDB
         },
         {
             AbilityID.Swarm,//When HP is below 1/3rd its maximum, power of Bug-type moves is increased by 50%.
-            new Ability()
+            new AbilityBase()
             {
                 Name = "Swarm",
                 Description = "Powers up Bug-type moves when the Pokémon's HP is low.",
@@ -1072,7 +1072,7 @@ public class AbilityDB
         },
         {
             AbilityID.SwiftSwim,
-            new Ability()
+            new AbilityBase()
             {
                 Name = "Swift Swim",
                 Description = "Boosts the Pokémon's Speed stat in rain.",
@@ -1089,7 +1089,7 @@ public class AbilityDB
         //T
         {
             AbilityID.Technician,
-            new Ability()
+            new AbilityBase()
             {
                 Name = "Technician",
                 Description = "Powers up the Pokémon's weaker moves.",
@@ -1105,7 +1105,7 @@ public class AbilityDB
         },
         {
             AbilityID.TintedLens,
-            new Ability()
+            new AbilityBase()
             {
                 Name = "TintedLens",
                 Description = "The Pokémon can use \"not very effective\" moves to deal regular damage.",
@@ -1121,7 +1121,7 @@ public class AbilityDB
         },
         {
             AbilityID.Torrent,//When HP is below 1/3rd its maximum, power of Water-type moves is increased by 50%.
-            new Ability()
+            new AbilityBase()
             {
                 Name = "Torrent",
                 Description = "Powers up Water-type moves when the Pokémon's HP is low.",
@@ -1142,7 +1142,7 @@ public class AbilityDB
         },
         {
             AbilityID.ToughClaws,
-            new Ability()
+            new AbilityBase()
             {
                 Name = "Tough Claws",
                 Description = "Powers up moves that make direct contact.",
@@ -1158,7 +1158,7 @@ public class AbilityDB
         },
         {
             AbilityID.Transistor,
-            new Ability()
+            new AbilityBase()
             {
                 Name = "Transistor",
                 Description = "Powers up Electric-type moves.",
@@ -1174,7 +1174,7 @@ public class AbilityDB
         },
         {
             AbilityID.ToxicBoost,//Boosts a stat by 50% when affected with a status condition
-            new Ability()//Status Condition: Any
+            new AbilityBase()//Status Condition: Any
             {
                 Name = "Toxic Boost",
                 Description = "Powers up physical attacks when the Pokémon is poisoned.",
@@ -1192,7 +1192,7 @@ public class AbilityDB
         //V
         {
             AbilityID.VitalSpirit,
-            new Ability()
+            new AbilityBase()
             {
                 Name = "Vital Spirit",
                 Description = "The Pokémon is full of vitality, and that prevents it from falling asleep.",
@@ -1213,7 +1213,7 @@ public class AbilityDB
         //W
         {
             AbilityID.WaterVeil,
-            new Ability()
+            new AbilityBase()
             {
                 Name = "Water Veil",
                 Description = "The Pokémon is covered with a water veil, which prevents the Pokémon from getting a burn.",
@@ -1233,7 +1233,7 @@ public class AbilityDB
         },
         {
             AbilityID.WhiteSmoke,
-            new Ability()
+            new AbilityBase()
             {
                 Name = "White Smoke",
                 Description = "The Pokémon is protected by its white smoke, which prevents other Pokémon from lowering its stats.",

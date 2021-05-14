@@ -22,5 +22,10 @@ public class ConditionsDB
         }
     }
 
-    public static Dictionary<ConditionID, ConditionBase> Conditions = new Dictionary<ConditionID, ConditionBase>();
+    static Dictionary<ConditionID, ConditionBase> Conditions = new Dictionary<ConditionID, ConditionBase>();
+
+    public static ConditionBase GetConditionBase(ConditionID iD)
+    {
+        return Conditions[iD].ReturnDerivedClassAsNew();
+    } 
 }

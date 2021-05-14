@@ -5,6 +5,7 @@ using UnityEngine;
 public class PerishSong : ConditionBase
 {
     public override ConditionID Id { get { return ConditionID.PerishSong; } }
+    public override ConditionBase ReturnDerivedClassAsNew() { return new PerishSong(); }
     public override string StartMessage(Pokemon pokemon)
     {
         StatusTime = 4;

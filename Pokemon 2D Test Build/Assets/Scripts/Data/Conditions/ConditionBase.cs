@@ -6,6 +6,7 @@ using UnityEngine;
 public abstract class ConditionBase
 {
     public abstract ConditionID Id { get; }
+    public abstract ConditionBase ReturnDerivedClassAsNew();
     public string Name { get { return Id.ToString(); } }
     public virtual string StartMessage(Pokemon pokemon) { return ""; }
     public virtual bool HasCondition(ConditionID conditionID) { return (conditionID == Id); }

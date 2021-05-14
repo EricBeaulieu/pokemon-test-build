@@ -5,6 +5,7 @@ using UnityEngine;
 public class Identified : ConditionBase
 {
     public override ConditionID Id { get { return ConditionID.Identified; } }
+    public override ConditionBase ReturnDerivedClassAsNew() { return new Identified(); }
     public override string StartMessage(Pokemon pokemon)
     {
         return $"{pokemon.currentName} was Identified";

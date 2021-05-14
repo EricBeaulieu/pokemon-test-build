@@ -13,7 +13,7 @@ public class Pokemon {
     public IndividualValues individualValues { get; set; }
     public EffortValues effortValues { get; set; }
     NatureBase _nature;
-    public Ability ability { get; private set; }
+    public AbilityBase ability { get; private set; }
     public Gender gender { get; set; }
 
     string _currentName;
@@ -492,7 +492,7 @@ public class Pokemon {
             return;
         }
 
-        status = ConditionsDB.Conditions[conditionID];
+        status = ConditionsDB.GetConditionBase(conditionID);
         statusChanges.Enqueue(status.StartMessage(this));
 
         OnStatusChanged?.Invoke();
@@ -543,16 +543,13 @@ public class Pokemon {
 
     public void SetVolatileStatus(ConditionID conditionID,MoveBase currentMove)
     {
-        ConditionBase currentCondition = ConditionsDB.Conditions[conditionID];
+        ConditionBase currentCondition = ConditionsDB.GetConditionBase(conditionID);
 
-        if (volatileStatus.Contains(currentCondition) == true)
+        if (volatileStatus.Exists(x => x.Id == conditionID) == true)
         {
             string currentStatusChange = null;
 
-            if (currentCondition.HasConditionMessage(this) != "")
-            {
-                currentStatusChange = $"{currentCondition.HasConditionMessage(this)}";
-            }
+            currentStatusChange = $"{currentCondition.HasConditionMessage(this)}";
 
             if (currentCondition.HasCondition(conditionID) == false)
             {
@@ -566,7 +563,7 @@ public class Pokemon {
             return;
         }
 
-        ConditionBase newVolatileStatus = ConditionsDB.Conditions[conditionID];
+        ConditionBase newVolatileStatus = ConditionsDB.GetConditionBase(conditionID);
         volatileStatus.Add(newVolatileStatus);
 
         if(newVolatileStatus.Id == ConditionID.Bound)
@@ -584,7 +581,7 @@ public class Pokemon {
 
     public void CureVolatileStatus(ConditionID conditionID)
     {
-        volatileStatus.Remove(ConditionsDB.Conditions[conditionID]);
+        volatileStatus.Remove(volatileStatus.Find(x => x.Id == conditionID));
     }
 
     public bool HasCurrentVolatileStatus(ConditionID conditionID)
@@ -695,7 +692,7 @@ public class Pokemon {
 
     void SetAbility()
     {
-        List<Ability> abilities = new List<Ability>();
+        List<AbilityBase> abilities = new List<AbilityBase>();
 
         if(pokemonBase.FirstAbility != AbilityID.NA)
         {

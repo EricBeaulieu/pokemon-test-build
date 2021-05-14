@@ -127,17 +127,18 @@
     <Compile Include="Assets\Notes.cs" />
     <Compile Include="Assets\Scripts\Mechanics\HPBar.cs" />
     <Compile Include="Assets\Scripts\Battle\BattleHUD.cs" />
-    <Compile Include="Assets\Scripts\Pokemon\Ability.cs" />
+    <Compile Include="Assets\Scripts\Data\Abilitys\AbilityBase.cs" />
     <Compile Include="Assets\Scripts\Party\SummarySkills.cs" />
     <Compile Include="Assets\Scripts\Data\Weather\Weather Effects\Sunshine.cs" />
     <Compile Include="Assets\Scripts\Data\Conditions\VolatileStatus\Flinch.cs" />
     <Compile Include="Assets\Scripts\Data\EntryHazards\Hazards\Spikes.cs" />
+    <Compile Include="Assets\Scripts\Data\Conditions\VolatileStatus\PerishSong.cs" />
     <Compile Include="Assets\Scripts\Data\Conditions\VolatileStatus\Encore.cs" />
     <Compile Include="Assets\Scripts\Data\Conditions\Status\Burn.cs" />
     <Compile Include="Assets\Scripts\Static Tables\DamageModifiers.cs" />
     <Compile Include="Assets\Scripts\ExtensionMethods\GlobalTools.cs" />
     <Compile Include="Assets\Scripts\Pokemon\Move.cs" />
-    <Compile Include="Assets\Scripts\Data\AbilityDB.cs" />
+    <Compile Include="Assets\Scripts\Data\Abilitys\AbilityDB.cs" />
     <Compile Include="Assets\Scripts\Pokemon\MoveEffects.cs" />
     <Compile Include="Assets\Scripts\Characters\TrainerController.cs" />
     <Compile Include="Assets\Scripts\Characters\SpriteSheetSwap.cs" />
@@ -155,7 +156,6 @@
     <Compile Include="Assets\Scripts\Battle\TurnAttackDetails.cs" />
     <Compile Include="Assets\Scripts\Data\Conditions\VolatileStatus\Nightmare.cs" />
     <Compile Include="Assets\Scripts\Data\Weather\Weather Effects\Rain.cs" />
-    <Compile Include="Assets\Scripts\Data\Conditions\VolatileStatus\PerishSong.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">

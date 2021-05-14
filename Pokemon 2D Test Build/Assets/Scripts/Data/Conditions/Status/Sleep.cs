@@ -5,6 +5,7 @@ using UnityEngine;
 public class Sleep : ConditionBase
 {
     public override ConditionID Id { get { return ConditionID.Sleep; } }
+    public override ConditionBase ReturnDerivedClassAsNew() { return new Sleep(); }
     public override string StartMessage(Pokemon pokemon)
     {
         StatusTime = Random.Range(1, 4);

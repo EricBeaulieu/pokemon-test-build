@@ -5,6 +5,7 @@ using UnityEngine;
 public class Spikes : EntryHazardBase
 {
     public override EntryHazardID Id { get { return EntryHazardID.Spikes; } }
+    public override EntryHazardBase ReturnDerivedClassAsNew() { return new Spikes(); }
     protected override int _maxLayers() { return 3; }
     public override string StartMessage(BattleUnit battleUnit)
     {

@@ -5,6 +5,7 @@ using UnityEngine;
 public class StealthRock : EntryHazardBase
 {
     public override EntryHazardID Id { get { return EntryHazardID.StealthRock; } }
+    public override EntryHazardBase ReturnDerivedClassAsNew() { return new StealthRock(); }
     protected override int _maxLayers() { return 1; }
     public override string StartMessage(BattleUnit battleUnit)
     {

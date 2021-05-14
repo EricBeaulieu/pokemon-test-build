@@ -5,6 +5,7 @@ using UnityEngine;
 public class Confused : ConditionBase
 {
     public override ConditionID Id { get { return ConditionID.Confused; } }
+    public override ConditionBase ReturnDerivedClassAsNew() { return new Confused(); }
     public override string StartMessage(Pokemon pokemon)
     {
         StatusTime = Random.Range(2, 6);

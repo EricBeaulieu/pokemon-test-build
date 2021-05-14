@@ -5,6 +5,7 @@ using UnityEngine;
 public class Poison : ConditionBase
 {
     public override ConditionID Id { get { return ConditionID.Poison; } }
+    public override ConditionBase ReturnDerivedClassAsNew() { return new Poison(); }
     public override string StartMessage(Pokemon pokemon)
     {
         return $"{pokemon.currentName} has been poisoned";

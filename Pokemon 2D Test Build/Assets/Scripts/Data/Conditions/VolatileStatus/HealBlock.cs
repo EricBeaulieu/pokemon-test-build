@@ -5,6 +5,7 @@ using UnityEngine;
 public class HealBlock : ConditionBase
 {
     public override ConditionID Id { get { return ConditionID.HealBlock; } }
+    public override ConditionBase ReturnDerivedClassAsNew() { return new HealBlock(); }
     public override string StartMessage(Pokemon pokemon)
     {
         StatusTime = 5;

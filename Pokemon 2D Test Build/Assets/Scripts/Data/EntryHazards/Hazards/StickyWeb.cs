@@ -5,6 +5,7 @@ using UnityEngine;
 public class StickyWeb : EntryHazardBase
 {
     public override EntryHazardID Id { get { return EntryHazardID.StickyWeb; } }
+    public override EntryHazardBase ReturnDerivedClassAsNew() { return new StickyWeb(); }
     protected override int _maxLayers() { return 1; }
     public override string StartMessage(BattleUnit battleUnit)
     {

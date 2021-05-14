@@ -17,5 +17,10 @@ public class EntryHazardsDB : MonoBehaviour
         }
     }
 
-    public static Dictionary<EntryHazardID, EntryHazardBase> EntryHazards = new Dictionary<EntryHazardID, EntryHazardBase>();
+    static Dictionary<EntryHazardID, EntryHazardBase> EntryHazards = new Dictionary<EntryHazardID, EntryHazardBase>();
+
+    public static EntryHazardBase GetEntryHazardBase(EntryHazardID iD)
+    {
+        return EntryHazards[iD].ReturnDerivedClassAsNew();
+    }
 }

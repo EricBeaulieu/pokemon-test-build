@@ -5,6 +5,7 @@ using UnityEngine;
 public class LeechSeed : ConditionBase
 {
     public override ConditionID Id { get { return ConditionID.LeechSeed; } }
+    public override ConditionBase ReturnDerivedClassAsNew() { return new LeechSeed(); }
     public override string StartMessage(Pokemon pokemon)
     {
         return $"{pokemon.currentName} was seeded";

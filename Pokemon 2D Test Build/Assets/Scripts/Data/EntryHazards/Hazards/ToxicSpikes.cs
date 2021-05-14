@@ -5,6 +5,7 @@ using UnityEngine;
 public class ToxicSpikes : EntryHazardBase
 {
     public override EntryHazardID Id { get { return EntryHazardID.ToxicSpikes; } }
+    public override EntryHazardBase ReturnDerivedClassAsNew() { return new ToxicSpikes(); }
     protected override int _maxLayers() { return 2; }
     public override string StartMessage(BattleUnit battleUnit)
     {
