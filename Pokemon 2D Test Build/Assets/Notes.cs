@@ -5,14 +5,11 @@ using UnityEngine;
 public class Notes
 {
     //To do list
-    
-    //continue to make the dictionary return a new class
 
     //add in specific moves
     //hidden power
     //transform
     //barrier moves, reflect, brick break etc
-    //wrap moves
     //variations of arena trap
     //clean up the way it enques ability actvation 
     //inner focus and oblivious prevents intimidation from working
@@ -21,15 +18,14 @@ public class Notes
     //Encore specialized move failures need to be implimented
 
     //punk rock sounds reduction based
-    //Steely Spirit not implimented due to not having ally boost moves implimented and steel worker does the same thing
     //normalize to change the type of status moves as well
 
     //Add in specific abilities
     //levitate
     //scrappy
 
+    //roost creating it so the pokemon can get hit by ground moves
     //double check abilities dropping or raising higher then stated
-    //change indimitimate ability styles, instread of it saying it lowered the stat say it was caused by the entry
     //test out bug on new pokemon, in summary
     //Start menu items
     //add in trainer details to said pokemon and trainer

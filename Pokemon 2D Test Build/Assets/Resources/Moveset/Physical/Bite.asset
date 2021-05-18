@@ -23,6 +23,7 @@ MonoBehaviour:
     volatileStatus: 0
     weatherEffect: 0
     entryHazard: 0
+    specialStartMessage: 
   secondaryEffects:
   - boosts:
     - stat: 0
@@ -31,7 +32,8 @@ MonoBehaviour:
     volatileStatus: 11
     weatherEffect: 0
     entryHazard: 0
-    percentChance: 100
+    specialStartMessage: 
+    percentChance: 30
     target: 0
   target: 0
   power: 60
@@ -40,6 +42,8 @@ MonoBehaviour:
   priority: 0
   powerPoints: 25
   baseCriticalHitRate: 0
+  multiStrikeMove: 0
+  fixedNumberOfStrikes: 0
   physicalContact: 1
   soundType: 0
   punchMove: 0
@@ -48,5 +52,9 @@ MonoBehaviour:
   affectedByGravity: 0
   defrostsWhenUsed: 0
   reflectedByMagicCoatMagicBounce: 0
-  blockedByProtectDetect: 0
-  copyableByMirrorMove: 0
+  blockedByProtectDetect: 1
+  copyableByMirrorMove: 1
+  recoilType: 0
+  recoilPercentage: 0
+  drainsHP: 0
+  hpRecovered: 0

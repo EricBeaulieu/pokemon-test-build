@@ -13,12 +13,37 @@ MonoBehaviour:
   m_Name: Water Gun
   m_EditorClassIdentifier: 
   moveName: WaterGun
-  moveDescription: 
+  moveDescription: The target is blasted with a forceful shot of water.
   elementType: 17
   moveType: 1
   moveEffects:
     boosts: []
+    status: 0
+    volatileStatus: 0
+    weatherEffect: 0
+    entryHazard: 0
+    specialStartMessage: 
+  secondaryEffects: []
   target: 0
   power: 40
   accuracy: 100
-  powerPoints: 40
+  alwaysHits: 0
+  priority: 0
+  powerPoints: 25
+  baseCriticalHitRate: 4.17
+  multiStrikeMove: 0
+  fixedNumberOfStrikes: 0
+  physicalContact: 0
+  soundType: 0
+  punchMove: 0
+  bitingMove: 0
+  snatchable: 0
+  affectedByGravity: 0
+  defrostsWhenUsed: 0
+  reflectedByMagicCoatMagicBounce: 0
+  blockedByProtectDetect: 1
+  copyableByMirrorMove: 1
+  recoilType: 0
+  recoilPercentage: 0
+  drainsHP: 0
+  hpRecovered: 0

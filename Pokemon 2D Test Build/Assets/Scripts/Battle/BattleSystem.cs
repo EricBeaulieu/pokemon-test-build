@@ -41,7 +41,7 @@ public class BattleSystem : MonoBehaviour
     Vector2 inGameItemoffScreenPos;
     public event Action<Pokemon,PokeballItem> OnPokemonCaptured;
 
-    [SerializeField] MoveBase struggle;
+    const string BUT_IT_FAILED = "But it failed";
     int _escapeAttempts;
     public int battleDuration { get; private set; }
 
@@ -49,9 +49,16 @@ public class BattleSystem : MonoBehaviour
     [SerializeField] LevelUpUI levelUpUI;
 
     [Header("Special Move with Conditions")]
+    [SerializeField] MoveBase struggle;
     [SerializeField] MoveBase noRetreat;
     [SerializeField] MoveBase encore;
     [SerializeField] MoveBase dreamEater;
+    [SerializeField] MoveBase synthesis;
+    [SerializeField] MoveBase moonlight;
+    [SerializeField] MoveBase morningSun;
+    [SerializeField] MoveBase shoreUp;
+    [SerializeField] MoveBase purify;
+    [SerializeField] MoveBase rest;
 
     #region End of Turn effects Order reference as of GEN 5
 
@@ -631,8 +638,8 @@ public class BattleSystem : MonoBehaviour
 
         //Called after all attacks have been done
 
-        yield return ApplyEffectsOnEndTurn(playerBattleUnit);
-        yield return ApplyEffectsOnEndTurn(enemyBattleUnit);
+        yield return ApplyEffectsOnEndTurn(playerBattleUnit,enemyBattleUnit);
+        yield return ApplyEffectsOnEndTurn(enemyBattleUnit, playerBattleUnit);
 
         //If current pokemon has fainted then it goes to the party system and waits on the selector
         if (playerBattleUnit.SendOutPokemonOnTurnEnd == true)
@@ -708,7 +715,7 @@ public class BattleSystem : MonoBehaviour
 
         if (CheckIfMoveHasSpecializedConditionAndSuccessful(sourceUnit, targetUnit, move.moveBase) == false)
         {
-            yield return dialogBox.TypeDialog($"But it Failed");
+            yield return dialogBox.TypeDialog($"{BUT_IT_FAILED}");
             yield break;
         }
 
@@ -799,12 +806,12 @@ public class BattleSystem : MonoBehaviour
                     yield return dialogBox.TypeDialog($"Hit {attackLoop} time(s)!");
                 }
 
-                if(move.moveBase.DrainsHP == true && sourceUnit.pokemon.currentHitPoints != sourceUnit.pokemon.maxHitPoints)
+                if(sourceUnit.pokemon.HasCurrentVolatileStatus(ConditionID.HealBlock) == false)
                 {
-                    int hpHealed = Mathf.CeilToInt((hpPriorToAttack - targetUnit.pokemon.currentHitPoints) * (move.moveBase.HpRecovered));
-
-                    if(hpHealed > 1)
+                    if (move.moveBase.DrainsHP == true && sourceUnit.pokemon.currentHitPoints != sourceUnit.pokemon.maxHitPoints && hpPriorToAttack - targetUnit.pokemon.currentHitPoints > 0)
                     {
+                        int hpHealed = Mathf.CeilToInt((hpPriorToAttack - targetUnit.pokemon.currentHitPoints) * (move.moveBase.HpRecovered));
+
                         hpHealed = Mathf.Clamp(hpHealed, 1, sourceUnit.pokemon.maxHitPoints - sourceUnit.pokemon.currentHitPoints);
                         sourceUnit.pokemon.UpdateHPRestored(hpHealed);
                         yield return sourceUnit.HUD.UpdateHPRecovered(hpHealed);
@@ -943,7 +950,7 @@ public class BattleSystem : MonoBehaviour
                     }
                     else
                     {
-                        yield return dialogBox.TypeDialog("But it failed");
+                        yield return dialogBox.TypeDialog($"{BUT_IT_FAILED}");
                         yield break;
                     }
                 }
@@ -951,7 +958,7 @@ public class BattleSystem : MonoBehaviour
                 {
                     if(target.pokemon.volatileStatus.Exists(x => x.Id == effects.Volatiletatus) == true && wasSecondaryEffect == false)
                     {
-                        yield return dialogBox.TypeDialog("But it failed");
+                        yield return dialogBox.TypeDialog($"{BUT_IT_FAILED}");
                         yield break;
                     }
                     target.pokemon.SetVolatileStatus(effects.Volatiletatus, currentMove,source);
@@ -990,7 +997,7 @@ public class BattleSystem : MonoBehaviour
                     currentHazard = currentEntrySide.Find(x => x.Id == effects.EntryHazard);
                     if (currentHazard.CanBeUsed() == false)
                     {
-                        yield return dialogBox.TypeDialog("But it failed");
+                        yield return dialogBox.TypeDialog($"{BUT_IT_FAILED}");
                         yield break;
                     }
                     else
@@ -1007,6 +1014,27 @@ public class BattleSystem : MonoBehaviour
             else
             {
                 Debug.Log($"Entry hazard is trying to be set on own side of field {effects}");
+            }
+        }
+
+        if(currentMove.HpRecovered > 0)
+        {
+            if (source.pokemon.maxHitPoints - source.pokemon.currentHitPoints > 0 && source.pokemon.HasCurrentVolatileStatus(ConditionID.HealBlock) == false)
+            {
+                int hpHealed = Mathf.CeilToInt(source.pokemon.maxHitPoints * (currentMove.HpRecovered * source.pokemon.ability.PowerUpCertainMoves(source.pokemon, target.pokemon, currentMove)));
+                WeatherEffectID weatherEffectID = (_currentWeather == null) ? WeatherEffectID.NA : _currentWeather.Id;
+                hpHealed = Mathf.CeilToInt(hpHealed * HealthRecoveryModifiers(currentMove, weatherEffectID));
+                hpHealed = Mathf.Clamp(hpHealed, 1, source.pokemon.maxHitPoints - source.pokemon.currentHitPoints);
+                source.pokemon.UpdateHPRestored(hpHealed);
+                yield return source.HUD.UpdateHPRecovered(hpHealed);
+                source.pokemon.statusChanges.Enqueue($"{source.pokemon.currentName}'s hp was restored");
+            }
+            else
+            {
+                if(currentMove != rest)
+                {
+                    yield return dialogBox.TypeDialog($"{BUT_IT_FAILED}");
+                }
             }
         }
 
@@ -1036,7 +1064,7 @@ public class BattleSystem : MonoBehaviour
         return Random.Range(1, 101) <= moveAccuracy;
     }
 
-    IEnumerator ApplyEffectsOnEndTurn(BattleUnit sourceUnit)
+    IEnumerator ApplyEffectsOnEndTurn(BattleUnit sourceUnit,BattleUnit targetUnit)
     {
         if(sourceUnit.pokemon.currentHitPoints <= 0)
         {
@@ -1072,6 +1100,21 @@ public class BattleSystem : MonoBehaviour
 
             yield return ShowStatusChanges(sourceUnit.pokemon);
             yield return sourceUnit.HUD.UpdateHPDamage(currentHP);
+
+            if(currentCondition.Id == ConditionID.LeechSeed)
+            {
+                LeechSeed leechSeed = ((LeechSeed)currentCondition);
+                if(targetUnit.pokemon.HasCurrentVolatileStatus(ConditionID.HealBlock) == true)
+                {
+                    continue;
+                }
+                if(targetUnit.pokemon.maxHitPoints - targetUnit.pokemon.currentHitPoints > 0)
+                {
+                    int hpHealed = Mathf.Clamp(leechSeed.HealthStolen, 1, targetUnit.pokemon.maxHitPoints - targetUnit.pokemon.currentHitPoints);
+                    targetUnit.pokemon.UpdateHPRestored(hpHealed);
+                    yield return targetUnit.HUD.UpdateHPRecovered(leechSeed.HealthStolen);
+                }
+            }
         }
 
         if (sourceUnit.pokemon.currentHitPoints <= 0)
@@ -1514,7 +1557,7 @@ public class BattleSystem : MonoBehaviour
             {
                 if(wasAbility == false)
                 {
-                    yield return dialogBox.TypeDialog("But it failed");
+                    yield return dialogBox.TypeDialog($"{BUT_IT_FAILED}");
                 }
                 yield break;
             }
@@ -1530,7 +1573,7 @@ public class BattleSystem : MonoBehaviour
             }
             else
             {
-                yield return dialogBox.TypeDialog("But it failed");
+                yield return dialogBox.TypeDialog($"{BUT_IT_FAILED}");
             }
             yield break;
         }
@@ -1543,7 +1586,7 @@ public class BattleSystem : MonoBehaviour
             }
             else
             {
-                yield return dialogBox.TypeDialog("But it failed");
+                yield return dialogBox.TypeDialog($"{BUT_IT_FAILED}");
             }
             yield break;
         }
@@ -1881,6 +1924,14 @@ public class BattleSystem : MonoBehaviour
         {
             return (DreamEaterSuccessful(targetUnit));
         }
+        else if(moveBase == purify)
+        {
+            return (PurifySuccessful(sourceUnit));
+        }
+        else if(moveBase == rest)
+        {
+            return (RestSuccessful(sourceUnit));
+        }
 
         return true;
     }
@@ -1930,6 +1981,63 @@ public class BattleSystem : MonoBehaviour
             return true;
         }
         return false;
+    }
+
+    bool PurifySuccessful(BattleUnit sourceUnit)
+    {
+        if (sourceUnit.pokemon.status != null)
+        {
+            if(sourceUnit.pokemon.status.Id != ConditionID.NA)
+            {
+                sourceUnit.pokemon.CureStatus();
+                sourceUnit.pokemon.statusChanges.Enqueue($"{sourceUnit.pokemon.currentName} cured its status condition");
+
+                return true;
+            }
+        }
+        return false;
+    }
+
+    bool RestSuccessful(BattleUnit sourceUnit)
+    {
+        if(sourceUnit.pokemon.maxHitPoints - sourceUnit.pokemon.currentHitPoints > 0 || sourceUnit.pokemon.status != null)
+        {
+            if(sourceUnit.pokemon.HasCurrentVolatileStatus(ConditionID.HealBlock) == false)
+            {
+                sourceUnit.pokemon.CureStatus();
+                sourceUnit.pokemon.SetStatus(ConditionID.Sleep,false);
+                sourceUnit.pokemon.statusChanges.Clear();
+                sourceUnit.pokemon.statusChanges.Enqueue($"{sourceUnit.pokemon.currentName} went to sleep to become healthy");
+                sourceUnit.pokemon.status.StatusTime = 2;
+                return true;
+            }
+        }
+        return false;
+    }
+
+    float HealthRecoveryModifiers(MoveBase moveBase,WeatherEffectID iD)
+    {
+        if(moveBase == moonlight||moveBase == synthesis|| moveBase == morningSun)
+        {
+            if(iD == WeatherEffectID.Sunshine)
+            {
+                return 1.33f;
+            }
+            else if(iD == WeatherEffectID.Rain|| iD == WeatherEffectID.Sandstorm||iD == WeatherEffectID.Hail)
+            {
+                return 0.5f;
+            }
+        }
+
+        if (moveBase == shoreUp)
+        {
+            if (iD == WeatherEffectID.Sandstorm)
+            {
+                return 1.33f;
+            }
+        }
+
+        return 1f;
     }
 
     #endregion

@@ -26,7 +26,7 @@ public class MoveBase : ScriptableObject {
     [SerializeField] bool alwaysHits;
     [SerializeField] int priority;
     [SerializeField] int powerPoints;
-    [SerializeField] float baseCriticalHitRate;
+    [SerializeField] float baseCriticalHitRate = 4.17f;
 
     [SerializeField] bool multiStrikeMove;
     [SerializeField] int fixedNumberOfStrikes;
