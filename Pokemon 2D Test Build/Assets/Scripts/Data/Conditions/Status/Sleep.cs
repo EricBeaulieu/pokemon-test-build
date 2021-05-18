@@ -6,7 +6,7 @@ public class Sleep : ConditionBase
 {
     public override ConditionID Id { get { return ConditionID.Sleep; } }
     public override ConditionBase ReturnDerivedClassAsNew() { return new Sleep(); }
-    public override string StartMessage(Pokemon pokemon)
+    public override string StartMessage(Pokemon pokemon, Pokemon attackingPokemon)
     {
         StatusTime = Random.Range(1, 4);
         return $"{pokemon.currentName} has fallen asleep";

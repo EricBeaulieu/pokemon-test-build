@@ -37,6 +37,9 @@ public class BattleUnit : MonoBehaviour
     //This is mainly for the enemy pokemon, so they gain XP
     List<Pokemon> pokemonBattledAgainst;
 
+    public bool cantEscapeGivenToSelf { get; set; }
+    public Move lastMoveUsed { get; set; }
+
     void Awake()
     {
         if (battleFloor == null)
@@ -127,6 +130,9 @@ public class BattleUnit : MonoBehaviour
         hud.SetData(pokemon, isPlayersPokemon);
         pokemon.Reset();
         _sendOutPokemonOnTurnEnd = false;
+
+        cantEscapeGivenToSelf = false;
+        lastMoveUsed = null;
 
         pokemonBattledAgainst = new List<Pokemon>();
     }
@@ -624,6 +630,19 @@ public class BattleUnit : MonoBehaviour
 
     public bool NoMovesAvailable()
     {
+        if(IsEncored() == true)
+        {
+            if(lastMoveUsed == null)
+            {
+                return true;
+            }
+            else if(lastMoveUsed.pP > 0)
+            {
+                return false;
+            }
+            return true;
+        }
+
         List<Move> currentMoveList = new List<Move>(pokemon.moves);
 
         foreach (Move move in currentMoveList)
@@ -635,5 +654,40 @@ public class BattleUnit : MonoBehaviour
         }
 
         return true;
+    }
+
+    public Move ReturnRandomMove()
+    {
+        if(NoMovesAvailable() == true)
+        {
+            return null;
+        }
+
+        List<Move> movesWithPp = pokemon.moves.Where(x => x.pP > 0).ToList();
+
+        if (movesWithPp.Count == 0)
+        {
+            return null;
+        }
+
+        int r = Random.Range(0, movesWithPp.Count);
+        return movesWithPp[r];
+    }
+
+    public bool CanSwitchOutOrFlee()
+    {
+        foreach (ConditionBase status in pokemon.volatileStatus)
+        {
+            if(status.PreventsEscape() == true)
+            {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public bool IsEncored()
+    {
+        return (pokemon.volatileStatus.Exists(x => x.Id == ConditionID.Encore));
     }
 }

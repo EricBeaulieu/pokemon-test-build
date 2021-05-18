@@ -6,9 +6,9 @@ public class CursedUser : ConditionBase
 {
     public override ConditionID Id { get { return ConditionID.CursedUser; } }
     public override ConditionBase ReturnDerivedClassAsNew() { return new CursedUser(); }
-    public override string StartMessage(Pokemon pokemon)
+    public override string StartMessage(Pokemon pokemon, Pokemon attackingPokemon)
     {
-        pokemon.UpdateHP(pokemon.maxHitPoints / 2);
+        pokemon.UpdateHPDamage(pokemon.maxHitPoints / 2);
         pokemon.CureVolatileStatus(Id);
         return $"{pokemon.currentName} cut its own HP to lay a curse on enemy Pokemon";
     }

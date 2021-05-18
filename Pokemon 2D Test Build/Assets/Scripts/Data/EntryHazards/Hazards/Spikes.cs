@@ -38,7 +38,7 @@ public class Spikes : EntryHazardBase
             damage = 1;
         }
 
-        pokemon.UpdateHP(damage);
+        pokemon.UpdateHPDamage(damage);
         pokemon.statusChanges.Enqueue($"{pokemon.currentName} is hurt Spikes");
     }
 }

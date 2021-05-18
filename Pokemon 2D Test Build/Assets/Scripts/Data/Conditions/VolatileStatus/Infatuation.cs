@@ -6,7 +6,7 @@ public class Infatuation : ConditionBase
 {
     public override ConditionID Id { get { return ConditionID.Infatuation; } }
     public override ConditionBase ReturnDerivedClassAsNew() { return new Infatuation(); }
-    public override string StartMessage(Pokemon pokemon)
+    public override string StartMessage(Pokemon pokemon, Pokemon attackingPokemon)
     {
         return $"{pokemon.currentName} fell in love!";
     }

@@ -35,7 +35,7 @@ public class Sandstorm : WeatherEffectBase
             damage = 1;
         }
 
-        pokemon.UpdateHP(damage);
+        pokemon.UpdateHPDamage(damage);
         pokemon.statusChanges.Enqueue($"{pokemon.currentName} was hit by the sandstorm");
     }
 }

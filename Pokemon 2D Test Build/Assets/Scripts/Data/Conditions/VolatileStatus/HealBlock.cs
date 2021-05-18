@@ -6,7 +6,7 @@ public class HealBlock : ConditionBase
 {
     public override ConditionID Id { get { return ConditionID.HealBlock; } }
     public override ConditionBase ReturnDerivedClassAsNew() { return new HealBlock(); }
-    public override string StartMessage(Pokemon pokemon)
+    public override string StartMessage(Pokemon pokemon, Pokemon attackingPokemon)
     {
         StatusTime = 5;
         return $"{pokemon.currentName} was prevented from healing";

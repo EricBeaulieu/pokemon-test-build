@@ -6,7 +6,7 @@ public class Frozen : ConditionBase
 {
     public override ConditionID Id { get { return ConditionID.Frozen; } }
     public override ConditionBase ReturnDerivedClassAsNew() { return new Frozen(); }
-    public override string StartMessage(Pokemon pokemon)
+    public override string StartMessage(Pokemon pokemon, Pokemon attackingPokemon)
     {
         return $"{pokemon.currentName} has been frozen";
     }

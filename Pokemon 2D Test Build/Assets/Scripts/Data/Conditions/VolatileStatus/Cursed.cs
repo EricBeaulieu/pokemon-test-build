@@ -12,7 +12,7 @@ public class Cursed : ConditionBase
     }
     public override void OnEndTurn(Pokemon pokemon)
     {
-        pokemon.UpdateHP(Mathf.CeilToInt((float)pokemon.maxHitPoints / 4f));
+        pokemon.UpdateHPDamage(Mathf.CeilToInt((float)pokemon.maxHitPoints / 4f));
         pokemon.statusChanges.Enqueue($"{pokemon.currentName} is afflicted by the curse");
     }
 }

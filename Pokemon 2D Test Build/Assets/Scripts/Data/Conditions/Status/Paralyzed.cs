@@ -6,7 +6,7 @@ public class Paralyzed : ConditionBase
 {
     public override ConditionID Id { get { return ConditionID.Paralyzed; } }
     public override ConditionBase ReturnDerivedClassAsNew() { return new Paralyzed(); }
-    public override string StartMessage(Pokemon pokemon)
+    public override string StartMessage(Pokemon pokemon,Pokemon attackingPokemon)
     {
         return $"{pokemon.currentName} has been paralyzed";
     }

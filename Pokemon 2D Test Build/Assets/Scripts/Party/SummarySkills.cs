@@ -41,7 +41,7 @@ public class SummarySkills : SummaryUIBase
         if(pokemon.ability != null)
         {
             abilityName.text = pokemon.ability.Name;
-            abilityDescription.text = pokemon.ability.Description;
+            abilityDescription.text = pokemon.ability.Description();
         }
         else
         {

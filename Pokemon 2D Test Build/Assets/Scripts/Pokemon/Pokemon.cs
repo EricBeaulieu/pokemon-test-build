@@ -227,7 +227,7 @@ public class Pokemon {
 
         if(status != null)
         {
-            bool? negated = ability?.NegatesStatusEffectStatDropFromCondition?.Invoke(status.Id, currentStat);
+            bool negated = ability.NegatesStatusEffectStatDropFromCondition(status.Id, currentStat);
 
             float? reduction = status?.StatEffectedByCondition(currentStat);
             if(reduction.HasValue == true && negated == false)
@@ -235,27 +235,16 @@ public class Pokemon {
                 statValue *= reduction.Value;
             }
 
-            negated = ability?.BoostsAStatWhenAffectedWithAStatusCondition != null;
-            if(negated == true)
-            {
-                reduction = ability?.BoostsAStatWhenAffectedWithAStatusCondition?.Invoke(status.Id, currentStat);
-                if(reduction.Value <= 1)
-                {
-                    reduction = 1;
-                }
-                statValue *= reduction.Value;
-            }
+            reduction = ability.BoostsAStatWhenAffectedWithAStatusCondition(status.Id, currentStat);
+            statValue *= reduction.Value;
         }
 
-        if(ability?.DoublesSpeedInAWeatherEffect != null && currentStat == StatAttribute.Speed)
+        if(currentStat == StatAttribute.Speed)
         {
             statValue *= ability.DoublesSpeedInAWeatherEffect(BattleSystem.GetCurrentWeather);
         }
 
-        if(ability?.DoublesAStat != null)
-        {
-            statValue *= ability.DoublesAStat(currentStat);
-        }
+        statValue *= ability.DoublesAStat(currentStat);
 
         return statValue;
     }
@@ -351,10 +340,7 @@ public class Pokemon {
             typeEffectiveness = 1
         };
 
-        if(attackingPokemon.ability?.ChangeMovesToDifferentTypeAndIncreasesTheirPower?.Invoke(move) != null)
-        {
-            move = attackingPokemon.ability?.ChangeMovesToDifferentTypeAndIncreasesTheirPower.Invoke(move);
-        }
+        move = attackingPokemon.ability.ChangeMovesToDifferentTypeAndIncreasesTheirPower(move);
 
         damageDetails.typeEffectiveness = DamageModifiers.TypeChartEffectiveness(pokemonBase, move.Type);
 
@@ -370,7 +356,7 @@ public class Pokemon {
 
             //If sniper then make 2.
 
-            if (ability?.PreventsCriticalHits == true)
+            if (ability.PreventsCriticalHits() == true)
             {
                 damageDetails.criticalHit = 1f;
             }
@@ -381,13 +367,10 @@ public class Pokemon {
         modifier *= DamageModifiers.SameTypeAttackBonus(move, attackingPokemon.pokemonBase);
 
         //Ability
-        float? abilityBonus = attackingPokemon.ability?.BoostACertainTypeInAPinch?.Invoke(attackingPokemon, move.Type);
-        abilityBonus = (abilityBonus.HasValue == true) ? abilityBonus : attackingPokemon.ability?.PowerUpCertainMoves?.Invoke(attackingPokemon,this, move);
+        float abilityBonus = attackingPokemon.ability.BoostACertainTypeInAPinch(attackingPokemon, move.Type);
+        abilityBonus = (abilityBonus >1) ? abilityBonus : attackingPokemon.ability.PowerUpCertainMoves(attackingPokemon,this, move);
 
-        if (abilityBonus.HasValue == true)
-        {
-            modifier *= abilityBonus.Value;
-        }
+        modifier *= abilityBonus;
 
         float attackPower = (move.MoveType == MoveType.Physical) ? attackingPokemon.attack : attackingPokemon.specialAttack;
         float defendersDefense = (move.MoveType == MoveType.Physical) ? defense : specialDefense;
@@ -423,27 +406,19 @@ public class Pokemon {
             }
         }
 
-        UpdateHP(damage);
+        UpdateHPDamage(damage);
 
         return damageDetails;
     }
 
-    public void UpdateHP(int damage)
+    public void UpdateHPDamage(int damage)
     {
         currentHitPoints = Mathf.Clamp(currentHitPoints - damage, 0, maxHitPoints);
     }
 
-    public Move ReturnRandomMove()
+    public void UpdateHPRestored(int hpRestored)
     {
-        List<Move> movesWithPp = moves.Where(x => x.pP > 0).ToList();
-
-        if(movesWithPp.Count == 0)
-        {
-            return null;
-        }
-
-        int r = Random.Range(0, movesWithPp.Count);
-        return movesWithPp[r];
+        currentHitPoints = Mathf.Clamp(currentHitPoints + hpRestored, 0, maxHitPoints);
     }
 
     public string currentName
@@ -541,7 +516,7 @@ public class Pokemon {
         return false;
     }
 
-    public void SetVolatileStatus(ConditionID conditionID,MoveBase currentMove)
+    public void SetVolatileStatus(ConditionID conditionID,MoveBase currentMove,BattleUnit sourceBattleUnit)
     {
         ConditionBase currentCondition = ConditionsDB.GetConditionBase(conditionID);
 
@@ -571,7 +546,7 @@ public class Pokemon {
             ((Bound)newVolatileStatus).SetBoundMove = currentMove;
         }
 
-        statusChanges.Enqueue(newVolatileStatus.StartMessage(this));
+        statusChanges.Enqueue(newVolatileStatus.StartMessage(this,sourceBattleUnit.pokemon));
     }
 
     public void CureAllVolatileStatus()
@@ -696,17 +671,17 @@ public class Pokemon {
 
         if(pokemonBase.FirstAbility != AbilityID.NA)
         {
-            abilities.Add(AbilityDB.AbilityDex[pokemonBase.FirstAbility]);
+            abilities.Add(AbilityDB.GetAbilityBase(pokemonBase.FirstAbility));
         }
 
         if (pokemonBase.SecondAbility != AbilityID.NA)
         {
-            abilities.Add(AbilityDB.AbilityDex[pokemonBase.SecondAbility]);
+            abilities.Add(AbilityDB.GetAbilityBase(pokemonBase.SecondAbility));
         }
 
         if (pokemonBase.HiddenAbility != AbilityID.NA)
         {
-            abilities.Add(AbilityDB.AbilityDex[pokemonBase.HiddenAbility]);
+            abilities.Add(AbilityDB.GetAbilityBase(pokemonBase.HiddenAbility));
         }
 
         if(abilities.Count == 0)

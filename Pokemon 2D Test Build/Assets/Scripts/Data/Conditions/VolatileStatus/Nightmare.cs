@@ -6,7 +6,7 @@ public class Nightmare : ConditionBase
 {
     public override ConditionID Id { get { return ConditionID.Nightmare; } }
     public override ConditionBase ReturnDerivedClassAsNew() { return new Nightmare(); }
-    public override string StartMessage(Pokemon pokemon)
+    public override string StartMessage(Pokemon pokemon, Pokemon attackingPokemon)
     {
         return $"{pokemon.currentName} began having a Nightmare";
     }
@@ -18,7 +18,7 @@ public class Nightmare : ConditionBase
             return;
         }
 
-        pokemon.UpdateHP(Mathf.CeilToInt((float)pokemon.maxHitPoints / 4f));
+        pokemon.UpdateHPDamage(Mathf.CeilToInt((float)pokemon.maxHitPoints / 4f));
         pokemon.statusChanges.Enqueue($"{pokemon.currentName} is locked in a nightmare");
     }
     public override bool RequiredConditionToWork(ConditionID iD)

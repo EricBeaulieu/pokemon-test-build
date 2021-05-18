@@ -17,7 +17,8 @@ public class Notes
     //clean up the way it enques ability actvation 
     //inner focus and oblivious prevents intimidation from working
     //oblivious taunts
-    //Encore, Embargo, Cant escape all implimented but needs to be put into battle system
+    //Embargo implimented but needs to be put into battle system
+    //Encore specialized move failures need to be implimented
 
     //punk rock sounds reduction based
     //Steely Spirit not implimented due to not having ally boost moves implimented and steel worker does the same thing
@@ -48,6 +49,7 @@ public class Notes
 
     //Bugs
 
+    //on turn end for bound moves the pokemon doesnt play flash of hit animation
     //trainer when walking for some reason got into a half positionand stuck while walking. no idea how i created the bug
     //place trainer in path off start, let them stand and hit them and recreate this bug
 

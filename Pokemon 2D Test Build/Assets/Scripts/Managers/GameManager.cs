@@ -47,12 +47,12 @@ public class GameManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+
+        InitializeAllDatabases();
     }
 
     void Start()
     {
-        InitializeAllDatabases();
-
         playerController.OnEncounter += StartWildPokemonBattle;
         playerController.OnEncounter += (() => _inBattle = true);
         playerController.OpenStartMenu += () => 
@@ -211,7 +211,7 @@ public class GameManager : MonoBehaviour
         ConditionsDB.Initialization(GetAllConditions().ToList());
         EntryHazardsDB.Initialization(GetAllEntryHazards().ToList());
         WeatherEffectDB.Initialization(GetAllWeatherEffects().ToList());
-        AbilityDB.Initialization();
+        AbilityDB.Initialization(GetAllAbilities().ToList());
     }
 
     void CapturedNewPokemon(Pokemon capturedPokemon,PokeballItem pokeball)
@@ -265,5 +265,13 @@ public class GameManager : MonoBehaviour
             .SelectMany(assembly => assembly.GetTypes())
             .Where(type => type.IsSubclassOf(typeof(WeatherEffectBase)))
             .Select(type => Activator.CreateInstance(type) as WeatherEffectBase);
+    }
+
+    IEnumerable<AbilityBase> GetAllAbilities()
+    {
+        return AppDomain.CurrentDomain.GetAssemblies()
+            .SelectMany(assembly => assembly.GetTypes())
+            .Where(type => type.IsSubclassOf(typeof(AbilityBase)))
+            .Select(type => Activator.CreateInstance(type) as AbilityBase);
     }
 }

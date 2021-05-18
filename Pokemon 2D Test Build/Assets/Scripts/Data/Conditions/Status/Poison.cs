@@ -6,7 +6,7 @@ public class Poison : ConditionBase
 {
     public override ConditionID Id { get { return ConditionID.Poison; } }
     public override ConditionBase ReturnDerivedClassAsNew() { return new Poison(); }
-    public override string StartMessage(Pokemon pokemon)
+    public override string StartMessage(Pokemon pokemon, Pokemon attackingPokemon)
     {
         return $"{pokemon.currentName} has been poisoned";
     }
@@ -27,7 +27,7 @@ public class Poison : ConditionBase
             damage = 1;
         }
 
-        pokemon.UpdateHP(damage);
+        pokemon.UpdateHPDamage(damage);
         pokemon.statusChanges.Enqueue($"{pokemon.currentName} is hurt by poison");
     }
 }

@@ -6,7 +6,7 @@ public class PerishSong : ConditionBase
 {
     public override ConditionID Id { get { return ConditionID.PerishSong; } }
     public override ConditionBase ReturnDerivedClassAsNew() { return new PerishSong(); }
-    public override string StartMessage(Pokemon pokemon)
+    public override string StartMessage(Pokemon pokemon, Pokemon attackingPokemon)
     {
         StatusTime = 4;
         return base.StartMessage(pokemon);//"All Pokemon that heard the song will faint in 3 turns"
@@ -18,7 +18,7 @@ public class PerishSong : ConditionBase
 
         if (StatusTime <= 0)
         {
-            pokemon.UpdateHP(pokemon.maxHitPoints);
+            pokemon.UpdateHPDamage(pokemon.maxHitPoints);
         }
     }
 }

@@ -8,7 +8,7 @@ public abstract class ConditionBase
     public abstract ConditionID Id { get; }
     public abstract ConditionBase ReturnDerivedClassAsNew();
     public string Name { get { return Id.ToString(); } }
-    public virtual string StartMessage(Pokemon pokemon) { return ""; }
+    public virtual string StartMessage(Pokemon pokemon,Pokemon attackingPokemon = null) { return ""; }
     public virtual bool HasCondition(ConditionID conditionID) { return (conditionID == Id); }
     public virtual string HasConditionMessage(Pokemon pokemon) { return ""; }
     public virtual float StatEffectedByCondition(StatAttribute statAttribute) { return 1f; }

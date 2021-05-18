@@ -6,7 +6,7 @@ public class Burn : ConditionBase
 {
     public override ConditionID Id { get { return ConditionID.Burn; } }
     public override ConditionBase ReturnDerivedClassAsNew(){ return new Burn();}
-    public override string StartMessage(Pokemon pokemon)
+    public override string StartMessage(Pokemon pokemon, Pokemon attackingPokemon)
     {
         return $"{pokemon.currentName} has been burned";
     }
@@ -31,7 +31,7 @@ public class Burn : ConditionBase
             damage = 1;
         }
 
-        pokemon.UpdateHP(damage);
+        pokemon.UpdateHPDamage(damage);
         pokemon.statusChanges.Enqueue($"{pokemon.currentName} is hurt by burn");
     }
 }

@@ -6,7 +6,7 @@ public class Confused : ConditionBase
 {
     public override ConditionID Id { get { return ConditionID.Confused; } }
     public override ConditionBase ReturnDerivedClassAsNew() { return new Confused(); }
-    public override string StartMessage(Pokemon pokemon)
+    public override string StartMessage(Pokemon pokemon, Pokemon attackingPokemon)
     {
         StatusTime = Random.Range(2, 6);
         return $"{pokemon.currentName} has been confused";
@@ -39,7 +39,7 @@ public class Confused : ConditionBase
             damage = 1;
         }
 
-        source.UpdateHP(damage);
+        source.UpdateHPDamage(damage);
         source.statusChanges.Enqueue($"{source.currentName} hurt itself in its confusion");
         return false;
     }

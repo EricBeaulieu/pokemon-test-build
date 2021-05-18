@@ -6,10 +6,10 @@ public class Bound : ConditionBase
 {
     public override ConditionID Id { get { return ConditionID.Bound; } }
     public override ConditionBase ReturnDerivedClassAsNew() { return new Bound(); }
-    public override string StartMessage(Pokemon pokemon)
+    public override string StartMessage(Pokemon pokemon, Pokemon attackingPokemon)
     {
         StatusTime = Random.Range(4, 6);
-        return $"{pokemon.currentName} {boundMove.SecondaryEffects[0].SpecialStartMessage}";
+        return $"{pokemon.currentName} {GlobalTools.ReplaceUserWithPokemonName(boundMove.SecondaryEffects[0].SpecialStartMessage, attackingPokemon)}";
     }
     public override void OnEndTurn(Pokemon pokemon)
     {
@@ -28,7 +28,7 @@ public class Bound : ConditionBase
             damage = 1;
         }
         
-        pokemon.UpdateHP(damage);
+        pokemon.UpdateHPDamage(damage);
         pokemon.statusChanges.Enqueue($"{pokemon.currentName} is hurt by {boundMove.MoveName}!");
     }
     public MoveBase SetBoundMove { set { boundMove = value; } }

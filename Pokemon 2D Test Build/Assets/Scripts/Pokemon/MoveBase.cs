@@ -45,6 +45,9 @@ public class MoveBase : ScriptableObject {
     [SerializeField] Recoil recoilType;
     [SerializeField] float recoilPercentage;
 
+    [SerializeField] bool drainsHP;
+    [SerializeField] float hpRecovered;
+
     public MoveBase adjustedMove(ElementType newType,float powerIncrease)
     {
         MoveBase updatedMove = MoveBase.Instantiate(this);
@@ -181,6 +184,17 @@ public class MoveBase : ScriptableObject {
     public int FixedNumberOfStrikes
     {
         get { return fixedNumberOfStrikes; }
+    }
+
+
+    public bool DrainsHP
+    {
+        get { return drainsHP; }
+    }
+
+    public float HpRecovered
+    {
+        get { return hpRecovered; }
     }
 
     #endregion

@@ -21,7 +21,7 @@ public class HPBar : MonoBehaviour
         _healthBar.color = StatusConditionArt.instance.ReturnHitPointsColor(hpNormalized);
     }
 
-    public IEnumerator SetHPAnimation(int healthAfterDamage,int healthBeforeDamage,int maxHP,Text currentHpText = null)
+    public IEnumerator SetHPDamageAnimation(int healthAfterDamage,int healthBeforeDamage,int maxHP,Text currentHpText = null)
     {
         float curHP = healthBeforeDamage;
         float changeAmount = curHP - healthAfterDamage;
@@ -41,6 +41,28 @@ public class HPBar : MonoBehaviour
         if (currentHpText != null)
         {
             currentHpText.text = $"{healthAfterDamage.ToString("0")} / {maxHP.ToString()}";
+        }
+    }
+
+    public IEnumerator SetHPRecoveredAnimation(int healthAfterRecovery, int hpHealed, int maxHP, Text currentHpText = null)
+    {
+        float curHP = healthAfterRecovery - hpHealed;
+        while (healthAfterRecovery - curHP > Mathf.Epsilon)
+        {
+            curHP += hpHealed * Time.deltaTime;
+            SetHP((float)curHP / maxHP);
+            if (currentHpText != null)
+            {
+                currentHpText.text = $"{curHP.ToString("0")} / {maxHP.ToString()}";
+            }
+            yield return null;
+        }
+
+        SetHP((float)healthAfterRecovery / maxHP);
+
+        if (currentHpText != null)
+        {
+            currentHpText.text = $"{healthAfterRecovery.ToString("0")} / {maxHP.ToString()}";
         }
     }
 

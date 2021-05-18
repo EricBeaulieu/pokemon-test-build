@@ -48,6 +48,11 @@ public class BattleSystem : MonoBehaviour
     [SerializeField] LearnNewMoveUI learnNewMoveUI;
     [SerializeField] LevelUpUI levelUpUI;
 
+    [Header("Special Move with Conditions")]
+    [SerializeField] MoveBase noRetreat;
+    [SerializeField] MoveBase encore;
+    [SerializeField] MoveBase dreamEater;
+
     #region End of Turn effects Order reference as of GEN 5
 
     //1.0 weather ends
@@ -328,6 +333,10 @@ public class BattleSystem : MonoBehaviour
         }
         else
         {
+            if(playerBattleUnit.IsEncored() == true)
+            {
+                AttackSelected(playerBattleUnit,playerBattleUnit.lastMoveUsed);
+            }
             EnableAttackMoveSelector(true);
         }
     }
@@ -337,7 +346,14 @@ public class BattleSystem : MonoBehaviour
     /// </summary>
     void PlayerActionPokemon()
     {
-        OpenPokemonParty(true,false);
+        if(playerBattleUnit.CanSwitchOutOrFlee() == true)
+        {
+            OpenPokemonParty(true,false);
+        }
+        else
+        {
+            PlayerCantEscapeActiveWhenTryingToSwitch();
+        }
     }
 
     /// <summary>
@@ -392,6 +408,7 @@ public class BattleSystem : MonoBehaviour
     /// <param name="moveBase">Current Move Being Used</param>
     public void AttackSelected(BattleUnit currentPokemon, Move move)
     {
+        dialogBox.SetDialogText("");
         EnableAttackMoveSelector(false);
         TurnAttackDetails turnAttack = new TurnAttackDetails(move, currentPokemon, enemyBattleUnit);
 
@@ -424,6 +441,18 @@ public class BattleSystem : MonoBehaviour
         yield return dialogBox.TypeDialog($"{playerBattleUnit.pokemon.currentName} has no available moves left");
         yield return new WaitForSeconds(1);
         AttackSelected(playerBattleUnit, new Move(struggle));
+    }
+
+    public void PlayerCantEscapeActiveWhenTryingToSwitch()
+    {
+        StartCoroutine(PlayerCantEscapeActiveWhenTryingToSwitchIEnumerator());
+    }
+
+    IEnumerator PlayerCantEscapeActiveWhenTryingToSwitchIEnumerator()
+    {
+        EnableActionSelector(false);
+        yield return dialogBox.TypeDialog($"{playerBattleUnit.pokemon.currentName} can't escape!",true);
+        EnableActionSelector(true);
     }
 
     public void ReturnFromPokemonPartySystem()
@@ -476,7 +505,7 @@ public class BattleSystem : MonoBehaviour
 
     public IEnumerator EnemyMove()
     {
-        Move currentAttack = enemyBattleUnit.pokemon.ReturnRandomMove();
+        Move currentAttack = enemyBattleUnit.ReturnRandomMove();
 
         if(currentAttack == null)
         {
@@ -634,6 +663,15 @@ public class BattleSystem : MonoBehaviour
 
     IEnumerator RunMove(BattleUnit sourceUnit, BattleUnit targetUnit, Move move)
     {
+        //If the pokemon was encored after selecting the move, switch it to the new move style
+        if(sourceUnit.IsEncored() == true)
+        {
+            if (move != sourceUnit.lastMoveUsed)
+            {
+                move = sourceUnit.lastMoveUsed;
+            }
+        }
+
         //This is here incase the pokemon hits itself in confusion for the smooth animation
         int previousHP = sourceUnit.pokemon.currentHitPoints;
 
@@ -646,7 +684,7 @@ public class BattleSystem : MonoBehaviour
             yield return ShowStatusChanges(sourceUnit.pokemon);
             yield return sourceUnit.StatusConditionAnimation(canUseMove);
             //If it hit itself in its confusion update the HUD
-            yield return sourceUnit.HUD.UpdateHP(previousHP);
+            yield return sourceUnit.HUD.UpdateHPDamage(previousHP);
             if (sourceUnit.pokemon.currentHitPoints <= 0)
             {
                 yield return PokemonHasFainted(sourceUnit);
@@ -668,6 +706,12 @@ public class BattleSystem : MonoBehaviour
         yield return sourceUnit.PlayAttackAnimation();
         int hpPriorToAttack = targetUnit.pokemon.currentHitPoints;//for the animator in UpdateHP and recoil
 
+        if (CheckIfMoveHasSpecializedConditionAndSuccessful(sourceUnit, targetUnit, move.moveBase) == false)
+        {
+            yield return dialogBox.TypeDialog($"But it Failed");
+            yield break;
+        }
+
         if (CheckIfMoveHits(move.moveBase, sourceUnit.pokemon, targetUnit.pokemon) == true)
         {
             if (move.moveBase.MoveType == MoveType.Status)
@@ -686,7 +730,7 @@ public class BattleSystem : MonoBehaviour
                     }
                     else
                     {
-                        if (sourceUnit.pokemon.ability?.MaximizeMultistrikeMovesHit == true)
+                        if (sourceUnit.pokemon.ability.MaximizeMultistrikeMovesHit() == true)
                         {
                             attackLoop = 5;
                         }
@@ -715,7 +759,7 @@ public class BattleSystem : MonoBehaviour
                             targetUnit.PlayHitAnimation();
                         }
 
-                        yield return targetUnit.HUD.UpdateHP(hpPriorToAttack);
+                        yield return targetUnit.HUD.UpdateHPDamage(hpPriorToAttack);
 
                         if(damageDetails.criticalHit > 1 && i < attackLoop)
                         {
@@ -745,7 +789,7 @@ public class BattleSystem : MonoBehaviour
                         targetUnit.PlayHitAnimation();
                     }
 
-                    yield return targetUnit.HUD.UpdateHP(hpPriorToAttack);
+                    yield return targetUnit.HUD.UpdateHPDamage(hpPriorToAttack);
                 }
                 
                 yield return ShowDamageDetails(damageDetails, targetUnit);
@@ -753,6 +797,19 @@ public class BattleSystem : MonoBehaviour
                 if (move.moveBase.MultiStrikeMove == true && damageDetails.typeEffectiveness != 0)
                 {
                     yield return dialogBox.TypeDialog($"Hit {attackLoop} time(s)!");
+                }
+
+                if(move.moveBase.DrainsHP == true && sourceUnit.pokemon.currentHitPoints != sourceUnit.pokemon.maxHitPoints)
+                {
+                    int hpHealed = Mathf.CeilToInt((hpPriorToAttack - targetUnit.pokemon.currentHitPoints) * (move.moveBase.HpRecovered));
+
+                    if(hpHealed > 1)
+                    {
+                        hpHealed = Mathf.Clamp(hpHealed, 1, sourceUnit.pokemon.maxHitPoints - sourceUnit.pokemon.currentHitPoints);
+                        sourceUnit.pokemon.UpdateHPRestored(hpHealed);
+                        yield return sourceUnit.HUD.UpdateHPRecovered(hpHealed);
+                        yield return dialogBox.TypeDialog($"{targetUnit.pokemon.currentName} had its energy drained");
+                    }
                 }
 
                 //Shows that the damage does not effect them and then ends the move right there
@@ -773,7 +830,7 @@ public class BattleSystem : MonoBehaviour
 
                         if (secondaryEffect.Volatiletatus == ConditionID.CursedUser)
                         {
-                            yield return sourceUnit.HUD.UpdateHP(previousHP);
+                            yield return sourceUnit.HUD.UpdateHPDamage(previousHP);
                             if (sourceUnit.pokemon.currentHitPoints <= 0)
                             {
                                 yield return PokemonHasFainted(sourceUnit);
@@ -783,32 +840,29 @@ public class BattleSystem : MonoBehaviour
                 }
             }
 
-            if(targetUnit.pokemon.ability?.ContactMoveMayCauseStatusEffect != null)
-            {
-                ConditionID newCondition = targetUnit.pokemon.ability.ContactMoveMayCauseStatusEffect(targetUnit.pokemon,sourceUnit.pokemon, move.moveBase);
+            ConditionID newCondition = targetUnit.pokemon.ability.ContactMoveMayCauseStatusEffect(targetUnit.pokemon, sourceUnit.pokemon, move.moveBase);
 
-                if(newCondition > ConditionID.NA && newCondition <= ConditionID.ToxicPoison)
+            if (newCondition > ConditionID.NA && newCondition <= ConditionID.ToxicPoison)
+            {
+                if (sourceUnit.pokemon.status == null)
                 {
-                    if(sourceUnit.pokemon.status == null)
-                    {
-                        targetUnit.OnAbilityActivation();
-                        sourceUnit.pokemon.SetStatus(newCondition,false);
-                        yield return ShowStatusChanges(sourceUnit.pokemon);
-                    }
+                    targetUnit.OnAbilityActivation();
+                    sourceUnit.pokemon.SetStatus(newCondition, false);
+                    yield return ShowStatusChanges(sourceUnit.pokemon);
                 }
-                else if(newCondition > ConditionID.ToxicPoison && targetUnit.pokemon.currentHitPoints > 0)
+            }
+            else if (newCondition > ConditionID.ToxicPoison && targetUnit.pokemon.currentHitPoints > 0)
+            {
+                if (sourceUnit.pokemon.HasCurrentVolatileStatus(newCondition) == false)
                 {
-                    if(sourceUnit.pokemon.HasCurrentVolatileStatus(newCondition) == false)
-                    {
-                        targetUnit.OnAbilityActivation();
-                        sourceUnit.pokemon.SetVolatileStatus(newCondition, move.moveBase);
-                        yield return ShowStatusChanges(sourceUnit.pokemon);
-                    }
+                    targetUnit.OnAbilityActivation();
+                    sourceUnit.pokemon.SetVolatileStatus(newCondition, move.moveBase,sourceUnit);
+                    yield return ShowStatusChanges(sourceUnit.pokemon);
                 }
             }
 
             //Recoil
-            if(move.moveBase.RecoilType != Recoil.NA)
+            if (move.moveBase.RecoilType != Recoil.NA)
             {
                 int recoilDamage = 0;
 
@@ -829,8 +883,8 @@ public class BattleSystem : MonoBehaviour
                 }
                 
                 previousHP = sourceUnit.pokemon.currentHitPoints;
-                sourceUnit.pokemon.UpdateHP(recoilDamage);
-                yield return sourceUnit.HUD.UpdateHP(previousHP);
+                sourceUnit.pokemon.UpdateHPDamage(recoilDamage);
+                yield return sourceUnit.HUD.UpdateHPDamage(previousHP);
                 yield return dialogBox.TypeDialog($"{sourceUnit.pokemon.currentName} is hit with recoil!");
 
                 if (sourceUnit.pokemon.currentHitPoints <= 0)
@@ -838,6 +892,8 @@ public class BattleSystem : MonoBehaviour
                     yield return PokemonHasFainted(sourceUnit);
                 }
             }
+
+            sourceUnit.lastMoveUsed = move;
         }
         else
         {
@@ -860,19 +916,12 @@ public class BattleSystem : MonoBehaviour
         //Status Condition
         if (effects.Status != ConditionID.NA)
         {
-            if(target.pokemon.ability?.PreventCertainStatusCondition != null)
+            if (target.pokemon.ability.PreventCertainStatusCondition(effects.Status) == true)
             {
-                if (target.pokemon.ability.PreventCertainStatusCondition.Invoke(effects.Status) == true)
+                if (wasSecondaryEffect == false)
                 {
-                    if(wasSecondaryEffect == false)
-                    {
-                        target.OnAbilityActivation();
-                        target.pokemon.statusChanges.Enqueue(target.pokemon.ability.OnAbilitityActivation(target.pokemon));
-                    }
-                }
-                else
-                {
-                    target.pokemon.SetStatus(effects.Status, wasSecondaryEffect);
+                    target.OnAbilityActivation();
+                    target.pokemon.statusChanges.Enqueue(target.pokemon.ability.OnAbilitityActivation(target.pokemon));
                 }
             }
             else
@@ -888,9 +937,9 @@ public class BattleSystem : MonoBehaviour
             {
                 if (effects.Volatiletatus == ConditionID.Infatuation)
                 {
-                    if (CheckIfInflatuated(source.pokemon, target.pokemon) == true)
+                    if (CheckIfTargetCanBeInflatuated(source.pokemon, target.pokemon) == true)
                     {
-                        target.pokemon.SetVolatileStatus(effects.Volatiletatus, currentMove);
+                        target.pokemon.SetVolatileStatus(effects.Volatiletatus, currentMove,source);
                     }
                     else
                     {
@@ -900,12 +949,17 @@ public class BattleSystem : MonoBehaviour
                 }
                 else
                 {
-                    target.pokemon.SetVolatileStatus(effects.Volatiletatus, currentMove);
+                    if(target.pokemon.volatileStatus.Exists(x => x.Id == effects.Volatiletatus) == true && wasSecondaryEffect == false)
+                    {
+                        yield return dialogBox.TypeDialog("But it failed");
+                        yield break;
+                    }
+                    target.pokemon.SetVolatileStatus(effects.Volatiletatus, currentMove,source);
                 }
             }
             else if(moveTarget == MoveTarget.Self)
             {
-                source.pokemon.SetVolatileStatus(effects.Volatiletatus, currentMove);
+                source.pokemon.SetVolatileStatus(effects.Volatiletatus, currentMove,source);
             }
             else if(moveTarget == MoveTarget.All)
             {
@@ -914,8 +968,8 @@ public class BattleSystem : MonoBehaviour
                     yield return dialogBox.TypeDialog("All Pokemon that heard the song will faint in 3 turns");
                 }
 
-                target.pokemon.SetVolatileStatus(effects.Volatiletatus, currentMove);
-                source.pokemon.SetVolatileStatus(effects.Volatiletatus, currentMove);
+                target.pokemon.SetVolatileStatus(effects.Volatiletatus, currentMove,source);
+                source.pokemon.SetVolatileStatus(effects.Volatiletatus, currentMove,target);
             }
         }
 
@@ -973,12 +1027,9 @@ public class BattleSystem : MonoBehaviour
 
         float targetEvasion = target.evasion;
 
-        if (source.ability?.IgnoreStatIncreases != null)
+        if (source.ability.IgnoreStatIncreases(StatAttribute.Evasion) == true && targetEvasion > 1)
         {
-            if (source.ability.IgnoreStatIncreases.Invoke(StatAttribute.Evasion) == true && targetEvasion > 1)
-            {
-                targetEvasion = 1;
-            }
+            targetEvasion = 1;
         }
         moveAccuracy /= targetEvasion;
 
@@ -1020,7 +1071,7 @@ public class BattleSystem : MonoBehaviour
             yield return sourceUnit.StatusConditionAnimation(currentCondition.Id);
 
             yield return ShowStatusChanges(sourceUnit.pokemon);
-            yield return sourceUnit.HUD.UpdateHP(currentHP);
+            yield return sourceUnit.HUD.UpdateHPDamage(currentHP);
         }
 
         if (sourceUnit.pokemon.currentHitPoints <= 0)
@@ -1081,6 +1132,11 @@ public class BattleSystem : MonoBehaviour
                             continue;
                         }
 
+                        if(statBoosts[j] == null)
+                        {
+                            statBoosts.RemoveAt(j);
+                        }
+
                         if(statBoosts[i].stat == statBoosts[j].stat)// && i != j)
                         {
                             statBoosts[i].boost += statBoosts[j].boost;
@@ -1097,7 +1153,11 @@ public class BattleSystem : MonoBehaviour
 
         foreach (StatBoost currentStat in statBoosts)
         {
-            if (currentStat.boost == 0)
+            if(currentStat == null)
+            {
+                continue;
+            }
+            else if (currentStat.boost == 0)
             {
                 continue;
             }
@@ -1115,8 +1175,7 @@ public class BattleSystem : MonoBehaviour
         {
             yield break;
         }
-
-        bool targetBoostedAStat = false;
+        
         List<StatBoost> boostedStats = new List<StatBoost>();
 
         if (moveTarget == MoveTarget.Foe)
@@ -1125,36 +1184,33 @@ public class BattleSystem : MonoBehaviour
             yield return targetUnit.ShowStatChanges(positiveEffects, true);
             yield return ShowStatusChanges(targetUnit.pokemon);
 
-            if (targetUnit.pokemon.ability?.PreventStatFromBeingLowered != null)
-            {
-                bool abilityActivated = false;//This is for multiple stats prevented from being lowered so it doesnt stack the Queue
+            bool abilityActivated = false;//This is for multiple stats prevented from being lowered so it doesnt stack the Queue
 
-                List<StatBoost> negativeEffectsCopy = new List<StatBoost>(negativeEffects);
-                foreach (StatBoost stat in negativeEffectsCopy)
+            List<StatBoost> negativeEffectsCopy = new List<StatBoost>(negativeEffects);
+            foreach (StatBoost stat in negativeEffectsCopy)
+            {
+                if (stat.boost < 0)
                 {
-                    if (stat.boost < 0)
+                    bool negated = targetUnit.pokemon.ability.PreventStatFromBeingLowered(stat.stat);
+                    if (negated == true)
                     {
-                        bool? negated = targetUnit.pokemon.ability.PreventStatFromBeingLowered.Invoke(stat.stat);
-                        if (negated == true)
+                        if (abilityActivated == false)
                         {
-                            if (abilityActivated == false)
-                            {
-                                targetUnit.OnAbilityActivation();
-                                targetUnit.pokemon.statusChanges.Enqueue(targetUnit.pokemon.ability.OnAbilitityActivation(targetUnit.pokemon));
-                                abilityActivated = true;
-                            }
-                            negativeEffects.Remove(stat);
+                            targetUnit.OnAbilityActivation();
+                            targetUnit.pokemon.statusChanges.Enqueue(targetUnit.pokemon.ability.OnAbilitityActivation(targetUnit.pokemon));
+                            abilityActivated = true;
                         }
+                        negativeEffects.Remove(stat);
                     }
                 }
             }
 
-            if (targetUnit.pokemon.ability?.BoostStatSharplyIfAnyStatLowered != null)
+            for (int i = 0; i < negativeEffects.Count; i++)
             {
-                targetBoostedAStat = true;
-                for (int i = 0; i < negativeEffects.Count; i++)
+                StatBoost abilityBoost = targetUnit.pokemon.ability.BoostStatSharplyIfAnyStatLowered();
+                if(abilityBoost != null)
                 {
-                    boostedStats.Add(targetUnit.pokemon.ability.BoostStatSharplyIfAnyStatLowered);
+                    boostedStats.Add(abilityBoost);
                 }
             }
 
@@ -1173,7 +1229,7 @@ public class BattleSystem : MonoBehaviour
             yield return ShowStatusChanges(sourceUnit.pokemon);
         }
 
-        if(targetBoostedAStat == true)
+        if(boostedStats.Count > 0)
         {
             targetUnit.OnAbilityActivation();
             yield return ApplyStatChanges(boostedStats, targetUnit, MoveTarget.Self,targetUnit);
@@ -1187,21 +1243,23 @@ public class BattleSystem : MonoBehaviour
             yield break;
         }
 
-        if (sourceUnit.pokemon.ability.OnStartWeatherEffect != WeatherEffectID.NA)
+        WeatherEffectID weatherEffect = sourceUnit.pokemon.ability.OnStartWeatherEffect();
+        if (weatherEffect != WeatherEffectID.NA)
         {
             sourceUnit.OnAbilityActivation();
-            yield return StartWeatherEffect(sourceUnit.pokemon.ability.OnStartWeatherEffect, true);
+            yield return StartWeatherEffect(weatherEffect, true);
             yield break;
         }
 
-        if (sourceUnit.pokemon.ability?.OnEntryLowerStat != null)
+        StatBoost statBoost = sourceUnit.pokemon.ability.OnEntryLowerStat();
+        if (statBoost != null)
         {
             sourceUnit.OnAbilityActivation();
-            List<StatBoost> abilityStatBoosts = new List<StatBoost>() { sourceUnit.pokemon.ability.OnEntryLowerStat };
+            List<StatBoost> abilityStatBoosts = new List<StatBoost>() { statBoost };
             yield return ApplyStatChanges(abilityStatBoosts, targetUnit, MoveTarget.Foe, sourceUnit);
         }
 
-        if (sourceUnit.pokemon.ability.NegatesWeatherEffects == true)
+        if (sourceUnit.pokemon.ability.NegatesWeatherEffects() == true)
         {
             if(_currentWeather != null || _currentWeather?.Id == WeatherEffectID.NA)
             {
@@ -1428,7 +1486,7 @@ public class BattleSystem : MonoBehaviour
             {
                 target.PlayHitAnimation();
             }
-            yield return target.HUD.UpdateHP(currentHP);
+            yield return target.HUD.UpdateHPDamage(currentHP);
 
             if (target.pokemon.currentHitPoints <= 0)
             {
@@ -1462,7 +1520,7 @@ public class BattleSystem : MonoBehaviour
             }
         }
 
-        if(enemyBattleUnit.pokemon.ability?.NegatesWeatherEffects == true)
+        if(enemyBattleUnit.pokemon.ability.NegatesWeatherEffects() == true)
         {
             enemyBattleUnit.OnAbilityActivation();
 
@@ -1476,7 +1534,7 @@ public class BattleSystem : MonoBehaviour
             }
             yield break;
         }
-        else if(playerBattleUnit.pokemon.ability?.NegatesWeatherEffects == true)
+        else if(playerBattleUnit.pokemon.ability.NegatesWeatherEffects() == true)
         {
             playerBattleUnit.OnAbilityActivation();
             if (wasAbility == true)
@@ -1516,7 +1574,7 @@ public class BattleSystem : MonoBehaviour
             sourceUnit.PlayHitAnimation();
         }
 
-        yield return sourceUnit.HUD.UpdateHP(currentHP);
+        yield return sourceUnit.HUD.UpdateHPDamage(currentHP);
 
         if (sourceUnit.pokemon.currentHitPoints <= 0)
         {
@@ -1775,7 +1833,7 @@ public class BattleSystem : MonoBehaviour
 
     #region Specialized Attacks
 
-    public static bool CheckIfInflatuated(Pokemon sourcePokemon, Pokemon targetPokemon)
+    public static bool CheckIfTargetCanBeInflatuated(Pokemon sourcePokemon, Pokemon targetPokemon)
     {
         if(sourcePokemon.gender == targetPokemon.gender)
         {
@@ -1807,6 +1865,71 @@ public class BattleSystem : MonoBehaviour
             default:
                 return 5;
         }
+    }
+
+    bool CheckIfMoveHasSpecializedConditionAndSuccessful(BattleUnit sourceUnit, BattleUnit targetUnit, MoveBase moveBase)
+    {
+        if(moveBase == noRetreat)
+        {
+            return (NoRetreatSuccessful(sourceUnit));
+        }
+        else if (moveBase == encore)
+        {
+            return EncoreSuccessful(targetUnit);
+        }
+        else if(moveBase == dreamEater)
+        {
+            return (DreamEaterSuccessful(targetUnit));
+        }
+
+        return true;
+    }
+
+    bool NoRetreatSuccessful(BattleUnit sourceUnit)
+    {
+        if(sourceUnit.cantEscapeGivenToSelf == true)
+        {
+            return false;
+        }
+        else
+        {
+            if(sourceUnit.pokemon.volatileStatus.Exists(x => x.Id == ConditionID.CantEscape))
+            {
+                return true;
+            }
+        }
+        sourceUnit.cantEscapeGivenToSelf = true;
+        return true;
+    }
+
+    bool EncoreSuccessful(BattleUnit targetUnit)
+    {
+        if(targetUnit.lastMoveUsed == null)
+        {
+            return false;
+        }
+        else if(targetUnit.lastMoveUsed.pP > 0)
+        {
+            return true;
+        }
+        else if(targetUnit.lastMoveUsed.moveBase == struggle)
+        {
+            return false;
+        }
+        else if (targetUnit.lastMoveUsed.moveBase == encore)
+        {
+            return false;
+        }
+        return false;
+    }
+
+    bool DreamEaterSuccessful(BattleUnit targetUnit)
+    {
+        if (targetUnit.pokemon.status?.Id == ConditionID.Sleep)
+        {
+            return true;
+        }
+        return false;
     }
 
     #endregion

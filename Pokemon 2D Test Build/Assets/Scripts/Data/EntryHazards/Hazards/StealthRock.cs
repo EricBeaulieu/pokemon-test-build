@@ -32,7 +32,7 @@ public class StealthRock : EntryHazardBase
             damage = 1;
         }
 
-        pokemon.UpdateHP(damage);
+        pokemon.UpdateHPDamage(damage);
         pokemon.statusChanges.Enqueue($"Pointed Stones Dug into {pokemon.currentName}");
     }
 }
