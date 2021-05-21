@@ -6,6 +6,7 @@ public class Notes
 {
     //To do list
 
+    //complete trainer controller, as of right now the ai decisions are not implimented
     //add in specific moves
     //hidden power
     //transform
@@ -45,6 +46,7 @@ public class Notes
 
     //Bugs
 
+    //cannot interact with objects from different scene
     //on turn end for bound moves the pokemon doesnt play flash of hit animation
     //trainer when walking for some reason got into a half positionand stuck while walking. no idea how i created the bug
     //place trainer in path off start, let them stand and hit them and recreate this bug

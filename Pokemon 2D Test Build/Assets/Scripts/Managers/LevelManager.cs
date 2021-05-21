@@ -2,13 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LevelArtDetails
+public class BattleFieldArtDetails
 {
     public Sprite background { get; private set; }
     public Sprite playerPosition { get; private set; }
     public Sprite enemyPosition { get; private set; }
 
-    public LevelArtDetails(Sprite background,Sprite playerPosition,Sprite enemyPosition)
+    public BattleFieldArtDetails(Sprite background,Sprite playerPosition,Sprite enemyPosition)
     {
         this.background = background;
         this.playerPosition = playerPosition;
@@ -16,17 +16,17 @@ public class LevelArtDetails
     }
 }
 
-public enum levelArea { GrassyField}
+public enum levelArea { GrassyField,Plains,Water,Shore}
 
 public class LevelManager : MonoBehaviour
 {
     [SerializeField] List<Pokemon> wildPokemon;
 
-    LevelArtDetails _currentAreaDetails;
+    BattleFieldArtDetails _currentAreaDetails;
 
     void Start()
     {
-        _currentAreaDetails = LevelManagerArt.instance.GetArtDetails(levelArea.GrassyField);
+        _currentAreaDetails = BattleFieldArtManager.instance.GetArtDetails(levelArea.GrassyField);
     }
 
     public Pokemon WildPokemon()
@@ -53,7 +53,7 @@ public class LevelManager : MonoBehaviour
         return allEntitiesInScene;
     }
 
-    public LevelArtDetails GetBattleEnvironmentArt
+    public BattleFieldArtDetails GetBattleEnvironmentArt
     {
         get { return _currentAreaDetails; }
     }

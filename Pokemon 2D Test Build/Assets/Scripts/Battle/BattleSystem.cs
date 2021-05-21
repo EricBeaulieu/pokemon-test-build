@@ -202,7 +202,7 @@ public class BattleSystem : MonoBehaviour
 
     #region Battle Setup
 
-    public void SetupBattleArt(LevelArtDetails levelArt)
+    public void SetupBattleArt(BattleFieldArtDetails levelArt)
     {
         backgroundArt.sprite = levelArt.background;
         playerBattleUnit.SetBattlePositionArt(levelArt.playerPosition);

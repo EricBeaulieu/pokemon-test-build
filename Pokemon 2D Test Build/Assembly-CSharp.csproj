@@ -81,7 +81,7 @@
     <Compile Include="Assets\Scripts\Managers\SpriteAtlas.cs" />
     <Compile Include="Assets\Scripts\Data\EntryHazards\Hazards\StealthRock.cs" />
     <Compile Include="Assets\Scripts\Data\Abilitys\List\AirLock.cs" />
-    <Compile Include="Assets\Scripts\Characters\PlayerController.cs" />
+    <Compile Include="Assets\Scripts\Characters\MonoBehavior\PlayerController.cs" />
     <Compile Include="Assets\Scripts\Data\Abilitys\List\Oblivious.cs" />
     <Compile Include="Assets\Scripts\Data\Abilitys\List\Insomnia.cs" />
     <Compile Include="Assets\Scripts\Data\Abilitys\List\Drought.cs" />
@@ -135,7 +135,7 @@
     <Compile Include="Assets\Scripts\Data\Conditions\Status\Sleep.cs" />
     <Compile Include="Assets\Scripts\Party\PartyMemberUI.cs" />
     <Compile Include="Assets\Scripts\Items\PokeballItem.cs" />
-    <Compile Include="Assets\Scripts\ArtHolders\LevelManagerArt.cs" />
+    <Compile Include="Assets\Scripts\ArtHolders\BattleFieldArtManager.cs" />
     <Compile Include="Assets\Scripts\Data\Abilitys\List\Limber.cs" />
     <Compile Include="Assets\Scripts\Data\Abilitys\List\WaterVeil.cs" />
     <Compile Include="Assets\Scripts\Data\Weather\WeatherEffectDB.cs" />
@@ -144,9 +144,10 @@
     <Compile Include="Assets\Scripts\Data\Abilitys\List\Galvanize.cs" />
     <Compile Include="Assets\Scripts\Mechanics\CaptureBallRoute.cs" />
     <Compile Include="Assets\Scripts\Data\Conditions\VolatileStatus\CursedUser.cs" />
-    <Compile Include="Assets\Scripts\Characters\NpcController.cs" />
+    <Compile Include="Assets\Scripts\Characters\MonoBehavior\NpcController.cs" />
     <Compile Include="Assets\Scripts\Party\SummaryDisplay.cs" />
     <Compile Include="Assets\Scripts\Party\SummaryInfo.cs" />
+    <Compile Include="Assets\Scripts\Overworld\Ledge.cs" />
     <Compile Include="Assets\Scripts\Battle\BattleAbilityUI.cs" />
     <Compile Include="Assets\Scripts\Battle\LevelUpUI.cs" />
     <Compile Include="Assets\Scripts\Party\SummaryUIBase.cs" />
@@ -159,16 +160,17 @@
     <Compile Include="Assets\Scripts\Data\Conditions\Status\Paralyzed.cs" />
     <Compile Include="Assets\Scripts\ArtHolders\StatusConditionArt.cs" />
     <Compile Include="Assets\Scripts\Managers\DialogManager.cs" />
-    <Compile Include="Assets\Scripts\Characters\AIDecision.cs" />
+    <Compile Include="Assets\Scripts\Characters\MonoBehavior\AIDecision.cs" />
     <Compile Include="Assets\Scripts\Data\Conditions\Status\Poison.cs" />
     <Compile Include="Assets\Scripts\Data\Abilitys\List\OwnTempo.cs" />
     <Compile Include="Assets\Scripts\Pokemon\PokemonParty.cs" />
     <Compile Include="Assets\Scripts\Data\Abilitys\List\Defiant.cs" />
     <Compile Include="Assets\Scripts\Data\Abilitys\List\FlameBody.cs" />
-    <Compile Include="Assets\Scripts\Characters\Entity.cs" />
+    <Compile Include="Assets\Scripts\Characters\MonoBehavior\Entity.cs" />
     <Compile Include="Assets\Scripts\Data\Abilitys\List\Chlorophyll.cs" />
     <Compile Include="Assets\Scripts\Data\Conditions\Status\Frozen.cs" />
     <Compile Include="Assets\Scripts\Data\Abilitys\List\PurePower.cs" />
+    <Compile Include="Assets\Scripts\Managers\SceneManagement\GameScene.cs" />
     <Compile Include="Assets\Scripts\Data\Abilitys\List\VitalSpirit.cs" />
     <Compile Include="Assets\Notes.cs" />
     <Compile Include="Assets\Scripts\Data\Abilitys\List\Pixilate.cs" />
@@ -200,14 +202,15 @@
     <Compile Include="Assets\Scripts\Data\Abilitys\List\Torrent.cs" />
     <Compile Include="Assets\Scripts\Data\Abilitys\List\FurCoat.cs" />
     <Compile Include="Assets\Scripts\Data\Abilitys\List\SandStream.cs" />
-    <Compile Include="Assets\Scripts\Characters\TrainerController.cs" />
-    <Compile Include="Assets\Scripts\Characters\SpriteSheetSwap.cs" />
+    <Compile Include="Assets\Scripts\Characters\MonoBehavior\TrainerController.cs" />
+    <Compile Include="Assets\Scripts\Characters\MonoBehavior\SpriteSheetSwap.cs" />
     <Compile Include="Assets\Scripts\Pokemon\MoveBase.cs" />
     <Compile Include="Assets\Scripts\Data\Abilitys\List\Immunity.cs" />
     <Compile Include="Assets\Scripts\Data\Abilitys\List\Blaze.cs" />
     <Compile Include="Assets\Scripts\Data\Abilitys\List\StrongJaw.cs" />
     <Compile Include="Assets\Scripts\Pokemon\LearnableMove.cs" />
     <Compile Include="Assets\Scripts\Battle\BattleUnit.cs" />
+    <Compile Include="Assets\Scripts\Managers\SceneManagement\Portal.cs" />
     <Compile Include="Assets\Scripts\Static Tables\PokemonNameList.cs" />
     <Compile Include="Assets\Scripts\Mechanics\InBattleItem.cs" />
     <Compile Include="Assets\Scripts\Data\Conditions\VolatileStatus\Cursed.cs" />
@@ -223,8 +226,10 @@
     <Compile Include="Assets\Scripts\Data\Abilitys\List\Aerilate.cs" />
     <Compile Include="Assets\Scripts\Data\Conditions\VolatileStatus\Nightmare.cs" />
     <Compile Include="Assets\Scripts\Data\Weather\Weather Effects\Rain.cs" />
-    <Compile Include="Assets\Scripts\Managers\SceneManagement\Portal.cs" />
-    <Compile Include="Assets\Scripts\Managers\SceneManagement\GameScene.cs" />
+    <Compile Include="Assets\Scripts\Characters\ScriptableObjects\TrainerBaseSO.cs" />
+    <Compile Include="Assets\Scripts\Characters\ScriptableObjects\CharacterArtSO.cs" />
+    <Compile Include="Assets\Scripts\Characters\ScriptableObjects\NPCBaseSO.cs" />
+    <Compile Include="Assets\Scripts\Characters\ScriptableObjects\EntityBaseSO.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">

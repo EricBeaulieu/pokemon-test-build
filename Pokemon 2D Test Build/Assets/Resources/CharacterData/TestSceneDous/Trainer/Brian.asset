@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f85a40386f9b49743ad8c5165e9e1af5, type: 3}
+  m_Name: Brian
+  m_EditorClassIdentifier: 
+  characterArt: {fileID: 11400000, guid: cf762157deb2ce64b90ff119d1775dc5, type: 2}
+  preBattleDialog:
+    lines:
+    - A Clown Robbed Me
+    - Have You Scene Him Around
+  inBattleDialogOnDefeat:
+    lines:
+    - ok but, have you seen that clown
+  inBattleDialogOnVictory:
+    lines:
+    - Yeah Baby, but this doesnt help me find that clown
+  postDefeatOverworldDialog:
+    lines:
+    - If you see a guy named bozo, im looking for him
+  trainerName: Brian

@@ -152,8 +152,8 @@ public class GameManager : MonoBehaviour
         _inBattle = true;
         trainerController = currentTrainer;
 
-        PokemonParty currentParty = playerController.GetComponent<PokemonParty>();
-        PokemonParty trainerParty = currentTrainer.GetComponent<PokemonParty>();
+        PokemonParty currentParty = playerController.pokemonParty;
+        PokemonParty trainerParty = currentTrainer.pokemonParty;
         trainerParty.HealAllPokemonInParty();
 
         battleSystem.SetupBattleArt(levelManager.GetBattleEnvironmentArt);
