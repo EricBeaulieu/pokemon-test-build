@@ -202,11 +202,11 @@ public class BattleSystem : MonoBehaviour
 
     #region Battle Setup
 
-    public void SetupBattleArt(BattleFieldArtDetails levelArt)
+    public void SetupBattleArt(BattleFieldLayoutBaseSO levelArt)
     {
-        backgroundArt.sprite = levelArt.background;
-        playerBattleUnit.SetBattlePositionArt(levelArt.playerPosition);
-        enemyBattleUnit.SetBattlePositionArt(levelArt.enemyPosition);
+        backgroundArt.sprite = levelArt.GetBackground;
+        playerBattleUnit.SetBattlePositionArt(levelArt.GetPlayerPosition);
+        enemyBattleUnit.SetBattlePositionArt(levelArt.GetEnemyPosition);
     }
 
     public void StartBattle(PokemonParty playerParty,Pokemon wildPokemon)

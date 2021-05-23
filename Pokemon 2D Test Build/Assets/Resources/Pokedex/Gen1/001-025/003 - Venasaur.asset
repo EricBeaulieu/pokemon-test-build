@@ -13,14 +13,19 @@ MonoBehaviour:
   m_Name: 003 - Venasaur
   m_EditorClassIdentifier: 
   _pokedexNumber: 3
-  _pokedexDescription: 
+  _pokedexDescription: "The flower on its back catches the sun\u2019s rays. The sunlight
+    is then absorbed and used for energy."
   _classification: 
   _heightInFeet: 0
   _heightInMeters: 0
   _weightInPounds: 0
   _weightInKilograms: 0
   _captureRate: 45
-  rewardedEffortValue: []
+  rewardedEffortValue:
+  - _statAttribute: 4
+    _statValue: 2
+  - _statAttribute: 5
+    _statValue: 1
   _hasGender: 1
   _maleFemaleRatio: 50
   _baseGroup: 3

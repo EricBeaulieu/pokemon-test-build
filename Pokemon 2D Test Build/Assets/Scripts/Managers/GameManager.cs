@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public enum GameState { Overworld, Battle, Party, Dialog}
 
@@ -16,7 +17,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] Camera overWorldCamera;
     [SerializeField] PartySystem partySystem;
     DialogManager _dialogManager;
-    [SerializeField] LevelManager levelManager;
+    LevelManager _levelManager;
     [SerializeField] StartMenu startMenu;
     //used as a null reference and to return from here
     [SerializeField] PokeballItem standardPokeball;
@@ -30,6 +31,10 @@ public class GameManager : MonoBehaviour
     GameState _state = GameState.Overworld;
 
     List<Entity> allActiveEntities;
+    List<GameSceneBaseSO> currentScenesLoaded = new List<GameSceneBaseSO>();
+    List<AsyncOperation> scenesToLoad = new List<AsyncOperation>();
+    [SerializeField] GameSceneBaseSO startingScene;
+
 
     public static GameManager instance
     {
@@ -54,7 +59,6 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         playerController.OnEncounter += StartWildPokemonBattle;
-        playerController.OnEncounter += (() => _inBattle = true);
         playerController.OpenStartMenu += () => 
         {
             _state = GameState.Dialog;
@@ -102,7 +106,8 @@ public class GameManager : MonoBehaviour
         }
 
         allActiveEntities = new List<Entity>();
-        allActiveEntities = levelManager.ReturnAllEntities();
+        allActiveEntities.Add(playerController);
+        currentScenesLoaded.Add(startingScene);
 
         foreach (MoveBase move in movesThatLeavesTargetWithOneHP)
         {
@@ -136,11 +141,12 @@ public class GameManager : MonoBehaviour
         _state = GameState.Battle;
         battleSystem.gameObject.SetActive(true);
         overWorldCamera.gameObject.SetActive(false);
+        _inBattle = true;
 
         PokemonParty currentParty = playerController.GetComponent<PokemonParty>();
-        Pokemon currentWildPokemon = FindObjectOfType<LevelManager>().GetComponent<LevelManager>().WildPokemon();
+        Pokemon currentWildPokemon = _levelManager.WildPokemon();
 
-        battleSystem.SetupBattleArt(levelManager.GetBattleEnvironmentArt);
+        battleSystem.SetupBattleArt(_levelManager.GetBattleEnvironmentArt);
         battleSystem.StartBattle(currentParty,currentWildPokemon);
     }
 
@@ -156,7 +162,7 @@ public class GameManager : MonoBehaviour
         PokemonParty trainerParty = currentTrainer.pokemonParty;
         trainerParty.HealAllPokemonInParty();
 
-        battleSystem.SetupBattleArt(levelManager.GetBattleEnvironmentArt);
+        battleSystem.SetupBattleArt(_levelManager.GetBattleEnvironmentArt);
         battleSystem.StartBattle(currentParty, trainerParty);
     }
 
@@ -273,5 +279,31 @@ public class GameManager : MonoBehaviour
             .SelectMany(assembly => assembly.GetTypes())
             .Where(type => type.IsSubclassOf(typeof(AbilityBase)))
             .Select(type => Activator.CreateInstance(type) as AbilityBase);
+    }
+
+    public void NewAreaEntered(LevelManager newLevel)
+    {
+        _levelManager = newLevel;
+        //allActiveEntities = newLevel.ReturnAllEntities();
+
+        foreach (GameSceneBaseSO currentScenes in currentScenesLoaded)
+        {
+            if(currentScenes == newLevel.GameSceneBase || newLevel.GameSceneBase.AdjacentGameScenes.Contains(currentScenes) == true)
+            {
+                continue;
+            }
+            SceneManager.UnloadSceneAsync(currentScenes.GetScenePath);
+            currentScenesLoaded.Remove(currentScenes);
+        }
+
+        foreach (GameSceneBaseSO newScene in newLevel.GameSceneBase.AdjacentGameScenes)
+        {
+            if (currentScenesLoaded.Contains(newScene) == true)
+            {
+                continue;
+            }
+            SceneManager.LoadSceneAsync(newScene.GetSceneName,LoadSceneMode.Additive);
+            currentScenesLoaded.Add(newScene);
+        }
     }
 }
