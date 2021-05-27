@@ -6,12 +6,15 @@ using UnityEngine.SceneManagement;
 public class LevelManager : MonoBehaviour
 {
     [SerializeField] BattleFieldLayoutBaseSO currentAreaDetails;
+    [SerializeField] bool grassOnlyWildPokemon = true;
     [SerializeField] List<Pokemon> wildPokemon;
     [SerializeField] GameSceneBaseSO sceneReference;
+    public List<Portal> allInLevelPortals = new List<Portal>();
+    public List<Entity> allEntitiesInScene = new List<Entity>();
+    bool loaded;
 
-    void Start()
+    void Awake()
     {
-        Debug.Log(SceneManager.GetActiveScene().path);
         GetComponent<SpriteRenderer>().color = Color.clear;
 
         if(currentAreaDetails == null)
@@ -37,7 +40,22 @@ public class LevelManager : MonoBehaviour
                 }
             }
         }
+        sceneReference.SetLevelManager(this);
+    }
 
+    public void Initilization()
+    {
+        if(loaded == true)
+        {
+            return;
+        }
+
+        GameObject[] temp = SceneManager.GetSceneByName(sceneReference.GetSceneName).GetRootGameObjects();
+
+        allEntitiesInScene = ReturnAllEntities(temp);
+        allInLevelPortals = ReturnAllPortals(temp);
+
+        loaded = true;
     }
 
     public Pokemon WildPokemon()
@@ -46,35 +64,8 @@ public class LevelManager : MonoBehaviour
         return temp;
     }
 
-    public List<Entity> ReturnAllEntities()
+    public List<Entity> GetAllEntities()
     {
-        List<Entity> allEntitiesInScene = new List<Entity>();
-
-        //// get root objects in scene
-        //List<GameObject> rootObjects = new List<GameObject>();
-        //SceneManager.GetActiveScene().GetRootGameObjects(rootObjects);
-        //Entity[] entity = GetComponentInChildren<Entity>();
-
-        //// iterate root objects and do something
-        //for (int i = 0; i < rootObjects.Count; ++i)
-        //{
-        //     = rootObjects[i].GetComponent<Entity>();
-        //    if (entity != null)
-        //    {
-        //        allEntitiesInScene.Add(entity);
-        //    }
-        //}
-        
-        //Entity[] gameObjects = Resources.FindObjectsOfTypeAll(typeof(Entity)) as Entity[];
-
-        //for (int i = 0; i < gameObjects.Length; i++)
-        //{
-        //    if(gameObjects[i].gameObject.activeInHierarchy == true)
-        //    {
-        //        allEntitiesInScene.Add(gameObjects[i]);
-        //    }
-        //}
-
         return allEntitiesInScene;
     }
 
@@ -95,5 +86,40 @@ public class LevelManager : MonoBehaviour
     public GameSceneBaseSO GameSceneBase
     {
         get { return sceneReference; }
+    }
+
+    public List<Portal> GetAllPortalsInLevel()
+    {
+        return allInLevelPortals;
+    }
+
+    List<Entity> ReturnAllEntities(GameObject[] gameObjects)
+    {
+        List<Entity> entity = new List<Entity>();
+
+        for (int i = 0; i < gameObjects.Length; i++)
+        {
+            entity.AddRange(gameObjects[i].GetComponentsInChildren<NpcController>());
+            entity.AddRange(gameObjects[i].GetComponentsInChildren<TrainerController>());
+        }
+
+        return entity;
+    }
+
+    List<Portal> ReturnAllPortals(GameObject[] gameObjects)
+    {
+        List<Portal> portals = new List<Portal>();
+
+        for (int i = 0; i < gameObjects.Length; i++)
+        {
+            portals.AddRange(gameObjects[i].GetComponentsInChildren<Portal>());
+        }
+
+        return portals;
+    }
+
+    public bool GetWildEncountersGrassSpecific
+    {
+        get { return grassOnlyWildPokemon; }
     }
 }

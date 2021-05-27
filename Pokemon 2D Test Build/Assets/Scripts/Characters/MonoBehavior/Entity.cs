@@ -12,6 +12,7 @@ public abstract class Entity : MonoBehaviour
     protected LayerMask interactableLayermask;
     protected LayerMask grassLayermask;
     protected LayerMask playerLayerMask;
+    protected LayerMask portalLayerMask;
 
     bool _isMoving;
     bool _isRunning;
@@ -72,6 +73,7 @@ public abstract class Entity : MonoBehaviour
         interactableLayermask = LayerMask.GetMask("Interactable");
         grassLayermask = LayerMask.GetMask("Grass");
         playerLayerMask = LayerMask.GetMask("Player");
+        portalLayerMask = LayerMask.GetMask("Portal");
 
         CorrectStartingPlacement();
 

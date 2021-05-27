@@ -16,6 +16,7 @@ public class GameSceneBaseSO : ScriptableObject
     [SerializeField] float musicVolume = 1.0f;
     
     bool isLoaded;
+    LevelManager attachedLevelManager;
 
     public string GetSceneName
     {
@@ -41,5 +42,15 @@ public class GameSceneBaseSO : ScriptableObject
     public List<GameSceneBaseSO> AdjacentGameScenes
     {
         get { return adjacentGameScenes; }
+    }
+
+    public void SetLevelManager(LevelManager levelManager)
+    {
+        attachedLevelManager = levelManager;
+    }
+
+    public LevelManager GetLevelManager
+    {
+        get { return attachedLevelManager; }
     }
 }

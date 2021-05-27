@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 [RequireComponent(typeof(PokemonParty))]
 public class PlayerController : Entity
@@ -12,7 +13,9 @@ public class PlayerController : Entity
     public PokemonParty pokemonParty { get; private set; }
 
     public event Action OnEncounter;
+    bool wildEncountersGrassSpecific;
     public event Action OpenStartMenu;
+    public event Action <Portal> PortalEntered;
 
     Vector2 _currentInput;
 
@@ -93,7 +96,7 @@ public class PlayerController : Entity
 
                 if (_currentInput != Vector2.zero)
                 {
-                    StartCoroutine(MoveToPosition(_currentInput));                
+                    StartCoroutine(MoveToPosition(_currentInput));
                 }
 
                 if (Input.GetButtonDown("Fire1"))
@@ -111,16 +114,30 @@ public class PlayerController : Entity
     {
         yield return base.MoveToPosition(moveVector);
 
-        CheckForWildEncounter();
+        OnMoveOver();
     }
 
-    void CheckForWildEncounter()
+    void OnMoveOver()
     {
-        if (Physics2D.OverlapCircle(transform.position, 0.25f, grassLayermask) != null)
+        Collider2D col = Physics2D.OverlapCircle(transform.position, 0.25f, grassLayermask|portalLayerMask);
+        if(col != null)
         {
-            _anim.SetBool("isMoving", false);
-            isRunning = false;
-            OnEncounter();
+            if(grassLayermask == (grassLayermask | (1 << col.gameObject.layer)))
+            {
+                PlayerHasWildEncounter();
+            }
+            else if(portalLayerMask == (portalLayerMask | (1 << col.gameObject.layer)))
+            {
+                _anim.SetBool("isMoving", false);
+                isRunning = false;
+                PortalEntered(col.GetComponent<Portal>());
+                return;
+            }
+        }
+
+        if (wildEncountersGrassSpecific == false)
+        {
+            PlayerHasWildEncounter();
         }
     }
 
@@ -205,5 +222,20 @@ public class PlayerController : Entity
     {
         _ignorePlayerInput = false;
         _ignoreMenuOpen = true;
+    }
+
+    public void SetWildEncounter(bool grassSpecific)
+    {
+        wildEncountersGrassSpecific = grassSpecific;
+    }
+
+    void PlayerHasWildEncounter()
+    {
+        if(Random.Range(1,101) <= 11)
+        {
+            _anim.SetBool("isMoving", false);
+            isRunning = false;
+            OnEncounter();
+        }
     }
 }
