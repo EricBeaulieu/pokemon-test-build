@@ -14,8 +14,9 @@ public static class PokemonSaveData
         AddData(location);
 
         AddData(pokemon.pokemonBase.GetPokedexNumber().ToString());
-
+        AddData(pokemon.currentLevel.ToString());
         AddData(pokemon.currentExp.ToString());
+        AddData(pokemon.currentHitPoints.ToString());
 
         for (int i = 0; i < PokemonBase.MAX_NUMBER_OF_MOVES; i++)
         {
@@ -42,10 +43,25 @@ public static class PokemonSaveData
             AddData(pokemon.individualValues.ReturnValueAtIndex(i).ToString());
         }
 
-        //for (int i = 0; i < length; i++)
-        //{
+        for (int i = 0; i < EffortValues.VALUES_SAVED_LENGTH; i++)
+        {
+            AddData(pokemon.effortValues.ReturnValueAtIndex(i).ToString());
+        }
 
-        //}
+        if(pokemon.currentName == pokemon.pokemonBase.GetPokedexName())
+        {
+            AddData(empty);
+        }
+        else
+        {
+            AddData(pokemon.currentName);
+        }
+
+        AddData(pokemon.ability.Id.ToString());
+        AddData(pokemon.status.Id.ToString());
+        AddData(pokemon.originalTrainer);
+        AddData(pokemon.originalTrainerID);
+        AddData(pokemon.pokeballCapturedIn.GetInstanceID().ToString());
     }
     
     public static Pokemon LoadPokemon(string Location)

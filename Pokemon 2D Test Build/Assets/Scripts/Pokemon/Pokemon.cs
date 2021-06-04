@@ -48,13 +48,13 @@ public class Pokemon {
     public Pokemon(PokemonBase pokemonBase,int level,IndividualValues iV = null,EffortValues eV = null, Gender specifiedgender = Gender.NA, 
         bool? shiny = null,NatureBase specifiedNature = null,string nickname = null, List<MoveBase> presetMoveList = null, 
         AbilityBase abilityBase = null,int savedHitpoints = -1,int savedExperience = -1,string oTrainer = null,string oTrainerID = null, 
-        PokeballItem pokeball = null)
+        PokeballItem pokeball = null,ConditionID condition = ConditionID.NA)
     {
         _pokemonBase = pokemonBase;
         currentLevel = level;
 
-        _individualValues.SetIVs(iV);
-        _effortValues.SetEVs(eV);
+        _individualValues.SetValues(iV);
+        _effortValues.SetValues(eV);
         gender = SetGender(specifiedgender);
 
         nature = specifiedNature == null ? SetNature() : specifiedNature;
@@ -71,9 +71,11 @@ public class Pokemon {
         pokeballCapturedIn = pokeball;
 
         ability = SetAbility(abilityBase);
-        Reset();
 
         SetMoves(presetMoveList);
+        SetStatus(condition, false);
+
+        Reset();
     }
 
     void SetMoves(List<MoveBase> presetMoves)
@@ -121,6 +123,7 @@ public class Pokemon {
     {
         ResetStatBoosts();
         volatileStatus = new List<ConditionBase>();
+        statusChanges = new Queue<string>();
     }
 
     public void Obtained(PlayerController player,PokeballItem pokeball)
@@ -136,7 +139,7 @@ public class Pokemon {
     {
         baseStats = new Dictionary<StatAttribute, int>();
 
-        maxHitPoints = Mathf.FloorToInt(((_individualValues.maxHitPoints + 2 * pokemonBase.maxHitPoints + (_effortValues.hitPoints / 4)) * currentLevel / 100) + 10 + currentLevel);
+        maxHitPoints = Mathf.FloorToInt(((_individualValues.hitPoints + 2 * pokemonBase.maxHitPoints + (_effortValues.hitPoints / 4)) * currentLevel / 100) + 10 + currentLevel);
         baseStats.Add(StatAttribute.Attack, Mathf.FloorToInt((((_individualValues.attack + 2 * pokemonBase.attack + (_effortValues.attack / 4)) * currentLevel / 100) + 5) * nature.NatureModifier(nature, StatAttribute.Attack)));
         baseStats.Add(StatAttribute.Defense, Mathf.FloorToInt((((_individualValues.defense + 2 * pokemonBase.defense + (_effortValues.defense / 4)) * currentLevel / 100) + 5) * nature.NatureModifier(nature, StatAttribute.Defense)));
         baseStats.Add(StatAttribute.SpecialAttack, Mathf.FloorToInt((((_individualValues.specialAttack + 2 * pokemonBase.specialAttack + (_effortValues.specialAttack / 4)) * currentLevel / 100) + 5) * nature.NatureModifier(nature, StatAttribute.SpecialAttack)));
@@ -427,6 +430,8 @@ public class Pokemon {
 
     public void SetStatus(ConditionID conditionID,bool secondaryEffect)
     {
+        if(conditionID == ConditionID.NA) { return; }
+
         if(status != null)
         {
             if (secondaryEffect == true)
@@ -699,7 +704,7 @@ public class Pokemon {
     {
         int diffInHP = maxHitPoints;
 
-        maxHitPoints = Mathf.FloorToInt(((_individualValues.maxHitPoints + 2 * pokemonBase.maxHitPoints + (_effortValues.hitPoints / 4)) * currentLevel / 100) + 10 + currentLevel);
+        maxHitPoints = Mathf.FloorToInt(((_individualValues.hitPoints + 2 * pokemonBase.maxHitPoints + (_effortValues.hitPoints / 4)) * currentLevel / 100) + 10 + currentLevel);
         baseStats[StatAttribute.Attack] = Mathf.FloorToInt((((_individualValues.attack + 2 * pokemonBase.attack + (_effortValues.attack / 4)) * currentLevel / 100) + 5) * nature.NatureModifier(nature, StatAttribute.Attack));
         baseStats[StatAttribute.Defense] = Mathf.FloorToInt((((_individualValues.defense + 2 * pokemonBase.defense + (_effortValues.defense / 4)) * currentLevel / 100) + 5) * nature.NatureModifier(nature, StatAttribute.Defense));
         baseStats[StatAttribute.SpecialAttack] =Mathf.FloorToInt((((_individualValues.specialAttack + 2 * pokemonBase.specialAttack + (_effortValues.specialAttack / 4)) * currentLevel / 100) + 5) * nature.NatureModifier(nature, StatAttribute.SpecialAttack));

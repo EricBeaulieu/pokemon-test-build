@@ -20,27 +20,27 @@ public class EarnableEV
 }
 
 [System.Serializable]
-public class EffortValues {
-
-    [SerializeField] int _hitPoints = 0;
-    [SerializeField] int _attack = 0;
-    [SerializeField] int _defense = 0;
-    [SerializeField] int _specialAttack = 0;
-    [SerializeField] int _specialDefense = 0;
-    [SerializeField] int _speed = 0;
-
+public class EffortValues : SpecifiedValues
+{
     const int MAXIMUM_EV_Value = 255;
     const int MAXIMUM_EV_Total = 510;
 
-    public void SetEVs(EffortValues effortValues)
+    public override void SetValues(SpecifiedValues effortValues)
     {
-        if(effortValues == null) { return; }
-        _hitPoints = effortValues.hitPoints;
-        _attack = effortValues.attack;
-        _defense = effortValues.defense;
-        _specialAttack = effortValues.specialAttack;
-        _specialDefense = effortValues.specialDefense;
-        _speed = effortValues.speed;
+        if (effortValues == null) { return; }
+        if (IsCorrectClass(effortValues) == false) { return; }
+
+        hitPoints = effortValues.hitPoints;
+        attack = effortValues.attack;
+        defense = effortValues.defense;
+        specialAttack = effortValues.specialAttack;
+        specialDefense = effortValues.specialDefense;
+        speed = effortValues.speed;
+    }
+
+    protected override bool IsCorrectClass(SpecifiedValues passedValue)
+    {
+        return (passedValue is EffortValues);
     }
 
     public void AddEffortValue(EarnableEV earnedEV)
@@ -78,83 +78,81 @@ public class EffortValues {
         get { return hitPoints + attack + defense + specialAttack + specialDefense + speed; }
     }
 
-    public int hitPoints
+    public override int hitPoints
     {
-        get { return _hitPoints; }
-        private set
+        get { return base.hitPoints; }
+        protected set
         {
-            _hitPoints = value;
-            if(_hitPoints > MAXIMUM_EV_Value)
+            base.hitPoints = value;
+            if(base.hitPoints > MAXIMUM_EV_Value)
             {
-                _hitPoints = MAXIMUM_EV_Value;
+                base.hitPoints = MAXIMUM_EV_Value;
             }
         }
     }
 
-    public int attack
+    public override int attack
     {
-        get { return _attack; }
-        private set
+        get { return base.attack; }
+        protected set
         {
-            _attack = value;
-            if (_attack > MAXIMUM_EV_Value)
+            base.attack = value;
+            if (base.attack > MAXIMUM_EV_Value)
             {
-                _attack = MAXIMUM_EV_Value;
+                base.attack = MAXIMUM_EV_Value;
             }
         }
     }
 
-    public int defense
+    public override int defense
     {
-        get { return _defense; }
-        private set
+        get { return base.defense; }
+        protected set
         {
-            _defense = value;
-            if (_defense > MAXIMUM_EV_Value)
+            base.defense = value;
+            if (base.defense > MAXIMUM_EV_Value)
             {
-                _defense = MAXIMUM_EV_Value;
+                base.defense = MAXIMUM_EV_Value;
             }
         }
     }
 
-    public int specialAttack
+    public override int specialAttack
     {
-        get { return _specialAttack; }
-        private set
+        get { return base.specialAttack; }
+        protected set
         {
-            _specialAttack = value;
-            if (_specialAttack > MAXIMUM_EV_Value)
+            base.specialAttack = value;
+            if (base.specialAttack > MAXIMUM_EV_Value)
             {
-                _specialAttack = MAXIMUM_EV_Value;
+                base.specialAttack = MAXIMUM_EV_Value;
             }
         }
     }
 
-    public int specialDefense
+    public override int specialDefense
     {
-        get { return _specialDefense; }
-        private set
+        get { return base.specialDefense; }
+        protected set
         {
-            _specialDefense = value;
-            if (_specialDefense > MAXIMUM_EV_Value)
+            base.specialDefense = value;
+            if (base.specialDefense > MAXIMUM_EV_Value)
             {
-                _specialDefense = MAXIMUM_EV_Value;
+                base.specialDefense = MAXIMUM_EV_Value;
             }
         }
     }
 
-    public int speed
+    public override int speed
     {
-        get { return _speed; }
-        private set
+        get { return base.speed; }
+        protected set
         {
-            _speed = value;
-            if (_speed > MAXIMUM_EV_Value)
+            base.speed = value;
+            if (base.speed > MAXIMUM_EV_Value)
             {
-                _speed = MAXIMUM_EV_Value;
+                base.speed = MAXIMUM_EV_Value;
             }
         }
     }
-
-
 }
