@@ -22,15 +22,26 @@ public class EarnableEV
 [System.Serializable]
 public class EffortValues {
 
-    int _hitPoints = 0;
-    int _attack = 0;
-    int _defense = 0;
-    int _specialAttack = 0;
-    int _specialDefense = 0;
-    int _speed = 0;
+    [SerializeField] int _hitPoints = 0;
+    [SerializeField] int _attack = 0;
+    [SerializeField] int _defense = 0;
+    [SerializeField] int _specialAttack = 0;
+    [SerializeField] int _specialDefense = 0;
+    [SerializeField] int _speed = 0;
 
     const int MAXIMUM_EV_Value = 255;
     const int MAXIMUM_EV_Total = 510;
+
+    public void SetEVs(EffortValues effortValues)
+    {
+        if(effortValues == null) { return; }
+        _hitPoints = effortValues.hitPoints;
+        _attack = effortValues.attack;
+        _defense = effortValues.defense;
+        _specialAttack = effortValues.specialAttack;
+        _specialDefense = effortValues.specialDefense;
+        _speed = effortValues.speed;
+    }
 
     public void AddEffortValue(EarnableEV earnedEV)
     {

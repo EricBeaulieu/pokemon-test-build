@@ -17,6 +17,7 @@ public class StartMenu : MonoBehaviour
 
     //public event Action<bool, bool> OpenPokeDex;
     public event Action OpenPokemonParty;
+    public event Action SaveGame;
     public event Action StartMenuClosed;
     GameObject _lastSelected;
 
@@ -45,6 +46,11 @@ public class StartMenu : MonoBehaviour
         {
             EnableStartMenu(false);
             OpenPokemonParty();
+        });
+        saveButton.GetComponent<Button>().onClick.AddListener(delegate
+        {
+            EnableStartMenu(false);
+            SaveGame();
         });
         exitButton.GetComponent<Button>().onClick.AddListener(delegate { EnableStartMenu(false); });
     }

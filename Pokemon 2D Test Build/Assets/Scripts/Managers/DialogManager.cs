@@ -98,7 +98,12 @@ public class DialogManager : MonoBehaviour
         StartCoroutine(TypeDialog(_currentDialog.Lines[_currentLine]));
     }
 
-    public void SetDialogText(string line)
+    public void ShowMessage(string message, Action onFinished = null)
+    {
+        StartCoroutine(ShowDialogBox(new Dialog(message)));
+    }
+
+    void SetDialogText(string line)
     {
         dialogText.text = line;
     }

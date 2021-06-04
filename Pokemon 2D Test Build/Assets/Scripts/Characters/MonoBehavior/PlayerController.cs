@@ -74,6 +74,11 @@ public class PlayerController : Entity
                 isRunning = false;
             }
 
+            if (Input.GetKeyUp(KeyCode.Alpha0))
+            {
+                GameManager.instance.LoadGame();
+            }
+
             if (IsMoving == false)
             {
                 _currentInput.x = Input.GetAxisRaw("Horizontal");

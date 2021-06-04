@@ -10,12 +10,17 @@ public enum GameState { Overworld, Battle, Party, Dialog, Fade}
 public class GameManager : MonoBehaviour
 {
     static GameManager _instance = null;
-    
-    [SerializeField] PlayerController playerController;
+
+    public bool startNewSaveEveryStart;
+
+    [SerializeField] PlayerController playerPrefab;
+    PlayerController playerController;
+    [SerializeField] Transform defaultSpawnLocation;
     TrainerController trainerController = null;
     [SerializeField] BattleSystem battleSystem;
     [SerializeField] Camera overWorldCamera;
     [SerializeField] PartySystem partySystem;
+    [SerializeField] FadeSystem fadeSystem;
     DialogManager _dialogManager;
     LevelManager _levelManager;
     [SerializeField] StartMenu startMenu;
@@ -57,8 +62,6 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-        SpawnInPlayer();
-
         battleSystem.OnBattleOver += EndBattle;
         battleSystem.OpenPokemonParty += OpenParty;
         battleSystem.OnPokemonCaptured += CapturedNewPokemon;
@@ -85,6 +88,7 @@ public class GameManager : MonoBehaviour
         };
 
         startMenu.OpenPokemonParty += (() => OpenParty(false,false));
+        startMenu.SaveGame += SaveGame;
         startMenu.StartMenuClosed += () =>
         {
             _state = GameState.Overworld;
@@ -99,11 +103,20 @@ public class GameManager : MonoBehaviour
             partySystem.gameObject.SetActive(false);
         }
         
-        currentScenesLoaded.Add(startingScene);
+        currentScenesLoaded = GetAllOpenScenes(currentScenesLoaded);
 
         foreach (MoveBase move in movesThatLeavesTargetWithOneHP)
         {
             DamageModifiers.AddMovesThatLeavesTargetWithOneHP(move);
+        }
+
+        if(startNewSaveEveryStart == false)
+        {
+            LoadGame();
+        }
+        else
+        {
+            SpawnInPlayer(defaultSpawnLocation.position);
         }
     }
 
@@ -121,6 +134,8 @@ public class GameManager : MonoBehaviour
                 break;
             case GameState.Dialog:
                 _dialogManager.HandleUpdate();
+                break;
+            case GameState.Fade:
                 break;
             default:
                 Debug.LogError("Broken");
@@ -307,9 +322,45 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    void SpawnInPlayer()
+    List<GameSceneBaseSO> GetAllOpenScenes(List<GameSceneBaseSO> current)
     {
-        playerController = Instantiate(playerController);
+        int countLoaded = SceneManager.sceneCount;
+        Scene[] loadedScenes = new Scene[countLoaded];
+
+        for (int i = 0; i < countLoaded; i++)
+        {
+            loadedScenes[i] = SceneManager.GetSceneAt(i);
+        }
+
+        GameSceneBaseSO[] allGameSceneBaseSO;
+        allGameSceneBaseSO = Resources.LoadAll<GameSceneBaseSO>("SceneData");
+
+        for (int i = 0; i < loadedScenes.Length; i++)
+        {
+            GameSceneBaseSO matching = allGameSceneBaseSO.FirstOrDefault(x => x.GetSceneName == loadedScenes[i].name);
+            if(matching != null)
+            {
+                if(current.Contains(matching) == false)
+                {
+                    current.Add(matching);
+                    matching.GetLevelManager.Initilization();
+                }
+            }
+        }
+
+        return current;
+    }
+
+    void SpawnInPlayer(Vector3 spawnLocation)
+    {
+        if(playerController != null)
+        {
+            allActiveEntities.Remove(playerController);
+            overWorldCamera.transform.parent = null;
+            Destroy(playerController.gameObject);
+        }
+
+        playerController = Instantiate(playerPrefab,spawnLocation,Quaternion.identity);
         playerController.OnEncounter += StartWildPokemonBattle;
         playerController.OpenStartMenu += () =>
         {
@@ -319,18 +370,41 @@ public class GameManager : MonoBehaviour
         playerController.PortalEntered += PlayerEnteredPortal;
         allActiveEntities.Add(playerController);
         overWorldCamera.transform.parent = playerController.transform;
+        overWorldCamera.transform.localPosition = Vector3.zero;
+        defaultSpawnLocation.gameObject.SetActive(false);
+    }
+
+    public IEnumerator LoadScenethatPlayerSavedIn(string sceneName)
+    {
+        for (int i = currentScenesLoaded.Count - 1; i >= 0; i--)
+        {
+            allActiveEntities.RemoveAll(x => currentScenesLoaded[i].GetLevelManager.GetAllEntities().Contains(x) == true);
+            SceneManager.UnloadSceneAsync(currentScenesLoaded[i].GetScenePath);
+            currentScenesLoaded.RemoveAt(i);
+        }
+
+        GameSceneBaseSO gameSceneBase = Resources.FindObjectsOfTypeAll<GameSceneBaseSO>().FirstOrDefault(x => x.GetSceneName == sceneName);
+        AsyncOperation sceneToLoad = SceneManager.LoadSceneAsync(gameSceneBase.GetSceneName, LoadSceneMode.Additive);
+        currentScenesLoaded.Add(gameSceneBase);
+        yield return OnLevelLoaded(sceneToLoad, gameSceneBase);
     }
 
     void PlayerEnteredPortal(Portal portal)
     {
         if(portal.canPlayerPassThrough == true)
         {
-            _state = GameState.Fade;
-            Portal exit = portal.AlternativeScene.GetLevelManager.GetAllPortalsInLevel().FirstOrDefault(x => x.MatchingIdentifier == portal.MatchingIdentifier);
-            exit.PlayerPassedThroughPortal();
-            playerController.transform.root.position = exit.SpawnPoint;
-            _state = GameState.Overworld;
+            StartCoroutine(PortalAnimation(portal));
         }
+    }
+
+    IEnumerator PortalAnimation(Portal portal)
+    {
+        yield return Fade(portal.FadeStyle, true);
+        Portal exit = portal.AlternativeScene.GetLevelManager.GetAllPortalsInLevel().FirstOrDefault(x => x.MatchingIdentifier == portal.MatchingIdentifier);
+        exit.PlayerPassedThroughPortal();
+        playerController.transform.root.position = exit.SpawnPoint;
+        playerController.SnapToGrid();
+        yield return Fade(exit.FadeStyle, false);
     }
 
     IEnumerator OnLevelLoaded(AsyncOperation asyncScene, GameSceneBaseSO gameScene)
@@ -341,5 +415,38 @@ public class GameManager : MonoBehaviour
         }
         gameScene.GetLevelManager.Initilization();
         allActiveEntities.AddRange(gameScene.GetLevelManager.GetAllEntities());
+    }
+
+    void SaveGame()
+    {
+        SavingSystem.SavePlayer(playerController,_levelManager.GameSceneBase);
+        _dialogManager.ShowMessage("The Game Has Been Saved");
+    }
+
+    public void LoadGame()
+    {
+        StartCoroutine(LoadGameIEnumerator());
+    }
+
+    IEnumerator LoadGameIEnumerator()
+    {
+        yield return Fade(FadeStyle.FullFade,true);
+        yield return SavingSystem.LoadPlayerScene();
+        SpawnInPlayer(SavingSystem.LoadPlayerPosition());
+        yield return Fade(FadeStyle.FullFade, false);
+    }
+
+    IEnumerator Fade(FadeStyle fadeStyle,bool isFadeIn)
+    {
+        if (isFadeIn)
+        {
+            _state = GameState.Fade;
+            yield return fadeSystem.FadeIn(fadeStyle);
+        }
+        else
+        {
+            yield return fadeSystem.FadeOut(fadeStyle);
+            _state = GameState.Overworld;
+        }
     }
 }

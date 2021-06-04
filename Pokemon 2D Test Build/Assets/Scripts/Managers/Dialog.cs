@@ -12,4 +12,9 @@ public class Dialog
         get { return lines; }
     }
 
+    public Dialog(string Message)
+    {
+        lines = new List<string>();
+        lines.Add(Message);
+    }
 }

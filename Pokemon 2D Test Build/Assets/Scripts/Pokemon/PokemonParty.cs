@@ -19,7 +19,8 @@ public class PokemonParty : MonoBehaviour
         {
             if(currentCount < MAX_PARTY_POKEMON_SIZE)
             {
-                copyOfParty.Add(new Pokemon(pokemon.pokemonBase, pokemon.currentLevel));
+                copyOfParty.Add(new Pokemon(pokemon.pokemonBase, pokemon.currentLevel,pokemon.individualValues,pokemon.effortValues,
+                    pokemon.gender,pokemon.isShiny,pokemon.nature,pokemon.currentName,pokemon.presetMoves,pokemon.ability));
             }
             else
             {

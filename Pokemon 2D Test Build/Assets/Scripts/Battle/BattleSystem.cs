@@ -1752,7 +1752,7 @@ public class BattleSystem : MonoBehaviour
             yield return levelUpUI.DisplayLevelUp(StatsBeforeLevel, targetUnit.pokemon.GetStandardStats());
             targetUnit.HUD.UpdateHPWithoutAnimation();
 
-            List<LearnableMove> newMove = targetUnit.pokemon.GetLeranableMoveAtCurrentLevel();
+            List<LearnableMove> newMove = targetUnit.pokemon.GetLearnableMoveAtCurrentLevel();
 
             if (newMove.Count > 0)
             {
@@ -1786,7 +1786,7 @@ public class BattleSystem : MonoBehaviour
 
             yield return levelUpUI.DisplayLevelUp(StatsBeforeLevel, pokemon.GetStandardStats(),pokemon);
 
-            List<LearnableMove> newMove = pokemon.GetLeranableMoveAtCurrentLevel();
+            List<LearnableMove> newMove = pokemon.GetLearnableMoveAtCurrentLevel();
 
             if (newMove.Count > 0)
             {

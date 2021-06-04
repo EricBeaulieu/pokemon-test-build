@@ -7,6 +7,7 @@ public class TrainerController : Entity,IInteractable
 {
     [Header("Trainer Controller")]
     [SerializeField] TrainerBaseSO trainerBase;
+    int uniqueID;
     bool _hasLostToPlayer = false;
     
     public PokemonParty pokemonParty { get; private set; }
@@ -31,6 +32,14 @@ public class TrainerController : Entity,IInteractable
     void Awake()
     {
         base.Initialization(trainerBase);
+
+        uniqueID = trainerBase.GetInstanceID();
+
+        if(GameManager.instance.startNewSaveEveryStart == false)
+        {
+            _hasLostToPlayer = SavingSystem.GetTrainerSave(uniqueID);
+        }
+
         FaceTowardsDirection(Vector2.down + (Vector2)transform.position);
         _idleTimerLimit = SetNewIdleTimer();
         exclamationMark.SetActive(false);
@@ -243,6 +252,7 @@ public class TrainerController : Entity,IInteractable
 
         if (playerHasWon == true)
         {
+            SavingSystem.AddDefeatedTrainerToStack(uniqueID);
             return trainerBase.GetInBattleDialogOnDefeat.Lines;
         }
         else

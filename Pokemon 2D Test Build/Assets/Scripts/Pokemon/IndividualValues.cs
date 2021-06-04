@@ -5,17 +5,32 @@ using UnityEngine;
 [System.Serializable]
 public class IndividualValues
 {
-    [SerializeField] int _maxHitPoints;
-    [SerializeField] int _attack;
-    [SerializeField] int _defense;
-    [SerializeField] int _specialAttack;
-    [SerializeField] int _specialDefense;
-    [SerializeField] int _speed;
+    [SerializeField] int _maxHitPoints = 0;
+    [SerializeField] int _attack = 0;
+    [SerializeField] int _defense = 0;
+    [SerializeField] int _specialAttack = 0;
+    [SerializeField] int _specialDefense = 0;
+    [SerializeField] int _speed = 0;
 
     const int MINIMUM_IV_VALUE = 1;
     const int MAXIMUM_IV_VALUE = 31;
 
-    public void GenerateIVs()
+    public void SetIVs(IndividualValues individualValues)
+    {
+        if(individualValues == null)
+        {
+            GenerateIVs();
+            return;
+        }
+        _maxHitPoints = individualValues.maxHitPoints == 0 ? Random.Range(MINIMUM_IV_VALUE, MAXIMUM_IV_VALUE) : individualValues.maxHitPoints;
+        _attack = individualValues.attack == 0 ? Random.Range(MINIMUM_IV_VALUE, MAXIMUM_IV_VALUE) : individualValues.attack;
+        _defense = individualValues.defense == 0 ? Random.Range(MINIMUM_IV_VALUE, MAXIMUM_IV_VALUE) : individualValues.defense;
+        _specialAttack = individualValues.specialAttack == 0 ? Random.Range(MINIMUM_IV_VALUE, MAXIMUM_IV_VALUE) : individualValues.specialAttack;
+        _specialDefense = individualValues.specialDefense == 0 ? Random.Range(MINIMUM_IV_VALUE, MAXIMUM_IV_VALUE) : individualValues.specialDefense;
+        _speed = individualValues.speed == 0 ? Random.Range(MINIMUM_IV_VALUE, MAXIMUM_IV_VALUE) : individualValues.speed;
+    }
+
+    void GenerateIVs()
     {
         maxHitPoints = Random.Range(MINIMUM_IV_VALUE, MAXIMUM_IV_VALUE);
         attack = Random.Range(MINIMUM_IV_VALUE, MAXIMUM_IV_VALUE);

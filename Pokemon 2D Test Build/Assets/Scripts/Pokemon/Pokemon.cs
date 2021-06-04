@@ -6,73 +6,78 @@ using UnityEngine;
 [System.Serializable]
 public class Pokemon {
 
-    //Used for testing, will be fixed later
+    //variables
     [SerializeField] PokemonBase _pokemonBase;
-    public PokemonBase pokemonBase { get { return _pokemonBase; } set { _pokemonBase = value; } }
-    public bool isShiny { get; private set; }
-    public IndividualValues individualValues { get; set; }
-    public EffortValues effortValues { get; set; }
-    NatureBase _nature;
-    public AbilityBase ability { get; private set; }
-    public Gender gender { get; set; }
-
-    string _currentName;
     [SerializeField] int _level;
+    [SerializeField] List<MoveBase> _presetMoves;
+    [SerializeField] bool _isShiny;
+    [SerializeField] Gender _gender;
+    [SerializeField] NatureBase _nature;
+    [SerializeField] IndividualValues _individualValues = new IndividualValues();
+    [SerializeField] EffortValues _effortValues = new EffortValues();
+    [SerializeField] string _currentName;
+    [SerializeField] AbilityBase _ability;
+    public System.Action OnStatusChanged;
+
+    //properties
+    public PokemonBase pokemonBase { get { return _pokemonBase; } private set { _pokemonBase = value; } }
     public int currentLevel { get { return _level; } private set { _level = value; } }
     public int currentHitPoints { get; set; }
     public int currentExp { get; set; }
+    public NatureBase nature { get { return _nature; } set { _nature = value; } }
     public string originalTrainer { get; private set; }
     public string originalTrainerID { get; private set; }
     public PokeballItem pokeballCapturedIn { get; private set; }
+    public AbilityBase ability { get { return _ability; } private set { _ability = value; } }
+    public Gender gender { get { return _gender; } private set { _gender = value; } }
+    public bool isShiny { get { return _isShiny; } private set { _isShiny = value; } }
+    public IndividualValues individualValues { get { return _individualValues; } private set { _individualValues = value; } }
+    public EffortValues effortValues { get { return _effortValues; } private set { _effortValues = value; } }
 
     public List<Move> moves { get; set; }
+    public List<MoveBase> presetMoves { get { return _presetMoves; } }
     public Dictionary<StatAttribute, int> baseStats { get; private set; }
     public Dictionary<StatAttribute, int> statBoosts { get; private set; }
-    public Queue<string> statusChanges { get; private set; }
+    public Queue<string> statusChanges { get; private set; } = new Queue<string>();
 
     public ConditionBase status { get; private set; }
     public int statusTime { get; set; }
     public List<ConditionBase> volatileStatus { get; private set; }
     public int volatileStatusTime { get; set; }
-    public System.Action OnStatusChanged;
 
-    public Pokemon(PokemonBase pokemonBase,int level)
+    public Pokemon(PokemonBase pokemonBase,int level,IndividualValues iV = null,EffortValues eV = null, Gender specifiedgender = Gender.NA, 
+        bool? shiny = null,NatureBase specifiedNature = null,string nickname = null, List<MoveBase> presetMoveList = null, 
+        AbilityBase abilityBase = null,int savedHitpoints = -1,int savedExperience = -1,string oTrainer = null,string oTrainerID = null, 
+        PokeballItem pokeball = null)
     {
         _pokemonBase = pokemonBase;
         currentLevel = level;
 
-        NewInitialization();
+        _individualValues.SetIVs(iV);
+        _effortValues.SetEVs(eV);
+        gender = SetGender(specifiedgender);
+
+        nature = specifiedNature == null ? SetNature() : specifiedNature;
+        isShiny = shiny.HasValue ? shiny.Value: (Random.value > 0.5f);
+        currentName = nickname == null|| nickname == "" ? _pokemonBase.GetPokedexName() : nickname;
+
+        currentExp = savedExperience <0 ? _pokemonBase.GetExpForLevel(currentLevel):savedExperience;
+
+        SetDataStats();
+        currentHitPoints = savedHitpoints <0 ? maxHitPoints:savedHitpoints;
+
+        originalTrainer = oTrainer;
+        originalTrainerID = oTrainerID;
+        pokeballCapturedIn = pokeball;
+
+        ability = SetAbility(abilityBase);
+        Reset();
+
+        SetMoves(presetMoveList);
     }
 
-    public Pokemon(PokemonBase pokemonBase, int level,Gender savedGender,NatureBase nature, IndividualValues iV,EffortValues eV, string nickname = null,bool shiny = false)
+    void SetMoves(List<MoveBase> presetMoves)
     {
-        _pokemonBase = pokemonBase;
-        currentLevel = level;
-
-        gender = savedGender;
-        _nature = nature;
-
-        statusChanges = new Queue<string>();
-
-        individualValues = iV;
-        effortValues = eV;
-
-        currentName = currentName == null ? _pokemonBase.GetPokedexName() : nickname;
-        isShiny = shiny;
-        LoadedInitialization();
-    }
-
-    void NewInitialization()
-    {
-        _currentName = null;
-
-        if(Random.value > 0.5f)
-        {
-            isShiny = true;
-        }
-        
-        nature = SetNature();
-
         moves = new List<Move>();
         foreach(LearnableMove move in _pokemonBase.LearnableMoves)
         {
@@ -91,33 +96,22 @@ public class Pokemon {
             }
         }
 
-        currentExp = _pokemonBase.GetExpForLevel(currentLevel);
+        if(presetMoves == null) { return; }
 
-        individualValues = new IndividualValues();
-        individualValues.GenerateIVs();
-        effortValues = new EffortValues();
-
-        SetDataStats();
-        currentHitPoints = maxHitPoints;
-
-        gender = SetGender(_pokemonBase);
-        statusChanges = new Queue<string>();
-
-        originalTrainer = null;
-        originalTrainerID = null;
-        pokeballCapturedIn = null;
-
-        SetAbility();
-        Reset();
+        foreach (MoveBase move in presetMoves)
+        {
+            if (moves.Exists(x => x.moveBase == move) == true)
+            {
+                continue;
+            }
+            if (moves.Count >= PokemonBase.MAX_NUMBER_OF_MOVES)
+            {
+                moves.RemoveAt(0);
+            }
+            moves.Add(new Move(move));
+        }
     }
 
-    /// <summary>
-    /// If the pokemon was loaded this will be called instead
-    /// </summary>
-    void LoadedInitialization()
-    {
-
-    }
 
     /// <summary>
     /// resets all pokemon stats and volatile status, this is for when the pokmon is sent out or 
@@ -142,12 +136,12 @@ public class Pokemon {
     {
         baseStats = new Dictionary<StatAttribute, int>();
 
-        maxHitPoints = Mathf.FloorToInt(((individualValues.maxHitPoints + 2 * pokemonBase.maxHitPoints + (effortValues.hitPoints / 4)) * currentLevel / 100) + 10 + currentLevel);
-        baseStats.Add(StatAttribute.Attack, Mathf.FloorToInt((((individualValues.attack + 2 * pokemonBase.attack + (effortValues.attack / 4)) * currentLevel / 100) + 5) * nature.NatureModifier(nature, StatAttribute.Attack)));
-        baseStats.Add(StatAttribute.Defense, Mathf.FloorToInt((((individualValues.defense + 2 * pokemonBase.defense + (effortValues.defense / 4)) * currentLevel / 100) + 5) * nature.NatureModifier(nature, StatAttribute.Defense)));
-        baseStats.Add(StatAttribute.SpecialAttack, Mathf.FloorToInt((((individualValues.specialAttack + 2 * pokemonBase.specialAttack + (effortValues.specialAttack / 4)) * currentLevel / 100) + 5) * nature.NatureModifier(nature, StatAttribute.SpecialAttack)));
-        baseStats.Add(StatAttribute.SpecialDefense, Mathf.FloorToInt((((individualValues.specialDefense + 2 * pokemonBase.specialDefense + (effortValues.specialDefense / 4)) * currentLevel / 100) + 5) * nature.NatureModifier(nature, StatAttribute.SpecialDefense)));
-        baseStats.Add(StatAttribute.Speed, Mathf.FloorToInt((((individualValues.speed + 2 * pokemonBase.speed + (effortValues.speed / 4)) * currentLevel / 100) + 5) * nature.NatureModifier(nature, StatAttribute.Speed)));
+        maxHitPoints = Mathf.FloorToInt(((_individualValues.maxHitPoints + 2 * pokemonBase.maxHitPoints + (_effortValues.hitPoints / 4)) * currentLevel / 100) + 10 + currentLevel);
+        baseStats.Add(StatAttribute.Attack, Mathf.FloorToInt((((_individualValues.attack + 2 * pokemonBase.attack + (_effortValues.attack / 4)) * currentLevel / 100) + 5) * nature.NatureModifier(nature, StatAttribute.Attack)));
+        baseStats.Add(StatAttribute.Defense, Mathf.FloorToInt((((_individualValues.defense + 2 * pokemonBase.defense + (_effortValues.defense / 4)) * currentLevel / 100) + 5) * nature.NatureModifier(nature, StatAttribute.Defense)));
+        baseStats.Add(StatAttribute.SpecialAttack, Mathf.FloorToInt((((_individualValues.specialAttack + 2 * pokemonBase.specialAttack + (_effortValues.specialAttack / 4)) * currentLevel / 100) + 5) * nature.NatureModifier(nature, StatAttribute.SpecialAttack)));
+        baseStats.Add(StatAttribute.SpecialDefense, Mathf.FloorToInt((((_individualValues.specialDefense + 2 * pokemonBase.specialDefense + (_effortValues.specialDefense / 4)) * currentLevel / 100) + 5) * nature.NatureModifier(nature, StatAttribute.SpecialDefense)));
+        baseStats.Add(StatAttribute.Speed, Mathf.FloorToInt((((_individualValues.speed + 2 * pokemonBase.speed + (_effortValues.speed / 4)) * currentLevel / 100) + 5) * nature.NatureModifier(nature, StatAttribute.Speed)));
         baseStats.Add(StatAttribute.Accuracy, 1);
         baseStats.Add(StatAttribute.Evasion, 1);
     }
@@ -291,15 +285,6 @@ public class Pokemon {
 
     #region Nature/Gender
 
-    public NatureBase nature
-    {
-        get { return _nature; }
-        set
-        {
-            _nature = value;
-        }
-    }
-
     public NatureBase SetNature()
     {
         NatureBase[] natureBases;
@@ -308,25 +293,28 @@ public class Pokemon {
         return natureBases[Random.Range(0, natureBases.Length)];
     }
 
-    Gender SetGender(PokemonBase pokemonBase)
+    Gender SetGender(Gender serializedGender)
     {
-        Gender currentGender = Gender.NA;
-
-        if(pokemonBase.HasGender == true)
+        if (pokemonBase.HasGender == true)
         {
+            if(serializedGender != Gender.NA)
+            {
+                return serializedGender;
+            }
+
             float checker = Random.Range(1, 101);
 
             if (checker <= pokemonBase.MaleFemaleGenderRatio)//If true then male
             {
-                currentGender = Gender.Male;
+                serializedGender = Gender.Male;
             }
             else
             {
-                currentGender = Gender.Female;
+                serializedGender = Gender.Female;
             }
         }
 
-        return currentGender;
+        return serializedGender;
     }
 
     #endregion
@@ -630,7 +618,7 @@ public class Pokemon {
         return false;
     }
 
-    public List<LearnableMove> GetLeranableMoveAtCurrentLevel()
+    public List<LearnableMove> GetLearnableMoveAtCurrentLevel()
     {
         List<LearnableMove> copyOfLearnableMoves = _pokemonBase.LearnableMoves.FindAll(x => x.levelLearned == currentLevel);
         List<LearnableMove> learnableMoves = new List<LearnableMove>();
@@ -661,11 +649,11 @@ public class Pokemon {
     {
         foreach (EarnableEV eV in effortValuesEarned)
         {
-            effortValues.AddEffortValue(eV);
+            _effortValues.AddEffortValue(eV);
         }
     }
 
-    void SetAbility()
+    AbilityBase SetAbility(AbilityBase presetAbility)
     {
         List<AbilityBase> abilities = new List<AbilityBase>();
 
@@ -687,9 +675,18 @@ public class Pokemon {
         if(abilities.Count == 0)
         {
             Debug.LogWarning($"{this.pokemonBase.GetPokedexName()} doesnt have any abilities set");
-            return;
+            return null;
         }
-        ability = abilities[Random.Range(0, abilities.Count)];
+
+        if(presetAbility != null)
+        {
+            if (abilities.Exists(x => x.Id == presetAbility.Id))
+            {
+                return presetAbility;
+            }
+        }
+
+        return abilities[Random.Range(0, abilities.Count)];
     }
 
     public StandardStats GetStandardStats()
@@ -702,12 +699,12 @@ public class Pokemon {
     {
         int diffInHP = maxHitPoints;
 
-        maxHitPoints = Mathf.FloorToInt(((individualValues.maxHitPoints + 2 * pokemonBase.maxHitPoints + (effortValues.hitPoints / 4)) * currentLevel / 100) + 10 + currentLevel);
-        baseStats[StatAttribute.Attack] = Mathf.FloorToInt((((individualValues.attack + 2 * pokemonBase.attack + (effortValues.attack / 4)) * currentLevel / 100) + 5) * nature.NatureModifier(nature, StatAttribute.Attack));
-        baseStats[StatAttribute.Defense] = Mathf.FloorToInt((((individualValues.defense + 2 * pokemonBase.defense + (effortValues.defense / 4)) * currentLevel / 100) + 5) * nature.NatureModifier(nature, StatAttribute.Defense));
-        baseStats[StatAttribute.SpecialAttack] =Mathf.FloorToInt((((individualValues.specialAttack + 2 * pokemonBase.specialAttack + (effortValues.specialAttack / 4)) * currentLevel / 100) + 5) * nature.NatureModifier(nature, StatAttribute.SpecialAttack));
-        baseStats[StatAttribute.SpecialDefense] =Mathf.FloorToInt((((individualValues.specialDefense + 2 * pokemonBase.specialDefense + (effortValues.specialDefense / 4)) * currentLevel / 100) + 5) * nature.NatureModifier(nature, StatAttribute.SpecialDefense));
-        baseStats[StatAttribute.Speed] = Mathf.FloorToInt((((individualValues.speed + 2 * pokemonBase.speed + (effortValues.speed / 4)) * currentLevel / 100) + 5) * nature.NatureModifier(nature, StatAttribute.Speed));
+        maxHitPoints = Mathf.FloorToInt(((_individualValues.maxHitPoints + 2 * pokemonBase.maxHitPoints + (_effortValues.hitPoints / 4)) * currentLevel / 100) + 10 + currentLevel);
+        baseStats[StatAttribute.Attack] = Mathf.FloorToInt((((_individualValues.attack + 2 * pokemonBase.attack + (_effortValues.attack / 4)) * currentLevel / 100) + 5) * nature.NatureModifier(nature, StatAttribute.Attack));
+        baseStats[StatAttribute.Defense] = Mathf.FloorToInt((((_individualValues.defense + 2 * pokemonBase.defense + (_effortValues.defense / 4)) * currentLevel / 100) + 5) * nature.NatureModifier(nature, StatAttribute.Defense));
+        baseStats[StatAttribute.SpecialAttack] =Mathf.FloorToInt((((_individualValues.specialAttack + 2 * pokemonBase.specialAttack + (_effortValues.specialAttack / 4)) * currentLevel / 100) + 5) * nature.NatureModifier(nature, StatAttribute.SpecialAttack));
+        baseStats[StatAttribute.SpecialDefense] =Mathf.FloorToInt((((_individualValues.specialDefense + 2 * pokemonBase.specialDefense + (_effortValues.specialDefense / 4)) * currentLevel / 100) + 5) * nature.NatureModifier(nature, StatAttribute.SpecialDefense));
+        baseStats[StatAttribute.Speed] = Mathf.FloorToInt((((_individualValues.speed + 2 * pokemonBase.speed + (_effortValues.speed / 4)) * currentLevel / 100) + 5) * nature.NatureModifier(nature, StatAttribute.Speed));
 
         currentHitPoints += maxHitPoints - diffInHP;
     }

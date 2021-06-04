@@ -9,6 +9,7 @@ public class Portal : MonoBehaviour
     [SerializeField] GameSceneBaseSO alternativeScene;
     [SerializeField] bool exitOnly;
     [SerializeField] DestinationIdentifier destinationIdentifier;
+    [SerializeField] FadeStyle fadeStyle;
 
     //This is to prevent the player going in and out if they cannot move ontop of it
     public bool canPlayerPassThrough { get; private set; } = true;
@@ -30,7 +31,7 @@ public class Portal : MonoBehaviour
 
     public void PlayerPassedThroughPortal()
     {
-        canPlayerPassThrough = false;
+        canPlayerPassThrough = (spawnPoint.transform.localPosition != Vector3.zero);
     }
 
     private void OnTriggerExit2D(Collider2D col)
@@ -39,5 +40,10 @@ public class Portal : MonoBehaviour
         {
             canPlayerPassThrough = true;
         }
+    }
+
+    public FadeStyle FadeStyle
+    {
+        get { return fadeStyle; }
     }
 }

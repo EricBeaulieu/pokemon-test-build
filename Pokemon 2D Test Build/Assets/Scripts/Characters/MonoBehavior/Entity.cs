@@ -75,7 +75,7 @@ public abstract class Entity : MonoBehaviour
         playerLayerMask = LayerMask.GetMask("Player");
         portalLayerMask = LayerMask.GetMask("Portal");
 
-        CorrectStartingPlacement();
+        SnapToGrid();
 
         if(positionMovingTo == null)
         {
@@ -168,7 +168,7 @@ public abstract class Entity : MonoBehaviour
         _anim.SetFloat("moveY", targetDir.y);
     }
 
-    void CorrectStartingPlacement()
+    public void SnapToGrid()
     {
         Vector3 currentPos = transform.position;
 

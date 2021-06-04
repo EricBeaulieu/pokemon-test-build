@@ -9,8 +9,8 @@ public class LevelManager : MonoBehaviour
     [SerializeField] bool grassOnlyWildPokemon = true;
     [SerializeField] List<Pokemon> wildPokemon;
     [SerializeField] GameSceneBaseSO sceneReference;
-    public List<Portal> allInLevelPortals = new List<Portal>();
-    public List<Entity> allEntitiesInScene = new List<Entity>();
+    List<Portal> allInLevelPortals = new List<Portal>();
+    List<Entity> allEntitiesInScene = new List<Entity>();
     bool loaded;
 
     void Awake()
