@@ -146,6 +146,7 @@
     <Compile Include="Assets\Scripts\Battle\LearningMoves\SummaryAttackButton.cs" />
     <Compile Include="Assets\Scripts\Data\Abilitys\List\Galvanize.cs" />
     <Compile Include="Assets\Scripts\Mechanics\CaptureBallRoute.cs" />
+    <Compile Include="Assets\Scripts\Saving\SavingSystem.cs" />
     <Compile Include="Assets\Scripts\Data\Conditions\VolatileStatus\CursedUser.cs" />
     <Compile Include="Assets\Scripts\Characters\MonoBehavior\NpcController.cs" />
     <Compile Include="Assets\Scripts\Party\SummaryDisplay.cs" />
@@ -233,7 +234,8 @@
     <Compile Include="Assets\Scripts\Data\Abilitys\List\Aerilate.cs" />
     <Compile Include="Assets\Scripts\Data\Conditions\VolatileStatus\Nightmare.cs" />
     <Compile Include="Assets\Scripts\Data\Weather\Weather Effects\Rain.cs" />
-    <Compile Include="Assets\Scripts\Saving\SavingSystem.cs" />
+    <Compile Include="Assets\Scripts\Saving\PokemonSaveData.cs" />
+    <Compile Include="Assets\Scripts\Pokemon\SpecifiedValues.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">

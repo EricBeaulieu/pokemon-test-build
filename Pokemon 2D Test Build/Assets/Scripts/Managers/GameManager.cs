@@ -425,7 +425,14 @@ public class GameManager : MonoBehaviour
 
     public void LoadGame()
     {
-        StartCoroutine(LoadGameIEnumerator());
+        if(SavingSystem.SaveFileAvailable() == true)
+        {
+            StartCoroutine(LoadGameIEnumerator());
+        }
+        else
+        {
+            _dialogManager.ShowMessage("Their is no save to load");
+        }
     }
 
     IEnumerator LoadGameIEnumerator()

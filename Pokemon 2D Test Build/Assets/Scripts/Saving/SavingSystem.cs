@@ -6,12 +6,23 @@ public static class SavingSystem
 {
     static Stack<int> trainersToBeSaved = new Stack<int>();
 
+    //keys
+    const string PlayerName = "PlayerName";
+    const string PlayerXPos = "PlayerXPos";
+    const string PlayerYPos = "PlayerYPos";
+
+    public static bool SaveFileAvailable()
+    {
+        return PlayerPrefs.HasKey(PlayerName);
+    }
+
     public static void SavePlayer(PlayerController player,GameSceneBaseSO currentScene)
     {
         int playerXPos = Mathf.FloorToInt(player.transform.position.x);
         int playerYPos = Mathf.FloorToInt(player.transform.position.y);
-        PlayerPrefs.SetInt("PlayerXPos", playerXPos);
-        PlayerPrefs.SetInt("PlayerYPos", playerYPos);
+        PlayerPrefs.SetInt(PlayerXPos, playerXPos);
+        PlayerPrefs.SetInt(PlayerYPos, playerYPos);
+        PlayerPrefs.SetString(PlayerName, player.TrainerName);
 
         string currentLevel = currentScene.GetSceneName;
         PlayerPrefs.SetString("CurrentLevel", currentLevel);

@@ -5,6 +5,8 @@ using UnityEngine;
 [System.Serializable]
 public class IndividualValues
 {
+    public static int VALUES_SAVED_LENGTH = 6;
+
     [SerializeField] int _maxHitPoints = 0;
     [SerializeField] int _attack = 0;
     [SerializeField] int _defense = 0;
@@ -91,6 +93,28 @@ public class IndividualValues
         set
         {
             _speed = value;
+        }
+    }
+
+    public int ReturnValueAtIndex(int index)
+    {
+        switch (index)
+        {
+            case 0:
+                return maxHitPoints;
+            case 1:
+                return attack;
+            case 2:
+                return defense;
+            case 3:
+                return specialAttack;
+            case 4:
+                return specialDefense;
+            case 5:
+                return speed;
+            default:
+                Debug.LogError("Index out of range");
+                return 0;
         }
     }
 }
