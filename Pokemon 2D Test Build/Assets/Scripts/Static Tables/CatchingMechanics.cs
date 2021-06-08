@@ -69,12 +69,12 @@ public static class CatchingMechanics
 
     public static int CatchRate(Pokemon currentPokemon,PokeballItem pokeball,int battleDuration)
     {
-        if(pokeball.CaptureRate == PokeballCaptureID.Master)
+        if(pokeball.PokeballId == PokeballCaptureID.Master)
         {
             return 4;
         }
 
-        float pokeballCaptureRate = captureRate(pokeball.CaptureRate,currentPokemon,battleDuration);
+        float pokeballCaptureRate = captureRate(pokeball.PokeballId,currentPokemon,battleDuration);
 
         float catchValue = (((3 * currentPokemon.maxHitPoints - 2 * currentPokemon.currentHitPoints)
             * (currentPokemon.pokemonBase.GetCatchRate() * pokeballCaptureRate) / (3 * currentPokemon.maxHitPoints)) 

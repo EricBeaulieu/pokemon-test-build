@@ -10,6 +10,7 @@ public static class SavingSystem
     const string PlayerName = "PlayerName";
     const string PlayerXPos = "PlayerXPos";
     const string PlayerYPos = "PlayerYPos";
+    const string PlayerParty = "PlayerParty";
 
     public static bool SaveFileAvailable()
     {
@@ -28,10 +29,19 @@ public static class SavingSystem
         PlayerPrefs.SetString("CurrentLevel", currentLevel);
 
         List<Pokemon> currentParty = player.pokemonParty.CurrentPokemonList();
+        int partysize = currentParty.Count;
 
-        for (int i = 0; i < currentParty.Count; i++)
+        for (int i = 0; i < PokemonParty.MAX_PARTY_POKEMON_SIZE; i++)
         {
-            
+            string location = $"{PlayerParty}{i}";
+            if(i < partysize)
+            {
+                PokemonSavingSystem.SavePokemon(currentParty[i], location);
+            }
+            else
+            {
+                PokemonSavingSystem.SavePokemon(null, location);
+            }
         }
 
         while(trainersToBeSaved.Count > 0)
@@ -58,6 +68,23 @@ public static class SavingSystem
     public static void AddDefeatedTrainerToStack(int trainerID)
     {
         trainersToBeSaved.Push(trainerID);
+    }
+
+    public static List<Pokemon> LoadPlayerParty()
+    {
+        List<Pokemon> savedParty = new List<Pokemon>();
+
+        for (int i = 0; i < PokemonParty.MAX_PARTY_POKEMON_SIZE; i++)
+        {
+            string location = $"{PlayerParty}{i}";
+            Pokemon currentPokemon = PokemonSavingSystem.LoadPokemon(location);
+
+            if(currentPokemon != null)
+            {
+                savedParty.Add(currentPokemon);
+            }
+        }
+        return savedParty;
     }
 
     public static bool GetTrainerSave(int trainerID)

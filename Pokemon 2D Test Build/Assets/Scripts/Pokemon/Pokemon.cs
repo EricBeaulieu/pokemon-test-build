@@ -45,13 +45,15 @@ public class Pokemon {
     public List<ConditionBase> volatileStatus { get; private set; }
     public int volatileStatusTime { get; set; }
 
+    #region Constructors
+
     public Pokemon(PokemonBase pokemonBase,int level,IndividualValues iV = null,EffortValues eV = null, Gender specifiedgender = Gender.NA, 
         bool? shiny = null,NatureBase specifiedNature = null,string nickname = null, List<MoveBase> presetMoveList = null, 
-        AbilityBase abilityBase = null,int savedHitpoints = -1,int savedExperience = -1,string oTrainer = null,string oTrainerID = null, 
-        PokeballItem pokeball = null,ConditionID condition = ConditionID.NA)
+        AbilityBase abilityBase = null)
     {
         _pokemonBase = pokemonBase;
         currentLevel = level;
+        currentExp = pokemonBase.GetExpForLevel(level);
 
         _individualValues.SetValues(iV);
         _effortValues.SetValues(eV);
@@ -61,22 +63,47 @@ public class Pokemon {
         isShiny = shiny.HasValue ? shiny.Value: (Random.value > 0.5f);
         currentName = nickname == null|| nickname == "" ? _pokemonBase.GetPokedexName() : nickname;
 
-        currentExp = savedExperience <0 ? _pokemonBase.GetExpForLevel(currentLevel):savedExperience;
-
         SetDataStats();
-        currentHitPoints = savedHitpoints <0 ? maxHitPoints:savedHitpoints;
-
-        originalTrainer = oTrainer;
-        originalTrainerID = oTrainerID;
-        pokeballCapturedIn = pokeball;
-
+        currentHitPoints = maxHitPoints;
         ability = SetAbility(abilityBase);
 
         SetMoves(presetMoveList);
-        SetStatus(condition, false);
 
         Reset();
     }
+
+    public Pokemon(PokemonSaveData saveData)
+    {
+        _pokemonBase = saveData.currentBase;
+        currentLevel = saveData.currentLevel;
+
+        _individualValues.SetValues(saveData.currentIndividualValues);
+        _effortValues.SetValues(saveData.currentEffortValues);
+        gender = SetGender(saveData.currentGender);
+
+        nature = saveData.currentNature;
+        isShiny = saveData.isShiny;
+        currentName = saveData.currentNickname == null || saveData.currentNickname == "" ? _pokemonBase.GetPokedexName() : saveData.currentNickname;
+
+        currentExp = saveData.currentExp;
+
+        SetDataStats();
+        currentHitPoints = saveData.currentHitPoints;
+
+        originalTrainer = saveData.currentOT;
+        originalTrainerID = saveData.currentOTId;
+        pokeballCapturedIn = saveData.currentPokeball;
+
+        AbilityBase savedAbility = AbilityDB.GetAbilityBase(saveData.currentAbilityID);
+        ability = SetAbility(savedAbility);
+
+        LoadedMoves(saveData.currentMoves);
+        SetStatus(saveData.currentCondition, false);
+
+        Reset();
+    }
+
+    #endregion
 
     void SetMoves(List<MoveBase> presetMoves)
     {
@@ -111,6 +138,23 @@ public class Pokemon {
                 moves.RemoveAt(0);
             }
             moves.Add(new Move(move));
+        }
+    }
+
+    void LoadedMoves(List<Move> savedMoves)
+    {
+        moves = new List<Move>();
+        foreach (Move move in savedMoves)
+        {
+            if (moves.Exists(x => x == move) == true)
+            {
+                continue;
+            }
+            if (moves.Count >= PokemonBase.MAX_NUMBER_OF_MOVES)
+            {
+                moves.RemoveAt(0);
+            }
+            moves.Add(move);
         }
     }
 

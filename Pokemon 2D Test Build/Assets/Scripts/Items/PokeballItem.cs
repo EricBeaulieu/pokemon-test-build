@@ -22,7 +22,7 @@ public class PokeballItem : ItemBase
         //nothing yet
     }
 
-    public PokeballCaptureID CaptureRate
+    public PokeballCaptureID PokeballId
     {
         get { return currentPokeball; }
     }
@@ -31,5 +31,4 @@ public class PokeballItem : ItemBase
     {
         return new[] {closed, open};
     }
-
 }

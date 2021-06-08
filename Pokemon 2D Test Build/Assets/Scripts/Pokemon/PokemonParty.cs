@@ -8,9 +8,9 @@ public class PokemonParty : MonoBehaviour
     [SerializeField] List<Pokemon> pokemonParty;
     List<Pokemon> _originalPos;
 
-    const int MAX_PARTY_POKEMON_SIZE = 6;
+    public static int MAX_PARTY_POKEMON_SIZE { get; } = 6;
 
-    void Start()
+    void Awake()
     {
         int currentCount = 0;
         List<Pokemon> copyOfParty = new List<Pokemon>();
@@ -123,5 +123,10 @@ public class PokemonParty : MonoBehaviour
             }
         }
         return currentCount;
+    }
+
+    public void LoadPlayerParty(List<Pokemon> loadedParty)
+    {
+        pokemonParty = loadedParty;
     }
 }

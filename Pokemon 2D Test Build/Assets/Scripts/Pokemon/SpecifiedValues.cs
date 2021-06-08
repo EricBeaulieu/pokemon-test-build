@@ -18,6 +18,16 @@ public abstract class SpecifiedValues
 
     protected abstract bool IsCorrectClass(SpecifiedValues passedValue);
 
+    public void LoadValues(int hp,int att,int def, int spAtt,int spDef,int spd)
+    {
+        hitPoints = hp;
+        attack = att;
+        defense = def;
+        specialAttack = spAtt;
+        specialDefense = spDef;
+        speed = spd;
+    }
+
     public virtual int hitPoints
     {
         get { return _hitPoints; }

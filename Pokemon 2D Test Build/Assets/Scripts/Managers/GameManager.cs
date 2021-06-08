@@ -440,6 +440,7 @@ public class GameManager : MonoBehaviour
         yield return Fade(FadeStyle.FullFade,true);
         yield return SavingSystem.LoadPlayerScene();
         SpawnInPlayer(SavingSystem.LoadPlayerPosition());
+        playerController.pokemonParty.LoadPlayerParty(SavingSystem.LoadPlayerParty());
         yield return Fade(FadeStyle.FullFade, false);
     }
 
