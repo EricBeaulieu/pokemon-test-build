@@ -10,12 +10,12 @@ public class SandRush : AbilityBase
     {
         return "Boosts the Pokémon's Speed stat in a sandstorm.";
     }
-    public override float DoublesSpeedInAWeatherEffect(WeatherEffectID iD)
+    public override float AlterStatDuringWeatherEffect(WeatherEffectID iD, StatAttribute statAffected)
     {
-        if (iD == WeatherEffectID.Sandstorm)
+        if (iD == WeatherEffectID.Sandstorm && statAffected == StatAttribute.Speed)
         {
             return 2;
         }
-        return base.DoublesSpeedInAWeatherEffect(iD);
+        return base.AlterStatDuringWeatherEffect(iD, statAffected);
     }
 }

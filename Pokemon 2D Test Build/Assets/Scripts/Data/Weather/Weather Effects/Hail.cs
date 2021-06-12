@@ -28,6 +28,11 @@ public class Hail : WeatherEffectBase
             return;
         }
 
+        if(pokemon.ability.Id == AbilityID.IceBody)
+        {
+            return;
+        }
+
         int damage = pokemon.maxHitPoints / 16;
 
         if (damage <= 0)

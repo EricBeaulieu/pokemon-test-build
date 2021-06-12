@@ -10,12 +10,12 @@ public class SwiftSwim : AbilityBase
     {
         return "Boosts the Pokémon's Speed stat in rain.";
     }
-    public override float DoublesSpeedInAWeatherEffect(WeatherEffectID iD)
+    public override float AlterStatDuringWeatherEffect(WeatherEffectID iD, StatAttribute statAffected)
     {
-        if (iD == WeatherEffectID.Rain)
+        if (iD == WeatherEffectID.Rain && statAffected == StatAttribute.Speed)
         {
             return 2;
         }
-        return base.DoublesSpeedInAWeatherEffect(iD);
+        return base.AlterStatDuringWeatherEffect(iD, statAffected);
     }
 }

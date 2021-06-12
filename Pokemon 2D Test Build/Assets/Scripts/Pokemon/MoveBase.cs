@@ -48,12 +48,20 @@ public class MoveBase : ScriptableObject {
     [SerializeField] bool drainsHP;
     [SerializeField] float hpRecovered;
 
-    public MoveBase adjustedMove(ElementType newType,float powerIncrease)
+    public MoveBase adjustedMovePower(ElementType newType,float powerIncrease)
     {
         MoveBase updatedMove = MoveBase.Instantiate(this);
 
         updatedMove.elementType = newType;
         updatedMove.power += Mathf.RoundToInt(updatedMove.power * powerIncrease);
+        return updatedMove;
+    }
+
+    public MoveBase removeMoveSecondaryEffects()
+    {
+        MoveBase updatedMove = MoveBase.Instantiate(this);
+
+        updatedMove.secondaryEffects = new List<MoveSecondaryEffects>();
         return updatedMove;
     }
 

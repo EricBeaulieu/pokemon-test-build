@@ -74,4 +74,42 @@ public static class DamageModifiers
         }
         return false;
     }
+
+    public static float WeatherConditionModifiers(WeatherEffectID weather,MoveBase currentMove)
+    {
+        if(weather == WeatherEffectID.Sunshine)
+        {
+            if(currentMove.Type == ElementType.Fire)
+            {
+                return 1.5f;
+            }
+            else if(currentMove.Type == ElementType.Water)
+            {
+                return 0.5f;
+            }
+        }
+        else if(weather == WeatherEffectID.Rain)
+        {
+            if (currentMove.Type == ElementType.Water)
+            {
+                return 1.5f;
+            }
+            else if (currentMove.Type == ElementType.Fire)
+            {
+                return 0.5f;
+            }
+        }
+
+        return 1f;
+    }
+
+    public static float SandStormSpecialDefenseBonus(WeatherEffectID weather, Pokemon defendingPokemon, MoveBase move)
+    {
+        if(weather == WeatherEffectID.Sandstorm && defendingPokemon.pokemonBase.IsType(ElementType.Rock) && move.MoveType == MoveType.Special)
+        {
+            return 1.5f;
+        }
+
+        return 1f;
+    }
 }

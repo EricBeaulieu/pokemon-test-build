@@ -12,18 +12,18 @@ public enum AbilityID
     //C
     Chlorophyll, ClearBody, CloudNine, Competitive, CuteCharm,
     //D
-    Defiant, DragonsMaw, Drizzle, Drought,
+    Defiant, DragonsMaw, Drizzle, Drought,DrySkin,
     //E
     EffectSpore,
     //F
-    FlameBody, FlareBoost, FullMetalBody, FurCoat,
+    Filter, FlameBody, FlareBoost, FullMetalBody, FurCoat,
     //G
     Galvanize, Guts,
     //H
     HugePower, HyperCutter,
     //I
-    IceScales, Immunity, InnerFocus, Insomnia, Intimidate,
-    IronFist,
+    IceBody, IceScales, Immunity, InnerFocus, Insomnia,
+    Intimidate, IronFist,
     //J
     //K
     KeenEye,
@@ -36,15 +36,15 @@ public enum AbilityID
     //O
     Oblivious, Overgrown, OwnTempo,
     //P
-    Pixilate, PoisonPoint, PunkRock, PurePower,
+    Pixilate, PoisonPoint, PrismArmor, PunkRock, PurePower,
     //Q
     QuickFeet,
     //R
-    Reckless, Refrigerate,
+    RainDish, Reckless, Refrigerate,
     //S
-    SandRush, SandStream, ShellArmor, SkillLink, SlushRush,
-    SnowWarning, Static, Steelworker, StrongJaw, Swarm,
-    SwiftSwim,
+    SandRush, SandStream, SandVeil,ShellArmor, SkillLink,
+    SlushRush, SnowCloak, SnowWarning, SolarPower, SolidRock,
+    Static, Steelworker, StrongJaw, Swarm, SwiftSwim,
     //T
     Technician, TintedLens,Torrent, ToughClaws, ToxicBoost,
     Transistor,

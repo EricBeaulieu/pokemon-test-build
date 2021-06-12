@@ -80,14 +80,14 @@ public class PokemonBase : ScriptableObject {
     {
         string spriteName = GetStartingSpriteNameEntry(isShiny, gender);
 
-        return new[] { GameManager.instance.SpriteAtlas.GetSprite(spriteName + "FrontA"), GameManager.instance.SpriteAtlas.GetSprite(spriteName + "FrontB") };
+        return new[] { SpriteAtlas.GetSprite(spriteName + "FrontA"), SpriteAtlas.GetSprite(spriteName + "FrontB") };
     }
 
     public Sprite[] GetBackSprite(bool isShiny, Gender gender)
     {
         string spriteName = GetStartingSpriteNameEntry(isShiny, gender);
 
-        return new[] { GameManager.instance.SpriteAtlas.GetSprite(spriteName + "BackA"), GameManager.instance.SpriteAtlas.GetSprite(spriteName + "BackB") };
+        return new[] { SpriteAtlas.GetSprite(spriteName + "BackA"), SpriteAtlas.GetSprite(spriteName + "BackB") };
     }
 
     /// <summary>
@@ -98,7 +98,7 @@ public class PokemonBase : ScriptableObject {
     {
         string spriteName = GetStartingSpriteNameEntry(false);
 
-        return new[] { GameManager.instance.SpriteAtlas.GetSprite(spriteName + "SpriteA"), GameManager.instance.SpriteAtlas.GetSprite(spriteName + "SpriteB") };
+        return new[] { SpriteAtlas.GetSprite(spriteName + "SpriteA"), SpriteAtlas.GetSprite(spriteName + "SpriteB") };
     }
 
     #endregion

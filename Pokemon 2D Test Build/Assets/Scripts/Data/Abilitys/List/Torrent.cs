@@ -17,7 +17,7 @@ public class Torrent : AbilityBase
             return base.BoostACertainTypeInAPinch(attackingPokemon, attackType);
         }
 
-        if (attackingPokemon.currentHitPoints / attackingPokemon.maxHitPoints <= 1 / 3)
+        if (((float)attackingPokemon.currentHitPoints / (float)attackingPokemon.maxHitPoints) <= HpRequiredToActivatePinch)
         {
             return 1.5f;
         }

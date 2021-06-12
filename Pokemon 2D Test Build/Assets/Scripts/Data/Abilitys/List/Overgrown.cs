@@ -17,7 +17,7 @@ public class Overgrown : AbilityBase
             return base.BoostACertainTypeInAPinch(attackingPokemon, attackType);
         }
 
-        if (attackingPokemon.currentHitPoints / attackingPokemon.maxHitPoints <= HpRequiredToActivatePinch)
+        if (((float)attackingPokemon.currentHitPoints / (float)attackingPokemon.maxHitPoints) <= HpRequiredToActivatePinch)
         {
             return 1.5f;
         }

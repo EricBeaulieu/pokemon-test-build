@@ -14,7 +14,7 @@ public class Pixilate : AbilityBase
     {
         if (move.Type == ElementType.Normal)
         {
-            return move.adjustedMove(ElementType.Fairy, 0.2f);
+            return move.adjustedMovePower(ElementType.Fairy, 0.2f);
         }
         return base.ChangeMovesToDifferentTypeAndIncreasesTheirPower(move);
     }

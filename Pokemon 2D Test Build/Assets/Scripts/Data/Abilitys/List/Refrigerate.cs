@@ -14,7 +14,7 @@ public class Refrigerate : AbilityBase
     {
         if (move.Type == ElementType.Normal)
         {
-            return move.adjustedMove(ElementType.Ice, 0.2f);
+            return move.adjustedMovePower(ElementType.Ice, 0.2f);
         }
         return base.ChangeMovesToDifferentTypeAndIncreasesTheirPower(move);
     }

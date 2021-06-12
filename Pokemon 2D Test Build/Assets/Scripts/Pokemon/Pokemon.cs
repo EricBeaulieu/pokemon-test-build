@@ -280,10 +280,7 @@ public class Pokemon {
             statValue *= reduction.Value;
         }
 
-        if(currentStat == StatAttribute.Speed)
-        {
-            statValue *= ability.DoublesSpeedInAWeatherEffect(BattleSystem.GetCurrentWeather);
-        }
+        statValue *= ability.AlterStatDuringWeatherEffect(BattleSystem.GetCurrentWeather,currentStat);
 
         statValue *= ability.DoublesAStat(currentStat);
 
@@ -368,12 +365,7 @@ public class Pokemon {
 
     public DamageDetails TakeDamage(MoveBase move,Pokemon attackingPokemon)
     {
-        DamageDetails damageDetails = new DamageDetails()
-        {
-            hasFainted = false,
-            criticalHit = 1,
-            typeEffectiveness = 1
-        };
+        DamageDetails damageDetails = new DamageDetails();
 
         move = attackingPokemon.ability.ChangeMovesToDifferentTypeAndIncreasesTheirPower(move);
 
@@ -400,15 +392,29 @@ public class Pokemon {
         float modifier = damageDetails.criticalHit * damageDetails.typeEffectiveness;
         modifier *= DamageModifiers.StandardRandomAttackPowerModifier();
         modifier *= DamageModifiers.SameTypeAttackBonus(move, attackingPokemon.pokemonBase);
+        modifier *= DamageModifiers.WeatherConditionModifiers(BattleSystem.GetCurrentWeather, move);
 
         //Ability
         float abilityBonus = attackingPokemon.ability.BoostACertainTypeInAPinch(attackingPokemon, move.Type);
-        abilityBonus = (abilityBonus >1) ? abilityBonus : attackingPokemon.ability.PowerUpCertainMoves(attackingPokemon,this, move);
+        abilityBonus *= attackingPokemon.ability.PowerUpCertainMoves(attackingPokemon,this, move);
+        abilityBonus *= ability.AlterDamageTaken(this, move.Type,BattleSystem.GetCurrentWeather);
+        abilityBonus *= ability.LowersDamageTakeSuperEffectiveMoves(damageDetails.typeEffectiveness);
+
+        if(abilityBonus == 0)
+        {
+            damageDetails.criticalHit = 1f;
+            damageDetails.typeEffectiveness = 1;
+            damageDetails.abilityActivation = true;
+            damageDetails.damageNullified = true;
+            return damageDetails;
+        }
 
         modifier *= abilityBonus;
 
         float attackPower = (move.MoveType == MoveType.Physical) ? attackingPokemon.attack : attackingPokemon.specialAttack;
         float defendersDefense = (move.MoveType == MoveType.Physical) ? defense : specialDefense;
+
+        defendersDefense *= DamageModifiers.SandStormSpecialDefenseBonus(BattleSystem.GetCurrentWeather, this, move);
 
         //If Critical hit ignore the negative effects on attack and positive effects on the defense
         if(damageDetails.criticalHit > 1)

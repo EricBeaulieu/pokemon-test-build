@@ -10,12 +10,12 @@ public class Chlorophyll : AbilityBase
     {
         return "Boosts the Pokémon's Speed stat in sunshine.";
     }
-    public override float DoublesSpeedInAWeatherEffect(WeatherEffectID iD)
+    public override float AlterStatDuringWeatherEffect(WeatherEffectID iD, StatAttribute statAffected)
     {
-        if (iD == WeatherEffectID.Sunshine)
+        if (iD == WeatherEffectID.Sunshine && statAffected == StatAttribute.Speed)
         {
             return 2;
         }
-        return base.DoublesSpeedInAWeatherEffect(iD);
+        return base.AlterStatDuringWeatherEffect(iD,statAffected);
     }
 }

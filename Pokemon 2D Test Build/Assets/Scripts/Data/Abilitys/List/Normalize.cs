@@ -12,6 +12,6 @@ public class Normalize : AbilityBase
     }
     public override MoveBase ChangeMovesToDifferentTypeAndIncreasesTheirPower(MoveBase move)
     {
-        return move.adjustedMove(ElementType.Normal, 0.2f);
+        return move.adjustedMovePower(ElementType.Normal, 0.2f);
     }
 }

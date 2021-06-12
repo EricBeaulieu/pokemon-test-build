@@ -14,7 +14,7 @@ public class Aerilate : AbilityBase
     {
         if (move.Type == ElementType.Normal)
         {
-            return move.adjustedMove(ElementType.Flying, 0.2f);
+            return move.adjustedMovePower(ElementType.Flying, 0.2f);
         }
         return base.ChangeMovesToDifferentTypeAndIncreasesTheirPower(move);
     }

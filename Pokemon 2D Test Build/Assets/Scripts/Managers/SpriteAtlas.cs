@@ -8,9 +8,9 @@ public class SpriteAtlas : MonoBehaviour
 {
     [SerializeField] Texture2D gen1;
     [SerializeField] Texture2D gen2;
-    List<Sprite> pokemonSprites = new List<Sprite>();
+    static List<Sprite> pokemonSprites = new List<Sprite>();
 
-    private void Start()
+    void Start()
     {
         string spriteSheet = AssetDatabase.GetAssetPath(gen1);
         List<Sprite> kantoSprites = AssetDatabase.LoadAllAssetsAtPath(spriteSheet).OfType<Sprite>().ToList();
@@ -22,7 +22,7 @@ public class SpriteAtlas : MonoBehaviour
         johtoSprites.ForEach(x => pokemonSprites.Add(x));
     }
 
-    public Sprite GetSprite(string spriteName)
+    public static Sprite GetSprite(string spriteName)
     {
         return pokemonSprites.Find(x => x.name == spriteName);
     }

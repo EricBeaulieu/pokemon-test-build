@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,7 +25,6 @@ public class GameManager : MonoBehaviour
     [SerializeField] StartMenu startMenu;
     //used as a null reference and to return from here
     [SerializeField] PokeballItem standardPokeball;
-    [SerializeField] SpriteAtlas spriteAtlas;
 
     [Header("Specialized Battle Moves")]
     [SerializeField] List<MoveBase> movesThatLeavesTargetWithOneHP;
@@ -57,7 +55,7 @@ public class GameManager : MonoBehaviour
             Destroy(gameObject);
         }
 
-        InitializeAllDatabases();
+        GlobalDataBase.InitializeAllDatabases();
     }
 
     void Start()
@@ -87,7 +85,7 @@ public class GameManager : MonoBehaviour
             }
         };
 
-        startMenu.OpenPokemonParty += (() => OpenParty(false,false));
+        startMenu.OpenPokemonParty += (() => OpenParty(false));
         startMenu.SaveGame += SaveGame;
         startMenu.StartMenuClosed += () =>
         {
@@ -189,13 +187,13 @@ public class GameManager : MonoBehaviour
         playerController.GetComponent<PokemonParty>().SetPositionstoBeforeBattle();
     }
 
-    void OpenParty(bool inBattle,bool wasShiftSwap)
+    void OpenParty(bool wasShiftSwap)
     {
-        _inBattle = inBattle;
+        _inBattle = (_state == GameState.Battle);
         _state = GameState.Party;
         partySystem.gameObject.SetActive(true);
-        partySystem.SetPartyData(playerController.GetComponent<PokemonParty>().CurrentPokemonList(),inBattle);
-        partySystem.OpenPartySystem(inBattle,wasShiftSwap);
+        partySystem.SetPartyData(playerController.pokemonParty.CurrentPokemonList(), _inBattle);
+        partySystem.OpenPartySystem(_inBattle, wasShiftSwap);
     }
 
     void CloseParty()
@@ -217,14 +215,6 @@ public class GameManager : MonoBehaviour
         {
             entity.HandleUpdate();
         }
-    }
-
-    void InitializeAllDatabases()
-    {
-        ConditionsDB.Initialization(GetAllConditions().ToList());
-        EntryHazardsDB.Initialization(GetAllEntryHazards().ToList());
-        WeatherEffectDB.Initialization(GetAllWeatherEffects().ToList());
-        AbilityDB.Initialization(GetAllAbilities().ToList());
     }
 
     void CapturedNewPokemon(Pokemon capturedPokemon,PokeballItem pokeball)
@@ -249,43 +239,6 @@ public class GameManager : MonoBehaviour
     public PokeballItem StandardPokeball
     {
         get { return standardPokeball; }
-    }
-
-    public SpriteAtlas SpriteAtlas
-    {
-        get { return spriteAtlas; }
-    }
-
-    IEnumerable<ConditionBase> GetAllConditions()
-    {
-        return AppDomain.CurrentDomain.GetAssemblies()
-            .SelectMany(assembly => assembly.GetTypes())
-            .Where(type => type.IsSubclassOf(typeof(ConditionBase)))
-            .Select(type => Activator.CreateInstance(type) as ConditionBase);
-    }
-
-    IEnumerable<EntryHazardBase> GetAllEntryHazards()
-    {
-        return AppDomain.CurrentDomain.GetAssemblies()
-            .SelectMany(assembly => assembly.GetTypes())
-            .Where(type => type.IsSubclassOf(typeof(EntryHazardBase)))
-            .Select(type => Activator.CreateInstance(type) as EntryHazardBase);
-    }
-
-    IEnumerable<WeatherEffectBase> GetAllWeatherEffects()
-    {
-        return AppDomain.CurrentDomain.GetAssemblies()
-            .SelectMany(assembly => assembly.GetTypes())
-            .Where(type => type.IsSubclassOf(typeof(WeatherEffectBase)))
-            .Select(type => Activator.CreateInstance(type) as WeatherEffectBase);
-    }
-
-    IEnumerable<AbilityBase> GetAllAbilities()
-    {
-        return AppDomain.CurrentDomain.GetAssemblies()
-            .SelectMany(assembly => assembly.GetTypes())
-            .Where(type => type.IsSubclassOf(typeof(AbilityBase)))
-            .Select(type => Activator.CreateInstance(type) as AbilityBase);
     }
 
     public void NewAreaEntered(LevelManager newLevel)

@@ -14,7 +14,7 @@ public class Galvanize : AbilityBase
     {
         if (move.Type == ElementType.Normal)
         {
-            return move.adjustedMove(ElementType.Electric, 0.2f);
+            return move.adjustedMovePower(ElementType.Electric, 0.2f);
         }
         return base.ChangeMovesToDifferentTypeAndIncreasesTheirPower(move);
     }

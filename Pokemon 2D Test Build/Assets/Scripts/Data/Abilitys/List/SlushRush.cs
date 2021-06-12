@@ -10,12 +10,12 @@ public class SlushRush : AbilityBase
     {
         return "Boosts the Pokémon's Speed stat in a hailstorm.";
     }
-    public override float DoublesSpeedInAWeatherEffect(WeatherEffectID iD)
+    public override float AlterStatDuringWeatherEffect(WeatherEffectID iD, StatAttribute statAffected)
     {
-        if (iD == WeatherEffectID.Hail)
+        if (iD == WeatherEffectID.Hail && statAffected == StatAttribute.Speed)
         {
             return 2;
         }
-        return base.DoublesSpeedInAWeatherEffect(iD);
+        return base.AlterStatDuringWeatherEffect(iD, statAffected);
     }
 }

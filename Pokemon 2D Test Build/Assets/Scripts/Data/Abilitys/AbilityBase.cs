@@ -26,8 +26,8 @@ public abstract class AbilityBase
     ///Checks the type of move it is, if true then give it a bonus of 50%
     /// </summary>
     public virtual float BoostACertainTypeInAPinch(Pokemon attackingPokemon, ElementType attackType) { return 1f; }
-    protected const float HpRequiredToActivatePinch = 1 / 3;
-    public virtual float DoublesSpeedInAWeatherEffect(WeatherEffectID iD) { return 1f; }
+    protected const float HpRequiredToActivatePinch = 1f / 3f;
+    public virtual float AlterStatDuringWeatherEffect(WeatherEffectID iD,StatAttribute statAffected) { return 1f; }
     public virtual StatBoost BoostStatSharplyIfAnyStatLowered() { return null; }
     public virtual int DoublesAStat(StatAttribute stat) { return 1; }
     public virtual bool NegatesWeatherEffects() { return false; }
@@ -37,4 +37,10 @@ public abstract class AbilityBase
     public virtual MoveBase ChangeMovesToDifferentTypeAndIncreasesTheirPower(MoveBase move) { return move; }
     public virtual bool PreventCertainStatusCondition(ConditionID iD) { return false; }
     public virtual bool PreventFoeFromEscapingBattle() { return false; }
+    public virtual bool AffectsHpByXEachTurnWithWeather(Pokemon pokemon,WeatherEffectID weather) { return false; }
+    protected const float HpAmountDeductedByWeather = 1f / 8f;
+    protected const float HpAmountHealedByWeather = 1f / 16f;
+    public virtual float AlterDamageTaken(Pokemon defendingPokemon,ElementType attackType,WeatherEffectID weather) { return 1f; }
+    public virtual float LowersDamageTakeSuperEffectiveMoves(float typeEffectiveness) { return 1f; }
+    protected const float DamageLoweredPercentage = 2f / 3f;
 }

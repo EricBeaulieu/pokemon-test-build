@@ -70,6 +70,16 @@ public static class SavingSystem
         trainersToBeSaved.Push(trainerID);
     }
 
+    public static bool GetTrainerSave(int trainerID)
+    {
+        if (trainersToBeSaved.Contains(trainerID))
+        {
+            return true;
+        }
+
+        return (PlayerPrefs.GetInt(trainerID.ToString()) == 1);
+    }
+
     public static List<Pokemon> LoadPlayerParty()
     {
         List<Pokemon> savedParty = new List<Pokemon>();
@@ -85,10 +95,5 @@ public static class SavingSystem
             }
         }
         return savedParty;
-    }
-
-    public static bool GetTrainerSave(int trainerID)
-    {
-        return (PlayerPrefs.GetInt(trainerID.ToString()) == 1);
     }
 }

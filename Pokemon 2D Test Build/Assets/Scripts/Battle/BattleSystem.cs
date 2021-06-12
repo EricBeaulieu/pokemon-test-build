@@ -16,7 +16,7 @@ public class BattleSystem : MonoBehaviour
 
     public event Action<bool> OnBattleOver;
     //inbattle,wasShift
-    public event Action<bool,bool> OpenPokemonParty;
+    public event Action<bool> OpenPokemonParty;
 
     [SerializeField] BattleDialogBox dialogBox;
     [SerializeField] ActionSelectionEventSelector actionSelectionEventSelector;
@@ -355,7 +355,7 @@ public class BattleSystem : MonoBehaviour
     {
         if(playerBattleUnit.CanSwitchOutOrFlee() == true)
         {
-            OpenPokemonParty(true,false);
+            OpenPokemonParty(false);
         }
         else
         {
@@ -533,7 +533,7 @@ public class BattleSystem : MonoBehaviour
 
         yield return dialogBox.SetChoiceBox(() =>
         {
-            OpenPokemonParty(true, true);
+            OpenPokemonParty(true);
         }
         , () =>
         {
@@ -644,7 +644,7 @@ public class BattleSystem : MonoBehaviour
         //If current pokemon has fainted then it goes to the party system and waits on the selector
         if (playerBattleUnit.SendOutPokemonOnTurnEnd == true)
         {
-            OpenPokemonParty(true,false);
+            OpenPokemonParty(false);
         }
         else
         {
@@ -766,6 +766,11 @@ public class BattleSystem : MonoBehaviour
                             targetUnit.PlayHitAnimation();
                         }
 
+                        if (damageDetails.damageNullified == true)
+                        {
+                            break;
+                        }
+
                         yield return targetUnit.HUD.UpdateHPDamage(hpPriorToAttack);
 
                         if(damageDetails.criticalHit > 1 && i < attackLoop)
@@ -796,10 +801,18 @@ public class BattleSystem : MonoBehaviour
                         targetUnit.PlayHitAnimation();
                     }
 
-                    yield return targetUnit.HUD.UpdateHPDamage(hpPriorToAttack);
+                    if(hpPriorToAttack > targetUnit.pokemon.currentHitPoints)
+                    {
+                        yield return targetUnit.HUD.UpdateHPDamage(hpPriorToAttack);
+                    }
                 }
                 
                 yield return ShowDamageDetails(damageDetails, targetUnit);
+                if(damageDetails.damageNullified == true)
+                {
+                    yield return targetUnit.HUD.UpdateHPRecovered(targetUnit.pokemon.currentHitPoints- hpPriorToAttack);
+                    yield break;
+                }
 
                 if (move.moveBase.MultiStrikeMove == true && damageDetails.typeEffectiveness != 0)
                 {
@@ -1153,6 +1166,12 @@ public class BattleSystem : MonoBehaviour
         else if (damageDetails.typeEffectiveness > 1f)
         {
             yield return dialogBox.TypeDialog($"It's super effective!");
+        }
+
+        if(damageDetails.abilityActivation == true)
+        {
+            battleUnit.OnAbilityActivation();
+            yield return ShowStatusChanges(battleUnit.pokemon);
         }
     }
 
@@ -1615,9 +1634,24 @@ public class BattleSystem : MonoBehaviour
         if(currentHP != sourceUnit.pokemon.currentHitPoints)
         {
             sourceUnit.PlayHitAnimation();
+            yield return sourceUnit.HUD.UpdateHPDamage(currentHP);
         }
 
-        yield return sourceUnit.HUD.UpdateHPDamage(currentHP);
+        currentHP = sourceUnit.pokemon.currentHitPoints;
+        if (sourceUnit.pokemon.ability.AffectsHpByXEachTurnWithWeather(sourceUnit.pokemon, weather.Id) == true)
+        {
+            sourceUnit.OnAbilityActivation();
+            yield return ShowStatusChanges(sourceUnit.pokemon);
+            if (currentHP < sourceUnit.pokemon.currentHitPoints)
+            {
+                yield return sourceUnit.HUD.UpdateHPRecovered(sourceUnit.pokemon.currentHitPoints - currentHP);
+            }
+            else
+            {
+                yield return sourceUnit.HUD.UpdateHPDamage(currentHP);
+            }
+        }
+
 
         if (sourceUnit.pokemon.currentHitPoints <= 0)
         {
