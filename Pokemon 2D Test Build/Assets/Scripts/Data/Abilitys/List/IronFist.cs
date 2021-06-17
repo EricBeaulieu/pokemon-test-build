@@ -10,12 +10,12 @@ public class IronFist : AbilityBase
     {
         return "Powers up punching moves.";
     }
-    public override float PowerUpCertainMoves(Pokemon attackingPokemon, Pokemon defendingPokemon, MoveBase currentMove)
+    public override float PowerUpCertainMoves(Pokemon attackingPokemon, Pokemon defendingPokemon, MoveBase currentMove, WeatherEffectID weather)
     {
         if (currentMove.PunchMove == true)
         {
             return 1.2f;
         }
-        return base.PowerUpCertainMoves(attackingPokemon, defendingPokemon, currentMove);
+        return base.PowerUpCertainMoves(attackingPokemon, defendingPokemon, currentMove,weather);
     }
 }

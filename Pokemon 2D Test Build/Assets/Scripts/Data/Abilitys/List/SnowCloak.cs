@@ -10,12 +10,12 @@ public class SnowCloak : AbilityBase
     {
         return "Boosts evasiveness in a hailstorm.";
     }
-    public override float AlterStatDuringWeatherEffect(WeatherEffectID iD, StatAttribute statAffected)
+    public override float AlterStat(WeatherEffectID iD, StatAttribute statAffected)
     {
         if (iD == WeatherEffectID.Hail && statAffected == StatAttribute.Evasion)
         {
             return 1.2f;
         }
-        return base.AlterStatDuringWeatherEffect(iD, statAffected);
+        return base.AlterStat(iD, statAffected);
     }
 }

@@ -10,12 +10,12 @@ public class StrongJaw : AbilityBase
     {
         return "The Pokémon's strong jaw boosts the power of its biting moves.";
     }
-    public override float PowerUpCertainMoves(Pokemon attackingPokemon, Pokemon defendingPokemon, MoveBase currentMove)
+    public override float PowerUpCertainMoves(Pokemon attackingPokemon, Pokemon defendingPokemon, MoveBase currentMove,WeatherEffectID weather)
     {
         if (currentMove.BitingMove == true)
         {
             return 1.5f;
         }
-        return base.PowerUpCertainMoves(attackingPokemon, defendingPokemon, currentMove);
+        return base.PowerUpCertainMoves(attackingPokemon, defendingPokemon, currentMove,weather);
     }
 }

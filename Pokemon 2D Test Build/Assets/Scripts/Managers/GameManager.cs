@@ -148,11 +148,10 @@ public class GameManager : MonoBehaviour
         overWorldCamera.gameObject.SetActive(false);
         _inBattle = true;
 
-        PokemonParty currentParty = playerController.GetComponent<PokemonParty>();
         Pokemon currentWildPokemon = _levelManager.WildPokemon();
 
         battleSystem.SetupBattleArt(_levelManager.GetBattleEnvironmentArt);
-        battleSystem.StartBattle(currentParty,currentWildPokemon);
+        battleSystem.StartBattle(playerController, currentWildPokemon);
     }
 
     public void StartTrainerBattle(TrainerController currentTrainer)
@@ -163,12 +162,10 @@ public class GameManager : MonoBehaviour
         _inBattle = true;
         trainerController = currentTrainer;
 
-        PokemonParty currentParty = playerController.pokemonParty;
-        PokemonParty trainerParty = currentTrainer.pokemonParty;
-        trainerParty.HealAllPokemonInParty();
+        trainerController.pokemonParty.HealAllPokemonInParty();
 
         battleSystem.SetupBattleArt(_levelManager.GetBattleEnvironmentArt);
-        battleSystem.StartBattle(currentParty, trainerParty);
+        battleSystem.StartBattle(playerController, trainerController);
     }
 
     void EndBattle(bool wasWon)

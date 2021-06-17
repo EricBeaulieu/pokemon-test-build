@@ -31,6 +31,11 @@ public class Spikes : EntryHazardBase
             return;
         }
 
+        if (pokemon.ability.Id == AbilityID.Levitate)
+        {
+            return;
+        }
+
         int damage = pokemon.maxHitPoints / (10 - (layers * 2));
 
         if (damage <= 0)

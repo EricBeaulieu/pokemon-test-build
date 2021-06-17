@@ -18,10 +18,10 @@ public class InBattleItem : MonoBehaviour
 
     public IEnumerator FollowTheRoute()
     {
-        Vector2 p0 = pokeballRoute.GetChild(0).position;
-        Vector2 p1 = pokeballRoute.GetChild(1).position;
-        Vector2 p2 = pokeballRoute.GetChild(2).position;
-        Vector2 p3 = pokeballRoute.GetChild(3).position;
+        Vector3 p0 = pokeballRoute.GetChild(0).position;
+        Vector3 p1 = pokeballRoute.GetChild(1).position;
+        Vector3 p2 = pokeballRoute.GetChild(2).position;
+        Vector3 p3 = pokeballRoute.GetChild(3).position;
         float tParam = 0f;
 
         while (tParam < 1)

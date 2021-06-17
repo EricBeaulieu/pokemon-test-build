@@ -10,8 +10,12 @@ public class Intimidate : AbilityBase
     {
         return "The Pokémon intimidates opposing Pokémon upon entering battle, lowering their Attack stat.";
     }
-    public override StatBoost OnEntryLowerStat()
+    public override StatBoost OnEntryLowerStat(AbilityID opposingAbility)
     {
+        if(opposingAbility == AbilityID.InnerFocus || opposingAbility == AbilityID.Oblivious || opposingAbility == AbilityID.Scrappy || opposingAbility == AbilityID.OwnTempo)
+        {
+            return null;
+        }
         return new StatBoost() { stat = StatAttribute.Attack, boost = -1 };
     }
 }

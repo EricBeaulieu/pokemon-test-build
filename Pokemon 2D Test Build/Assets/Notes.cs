@@ -22,7 +22,6 @@ public class Notes
     //normalize to change the type of status moves as well
 
     //Add in specific abilities
-    //levitate
     //scrappy
 
     //roost creating it so the pokemon can get hit by ground moves
@@ -39,14 +38,12 @@ public class Notes
 
     //On receiving a status play animation, nothing set yet possibly same as the enqueue string thing but with condition ID's as an addition and on show changes have it play the animation
     //Roar
-    //Saving
 
     //Wishes
     //Overworld effects with abilitities
 
     //Bugs
-
-    //cannot interact with objects from different scene
+    
     //on turn end for bound moves the pokemon doesnt play flash of hit animation
     //trainer when walking for some reason got into a half positionand stuck while walking. no idea how i created the bug
     //place trainer in path off start, let them stand and hit them and recreate this bug

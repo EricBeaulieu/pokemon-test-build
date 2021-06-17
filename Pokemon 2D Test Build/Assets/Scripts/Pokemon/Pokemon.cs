@@ -280,7 +280,7 @@ public class Pokemon {
             statValue *= reduction.Value;
         }
 
-        statValue *= ability.AlterStatDuringWeatherEffect(BattleSystem.GetCurrentWeather,currentStat);
+        statValue *= ability.AlterStat(BattleSystem.GetCurrentWeather,currentStat);
 
         statValue *= ability.DoublesAStat(currentStat);
 
@@ -373,15 +373,20 @@ public class Pokemon {
 
         if(damageDetails.typeEffectiveness == 0)//If it doesnt effect the pokemon then just end it right here
         {
-            return damageDetails;
+            if(attackingPokemon.ability.DamageDealingMovesCutThroughNaturalImmunity(this,move.Type) == true)
+            {
+                damageDetails.typeEffectiveness = 1;
+            }
+            else
+            {
+                return damageDetails;
+            }
         }
 
         //Critical Hit Chance
-        if (Random.value * 100 <= 6.25f)
+        if (Random.value * 100 <= move.BaseCriticalHitRate)
         {
-            damageDetails.criticalHit = 1.5f;
-
-            //If sniper then make 2.
+            damageDetails.criticalHit = attackingPokemon.ability.AltersCriticalHitDamage();
 
             if (ability.PreventsCriticalHits() == true)
             {
@@ -396,11 +401,27 @@ public class Pokemon {
 
         //Ability
         float abilityBonus = attackingPokemon.ability.BoostACertainTypeInAPinch(attackingPokemon, move.Type);
-        abilityBonus *= attackingPokemon.ability.PowerUpCertainMoves(attackingPokemon,this, move);
-        abilityBonus *= ability.AlterDamageTaken(this, move.Type,BattleSystem.GetCurrentWeather);
+        abilityBonus *= attackingPokemon.ability.PowerUpCertainMoves(attackingPokemon,this, move,BattleSystem.GetCurrentWeather);
+        abilityBonus *= ability.AlterDamageTaken(this, move,BattleSystem.GetCurrentWeather);
         abilityBonus *= ability.LowersDamageTakeSuperEffectiveMoves(damageDetails.typeEffectiveness);
 
-        if(abilityBonus == 0)
+        StatBoost defenderAbilityStatBoost = ability.AlterStatAfterTakingDamageFromCertainType(move.Type);
+        StatBoost attackerAbilityStatBoost = ability.AlterStatAfterTakingDamage(move);
+
+        if(defenderAbilityStatBoost != null)
+        {
+            damageDetails.abilityActivation = true;
+            damageDetails.defendersStatBoostByAbility.Add(defenderAbilityStatBoost);
+        }
+
+        if (attackerAbilityStatBoost != null)
+        {
+            damageDetails.abilityActivation = true;
+            damageDetails.attackersStatBoostByDefendersAbility.Add(attackerAbilityStatBoost);
+        }
+
+
+        if (abilityBonus == 0)
         {
             damageDetails.criticalHit = 1f;
             damageDetails.typeEffectiveness = 1;

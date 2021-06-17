@@ -6,33 +6,37 @@ public enum AbilityID
 {
     NA,
     //A
-    Adaptability, Aerilate, AirLock,
+    Adaptability, Aerilate, AirLock, AngerPoint,
     //B
-    BattleArmor, BigPecks, Blaze,
+    BattleArmor, BigPecks, Blaze, Bulletproof,
     //C
-    Chlorophyll, ClearBody, CloudNine, Competitive, CuteCharm,
+    Chlorophyll, ClearBody, CloudNine, Competitive, CompoundEyes,
+    CuteCharm,
     //D
-    Defiant, DragonsMaw, Drizzle, Drought,DrySkin,
+    Damp, Defiant, Download, DragonsMaw, Drizzle,
+    Drought, DrySkin,
     //E
     EffectSpore,
     //F
-    Filter, FlameBody, FlareBoost, FullMetalBody, FurCoat,
+    Filter, FlameBody, FlareBoost, FlashFire, FullMetalBody,
+    FurCoat,
     //G
-    Galvanize, Guts,
+    Galvanize, Gooey, Guts,
     //H
-    HugePower, HyperCutter,
+    Heatproof, HugePower, HyperCutter,
     //I
     IceBody, IceScales, Immunity, InnerFocus, Insomnia,
     Intimidate, IronFist,
     //J
+    Justified,
     //K
     KeenEye,
     //L
-    Limber,
+    LeafGuard,Levitate, LightningRod, Limber,
     //M
-    MagmaArmor, MarvelScale, MegaLauncher,
+    MagmaArmor, MarvelScale, MegaLauncher, MotorDrive, Multiscale,
     //N
-    Neuroforce, Normalize,
+    Neuroforce, NoGuard, Normalize,
     //O
     Oblivious, Overgrown, OwnTempo,
     //P
@@ -40,23 +44,26 @@ public enum AbilityID
     //Q
     QuickFeet,
     //R
-    RainDish, Reckless, Refrigerate,
+    RainDish, Rattled, Reckless, Refrigerate,
     //S
-    SandRush, SandStream, SandVeil,ShellArmor, SkillLink,
-    SlushRush, SnowCloak, SnowWarning, SolarPower, SolidRock,
-    Static, Steelworker, StrongJaw, Swarm, SwiftSwim,
+    SandForce, SandRush, SandStream, SandVeil, SapSipper,
+    Scrappy, ShellArmor, SkillLink, SlushRush, Sniper,
+    SnowCloak, SnowWarning, SolarPower, SolidRock, Soundproof,
+    SpeedBoost, Static, SteamEngine, Steelworker, StormDrain,
+    StrongJaw, Swarm, SwiftSwim,
     //T
-    Technician, TintedLens,Torrent, ToughClaws, ToxicBoost,
-    Transistor,
+    TanglingHair, Technician, ThickFat, TintedLens,Torrent,
+    ToughClaws, ToxicBoost, Transistor,
     //U
     //V
     VitalSpirit,
     //W
-    WaterVeil, WhiteSmoke,
+    WaterAbsorb, WaterBubble, WaterCompaction, WaterVeil, WhiteSmoke,
+    WonderGuard,
     //X
     //Y
     //Z
-    
+
 }
 
 public class AbilityDB

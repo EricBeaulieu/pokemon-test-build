@@ -27,7 +27,7 @@ public static class PokemonSavingSystem
 
         for (int i = 0; i < PokemonBase.MAX_NUMBER_OF_MOVES; i++)
         {
-            if (pokemon.moves[i] != null)
+            if (i < pokemon.moves.Count)
             {
                 AddData(GetAssetPath(pokemon.moves[i].moveBase));
                 AddData(pokemon.moves[i].pP.ToString());

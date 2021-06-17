@@ -9,6 +9,8 @@ public class DamageDetails
     public float typeEffectiveness { get; set; }
     public bool abilityActivation { get; set; }
     public bool damageNullified { get; set; }
+    public List<StatBoost> defendersStatBoostByAbility { get; set; }
+    public List<StatBoost> attackersStatBoostByDefendersAbility { get; set; }
 
     public DamageDetails()
     {
@@ -17,5 +19,7 @@ public class DamageDetails
         typeEffectiveness = 1;
         abilityActivation = false;
         damageNullified = false;
+        defendersStatBoostByAbility = new List<StatBoost>();
+        attackersStatBoostByDefendersAbility = new List<StatBoost>();
     }
 }

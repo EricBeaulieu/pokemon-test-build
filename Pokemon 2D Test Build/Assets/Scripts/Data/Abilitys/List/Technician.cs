@@ -10,12 +10,12 @@ public class Technician : AbilityBase
     {
         return "Powers up the Pokémon's weaker moves.";
     }
-    public override float PowerUpCertainMoves(Pokemon attackingPokemon, Pokemon defendingPokemon, MoveBase currentMove)
+    public override float PowerUpCertainMoves(Pokemon attackingPokemon, Pokemon defendingPokemon, MoveBase currentMove, WeatherEffectID weather)
     {
         if (currentMove.MovePower <= 60)
         {
             return 1.5f;
         }
-        return base.PowerUpCertainMoves(attackingPokemon, defendingPokemon, currentMove);
+        return base.PowerUpCertainMoves(attackingPokemon, defendingPokemon, currentMove,weather);
     }
 }

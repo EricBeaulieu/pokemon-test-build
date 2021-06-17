@@ -10,13 +10,13 @@ public class WaterVeil : AbilityBase
     {
         return "The Pokémon is covered with a water veil, which prevents the Pokémon from getting a burn.";
     }
-    public override bool PreventCertainStatusCondition(ConditionID iD)
+    public override bool PreventCertainStatusCondition(ConditionID iD, WeatherEffectID weather)
     {
         if (iD == ConditionID.Burn)
         {
             return true;
         }
-        return base.PreventCertainStatusCondition(iD);
+        return base.PreventCertainStatusCondition(iD,weather);
     }
     public override string OnAbilitityActivation(Pokemon pokemon)
     {

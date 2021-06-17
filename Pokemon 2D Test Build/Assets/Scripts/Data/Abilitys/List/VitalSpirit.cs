@@ -10,13 +10,13 @@ public class VitalSpirit : AbilityBase
     {
         return "The Pokémon is full of vitality, and that prevents it from falling asleep.";
     }
-    public override bool PreventCertainStatusCondition(ConditionID iD)
+    public override bool PreventCertainStatusCondition(ConditionID iD, WeatherEffectID weather)
     {
         if (iD == ConditionID.Sleep)
         {
             return true;
         }
-        return base.PreventCertainStatusCondition(iD);
+        return base.PreventCertainStatusCondition(iD,weather);
     }
     public override string OnAbilitityActivation(Pokemon pokemon)
     {

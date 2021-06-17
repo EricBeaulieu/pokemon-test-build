@@ -10,13 +10,13 @@ public class Immunity : AbilityBase
     {
         return "The immune system of the Pokémon prevents it from getting poisoned.";
     }
-    public override bool PreventCertainStatusCondition(ConditionID iD)
+    public override bool PreventCertainStatusCondition(ConditionID iD, WeatherEffectID weather)
     {
         if (iD == ConditionID.Poison || iD == ConditionID.ToxicPoison)
         {
             return true;
         }
-        return base.PreventCertainStatusCondition(iD);
+        return base.PreventCertainStatusCondition(iD,weather);
     }
     public override string OnAbilitityActivation(Pokemon pokemon)
     {

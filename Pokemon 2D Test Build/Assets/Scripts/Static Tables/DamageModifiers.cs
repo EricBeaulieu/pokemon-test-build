@@ -5,6 +5,7 @@ using UnityEngine;
 public static class DamageModifiers
 {
     static List<MoveBase> _movesThatLeavesTargetWithOneHP = new List<MoveBase>();
+    public static float CriticalHitModifier { get; } = 1.5f;
 
     static float[,] _typeChart =
     {

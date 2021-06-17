@@ -10,13 +10,13 @@ public class SolarPower : AbilityBase
     {
         return "Boosts the Sp. Atk stat in harsh sunlight, but HP decreases every turn.";
     }
-    public override float AlterStatDuringWeatherEffect(WeatherEffectID iD, StatAttribute statAffected)
+    public override float AlterStat(WeatherEffectID iD, StatAttribute statAffected)
     {
         if (iD == WeatherEffectID.Sunshine && statAffected == StatAttribute.SpecialAttack)
         {
             return 1.5f;
         }
-        return base.AlterStatDuringWeatherEffect(iD, statAffected);
+        return base.AlterStat(iD, statAffected);
     }
     public override bool AffectsHpByXEachTurnWithWeather(Pokemon pokemon, WeatherEffectID weather)
     {

@@ -10,12 +10,12 @@ public class Adaptability : AbilityBase
     {
         return "Powers up moves of the same type as the Pokémon.";
     }
-    public override float PowerUpCertainMoves(Pokemon attackingPokemon, Pokemon defendingPokemon, MoveBase currentMove)
+    public override float PowerUpCertainMoves(Pokemon attackingPokemon, Pokemon defendingPokemon, MoveBase currentMove, WeatherEffectID weather)
     {
         if (attackingPokemon.pokemonBase.IsType(currentMove.Type) == true)
         {
             return 1.33f;
         }
-        return base.PowerUpCertainMoves(attackingPokemon, defendingPokemon, currentMove);
+        return base.PowerUpCertainMoves(attackingPokemon, defendingPokemon, currentMove,weather);
     }
 }

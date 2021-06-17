@@ -10,12 +10,12 @@ public class SandVeil : AbilityBase
     {
         return "Boosts the Pokémon's evasiveness in a sandstorm.";
     }
-    public override float AlterStatDuringWeatherEffect(WeatherEffectID iD, StatAttribute statAffected)
+    public override float AlterStat(WeatherEffectID iD, StatAttribute statAffected)
     {
         if (iD == WeatherEffectID.Sandstorm && statAffected == StatAttribute.Evasion)
         {
             return 1.2f;
         }
-        return base.AlterStatDuringWeatherEffect(iD, statAffected);
+        return base.AlterStat(iD, statAffected);
     }
 }

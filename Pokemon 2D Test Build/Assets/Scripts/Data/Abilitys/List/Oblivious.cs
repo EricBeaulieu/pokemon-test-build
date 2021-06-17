@@ -10,13 +10,13 @@ public class Oblivious : AbilityBase
     {
         return "The Pokémon is oblivious, and that keeps it from being infatuated or falling for taunts.";
     }
-    public override bool PreventCertainStatusCondition(ConditionID iD)
+    public override bool PreventCertainStatusCondition(ConditionID iD, WeatherEffectID weather)
     {
         if (iD == ConditionID.Infatuation)
         {
             return true;
         }
-        return base.PreventCertainStatusCondition(iD);
+        return base.PreventCertainStatusCondition(iD,weather);
     }
     public override string OnAbilitityActivation(Pokemon pokemon)
     {

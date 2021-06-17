@@ -19,7 +19,8 @@ public abstract class AbilityBase
     /// </summary>
     /// <returns></returns>
     public virtual WeatherEffectID OnStartWeatherEffect() { return WeatherEffectID.NA; }
-    public virtual StatBoost OnEntryLowerStat() { return null; }
+    public virtual StatBoost OnEntryLowerStat(AbilityID opposingAbility) { return null; }
+    public virtual StatBoost OnEntryRaiseStat(Pokemon opposingPokemon) { return null; }
     public virtual bool PreventsCriticalHits() { return false; }
     /// <summary>
     /// Checks the pokemons health if it is 1/3 or less
@@ -27,20 +28,28 @@ public abstract class AbilityBase
     /// </summary>
     public virtual float BoostACertainTypeInAPinch(Pokemon attackingPokemon, ElementType attackType) { return 1f; }
     protected const float HpRequiredToActivatePinch = 1f / 3f;
-    public virtual float AlterStatDuringWeatherEffect(WeatherEffectID iD,StatAttribute statAffected) { return 1f; }
+    public virtual float AlterStat(WeatherEffectID iD,StatAttribute statAffected) { return 1f; }
     public virtual StatBoost BoostStatSharplyIfAnyStatLowered() { return null; }
     public virtual int DoublesAStat(StatAttribute stat) { return 1; }
     public virtual bool NegatesWeatherEffects() { return false; }
     public virtual ConditionID ContactMoveMayCauseStatusEffect(Pokemon defendingPokemon, Pokemon attackingPokemon, MoveBase currentAttack) { return ConditionID.NA; }
-    public virtual float PowerUpCertainMoves(Pokemon attackingPokemon, Pokemon defendingPokemon, MoveBase currentMove) { return 1f; }
+    public virtual float PowerUpCertainMoves(Pokemon attackingPokemon, Pokemon defendingPokemon, MoveBase currentMove,WeatherEffectID weather) { return 1f; }
     public virtual bool MaximizeMultistrikeMovesHit() { return false; }
     public virtual MoveBase ChangeMovesToDifferentTypeAndIncreasesTheirPower(MoveBase move) { return move; }
-    public virtual bool PreventCertainStatusCondition(ConditionID iD) { return false; }
+    public virtual bool PreventCertainStatusCondition(ConditionID iD, WeatherEffectID weather) { return false; }
     public virtual bool PreventFoeFromEscapingBattle() { return false; }
     public virtual bool AffectsHpByXEachTurnWithWeather(Pokemon pokemon,WeatherEffectID weather) { return false; }
     protected const float HpAmountDeductedByWeather = 1f / 8f;
     protected const float HpAmountHealedByWeather = 1f / 16f;
-    public virtual float AlterDamageTaken(Pokemon defendingPokemon,ElementType attackType,WeatherEffectID weather) { return 1f; }
+    public virtual float AlterDamageTaken(Pokemon defendingPokemon,MoveBase move,WeatherEffectID weather) { return 1f; }
     public virtual float LowersDamageTakeSuperEffectiveMoves(float typeEffectiveness) { return 1f; }
     protected const float DamageLoweredPercentage = 2f / 3f;
+    public virtual StatBoost AlterStatAfterTakingDamageFromCertainType(ElementType attackType) { return null; }
+    public virtual StatBoost AlterStatAfterTakingDamage(MoveBase move) { return null; }
+    public virtual StatBoost AlterStatAtTurnEnd() { return null; }
+    public virtual bool DamageDealingMovesCutThroughNaturalImmunity(Pokemon defendingPokemon,ElementType attackType) { return false; }
+    public virtual StatBoost MaxOutStatUponCriticalHit(Pokemon defendingPokemon) { return null; }
+    public virtual bool IncomingAndOutgoingAttacksAlwaysLand() { return false; }
+    public virtual bool PreventsTheUseOfSpecificMoves(Pokemon attackingPokemon,MoveBase move) { return false; }
+    public virtual float AltersCriticalHitDamage() { return DamageModifiers.CriticalHitModifier; }
 }

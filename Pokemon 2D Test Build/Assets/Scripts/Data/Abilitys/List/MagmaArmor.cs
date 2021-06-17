@@ -10,13 +10,13 @@ public class MagmaArmor : AbilityBase
     {
         return "The Pokémon is covered with hot magma, which prevents the Pokémon from becoming frozen.";
     }
-    public override bool PreventCertainStatusCondition(ConditionID iD)
+    public override bool PreventCertainStatusCondition(ConditionID iD, WeatherEffectID weather)
     {
         if (iD == ConditionID.Frozen)
         {
             return true;
         }
-        return base.PreventCertainStatusCondition(iD);
+        return base.PreventCertainStatusCondition(iD,weather);
     }
     public override string OnAbilitityActivation(Pokemon pokemon)
     {

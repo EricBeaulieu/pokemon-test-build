@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 public class LevelManager : MonoBehaviour
 {
     [SerializeField] BattleFieldLayoutBaseSO currentAreaDetails;
+    [SerializeField] bool showLabelUponEntry = true;
     [SerializeField] bool grassOnlyWildPokemon = true;
     [SerializeField] List<Pokemon> wildPokemon;
     [SerializeField] GameSceneBaseSO sceneReference;

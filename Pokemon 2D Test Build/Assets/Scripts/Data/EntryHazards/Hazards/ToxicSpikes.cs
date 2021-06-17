@@ -37,6 +37,11 @@ public class ToxicSpikes : EntryHazardBase
             return;
         }
 
+        if(pokemon.ability.Id == AbilityID.Levitate)
+        {
+            return;
+        }
+
         if (layers == 0)
         {
             return;

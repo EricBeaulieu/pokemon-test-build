@@ -31,13 +31,23 @@ public class StickyWeb : EntryHazardBase
             return;
         }
 
+        if (pokemon.ability.Id == AbilityID.Levitate)
+        {
+            return;
+        }
+
         pokemon.statusChanges.Enqueue($"{pokemon.currentName} was caught in the sticky web");
     }
     public override StatBoost OnEntryLowerStat(Pokemon pokemon)
     {
         if (pokemon.pokemonBase.IsType(ElementType.Flying))
         {
-            return new StatBoost() { stat = StatAttribute.Speed, boost = 0 }; ;
+            return null;
+        }
+
+        if (pokemon.ability.Id == AbilityID.Levitate)
+        {
+            return null;
         }
 
         return new StatBoost() { stat = StatAttribute.Speed, boost = -1 };
