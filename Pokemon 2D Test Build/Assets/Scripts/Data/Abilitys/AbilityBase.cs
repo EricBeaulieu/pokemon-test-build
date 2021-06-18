@@ -35,7 +35,7 @@ public abstract class AbilityBase
     public virtual ConditionID ContactMoveMayCauseStatusEffect(Pokemon defendingPokemon, Pokemon attackingPokemon, MoveBase currentAttack) { return ConditionID.NA; }
     public virtual float PowerUpCertainMoves(Pokemon attackingPokemon, Pokemon defendingPokemon, MoveBase currentMove,WeatherEffectID weather) { return 1f; }
     public virtual bool MaximizeMultistrikeMovesHit() { return false; }
-    public virtual MoveBase ChangeMovesToDifferentTypeAndIncreasesTheirPower(MoveBase move) { return move; }
+    public virtual MoveBase AlterMoveDetails(MoveBase move) { return move; }
     public virtual bool PreventCertainStatusCondition(ConditionID iD, WeatherEffectID weather) { return false; }
     public virtual bool PreventFoeFromEscapingBattle() { return false; }
     public virtual bool AffectsHpByXEachTurnWithWeather(Pokemon pokemon,WeatherEffectID weather) { return false; }
@@ -52,4 +52,6 @@ public abstract class AbilityBase
     public virtual bool IncomingAndOutgoingAttacksAlwaysLand() { return false; }
     public virtual bool PreventsTheUseOfSpecificMoves(Pokemon attackingPokemon,MoveBase move) { return false; }
     public virtual float AltersCriticalHitDamage() { return DamageModifiers.CriticalHitModifier; }
+    public virtual bool PreventsOneHitKO(Pokemon defendingPokemon,int damage) { return false; }
+    public virtual bool PreventsRecoilDamage(MoveBase move) { return false; }
 }

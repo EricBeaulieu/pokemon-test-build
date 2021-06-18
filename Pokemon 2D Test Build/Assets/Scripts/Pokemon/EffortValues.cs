@@ -6,6 +6,7 @@ using UnityEngine;
 public class EarnableEV
 {
     [SerializeField] StatAttribute _statAttribute;
+    [Range(1,3)]
     [SerializeField] int _statValue;
 
     public StatAttribute statAttribute

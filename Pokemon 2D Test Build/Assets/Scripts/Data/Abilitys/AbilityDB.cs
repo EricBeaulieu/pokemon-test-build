@@ -23,7 +23,7 @@ public enum AbilityID
     //G
     Galvanize, Gooey, Guts,
     //H
-    Heatproof, HugePower, HyperCutter,
+    Heatproof, HugePower, Hustle, HyperCutter,
     //I
     IceBody, IceScales, Immunity, InnerFocus, Insomnia,
     Intimidate, IronFist,
@@ -44,13 +44,13 @@ public enum AbilityID
     //Q
     QuickFeet,
     //R
-    RainDish, Rattled, Reckless, Refrigerate,
+    RainDish, Rattled, Reckless, Refrigerate, RockHead,
     //S
     SandForce, SandRush, SandStream, SandVeil, SapSipper,
     Scrappy, ShellArmor, SkillLink, SlushRush, Sniper,
     SnowCloak, SnowWarning, SolarPower, SolidRock, Soundproof,
     SpeedBoost, Static, SteamEngine, Steelworker, StormDrain,
-    StrongJaw, Swarm, SwiftSwim,
+    StrongJaw, Sturdy, Swarm, SwiftSwim,
     //T
     TanglingHair, Technician, ThickFat, TintedLens,Torrent,
     ToughClaws, ToxicBoost, Transistor,

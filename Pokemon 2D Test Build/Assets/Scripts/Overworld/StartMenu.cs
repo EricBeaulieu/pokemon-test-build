@@ -21,7 +21,7 @@ public class StartMenu : MonoBehaviour
     public event Action StartMenuClosed;
     GameObject _lastSelected;
 
-    public void HandleAwake()
+    public void Initialization()
     {
         //Removes all listeners to prevent the same delegate from being called multiple times
         pokeDexButton.GetComponent<Button>().onClick.RemoveAllListeners();

@@ -13,8 +13,7 @@ public class PartySystem : MonoBehaviour
     PartyMemberUI[] _partyMemberSlots;
     [SerializeField] Button cancelButton;
 
-    //Clean this up later, just get it working for now and then clean up the code later
-    public BattleSystem battleSystemReference { get; set; }
+    BattleSystem battleSystemReference;
     public Action onCloseParty;
     List<Pokemon> _currentParty;
     Pokemon _currentlySelectedPokemon;
@@ -35,8 +34,9 @@ public class PartySystem : MonoBehaviour
     const int MESSAGEBOX_STANDARD_SIZE = 650;
     const int MESSAGEBOX_SELECTED_SIZE = 515;
 
-    void Awake()
+    public void Initialization(BattleSystem battleSystem)
     {
+        battleSystemReference = battleSystem;
         _partyMemberSlots = GetComponentsInChildren<PartyMemberUI>();
         summarySystem.OnClosedSummary += SelectBox;
     }

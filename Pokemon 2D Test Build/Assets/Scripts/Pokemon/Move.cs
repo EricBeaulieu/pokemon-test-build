@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class Move
 {
-
     public MoveBase moveBase { get; set; }
 
     public int pP { get; set; }

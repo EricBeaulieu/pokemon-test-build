@@ -48,21 +48,31 @@ public class MoveBase : ScriptableObject {
     [SerializeField] bool drainsHP;
     [SerializeField] float hpRecovered;
 
-    public MoveBase adjustedMovePower(ElementType newType,float powerIncrease)
-    {
-        MoveBase updatedMove = MoveBase.Instantiate(this);
+    [SerializeField] bool leavesTargetWith1HP;
 
-        updatedMove.elementType = newType;
-        updatedMove.power += Mathf.RoundToInt(updatedMove.power * powerIncrease);
-        return updatedMove;
+    public void adjustedMovePower(float powerIncrease)
+    {
+        power += Mathf.RoundToInt(power * powerIncrease);
     }
 
-    public MoveBase removeMoveSecondaryEffects()
+    public void adjustedMoveType(ElementType newType)
     {
-        MoveBase updatedMove = MoveBase.Instantiate(this);
+        elementType = newType;
+    }
 
-        updatedMove.secondaryEffects = new List<MoveSecondaryEffects>();
-        return updatedMove;
+    public void adjustedMoveAccuracy(float accuracyIncrease)
+    {
+        accuracy += Mathf.RoundToInt(accuracy * accuracyIncrease);
+    }
+
+    public void removeMoveSecondaryEffects()
+    {
+        secondaryEffects.Clear();
+    }
+
+    public MoveBase Clone()
+    {
+        return Instantiate(this);
     }
 
     #region Return Methods
@@ -203,6 +213,11 @@ public class MoveBase : ScriptableObject {
     public float HpRecovered
     {
         get { return hpRecovered; }
+    }
+
+    public bool LeavesTargetWith1HP
+    {
+        get { return leavesTargetWith1HP; }
     }
 
     #endregion

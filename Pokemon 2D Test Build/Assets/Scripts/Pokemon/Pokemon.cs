@@ -367,8 +367,6 @@ public class Pokemon {
     {
         DamageDetails damageDetails = new DamageDetails();
 
-        move = attackingPokemon.ability.ChangeMovesToDifferentTypeAndIncreasesTheirPower(move);
-
         damageDetails.typeEffectiveness = DamageModifiers.TypeChartEffectiveness(pokemonBase, move.Type);
 
         if(damageDetails.typeEffectiveness == 0)//If it doesnt effect the pokemon then just end it right here
@@ -460,12 +458,18 @@ public class Pokemon {
             damage = 1;
         }
 
-        if(DamageModifiers.LeavesTargetWithOneHP(move) == true)
+        if(move.LeavesTargetWith1HP == true)
         {
             if(damage >= currentHitPoints)
             {
                 damage = currentHitPoints - 1;
             }
+        }
+
+        if(ability.PreventsOneHitKO(this,damage) == true)
+        {
+            damage = maxHitPoints - 1;
+            damageDetails.abilityActivation = true;
         }
 
         UpdateHPDamage(damage);

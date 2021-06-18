@@ -10,12 +10,14 @@ public class Galvanize : AbilityBase
     {
         return "Normal-type moves become Electric-type moves. The power of those moves is boosted a little.";
     }
-    public override MoveBase ChangeMovesToDifferentTypeAndIncreasesTheirPower(MoveBase move)
+    public override MoveBase AlterMoveDetails(MoveBase move)
     {
         if (move.Type == ElementType.Normal)
         {
-            return move.adjustedMovePower(ElementType.Electric, 0.2f);
+            move = move.Clone();
+            move.adjustedMoveType(ElementType.Electric);
+            move.adjustedMovePower(0.2f);
         }
-        return base.ChangeMovesToDifferentTypeAndIncreasesTheirPower(move);
+        return base.AlterMoveDetails(move);
     }
 }

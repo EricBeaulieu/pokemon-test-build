@@ -21,7 +21,8 @@ public class BattleSystem : MonoBehaviour
     [SerializeField] ActionSelectionEventSelector actionSelectionEventSelector;
     [SerializeField] AttackSelectionEventSelector attackSelectionEventSelector;
 
-    List<TurnAttackDetails> _currentTurnDetails;
+    List<TurnAttackDetails> currentTurnDetails;
+    MoveBase alteredMove;
 
     PlayerController _playerController;
     TrainerController _trainerController;
@@ -134,7 +135,7 @@ public class BattleSystem : MonoBehaviour
 
     #endregion
 
-    public void HandleAwake()
+    public void Initialization()
     {
         gameObject.SetActive(false);
         inGameItemoffScreenPos = inGameItem.transform.localPosition;
@@ -174,6 +175,9 @@ public class BattleSystem : MonoBehaviour
         {
             Debug.LogWarning($"learnNewMoveManager has not been set");
         }
+
+        alteredMove = new MoveBase();
+        currentTurnDetails = new List<TurnAttackDetails>();
     }
 
     public void HandleUpdate()
@@ -217,7 +221,7 @@ public class BattleSystem : MonoBehaviour
         _isTrainerBattle = false;
 
         StartCoroutine(SetupBattle());
-        _currentTurnDetails = new List<TurnAttackDetails>();
+        currentTurnDetails.Clear();
     }
 
     public void StartBattle(PlayerController player, TrainerController trainer)
@@ -228,7 +232,7 @@ public class BattleSystem : MonoBehaviour
         _isTrainerBattle = true;
 
         StartCoroutine(SetupBattle());
-        _currentTurnDetails = new List<TurnAttackDetails>();
+        currentTurnDetails.Clear();
     }
 
     /// <summary>
@@ -414,7 +418,7 @@ public class BattleSystem : MonoBehaviour
         TurnAttackDetails turnAttack = new TurnAttackDetails(move, currentPokemon, enemyBattleUnit);
 
         _escapeAttempts = 0;
-        _currentTurnDetails.Add(turnAttack);
+        currentTurnDetails.Add(turnAttack);
         StartCoroutine(EnemyMove());
     }
 
@@ -514,9 +518,9 @@ public class BattleSystem : MonoBehaviour
         }
 
         TurnAttackDetails turnAttack = new TurnAttackDetails(currentAttack, enemyBattleUnit, playerBattleUnit);
-        _currentTurnDetails.Add(turnAttack);
+        currentTurnDetails.Add(turnAttack);
 
-        yield return RunThroughTurns(_currentTurnDetails);
+        yield return RunThroughTurns(currentTurnDetails);
     }
 
     IEnumerator TrainerAboutToUsePokemonFeature(Pokemon nextPokemon)
@@ -721,21 +725,23 @@ public class BattleSystem : MonoBehaviour
             yield break;
         }
 
-        if (CheckIfMoveHits(move.moveBase, sourceUnit.pokemon, targetUnit.pokemon) == true)
+        alteredMove = sourceUnit.pokemon.ability.AlterMoveDetails(move.moveBase);
+
+        if (CheckIfMoveHits(alteredMove, sourceUnit.pokemon, targetUnit.pokemon) == true)
         {
-            if (move.moveBase.MoveType == MoveType.Status)
+            if (alteredMove.MoveType == MoveType.Status)
             {
-                yield return RunMoveEffects(move.moveBase.MoveEffects, sourceUnit, targetUnit, move.moveBase, move.moveBase.Target);
+                yield return RunMoveEffects(alteredMove.MoveEffects, sourceUnit, targetUnit, alteredMove, alteredMove.Target);
             }
             else
             {
                 int attackLoop = 1;
 
-                if(move.moveBase.MultiStrikeMove == true)
+                if(alteredMove.MultiStrikeMove == true)
                 {
-                    if(move.moveBase.FixedNumberOfStrikes > 0)
+                    if(alteredMove.FixedNumberOfStrikes > 0)
                     {
-                        attackLoop = move.moveBase.FixedNumberOfStrikes;
+                        attackLoop = alteredMove.FixedNumberOfStrikes;
                     }
                     else
                     {
@@ -750,7 +756,7 @@ public class BattleSystem : MonoBehaviour
                     }
                 }
 
-                DamageDetails damageDetails = targetUnit.pokemon.TakeDamage(move.moveBase, sourceUnit.pokemon);
+                DamageDetails damageDetails = targetUnit.pokemon.TakeDamage(alteredMove, sourceUnit.pokemon);
 
                 if (attackLoop > 1)
                 {
@@ -760,10 +766,10 @@ public class BattleSystem : MonoBehaviour
                     {
                         if (i > 0)
                         {
-                            damageDetails = targetUnit.pokemon.TakeDamage(move.moveBase, sourceUnit.pokemon);
+                            damageDetails = targetUnit.pokemon.TakeDamage(alteredMove, sourceUnit.pokemon);
                         }
 
-                        if (move.moveBase.Target == MoveTarget.Foe && damageDetails.typeEffectiveness != 0)
+                        if (alteredMove.Target == MoveTarget.Foe && damageDetails.typeEffectiveness != 0)
                         {
                             targetUnit.PlayHitAnimation();
                         }
@@ -798,7 +804,7 @@ public class BattleSystem : MonoBehaviour
                 }
                 else
                 {
-                    if (move.moveBase.Target == MoveTarget.Foe && damageDetails.typeEffectiveness != 0)
+                    if (alteredMove.Target == MoveTarget.Foe && damageDetails.typeEffectiveness != 0)
                     {
                         targetUnit.PlayHitAnimation();
                     }
@@ -829,16 +835,16 @@ public class BattleSystem : MonoBehaviour
                     yield return ApplyStatChanges(damageDetails.attackersStatBoostByDefendersAbility, targetUnit, MoveTarget.Self,sourceUnit);
                 }
 
-                if (move.moveBase.MultiStrikeMove == true && damageDetails.typeEffectiveness != 0)
+                if (alteredMove.MultiStrikeMove == true && damageDetails.typeEffectiveness != 0)
                 {
                     yield return dialogBox.TypeDialog($"Hit {attackLoop} time(s)!");
                 }
 
                 if(sourceUnit.pokemon.HasCurrentVolatileStatus(ConditionID.HealBlock) == false)
                 {
-                    if (move.moveBase.DrainsHP == true && sourceUnit.pokemon.currentHitPoints != sourceUnit.pokemon.maxHitPoints && hpPriorToAttack - targetUnit.pokemon.currentHitPoints > 0)
+                    if (alteredMove.DrainsHP == true && sourceUnit.pokemon.currentHitPoints != sourceUnit.pokemon.maxHitPoints && hpPriorToAttack - targetUnit.pokemon.currentHitPoints > 0)
                     {
-                        int hpHealed = Mathf.CeilToInt((hpPriorToAttack - targetUnit.pokemon.currentHitPoints) * (move.moveBase.HpRecovered));
+                        int hpHealed = Mathf.CeilToInt((hpPriorToAttack - targetUnit.pokemon.currentHitPoints) * (alteredMove.HpRecovered));
 
                         hpHealed = Mathf.Clamp(hpHealed, 1, sourceUnit.pokemon.maxHitPoints - sourceUnit.pokemon.currentHitPoints);
                         sourceUnit.pokemon.UpdateHPRestored(hpHealed);
@@ -855,14 +861,14 @@ public class BattleSystem : MonoBehaviour
                 
             }
 
-            if (move.moveBase.SecondaryEffects != null && move.moveBase.SecondaryEffects.Count > 0 && targetUnit.pokemon.currentHitPoints > 0)
+            if (alteredMove.SecondaryEffects != null && alteredMove.SecondaryEffects.Count > 0 && targetUnit.pokemon.currentHitPoints > 0)
             {
-                foreach (var secondaryEffect in move.moveBase.SecondaryEffects)
+                foreach (var secondaryEffect in alteredMove.SecondaryEffects)
                 {
                     int rnd = Random.Range(1, 101);
                     if (rnd <= secondaryEffect.PercentChance)
                     {
-                        yield return RunMoveEffects(secondaryEffect, sourceUnit, targetUnit, move.moveBase, secondaryEffect.Target, (secondaryEffect.PercentChance<100)) ;
+                        yield return RunMoveEffects(secondaryEffect, sourceUnit, targetUnit, alteredMove, secondaryEffect.Target, (secondaryEffect.PercentChance<100)) ;
 
                         if (secondaryEffect.Volatiletatus == ConditionID.CursedUser)
                         {
@@ -876,7 +882,7 @@ public class BattleSystem : MonoBehaviour
                 }
             }
 
-            ConditionID newCondition = targetUnit.pokemon.ability.ContactMoveMayCauseStatusEffect(targetUnit.pokemon, sourceUnit.pokemon, move.moveBase);
+            ConditionID newCondition = targetUnit.pokemon.ability.ContactMoveMayCauseStatusEffect(targetUnit.pokemon, sourceUnit.pokemon, alteredMove);
 
             if (newCondition > ConditionID.NA && newCondition <= ConditionID.ToxicPoison)
             {
@@ -892,40 +898,46 @@ public class BattleSystem : MonoBehaviour
                 if (sourceUnit.pokemon.HasCurrentVolatileStatus(newCondition) == false)
                 {
                     targetUnit.OnAbilityActivation();
-                    sourceUnit.pokemon.SetVolatileStatus(newCondition, move.moveBase,sourceUnit);
+                    sourceUnit.pokemon.SetVolatileStatus(newCondition, alteredMove,sourceUnit);
                     yield return ShowStatusChanges(sourceUnit.pokemon);
                 }
             }
 
             //Recoil
-            if (move.moveBase.RecoilType != Recoil.NA)
+            if (alteredMove.RecoilType != Recoil.NA)
             {
-                int recoilDamage = 0;
+                if(sourceUnit.pokemon.ability.PreventsRecoilDamage(alteredMove) == false && move.moveBase != struggle)
+                {
+                    int recoilDamage = 0;
 
-                if(move.moveBase.RecoilType == Recoil.DamageDealt)
-                {
-                    recoilDamage = hpPriorToAttack - targetUnit.pokemon.currentHitPoints;
-                    recoilDamage = Mathf.CeilToInt(recoilDamage * move.moveBase.RecoilPercentage);
-                }
-                else if(move.moveBase.RecoilType == Recoil.UsersCurrentHP)
-                {
-                    recoilDamage = sourceUnit.pokemon.currentHitPoints;
-                    recoilDamage = Mathf.CeilToInt(recoilDamage * move.moveBase.RecoilPercentage);
-                }
-                else//users max hp
-                {
-                    recoilDamage = sourceUnit.pokemon.maxHitPoints;
-                    recoilDamage = Mathf.CeilToInt(recoilDamage * move.moveBase.RecoilPercentage);
-                }
-                
-                previousHP = sourceUnit.pokemon.currentHitPoints;
-                sourceUnit.pokemon.UpdateHPDamage(recoilDamage);
-                yield return sourceUnit.HUD.UpdateHPDamage(previousHP);
-                yield return dialogBox.TypeDialog($"{sourceUnit.pokemon.currentName} is hit with recoil!");
+                    if (alteredMove.RecoilType == Recoil.DamageDealt)
+                    {
+                        recoilDamage = hpPriorToAttack - targetUnit.pokemon.currentHitPoints;
+                        recoilDamage = Mathf.CeilToInt(recoilDamage * alteredMove.RecoilPercentage);
+                    }
+                    else if (alteredMove.RecoilType == Recoil.UsersCurrentHP)
+                    {
+                        recoilDamage = sourceUnit.pokemon.currentHitPoints;
+                        recoilDamage = Mathf.CeilToInt(recoilDamage * alteredMove.RecoilPercentage);
+                    }
+                    else//users max hp
+                    {
+                        recoilDamage = sourceUnit.pokemon.maxHitPoints;
+                        recoilDamage = Mathf.CeilToInt(recoilDamage * alteredMove.RecoilPercentage);
+                    }
 
-                if (sourceUnit.pokemon.currentHitPoints <= 0)
-                {
-                    yield return PokemonHasFainted(sourceUnit);
+                    previousHP = sourceUnit.pokemon.currentHitPoints;
+                    sourceUnit.pokemon.UpdateHPDamage(recoilDamage);
+                    yield return sourceUnit.HUD.UpdateHPDamage(previousHP);
+                    if(alteredMove.RecoilPercentage < 100)
+                    {
+                        yield return dialogBox.TypeDialog($"{sourceUnit.pokemon.currentName} is hit with recoil!");
+                    }
+
+                    if (sourceUnit.pokemon.currentHitPoints <= 0)
+                    {
+                        yield return PokemonHasFainted(sourceUnit);
+                    }
                 }
             }
 
@@ -937,7 +949,7 @@ public class BattleSystem : MonoBehaviour
         }
 
         //explosive moves incase they miss
-        if (move.moveBase.RecoilType == Recoil.UsersMaximumHP && move.moveBase.RecoilPercentage >= 100 && sourceUnit.pokemon.currentHitPoints <= 0)
+        if (alteredMove.RecoilType == Recoil.UsersMaximumHP && alteredMove.RecoilPercentage >= 100 && sourceUnit.pokemon.currentHitPoints > 0)
         {
             int recoilDamage = sourceUnit.pokemon.currentHitPoints;
             sourceUnit.pokemon.UpdateHPDamage(recoilDamage);
@@ -1574,6 +1586,12 @@ public class BattleSystem : MonoBehaviour
         if (battleUnit.isPlayerPokemon)
         {
             yield return ActivatePokemonAbilityUponEntry(playerBattleUnit, enemyBattleUnit);
+
+            if (enemyBattleUnit.pokemon.currentHitPoints <= 0)
+            {
+                yield return SwitchPokemonIEnumerator(enemyBattleUnit, _trainerController.pokemonParty.GetFirstHealthyPokemon());
+            }
+
             if (currentPokemonFainted == true)
             {
                 PlayerActions();
@@ -1586,7 +1604,6 @@ public class BattleSystem : MonoBehaviour
         else
         {
             yield return ActivatePokemonAbilityUponEntry(enemyBattleUnit, playerBattleUnit);
-            //yield return RunThroughTurns(_currentTurnDetails);
         }
     }
 

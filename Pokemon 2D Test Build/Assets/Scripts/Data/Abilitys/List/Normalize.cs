@@ -10,8 +10,11 @@ public class Normalize : AbilityBase
     {
         return "All the Pokémon's moves become Normal type. The power of those moves is boosted a little.";
     }
-    public override MoveBase ChangeMovesToDifferentTypeAndIncreasesTheirPower(MoveBase move)
+    public override MoveBase AlterMoveDetails(MoveBase move)
     {
-        return move.adjustedMovePower(ElementType.Normal, 0.2f);
+        move = move.Clone();
+        move.adjustedMoveType(ElementType.Normal);
+        move.adjustedMovePower(0.2f);
+        return move;
     }
 }

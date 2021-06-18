@@ -18,10 +18,8 @@ public class PokemonBase : ScriptableObject {
     [TextArea]
     [SerializeField] string _pokedexDescription;
     [SerializeField] string _classification;
-    [SerializeField] float _heightInFeet;
     [SerializeField] float _heightInMeters;
     [SerializeField] float _weightInPounds;
-    [SerializeField] float _weightInKilograms;
     [SerializeField] int _captureRate;
     [SerializeField] List<EarnableEV> rewardedEffortValue;
 

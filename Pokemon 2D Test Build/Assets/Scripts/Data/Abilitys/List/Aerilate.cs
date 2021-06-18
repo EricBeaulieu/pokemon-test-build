@@ -10,12 +10,14 @@ public class Aerilate : AbilityBase
     {
         return "Normal-type moves become Flying-type moves. The power of those moves is boosted a little.";
     }
-    public override MoveBase ChangeMovesToDifferentTypeAndIncreasesTheirPower(MoveBase move)
+    public override MoveBase AlterMoveDetails(MoveBase move)
     {
         if (move.Type == ElementType.Normal)
         {
-            return move.adjustedMovePower(ElementType.Flying, 0.2f);
+            move = move.Clone();
+            move.adjustedMoveType(ElementType.Flying);
+            move.adjustedMovePower(0.2f);
         }
-        return base.ChangeMovesToDifferentTypeAndIncreasesTheirPower(move);
+        return base.AlterMoveDetails(move);
     }
 }

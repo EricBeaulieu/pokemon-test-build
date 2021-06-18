@@ -62,20 +62,6 @@ public static class DamageModifiers
         return damageMultiplier;
     }
 
-    public static void AddMovesThatLeavesTargetWithOneHP(MoveBase moveBase)
-    {
-        _movesThatLeavesTargetWithOneHP.Add(moveBase);
-    }
-
-    public static bool LeavesTargetWithOneHP(MoveBase moveBase)
-    {
-        if (_movesThatLeavesTargetWithOneHP.Contains(moveBase) == true)
-        {
-            return true;
-        }
-        return false;
-    }
-
     public static float WeatherConditionModifiers(WeatherEffectID weather,MoveBase currentMove)
     {
         if(weather == WeatherEffectID.Sunshine)

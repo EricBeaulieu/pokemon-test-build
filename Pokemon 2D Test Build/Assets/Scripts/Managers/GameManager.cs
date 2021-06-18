@@ -23,11 +23,7 @@ public class GameManager : MonoBehaviour
     DialogManager _dialogManager;
     LevelManager _levelManager;
     [SerializeField] StartMenu startMenu;
-    //used as a null reference and to return from here
     [SerializeField] PokeballItem standardPokeball;
-
-    [Header("Specialized Battle Moves")]
-    [SerializeField] List<MoveBase> movesThatLeavesTargetWithOneHP;
 
     bool _inBattle = false;
 
@@ -36,7 +32,6 @@ public class GameManager : MonoBehaviour
     public List<Entity> allActiveEntities = new List<Entity>();
     List<GameSceneBaseSO> currentScenesLoaded = new List<GameSceneBaseSO>();
     [SerializeField] GameSceneBaseSO startingScene;
-
 
     public static GameManager instance
     {
@@ -60,53 +55,12 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-        battleSystem.OnBattleOver += EndBattle;
-        battleSystem.OpenPokemonParty += OpenParty;
-        battleSystem.OnPokemonCaptured += CapturedNewPokemon;
-
-        //Clean this up later, just get it working for now and then clean up the code later
-        partySystem.battleSystemReference = battleSystem;
-        partySystem.onCloseParty += CloseParty;
-
-        _dialogManager = DialogManager.instance;
-        _dialogManager.OnShowDialog += () => { _state = GameState.Dialog; };
-        _dialogManager.OnCloseDialog += () => 
-        {
-            if(_state == GameState.Dialog)
-            {
-                if (_inBattle == true)
-                {
-                    _state = GameState.Battle;
-                }
-                else
-                {
-                    _state = GameState.Overworld;
-                }
-            }
-        };
-
-        startMenu.OpenPokemonParty += (() => OpenParty(false));
-        startMenu.SaveGame += SaveGame;
-        startMenu.StartMenuClosed += () =>
-        {
-            _state = GameState.Overworld;
-            playerController.ReturnFromStartMenu();
-        };
-
-        battleSystem.HandleAwake();
-        startMenu.HandleAwake();
-
-        if(partySystem.gameObject.activeInHierarchy == true)
-        {
-            partySystem.gameObject.SetActive(false);
-        }
+        BattleSystemInitialization();
+        PartySystemInitialization();
+        DialogSystemInitialization();
+        StartMenuInitialization();
         
         currentScenesLoaded = GetAllOpenScenes(currentScenesLoaded);
-
-        foreach (MoveBase move in movesThatLeavesTargetWithOneHP)
-        {
-            DamageModifiers.AddMovesThatLeavesTargetWithOneHP(move);
-        }
 
         if(startNewSaveEveryStart == false)
         {
@@ -406,5 +360,56 @@ public class GameManager : MonoBehaviour
             yield return fadeSystem.FadeOut(fadeStyle);
             _state = GameState.Overworld;
         }
+    }
+
+    void BattleSystemInitialization()
+    {
+        battleSystem.OnBattleOver += EndBattle;
+        battleSystem.OpenPokemonParty += OpenParty;
+        battleSystem.OnPokemonCaptured += CapturedNewPokemon;
+        battleSystem.Initialization();
+    }
+
+    void PartySystemInitialization()
+    {
+        partySystem.Initialization(battleSystem);
+        partySystem.onCloseParty += CloseParty;
+
+        if (partySystem.gameObject.activeInHierarchy == true)
+        {
+            partySystem.gameObject.SetActive(false);
+        }
+    }
+
+    void DialogSystemInitialization()
+    {
+        _dialogManager = DialogManager.instance;
+        _dialogManager.OnShowDialog += () => { _state = GameState.Dialog; };
+        _dialogManager.OnCloseDialog += () =>
+        {
+            if (_state == GameState.Dialog)
+            {
+                if (_inBattle == true)
+                {
+                    _state = GameState.Battle;
+                }
+                else
+                {
+                    _state = GameState.Overworld;
+                }
+            }
+        };
+    }
+
+    void StartMenuInitialization()
+    {
+        startMenu.OpenPokemonParty += (() => OpenParty(false));
+        startMenu.SaveGame += SaveGame;
+        startMenu.StartMenuClosed += () =>
+        {
+            _state = GameState.Overworld;
+            playerController.ReturnFromStartMenu();
+        };
+        startMenu.Initialization();
     }
 }
