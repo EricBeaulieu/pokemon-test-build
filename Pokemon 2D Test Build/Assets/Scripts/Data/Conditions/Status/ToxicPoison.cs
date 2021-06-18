@@ -19,7 +19,7 @@ public class ToxicPoison : ConditionBase
     {
         return $"{pokemon.currentName} is already poisoned";
     }
-    public override void OnEndTurn(Pokemon pokemon)
+    public override bool OnEndTurn(Pokemon pokemon)
     {
         StatusTime++;
         int damage = pokemon.maxHitPoints / (16 / StatusTime);
@@ -31,5 +31,6 @@ public class ToxicPoison : ConditionBase
 
         pokemon.UpdateHPDamage(damage);
         pokemon.statusChanges.Enqueue($"{pokemon.currentName} is hurt by poison");
+        return true;
     }
 }

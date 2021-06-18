@@ -661,9 +661,9 @@ public class Pokemon {
     /// <summary>
     /// Applies any Effects on the pokemons turn end that it may have through Status Effects or Volatile Status
     /// </summary>
-    public void OnEndTurn(ConditionBase condition)
+    public bool OnEndTurn(ConditionBase condition)
     {
-        condition?.OnEndTurn(this);
+        return condition.OnEndTurn(this);
     }
 
     public ConditionID GetCurrentStatus()

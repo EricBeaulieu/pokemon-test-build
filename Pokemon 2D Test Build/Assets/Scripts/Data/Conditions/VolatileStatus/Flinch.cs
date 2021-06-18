@@ -11,8 +11,9 @@ public class Flinch : ConditionBase
         source.statusChanges.Enqueue($"{source.currentName} flinched and couldn't move");
         return false;
     }
-    public override void OnEndTurn(Pokemon pokemon)
+    public override bool OnEndTurn(Pokemon pokemon)
     {
         pokemon.CureVolatileStatus(ConditionID.Flinch);
+        return base.OnEndTurn(pokemon);
     }
 }

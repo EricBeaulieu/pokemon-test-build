@@ -11,7 +11,7 @@ public class PerishSong : ConditionBase
         StatusTime = 4;
         return base.StartMessage(pokemon);//"All Pokemon that heard the song will faint in 3 turns"
     }
-    public override void OnEndTurn(Pokemon pokemon)
+    public override bool OnEndTurn(Pokemon pokemon)
     {
         StatusTime--;
         pokemon.statusChanges.Enqueue($"{pokemon.currentName} perish count fell to {StatusTime}");
@@ -20,5 +20,6 @@ public class PerishSong : ConditionBase
         {
             pokemon.UpdateHPDamage(pokemon.maxHitPoints);
         }
+        return base.OnEndTurn(pokemon);
     }
 }

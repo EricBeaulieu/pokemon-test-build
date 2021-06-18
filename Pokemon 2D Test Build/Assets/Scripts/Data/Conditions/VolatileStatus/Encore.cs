@@ -11,7 +11,7 @@ public class Encore : ConditionBase
         StatusTime = 3;
         return $"{pokemon.currentName} received an Encore!";
     }
-    public override void OnEndTurn(Pokemon pokemon)
+    public override bool OnEndTurn(Pokemon pokemon)
     {
         StatusTime--;
         if (StatusTime <= 0)
@@ -19,5 +19,6 @@ public class Encore : ConditionBase
             pokemon.CureVolatileStatus(Id);
             pokemon.statusChanges.Enqueue($"{pokemon.currentName}'s encore ended");
         }
+        return base.OnEndTurn(pokemon);
     }
 }

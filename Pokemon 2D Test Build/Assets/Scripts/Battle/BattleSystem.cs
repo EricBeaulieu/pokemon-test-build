@@ -176,7 +176,7 @@ public class BattleSystem : MonoBehaviour
             Debug.LogWarning($"learnNewMoveManager has not been set");
         }
 
-        alteredMove = new MoveBase();
+        alteredMove = MoveBase.CreateInstance<MoveBase>();
         currentTurnDetails = new List<TurnAttackDetails>();
     }
 
@@ -1159,8 +1159,10 @@ public class BattleSystem : MonoBehaviour
             }
             currentHP = sourceUnit.pokemon.currentHitPoints;
 
-            sourceUnit.pokemon.OnEndTurn(currentCondition);
-            yield return sourceUnit.StatusConditionAnimation(currentCondition.Id);
+            if(sourceUnit.pokemon.OnEndTurn(currentCondition) == true)
+            {
+                yield return sourceUnit.StatusConditionAnimation(currentCondition.Id);
+            }
 
             yield return ShowStatusChanges(sourceUnit.pokemon);
             yield return sourceUnit.HUD.UpdateHPDamage(currentHP);

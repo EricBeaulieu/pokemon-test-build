@@ -10,9 +10,10 @@ public class Cursed : ConditionBase
     {
         return $"{pokemon.currentName} is already Cursed";
     }
-    public override void OnEndTurn(Pokemon pokemon)
+    public override bool OnEndTurn(Pokemon pokemon)
     {
         pokemon.UpdateHPDamage(Mathf.CeilToInt((float)pokemon.maxHitPoints / 4f));
         pokemon.statusChanges.Enqueue($"{pokemon.currentName} is afflicted by the curse");
+        return true;
     }
 }

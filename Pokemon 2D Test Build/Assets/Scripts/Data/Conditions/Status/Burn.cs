@@ -22,7 +22,7 @@ public class Burn : ConditionBase
         }
         return 1;
     }
-    public override void OnEndTurn(Pokemon pokemon)
+    public override bool OnEndTurn(Pokemon pokemon)
     {
         int damage = pokemon.maxHitPoints / 16;
 
@@ -33,5 +33,6 @@ public class Burn : ConditionBase
 
         pokemon.UpdateHPDamage(damage);
         pokemon.statusChanges.Enqueue($"{pokemon.currentName} is hurt by burn");
+        return true;
     }
 }

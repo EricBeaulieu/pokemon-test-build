@@ -10,7 +10,7 @@ public class LeechSeed : ConditionBase
     {
         return $"{pokemon.currentName} was seeded";
     }
-    public override void OnEndTurn(Pokemon pokemon)
+    public override bool OnEndTurn(Pokemon pokemon)
     {
         int damage = Mathf.FloorToInt(pokemon.maxHitPoints / 8);
         damage = Mathf.Clamp(damage, 1, pokemon.currentHitPoints);
@@ -18,6 +18,7 @@ public class LeechSeed : ConditionBase
 
         pokemon.UpdateHPDamage(damage);
         pokemon.statusChanges.Enqueue($"{pokemon.currentName} health is sapped by leech seed");
+        return true;
     }
     public int HealthStolen { get; private set; }
 }

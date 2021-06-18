@@ -10,16 +10,17 @@ public class Nightmare : ConditionBase
     {
         return $"{pokemon.currentName} began having a Nightmare";
     }
-    public override void OnEndTurn(Pokemon pokemon)
+    public override bool OnEndTurn(Pokemon pokemon)
     {
         if(pokemon.status.Id != ConditionID.Sleep)
         {
             pokemon.CureVolatileStatus(Id);
-            return;
+            return false;
         }
 
         pokemon.UpdateHPDamage(Mathf.CeilToInt((float)pokemon.maxHitPoints / 4f));
         pokemon.statusChanges.Enqueue($"{pokemon.currentName} is locked in a nightmare");
+        return true;
     }
     public override bool RequiredConditionToWork(ConditionID iD)
     {

@@ -11,14 +11,14 @@ public class Bound : ConditionBase
         StatusTime = Random.Range(4, 6);
         return $"{pokemon.currentName} {GlobalTools.ReplaceUserWithPokemonName(boundMove.SecondaryEffects[0].SpecialStartMessage, attackingPokemon)}";
     }
-    public override void OnEndTurn(Pokemon pokemon)
+    public override bool OnEndTurn(Pokemon pokemon)
     {
         StatusTime--;
         if(StatusTime <= 0)
         {
             pokemon.CureVolatileStatus(Id);
             pokemon.statusChanges.Enqueue($"{pokemon.currentName} was freed from {boundMove.MoveName}!");
-            return;
+            return false;
         }
 
         int damage = Mathf.FloorToInt(pokemon.maxHitPoints / 8);
@@ -30,6 +30,7 @@ public class Bound : ConditionBase
         
         pokemon.UpdateHPDamage(damage);
         pokemon.statusChanges.Enqueue($"{pokemon.currentName} is hurt by {boundMove.MoveName}!");
+        return true;
     }
     public MoveBase SetBoundMove { set { boundMove = value; } }
     MoveBase boundMove = null;

@@ -11,7 +11,7 @@ public class HealBlock : ConditionBase
         StatusTime = 5;
         return $"{pokemon.currentName} was prevented from healing";
     }
-    public override void OnEndTurn(Pokemon pokemon)
+    public override bool OnEndTurn(Pokemon pokemon)
     {
         StatusTime--;
         if (StatusTime <= 0)
@@ -19,6 +19,7 @@ public class HealBlock : ConditionBase
             pokemon.CureVolatileStatus(Id);
             pokemon.statusChanges.Enqueue($"{pokemon.currentName}'s Heal Block ended");
         }
+        return base.OnEndTurn(pokemon);
     }
     public override bool PreventsHealing()
     {

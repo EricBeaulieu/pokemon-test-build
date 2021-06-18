@@ -11,7 +11,7 @@ public class Embargo : ConditionBase
         StatusTime = 5;
         return $"{pokemon.currentName} cant use items anymore";
     }
-    public override void OnEndTurn(Pokemon pokemon)
+    public override bool OnEndTurn(Pokemon pokemon)
     {
         StatusTime--;
 
@@ -20,6 +20,7 @@ public class Embargo : ConditionBase
             pokemon.statusChanges.Enqueue($"{pokemon.currentName} can use items");
             pokemon.CureVolatileStatus(Id);
         }
+        return base.OnEndTurn(pokemon);
     }
     public override bool PreventsItemUse() { return true; }
 }

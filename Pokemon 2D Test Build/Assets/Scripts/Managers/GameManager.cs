@@ -14,6 +14,7 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] PlayerController playerPrefab;
     PlayerController playerController;
+    [SerializeField] GameSceneBaseSO startingScene;
     [SerializeField] Transform defaultSpawnLocation;
     TrainerController trainerController = null;
     [SerializeField] BattleSystem battleSystem;
@@ -31,7 +32,6 @@ public class GameManager : MonoBehaviour
 
     public List<Entity> allActiveEntities = new List<Entity>();
     List<GameSceneBaseSO> currentScenesLoaded = new List<GameSceneBaseSO>();
-    [SerializeField] GameSceneBaseSO startingScene;
 
     public static GameManager instance
     {
@@ -68,6 +68,7 @@ public class GameManager : MonoBehaviour
         }
         else
         {
+            StartCoroutine(LoadScenethatPlayerSavedIn(startingScene.GetSceneName));
             SpawnInPlayer(defaultSpawnLocation.position);
         }
     }

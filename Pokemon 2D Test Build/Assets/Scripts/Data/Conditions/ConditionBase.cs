@@ -19,7 +19,8 @@ public abstract class ConditionBase
     /// <param name="target">needs reference to pokemon name</param>
     /// <returns>if the pokemons move will be successful</returns>
     public virtual bool OnBeforeMove(Pokemon source, Pokemon target = null) { return true; }
-    public virtual void OnEndTurn(Pokemon pokemon) { }
+    //Bool is for playing animation
+    public virtual bool OnEndTurn(Pokemon pokemon) { return false; }
     public int StatusTime { get; set; }
     public virtual bool PreventsEscape() { return false; }
     public virtual bool PreventsItemUse() { return false; }
