@@ -17,6 +17,7 @@ public class StartMenu : MonoBehaviour
 
     //public event Action<bool, bool> OpenPokeDex;
     public event Action OpenPokemonParty;
+    public event Action OpenInventory;
     public event Action SaveGame;
     public event Action StartMenuClosed;
     GameObject _lastSelected;
@@ -35,24 +36,28 @@ public class StartMenu : MonoBehaviour
 
         //Setting up the last button pressed in the action button to be the first button pressed
         pokeDexButton.GetComponent<Button>().onClick.AddListener(delegate { _lastSelected = pokeDexButton; });
-        pokemonPartyButton.GetComponent<Button>().onClick.AddListener(delegate { _lastSelected = pokemonPartyButton; });
-        bagButton.GetComponent<Button>().onClick.AddListener(delegate { _lastSelected = bagButton; });
         playerButton.GetComponent<Button>().onClick.AddListener(delegate { _lastSelected = playerButton; });
-        saveButton.GetComponent<Button>().onClick.AddListener(delegate { _lastSelected = saveButton; });
         optionsButton.GetComponent<Button>().onClick.AddListener(delegate { _lastSelected = optionsButton; });
-        exitButton.GetComponent<Button>().onClick.AddListener(delegate { _lastSelected = exitButton; });
 
         pokemonPartyButton.GetComponent<Button>().onClick.AddListener(delegate 
         {
+            _lastSelected = pokemonPartyButton;
             EnableStartMenu(false);
             OpenPokemonParty();
         });
+        bagButton.GetComponent<Button>().onClick.AddListener(delegate 
+        {
+            _lastSelected = bagButton;
+            EnableStartMenu(false);
+            OpenInventory();
+        });
         saveButton.GetComponent<Button>().onClick.AddListener(delegate
         {
+            _lastSelected = saveButton;
             EnableStartMenu(false);
             SaveGame();
         });
-        exitButton.GetComponent<Button>().onClick.AddListener(delegate { EnableStartMenu(false); });
+        exitButton.GetComponent<Button>().onClick.AddListener(delegate { _lastSelected = exitButton; EnableStartMenu(false); });
     }
 
     void Update()

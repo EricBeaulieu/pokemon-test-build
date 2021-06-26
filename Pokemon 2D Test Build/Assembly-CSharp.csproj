@@ -54,9 +54,9 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\Characters\ScriptableObjects\CharacterArtSO.cs" />
-    <Compile Include="Assets\Art\Pokemon\BadSlicesList.cs" />
     <Compile Include="Assets\Scripts\Data\Conditions\VolatileStatus\Infatuation.cs" />
     <Compile Include="Assets\Scripts\Data\Abilitys\List\Steelworker.cs" />
+    <Compile Include="Assets\Scripts\Items\InventoryColorSystem.cs" />
     <Compile Include="Assets\Scripts\Data\Weather\Weather Effects\Sandstorm.cs" />
     <Compile Include="Assets\Scripts\Data\Conditions\VolatileStatus\Embargo.cs" />
     <Compile Include="Assets\Scripts\Pokemon\IndividualValues.cs" />
@@ -92,12 +92,14 @@
     <Compile Include="Assets\Scripts\Managers\SpriteAtlas.cs" />
     <Compile Include="Assets\Scripts\Data\Abilitys\List\AngerPoint.cs" />
     <Compile Include="Assets\Scripts\Data\EntryHazards\Hazards\StealthRock.cs" />
+    <Compile Include="Assets\Scripts\Items\InventorySystem.cs" />
     <Compile Include="Assets\Scripts\Data\Abilitys\List\Rattled.cs" />
     <Compile Include="Assets\Scripts\Data\Abilitys\List\AirLock.cs" />
     <Compile Include="Assets\Scripts\Data\Abilitys\List\CompoundEyes.cs" />
     <Compile Include="Assets\Scripts\Characters\MonoBehavior\PlayerController.cs" />
     <Compile Include="Assets\Scripts\Data\Abilitys\List\Oblivious.cs" />
     <Compile Include="Assets\Scripts\Data\Abilitys\List\WonderGuard.cs" />
+    <Compile Include="Assets\Scripts\Data\Abilitys\List\Sturdy.cs" />
     <Compile Include="Assets\Scripts\Data\Abilitys\List\Insomnia.cs" />
     <Compile Include="Assets\Scripts\Data\Abilitys\List\LeafGuard.cs" />
     <Compile Include="Assets\Scripts\Data\Abilitys\List\Drought.cs" />
@@ -114,6 +116,7 @@
     <Compile Include="Assets\Scripts\Data\Conditions\VolatileStatus\Bound.cs" />
     <Compile Include="Assets\Scripts\Saving\PokemonSaveData.cs" />
     <Compile Include="Assets\Scripts\Data\Abilitys\List\EffectSpore.cs" />
+    <Compile Include="Assets\Scripts\Data\Abilitys\List\Hustle.cs" />
     <Compile Include="Assets\Scripts\Data\Abilitys\List\QuickFeet.cs" />
     <Compile Include="Assets\Scripts\Static Tables\ExperienceTable.cs" />
     <Compile Include="Assets\Scripts\Static Tables\CatchingMechanics.cs" />
@@ -127,7 +130,7 @@
     <Compile Include="Assets\Scripts\UI\CutoutMaskUI.cs" />
     <Compile Include="Assets\Scripts\Data\Abilitys\List\Normalize.cs" />
     <Compile Include="Assets\Scripts\Data\Abilitys\List\StormDrain.cs" />
-    <Compile Include="Assets\Scripts\Items\ItemBase.cs" />
+    <Compile Include="Assets\Scripts\Items\ScriptableObjects\ItemBase.cs" />
     <Compile Include="Assets\Scripts\Data\GlobalDataBase.cs" />
     <Compile Include="Assets\Scripts\Data\EntryHazards\EntryHazardBase.cs" />
     <Compile Include="Assets\Scripts\Data\Abilitys\List\MarvelScale.cs" />
@@ -159,18 +162,22 @@
     <Compile Include="Assets\Scripts\Data\Abilitys\List\Gooey.cs" />
     <Compile Include="Assets\Scripts\Data\Conditions\Status\Sleep.cs" />
     <Compile Include="Assets\Scripts\Data\Abilitys\List\IceBody.cs" />
+    <Compile Include="Assets\Scripts\Items\UI\ItemMenuButtonUI.cs" />
     <Compile Include="Assets\Scripts\Party\PartyMemberUI.cs" />
     <Compile Include="Assets\Scripts\Pokemon\SpecifiedValues.cs" />
-    <Compile Include="Assets\Scripts\Items\PokeballItem.cs" />
+    <Compile Include="Assets\Scripts\Items\ScriptableObjects\PokeballItem.cs" />
     <Compile Include="Assets\Scripts\Data\Abilitys\List\Levitate.cs" />
     <Compile Include="Assets\Scripts\Data\Abilitys\List\Limber.cs" />
     <Compile Include="Assets\Scripts\Data\Abilitys\List\WaterVeil.cs" />
     <Compile Include="Assets\Scripts\Data\Weather\WeatherEffectDB.cs" />
     <Compile Include="Assets\Scripts\Data\Conditions\VolatileStatus\HealBlock.cs" />
+    <Compile Include="Assets\Scripts\Data\Abilitys\List\RockHead.cs" />
     <Compile Include="Assets\Scripts\Battle\LearningMoves\SummaryAttackButton.cs" />
     <Compile Include="Assets\Scripts\Data\Abilitys\List\Galvanize.cs" />
     <Compile Include="Assets\Scripts\Mechanics\CaptureBallRoute.cs" />
+    <Compile Include="Assets\Scripts\Items\Item.cs" />
     <Compile Include="Assets\Scripts\Saving\SavingSystem.cs" />
+    <Compile Include="Assets\Scripts\Items\ScriptableObjects\MedicineItem.cs" />
     <Compile Include="Assets\Scripts\Data\Conditions\VolatileStatus\CursedUser.cs" />
     <Compile Include="Assets\Scripts\Characters\MonoBehavior\NpcController.cs" />
     <Compile Include="Assets\Scripts\Party\SummaryDisplay.cs" />
@@ -191,6 +198,7 @@
     <Compile Include="Assets\Scripts\Characters\MonoBehavior\AIDecision.cs" />
     <Compile Include="Assets\Scripts\Data\Abilitys\List\SandForce.cs" />
     <Compile Include="Assets\Scripts\Data\Conditions\Status\Poison.cs" />
+    <Compile Include="Assets\Scripts\Items\UI\ItemButtonUI.cs" />
     <Compile Include="Assets\Scripts\Data\Abilitys\List\WaterBubble.cs" />
     <Compile Include="Assets\Scripts\Data\Abilitys\List\OwnTempo.cs" />
     <Compile Include="Assets\Scripts\Pokemon\PokemonParty.cs" />
@@ -212,6 +220,7 @@
     <Compile Include="Assets\Scripts\Party\SummarySkills.cs" />
     <Compile Include="Assets\Scripts\Data\Abilitys\List\WhiteSmoke.cs" />
     <Compile Include="Assets\Scripts\Data\Weather\Weather Effects\Sunshine.cs" />
+    <Compile Include="Assets\Scripts\Items\ScriptableObjects\ItemColorScheme.cs" />
     <Compile Include="Assets\Scripts\Data\Conditions\VolatileStatus\Flinch.cs" />
     <Compile Include="Assets\Scripts\Data\Abilitys\List\Guts.cs" />
     <Compile Include="Assets\Scripts\Data\EntryHazards\Hazards\Spikes.cs" />
@@ -277,9 +286,7 @@
     <Compile Include="Assets\Scripts\Data\Abilitys\List\RainDish.cs" />
     <Compile Include="Assets\Scripts\Data\Abilitys\List\Justified.cs" />
     <Compile Include="Assets\Scripts\Data\Abilitys\List\Soundproof.cs" />
-    <Compile Include="Assets\Scripts\Data\Abilitys\List\Hustle.cs" />
-    <Compile Include="Assets\Scripts\Data\Abilitys\List\Sturdy.cs" />
-    <Compile Include="Assets\Scripts\Data\Abilitys\List\RockHead.cs" />
+    <Compile Include="Assets\Scripts\Items\UI\ArrowButtonUI.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">

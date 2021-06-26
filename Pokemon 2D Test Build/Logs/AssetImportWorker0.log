@@ -15,11 +15,11 @@ D:/GitHub/pokemon-test-build/Pokemon 2D Test Build
 -logFile
 Logs/AssetImportWorker0.log
 -srvPort
-59717
+58033
 Successfully changed project path to: D:/GitHub/pokemon-test-build/Pokemon 2D Test Build
 D:/GitHub/pokemon-test-build/Pokemon 2D Test Build
 Using Asset Import Pipeline V2.
-Refreshing native plugins compatible for Editor in 90.06 ms, found 0 plugins.
+Refreshing native plugins compatible for Editor in 85.40 ms, found 0 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Initialize engine version: 2020.2.5f1 (e2c53f129de5)
 [Subsystems] Discovering subsystems at path C:/Program Files/Unity/Hub/Editor/2020.2.5f1/Editor/Data/Resources/UnitySubsystems
@@ -35,76 +35,392 @@ Initialize mono
 Mono path[0] = 'C:/Program Files/Unity/Hub/Editor/2020.2.5f1/Editor/Data/Managed'
 Mono path[1] = 'C:/Program Files/Unity/Hub/Editor/2020.2.5f1/Editor/Data/MonoBleedingEdge/lib/mono/unityjit'
 Mono config path = 'C:/Program Files/Unity/Hub/Editor/2020.2.5f1/Editor/Data/MonoBleedingEdge/etc'
-Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56712
+Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56744
 Begin MonoManager ReloadAssembly
 Registering precompiled unity dll's ...
 Register platform support module: C:/Program Files/Unity/Hub/Editor/2020.2.5f1/Editor/Data/PlaybackEngines/WindowsStandaloneSupport/UnityEditor.WindowsStandalone.Extensions.dll
-Registered in 0.002159 seconds.
+Registered in 0.001991 seconds.
 Native extension for WindowsStandalone target not found
-Refreshing native plugins compatible for Editor in 121.83 ms, found 0 plugins.
+Refreshing native plugins compatible for Editor in 115.33 ms, found 0 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Invoked RoslynAnalysisRunner static constructor.
 RoslynAnalysisRunner will not be running.
 RoslynAnalysisRunner has terminated.
 Mono: successfully reloaded assembly
-- Completed reload, in  1.642 seconds
+- Completed reload, in  1.343 seconds
 Platform modules already initialized, skipping
 Registering precompiled user dll's ...
-Registered in 0.004607 seconds.
+Registered in 0.003997 seconds.
 Begin MonoManager ReloadAssembly
 Native extension for WindowsStandalone target not found
-Refreshing native plugins compatible for Editor in 0.90 ms, found 0 plugins.
+Refreshing native plugins compatible for Editor in 0.69 ms, found 0 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Invoked RoslynAnalysisRunner static constructor.
 RoslynAnalysisRunner will not be running.
 RoslynAnalysisRunner has terminated.
 Mono: successfully reloaded assembly
-- Completed reload, in  1.026 seconds
+- Completed reload, in  0.891 seconds
 Platform modules already initialized, skipping
 ========================================================================
 Worker process is ready to serve import requests
-Launched and connected shader compiler UnityShaderCompiler.exe after 0.05 seconds
-Refreshing native plugins compatible for Editor in 0.95 ms, found 0 plugins.
+Launched and connected shader compiler UnityShaderCompiler.exe after 0.04 seconds
+Refreshing native plugins compatible for Editor in 0.75 ms, found 0 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
-Unloading 1604 Unused Serialized files (Serialized files now loaded: 0)
-System memory in use before: 72.7 MB.
-System memory in use after: 72.8 MB.
+Unloading 1611 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 72.8 MB.
+System memory in use after: 72.9 MB.
 
-Unloading 32 unused Assets to reduce memory usage. Loaded Objects now: 2034.
-Total: 12.572300 ms (FindLiveObjects: 2.651400 ms CreateObjectMapping: 4.124100 ms MarkObjects: 5.744000 ms  DeleteObjects: 0.050800 ms)
-
-========================================================================
-Received Import Request.
-  path: Assets/Scenes/TestCave.unity
-  artifactKey: Guid(a30d920115691b94098398b77f3f8374) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Scenes/TestCave.unity using Guid(a30d920115691b94098398b77f3f8374) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'e9df2919a8ec5d6a57fb04ee4746f7d8') in 0.058185 seconds
-  Import took 0.061911 seconds .
+Unloading 32 unused Assets to reduce memory usage. Loaded Objects now: 2041.
+Total: 1.868000 ms (FindLiveObjects: 0.161800 ms CreateObjectMapping: 0.062200 ms MarkObjects: 1.613400 ms  DeleteObjects: 0.029100 ms)
 
 ========================================================================
 Received Import Request.
-  Time since last request: 0.000302 seconds.
-  path: Assets/Scenes/TestSceneDous.unity
-  artifactKey: Guid(1170f10a0713d244899ebfa4eb300a09) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Scenes/TestSceneDous.unity using Guid(1170f10a0713d244899ebfa4eb300a09) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'b92e20b37385b27f7bc68d50d0d7b9fe') in 0.008196 seconds
-  Import took 0.013785 seconds .
+  path: Assets/Resources/Items/Medicine/FreshWater.asset
+  artifactKey: Guid(5283adf274c5359489e4f4eb96d0c7c0) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Items/Medicine/FreshWater.asset using Guid(5283adf274c5359489e4f4eb96d0c7c0) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '9cc5881bdfcc10b40fdb40749c79ef8a') in 0.050845 seconds
+  Import took 0.053581 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000339 seconds.
+  path: Assets/Resources/Items/Medicine/FullHeal.asset
+  artifactKey: Guid(d9e06e905840c6843abfcce65a852e82) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Items/Medicine/FullHeal.asset using Guid(d9e06e905840c6843abfcce65a852e82) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'ab7702da0631526e165ae112d1a5aaa2') in 0.008291 seconds
+  Import took 0.010844 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000340 seconds.
+  path: Assets/Resources/Items/Medicine/HyperPotion.asset
+  artifactKey: Guid(f0de9001f385acf4489124c9c327168e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Items/Medicine/HyperPotion.asset using Guid(f0de9001f385acf4489124c9c327168e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '89e3ce5da8c7d61fb757897611d4c9db') in 0.007408 seconds
+  Import took 0.011014 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 13.674289 seconds.
+  path: Assets/Resources/Items/Medicine/MaxRevive.asset
+  artifactKey: Guid(8ccb39f9c9c5dd548bcde29db9e4661c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Items/Medicine/MaxRevive.asset using Guid(8ccb39f9c9c5dd548bcde29db9e4661c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'd0e07293b07ec290e0b13047ed50f003') in 0.026609 seconds
+  Import took 0.029246 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 1.542440 seconds.
+  path: Assets/Resources/Items/Medicine/ParalyzeHeal.asset
+  artifactKey: Guid(43d2efdb9fcae2941acd9617246720a0) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Items/Medicine/ParalyzeHeal.asset using Guid(43d2efdb9fcae2941acd9617246720a0) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'e9b3861cd1e9a89591e6d576ace47df0') in 0.021011 seconds
+  Import took 0.023704 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 3.905931 seconds.
+  path: Assets/Resources/Items/Medicine/Revive.asset
+  artifactKey: Guid(c53b61f031f356d4395ab05d8a45f3be) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Items/Medicine/Revive.asset using Guid(c53b61f031f356d4395ab05d8a45f3be) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'ce39fd363111717a5194b081f43a8403') in 0.008336 seconds
+  Import took 0.048385 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 175.960357 seconds.
+  path: Assets/Resources/Items/Medicine/New Medicine Item.asset
+  artifactKey: Guid(3c5f092c9ff0e9048ae5aabb157f884a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Items/Medicine/New Medicine Item.asset using Guid(3c5f092c9ff0e9048ae5aabb157f884a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'be9392b2dc30be8ff8d4a1e2455a263c') in 0.006818 seconds
+  Import took 0.009684 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 67.318825 seconds.
+  path: Assets/Resources/Items/Medicine/Antidote.asset
+  artifactKey: Guid(3c5f092c9ff0e9048ae5aabb157f884a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Items/Medicine/Antidote.asset using Guid(3c5f092c9ff0e9048ae5aabb157f884a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'be156d7017703e03a8be2ec58835206d') in 0.008826 seconds
+  Import took 0.011775 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 12.992402 seconds.
+  path: Assets/Resources/Items/Medicine/Awakening.asset
+  artifactKey: Guid(e5e1e90e21e416e488daf6ec9984a4d0) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Items/Medicine/Awakening.asset using Guid(e5e1e90e21e416e488daf6ec9984a4d0) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'a31f586c22ef00fac34322a142163395') in 0.007538 seconds
+  Import took 0.010549 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 49.858908 seconds.
+  path: Assets/Resources/Items/Medicine/BurnHeal.asset
+  artifactKey: Guid(dbb22004faed1c44cb9a2c86f45f757c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Items/Medicine/BurnHeal.asset using Guid(dbb22004faed1c44cb9a2c86f45f757c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'b59a97fcc5af3162baf4df9a78125aaf') in 0.007176 seconds
+  Import took 0.009643 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 70.235852 seconds.
+  path: Assets/Resources/Items/Medicine/Elixir.asset
+  artifactKey: Guid(788a0f8d6787c3b4a94c69f872646355) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Items/Medicine/Elixir.asset using Guid(788a0f8d6787c3b4a94c69f872646355) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '0e756af74ef135af61a53ef20cefd4ad') in 0.007239 seconds
+  Import took 0.009754 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.011752 seconds.
+  path: Assets/Resources/Items/Medicine/Elixir.asset
+  artifactKey: Guid(788a0f8d6787c3b4a94c69f872646355) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Items/Medicine/Elixir.asset using Guid(788a0f8d6787c3b4a94c69f872646355) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '0e756af74ef135af61a53ef20cefd4ad') in 0.003442 seconds
+  Import took 0.006044 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 52.479182 seconds.
+  path: Assets/Resources/Items/Medicine/EnergyPowder.asset
+  artifactKey: Guid(99ade17f94d856b41a102bf2453f1226) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Items/Medicine/EnergyPowder.asset using Guid(99ade17f94d856b41a102bf2453f1226) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '7b72a2a2ff526686e4c134f90cb9c1cb') in 0.007238 seconds
+  Import took 0.009922 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 45.011365 seconds.
+  path: Assets/Resources/Items/Medicine/EnergyRoot.asset
+  artifactKey: Guid(1075bbda9d19e1b4f87d3297186cd2b1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Items/Medicine/EnergyRoot.asset using Guid(1075bbda9d19e1b4f87d3297186cd2b1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '24dd83d4bce50a27b9dffbd53a66e95b') in 0.007613 seconds
+  Import took 0.010260 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 38.156411 seconds.
+  path: Assets/Resources/Items/Medicine/Ether.asset
+  artifactKey: Guid(fb212d569360c03408dd68046ab4c42c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Items/Medicine/Ether.asset using Guid(fb212d569360c03408dd68046ab4c42c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '5b158269edf8121521dc7dff1d01ec8d') in 0.008088 seconds
+  Import took 0.010891 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.011134 seconds.
+  path: Assets/Resources/Items/Medicine/Ether.asset
+  artifactKey: Guid(fb212d569360c03408dd68046ab4c42c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Items/Medicine/Ether.asset using Guid(fb212d569360c03408dd68046ab4c42c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '5b158269edf8121521dc7dff1d01ec8d') in 0.003539 seconds
+  Import took 0.006183 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 79.506663 seconds.
+  path: Assets/Resources/Items/Medicine/FullRestore.asset
+  artifactKey: Guid(453129ad0a0746a4fb2d6ac35d14a4cf) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Items/Medicine/FullRestore.asset using Guid(453129ad0a0746a4fb2d6ac35d14a4cf) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'd8c53c8163ed3803be7f9ec928b24ff7') in 0.008014 seconds
+  Import took 0.010501 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 45.186084 seconds.
+  path: Assets/Resources/Items/Medicine/New Medicine Item.asset
+  artifactKey: Guid(9824bb8d8de6c2c428a9ff3cec3253ff) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Items/Medicine/New Medicine Item.asset using Guid(9824bb8d8de6c2c428a9ff3cec3253ff) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '54acbf2bd28b898b1a245f219910e091') in 0.003472 seconds
+  Import took 0.006119 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 19.597729 seconds.
+  path: Assets/Resources/Items/Medicine/HealPowder.asset
+  artifactKey: Guid(9824bb8d8de6c2c428a9ff3cec3253ff) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Items/Medicine/HealPowder.asset using Guid(9824bb8d8de6c2c428a9ff3cec3253ff) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '33f9aa1b254a3edcd5c26cda1be71b6c') in 0.007284 seconds
+  Import took 0.009822 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 50.322818 seconds.
+  path: Assets/Resources/Items/Medicine/LavaCookie.asset
+  artifactKey: Guid(36c7d9e9b96fad74a86850edcc40c21f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Items/Medicine/LavaCookie.asset using Guid(36c7d9e9b96fad74a86850edcc40c21f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'da96ad93869055552ced58016569dfed') in 0.006908 seconds
+  Import took 0.009676 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 47.268530 seconds.
+  path: Assets/Resources/Items/Medicine/MaxElixir.asset
+  artifactKey: Guid(a12c9b840132aa843af25b94be5dda1b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Items/Medicine/MaxElixir.asset using Guid(a12c9b840132aa843af25b94be5dda1b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '81d1fa17f245152e34a478cb5ee3844c') in 0.008067 seconds
+  Import took 0.010713 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 74.711261 seconds.
+  path: Assets/Resources/Items/Medicine/MaxEther.asset
+  artifactKey: Guid(51362ef476627b44c8ef5225078c6b3e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Items/Medicine/MaxEther.asset using Guid(51362ef476627b44c8ef5225078c6b3e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'b198c34affab1b5542ea9c9a4929e42a') in 0.006742 seconds
+  Import took 0.009223 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 48.653092 seconds.
+  path: Assets/Resources/Items/Medicine/New Medicine Item.asset
+  artifactKey: Guid(141106c39173b274bb0c769d714c0aa2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Items/Medicine/New Medicine Item.asset using Guid(141106c39173b274bb0c769d714c0aa2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '4cc1ba2cefa6201a001e69a68237e6a8') in 0.003508 seconds
+  Import took 0.007336 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.020417 seconds.
+  path: Assets/Resources/Items/Medicine/New Medicine Item.asset
+  artifactKey: Guid(141106c39173b274bb0c769d714c0aa2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Items/Medicine/New Medicine Item.asset using Guid(141106c39173b274bb0c769d714c0aa2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '4cc1ba2cefa6201a001e69a68237e6a8') in 0.003144 seconds
+  Import took 0.005767 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 6.596651 seconds.
+  path: Assets/Resources/Items/Medicine/MaxPotion.asset
+  artifactKey: Guid(141106c39173b274bb0c769d714c0aa2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Items/Medicine/MaxPotion.asset using Guid(141106c39173b274bb0c769d714c0aa2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'f5275bb7d6f419797a2f56b18b193a0e') in 0.007964 seconds
+  Import took 0.010586 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 31.079653 seconds.
+  path: Assets/Resources/Items/Medicine/MooMooMilk.asset
+  artifactKey: Guid(03825ea1345f2c641a10460b20889666) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Items/Medicine/MooMooMilk.asset using Guid(03825ea1345f2c641a10460b20889666) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '9a057a27f69e8a16986f02894fe61b5e') in 0.007201 seconds
+  Import took 0.009838 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 111.458908 seconds.
+  path: Assets/Resources/Items/Medicine/OldGateau.asset
+  artifactKey: Guid(94129fd54f161ea41b698415aaafb473) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Items/Medicine/OldGateau.asset using Guid(94129fd54f161ea41b698415aaafb473) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '1ff91ceaeed69d9208d3879eb4be0c06') in 0.007369 seconds
+  Import took 0.010408 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 56.226773 seconds.
+  path: Assets/Resources/Items/Medicine/RevivalHerb.asset
+  artifactKey: Guid(6778533410f6460438923925818b35ba) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Items/Medicine/RevivalHerb.asset using Guid(6778533410f6460438923925818b35ba) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '4b907d5f4d916683c499a3e2bb285db0') in 0.006887 seconds
+  Import took 0.009591 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 92.719104 seconds.
+  path: Assets/Resources/Items/Medicine/SodaPop.asset
+  artifactKey: Guid(30c8a6f78101e2d4585029c6481ad0c1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Items/Medicine/SodaPop.asset using Guid(30c8a6f78101e2d4585029c6481ad0c1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'a1b6d5e3008e2e924ea0421e985fe7de') in 0.007404 seconds
+  Import took 0.010331 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 740.373000 seconds.
+  path: Assets/Art/Items/Pokeballs/Poke Ball icons.png
+  artifactKey: Guid(f3d0464e40e3256468b18a58acb26ab0) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Art/Items/Pokeballs/Poke Ball icons.png using Guid(f3d0464e40e3256468b18a58acb26ab0) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'd15d4e1605c9f84663f567b277255062') in 0.118528 seconds
+  Import took 0.122243 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.001400 seconds.
+  path: Assets/Art/Items/Pokeballs/Poke Ball icons.png
+  artifactKey: Guid(f3d0464e40e3256468b18a58acb26ab0) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Art/Items/Pokeballs/Poke Ball icons.png using Guid(f3d0464e40e3256468b18a58acb26ab0) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'd15d4e1605c9f84663f567b277255062') in 0.014215 seconds
+  Import took 0.017137 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 18.134290 seconds.
+  path: Assets/Art/Items/Pokeballs/Poke Ball icons.png
+  artifactKey: Guid(f3d0464e40e3256468b18a58acb26ab0) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Art/Items/Pokeballs/Poke Ball icons.png using Guid(f3d0464e40e3256468b18a58acb26ab0) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'c2e7bbf383abf183c88856a4c08c0304') in 0.020586 seconds
+  Import took 0.023256 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 673.833000 seconds.
+  path: Assets/Art/Items/Pokeballs/Poke Ball icons.png
+  artifactKey: Guid(f3d0464e40e3256468b18a58acb26ab0) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Art/Items/Pokeballs/Poke Ball icons.png using Guid(f3d0464e40e3256468b18a58acb26ab0) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'e60420b1b6ae184ba40cccc182321911') in 0.059085 seconds
+  Import took 0.062347 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 77.740590 seconds.
+  path: Assets/Resources/Items/Pokeballs/FastBall.asset
+  artifactKey: Guid(d9f5d73c3800a0b48a723f6271bedb79) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Items/Pokeballs/FastBall.asset using Guid(d9f5d73c3800a0b48a723f6271bedb79) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'bb5d9cf0808a30355aca5564606c11eb') in 0.008789 seconds
+  Import took 0.011865 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 9.970464 seconds.
+  path: Assets/Scripts/Items/ScriptableObjects/PokeballItem.cs
+  artifactKey: Guid(c7d5826aef3296a41a8813b743e1276b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/Items/ScriptableObjects/PokeballItem.cs using Guid(c7d5826aef3296a41a8813b743e1276b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'acbb39b803a0426e221c255fa94849cd') in 0.048098 seconds
+  Import took 0.050684 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 117.364949 seconds.
+  path: Assets/Resources/Items/Pokeballs/Ultra Ball.asset
+  artifactKey: Guid(d9f5d73c3800a0b48a723f6271bedb79) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Items/Pokeballs/Ultra Ball.asset using Guid(d9f5d73c3800a0b48a723f6271bedb79) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '5ec0623c835690135e25cfaad34381f9') in 0.023498 seconds
+  Import took 0.063264 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 95.371624 seconds.
+  path: Assets/Art/Items/Pokeballs/Pokeballs.png
+  artifactKey: Guid(39a30c96aa7147a43a66f79cae7f2352) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Art/Items/Pokeballs/Pokeballs.png using Guid(39a30c96aa7147a43a66f79cae7f2352) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'b96c23372e7cc49424a887929a09331e') in 0.134309 seconds
+  Import took 0.146630 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 30.718120 seconds.
+  path: Assets/Scripts/Items/ScriptableObjects/MedicineItem.cs
+  artifactKey: Guid(63ce4d369e9aefa4e9fbe80d03683dda) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/Items/ScriptableObjects/MedicineItem.cs using Guid(63ce4d369e9aefa4e9fbe80d03683dda) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '5e3984c46d868c7bdec16fd66cdc97de') in 0.008892 seconds
+  Import took 0.011402 seconds .
 
 ========================================================================
 Received Prepare
-Refreshing native plugins compatible for Editor in 371.05 ms, found 0 plugins.
+Registering precompiled user dll's ...
+Registered in 0.003660 seconds.
+Begin MonoManager ReloadAssembly
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 0.71 ms, found 0 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
-Unloading 22 Unused Serialized files (Serialized files now loaded: 0)
-System memory in use before: 41.3 MB.
-System memory in use after: 41.4 MB.
+Invoked RoslynAnalysisRunner static constructor.
+RoslynAnalysisRunner will not be running.
+RoslynAnalysisRunner has terminated.
+Mono: successfully reloaded assembly
+- Completed reload, in  0.856 seconds
+Platform modules already initialized, skipping
+Refreshing native plugins compatible for Editor in 0.78 ms, found 0 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 1605 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 75.9 MB.
+System memory in use after: 76.0 MB.
 
-Unloading 22 unused Assets to reduce memory usage. Loaded Objects now: 2034.
-Total: 2.676900 ms (FindLiveObjects: 0.159300 ms CreateObjectMapping: 0.055400 ms MarkObjects: 2.441200 ms  DeleteObjects: 0.019500 ms)
+Unloading 24 unused Assets to reduce memory usage. Loaded Objects now: 2058.
+Total: 1.946100 ms (FindLiveObjects: 0.154200 ms CreateObjectMapping: 0.053000 ms MarkObjects: 1.718800 ms  DeleteObjects: 0.018400 ms)
 
 ========================================================================
 Received Import Request.
-  Time since last request: 3741.429588 seconds.
-  path: Assets/Scripts/Pokemon/MoveBase.cs
-  artifactKey: Guid(60a83619553a27641bfeb93370b0ce89) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Scripts/Pokemon/MoveBase.cs using Guid(60a83619553a27641bfeb93370b0ce89) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '0a157dde769dfd174fb638e7c41951de') in 0.042851 seconds
-  Import took 0.047198 seconds .
+  Time since last request: 66.456456 seconds.
+  path: Assets/Scripts/Items/ScriptableObjects/MedicineItem.cs
+  artifactKey: Guid(63ce4d369e9aefa4e9fbe80d03683dda) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/Items/ScriptableObjects/MedicineItem.cs using Guid(63ce4d369e9aefa4e9fbe80d03683dda) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '9d9506ab64c51eafdc8ba0bbf274f85f') in 0.009196 seconds
+  Import took 0.011834 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 1028.014253 seconds.
+  path: Assets/Resources/Items/Pokeballs/Master Ball.asset
+  artifactKey: Guid(4f27745ae33b8a14fae441ec4e11b746) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Items/Pokeballs/Master Ball.asset using Guid(4f27745ae33b8a14fae441ec4e11b746) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '62b1674c818c2b7acb50d9c6ff3d49a3') in 0.028804 seconds
+  Import took 0.089802 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 665.445077 seconds.
+  path: Assets/Resources/Items/Pokeballs/Master Ball.asset
+  artifactKey: Guid(4f27745ae33b8a14fae441ec4e11b746) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Items/Pokeballs/Master Ball.asset using Guid(4f27745ae33b8a14fae441ec4e11b746) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '1124711f778d27b3ce0c7a6494531260') in 0.004487 seconds
+  Import took 0.007969 seconds .
 
 AssetImportWorkerClient::OnTransportError - code=2 error=End of file

@@ -4,7 +4,7 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public enum GameState { Overworld, Battle, Party, Dialog, Fade}
+public enum GameState { Overworld, Battle, Party,Inventory, Dialog, Fade}
 
 public class GameManager : MonoBehaviour
 {
@@ -25,6 +25,7 @@ public class GameManager : MonoBehaviour
     LevelManager _levelManager;
     [SerializeField] StartMenu startMenu;
     [SerializeField] PokeballItem standardPokeball;
+    [SerializeField] InventorySystem inventorySystem;
 
     bool _inBattle = false;
 
@@ -59,6 +60,7 @@ public class GameManager : MonoBehaviour
         PartySystemInitialization();
         DialogSystemInitialization();
         StartMenuInitialization();
+        InventorySystemInitialization();
         
         currentScenesLoaded = GetAllOpenScenes(currentScenesLoaded);
 
@@ -84,6 +86,8 @@ public class GameManager : MonoBehaviour
                 battleSystem.HandleUpdate();
                 break;
             case GameState.Party:
+                break;
+            case GameState.Inventory:
                 break;
             case GameState.Dialog:
                 _dialogManager.HandleUpdate();
@@ -159,6 +163,28 @@ public class GameManager : MonoBehaviour
             _state = GameState.Overworld;
         }
         partySystem.gameObject.SetActive(false);
+    }
+
+    void OpenInventory()
+    {
+        _inBattle = (_state == GameState.Battle);
+        _state = GameState.Inventory;
+        inventorySystem.gameObject.SetActive(true);
+        inventorySystem.SetData();
+        inventorySystem.OpenInventorySystem(_inBattle);
+    }
+
+    void CloseInventory()
+    {
+        if (_inBattle == true)
+        {
+            _state = GameState.Battle;
+        }
+        else
+        {
+            _state = GameState.Overworld;
+        }
+        inventorySystem.gameObject.SetActive(false);
     }
 
     void RunAllEntities()
@@ -405,6 +431,7 @@ public class GameManager : MonoBehaviour
     void StartMenuInitialization()
     {
         startMenu.OpenPokemonParty += (() => OpenParty(false));
+        startMenu.OpenInventory += OpenInventory;
         startMenu.SaveGame += SaveGame;
         startMenu.StartMenuClosed += () =>
         {
@@ -412,5 +439,16 @@ public class GameManager : MonoBehaviour
             playerController.ReturnFromStartMenu();
         };
         startMenu.Initialization();
+    }
+
+    void InventorySystemInitialization()
+    {
+        inventorySystem.Initialization(battleSystem);
+        inventorySystem.onCloseParty += CloseParty;
+
+        if (inventorySystem.gameObject.activeInHierarchy == true)
+        {
+            inventorySystem.gameObject.SetActive(false);
+        }
     }
 }
