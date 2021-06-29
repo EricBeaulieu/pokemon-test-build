@@ -60,9 +60,14 @@ public class MoveBase : ScriptableObject {
         elementType = newType;
     }
 
-    public void adjustedMoveAccuracy(float accuracyIncrease)
+    public void adjustedMoveAccuracyPercentage(float accuracyIncrease)
     {
         accuracy += Mathf.RoundToInt(accuracy * accuracyIncrease);
+    }
+
+    public void adjustedHPRecovered(float hpRecoveredIncrease)
+    {
+        hpRecovered += hpRecoveredIncrease;
     }
 
     public void removeMoveSecondaryEffects()

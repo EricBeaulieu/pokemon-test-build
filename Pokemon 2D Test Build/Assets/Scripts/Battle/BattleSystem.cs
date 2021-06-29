@@ -726,6 +726,8 @@ public class BattleSystem : MonoBehaviour
         }
 
         alteredMove = sourceUnit.pokemon.ability.AlterMoveDetails(move.moveBase);
+        alteredMove = sourceUnit.pokemon.GetHoldItemBase.AlterUserMoveDetails(alteredMove);
+        alteredMove = targetUnit.pokemon.GetHoldItemBase.AlterOpposingMoveDetails(alteredMove);
 
         if (CheckIfMoveHits(alteredMove, sourceUnit.pokemon, targetUnit.pokemon) == true)
         {

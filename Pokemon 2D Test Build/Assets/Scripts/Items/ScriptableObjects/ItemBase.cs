@@ -34,4 +34,9 @@ public abstract class ItemBase : ScriptableObject
     {
         get { return itemSprite; }
     }
+
+    public virtual HoldItemBase HoldItemAffects()
+    {
+        return HoldItemDB.GetHoldItem(HoldItemID.NA);
+    }
 }

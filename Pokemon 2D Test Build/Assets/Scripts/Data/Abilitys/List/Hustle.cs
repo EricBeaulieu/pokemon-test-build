@@ -23,7 +23,7 @@ public class Hustle : AbilityBase
         if(move.MoveType == MoveType.Physical)
         {
             move = move.Clone();
-            move.adjustedMoveAccuracy(-0.2f);
+            move.adjustedMoveAccuracyPercentage(-0.2f);
         }
         return base.AlterMoveDetails(move);
     }

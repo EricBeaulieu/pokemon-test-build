@@ -17,6 +17,7 @@ public class Pokemon {
     [SerializeField] EffortValues _effortValues = new EffortValues();
     [SerializeField] string _currentName;
     [SerializeField] AbilityBase _ability;
+    [SerializeField] ItemBase currentHeldItem;
     public System.Action OnStatusChanged;
 
     //properties
@@ -428,7 +429,21 @@ public class Pokemon {
             return damageDetails;
         }
 
+        //Item effects
+        float itemBonus = attackingPokemon.GetHoldItemBase.AlterDamageTaken(move);
+        //itemBonus *= attackingPokemon.GetHoldItemBase.
+
+
+
+        if (itemBonus == 0)
+        {
+            damageDetails.criticalHit = 1f;
+            damageDetails.typeEffectiveness = 0;
+            return damageDetails;
+        }
+
         modifier *= abilityBonus;
+        modifier *= itemBonus;
 
         float attackPower = (move.MoveType == MoveType.Physical) ? attackingPokemon.attack : attackingPokemon.specialAttack;
         float defendersDefense = (move.MoveType == MoveType.Physical) ? defense : specialDefense;
@@ -813,5 +828,25 @@ public class Pokemon {
         statMessage += (boost > 0) ? "rose!": "fell!";
 
         return statMessage;
+    }
+
+    public void GivePokemonItemToHold(ItemBase item)
+    {
+        currentHeldItem = item;
+    }
+
+    public HoldItemBase GetHoldItemBase
+    {
+        get
+        {
+            if (currentHeldItem == null)
+            {
+                return HoldItemDB.GetHoldItem(HoldItemID.NA);
+            }
+            else
+            {
+                return currentHeldItem.HoldItemAffects();
+            }
+        }
     }
 }
