@@ -11,6 +11,7 @@ public class DamageDetails
     public bool damageNullified { get; set; }
     public List<StatBoost> defendersStatBoostByAbility { get; set; }
     public List<StatBoost> attackersStatBoostByDefendersAbility { get; set; }
+    public List<StatBoost> alterStatAfterTakingDamageFromCertainTypeItem { get; set; }
 
     public DamageDetails()
     {
@@ -21,5 +22,6 @@ public class DamageDetails
         damageNullified = false;
         defendersStatBoostByAbility = new List<StatBoost>();
         attackersStatBoostByDefendersAbility = new List<StatBoost>();
+        alterStatAfterTakingDamageFromCertainTypeItem = new List<StatBoost>();
     }
 }

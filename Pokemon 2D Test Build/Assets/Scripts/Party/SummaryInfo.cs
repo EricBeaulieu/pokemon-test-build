@@ -34,7 +34,15 @@ public class SummaryInfo : SummaryUIBase
         }
         originalTrainerName.text = pokemon.originalTrainer;
         originalTrainerIDNumber.text = pokemon.originalTrainerID;
-        currentHeldItem.text = "NONE";
+
+        if (pokemon.GetCurrentItem != null)
+        {
+            currentHeldItem.text = pokemon.GetCurrentItem.ItemName;
+        }
+        else
+        {
+            currentHeldItem.text = "NONE";
+        }
         trainerMemo.text = $"{pokemon.nature.natureName} Nature";
     }
 }

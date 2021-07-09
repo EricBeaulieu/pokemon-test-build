@@ -13,14 +13,15 @@ public class PokemonParty : MonoBehaviour
     void Awake()
     {
         int currentCount = 0;
-        List<Pokemon> copyOfParty = new List<Pokemon>();
+        _originalPos = new List<Pokemon>();
 
         foreach (Pokemon pokemon in pokemonParty)
         {
             if(currentCount < MAX_PARTY_POKEMON_SIZE)
             {
-                copyOfParty.Add(new Pokemon(pokemon.pokemonBase, pokemon.currentLevel,pokemon.individualValues,pokemon.effortValues,
-                    pokemon.gender,pokemon.isShiny,pokemon.nature,pokemon.currentName,pokemon.presetMoves,pokemon.ability));
+                _originalPos.Add(new Pokemon(pokemon.pokemonBase, pokemon.currentLevel,pokemon.individualValues,pokemon.effortValues,
+                    pokemon.gender,pokemon.isShiny,pokemon.nature,pokemon.currentName,pokemon.presetMoves,pokemon.ability,
+                    pokemon.GetCurrentItem));
             }
             else
             {
@@ -29,7 +30,7 @@ public class PokemonParty : MonoBehaviour
             }
             currentCount++;
         }
-        pokemonParty = new List<Pokemon>(copyOfParty);
+        pokemonParty = new List<Pokemon>(_originalPos);
 
         ///This is just to set the players pokemon in his party ID
         if(GetComponent<PlayerController>() != null)

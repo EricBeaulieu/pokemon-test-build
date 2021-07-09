@@ -12,6 +12,7 @@ public static class GlobalDataBase
         EntryHazardsDB.Initialization(GetAllEntryHazards().ToList());
         WeatherEffectDB.Initialization(GetAllWeatherEffects().ToList());
         AbilityDB.Initialization(GetAllAbilities().ToList());
+        HoldItemDB.Initialization(GetAllHoldItems().ToList());
     }
 
     static IEnumerable<ConditionBase> GetAllConditions()
@@ -44,5 +45,13 @@ public static class GlobalDataBase
             .SelectMany(assembly => assembly.GetTypes())
             .Where(type => type.IsSubclassOf(typeof(AbilityBase)))
             .Select(type => Activator.CreateInstance(type) as AbilityBase);
+    }
+
+    static IEnumerable<HoldItemBase> GetAllHoldItems()
+    {
+        return AppDomain.CurrentDomain.GetAssemblies()
+            .SelectMany(assembly => assembly.GetTypes())
+            .Where(type => type.IsSubclassOf(typeof(HoldItemBase)))
+            .Select(type => Activator.CreateInstance(type) as HoldItemBase);
     }
 }

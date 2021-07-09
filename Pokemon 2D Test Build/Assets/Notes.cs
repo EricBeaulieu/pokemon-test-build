@@ -21,13 +21,9 @@ public class Notes
     //punk rock sounds reduction based
     //normalize to change the type of status moves as well
 
-    //Add in specific abilities
-    //scrappy
-
     //roost creating it so the pokemon can get hit by ground moves
     //double check abilities dropping or raising higher then stated
     //test out bug on new pokemon, in summary
-    //Start menu items
     //add in trainer details to said pokemon and trainer
     //finish all different types of animations with conditions
     //money set for trainer

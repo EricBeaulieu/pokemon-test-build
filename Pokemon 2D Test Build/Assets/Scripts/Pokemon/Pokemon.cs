@@ -50,7 +50,7 @@ public class Pokemon {
 
     public Pokemon(PokemonBase pokemonBase,int level,IndividualValues iV = null,EffortValues eV = null, Gender specifiedgender = Gender.NA, 
         bool? shiny = null,NatureBase specifiedNature = null,string nickname = null, List<MoveBase> presetMoveList = null, 
-        AbilityBase abilityBase = null)
+        AbilityBase abilityBase = null,ItemBase item = null)
     {
         _pokemonBase = pokemonBase;
         currentLevel = level;
@@ -67,6 +67,7 @@ public class Pokemon {
         SetDataStats();
         currentHitPoints = maxHitPoints;
         ability = SetAbility(abilityBase);
+        GivePokemonItemToHold(item);
 
         SetMoves(presetMoveList);
 
@@ -433,7 +434,12 @@ public class Pokemon {
         float itemBonus = attackingPokemon.GetHoldItemBase.AlterDamageTaken(move);
         //itemBonus *= attackingPokemon.GetHoldItemBase.
 
+        StatBoost itemStatBoost = GetHoldItemBase.AlterStatAfterTakingDamageFromCertainType(move.Type);
 
+        if (itemStatBoost != null)
+        {
+            damageDetails.alterStatAfterTakingDamageFromCertainTypeItem.Add(itemStatBoost);
+        }
 
         if (itemBonus == 0)
         {
@@ -848,5 +854,15 @@ public class Pokemon {
                 return currentHeldItem.HoldItemAffects();
             }
         }
+    }
+
+    public ItemBase GetCurrentItem
+    {
+        get { return currentHeldItem; }
+    }
+
+    public void ItemUsed()
+    {
+        currentHeldItem = null;
     }
 }

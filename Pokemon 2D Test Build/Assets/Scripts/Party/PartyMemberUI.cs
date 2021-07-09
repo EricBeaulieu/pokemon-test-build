@@ -70,8 +70,7 @@ public class PartyMemberUI : MonoBehaviour, ISelectHandler, IDeselectHandler
         _animatedSprite = currentPokemon.pokemonBase.GetAnimatedSprites();
         _currentIndex = 0;
         pokemonSprite.sprite = _animatedSprite[_currentIndex];
-        //until items are implimented
-        heldItem.sprite = StatusConditionArt.instance.Nothing;
+        heldItem.sprite = (currentPokemon.GetCurrentItem != null) ? PartyBackgroundArt.instance.HoldItemSprite() : StatusConditionArt.instance.Nothing;
 
         Deselected();
     }

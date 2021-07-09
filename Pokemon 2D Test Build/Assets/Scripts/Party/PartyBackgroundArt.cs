@@ -24,6 +24,8 @@ public class PartyBackgroundArt : MonoBehaviour
     [SerializeField] Sprite partyMemberSwitchSelectedBackground;
     [SerializeField] Sprite partyMemberSwitchSourceBackground;
 
+    [SerializeField] Sprite itemSprite;
+
     public static PartyBackgroundArt instance
     {
         get { return _instance; }
@@ -119,5 +121,10 @@ public class PartyBackgroundArt : MonoBehaviour
                 }
             }
         }
+    }
+
+    public Sprite HoldItemSprite()
+    {
+        return itemSprite;
     }
 }

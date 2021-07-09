@@ -830,6 +830,7 @@ public class BattleSystem : MonoBehaviour
                 if(targetUnit.pokemon.currentHitPoints > 0)
                 {
                     yield return ApplyStatChanges(damageDetails.defendersStatBoostByAbility, targetUnit, MoveTarget.Foe);
+                    yield return ApplyStatChanges(damageDetails.alterStatAfterTakingDamageFromCertainTypeItem, targetUnit, MoveTarget.Foe);
                 }
 
                 if (sourceUnit.pokemon.currentHitPoints > 0)
