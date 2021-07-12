@@ -10,7 +10,7 @@ public class BugGem : HoldItemBase
     {
         if (move.Type == ElementType.Bug && move.MoveType != MoveType.Status)
         {
-            RemoveItem();
+            RemoveItem = true;
             move = move.Clone();
             move.adjustedMovePower(0.5f);
         }

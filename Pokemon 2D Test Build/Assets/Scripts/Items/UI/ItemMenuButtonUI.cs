@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class ItemMenuButtonUI : MonoBehaviour, ISelectHandler, IDeselectHandler
 {
-    Image image;
+    [SerializeField] Image image;
     [SerializeField] itemType itemTypeMenu;
     [SerializeField] Sprite nonSelected;
     [SerializeField] Sprite currentlySelected;
@@ -14,11 +14,7 @@ public class ItemMenuButtonUI : MonoBehaviour, ISelectHandler, IDeselectHandler
     [TextArea]
     [SerializeField] string menuDecscription;
     [SerializeField] Text messageBox;
-
-    public void Initialization()
-    {
-        image = GetComponent<Image>();
-    }
+    [SerializeField] Button button;
 
     public void OnSelect(BaseEventData eventData)
     {
@@ -56,5 +52,10 @@ public class ItemMenuButtonUI : MonoBehaviour, ISelectHandler, IDeselectHandler
     void SetMessageText(string dialog)
     {
         messageBox.text = dialog;
+    }
+
+    public Button GetButton
+    {
+        get { return button; }
     }
 }

@@ -10,7 +10,7 @@ public class AbsorbBulb : HoldItemBase
     {
         if(attackType == ElementType.Water)
         {
-            RemoveItem();
+            RemoveItem = true;
             return new StatBoost() { stat = StatAttribute.SpecialAttack, boost = 1 };
         }
         return base.AlterStatAfterTakingDamageFromCertainType(attackType);

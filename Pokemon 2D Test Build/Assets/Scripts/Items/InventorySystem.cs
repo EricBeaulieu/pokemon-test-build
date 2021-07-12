@@ -9,7 +9,8 @@ using UnityEngine.UI;
 public class InventorySystem : MonoBehaviour
 {
     BattleSystem battleSystemReference;
-    public Action onCloseParty;
+    PartySystem partySystemReference;
+    public Action onCloseInventory;
     [SerializeField] List<Item> currentInventory;
 
     [SerializeField] List<ItemMenuButtonUI> menuButtons;
@@ -19,6 +20,12 @@ public class InventorySystem : MonoBehaviour
     [SerializeField] InventoryColorSystem colorSystem;
     [SerializeField] Text inventoryIndex;
     [SerializeField] ItemColorScheme[] colorScheme;
+
+    [SerializeField] GameObject currentItemOptionsMenu;
+    [SerializeField] ItemOptionDetailsUI itemDetails;
+    [SerializeField] ItemOptionButtonUI useOption;
+    [SerializeField] ItemOptionButtonUI giveOption;
+    [SerializeField] ItemOptionButtonUI trashOption;
 
     List<Item> currentItemsDisplayed = new List<Item>();
     itemType currentlySelected;
@@ -34,12 +41,23 @@ public class InventorySystem : MonoBehaviour
     const int MESSAGEBOX_STANDARD_SIZE = 650;
     const int MESSAGEBOX_SELECTED_SIZE = 515;
 
-    public void Initialization(BattleSystem battleSystem)
+    public void Initialization(BattleSystem battleSystem,PartySystem partySystem)
     {
         battleSystemReference = battleSystem;
+        partySystemReference = partySystem;
         CheckAndCorrectInventoryUponStart();
+        SetItemButtonFunctionality();
         SetMenuButtonFunctionality();
         SetArrowButtonFunctionaility();
+    }
+
+    public void HandleUpdate()
+    {
+        //If B button is pressed go back a menu
+        if (Input.GetButtonDown("Fire2"))
+        {
+            CloseInventorySystem();
+        }
     }
 
     public void OpenInventorySystem(bool inBattle)
@@ -54,7 +72,8 @@ public class InventorySystem : MonoBehaviour
 
     void CloseInventorySystem()
     {
-        onCloseParty();
+        EventSystem.current.SetSelectedGameObject(null);
+        onCloseInventory();
     }
 
     void SelectBox()
@@ -65,8 +84,8 @@ public class InventorySystem : MonoBehaviour
 
     void SetUpCancelButton(bool inBattle)
     {
-        cancelButton.onClick.AddListener(() => { CloseInventorySystem(); });
-        cancelButton.GetComponent<PartyCancelUI>().OnHandleStart();
+        SetUpCancelButtonFuntionality(true);
+        cancelButton.GetComponent<ItemCancelUI>().OnHandleStart();
     }
 
     public void SetData(itemType itemType = itemType.Basic)
@@ -133,13 +152,20 @@ public class InventorySystem : MonoBehaviour
 
     }
 
+    void SetItemButtonFunctionality()
+    {
+        for (int i = 0; i < itemButtons.Count; i++)
+        {
+            itemButtons[i].Initialization(this);
+        }
+    }
+
     void SetMenuButtonFunctionality()
     {
         for (int i = 0; i < menuButtons.Count; i++)
         {
             int k = i;
-            menuButtons[i].Initialization();
-            menuButtons[i].GetComponent<Button>().onClick.AddListener(() => SetData(menuButtons[k].ItemMenuType));
+            menuButtons[i].GetButton.onClick.AddListener(() => SetData(menuButtons[k].ItemMenuType));
         }
     }
 
@@ -198,7 +224,7 @@ public class InventorySystem : MonoBehaviour
 
             for (int i = 0; i < MAX_ITEMS_DISPLAY; i++)
             {
-                var navigation = itemButtons[i].GetComponent<Button>().navigation;
+                var navigation = itemButtons[i].GetButton.navigation;
                 if(i % 2 == 0)
                 {
                     navigation.selectOnLeft = arrowButtons[i % 2].GetComponent<Button>();
@@ -207,7 +233,7 @@ public class InventorySystem : MonoBehaviour
                 {
                     navigation.selectOnRight = arrowButtons[i % 2].GetComponent<Button>();
                 }
-                itemButtons[i].GetComponent<Button>().navigation = navigation;
+                itemButtons[i].GetButton.navigation = navigation;
             }
             inventoryIndex.gameObject.SetActive(true);
         }
@@ -220,7 +246,7 @@ public class InventorySystem : MonoBehaviour
 
             for (int i = 0; i < MAX_ITEMS_DISPLAY; i++)
             {
-                var navigation = itemButtons[i].GetComponent<Button>().navigation;
+                var navigation = itemButtons[i].GetButton.navigation;
                 if (i % 2 == 0)
                 {
                     navigation.selectOnLeft = null;
@@ -229,9 +255,110 @@ public class InventorySystem : MonoBehaviour
                 {
                     navigation.selectOnRight = null;
                 }
-                itemButtons[i].GetComponent<Button>().navigation = navigation;
+                itemButtons[i].GetButton.navigation = navigation;
             }
             inventoryIndex.gameObject.SetActive(false);
+        }
+    }
+
+    public void CurrentItemSelected(Item item)
+    {
+        Color background = ColorScheme(item.ItemBase.GetItemType).GetMissingItemFadeColor;
+
+        itemDetails.SetData(item);
+        useOption.SetData(background, true);
+        giveOption.SetData(background, true);
+        trashOption.SetData(background, true);
+
+        useOption.GetButton.onClick.AddListener(delegate { UseOptionSelected(item); });
+        giveOption.GetButton.onClick.AddListener(delegate { GiveOptionSelected(item); });
+        trashOption.GetButton.onClick.AddListener(delegate { TrashOptionSelected(item); });
+
+        SpecificItemOptionDisplay(true);
+
+        EventSystem.current.SetSelectedGameObject(null);
+        EventSystem.current.SetSelectedGameObject(useOption.gameObject);
+    }
+
+    void UseOptionSelected(Item item)
+    {
+        CloseInventorySystem();
+        partySystemReference.OpenPartySystemDueToInventoryItem(false, item, true);
+    }
+
+    void GiveOptionSelected(Item item)
+    {
+        Debug.Log($"give button clicked");
+    }
+
+    void TrashOptionSelected(Item item)
+    {
+        Debug.Log($"Trash button clicked");
+    }
+
+    void SpecificItemOptionDisplay(bool isOn)
+    {
+        SwitchAllItemButtonsToActive(!isOn);
+        SwitchAllMenuButtonsToActive(!isOn);
+        SwitchArrowButtonsToActive(!isOn);
+        currentItemOptionsMenu.SetActive(isOn);
+        SetUpCancelButtonFuntionality(!isOn);
+    }
+
+    void SwitchAllItemButtonsToActive(bool isOn)
+    {
+        for (int i = 0; i < itemButtons.Count; i++)
+        {
+            itemButtons[i].gameObject.SetActive(isOn);
+        }
+    }
+
+    void SwitchAllMenuButtonsToActive(bool isOn)
+    {
+        for (int i = 0; i < menuButtons.Count; i++)
+        {
+            menuButtons[i].gameObject.SetActive(isOn);
+        }
+    }
+
+    void SwitchArrowButtonsToActive(bool isOn)
+    {
+        for (int i = 0; i < arrowButtons.Count; i++)
+        {
+            arrowButtons[i].gameObject.SetActive(isOn);
+        }
+    }
+
+    void SetUpCancelButtonFuntionality(bool standardMenu)
+    {
+        cancelButton.onClick.RemoveAllListeners();
+
+        if (standardMenu == true)
+        {
+            cancelButton.onClick.AddListener(() => { CloseInventorySystem(); });
+
+            var navigation = cancelButton.navigation;
+            navigation.selectOnUp = itemButtons[5].GetButton;
+            navigation.selectOnDown = menuButtons[3].GetButton;
+            navigation.selectOnLeft = null;
+            navigation.selectOnRight = null;
+            cancelButton.navigation = navigation;
+
+        }
+        else
+        {
+            cancelButton.onClick.AddListener(() => 
+            {
+                SpecificItemOptionDisplay(false);
+                EventSystem.current.SetSelectedGameObject(lastButtonPressed.gameObject);
+            });
+
+            var navigation = cancelButton.navigation;
+            navigation.selectOnUp = trashOption.GetButton;
+            navigation.selectOnDown = trashOption.GetButton;
+            navigation.selectOnLeft = null;
+            navigation.selectOnRight = null;
+            cancelButton.navigation = navigation;
         }
     }
 }

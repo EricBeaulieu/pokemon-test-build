@@ -88,6 +88,7 @@ public class GameManager : MonoBehaviour
             case GameState.Party:
                 break;
             case GameState.Inventory:
+                inventorySystem.HandleUpdate();
                 break;
             case GameState.Dialog:
                 _dialogManager.HandleUpdate();
@@ -399,7 +400,7 @@ public class GameManager : MonoBehaviour
 
     void PartySystemInitialization()
     {
-        partySystem.Initialization(battleSystem);
+        partySystem.Initialization(battleSystem,inventorySystem);
         partySystem.onCloseParty += CloseParty;
 
         if (partySystem.gameObject.activeInHierarchy == true)
@@ -443,8 +444,8 @@ public class GameManager : MonoBehaviour
 
     void InventorySystemInitialization()
     {
-        inventorySystem.Initialization(battleSystem);
-        inventorySystem.onCloseParty += CloseParty;
+        inventorySystem.Initialization(battleSystem,partySystem);
+        inventorySystem.onCloseInventory += CloseInventory;
 
         if (inventorySystem.gameObject.activeInHierarchy == true)
         {

@@ -6,15 +6,9 @@ using UnityEngine;
 
 public class PartyCancelUI : MonoBehaviour, ISelectHandler, IDeselectHandler
 {
-    Image _backgroundSprite;
-
+    [SerializeField] Image _backgroundSprite;
     [SerializeField] Sprite onSelectBackground;
     [SerializeField] Sprite onDeselectBackground;
-
-    void Awake()
-    {
-        _backgroundSprite = GetComponent<Image>();
-    }
 
     public void OnHandleStart()
     {

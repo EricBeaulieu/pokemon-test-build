@@ -12,6 +12,7 @@ public class DamageDetails
     public List<StatBoost> defendersStatBoostByAbility { get; set; }
     public List<StatBoost> attackersStatBoostByDefendersAbility { get; set; }
     public List<StatBoost> alterStatAfterTakingDamageFromCertainTypeItem { get; set; }
+    public bool itemUsed { get; set; }
 
     public DamageDetails()
     {
@@ -23,5 +24,6 @@ public class DamageDetails
         defendersStatBoostByAbility = new List<StatBoost>();
         attackersStatBoostByDefendersAbility = new List<StatBoost>();
         alterStatAfterTakingDamageFromCertainTypeItem = new List<StatBoost>();
+        itemUsed = false;
     }
 }

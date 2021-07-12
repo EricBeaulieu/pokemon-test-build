@@ -14,7 +14,7 @@ public class AirBalloon : HoldItemBase
         }
         else
         {
-            RemoveItem();
+            RemoveItem = true;
             return 1;
         }
     }

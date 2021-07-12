@@ -14,6 +14,7 @@ public class PartySystem : MonoBehaviour
     [SerializeField] Button cancelButton;
 
     BattleSystem battleSystemReference;
+    InventorySystem inventorySystemReference;
     public Action onCloseParty;
     List<Pokemon> _currentParty;
     Pokemon _currentlySelectedPokemon;
@@ -34,11 +35,24 @@ public class PartySystem : MonoBehaviour
     const int MESSAGEBOX_STANDARD_SIZE = 650;
     const int MESSAGEBOX_SELECTED_SIZE = 515;
 
-    public void Initialization(BattleSystem battleSystem)
+    public void Initialization(BattleSystem battleSystem, InventorySystem inventorySystem)
     {
         battleSystemReference = battleSystem;
+        inventorySystemReference = inventorySystem;
         _partyMemberSlots = GetComponentsInChildren<PartyMemberUI>();
         summarySystem.OnClosedSummary += SelectBox;
+    }
+
+    public void HandleUpdate()
+    {
+        //If B button is pressed go back a menu
+        if (Input.GetButtonDown("Fire2"))
+        {
+            if (battleSelections.activeInHierarchy == true | overworldSelections.activeInHierarchy == true)
+            {
+                //onCloseParty();
+            }
+        }
     }
 
     public void OpenPartySystem(bool inBattle,bool wasShiftSwap)
@@ -53,6 +67,28 @@ public class PartySystem : MonoBehaviour
         SetMessageText("Choose a Pokemon");
 
         SetUpPartySystemCancelButton(inBattle,wasShiftSwap);
+    }
+
+    public void OpenPartySystemDueToInventoryItem(bool inBattle, Item item, bool usingItem)
+    {
+        _lastSelected = null;
+
+        SelectBox();
+        summarySystem.CloseSummarySystem();
+        overworldSelections.SetActive(false);
+        battleSelections.SetActive(false);
+        AdjustMessageBoxWidthSize(MESSAGEBOX_STANDARD_SIZE);
+        if(usingItem == true)
+        {
+            SetMessageText($"Use {item.ItemBase.name} on which pokemon");
+            SetUpPartySystemCancelButtonFromInventory(inBattle);
+        }
+        else
+        {
+            SetMessageText($"Give {item.ItemBase.name} to pokemon");
+
+        }
+
     }
 
     void ClosePartySystem()
@@ -101,6 +137,16 @@ public class PartySystem : MonoBehaviour
         {
             cancelButton.onClick.AddListener(() => { ClosePartySystem(); });
         }
+        cancelButton.GetComponent<PartyCancelUI>().OnHandleStart();
+    }
+
+    void SetUpPartySystemCancelButtonFromInventory(bool inBattle)
+    {
+        cancelButton.onClick.AddListener(() =>
+        {
+            ClosePartySystem();
+            inventorySystemReference.OpenInventorySystem(inBattle);
+        });
         cancelButton.GetComponent<PartyCancelUI>().OnHandleStart();
     }
 

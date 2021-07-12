@@ -10,7 +10,7 @@ public class CellBattery : HoldItemBase
     {
         if (attackType == ElementType.Electric)
         {
-            RemoveItem();
+            RemoveItem = true;
             return new StatBoost() { stat = StatAttribute.Attack, boost = 1 };
         }
         return base.AlterStatAfterTakingDamageFromCertainType(attackType);

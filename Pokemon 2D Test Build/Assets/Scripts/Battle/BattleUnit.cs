@@ -690,4 +690,71 @@ public class BattleUnit : MonoBehaviour
     {
         return (pokemon.volatileStatus.Exists(x => x.Id == ConditionID.Encore));
     }
+
+    public IEnumerator PlayItemUsedAnimation()
+    {
+        Debug.Log("Playing Item animation");
+        if(isPlayerPokemon == true)
+        {
+            yield return PlayPlayerItemUsedAnimation();
+        }
+        else
+        {
+            yield return PlayEnemyItemUsedAnimation();
+        }
+    }
+
+    IEnumerator PlayPlayerItemUsedAnimation()
+    {
+        float currentScale = 1;
+
+        float elapsedTime = 0;
+        float stepDuration = 0.4f;
+        int multiplier = 1;
+        int totalSteps = 4;
+
+        float sizeDifference = 0.1f;
+
+        for (int i = 0; i < totalSteps; i++)
+        {
+            while (elapsedTime < stepDuration)
+            {
+                currentScale += (((Time.deltaTime/ stepDuration) * sizeDifference) * multiplier);
+                pokemonSprite.rectTransform.localScale = new Vector3(1, currentScale, 1);
+                elapsedTime += Time.deltaTime;
+                yield return null;
+            }
+            multiplier *= -1;
+            elapsedTime = 0;
+        }
+
+        pokemonSprite.rectTransform.localScale = new Vector3(1, 1, 1);
+    }
+
+    IEnumerator PlayEnemyItemUsedAnimation()
+    {
+        float currentRotation = 0;
+
+        float elapsedTime = 0;
+        float stepDuration = 0.4f;
+        int multiplier = 1;
+        int totalSteps = 4;
+
+        int angleDifference = 20;
+
+        for (int i = 0; i < totalSteps; i++)
+        {
+            while (elapsedTime < stepDuration)
+            {
+                currentRotation += ((Time.deltaTime / stepDuration) * angleDifference) * multiplier;
+                pokemonSprite.rectTransform.localEulerAngles = new Vector3(0,0,currentRotation);
+                elapsedTime += Time.deltaTime;
+                yield return null;
+            }
+            multiplier *= -1;
+            elapsedTime = 0;
+        }
+
+        pokemonSprite.rectTransform.localEulerAngles = new Vector3(0,0,0);
+    }
 }

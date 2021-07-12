@@ -18,6 +18,7 @@ public class Pokemon {
     [SerializeField] string _currentName;
     [SerializeField] AbilityBase _ability;
     [SerializeField] ItemBase currentHeldItem;
+    HoldItemBase currentHoldItemEffects;
     public System.Action OnStatusChanged;
 
     //properties
@@ -431,10 +432,16 @@ public class Pokemon {
         }
 
         //Item effects
-        float itemBonus = attackingPokemon.GetHoldItemBase.AlterDamageTaken(move);
+        float itemBonus = attackingPokemon.GetHoldItemEffects.AlterDamageTaken(move);
         //itemBonus *= attackingPokemon.GetHoldItemBase.
 
-        StatBoost itemStatBoost = GetHoldItemBase.AlterStatAfterTakingDamageFromCertainType(move.Type);
+        StatBoost itemStatBoost = GetHoldItemEffects.AlterStatAfterTakingDamageFromCertainType(move.Type);
+
+        if(GetHoldItemEffects.RemoveItem == true)
+        {
+            ItemUsed();
+            damageDetails.itemUsed = true;
+        }
 
         if (itemStatBoost != null)
         {
@@ -839,9 +846,13 @@ public class Pokemon {
     public void GivePokemonItemToHold(ItemBase item)
     {
         currentHeldItem = item;
+        if(item != null)
+        {
+            currentHoldItemEffects = item.HoldItemAffects();
+        }
     }
 
-    public HoldItemBase GetHoldItemBase
+    public HoldItemBase GetHoldItemEffects
     {
         get
         {
@@ -851,7 +862,7 @@ public class Pokemon {
             }
             else
             {
-                return currentHeldItem.HoldItemAffects();
+                return currentHoldItemEffects;
             }
         }
     }
@@ -864,5 +875,6 @@ public class Pokemon {
     public void ItemUsed()
     {
         currentHeldItem = null;
+        currentHoldItemEffects = null;
     }
 }

@@ -726,8 +726,8 @@ public class BattleSystem : MonoBehaviour
         }
 
         alteredMove = sourceUnit.pokemon.ability.AlterMoveDetails(move.moveBase);
-        alteredMove = sourceUnit.pokemon.GetHoldItemBase.AlterUserMoveDetails(alteredMove);
-        alteredMove = targetUnit.pokemon.GetHoldItemBase.AlterOpposingMoveDetails(alteredMove);
+        alteredMove = sourceUnit.pokemon.GetHoldItemEffects.AlterUserMoveDetails(alteredMove);
+        alteredMove = targetUnit.pokemon.GetHoldItemEffects.AlterOpposingMoveDetails(alteredMove);
 
         if (CheckIfMoveHits(alteredMove, sourceUnit.pokemon, targetUnit.pokemon) == true)
         {
@@ -759,6 +759,11 @@ public class BattleSystem : MonoBehaviour
                 }
 
                 DamageDetails damageDetails = targetUnit.pokemon.TakeDamage(alteredMove, sourceUnit.pokemon);
+
+                if(damageDetails.itemUsed == true)
+                {
+                    yield return targetUnit.PlayItemUsedAnimation();
+                }
 
                 if (attackLoop > 1)
                 {
