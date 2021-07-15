@@ -11987,6 +11987,16 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 371114709060238009, guid: 6c34561d46222554c912985371129d81,
         type: 3}
+      propertyPath: m_Transition
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 371114709060238009, guid: 6c34561d46222554c912985371129d81,
+        type: 3}
+      propertyPath: m_Interactable
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 371114709060238009, guid: 6c34561d46222554c912985371129d81,
+        type: 3}
       propertyPath: m_Navigation.m_SelectOnUp
       value: 
       objectReference: {fileID: 448444111}
@@ -12005,6 +12015,11 @@ PrefabInstance:
       propertyPath: m_Navigation.m_SelectOnRight
       value: 
       objectReference: {fileID: 1856055595}
+    - target: {fileID: 3936756028648695159, guid: 6c34561d46222554c912985371129d81,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 9217218085582289780, guid: 6c34561d46222554c912985371129d81,
         type: 3}
       propertyPath: m_Text
@@ -15659,7 +15674,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1191449691
 RectTransform:
   m_ObjectHideFlags: 0

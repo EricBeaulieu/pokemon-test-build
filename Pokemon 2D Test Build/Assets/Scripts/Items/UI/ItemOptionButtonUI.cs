@@ -15,7 +15,7 @@ public class ItemOptionButtonUI : MonoBehaviour, ISelectHandler, IDeselectHandle
     public void SetData(Color missingColor,bool showButton)
     {
         button.onClick.RemoveAllListeners();
-
+        standardBackground.color = missingColor;
         background.SetActive(showButton);
         textBox.SetActive(showButton);
     }

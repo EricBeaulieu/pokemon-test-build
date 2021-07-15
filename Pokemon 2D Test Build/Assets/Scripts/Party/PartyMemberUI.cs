@@ -27,6 +27,7 @@ public class PartyMemberUI : MonoBehaviour, ISelectHandler, IDeselectHandler
 
     [SerializeField] GameObject selectorOn;
     [SerializeField] GameObject selectorOff;
+    [SerializeField] Button button;
 
     void Update()
     {
@@ -101,5 +102,10 @@ public class PartyMemberUI : MonoBehaviour, ISelectHandler, IDeselectHandler
     {
         selectorOn.SetActive(enabled);
         selectorOff.SetActive(!enabled);
+    }
+
+    public Button GetButton
+    {
+        get { return button; }
     }
 }

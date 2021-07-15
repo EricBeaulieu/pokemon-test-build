@@ -176,4 +176,9 @@ public class InBattleItem : MonoBehaviour
     {
         get { return _itemBase.ItemName; }
     }
+
+    public void SetInBattleItem(ItemBase item)
+    {
+        _itemBase = item;
+    }
 }

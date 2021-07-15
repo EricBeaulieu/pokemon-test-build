@@ -18,9 +18,18 @@ public class PokeballItem : ItemBase
         itemType = itemType.Pokeball;
     }
 
-    public override void UseItem()
+    public override bool UseItem(Pokemon pokemon)
     {
-        //nothing yet
+        return false;
+    }
+
+    public override bool UseItemOption()
+    {
+        if(BattleSystem.inBattle == true)
+        {
+            return true;
+        }
+        return false;
     }
 
     public PokeballCaptureID PokeballId

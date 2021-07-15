@@ -19,8 +19,56 @@ public class MedicineItem : ItemBase
         itemType = itemType.Medicine;
     }
 
-    public override void UseItem()
+    public override bool UseItem(Pokemon pokemon)
     {
-        //
+        if(hpRecovered > 0)
+        {
+            if(pokemon.currentHitPoints < pokemon.maxHitPoints)
+            {
+                return true;
+            }
+        }
+
+        if (ppRecovered > 0)
+        {
+            if(multipleMoves == true)
+            {
+                for (int i = 0; i < pokemon.moves.Count; i++)
+                {
+                    pokemon.moves[i].pP += ppRecovered;
+                }
+                return true;
+            }
+            //TO DO
+            return false; 
+        }
+
+        if(specificStatusRecovered != ConditionID.NA)
+        {
+            if(pokemon.status.Id == specificStatusRecovered)
+            {
+                return true;
+            }
+        }
+
+        if(cureAllStatus == true)
+        {
+            if(pokemon.status != null)
+            {
+                return true;
+            }
+        }
+
+        if(revive > 0 && pokemon.currentHitPoints <= 0)
+        {
+            pokemon.currentHitPoints = Mathf.CeilToInt(pokemon.maxHitPoints * revive);
+            return true;
+        }
+        return false;
+    }
+
+    public override bool UseItemOption()
+    {
+        return true;
     }
 }

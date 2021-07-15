@@ -27,6 +27,7 @@ public class ItemButtonUI : MonoBehaviour, ISelectHandler, IDeselectHandler
     {
         currentItem = item;
         button.onClick.RemoveAllListeners();
+        EnableSelector(false);
 
         if (item == null)
         {
@@ -49,7 +50,7 @@ public class ItemButtonUI : MonoBehaviour, ISelectHandler, IDeselectHandler
     public void OnSelect(BaseEventData eventData)
     {
         SetMessageText(currentItem);
-        InventorySystem.SetLastItemButton(this);
+        inventory.SetLastItemButton(this.gameObject);
         EnableSelector(true);
     }
 
@@ -77,7 +78,7 @@ public class ItemButtonUI : MonoBehaviour, ISelectHandler, IDeselectHandler
 
     IEnumerator OnClick()
     {
-        InventorySystem.SetLastItemButton(this);
+        inventory.SetLastItemButton(this.gameObject);
         EventSystem.current.SetSelectedGameObject(null);
 
         float elapsedTime = 0;

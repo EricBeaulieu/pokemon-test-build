@@ -16,6 +16,7 @@ public class BattleSystem : MonoBehaviour
 
     public event Action<bool> OnBattleOver;
     public event Action<bool> OpenPokemonParty;
+    public event Action OpenBag;
 
     [SerializeField] BattleDialogBox dialogBox;
     [SerializeField] ActionSelectionEventSelector actionSelectionEventSelector;
@@ -31,6 +32,7 @@ public class BattleSystem : MonoBehaviour
     bool _playerPokemonShift;
 
     static WeatherEffectBase _currentWeather;
+    public static bool inBattle { get; private set; } = false;
 
     List<EntryHazardBase> _playerSideEntryHazards = new List<EntryHazardBase>();
     List<EntryHazardBase> _enemySideEntryHazards = new List<EntryHazardBase>();
@@ -57,6 +59,9 @@ public class BattleSystem : MonoBehaviour
     [SerializeField] MoveBase shoreUp;
     [SerializeField] MoveBase purify;
     [SerializeField] MoveBase rest;
+
+    //pooling all the conditions on the pokemon prior to checking them
+    List<ConditionBase> allConditionsOnPokemon = new List<ConditionBase>();
 
     #region End of Turn effects Order reference as of GEN 5
 
@@ -241,9 +246,11 @@ public class BattleSystem : MonoBehaviour
     /// </summary>
     IEnumerator SetupBattle()
     {
+        inBattle = true;
         _playerSideEntryHazards = new List<EntryHazardBase>();
         _enemySideEntryHazards = new List<EntryHazardBase>();
         Pokemon playerPokemon = _playerController.pokemonParty.GetFirstHealthyPokemon();
+
         if (_isTrainerBattle == true)
         {
             Pokemon enemyPokemon = _trainerController.pokemonParty.GetFirstHealthyPokemon();
@@ -367,8 +374,7 @@ public class BattleSystem : MonoBehaviour
     void PlayerActionBag()
     {
         //Open Bag button
-        EnableActionSelector(false);
-        StartCoroutine(PlayerThrewPokeball(enemyBattleUnit));
+        OpenBag();
     }
 
     /// <summary>
@@ -460,7 +466,7 @@ public class BattleSystem : MonoBehaviour
         EnableActionSelector(true);
     }
 
-    public void ReturnFromPokemonPartySystem()
+    public void ReturnFromPokemonAlternateSystem()
     {
         actionSelectionEventSelector.SelectBox();
     }
@@ -481,6 +487,7 @@ public class BattleSystem : MonoBehaviour
         if (playerSpeed > enemySpeed)
         {
             yield return dialogBox.TypeDialog($"You got away safely", true);
+            inBattle = false;
             OnBattleOver(true);
             yield break;
         }
@@ -493,6 +500,7 @@ public class BattleSystem : MonoBehaviour
             if (rnd < f)
             {
                 yield return dialogBox.TypeDialog($"You got away safely", true);
+                inBattle = false;
                 OnBattleOver(true);
                 yield break;
             }
@@ -1145,7 +1153,8 @@ public class BattleSystem : MonoBehaviour
 
         int currentHP = sourceUnit.pokemon.currentHitPoints;
 
-        List<ConditionBase> allConditionsOnPokemon = new List<ConditionBase>();
+        allConditionsOnPokemon.Clear();
+
         if(sourceUnit.pokemon.status != null)
         {
             allConditionsOnPokemon.Add(sourceUnit.pokemon.status);
@@ -1502,7 +1511,7 @@ public class BattleSystem : MonoBehaviour
                 {
                     yield return TrainerBattleOver(false);
                 }
-
+                inBattle = false;
                 OnBattleOver(false);
             }
         }
@@ -1518,11 +1527,13 @@ public class BattleSystem : MonoBehaviour
                 else
                 {
                     yield return TrainerBattleOver(true);
+                    inBattle = false;
                     OnBattleOver(true);
                 }
             }
             else
             {
+                inBattle = false;
                 OnBattleOver(true);
             }
         }
@@ -1615,6 +1626,12 @@ public class BattleSystem : MonoBehaviour
         {
             yield return ActivatePokemonAbilityUponEntry(enemyBattleUnit, playerBattleUnit);
         }
+    }
+
+    public void PlayerUsedItemWhileInBattle()
+    {
+        StartCoroutine(EnemyMove());
+        EnableActionSelector(false);
     }
 
     #endregion
@@ -1771,7 +1788,13 @@ public class BattleSystem : MonoBehaviour
 
     #region Items/Catching Pokemon
 
-    IEnumerator PlayerThrewPokeball(BattleUnit targetUnit)
+    public void UsePokeballFromInventory(PokeballItem pokeball)
+    {
+        EnableActionSelector(false);
+        StartCoroutine(PlayerThrewPokeball(enemyBattleUnit,pokeball));
+    }
+
+    IEnumerator PlayerThrewPokeball(BattleUnit targetUnit,PokeballItem currentPokeball)
     {
         if(_isTrainerBattle == true)
         {
@@ -1780,11 +1803,10 @@ public class BattleSystem : MonoBehaviour
             PlayerActions();
             yield break;
         }
-
         
-
         inGameItem.SetActive(true);
         InBattleItem currentBall = inGameItem.GetComponent<InBattleItem>();
+        currentBall.SetInBattleItem(currentPokeball);
         Vector3 ballHeightJump = new Vector3(0, 75, 0);
 
         yield return dialogBox.TypeDialog($"{_playerController.TrainerName} used {currentBall.GetItemName}");
@@ -1827,6 +1849,7 @@ public class BattleSystem : MonoBehaviour
             yield return dialogBox.TypeDialog($"{targetUnit.pokemon.currentName} was Caught!",true);
             yield return currentBall.FadeItem(false);
             OnPokemonCaptured(enemyBattleUnit.pokemon,currentBall.CurrentPokeball);
+            inBattle = false;
             OnBattleOver(true);
         }
         else
@@ -2171,5 +2194,4 @@ public class BattleSystem : MonoBehaviour
     }
 
     #endregion
-
 }

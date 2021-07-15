@@ -32,7 +32,7 @@ public class InventorySystem : MonoBehaviour
     int currentIndex;
     int pages;
 
-    static ItemButtonUI lastButtonPressed;
+    GameObject lastSelected;
 
     const int MAX_ITEMS_DISPLAY = 6;
 
@@ -41,10 +41,10 @@ public class InventorySystem : MonoBehaviour
     const int MESSAGEBOX_STANDARD_SIZE = 650;
     const int MESSAGEBOX_SELECTED_SIZE = 515;
 
-    public void Initialization(BattleSystem battleSystem,PartySystem partySystem)
+    public void Initialization()
     {
-        battleSystemReference = battleSystem;
-        partySystemReference = partySystem;
+        battleSystemReference = GameManager.instance.GetBattleSystem;
+        partySystemReference = GameManager.instance.GetPartySystem;
         CheckAndCorrectInventoryUponStart();
         SetItemButtonFunctionality();
         SetMenuButtonFunctionality();
@@ -60,14 +60,14 @@ public class InventorySystem : MonoBehaviour
         }
     }
 
-    public void OpenInventorySystem(bool inBattle)
+    public void OpenInventorySystem()
     {
+        gameObject.SetActive(true);
+        SetData();
         _lastSelected = null;
+        SpecificItemOptionDisplay(false);
         SelectBox();
-        //overworldSelections.SetActive(false);
-        //battleSelections.SetActive(false);
-
-        SetUpCancelButton(inBattle);
+        SetUpCancelButton();
     }
 
     void CloseInventorySystem()
@@ -76,13 +76,21 @@ public class InventorySystem : MonoBehaviour
         onCloseInventory();
     }
 
-    void SelectBox()
+    void SelectBox(GameObject gameObject = null)
     {
         EventSystem.current.SetSelectedGameObject(null);
-        EventSystem.current.SetSelectedGameObject(menuButtons[0].gameObject);
+        if(gameObject == null)
+        {
+            EventSystem.current.SetSelectedGameObject(menuButtons[0].gameObject);
+        }
+        else
+        {
+            EventSystem.current.SetSelectedGameObject(gameObject);
+        }
+        
     }
 
-    void SetUpCancelButton(bool inBattle)
+    void SetUpCancelButton()
     {
         SetUpCancelButtonFuntionality(true);
         cancelButton.GetComponent<ItemCancelUI>().OnHandleStart();
@@ -179,12 +187,12 @@ public class InventorySystem : MonoBehaviour
 
     public GameObject ReturnToLastButtonPressed()
     {
-        return lastButtonPressed.gameObject;
+        return lastSelected.gameObject;
     }
 
-    public static void SetLastItemButton(ItemButtonUI itemButtonUI)
+    public void SetLastItemButton(GameObject gameObject)
     {
-        lastButtonPressed = itemButtonUI;
+        lastSelected = gameObject;
     }
 
     public void LoadNextPage(bool right)
@@ -266,9 +274,9 @@ public class InventorySystem : MonoBehaviour
         Color background = ColorScheme(item.ItemBase.GetItemType).GetMissingItemFadeColor;
 
         itemDetails.SetData(item);
-        useOption.SetData(background, true);
-        giveOption.SetData(background, true);
-        trashOption.SetData(background, true);
+        useOption.SetData(background, item.ItemBase.UseItemOption());
+        giveOption.SetData(background, item.ItemBase.GiveItemOption());
+        trashOption.SetData(background, item.ItemBase.TrashItemOption());
 
         useOption.GetButton.onClick.AddListener(delegate { UseOptionSelected(item); });
         giveOption.GetButton.onClick.AddListener(delegate { GiveOptionSelected(item); });
@@ -282,8 +290,29 @@ public class InventorySystem : MonoBehaviour
 
     void UseOptionSelected(Item item)
     {
-        CloseInventorySystem();
-        partySystemReference.OpenPartySystemDueToInventoryItem(false, item, true);
+        switch (item.ItemBase.GetItemType)
+        {
+            case itemType.Basic:
+                break;
+            case itemType.Medicine:
+                CloseInventorySystem();
+                partySystemReference.OpenPartySystemDueToInventoryItem(item, true);
+                break;
+            case itemType.Pokeball:
+                battleSystemReference.UsePokeballFromInventory((PokeballItem)item.ItemBase);
+                CloseInventorySystem();
+                break;
+            case itemType.TMHM:
+                break;
+            case itemType.Berry:
+                break;
+            case itemType.Battle:
+                break;
+            case itemType.KeyItem:
+                break;
+            default:
+                break;
+        }
     }
 
     void GiveOptionSelected(Item item)
@@ -301,6 +330,7 @@ public class InventorySystem : MonoBehaviour
         SwitchAllItemButtonsToActive(!isOn);
         SwitchAllMenuButtonsToActive(!isOn);
         SwitchArrowButtonsToActive(!isOn);
+        inventoryIndex.gameObject.SetActive(!isOn);
         currentItemOptionsMenu.SetActive(isOn);
         SetUpCancelButtonFuntionality(!isOn);
     }
@@ -344,13 +374,20 @@ public class InventorySystem : MonoBehaviour
             navigation.selectOnRight = null;
             cancelButton.navigation = navigation;
 
+            if(BattleSystem.inBattle == true)
+            {
+                cancelButton.onClick.AddListener(() => 
+                {
+                    battleSystemReference.ReturnFromPokemonAlternateSystem();
+                });
+            }
         }
         else
         {
             cancelButton.onClick.AddListener(() => 
             {
                 SpecificItemOptionDisplay(false);
-                EventSystem.current.SetSelectedGameObject(lastButtonPressed.gameObject);
+                EventSystem.current.SetSelectedGameObject(lastSelected.gameObject);
             });
 
             var navigation = cancelButton.navigation;
@@ -361,4 +398,14 @@ public class InventorySystem : MonoBehaviour
             cancelButton.navigation = navigation;
         }
     }
+
+    public void ReturnFromPartySystemAfterItemUsage()
+    {
+
+        //if item is above 0
+        SpecificItemOptionDisplay(false);
+        SelectBox();
+        SetUpCancelButton();
+    }
+    
 }

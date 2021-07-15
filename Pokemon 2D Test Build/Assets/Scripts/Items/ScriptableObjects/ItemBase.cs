@@ -13,7 +13,25 @@ public abstract class ItemBase : ScriptableObject
     [SerializeField] string itemDescription;
     [SerializeField] Sprite itemSprite;
 
-    public abstract void UseItem();
+    public abstract bool UseItem(Pokemon pokemon);
+
+    public abstract bool UseItemOption();
+    public virtual bool GiveItemOption()
+    {
+        if (BattleSystem.inBattle == true)
+        {
+            return false;
+        }
+        return true;
+    }
+    public virtual bool TrashItemOption()//Key item will always be false when implimented
+    {
+        if (BattleSystem.inBattle == true)
+        {
+            return false;
+        }
+        return true;
+    }
 
     public itemType GetItemType
     {

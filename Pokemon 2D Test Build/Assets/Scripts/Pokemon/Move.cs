@@ -6,7 +6,15 @@ public class Move
 {
     public MoveBase moveBase { get; set; }
 
-    public int pP { get; set; }
+    int currentPP;
+    public int pP
+    {
+        get { return currentPP; }
+        set
+        {
+            currentPP = Mathf.Clamp(value, 0, moveBase.PowerPoints);
+        }
+    }
     public bool disabled { get; set; }
 
     public Move(MoveBase mBase)

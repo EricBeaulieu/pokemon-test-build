@@ -13,9 +13,14 @@ public class HoldItem : ItemBase
         return HoldItemDB.GetHoldItem(holdItemID);
     }
 
-    public override void UseItem()
+    public override bool UseItem(Pokemon pokemon)
     {
-        throw new System.NotImplementedException();
+        return false;
+    }
+
+    public override bool UseItemOption()
+    {
+        return false;
     }
 
 }

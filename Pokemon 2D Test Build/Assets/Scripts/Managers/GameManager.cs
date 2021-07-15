@@ -27,8 +27,6 @@ public class GameManager : MonoBehaviour
     [SerializeField] PokeballItem standardPokeball;
     [SerializeField] InventorySystem inventorySystem;
 
-    bool _inBattle = false;
-
     GameState _state = GameState.Overworld;
 
     public List<Entity> allActiveEntities = new List<Entity>();
@@ -106,7 +104,6 @@ public class GameManager : MonoBehaviour
         _state = GameState.Battle;
         battleSystem.gameObject.SetActive(true);
         overWorldCamera.gameObject.SetActive(false);
-        _inBattle = true;
 
         Pokemon currentWildPokemon = _levelManager.WildPokemon();
 
@@ -119,7 +116,6 @@ public class GameManager : MonoBehaviour
         _state = GameState.Battle;
         battleSystem.gameObject.SetActive(true);
         overWorldCamera.gameObject.SetActive(false);
-        _inBattle = true;
         trainerController = currentTrainer;
 
         trainerController.pokemonParty.HealAllPokemonInParty();
@@ -138,24 +134,20 @@ public class GameManager : MonoBehaviour
         }
 
         _state = GameState.Overworld;
-        _inBattle = false;
         battleSystem.gameObject.SetActive(false);
         overWorldCamera.gameObject.SetActive(true);
-        playerController.GetComponent<PokemonParty>().SetPositionstoBeforeBattle();
+        playerController.pokemonParty.SetPositionstoBeforeBattle();
     }
 
     void OpenParty(bool wasShiftSwap)
     {
-        _inBattle = (_state == GameState.Battle);
         _state = GameState.Party;
-        partySystem.gameObject.SetActive(true);
-        partySystem.SetPartyData(playerController.pokemonParty.CurrentPokemonList(), _inBattle);
-        partySystem.OpenPartySystem(_inBattle, wasShiftSwap);
+        partySystem.OpenPartySystem(wasShiftSwap);
     }
 
     void CloseParty()
     {
-        if(_inBattle == true)
+        if(BattleSystem.inBattle == true)
         {
             _state = GameState.Battle;
         }
@@ -168,16 +160,13 @@ public class GameManager : MonoBehaviour
 
     void OpenInventory()
     {
-        _inBattle = (_state == GameState.Battle);
         _state = GameState.Inventory;
-        inventorySystem.gameObject.SetActive(true);
-        inventorySystem.SetData();
-        inventorySystem.OpenInventorySystem(_inBattle);
+        inventorySystem.OpenInventorySystem();
     }
 
     void CloseInventory()
     {
-        if (_inBattle == true)
+        if (BattleSystem.inBattle == true)
         {
             _state = GameState.Battle;
         }
@@ -394,13 +383,14 @@ public class GameManager : MonoBehaviour
     {
         battleSystem.OnBattleOver += EndBattle;
         battleSystem.OpenPokemonParty += OpenParty;
+        battleSystem.OpenBag += OpenInventory;
         battleSystem.OnPokemonCaptured += CapturedNewPokemon;
         battleSystem.Initialization();
     }
 
     void PartySystemInitialization()
     {
-        partySystem.Initialization(battleSystem,inventorySystem);
+        partySystem.Initialization();
         partySystem.onCloseParty += CloseParty;
 
         if (partySystem.gameObject.activeInHierarchy == true)
@@ -417,7 +407,7 @@ public class GameManager : MonoBehaviour
         {
             if (_state == GameState.Dialog)
             {
-                if (_inBattle == true)
+                if (BattleSystem.inBattle == true)
                 {
                     _state = GameState.Battle;
                 }
@@ -444,7 +434,7 @@ public class GameManager : MonoBehaviour
 
     void InventorySystemInitialization()
     {
-        inventorySystem.Initialization(battleSystem,partySystem);
+        inventorySystem.Initialization();
         inventorySystem.onCloseInventory += CloseInventory;
 
         if (inventorySystem.gameObject.activeInHierarchy == true)
@@ -452,4 +442,30 @@ public class GameManager : MonoBehaviour
             inventorySystem.gameObject.SetActive(false);
         }
     }
+
+    public BattleSystem GetBattleSystem
+    {
+        get { return battleSystem; }
+    }
+
+    public PartySystem GetPartySystem
+    {
+        get { return partySystem; }
+    }
+
+    public InventorySystem GetInventorySystem
+    {
+        get { return inventorySystem; }
+    }
+
+    public PlayerController GetPlayerController
+    {
+        get { return playerController; }
+    }
+
+    public void SetGameState(GameState newState)
+    {
+        _state = newState;
+    }
+
 }
