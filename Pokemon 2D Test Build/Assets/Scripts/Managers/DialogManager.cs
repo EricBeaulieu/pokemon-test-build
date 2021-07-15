@@ -12,9 +12,6 @@ public class DialogManager : MonoBehaviour
     [SerializeField] Text dialogText;
 
     [SerializeField] int lettersPerSecond = 30;
-
-    public Action OnShowDialog;
-    public Action OnCloseDialog;
     Action onDialogFinished;
 
     Dialog _currentDialog;
@@ -47,14 +44,6 @@ public class DialogManager : MonoBehaviour
         {
             dialogBox.SetActive(false);
         }
-
-        OnShowDialog += () =>
-        {
-            _playerSpedUp = false;
-            _currentlyTyping = false;
-            _waitingOnUserInput = false;
-        };
-        OnCloseDialog += () => { dialogBox.SetActive(false); };
     }
 
     public void HandleUpdate()
@@ -76,7 +65,7 @@ public class DialogManager : MonoBehaviour
                 }
                 else
                 {
-                    OnCloseDialog?.Invoke();
+                    OnCloseDialog();
                     onDialogFinished?.Invoke();
                 }
             }
@@ -87,7 +76,7 @@ public class DialogManager : MonoBehaviour
     {
         yield return new WaitForEndOfFrame();
 
-        OnShowDialog?.Invoke();
+        OnShowDialog();
 
         _currentDialog = dialog;
         _currentLine = 0;
@@ -136,4 +125,26 @@ public class DialogManager : MonoBehaviour
         dialogText.text += indicatorWhenWaitingOnInput;
         _waitingOnUserInput = true;
     }
+
+    void OnShowDialog()
+    {
+        GameManager.SetGameState(GameState.Dialog);
+        _playerSpedUp = false;
+        _currentlyTyping = false;
+        _waitingOnUserInput = false;
+    }
+
+    void OnCloseDialog()
+    {
+        if (BattleSystem.inBattle == true)
+        {
+            GameManager.SetGameState(GameState.Battle);
+        }
+        else
+        {
+            GameManager.SetGameState(GameState.Overworld);
+        }
+        dialogBox.SetActive(false);
+    }
+
 }

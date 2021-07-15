@@ -25,6 +25,7 @@ public class MedicineItem : ItemBase
         {
             if(pokemon.currentHitPoints < pokemon.maxHitPoints)
             {
+                pokemon.UpdateHPRestored(hpRecovered);
                 return true;
             }
         }

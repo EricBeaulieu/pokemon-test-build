@@ -21,13 +21,13 @@ public class GameManager : MonoBehaviour
     [SerializeField] Camera overWorldCamera;
     [SerializeField] PartySystem partySystem;
     [SerializeField] FadeSystem fadeSystem;
-    DialogManager _dialogManager;
+    DialogManager dialogManager;
     LevelManager _levelManager;
     [SerializeField] StartMenu startMenu;
     [SerializeField] PokeballItem standardPokeball;
     [SerializeField] InventorySystem inventorySystem;
 
-    GameState _state = GameState.Overworld;
+    static GameState state = GameState.Overworld;
 
     public List<Entity> allActiveEntities = new List<Entity>();
     List<GameSceneBaseSO> currentScenesLoaded = new List<GameSceneBaseSO>();
@@ -75,7 +75,7 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
-        switch (_state)
+        switch (state)
         {
             case GameState.Overworld:
                 RunAllEntities();
@@ -89,7 +89,7 @@ public class GameManager : MonoBehaviour
                 inventorySystem.HandleUpdate();
                 break;
             case GameState.Dialog:
-                _dialogManager.HandleUpdate();
+                dialogManager.HandleUpdate();
                 break;
             case GameState.Fade:
                 break;
@@ -101,7 +101,7 @@ public class GameManager : MonoBehaviour
 
     void StartWildPokemonBattle()
     {
-        _state = GameState.Battle;
+        SetGameState(GameState.Battle);
         battleSystem.gameObject.SetActive(true);
         overWorldCamera.gameObject.SetActive(false);
 
@@ -113,7 +113,7 @@ public class GameManager : MonoBehaviour
 
     public void StartTrainerBattle(TrainerController currentTrainer)
     {
-        _state = GameState.Battle;
+        SetGameState(GameState.Battle);
         battleSystem.gameObject.SetActive(true);
         overWorldCamera.gameObject.SetActive(false);
         trainerController = currentTrainer;
@@ -133,7 +133,7 @@ public class GameManager : MonoBehaviour
             playerController.PlayerHasLostBattle();
         }
 
-        _state = GameState.Overworld;
+        SetGameState(GameState.Overworld);
         battleSystem.gameObject.SetActive(false);
         overWorldCamera.gameObject.SetActive(true);
         playerController.pokemonParty.SetPositionstoBeforeBattle();
@@ -141,7 +141,6 @@ public class GameManager : MonoBehaviour
 
     void OpenParty(bool wasShiftSwap)
     {
-        _state = GameState.Party;
         partySystem.OpenPartySystem(wasShiftSwap);
     }
 
@@ -149,18 +148,17 @@ public class GameManager : MonoBehaviour
     {
         if(BattleSystem.inBattle == true)
         {
-            _state = GameState.Battle;
+            SetGameState(GameState.Battle);
         }
         else
         {
-            _state = GameState.Overworld;
+            SetGameState(GameState.Overworld);
         }
         partySystem.gameObject.SetActive(false);
     }
 
     void OpenInventory()
     {
-        _state = GameState.Inventory;
         inventorySystem.OpenInventorySystem();
     }
 
@@ -168,11 +166,11 @@ public class GameManager : MonoBehaviour
     {
         if (BattleSystem.inBattle == true)
         {
-            _state = GameState.Battle;
+            SetGameState(GameState.Battle);
         }
         else
         {
-            _state = GameState.Overworld;
+            SetGameState(GameState.Overworld);
         }
         inventorySystem.gameObject.SetActive(false);
     }
@@ -285,7 +283,7 @@ public class GameManager : MonoBehaviour
         playerController.OnEncounter += StartWildPokemonBattle;
         playerController.OpenStartMenu += () =>
         {
-            _state = GameState.Dialog;
+            SetGameState(GameState.Dialog);
             startMenu.EnableStartMenu(true);
         };
         playerController.PortalEntered += PlayerEnteredPortal;
@@ -341,7 +339,7 @@ public class GameManager : MonoBehaviour
     void SaveGame()
     {
         SavingSystem.SavePlayer(playerController,_levelManager.GameSceneBase);
-        _dialogManager.ShowMessage("The Game Has Been Saved");
+        dialogManager.ShowMessage("The Game Has Been Saved");
     }
 
     public void LoadGame()
@@ -352,7 +350,7 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-            _dialogManager.ShowMessage("Their is no save to load");
+            dialogManager.ShowMessage("Their is no save to load");
         }
     }
 
@@ -369,13 +367,13 @@ public class GameManager : MonoBehaviour
     {
         if (isFadeIn)
         {
-            _state = GameState.Fade;
+            SetGameState(GameState.Fade);
             yield return fadeSystem.FadeIn(fadeStyle);
         }
         else
         {
             yield return fadeSystem.FadeOut(fadeStyle);
-            _state = GameState.Overworld;
+            SetGameState(GameState.Overworld);
         }
     }
 
@@ -401,22 +399,7 @@ public class GameManager : MonoBehaviour
 
     void DialogSystemInitialization()
     {
-        _dialogManager = DialogManager.instance;
-        _dialogManager.OnShowDialog += () => { _state = GameState.Dialog; };
-        _dialogManager.OnCloseDialog += () =>
-        {
-            if (_state == GameState.Dialog)
-            {
-                if (BattleSystem.inBattle == true)
-                {
-                    _state = GameState.Battle;
-                }
-                else
-                {
-                    _state = GameState.Overworld;
-                }
-            }
-        };
+        dialogManager = DialogManager.instance;
     }
 
     void StartMenuInitialization()
@@ -426,7 +409,7 @@ public class GameManager : MonoBehaviour
         startMenu.SaveGame += SaveGame;
         startMenu.StartMenuClosed += () =>
         {
-            _state = GameState.Overworld;
+            SetGameState(GameState.Overworld);
             playerController.ReturnFromStartMenu();
         };
         startMenu.Initialization();
@@ -463,9 +446,10 @@ public class GameManager : MonoBehaviour
         get { return playerController; }
     }
 
-    public void SetGameState(GameState newState)
+    public static void SetGameState(GameState newState)
     {
-        _state = newState;
+        state = newState;
+        Debug.Log(state);
     }
 
 }

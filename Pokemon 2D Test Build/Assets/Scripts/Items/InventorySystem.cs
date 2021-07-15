@@ -26,6 +26,7 @@ public class InventorySystem : MonoBehaviour
     [SerializeField] ItemOptionButtonUI useOption;
     [SerializeField] ItemOptionButtonUI giveOption;
     [SerializeField] ItemOptionButtonUI trashOption;
+    Item specifiedItem;
 
     List<Item> currentItemsDisplayed = new List<Item>();
     itemType currentlySelected;
@@ -35,8 +36,6 @@ public class InventorySystem : MonoBehaviour
     GameObject lastSelected;
 
     const int MAX_ITEMS_DISPLAY = 6;
-
-    GameObject _lastSelected;
 
     const int MESSAGEBOX_STANDARD_SIZE = 650;
     const int MESSAGEBOX_SELECTED_SIZE = 515;
@@ -62,9 +61,9 @@ public class InventorySystem : MonoBehaviour
 
     public void OpenInventorySystem()
     {
+        GameManager.SetGameState(GameState.Inventory);
         gameObject.SetActive(true);
         SetData();
-        _lastSelected = null;
         SpecificItemOptionDisplay(false);
         SelectBox();
         SetUpCancelButton();
@@ -277,6 +276,7 @@ public class InventorySystem : MonoBehaviour
         useOption.SetData(background, item.ItemBase.UseItemOption());
         giveOption.SetData(background, item.ItemBase.GiveItemOption());
         trashOption.SetData(background, item.ItemBase.TrashItemOption());
+        specifiedItem = item;
 
         useOption.GetButton.onClick.AddListener(delegate { UseOptionSelected(item); });
         giveOption.GetButton.onClick.AddListener(delegate { GiveOptionSelected(item); });
@@ -401,11 +401,21 @@ public class InventorySystem : MonoBehaviour
 
     public void ReturnFromPartySystemAfterItemUsage()
     {
-
-        //if item is above 0
-        SpecificItemOptionDisplay(false);
-        SelectBox();
-        SetUpCancelButton();
+        GameManager.SetGameState(GameState.Inventory);
+        if (specifiedItem.Count > 0)
+        {
+            gameObject.SetActive(true);
+            SelectBox(useOption.gameObject);
+            SetUpCancelButtonFuntionality(false);
+        }
+        else
+        {
+            gameObject.SetActive(true);
+            SetData(specifiedItem.ItemBase.GetItemType);
+            SpecificItemOptionDisplay(false);
+            SelectBox(lastSelected);
+            SetUpCancelButtonFuntionality(true);
+        }
     }
     
 }

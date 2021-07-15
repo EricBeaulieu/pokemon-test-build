@@ -57,6 +57,7 @@ public class PartySystem : MonoBehaviour
 
     public void OpenPartySystem(bool wasShiftSwap)
     {
+        GameManager.SetGameState(GameState.Party);
         gameObject.SetActive(true);
         SetPartyData();
         _lastSelected = null;
@@ -73,6 +74,7 @@ public class PartySystem : MonoBehaviour
 
     public void OpenPartySystemDueToInventoryItem(Item item, bool usingItem)
     {
+        GameManager.SetGameState(GameState.Party);
         gameObject.SetActive(true);
         SetPartyItem(item, usingItem);
         _lastSelected = null;
@@ -114,7 +116,8 @@ public class PartySystem : MonoBehaviour
 
     void SetUpPartySystemCancelButton(bool wasShiftSwap)
     {
-        if(BattleSystem.inBattle == true)
+        cancelButton.onClick.RemoveAllListeners();
+        if (BattleSystem.inBattle == true)
         {
             if(battleSystemReference.GetCurrentPokemonInBattle.currentHitPoints > 0 || battleSystemReference.GetCurrentPokemonInBattle == null)
             {
@@ -145,6 +148,7 @@ public class PartySystem : MonoBehaviour
 
     void SetUpPartySystemCancelButtonFromInventory()
     {
+        cancelButton.onClick.RemoveAllListeners();
         cancelButton.onClick.AddListener(() =>
         {
             ClosePartySystem();
@@ -362,6 +366,9 @@ public class PartySystem : MonoBehaviour
 
     IEnumerator WaitForInputAfterItemUsage(bool itemWasUsed)
     {
+        //If the pokemons hp went up or was recovered then show an animation of the pokemon either going from faint to alive 
+        //and show the bar animate. Also update the battle bar 
+
         bool waitingForInput = false;
         yield return new WaitForSeconds(1f);
         while(waitingForInput == false)
