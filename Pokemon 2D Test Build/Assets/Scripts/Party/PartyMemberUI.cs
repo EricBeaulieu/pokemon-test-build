@@ -108,4 +108,23 @@ public class PartyMemberUI : MonoBehaviour, ISelectHandler, IDeselectHandler
     {
         get { return button; }
     }
+
+    public IEnumerator UpdateAfterItemUse(int hpRecovered = 0)
+    {
+        background.sprite = PartyBackgroundArt.instance.ReturnBackgroundArt(_pokemon.currentHitPoints, _isFirstSlot,true);
+        if (_pokemon.currentHitPoints <= 0)
+        {
+            status.sprite = StatusConditionArt.instance.FaintedStatus;
+        }
+        else if (_pokemon.status != null)
+        {
+            status.sprite = StatusConditionArt.instance.ReturnStatusConditionArt(_pokemon.status.Id);
+        }
+        else
+        {
+            status.sprite = StatusConditionArt.instance.Nothing;
+        }
+
+        yield return hPBar.SetHPRecoveredAnimation(_pokemon.currentHitPoints,hpRecovered, _pokemon.maxHitPoints, currentHP);
+    }
 }

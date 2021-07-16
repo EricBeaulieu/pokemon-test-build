@@ -14,13 +14,8 @@ public class StartMenu : MonoBehaviour
     [SerializeField] GameObject saveButton;
     [SerializeField] GameObject optionsButton;
     [SerializeField] GameObject exitButton;
-
-    //public event Action<bool, bool> OpenPokeDex;
-    public event Action OpenPokemonParty;
-    public event Action OpenInventory;
-    public event Action SaveGame;
-    public event Action StartMenuClosed;
-    GameObject _lastSelected;
+    
+    GameObject lastSelected;
 
     public void Initialization()
     {
@@ -32,32 +27,32 @@ public class StartMenu : MonoBehaviour
         saveButton.GetComponent<Button>().onClick.RemoveAllListeners();
         optionsButton.GetComponent<Button>().onClick.RemoveAllListeners();
         exitButton.GetComponent<Button>().onClick.RemoveAllListeners();
-        _lastSelected = null;
+        lastSelected = null;
 
         //Setting up the last button pressed in the action button to be the first button pressed
-        pokeDexButton.GetComponent<Button>().onClick.AddListener(delegate { _lastSelected = pokeDexButton; });
-        playerButton.GetComponent<Button>().onClick.AddListener(delegate { _lastSelected = playerButton; });
-        optionsButton.GetComponent<Button>().onClick.AddListener(delegate { _lastSelected = optionsButton; });
+        pokeDexButton.GetComponent<Button>().onClick.AddListener(delegate { lastSelected = pokeDexButton; });
+        playerButton.GetComponent<Button>().onClick.AddListener(delegate { lastSelected = playerButton; });
+        optionsButton.GetComponent<Button>().onClick.AddListener(delegate { lastSelected = optionsButton; });
 
         pokemonPartyButton.GetComponent<Button>().onClick.AddListener(delegate 
         {
-            _lastSelected = pokemonPartyButton;
+            lastSelected = pokemonPartyButton;
             EnableStartMenu(false);
-            OpenPokemonParty();
+            GameManager.instance.GetPartySystem.OpenPartySystem(false);
         });
         bagButton.GetComponent<Button>().onClick.AddListener(delegate 
         {
-            _lastSelected = bagButton;
+            lastSelected = bagButton;
             EnableStartMenu(false);
-            OpenInventory();
+            GameManager.instance.GetInventorySystem.OpenInventorySystem();
         });
         saveButton.GetComponent<Button>().onClick.AddListener(delegate
         {
-            _lastSelected = saveButton;
+            lastSelected = saveButton;
             EnableStartMenu(false);
-            SaveGame();
+            GameManager.instance.SaveGame();
         });
-        exitButton.GetComponent<Button>().onClick.AddListener(delegate { _lastSelected = exitButton; EnableStartMenu(false); });
+        exitButton.GetComponent<Button>().onClick.AddListener(delegate { lastSelected = exitButton; EnableStartMenu(false); });
     }
 
     void Update()
@@ -85,13 +80,19 @@ public class StartMenu : MonoBehaviour
     public void SelectBox()
     {
         EventSystem.current.SetSelectedGameObject(null);
-        if (_lastSelected == null)
+        if (lastSelected == null)
         {
             EventSystem.current.SetSelectedGameObject(pokeDexButton);
         }
         else
         {
-            EventSystem.current.SetSelectedGameObject(_lastSelected);
+            EventSystem.current.SetSelectedGameObject(lastSelected);
         }
+    }
+
+    void StartMenuClosed()
+    {
+        GameManager.SetGameState(GameState.Overworld);
+        GameManager.instance.GetPlayerController.ReturnFromStartMenu();
     }
 }

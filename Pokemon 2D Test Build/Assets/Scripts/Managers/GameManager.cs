@@ -54,12 +54,12 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-        BattleSystemInitialization();
-        PartySystemInitialization();
-        DialogSystemInitialization();
-        StartMenuInitialization();
-        InventorySystemInitialization();
-        
+        battleSystem.Initialization();
+        partySystem.Initialization();
+        dialogManager = DialogManager.instance;
+        startMenu.Initialization();
+        inventorySystem.Initialization();
+
         currentScenesLoaded = GetAllOpenScenes(currentScenesLoaded);
 
         if(startNewSaveEveryStart == false)
@@ -99,7 +99,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    void StartWildPokemonBattle()
+    public void StartWildPokemonBattle()
     {
         SetGameState(GameState.Battle);
         battleSystem.gameObject.SetActive(true);
@@ -124,7 +124,7 @@ public class GameManager : MonoBehaviour
         battleSystem.StartBattle(playerController, trainerController);
     }
 
-    void EndBattle(bool wasWon)
+    public void EndBattle(bool wasWon)
     {
         trainerController = null;
 
@@ -139,42 +139,6 @@ public class GameManager : MonoBehaviour
         playerController.pokemonParty.SetPositionstoBeforeBattle();
     }
 
-    void OpenParty(bool wasShiftSwap)
-    {
-        partySystem.OpenPartySystem(wasShiftSwap);
-    }
-
-    void CloseParty()
-    {
-        if(BattleSystem.inBattle == true)
-        {
-            SetGameState(GameState.Battle);
-        }
-        else
-        {
-            SetGameState(GameState.Overworld);
-        }
-        partySystem.gameObject.SetActive(false);
-    }
-
-    void OpenInventory()
-    {
-        inventorySystem.OpenInventorySystem();
-    }
-
-    void CloseInventory()
-    {
-        if (BattleSystem.inBattle == true)
-        {
-            SetGameState(GameState.Battle);
-        }
-        else
-        {
-            SetGameState(GameState.Overworld);
-        }
-        inventorySystem.gameObject.SetActive(false);
-    }
-
     void RunAllEntities()
     {
         foreach (Entity entity in allActiveEntities)
@@ -183,7 +147,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    void CapturedNewPokemon(Pokemon capturedPokemon,PokeballItem pokeball)
+    public void CapturedNewPokemon(Pokemon capturedPokemon,PokeballItem pokeball)
     {
         //If pokemon was new then show it in the pokedex being added
         //show the pokemon info pop up and light up the sprite animating through the pokedex
@@ -200,11 +164,6 @@ public class GameManager : MonoBehaviour
         {
             // add to PC
         }
-    }
-
-    public PokeballItem StandardPokeball
-    {
-        get { return standardPokeball; }
     }
 
     public void NewAreaEntered(LevelManager newLevel)
@@ -280,7 +239,6 @@ public class GameManager : MonoBehaviour
         }
 
         playerController = Instantiate(playerPrefab,spawnLocation,Quaternion.identity);
-        playerController.OnEncounter += StartWildPokemonBattle;
         playerController.OpenStartMenu += () =>
         {
             SetGameState(GameState.Dialog);
@@ -336,7 +294,7 @@ public class GameManager : MonoBehaviour
         allActiveEntities.AddRange(gameScene.GetLevelManager.GetAllEntities());
     }
 
-    void SaveGame()
+    public void SaveGame()
     {
         SavingSystem.SavePlayer(playerController,_levelManager.GameSceneBase);
         dialogManager.ShowMessage("The Game Has Been Saved");
@@ -377,55 +335,6 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    void BattleSystemInitialization()
-    {
-        battleSystem.OnBattleOver += EndBattle;
-        battleSystem.OpenPokemonParty += OpenParty;
-        battleSystem.OpenBag += OpenInventory;
-        battleSystem.OnPokemonCaptured += CapturedNewPokemon;
-        battleSystem.Initialization();
-    }
-
-    void PartySystemInitialization()
-    {
-        partySystem.Initialization();
-        partySystem.onCloseParty += CloseParty;
-
-        if (partySystem.gameObject.activeInHierarchy == true)
-        {
-            partySystem.gameObject.SetActive(false);
-        }
-    }
-
-    void DialogSystemInitialization()
-    {
-        dialogManager = DialogManager.instance;
-    }
-
-    void StartMenuInitialization()
-    {
-        startMenu.OpenPokemonParty += (() => OpenParty(false));
-        startMenu.OpenInventory += OpenInventory;
-        startMenu.SaveGame += SaveGame;
-        startMenu.StartMenuClosed += () =>
-        {
-            SetGameState(GameState.Overworld);
-            playerController.ReturnFromStartMenu();
-        };
-        startMenu.Initialization();
-    }
-
-    void InventorySystemInitialization()
-    {
-        inventorySystem.Initialization();
-        inventorySystem.onCloseInventory += CloseInventory;
-
-        if (inventorySystem.gameObject.activeInHierarchy == true)
-        {
-            inventorySystem.gameObject.SetActive(false);
-        }
-    }
-
     public BattleSystem GetBattleSystem
     {
         get { return battleSystem; }
@@ -446,10 +355,14 @@ public class GameManager : MonoBehaviour
         get { return playerController; }
     }
 
+    public PokeballItem StandardPokeball
+    {
+        get { return standardPokeball; }
+    }
+
     public static void SetGameState(GameState newState)
     {
         state = newState;
         Debug.Log(state);
     }
-
 }

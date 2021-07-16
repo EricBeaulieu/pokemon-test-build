@@ -10,7 +10,6 @@ public class InventorySystem : MonoBehaviour
 {
     BattleSystem battleSystemReference;
     PartySystem partySystemReference;
-    public Action onCloseInventory;
     [SerializeField] List<Item> currentInventory;
 
     [SerializeField] List<ItemMenuButtonUI> menuButtons;
@@ -37,11 +36,9 @@ public class InventorySystem : MonoBehaviour
 
     const int MAX_ITEMS_DISPLAY = 6;
 
-    const int MESSAGEBOX_STANDARD_SIZE = 650;
-    const int MESSAGEBOX_SELECTED_SIZE = 515;
-
     public void Initialization()
     {
+        gameObject.SetActive(false);
         battleSystemReference = GameManager.instance.GetBattleSystem;
         partySystemReference = GameManager.instance.GetPartySystem;
         CheckAndCorrectInventoryUponStart();
@@ -63,7 +60,7 @@ public class InventorySystem : MonoBehaviour
     {
         GameManager.SetGameState(GameState.Inventory);
         gameObject.SetActive(true);
-        SetData();
+        SetData(currentlySelected);
         SpecificItemOptionDisplay(false);
         SelectBox();
         SetUpCancelButton();
@@ -71,8 +68,15 @@ public class InventorySystem : MonoBehaviour
 
     void CloseInventorySystem()
     {
-        EventSystem.current.SetSelectedGameObject(null);
-        onCloseInventory();
+        if (BattleSystem.inBattle == true)
+        {
+            GameManager.SetGameState(GameState.Battle);
+        }
+        else
+        {
+            GameManager.SetGameState(GameState.Overworld);
+        }
+        gameObject.SetActive(false);
     }
 
     void SelectBox(GameObject gameObject = null)
@@ -80,7 +84,7 @@ public class InventorySystem : MonoBehaviour
         EventSystem.current.SetSelectedGameObject(null);
         if(gameObject == null)
         {
-            EventSystem.current.SetSelectedGameObject(menuButtons[0].gameObject);
+            EventSystem.current.SetSelectedGameObject(menuButtons[(int)currentlySelected].gameObject);
         }
         else
         {
@@ -106,7 +110,7 @@ public class InventorySystem : MonoBehaviour
         currentIndex = 0;
         currentItemsDisplayed.Clear();
         currentItemsDisplayed.AddRange(currentInventory.Where(x => x.ItemBase.GetItemType == itemType));
-        pages = currentItemsDisplayed.Count / 6;
+        pages = (currentItemsDisplayed.Count - 1) / 6;
         
         DisplayCurrentItems(currentlySelected,currentIndex);
         SetUpPagesDynamically(pages);
@@ -278,14 +282,23 @@ public class InventorySystem : MonoBehaviour
         trashOption.SetData(background, item.ItemBase.TrashItemOption());
         specifiedItem = item;
 
-        useOption.GetButton.onClick.AddListener(delegate { UseOptionSelected(item); });
-        giveOption.GetButton.onClick.AddListener(delegate { GiveOptionSelected(item); });
-        trashOption.GetButton.onClick.AddListener(delegate { TrashOptionSelected(item); });
+        if(useOption.CurrentlyActive == true)
+        {
+            useOption.GetButton.onClick.AddListener(delegate { UseOptionSelected(item); });
+        }
+
+        if(giveOption.CurrentlyActive == true)
+        {
+            giveOption.GetButton.onClick.AddListener(delegate { GiveOptionSelected(item); });
+        }
+
+        if(trashOption.CurrentlyActive == true)
+        {
+            trashOption.GetButton.onClick.AddListener(delegate { TrashOptionSelected(item); });
+        }
 
         SpecificItemOptionDisplay(true);
-
-        EventSystem.current.SetSelectedGameObject(null);
-        EventSystem.current.SetSelectedGameObject(useOption.gameObject);
+        SelectBox(useOption.gameObject);
     }
 
     void UseOptionSelected(Item item)
@@ -300,6 +313,7 @@ public class InventorySystem : MonoBehaviour
                 break;
             case itemType.Pokeball:
                 battleSystemReference.UsePokeballFromInventory((PokeballItem)item.ItemBase);
+                RemoveItem(item, 1);
                 CloseInventorySystem();
                 break;
             case itemType.TMHM:
@@ -329,8 +343,11 @@ public class InventorySystem : MonoBehaviour
     {
         SwitchAllItemButtonsToActive(!isOn);
         SwitchAllMenuButtonsToActive(!isOn);
-        SwitchArrowButtonsToActive(!isOn);
-        inventoryIndex.gameObject.SetActive(!isOn);
+        if (isOn == true)
+        {
+            SwitchArrowButtonsToActive(false);
+            inventoryIndex.gameObject.SetActive(false);
+        }
         currentItemOptionsMenu.SetActive(isOn);
         SetUpCancelButtonFuntionality(!isOn);
     }
@@ -387,6 +404,13 @@ public class InventorySystem : MonoBehaviour
             cancelButton.onClick.AddListener(() => 
             {
                 SpecificItemOptionDisplay(false);
+
+                if(pages > 0)
+                {
+                    SwitchArrowButtonsToActive(true);
+                    inventoryIndex.gameObject.SetActive(true);
+                }
+
                 EventSystem.current.SetSelectedGameObject(lastSelected.gameObject);
             });
 
@@ -402,20 +426,42 @@ public class InventorySystem : MonoBehaviour
     public void ReturnFromPartySystemAfterItemUsage()
     {
         GameManager.SetGameState(GameState.Inventory);
+        SetData(specifiedItem.ItemBase.GetItemType);
         if (specifiedItem.Count > 0)
         {
             gameObject.SetActive(true);
             SelectBox(useOption.gameObject);
             SetUpCancelButtonFuntionality(false);
+            itemDetails.SetData(specifiedItem);
         }
         else
         {
             gameObject.SetActive(true);
-            SetData(specifiedItem.ItemBase.GetItemType);
+            specifiedItem = null;
             SpecificItemOptionDisplay(false);
             SelectBox(lastSelected);
             SetUpCancelButtonFuntionality(true);
         }
     }
     
+    public void RemoveItem(Item item,int count)
+    {
+        item.Count -= count;
+        if (item.Count <= 0)
+        {
+            currentInventory.Remove(item);
+        }
+    }
+
+    public void AddItem(Item item, int count)
+    {
+        if(currentInventory.Exists(x => x.ItemBase == item.ItemBase) == true)
+        {
+            currentInventory.Find(x => x.ItemBase == item.ItemBase).Count += count;
+        }
+        else
+        {
+            currentInventory.Add(item);
+        }
+    }
 }

@@ -48,6 +48,7 @@ public class MedicineItem : ItemBase
         {
             if(pokemon.status.Id == specificStatusRecovered)
             {
+                pokemon.CureStatus();
                 return true;
             }
         }
@@ -56,6 +57,7 @@ public class MedicineItem : ItemBase
         {
             if(pokemon.status != null)
             {
+                pokemon.CureStatus();
                 return true;
             }
         }

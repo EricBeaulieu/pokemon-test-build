@@ -11,8 +11,7 @@ public class PlayerController : Entity
     [SerializeField] TrainerBaseSO trainerBase;
     int trainerIDNumber;
     public PokemonParty pokemonParty { get; private set; }
-
-    public event Action OnEncounter;
+    
     bool wildEncountersGrassSpecific;
     public event Action OpenStartMenu;
     public event Action <Portal> PortalEntered;
@@ -240,7 +239,7 @@ public class PlayerController : Entity
         {
             _anim.SetBool("isMoving", false);
             isRunning = false;
-            OnEncounter();
+            GameManager.instance.StartWildPokemonBattle();
         }
     }
 }

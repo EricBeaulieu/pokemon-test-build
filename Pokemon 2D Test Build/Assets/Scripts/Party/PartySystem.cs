@@ -15,7 +15,6 @@ public class PartySystem : MonoBehaviour
 
     BattleSystem battleSystemReference;
     InventorySystem inventorySystemReference;
-    public Action onCloseParty;
     List<Pokemon> _currentParty;
     Pokemon _currentlySelectedPokemon;
 
@@ -37,10 +36,11 @@ public class PartySystem : MonoBehaviour
 
     public void Initialization()
     {
+        gameObject.SetActive(false);
         battleSystemReference = GameManager.instance.GetBattleSystem;
         inventorySystemReference = GameManager.instance.GetInventorySystem;
         _partyMemberSlots = GetComponentsInChildren<PartyMemberUI>();
-        summarySystem.OnClosedSummary += SelectBox;
+        summarySystem.Initialization();
     }
 
     public void HandleUpdate()
@@ -98,7 +98,15 @@ public class PartySystem : MonoBehaviour
 
     void ClosePartySystem()
     {
-        onCloseParty();
+        if (BattleSystem.inBattle == true)
+        {
+            GameManager.SetGameState(GameState.Battle);
+        }
+        else
+        {
+            GameManager.SetGameState(GameState.Overworld);
+        }
+        gameObject.SetActive(false);
     }
 
     void SelectBox()
@@ -225,15 +233,20 @@ public class PartySystem : MonoBehaviour
                     _partyMemberSlots[k].GetButton.onClick.AddListener(() => 
                     {
                         Pokemon currentPokemon = _partyMemberSlots[k].CurrentPokemon();
+                        int hpDif = currentPokemon.currentHitPoints;
                         if (item.ItemBase.UseItem(currentPokemon) == true)
                         {
                             SetMessageText($"{item.ItemBase.ItemName} was used on {currentPokemon.currentName}");
-                            StartCoroutine(WaitForInputAfterItemUsage(true));
+                            hpDif = (hpDif != currentPokemon.currentHitPoints) ? currentPokemon.currentHitPoints - hpDif : 0;
+                            inventorySystemReference.RemoveItem(item, 1);
+                            StartCoroutine(WaitForInputAfterItemUsage(true, _partyMemberSlots[k],hpDif));
+                            _partyMemberSlots[k].GetButton.onClick.RemoveAllListeners();
                         }
                         else
                         {
                             SetMessageText($"{item.ItemBase.ItemName} had no effect");
-                            StartCoroutine(WaitForInputAfterItemUsage(false));
+                            StartCoroutine(WaitForInputAfterItemUsage(false, _partyMemberSlots[k]));
+                            _partyMemberSlots[k].GetButton.onClick.RemoveAllListeners();
                         }
                     });
                 }
@@ -246,13 +259,13 @@ public class PartySystem : MonoBehaviour
                         {
                             SetMessageText($"{item.ItemBase.ItemName} was given to {currentPokemon.currentName}");
                             currentPokemon.GivePokemonItemToHold(item.ItemBase);
-                            item.Count--;
-                            StartCoroutine(WaitForInputAfterItemUsage(false));
+                            inventorySystemReference.RemoveItem(item, 1);
+                            StartCoroutine(WaitForInputAfterItemUsage(false, _partyMemberSlots[k]));
                         }
                         else
                         {
                             SetMessageText($"{currentPokemon.currentName} is already holding onto {currentPokemon.GetCurrentItem.ItemName}");
-                            StartCoroutine(WaitForInputAfterItemUsage(false));
+                            StartCoroutine(WaitForInputAfterItemUsage(false, _partyMemberSlots[k]));
                         }
                     });
                 }
@@ -364,8 +377,9 @@ public class PartySystem : MonoBehaviour
         summarySystem.OnSummaryMenuOpened(_currentParty, pokemonIndex);
     }
 
-    IEnumerator WaitForInputAfterItemUsage(bool itemWasUsed)
+    IEnumerator WaitForInputAfterItemUsage(bool itemWasUsed, PartyMemberUI partyMemberUI,int hpRecovered = 0)
     {
+        yield return partyMemberUI.UpdateAfterItemUse(hpRecovered);
         //If the pokemons hp went up or was recovered then show an animation of the pokemon either going from faint to alive 
         //and show the bar animate. Also update the battle bar 
 
@@ -388,5 +402,10 @@ public class PartySystem : MonoBehaviour
         }
         
         inventorySystemReference.ReturnFromPartySystemAfterItemUsage();
+    }
+
+    public void ReturnFromSummarySystem()
+    {
+        SelectBox();
     }
 }

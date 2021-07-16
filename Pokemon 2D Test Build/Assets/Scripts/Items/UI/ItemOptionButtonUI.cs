@@ -11,6 +11,7 @@ public class ItemOptionButtonUI : MonoBehaviour, ISelectHandler, IDeselectHandle
     [SerializeField] GameObject selector;
     [SerializeField] GameObject textBox;
     [SerializeField] Button button;
+    bool active;
 
     public void SetData(Color missingColor,bool showButton)
     {
@@ -18,6 +19,7 @@ public class ItemOptionButtonUI : MonoBehaviour, ISelectHandler, IDeselectHandle
         standardBackground.color = missingColor;
         background.SetActive(showButton);
         textBox.SetActive(showButton);
+        active = showButton;
     }
 
     public void OnSelect(BaseEventData eventData)
@@ -38,5 +40,10 @@ public class ItemOptionButtonUI : MonoBehaviour, ISelectHandler, IDeselectHandle
     public Button GetButton
     {
         get { return button; }
+    }
+
+    public bool CurrentlyActive
+    {
+        get { return active; }
     }
 }

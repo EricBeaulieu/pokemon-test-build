@@ -10,13 +10,18 @@ public class SummarySystem : MonoBehaviour
     [SerializeField] SummarySkills skills;
     [SerializeField] SummaryMoves moves;
 
-    public event Action OnClosedSummary;
+    PartySystem partySystem;
 
     int _currentPage;
     int _pokemonIndex;
     List<Pokemon> _availablePokemon;
     bool _animating;
     Vector2 _currentInput;
+
+    public void Initialization()
+    {
+        partySystem = GameManager.instance.GetPartySystem;
+    }
 
     void Update()
     {
@@ -75,7 +80,7 @@ public class SummarySystem : MonoBehaviour
 
     public void CloseSummarySystem()
     {
-        OnClosedSummary();
+        partySystem.ReturnFromSummarySystem();
         gameObject.SetActive(false);
     }
 

@@ -240,4 +240,10 @@ public class BattleHUD : MonoBehaviour
             Debug.LogWarning($"pointerHead has not been set", gameObject);
         }
     }
+
+    public void UpdateHud()
+    {
+        hPBar.SetHPWithoutAnimation(_pokemon.currentHitPoints, _pokemon.maxHitPoints, currentHP);
+        SetStatusSprite();
+    }
 }

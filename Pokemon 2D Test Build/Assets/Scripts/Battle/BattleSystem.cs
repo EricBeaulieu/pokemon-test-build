@@ -14,9 +14,8 @@ public class BattleSystem : MonoBehaviour
     [SerializeField] BattleUnit playerBattleUnit;
     [SerializeField] BattleUnit enemyBattleUnit;
 
-    public event Action<bool> OnBattleOver;
-    public event Action<bool> OpenPokemonParty;
-    public event Action OpenBag;
+    PartySystem partySystem;
+    InventorySystem inventorySystem;
 
     [SerializeField] BattleDialogBox dialogBox;
     [SerializeField] ActionSelectionEventSelector actionSelectionEventSelector;
@@ -39,7 +38,6 @@ public class BattleSystem : MonoBehaviour
 
     [SerializeField] GameObject inGameItem;
     Vector2 inGameItemoffScreenPos;
-    public event Action<Pokemon,PokeballItem> OnPokemonCaptured;
 
     const string BUT_IT_FAILED = "But it failed";
     int _escapeAttempts;
@@ -143,6 +141,8 @@ public class BattleSystem : MonoBehaviour
     public void Initialization()
     {
         gameObject.SetActive(false);
+        partySystem = GameManager.instance.GetPartySystem;
+        inventorySystem = GameManager.instance.GetInventorySystem;
         inGameItemoffScreenPos = inGameItem.transform.localPosition;
         levelUpUI.HandleStart();
 
@@ -360,7 +360,7 @@ public class BattleSystem : MonoBehaviour
     {
         if(playerBattleUnit.CanSwitchOutOrFlee() == true)
         {
-            OpenPokemonParty(false);
+            partySystem.OpenPartySystem(false);
         }
         else
         {
@@ -373,8 +373,7 @@ public class BattleSystem : MonoBehaviour
     /// </summary>
     void PlayerActionBag()
     {
-        //Open Bag button
-        OpenBag();
+        inventorySystem.OpenInventorySystem();
     }
 
     /// <summary>
@@ -487,7 +486,6 @@ public class BattleSystem : MonoBehaviour
         if (playerSpeed > enemySpeed)
         {
             yield return dialogBox.TypeDialog($"You got away safely", true);
-            inBattle = false;
             OnBattleOver(true);
             yield break;
         }
@@ -500,7 +498,6 @@ public class BattleSystem : MonoBehaviour
             if (rnd < f)
             {
                 yield return dialogBox.TypeDialog($"You got away safely", true);
-                inBattle = false;
                 OnBattleOver(true);
                 yield break;
             }
@@ -539,7 +536,7 @@ public class BattleSystem : MonoBehaviour
 
         yield return dialogBox.SetChoiceBox(() =>
         {
-            OpenPokemonParty(true);
+            partySystem.OpenPartySystem(true);
         }
         , () =>
         {
@@ -650,7 +647,7 @@ public class BattleSystem : MonoBehaviour
         //If current pokemon has fainted then it goes to the party system and waits on the selector
         if (playerBattleUnit.SendOutPokemonOnTurnEnd == true)
         {
-            OpenPokemonParty(false);
+            partySystem.OpenPartySystem(false);
         }
         else
         {
@@ -1433,6 +1430,12 @@ public class BattleSystem : MonoBehaviour
         }
     }
 
+    void OnBattleOver(bool hasWon)
+    {
+        inBattle = false;
+        GameManager.instance.EndBattle(hasWon);
+    }
+
     #endregion
 
     #region PokemonFaint/Switching
@@ -1511,7 +1514,6 @@ public class BattleSystem : MonoBehaviour
                 {
                     yield return TrainerBattleOver(false);
                 }
-                inBattle = false;
                 OnBattleOver(false);
             }
         }
@@ -1527,13 +1529,11 @@ public class BattleSystem : MonoBehaviour
                 else
                 {
                     yield return TrainerBattleOver(true);
-                    inBattle = false;
                     OnBattleOver(true);
                 }
             }
             else
             {
-                inBattle = false;
                 OnBattleOver(true);
             }
         }
@@ -1630,6 +1630,7 @@ public class BattleSystem : MonoBehaviour
 
     public void PlayerUsedItemWhileInBattle()
     {
+        playerBattleUnit.HUD.UpdateHud();
         StartCoroutine(EnemyMove());
         EnableActionSelector(false);
     }
@@ -1848,8 +1849,7 @@ public class BattleSystem : MonoBehaviour
             //pokemon is caught
             yield return dialogBox.TypeDialog($"{targetUnit.pokemon.currentName} was Caught!",true);
             yield return currentBall.FadeItem(false);
-            OnPokemonCaptured(enemyBattleUnit.pokemon,currentBall.CurrentPokeball);
-            inBattle = false;
+            GameManager.instance.CapturedNewPokemon(enemyBattleUnit.pokemon, currentBall.CurrentPokeball);
             OnBattleOver(true);
         }
         else
