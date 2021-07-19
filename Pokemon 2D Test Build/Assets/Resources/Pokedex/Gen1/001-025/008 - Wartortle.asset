@@ -16,10 +16,8 @@ MonoBehaviour:
   _pokedexDescription: It is recognized as a symbol of longevity. If its shell has
     algae on it, that Wartortle is very old.
   _classification: 
-  _heightInFeet: 0
   _heightInMeters: 0
   _weightInPounds: 0
-  _weightInKilograms: 0
   _captureRate: 45
   rewardedEffortValue:
   - _statAttribute: 3
@@ -40,7 +38,11 @@ MonoBehaviour:
   _specialAttack: 65
   _specialDefense: 80
   _speed: 58
-  firstAbility: 4
+  firstAbility: 27
   secondAbility: 0
   hiddenAbility: 0
-  _learnableMoves: []
+  _learnableMoves:
+  - _moveBase: {fileID: 11400000, guid: 2c5cde9de904c11479885f361fb9433e, type: 2}
+    _levelLeanred: 0
+  - _moveBase: {fileID: 11400000, guid: 6851e1e7da7224a4888fec783426cdf3, type: 2}
+    _levelLeanred: 0

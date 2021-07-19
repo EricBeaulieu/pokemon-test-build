@@ -24,7 +24,8 @@ public class Pokemon {
     //properties
     public PokemonBase pokemonBase { get { return _pokemonBase; } private set { _pokemonBase = value; } }
     public int currentLevel { get { return _level; } private set { _level = value; } }
-    public int currentHitPoints { get; set; }
+    int hitPoints;
+    public int currentHitPoints { get { return hitPoints; } set { if (value <= 0) status = null; hitPoints = value; } }
     public int currentExp { get; set; }
     public NatureBase nature { get { return _nature; } set { _nature = value; } }
     public string originalTrainer { get; private set; }

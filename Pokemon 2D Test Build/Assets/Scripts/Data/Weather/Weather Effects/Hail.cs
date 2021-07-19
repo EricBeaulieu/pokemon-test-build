@@ -10,7 +10,7 @@ public class Hail : WeatherEffectBase
         duration = 5;
         return "It started to Hail";
     }
-    public override string OnEndTurn(BattleSystem battleSystem)
+    public override string OnEndTurn()
     {
         duration--;
         if (duration > 0)
@@ -18,7 +18,7 @@ public class Hail : WeatherEffectBase
             return "It continues to Hail";
         }
 
-        battleSystem.RemoveWeatherEffect();
+        BattleSystem.RemoveWeatherEffect();
         return "The hail stopped.";
     }
     public override void OnEndTurnDamage(Pokemon pokemon)

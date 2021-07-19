@@ -6,6 +6,7 @@ public class Notes
 {
     //To do list
 
+    //when you select a pokemon in the party menu, when the selection menu is selected it should still show the current pokemon as selected so you know what pokemon youre in the sub menu for
     //complete trainer controller, as of right now the ai decisions are not implimented
     //add in specific moves
     //hidden power

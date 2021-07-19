@@ -7,7 +7,8 @@ public enum HoldItemID
     NA,
     AbsorbBulb, AdamantOrb ,AirBalloon, AmuletCoin, AssaultVest,
     BigRoot, BindingBand, BlackBelt, BlackGlasses, BlackSludge,
-    BlunderPolicy, BrightPowder, BugGem, CellBattery
+    BlunderPolicy, BrightPowder, BugGem, CellBattery, Charcoal,
+    ChoiceBand, ChoiceScarf, ChoiceSpecs, CleanseTag, DampRock
 }
 
 public class HoldItemDB

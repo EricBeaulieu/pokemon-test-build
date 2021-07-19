@@ -10,7 +10,7 @@ public class Sandstorm : WeatherEffectBase
         duration = 5;
         return "A Sandstorm kicked up";
     }
-    public override string OnEndTurn(BattleSystem battleSystem)
+    public override string OnEndTurn()
     {
         duration--;
         if (duration > 0)
@@ -18,7 +18,7 @@ public class Sandstorm : WeatherEffectBase
             return "The Sandstorm rages";
         }
 
-        battleSystem.RemoveWeatherEffect();
+        BattleSystem.RemoveWeatherEffect();
         return "The Sandstorm subsided.";
     }
     public override void OnEndTurnDamage(Pokemon pokemon)

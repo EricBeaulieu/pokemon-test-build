@@ -10,7 +10,7 @@ public class Rain : WeatherEffectBase
         duration = 5;
         return "It started to Rain";
     }
-    public override string OnEndTurn(BattleSystem battleSystem)
+    public override string OnEndTurn()
     {
         duration--;
         if (duration > 0)
@@ -18,7 +18,7 @@ public class Rain : WeatherEffectBase
             return "It continues to Rain";
         }
 
-        battleSystem.RemoveWeatherEffect();
+        BattleSystem.RemoveWeatherEffect();
         return "The Rain Stopped.";
     }
 }

@@ -6,13 +6,13 @@ public class AssaultVest : HoldItemBase
 {
     public override HoldItemID Id { get { return HoldItemID.AssaultVest; } }
     public override HoldItemBase ReturnDerivedClassAsNew() { return new AssaultVest(); }
-    public override bool PreventTheUseOfCertainMoves(MoveBase move)
+    public override bool PreventTheUseOfCertainMoves(BattleUnit battleUnit, MoveBase move)
     {
         if(move.MoveType == MoveType.Status)
         {
             return true;
         }
-        return base.PreventTheUseOfCertainMoves(move);
+        return base.PreventTheUseOfCertainMoves(battleUnit,move);
     }
     public override string PreventTheUseOfCertainMoveMessage()
     {

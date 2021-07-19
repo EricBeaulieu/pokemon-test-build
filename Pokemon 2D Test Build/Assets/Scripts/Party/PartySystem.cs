@@ -7,7 +7,7 @@ using UnityEngine.UI;
 
 public class PartySystem : MonoBehaviour
 {
-    [SerializeField] Text messageBox;
+    [SerializeField] PartyDialogBox dialogBox;
     [SerializeField] SummarySystem summarySystem;
 
     PartyMemberUI[] _partyMemberSlots;
@@ -67,7 +67,7 @@ public class PartySystem : MonoBehaviour
         overworldSelections.SetActive(false);
         battleSelections.SetActive(false);
         AdjustMessageBoxWidthSize(MESSAGEBOX_STANDARD_SIZE);
-        SetMessageText("Choose a Pokemon");
+        dialogBox.SetDialogText("Choose a Pokemon");
 
         SetUpPartySystemCancelButton(wasShiftSwap);
     }
@@ -86,14 +86,13 @@ public class PartySystem : MonoBehaviour
         AdjustMessageBoxWidthSize(MESSAGEBOX_STANDARD_SIZE);
         if(usingItem == true)
         {
-            SetMessageText($"Use {item.ItemBase.name} on which pokemon");
-            SetUpPartySystemCancelButtonFromInventory();
+            dialogBox.SetDialogText($"Use {item.ItemBase.name} on which pokemon");
         }
         else
         {
-            SetMessageText($"Give {item.ItemBase.name} to pokemon");
-            SetUpPartySystemCancelButtonFromInventory();
+            dialogBox.SetDialogText($"Give {item.ItemBase.name} to pokemon");
         }
+        SetUpPartySystemCancelButtonFromInventory();
     }
 
     void ClosePartySystem()
@@ -144,7 +143,7 @@ public class PartySystem : MonoBehaviour
             }
             else
             {
-                cancelButton.onClick.AddListener(() => SetMessageText($"{battleSystemReference.GetCurrentPokemonInBattle.currentName} can no longer battle"));
+                cancelButton.onClick.AddListener(() => dialogBox.SetDialogText($"{battleSystemReference.GetCurrentPokemonInBattle.currentName} can no longer battle"));
             }
         }
         else
@@ -230,21 +229,21 @@ public class PartySystem : MonoBehaviour
                 _partyMemberSlots[k].GetButton.onClick.RemoveAllListeners();
                 if (useItem == true)
                 {
-                    _partyMemberSlots[k].GetButton.onClick.AddListener(() => 
+                    _partyMemberSlots[k].GetButton.onClick.AddListener(() =>
                     {
                         Pokemon currentPokemon = _partyMemberSlots[k].CurrentPokemon();
                         int hpDif = currentPokemon.currentHitPoints;
                         if (item.ItemBase.UseItem(currentPokemon) == true)
                         {
-                            SetMessageText($"{item.ItemBase.ItemName} was used on {currentPokemon.currentName}");
+                            dialogBox.SetDialogText($"{item.ItemBase.ItemName} was used on {currentPokemon.currentName}");
                             hpDif = (hpDif != currentPokemon.currentHitPoints) ? currentPokemon.currentHitPoints - hpDif : 0;
-                            inventorySystemReference.RemoveItem(item, 1);
-                            StartCoroutine(WaitForInputAfterItemUsage(true, _partyMemberSlots[k],hpDif));
+                            inventorySystemReference.RemoveItem(item);
+                            StartCoroutine(WaitForInputAfterItemUsage(true, _partyMemberSlots[k], hpDif));
                             _partyMemberSlots[k].GetButton.onClick.RemoveAllListeners();
                         }
                         else
                         {
-                            SetMessageText($"{item.ItemBase.ItemName} had no effect");
+                            dialogBox.SetDialogText($"{item.ItemBase.ItemName} had no effect");
                             StartCoroutine(WaitForInputAfterItemUsage(false, _partyMemberSlots[k]));
                             _partyMemberSlots[k].GetButton.onClick.RemoveAllListeners();
                         }
@@ -252,20 +251,19 @@ public class PartySystem : MonoBehaviour
                 }
                 else //Give
                 {
-                    _partyMemberSlots[k].GetButton.onClick.AddListener(() => 
+                    _partyMemberSlots[k].GetButton.onClick.AddListener(() =>
                     {
                         Pokemon currentPokemon = _partyMemberSlots[k].CurrentPokemon();
-                        if (currentPokemon.GetCurrentItem == null)
+                        if (currentPokemon.GetCurrentItem != null)
                         {
-                            SetMessageText($"{item.ItemBase.ItemName} was given to {currentPokemon.currentName}");
-                            currentPokemon.GivePokemonItemToHold(item.ItemBase);
-                            inventorySystemReference.RemoveItem(item, 1);
-                            StartCoroutine(WaitForInputAfterItemUsage(false, _partyMemberSlots[k]));
+                            ItemBase oldItem = currentPokemon.GetCurrentItem;
+                            StartCoroutine(GivePokemonItemWhileHoldingItem(oldItem,item,currentPokemon));
+                            _partyMemberSlots[k].GetButton.onClick.RemoveAllListeners();
                         }
                         else
                         {
-                            SetMessageText($"{currentPokemon.currentName} is already holding onto {currentPokemon.GetCurrentItem.ItemName}");
-                            StartCoroutine(WaitForInputAfterItemUsage(false, _partyMemberSlots[k]));
+                            StartCoroutine(WaitForInputAfterItemGiven(item,currentPokemon));
+                            _partyMemberSlots[k].GetButton.onClick.RemoveAllListeners();
                         }
                     });
                 }
@@ -296,15 +294,10 @@ public class PartySystem : MonoBehaviour
         }
     }
 
-    public void SetMessageText(string dialog)
-    {
-        messageBox.text = dialog;
-    }
-
     public void AdjustMessageBoxWidthSize(int size)
     {
         //get component in parent returns the same object since they both share rect transform
-        RectTransform rt = messageBox.transform.parent.GetComponent<RectTransform>();
+        RectTransform rt = dialogBox.transform.parent.GetComponent<RectTransform>();
         rt.sizeDelta = new Vector2(size, rt.sizeDelta.y);
     }
 
@@ -351,13 +344,13 @@ public class PartySystem : MonoBehaviour
     {
         if (currentPartyMember.CurrentPokemon().currentHitPoints <= 0)
         {
-            SetMessageText($"{currentPartyMember.CurrentPokemon().currentName} has no energy left to battle!");
+            dialogBox.SetDialogText($"{currentPartyMember.CurrentPokemon().currentName} has no energy left to battle!");
             return;
         }
 
         if(currentPartyMember.CurrentPokemon() == battleSystemReference.GetCurrentPokemonInBattle)
         {
-            SetMessageText($"{currentPartyMember.CurrentPokemon().currentName} is already in battle!");
+            dialogBox.SetDialogText($"{currentPartyMember.CurrentPokemon().currentName} is already in battle!");
             return;
         }
 
@@ -401,11 +394,61 @@ public class PartySystem : MonoBehaviour
             yield break;
         }
         
-        inventorySystemReference.ReturnFromPartySystemAfterItemUsage();
+        inventorySystemReference.ReturnFromPartySystemAfterItemUsage(true);
     }
 
     public void ReturnFromSummarySystem()
     {
         SelectBox();
+    }
+
+    IEnumerator GivePokemonItemWhileHoldingItem(ItemBase oldItem, Item newItem,Pokemon currentPokemon)
+    {
+        yield return dialogBox.TypeDialog($"{currentPokemon.currentName} is already holding {oldItem.ItemName}", true);
+
+        if(oldItem == newItem.ItemBase)
+        {
+            ClosePartySystem();
+            inventorySystemReference.ReturnFromPartySystemAfterItemUsage(false);
+        }
+
+        yield return dialogBox.TypeDialog($"Would you like to switch the two items");
+
+        bool itemWasSwitched = false;
+        yield return dialogBox.SetChoiceBox(() =>
+        {
+            itemWasSwitched = true;
+            inventorySystemReference.AddItem(oldItem);
+            inventorySystemReference.RemoveItem(newItem);
+        });
+
+        if(itemWasSwitched == true)
+        {
+            yield return dialogBox.TypeDialog($"{oldItem.ItemName} was taken and replaced with {newItem.ItemBase.ItemName}.");
+        }
+
+        ClosePartySystem();
+        inventorySystemReference.ReturnFromPartySystemAfterItemUsage(false);
+    }
+
+    IEnumerator WaitForInputAfterItemGiven(Item item,Pokemon pokemon)
+    {
+        pokemon.GivePokemonItemToHold(item.ItemBase);
+        yield return dialogBox.TypeDialog($"{pokemon.currentName} was given {item.ItemBase.ItemName} to hold");
+
+        bool waitingForInput = false;
+        yield return new WaitForSeconds(1f);
+        while (waitingForInput == false)
+        {
+            if (Input.anyKeyDown)
+            {
+                waitingForInput = true;
+            }
+            yield return null;
+        }
+
+        inventorySystemReference.RemoveItem(item);
+        ClosePartySystem();
+        inventorySystemReference.ReturnFromPartySystemAfterItemUsage(false);
     }
 }

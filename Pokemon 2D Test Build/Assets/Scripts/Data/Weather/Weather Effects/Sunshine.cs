@@ -10,7 +10,7 @@ public class Sunshine : WeatherEffectBase
         duration = 5;
         return "The Sunlight turned harsh!";
     }
-    public override string OnEndTurn(BattleSystem battleSystem)
+    public override string OnEndTurn()
     {
         duration--;
         if (duration > 0)
@@ -18,7 +18,7 @@ public class Sunshine : WeatherEffectBase
             return "The Sunlight is strong";
         }
 
-        battleSystem.RemoveWeatherEffect();
+        BattleSystem.RemoveWeatherEffect();
         return "The sunlight Faded.";
     }
 }

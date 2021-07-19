@@ -313,7 +313,7 @@ public class InventorySystem : MonoBehaviour
                 break;
             case itemType.Pokeball:
                 battleSystemReference.UsePokeballFromInventory((PokeballItem)item.ItemBase);
-                RemoveItem(item, 1);
+                RemoveItem(item);
                 CloseInventorySystem();
                 break;
             case itemType.TMHM:
@@ -331,6 +331,8 @@ public class InventorySystem : MonoBehaviour
 
     void GiveOptionSelected(Item item)
     {
+        CloseInventorySystem();
+        partySystemReference.OpenPartySystemDueToInventoryItem(item, false);
         Debug.Log($"give button clicked");
     }
 
@@ -423,14 +425,21 @@ public class InventorySystem : MonoBehaviour
         }
     }
 
-    public void ReturnFromPartySystemAfterItemUsage()
+    public void ReturnFromPartySystemAfterItemUsage(bool usingItem)
     {
         GameManager.SetGameState(GameState.Inventory);
         SetData(specifiedItem.ItemBase.GetItemType);
         if (specifiedItem.Count > 0)
         {
             gameObject.SetActive(true);
-            SelectBox(useOption.gameObject);
+            if(usingItem ==true)
+            {
+                SelectBox(useOption.gameObject);
+            }
+            else
+            {
+                SelectBox(giveOption.gameObject);
+            }
             SetUpCancelButtonFuntionality(false);
             itemDetails.SetData(specifiedItem);
         }
@@ -444,7 +453,7 @@ public class InventorySystem : MonoBehaviour
         }
     }
     
-    public void RemoveItem(Item item,int count)
+    public void RemoveItem(Item item,int count = 1)
     {
         item.Count -= count;
         if (item.Count <= 0)
@@ -453,15 +462,21 @@ public class InventorySystem : MonoBehaviour
         }
     }
 
-    public void AddItem(Item item, int count)
+    public void RemoveItem(ItemBase item,int count = 1)
     {
-        if(currentInventory.Exists(x => x.ItemBase == item.ItemBase) == true)
+        RemoveItem(currentInventory.Find(x => x.ItemBase == item),count);
+    }
+
+    public void AddItem(ItemBase item, int count = 1)
+    {
+        if(currentInventory.Exists(x => x.ItemBase == item) == true)
         {
-            currentInventory.Find(x => x.ItemBase == item.ItemBase).Count += count;
+            currentInventory.Find(x => x.ItemBase == item).Count += count;
         }
         else
         {
-            currentInventory.Add(item);
+            Item newItem = new Item() { ItemBase = item, Count = count };
+            currentInventory.Add(newItem);
         }
     }
 }

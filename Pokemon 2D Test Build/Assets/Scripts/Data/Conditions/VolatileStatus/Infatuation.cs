@@ -19,7 +19,7 @@ public class Infatuation : ConditionBase
             return true;
         }
 
-        source.statusChanges.Enqueue($"{source.currentName} is immobilized by love ");
+        source.statusChanges.Enqueue($"{source.currentName} is immobilized by love");
         return false;
     }
 }

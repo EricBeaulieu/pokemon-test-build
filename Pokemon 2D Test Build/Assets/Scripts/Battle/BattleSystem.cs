@@ -21,7 +21,7 @@ public class BattleSystem : MonoBehaviour
     [SerializeField] ActionSelectionEventSelector actionSelectionEventSelector;
     [SerializeField] AttackSelectionEventSelector attackSelectionEventSelector;
 
-    List<TurnAttackDetails> currentTurnDetails;
+    List<TurnAttackDetails> currentTurnDetails = new List<TurnAttackDetails>();
     MoveBase alteredMove;
 
     PlayerController _playerController;
@@ -182,7 +182,6 @@ public class BattleSystem : MonoBehaviour
         }
 
         alteredMove = MoveBase.CreateInstance<MoveBase>();
-        currentTurnDetails = new List<TurnAttackDetails>();
     }
 
     public void HandleUpdate()
@@ -1049,7 +1048,7 @@ public class BattleSystem : MonoBehaviour
 
         if (effects.WeatherEffect != WeatherEffectID.NA)
         {
-            yield return StartWeatherEffect(effects.WeatherEffect);
+            yield return StartWeatherEffect(effects.WeatherEffect,source,target);
         }
 
         if (effects.EntryHazard != EntryHazardID.NA)
@@ -1059,7 +1058,7 @@ public class BattleSystem : MonoBehaviour
                 List<EntryHazardBase> currentEntrySide = (target.isPlayerPokemon) ? _playerSideEntryHazards : _enemySideEntryHazards;
                 EntryHazardBase currentHazard = EntryHazardsDB.GetEntryHazardBase(effects.EntryHazard);
 
-                if (currentEntrySide.Contains(currentHazard) == true)
+                if (currentEntrySide.Exists(x => x.Id == currentHazard.Id) == true)
                 {
                     currentHazard = currentEntrySide.Find(x => x.Id == effects.EntryHazard);
                     if (currentHazard.CanBeUsed() == false)
@@ -1397,7 +1396,7 @@ public class BattleSystem : MonoBehaviour
         if (weatherEffect != WeatherEffectID.NA)
         {
             sourceUnit.OnAbilityActivation();
-            yield return StartWeatherEffect(weatherEffect, true);
+            yield return StartWeatherEffect(weatherEffect,sourceUnit,targetUnit, true);
             yield break;
         }
 
@@ -1678,11 +1677,10 @@ public class BattleSystem : MonoBehaviour
 
     IEnumerator ShowWeatherEffect(WeatherEffectBase weather)
     {
-        string message = weather.OnEndTurn(this);
-        yield return dialogBox.TypeDialog(message);
+        yield return dialogBox.TypeDialog(weather.OnEndTurn());
     }
 
-    IEnumerator StartWeatherEffect(WeatherEffectID weatherID,bool wasAbility = false)
+    IEnumerator StartWeatherEffect(WeatherEffectID weatherID,BattleUnit sourceUnit,BattleUnit targetUnit,bool wasAbility = false)
     {
         if (_currentWeather != null)
         {
@@ -1696,26 +1694,19 @@ public class BattleSystem : MonoBehaviour
             }
         }
 
-        if(enemyBattleUnit.pokemon.ability.NegatesWeatherEffects() == true)
+        if(sourceUnit.pokemon.ability.NegatesWeatherEffects() == true)
         {
-            enemyBattleUnit.OnAbilityActivation();
+            yield return dialogBox.TypeDialog($"{BUT_IT_FAILED}");
+            yield break;
+        }
+
+        if(targetUnit.pokemon.ability.NegatesWeatherEffects() == true)
+        {
+            targetUnit.OnAbilityActivation();
 
             if(wasAbility == true)
             {
-                yield return dialogBox.TypeDialog($"{playerBattleUnit.pokemon.currentName}'s {playerBattleUnit.pokemon.ability.Name} was negated by {enemyBattleUnit.pokemon.currentName}'s {enemyBattleUnit.pokemon.ability.Name}");
-            }
-            else
-            {
-                yield return dialogBox.TypeDialog($"{BUT_IT_FAILED}");
-            }
-            yield break;
-        }
-        else if(playerBattleUnit.pokemon.ability.NegatesWeatherEffects() == true)
-        {
-            playerBattleUnit.OnAbilityActivation();
-            if (wasAbility == true)
-            {
-                yield return dialogBox.TypeDialog($"{enemyBattleUnit.pokemon.currentName}'s {enemyBattleUnit.pokemon.ability.Name} was negated by {playerBattleUnit.pokemon.currentName}'s {playerBattleUnit.pokemon.ability.Name}");
+                yield return dialogBox.TypeDialog($"{sourceUnit.pokemon.currentName}'s {sourceUnit.pokemon.ability.Name} was negated by {targetUnit.pokemon.currentName}'s {targetUnit.pokemon.ability.Name}");
             }
             else
             {
@@ -1726,9 +1717,11 @@ public class BattleSystem : MonoBehaviour
 
         _currentWeather = WeatherEffectDB.WeatherEffects[weatherID];
         yield return dialogBox.TypeDialog(_currentWeather.StartMessage());
+        _currentWeather.duration += sourceUnit.pokemon.GetCurrentItem.HoldItemAffects().IncreasedWeatherEffectDuration(weatherID);
+        Debug.Log($"weather duration {_currentWeather.duration}");
     }
 
-    public void RemoveWeatherEffect()
+    public static void RemoveWeatherEffect()
     {
         _currentWeather = null;
     }

@@ -13,8 +13,17 @@ public abstract class HoldItemBase
     public virtual MoveBase AlterUserMoveDetails(MoveBase move) { return move; }
     public virtual MoveBase AlterOpposingMoveDetails(MoveBase move) { return move; }
     public virtual bool DoublesPrizeMoneyRecieved() { return false; }
-    public virtual bool PreventTheUseOfCertainMoves(MoveBase move) { return false; }
+    public virtual bool PreventTheUseOfCertainMoves(BattleUnit battleUnit,MoveBase move) { return false; }
     public virtual string PreventTheUseOfCertainMoveMessage() { return ""; }
     public virtual bool BindingDamageIncreased() { return false; }
     public virtual float AlterStat(StatAttribute statAffected) { return 1f; }
+    virtual protected WeatherEffectID WeatherEffectAmplified() { return WeatherEffectID.NA; }
+    public int IncreasedWeatherEffectDuration(WeatherEffectID currentWeatherEffect)
+    {
+        if(WeatherEffectAmplified() != WeatherEffectID.NA && WeatherEffectAmplified() == currentWeatherEffect)
+        {
+            return 3;
+        }
+        return 0;
+    }
 }
