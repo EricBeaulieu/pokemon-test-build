@@ -19,13 +19,19 @@ public class InventorySystem : MonoBehaviour
     [SerializeField] InventoryColorSystem colorSystem;
     [SerializeField] Text inventoryIndex;
     [SerializeField] ItemColorScheme[] colorScheme;
+    [SerializeField] InventoryDialogBox dialogBox;
+
+    [SerializeField] GameObject trashDetails;
+    [SerializeField] Text trashDetailsCountText;
+    [SerializeField] List<TrashArrowButtons> trashArrowButtons;
+    static int itemTrashAmount;
 
     [SerializeField] GameObject currentItemOptionsMenu;
     [SerializeField] ItemOptionDetailsUI itemDetails;
     [SerializeField] ItemOptionButtonUI useOption;
     [SerializeField] ItemOptionButtonUI giveOption;
     [SerializeField] ItemOptionButtonUI trashOption;
-    Item specifiedItem;
+    static Item specifiedItem;
 
     List<Item> currentItemsDisplayed = new List<Item>();
     itemType currentlySelected;
@@ -45,6 +51,7 @@ public class InventorySystem : MonoBehaviour
         SetItemButtonFunctionality();
         SetMenuButtonFunctionality();
         SetArrowButtonFunctionaility();
+        SetTrashArrowButtonFunctionaility();
     }
 
     public void HandleUpdate()
@@ -188,6 +195,14 @@ public class InventorySystem : MonoBehaviour
         }
     }
 
+    void SetTrashArrowButtonFunctionaility()
+    {
+        for (int i = 0; i < trashArrowButtons.Count; i++)
+        {
+            trashArrowButtons[i].Initialization();
+        }
+    }
+
     public GameObject ReturnToLastButtonPressed()
     {
         return lastSelected.gameObject;
@@ -303,6 +318,7 @@ public class InventorySystem : MonoBehaviour
 
     void UseOptionSelected(Item item)
     {
+        EventSystem.current.SetSelectedGameObject(null);
         switch (item.ItemBase.GetItemType)
         {
             case itemType.Basic:
@@ -331,14 +347,29 @@ public class InventorySystem : MonoBehaviour
 
     void GiveOptionSelected(Item item)
     {
+        EventSystem.current.SetSelectedGameObject(null);
         CloseInventorySystem();
         partySystemReference.OpenPartySystemDueToInventoryItem(item, false);
-        Debug.Log($"give button clicked");
     }
 
     void TrashOptionSelected(Item item)
     {
-        Debug.Log($"Trash button clicked");
+        specifiedItem = item;
+        itemTrashAmount = specifiedItem.Count;
+        trashDetails.gameObject.SetActive(true);
+        if(specifiedItem.Count > 1)
+        {
+            EventSystem.current.SetSelectedGameObject(trashDetails);
+            Button trashDetailsButton = trashDetails.GetComponent<Button>();
+            trashDetailsButton.onClick.RemoveAllListeners();
+            trashDetailsButton.onClick.AddListener(() => { StartCoroutine(TrashAmountSetandSelected()); });
+        }
+        else
+        {
+            StartCoroutine(TrashAmountSetandSelected());
+        }
+        EnableOptionsButtons(false);
+        SetTrashDetailsCount(itemTrashAmount);
     }
 
     void SpecificItemOptionDisplay(bool isOn)
@@ -478,5 +509,60 @@ public class InventorySystem : MonoBehaviour
             Item newItem = new Item() { ItemBase = item, Count = count };
             currentInventory.Add(newItem);
         }
+    }
+
+    public void SetTrashAmount(int addition)
+    {
+        itemTrashAmount += addition;
+        if(itemTrashAmount <= 0)
+        {
+            itemTrashAmount = specifiedItem.Count;
+        }
+        else if( itemTrashAmount > specifiedItem.Count)
+        {
+            itemTrashAmount = 1;
+        }
+        SetTrashDetailsCount(itemTrashAmount);
+    }
+
+    public void SetTrashDetailsCount(int count)
+    {
+        trashDetailsCountText.text = $"X {count.ToString("000")}";
+    }
+
+    void EnableOptionsButtons(bool enable)
+    {
+        useOption.gameObject.SetActive(enable);
+        giveOption.gameObject.SetActive(enable);
+        trashOption.gameObject.SetActive(enable);
+    }
+
+    IEnumerator TrashAmountSetandSelected()
+    {
+        dialogBox.SetDialogText($"Is it Ok to throw away {itemTrashAmount} {specifiedItem.ItemBase.ItemName}");
+        EventSystem.current.SetSelectedGameObject(null);
+
+        yield return new WaitForSeconds(1f);
+        yield return dialogBox.SetChoiceBox(
+            () =>//Yes 
+            {
+                RemoveItem(specifiedItem, itemTrashAmount);
+                ReturnToMenuAfterTrashDetails();
+            },
+            () =>//No
+            {
+                ReturnToMenuAfterTrashDetails();
+            });
+    }
+
+    void ReturnToMenuAfterTrashDetails()
+    {
+        EnableOptionsButtons(true);
+        SetData(specifiedItem.ItemBase.GetItemType);
+        trashDetails.SetActive(false);
+        specifiedItem = null;
+        SpecificItemOptionDisplay(false);
+        SelectBox(lastSelected);
+        SetUpCancelButtonFuntionality(true);
     }
 }

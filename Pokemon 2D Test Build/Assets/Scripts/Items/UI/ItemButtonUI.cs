@@ -15,7 +15,7 @@ public class ItemButtonUI : MonoBehaviour, ISelectHandler, IDeselectHandler
     [SerializeField] Image itemSprite;
     [SerializeField] Text itemName;
     [SerializeField] Text itemCount;
-    [SerializeField] Text messageBox;
+    [SerializeField] InventoryDialogBox messageBox;
     [SerializeField] Button button;
 
     public void Initialization(InventorySystem currentSystem)
@@ -68,11 +68,11 @@ public class ItemButtonUI : MonoBehaviour, ISelectHandler, IDeselectHandler
     {
         if(item == null)
         {
-            messageBox.text = "";
+            messageBox.SetDialogText("");
         }
         else
         {
-            messageBox.text = item.ItemBase.ItemDescription;
+            messageBox.SetDialogText(item.ItemBase.ItemDescription);
         }
     }
 

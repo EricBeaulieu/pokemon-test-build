@@ -420,6 +420,7 @@ public class PartySystem : MonoBehaviour
             itemWasSwitched = true;
             inventorySystemReference.AddItem(oldItem);
             inventorySystemReference.RemoveItem(newItem);
+            currentPokemon.GivePokemonItemToHold(newItem.ItemBase);
         });
 
         if(itemWasSwitched == true)

@@ -13,7 +13,7 @@ public class ItemMenuButtonUI : MonoBehaviour, ISelectHandler, IDeselectHandler
     [SerializeField] GameObject selector;
     [TextArea]
     [SerializeField] string menuDecscription;
-    [SerializeField] Text messageBox;
+    [SerializeField] InventoryDialogBox messageBox;
     [SerializeField] Button button;
 
     public void OnSelect(BaseEventData eventData)
@@ -49,9 +49,9 @@ public class ItemMenuButtonUI : MonoBehaviour, ISelectHandler, IDeselectHandler
         get { return itemTypeMenu; }
     }
 
-    void SetMessageText(string dialog)
+    void SetMessageText(string message)
     {
-        messageBox.text = dialog;
+        messageBox.SetDialogText(message);
     }
 
     public Button GetButton
