@@ -98,7 +98,6 @@ public class InventorySystem : MonoBehaviour
         {
             EventSystem.current.SetSelectedGameObject(gameObject);
         }
-        
     }
 
     void SetUpCancelButton()
@@ -138,10 +137,22 @@ public class InventorySystem : MonoBehaviour
                 itemButtons[i].SetData(currentItemsDisplayed[i + offset], ColorScheme(menu).GetMissingItemFadeColor);
                 if (givingItemFromPartySystem != null)
                 {
+                    Item item = currentItemsDisplayed[i + offset];
+
                     itemButtons[i].GetButton.onClick.RemoveAllListeners();
                     itemButtons[i].GetButton.onClick.AddListener(() =>
                     {
-                        //if item cannot be given then just skip it
+                        if(item.ItemBase.GiveItemOption() == true)
+                        {
+                            givingItemFromPartySystem = null;
+                            CloseInventorySystem();
+                            partySystemReference.ReturnToPartySystemAfterGivingItemToHoldFromInventory(item);
+                            RemoveItem(item);
+                        }
+                        else
+                        {
+                            dialogBox.SetDialogText($"{item.ItemBase.ItemName} cant be held");
+                        }
                     });
                 }
             }
@@ -587,7 +598,8 @@ public class InventorySystem : MonoBehaviour
         cancelButton.onClick.AddListener(() =>
         {
             givingItemFromPartySystem = null;
-            partySystemReference.OpenPartySystem();
+            CloseInventorySystem();
+            partySystemReference.ReturnToPartySystemAfterGivingItemToHoldFromInventory();
         });
     }
 }

@@ -85,7 +85,7 @@ public class PartyMemberUI : MonoBehaviour, ISelectHandler, IDeselectHandler
         _animatedSprite = currentPokemon.pokemonBase.GetAnimatedSprites();
         _currentIndex = 0;
         pokemonSprite.sprite = _animatedSprite[_currentIndex];
-        heldItem.sprite = (currentPokemon.GetCurrentItem != null) ? PartyBackgroundArt.instance.HoldItemSprite() : StatusConditionArt.instance.Nothing;
+        UpdateHoldItem();
 
         Deselected();
     }
@@ -186,5 +186,10 @@ public class PartyMemberUI : MonoBehaviour, ISelectHandler, IDeselectHandler
             }
             return xOffScreenPosition;
         }
+    }
+
+    public void UpdateHoldItem()
+    {
+        heldItem.sprite = (_pokemon.GetCurrentItem != null) ? PartyBackgroundArt.instance.HoldItemSprite() : StatusConditionArt.instance.Nothing;
     }
 }

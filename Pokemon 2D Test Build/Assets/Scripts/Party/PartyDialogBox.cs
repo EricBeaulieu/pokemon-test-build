@@ -61,12 +61,15 @@ public class PartyDialogBox : MonoBehaviour
         EnableChoiceBox(true);
         ChoiceSelectBox();
 
+        bool waitingForInput = false;
+
         choiceYesButton.GetComponent<Button>().onClick.RemoveAllListeners();
         choiceYesButton.GetComponent<Button>().onClick.AddListener(() =>
         {
             onYesSelected?.Invoke();
+            waitingForInput = true;
         });
-        bool waitingForInput = false;
+
 
         choiceNoButton.GetComponent<Button>().onClick.RemoveAllListeners();
         choiceNoButton.GetComponent<Button>().onClick.AddListener(() =>
@@ -74,13 +77,9 @@ public class PartyDialogBox : MonoBehaviour
             waitingForInput = true;
             onNoSelected?.Invoke();
         });
-        
+
         while (waitingForInput == false)
         {
-            if (Input.anyKeyDown)
-            {
-                waitingForInput = true;
-            }
             yield return null;
         }
         EnableChoiceBox(false);
