@@ -359,7 +359,7 @@ public class BattleSystem : MonoBehaviour
     {
         if(playerBattleUnit.CanSwitchOutOrFlee() == true)
         {
-            partySystem.OpenPartySystem(false);
+            partySystem.OpenPartySystem();
         }
         else
         {
@@ -646,7 +646,7 @@ public class BattleSystem : MonoBehaviour
         //If current pokemon has fainted then it goes to the party system and waits on the selector
         if (playerBattleUnit.SendOutPokemonOnTurnEnd == true)
         {
-            partySystem.OpenPartySystem(false);
+            partySystem.OpenPartySystem();
         }
         else
         {
@@ -1718,7 +1718,6 @@ public class BattleSystem : MonoBehaviour
         _currentWeather = WeatherEffectDB.WeatherEffects[weatherID];
         yield return dialogBox.TypeDialog(_currentWeather.StartMessage());
         _currentWeather.duration += sourceUnit.pokemon.GetCurrentItem.HoldItemAffects().IncreasedWeatherEffectDuration(weatherID);
-        Debug.Log($"weather duration {_currentWeather.duration}");
     }
 
     public static void RemoveWeatherEffect()

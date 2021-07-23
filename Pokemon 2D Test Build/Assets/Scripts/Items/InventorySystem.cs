@@ -38,6 +38,7 @@ public class InventorySystem : MonoBehaviour
     int currentIndex;
     int pages;
 
+    Pokemon givingItemFromPartySystem = null;
     GameObject lastSelected;
 
     const int MAX_ITEMS_DISPLAY = 6;
@@ -135,6 +136,14 @@ public class InventorySystem : MonoBehaviour
             else
             {
                 itemButtons[i].SetData(currentItemsDisplayed[i + offset], ColorScheme(menu).GetMissingItemFadeColor);
+                if (givingItemFromPartySystem != null)
+                {
+                    itemButtons[i].GetButton.onClick.RemoveAllListeners();
+                    itemButtons[i].GetButton.onClick.AddListener(() =>
+                    {
+                        //if item cannot be given then just skip it
+                    });
+                }
             }
         }
 
@@ -564,5 +573,21 @@ public class InventorySystem : MonoBehaviour
         SpecificItemOptionDisplay(false);
         SelectBox(lastSelected);
         SetUpCancelButtonFuntionality(true);
+    }
+
+    public void OpenUpInventorySystemDueToGivingItemFromParty(Pokemon pokemon)
+    {
+        GameManager.SetGameState(GameState.Inventory);
+        gameObject.SetActive(true);
+        givingItemFromPartySystem = pokemon;
+        SetData();
+        SpecificItemOptionDisplay(false);
+        SelectBox();
+        cancelButton.onClick.RemoveAllListeners();
+        cancelButton.onClick.AddListener(() =>
+        {
+            givingItemFromPartySystem = null;
+            partySystemReference.OpenPartySystem();
+        });
     }
 }

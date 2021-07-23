@@ -15,14 +15,21 @@ public class PartySystem : MonoBehaviour
 
     BattleSystem battleSystemReference;
     InventorySystem inventorySystemReference;
-    List<Pokemon> _currentParty;
-    Pokemon _currentlySelectedPokemon;
+    PokemonParty playersParty;
+    List<Pokemon> currentParty;
+    static bool currentlySwitchingPokemon = false;
+    PartyMemberUI currentPokemonBeingSwitched = null;
 
     [SerializeField] GameObject overworldSelections;
     [SerializeField] GameObject overworldSelectionsSummaryButton;
     [SerializeField] GameObject overworldSelectionsSwitchButton;
     [SerializeField] GameObject overworldSelectionsItemButton;
     [SerializeField] GameObject overworldSelectionsCancelButton;
+
+    [SerializeField] GameObject itemSelections;
+    [SerializeField] GameObject itemSelectionsGiveButton;
+    [SerializeField] GameObject itemSelectionsTakeButton;
+    [SerializeField] GameObject itemSelectionsCancelButton;
 
     [SerializeField] GameObject battleSelections;
     [SerializeField] GameObject battleSelectionShiftButton;
@@ -39,7 +46,7 @@ public class PartySystem : MonoBehaviour
         gameObject.SetActive(false);
         battleSystemReference = GameManager.instance.GetBattleSystem;
         inventorySystemReference = GameManager.instance.GetInventorySystem;
-        _partyMemberSlots = GetComponentsInChildren<PartyMemberUI>();
+        SetupPartyMemberFunctionality();
         summarySystem.Initialization();
     }
 
@@ -55,7 +62,7 @@ public class PartySystem : MonoBehaviour
         }
     }
 
-    public void OpenPartySystem(bool wasShiftSwap)
+    public void OpenPartySystem(bool wasShiftSwap = false)
     {
         GameManager.SetGameState(GameState.Party);
         gameObject.SetActive(true);
@@ -108,7 +115,7 @@ public class PartySystem : MonoBehaviour
         gameObject.SetActive(false);
     }
 
-    void SelectBox()
+    void SelectBox(GameObject gameObject = null)
     {
         EventSystem.current.SetSelectedGameObject(null);
         if (_lastSelected == null)
@@ -118,6 +125,11 @@ public class PartySystem : MonoBehaviour
         else
         {
             EventSystem.current.SetSelectedGameObject(_lastSelected);
+        }
+
+        if(gameObject != null)
+        {
+            EventSystem.current.SetSelectedGameObject(gameObject);
         }
     }
 
@@ -167,24 +179,24 @@ public class PartySystem : MonoBehaviour
     void SetPartyData()
     {
         List<Pokemon> currentParty = GameManager.instance.GetPlayerController.pokemonParty.CurrentPokemonList();
-        _currentParty = currentParty;
+        this.currentParty = currentParty;
 
         for (int i = 0; i < _partyMemberSlots.Length; i++)
         {
             if(i < currentParty.Count)
             {
                 _partyMemberSlots[i].gameObject.SetActive(true);
-                _partyMemberSlots[i].SetData(currentParty[i], i);
+                _partyMemberSlots[i].SetData(currentParty[i]);
 
                 int k = i;
-                _partyMemberSlots[k].GetComponent<Button>().onClick.RemoveAllListeners();
+                _partyMemberSlots[k].GetButton.onClick.RemoveAllListeners();
                 if (BattleSystem.inBattle == true)
                 {
-                    _partyMemberSlots[k].GetComponent<Button>().onClick.AddListener(() => OpenBattleSelections(_partyMemberSlots[k]));
+                    _partyMemberSlots[k].GetButton.onClick.AddListener(() => OpenBattleSelections(_partyMemberSlots[k]));
                 }
                 else
                 {
-                    _partyMemberSlots[k].GetComponent<Button>().onClick.AddListener(() => OpenOverworldSelections(_partyMemberSlots[k]));
+                    _partyMemberSlots[k].GetButton.onClick.AddListener(() => OpenOverworldSelections(_partyMemberSlots[k]));
                 }
 
                 if(i+1 == currentParty.Count)
@@ -215,15 +227,14 @@ public class PartySystem : MonoBehaviour
 
     public void SetPartyItem(Item item,bool useItem)//False == give
     {
-        List<Pokemon> currentParty = GameManager.instance.GetPlayerController.pokemonParty.CurrentPokemonList();
-        _currentParty = currentParty;
+        currentParty = playersParty.CurrentPokemonList();
 
         for (int i = 0; i < _partyMemberSlots.Length; i++)
         {
             if (i < currentParty.Count)
             {
                 _partyMemberSlots[i].gameObject.SetActive(true);
-                _partyMemberSlots[i].SetData(currentParty[i], i);
+                _partyMemberSlots[i].SetData(currentParty[i]);
 
                 int k = i;
                 _partyMemberSlots[k].GetButton.onClick.RemoveAllListeners();
@@ -303,8 +314,9 @@ public class PartySystem : MonoBehaviour
 
     void OpenBattleSelections(PartyMemberUI currentPartyMember)
     {
+        currentPartyMember.isCurrentlySelected = true;
         battleSelections.SetActive(true);
-        EventSystem.current.SetSelectedGameObject(battleSelectionShiftButton);
+        SelectBox(battleSelectionShiftButton);
         AdjustMessageBoxWidthSize(MESSAGEBOX_SELECTED_SIZE);
 
         battleSelectionShiftButton.GetComponent<Button>().onClick.RemoveAllListeners();
@@ -324,7 +336,9 @@ public class PartySystem : MonoBehaviour
 
     void OpenOverworldSelections(PartyMemberUI currentPartyMember)
     {
+        currentPartyMember.isCurrentlySelected = true;
         overworldSelections.SetActive(true);
+        itemSelections.SetActive(false);
         EventSystem.current.SetSelectedGameObject(overworldSelectionsSummaryButton);
         AdjustMessageBoxWidthSize(MESSAGEBOX_SELECTED_SIZE);
 
@@ -334,6 +348,21 @@ public class PartySystem : MonoBehaviour
             SummaryButton(System.Array.IndexOf(_partyMemberSlots, currentPartyMember));
             _lastSelected = overworldSelectionsSummaryButton;
             EventSystem.current.SetSelectedGameObject(null);
+        });
+
+        overworldSelectionsSwitchButton.GetComponent<Button>().onClick.RemoveAllListeners();
+        overworldSelectionsSwitchButton.GetComponent<Button>().onClick.AddListener(() =>
+        {
+            currentPartyMember.SwitchingPokemon = true;
+            currentPokemonBeingSwitched = currentPartyMember;
+            CancelSubMenuButton(currentPartyMember);
+            SetNextPokemonSelectedToSwitchPositions();
+        });
+
+        overworldSelectionsItemButton.GetComponent<Button>().onClick.RemoveAllListeners();
+        overworldSelectionsItemButton.GetComponent<Button>().onClick.AddListener(() =>
+        {
+            OpenItemSelections(currentPartyMember);
         });
 
         overworldSelectionsCancelButton.GetComponent<Button>().onClick.RemoveAllListeners();
@@ -360,6 +389,7 @@ public class PartySystem : MonoBehaviour
 
     void CancelSubMenuButton(PartyMemberUI previousSelection)
     {
+        previousSelection.isCurrentlySelected = false;
         battleSelections.SetActive(false);
         overworldSelections.SetActive(false);
         EventSystem.current.SetSelectedGameObject(previousSelection.gameObject);
@@ -367,7 +397,7 @@ public class PartySystem : MonoBehaviour
 
     void SummaryButton(int pokemonIndex)
     {
-        summarySystem.OnSummaryMenuOpened(_currentParty, pokemonIndex);
+        summarySystem.OnSummaryMenuOpened(currentParty, pokemonIndex);
     }
 
     IEnumerator WaitForInputAfterItemUsage(bool itemWasUsed, PartyMemberUI partyMemberUI,int hpRecovered = 0)
@@ -451,5 +481,137 @@ public class PartySystem : MonoBehaviour
         inventorySystemReference.RemoveItem(item);
         ClosePartySystem();
         inventorySystemReference.ReturnFromPartySystemAfterItemUsage(false);
+    }
+
+    void SetNextPokemonSelectedToSwitchPositions()
+    {
+        currentlySwitchingPokemon = true;
+        // if switching and select the same pokemon it cancels out of switching, as well as the cancel button
+
+        for (int i = 0; i < currentParty.Count; i++)
+        {
+            if (i < currentParty.Count)
+            {
+                int k = i;
+                _partyMemberSlots[k].GetButton.onClick.RemoveAllListeners();
+                _partyMemberSlots[k].GetButton.onClick.AddListener(() => 
+                {
+                    _lastSelected = _partyMemberSlots[k].gameObject;
+                    if (_partyMemberSlots[k] == currentPokemonBeingSwitched)
+                    {
+                        SwitchingPokemonEnded();
+                    }
+                    else
+                    {
+                        StartCoroutine(SwitchPokemonPositions(currentPokemonBeingSwitched, _partyMemberSlots[k]));
+                    }
+                    
+                });
+            }
+            cancelButton.onClick.RemoveAllListeners();
+            cancelButton.onClick.AddListener(() =>
+            {
+                _lastSelected = cancelButton.gameObject;
+                SwitchingPokemonEnded();
+            });
+        }
+    }
+
+    void SwitchingPokemonEnded()
+    {
+        for (int i = 0; i < currentParty.Count; i++)
+        {
+            _partyMemberSlots[i].SwitchingPokemon = false;
+        }
+        SetPartyData();
+        SetUpPartySystemCancelButton(false);
+        currentlySwitchingPokemon = false;
+        currentPokemonBeingSwitched = null;
+        SelectBox();
+    }
+
+    IEnumerator SwitchPokemonPositions(PartyMemberUI firstPokemon, PartyMemberUI secondPokemon)
+    {
+        secondPokemon.SwitchingPokemon = true;
+
+        StartCoroutine(firstPokemon.AnimateSwitchToStandardPosition(false));
+        yield return secondPokemon.AnimateSwitchToStandardPosition(false);
+
+        playersParty.SwitchPokemonPositions(firstPokemon.CurrentPokemon(), secondPokemon.CurrentPokemon());
+        Pokemon firstPositionPokemon = firstPokemon.CurrentPokemon();
+        Pokemon secondPositionPokemon = secondPokemon.CurrentPokemon();
+        firstPokemon.SetData(secondPositionPokemon);
+        secondPokemon.SetData(firstPositionPokemon);
+
+        StartCoroutine(firstPokemon.AnimateSwitchToStandardPosition(true));
+        yield return secondPokemon.AnimateSwitchToStandardPosition(true);
+
+        SwitchingPokemonEnded();
+    }
+
+    public static bool GetCurrentlySwitchingPokemon
+    {
+        get { return currentlySwitchingPokemon; }
+    }
+
+    void SetupPartyMemberFunctionality()
+    {
+        _partyMemberSlots = GetComponentsInChildren<PartyMemberUI>();
+        for (int i = 0; i < _partyMemberSlots.Length; i++)
+        {
+            _partyMemberSlots[i].Initialization(i);
+        }
+    }
+
+    public void SetPlayersParty(PokemonParty party)
+    {
+        playersParty = party;
+    }
+
+    void OpenItemSelections(PartyMemberUI currentPartyMember)
+    {
+        overworldSelections.SetActive(false);
+        itemSelections.SetActive(true);
+        SelectBox(itemSelectionsGiveButton);
+
+        itemSelectionsGiveButton.GetComponent<Button>().onClick.RemoveAllListeners();
+        itemSelectionsGiveButton.GetComponent<Button>().onClick.AddListener(() =>
+        {
+            EventSystem.current.SetSelectedGameObject(null);
+            ClosePartySystem();
+            inventorySystemReference.OpenUpInventorySystemDueToGivingItemFromParty(currentPartyMember.CurrentPokemon());
+        });
+
+        itemSelectionsTakeButton.GetComponent<Button>().onClick.RemoveAllListeners();
+        itemSelectionsTakeButton.GetComponent<Button>().onClick.AddListener(() =>
+        {
+            ItemBase item = currentPartyMember.CurrentPokemon().GetCurrentItem;
+            StartCoroutine(WaitForInputAfterItemTaken(item, currentPartyMember));
+        });
+
+        itemSelectionsCancelButton.GetComponent<Button>().onClick.RemoveAllListeners();
+        itemSelectionsCancelButton.GetComponent<Button>().onClick.AddListener(() =>
+        {
+            OpenOverworldSelections(currentPartyMember);
+        });
+    }
+
+    IEnumerator WaitForInputAfterItemTaken(ItemBase item, PartyMemberUI pokemonPos)
+    {
+        itemSelections.SetActive(false);
+        if (item == null)
+        {
+            yield return dialogBox.TypeDialog($"{pokemonPos.CurrentPokemon().currentName} isn't holding anything.");
+        }
+        else
+        {
+            yield return dialogBox.TypeDialog($"Received the {item.ItemName} from {pokemonPos.CurrentPokemon().currentName}",true);
+            inventorySystemReference.AddItem(item);
+            pokemonPos.CurrentPokemon().GivePokemonItemToHold(null);
+        }
+
+        pokemonPos.isCurrentlySelected = false;
+        SelectBox(pokemonPos.gameObject);
+        dialogBox.SetDialogText("Choose a Pokemon");
     }
 }

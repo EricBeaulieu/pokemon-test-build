@@ -249,6 +249,7 @@ public class GameManager : MonoBehaviour
         overWorldCamera.transform.parent = playerController.transform;
         overWorldCamera.transform.localPosition = Vector3.zero;
         defaultSpawnLocation.gameObject.SetActive(false);
+        partySystem.SetPlayersParty(playerController.pokemonParty);
     }
 
     public IEnumerator LoadScenethatPlayerSavedIn(string sceneName)

@@ -41,6 +41,7 @@ public class Notes
 
     //Bugs
     
+    //if the player moves out of site after the trainer looks it will still see him and battle him
     //on turn end for bound moves the pokemon doesnt play flash of hit animation
     //trainer when walking for some reason got into a half positionand stuck while walking. no idea how i created the bug
     //place trainer in path off start, let them stand and hit them and recreate this bug

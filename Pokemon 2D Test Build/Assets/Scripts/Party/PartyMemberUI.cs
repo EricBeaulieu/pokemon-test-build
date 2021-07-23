@@ -29,6 +29,24 @@ public class PartyMemberUI : MonoBehaviour, ISelectHandler, IDeselectHandler
     [SerializeField] GameObject selectorOff;
     [SerializeField] Button button;
 
+    bool currentlySelected = false;
+    bool switching = false;
+    Vector3 originalPosition;
+    Vector3 offsetPosition;
+    const int xOffScreenPosition = 600;
+    float _animationTime = 0.75f;
+
+    public void Initialization(int slotPosition)
+    {
+        if (slotPosition == 0)
+        {
+            _isFirstSlot = true;
+        }
+
+        originalPosition = transform.localPosition;
+        offsetPosition = new Vector3(transform.localPosition.x + offsetXPosDifference, transform.localPosition.y);
+    }
+
     void Update()
     {
         _timer += Time.deltaTime;
@@ -40,13 +58,9 @@ public class PartyMemberUI : MonoBehaviour, ISelectHandler, IDeselectHandler
         }
     }
 
-    public void SetData(Pokemon currentPokemon,int slotPosition)
+    public void SetData(Pokemon currentPokemon)
     {
         _pokemon = currentPokemon;
-        if(slotPosition == 0)
-        {
-            _isFirstSlot = true;
-        }
 
         nameText.text = currentPokemon.currentName;
         levelText.text = currentPokemon.currentLevel.ToString();
@@ -78,13 +92,23 @@ public class PartyMemberUI : MonoBehaviour, ISelectHandler, IDeselectHandler
 
     public void OnSelect(BaseEventData eventData)
     {
-        background.sprite = PartyBackgroundArt.instance.ReturnBackgroundArt(_pokemon.currentHitPoints, _isFirstSlot, true);
+        if(PartySystem.GetCurrentlySwitchingPokemon == true)
+        {
+            background.sprite = PartyBackgroundArt.instance.ReturnBackgroundArt(_pokemon.currentHitPoints, _isFirstSlot, true, true);
+        }
+        else
+        {
+            background.sprite = PartyBackgroundArt.instance.ReturnBackgroundArt(_pokemon.currentHitPoints, _isFirstSlot, true, switching);
+        }
         EnableSelector(true);
     }
 
     public void OnDeselect(BaseEventData eventData)
     {
-        Deselected();
+        if(currentlySelected == false)
+        {
+            Deselected();
+        }
     }
 
     public Pokemon CurrentPokemon()
@@ -94,7 +118,7 @@ public class PartyMemberUI : MonoBehaviour, ISelectHandler, IDeselectHandler
 
     void Deselected()
     {
-        background.sprite = PartyBackgroundArt.instance.ReturnBackgroundArt(_pokemon.currentHitPoints, _isFirstSlot, false);
+        background.sprite = PartyBackgroundArt.instance.ReturnBackgroundArt(_pokemon.currentHitPoints, _isFirstSlot, false, switching);
         EnableSelector(false);
     }
 
@@ -126,5 +150,41 @@ public class PartyMemberUI : MonoBehaviour, ISelectHandler, IDeselectHandler
         }
 
         yield return hPBar.SetHPRecoveredAnimation(_pokemon.currentHitPoints,hpRecovered, _pokemon.maxHitPoints, currentHP);
+    }
+
+    public bool SwitchingPokemon
+    {
+        get { return switching; }
+        set { switching = value; }
+    }
+
+    public bool isCurrentlySelected
+    {
+        get { return currentlySelected; }
+        set { currentlySelected = value; }
+    }
+
+    public IEnumerator AnimateSwitchToStandardPosition(bool on)
+    {
+        if (on == true)
+        {
+            yield return GlobalTools.SmoothTransitionToPosition(transform, originalPosition, _animationTime);
+        }
+        else
+        {
+            yield return GlobalTools.SmoothTransitionToPosition(transform, offsetPosition, _animationTime);
+        }
+    }
+
+    float offsetXPosDifference
+    {
+        get
+        {
+            if (_isFirstSlot == true)
+            {
+                return -xOffScreenPosition;
+            }
+            return xOffScreenPosition;
+        }
     }
 }

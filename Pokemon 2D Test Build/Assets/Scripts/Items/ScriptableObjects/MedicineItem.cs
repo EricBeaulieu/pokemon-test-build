@@ -21,53 +21,61 @@ public class MedicineItem : ItemBase
 
     public override bool UseItem(Pokemon pokemon)
     {
-        if(hpRecovered > 0)
+        bool itemUsed = false;
+
+        if(pokemon.currentHitPoints <= 0)
         {
-            if(pokemon.currentHitPoints < pokemon.maxHitPoints)
+            if (revive > 0)
             {
-                pokemon.UpdateHPRestored(hpRecovered);
+                pokemon.currentHitPoints = Mathf.CeilToInt(pokemon.maxHitPoints * revive);
                 return true;
             }
         }
-
-        if (ppRecovered > 0)
+        else
         {
-            if(multipleMoves == true)
+            if (hpRecovered > 0)
             {
-                for (int i = 0; i < pokemon.moves.Count; i++)
+                if (pokemon.currentHitPoints < pokemon.maxHitPoints)
                 {
-                    pokemon.moves[i].pP += ppRecovered;
+                    pokemon.UpdateHPRestored(hpRecovered);
+                    itemUsed = true;
                 }
-                return true;
             }
-            //TO DO
-            return false; 
-        }
 
-        if(specificStatusRecovered != ConditionID.NA)
-        {
-            if(pokemon.status.Id == specificStatusRecovered)
+            if (ppRecovered > 0)
             {
-                pokemon.CureStatus();
-                return true;
+                if (multipleMoves == true)
+                {
+                    for (int i = 0; i < pokemon.moves.Count; i++)
+                    {
+                        pokemon.moves[i].pP += ppRecovered;
+                    }
+                    itemUsed = true;
+                }
+                //TO DO
+                // open up UI showing current moves that can be recovered and show one
             }
-        }
 
-        if(cureAllStatus == true)
-        {
-            if(pokemon.status != null)
+            if (specificStatusRecovered != ConditionID.NA)
             {
-                pokemon.CureStatus();
-                return true;
+                if (pokemon.status.Id == specificStatusRecovered)
+                {
+                    pokemon.CureStatus();
+                    itemUsed = true;
+                }
+            }
+
+            if (cureAllStatus == true)
+            {
+                if (pokemon.status != null)
+                {
+                    pokemon.CureStatus();
+                    itemUsed = true;
+                }
             }
         }
 
-        if(revive > 0 && pokemon.currentHitPoints <= 0)
-        {
-            pokemon.currentHitPoints = Mathf.CeilToInt(pokemon.maxHitPoints * revive);
-            return true;
-        }
-        return false;
+        return itemUsed;
     }
 
     public override bool UseItemOption()
