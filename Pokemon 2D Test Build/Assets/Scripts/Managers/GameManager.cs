@@ -21,7 +21,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] Camera overWorldCamera;
     [SerializeField] PartySystem partySystem;
     [SerializeField] FadeSystem fadeSystem;
-    DialogManager dialogManager;
+    [SerializeField] DialogManager dialogManager;
     LevelManager _levelManager;
     [SerializeField] StartMenu startMenu;
     [SerializeField] PokeballItem standardPokeball;
@@ -56,7 +56,7 @@ public class GameManager : MonoBehaviour
     {
         battleSystem.Initialization();
         partySystem.Initialization();
-        dialogManager = DialogManager.instance;
+        dialogManager.Initialization();
         startMenu.Initialization();
         inventorySystem.Initialization();
 
@@ -349,6 +349,11 @@ public class GameManager : MonoBehaviour
     public InventorySystem GetInventorySystem
     {
         get { return inventorySystem; }
+    }
+
+    public DialogManager GetDialogSystem
+    {
+        get { return dialogManager; }
     }
 
     public PlayerController GetPlayerController

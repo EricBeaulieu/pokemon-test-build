@@ -110,7 +110,7 @@ public class NpcController : Entity, IInteractable
         if(IsMoving == false)
         {
             FaceTowardsDirection(initiator);
-            StartCoroutine(DialogManager.instance.ShowDialogBox(nPCBase.GetDialog, () =>
+            StartCoroutine(GameManager.instance.GetDialogSystem.ShowDialogBox(nPCBase.GetDialog, () =>
             {
                 _idleTimer = 0;
             }));

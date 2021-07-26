@@ -8,8 +8,9 @@ using UnityEngine.UI;
 
 public class InventorySystem : MonoBehaviour
 {
-    BattleSystem battleSystemReference;
-    PartySystem partySystemReference;
+    BattleSystem battleSystem;
+    PartySystem partySystem;
+    DialogManager dialogSystem;
     [SerializeField] List<Item> currentInventory;
 
     [SerializeField] List<ItemMenuButtonUI> menuButtons;
@@ -19,7 +20,7 @@ public class InventorySystem : MonoBehaviour
     [SerializeField] InventoryColorSystem colorSystem;
     [SerializeField] Text inventoryIndex;
     [SerializeField] ItemColorScheme[] colorScheme;
-    [SerializeField] InventoryDialogBox dialogBox;
+    [SerializeField] DialogBox dialogBox;
 
     [SerializeField] GameObject trashDetails;
     [SerializeField] Text trashDetailsCountText;
@@ -46,10 +47,11 @@ public class InventorySystem : MonoBehaviour
     public void Initialization()
     {
         gameObject.SetActive(false);
-        battleSystemReference = GameManager.instance.GetBattleSystem;
-        partySystemReference = GameManager.instance.GetPartySystem;
+        battleSystem = GameManager.instance.GetBattleSystem;
+        partySystem = GameManager.instance.GetPartySystem;
+        dialogSystem = GameManager.instance.GetDialogSystem;
         CheckAndCorrectInventoryUponStart();
-        SetItemButtonFunctionality();
+        //SetItemButtonFunctionality();
         SetMenuButtonFunctionality();
         SetArrowButtonFunctionaility();
         SetTrashArrowButtonFunctionaility();
@@ -67,6 +69,7 @@ public class InventorySystem : MonoBehaviour
     public void OpenInventorySystem()
     {
         GameManager.SetGameState(GameState.Inventory);
+        dialogSystem.SetCurrentDialogBox(dialogBox);
         gameObject.SetActive(true);
         SetData(currentlySelected);
         SpecificItemOptionDisplay(false);
@@ -83,6 +86,7 @@ public class InventorySystem : MonoBehaviour
         else
         {
             GameManager.SetGameState(GameState.Overworld);
+            dialogSystem.SetCurrentDialogBox();
         }
         gameObject.SetActive(false);
     }
@@ -146,12 +150,12 @@ public class InventorySystem : MonoBehaviour
                         {
                             givingItemFromPartySystem = null;
                             CloseInventorySystem();
-                            partySystemReference.ReturnToPartySystemAfterGivingItemToHoldFromInventory(item);
+                            partySystem.ReturnToPartySystemAfterGivingItemToHoldFromInventory(item);
                             RemoveItem(item);
                         }
                         else
                         {
-                            dialogBox.SetDialogText($"{item.ItemBase.ItemName} cant be held");
+                            dialogSystem.SetDialogText($"{item.ItemBase.ItemName} cant be held");
                         }
                     });
                 }
@@ -190,13 +194,13 @@ public class InventorySystem : MonoBehaviour
 
     }
 
-    void SetItemButtonFunctionality()
-    {
-        for (int i = 0; i < itemButtons.Count; i++)
-        {
-            itemButtons[i].Initialization(this);
-        }
-    }
+    //void SetItemButtonFunctionality()
+    //{
+    //    for (int i = 0; i < itemButtons.Count; i++)
+    //    {
+    //        itemButtons[i].Initialization();
+    //    }
+    //}
 
     void SetMenuButtonFunctionality()
     {
@@ -345,10 +349,10 @@ public class InventorySystem : MonoBehaviour
                 break;
             case itemType.Medicine:
                 CloseInventorySystem();
-                partySystemReference.OpenPartySystemDueToInventoryItem(item, true);
+                partySystem.OpenPartySystemDueToInventoryItem(item, true);
                 break;
             case itemType.Pokeball:
-                battleSystemReference.UsePokeballFromInventory((PokeballItem)item.ItemBase);
+                battleSystem.UsePokeballFromInventory((PokeballItem)item.ItemBase);
                 RemoveItem(item);
                 CloseInventorySystem();
                 break;
@@ -369,7 +373,7 @@ public class InventorySystem : MonoBehaviour
     {
         EventSystem.current.SetSelectedGameObject(null);
         CloseInventorySystem();
-        partySystemReference.OpenPartySystemDueToInventoryItem(item, false);
+        partySystem.OpenPartySystemDueToInventoryItem(item, false);
     }
 
     void TrashOptionSelected(Item item)
@@ -448,7 +452,7 @@ public class InventorySystem : MonoBehaviour
             {
                 cancelButton.onClick.AddListener(() => 
                 {
-                    battleSystemReference.ReturnFromPokemonAlternateSystem();
+                    battleSystem.ReturnFromPokemonAlternateSystem();
                 });
             }
         }
@@ -559,11 +563,11 @@ public class InventorySystem : MonoBehaviour
 
     IEnumerator TrashAmountSetandSelected()
     {
-        dialogBox.SetDialogText($"Is it Ok to throw away {itemTrashAmount} {specifiedItem.ItemBase.ItemName}");
+        dialogSystem.SetDialogText($"Is it Ok to throw away {itemTrashAmount} {specifiedItem.ItemBase.ItemName}");
         EventSystem.current.SetSelectedGameObject(null);
 
         yield return new WaitForSeconds(1f);
-        yield return dialogBox.SetChoiceBox(
+        yield return dialogSystem.SetChoiceBox(
             () =>//Yes 
             {
                 RemoveItem(specifiedItem, itemTrashAmount);
@@ -589,6 +593,7 @@ public class InventorySystem : MonoBehaviour
     public void OpenUpInventorySystemDueToGivingItemFromParty(Pokemon pokemon)
     {
         GameManager.SetGameState(GameState.Inventory);
+        dialogSystem.SetCurrentDialogBox(dialogBox);
         gameObject.SetActive(true);
         givingItemFromPartySystem = pokemon;
         SetData();
@@ -599,7 +604,7 @@ public class InventorySystem : MonoBehaviour
         {
             givingItemFromPartySystem = null;
             CloseInventorySystem();
-            partySystemReference.ReturnToPartySystemAfterGivingItemToHoldFromInventory();
+            partySystem.ReturnToPartySystemAfterGivingItemToHoldFromInventory();
         });
     }
 }

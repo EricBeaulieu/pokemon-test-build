@@ -8,6 +8,7 @@ using UnityEngine.UI;
 public class AttackSelectionEventSelector : MonoBehaviour
 {
     [SerializeField] GameObject [] moveButton;
+    [SerializeField] GameObject moveDetails;
 
     [SerializeField] Text pPText;
     [SerializeField] Text typeText;
@@ -18,7 +19,7 @@ public class AttackSelectionEventSelector : MonoBehaviour
     {
         if(moveButton.Length != 4)
         {
-            Debug.LogError("the Amount of moves selectable is not set corretly!");
+            Debug.LogError("the Amount of moves selectable is not set correctly!");
         }
 
         for (int i = 0; i < 4; i++)
@@ -26,11 +27,6 @@ public class AttackSelectionEventSelector : MonoBehaviour
             moveButton[i].GetComponent<AttackButton>().SetPPValues(pPText, typeText);
         }
     }
-
-    /// <summary>
-    /// When the Fight Button is clicked it shall select the last attack used
-    /// It shall select the first move if there have been no attacks used
-    /// </summary>
     public void SelectBox()
     {
         EventSystem.current.SetSelectedGameObject(null);
@@ -43,11 +39,6 @@ public class AttackSelectionEventSelector : MonoBehaviour
             EventSystem.current.SetSelectedGameObject(_lastSelected);
         }
     }
-
-    //public Button ReturnMoveButton(int moveNumber)
-    //{
-    //    return moveButton[moveNumber].GetComponent<Button>();
-    //}
 
     /// <summary>
     /// Sets up the moves in the location for when the pokemon is going to fight
@@ -87,5 +78,11 @@ public class AttackSelectionEventSelector : MonoBehaviour
             }
         }
         _lastSelected = null;
+    }
+
+    public void EnableMoveSelector(bool enabled)
+    {
+        gameObject.SetActive(enabled);
+        moveDetails.SetActive(enabled);
     }
 }

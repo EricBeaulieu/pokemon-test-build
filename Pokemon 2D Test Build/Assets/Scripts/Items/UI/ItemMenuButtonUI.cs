@@ -13,8 +13,13 @@ public class ItemMenuButtonUI : MonoBehaviour, ISelectHandler, IDeselectHandler
     [SerializeField] GameObject selector;
     [TextArea]
     [SerializeField] string menuDecscription;
-    [SerializeField] InventoryDialogBox messageBox;
+    DialogManager messageBox;
     [SerializeField] Button button;
+
+    void Awake()
+    {
+        messageBox = GameManager.instance.GetDialogSystem;
+    }
 
     public void OnSelect(BaseEventData eventData)
     {

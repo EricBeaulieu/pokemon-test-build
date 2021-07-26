@@ -15,12 +15,13 @@ public class ItemButtonUI : MonoBehaviour, ISelectHandler, IDeselectHandler
     [SerializeField] Image itemSprite;
     [SerializeField] Text itemName;
     [SerializeField] Text itemCount;
-    [SerializeField] InventoryDialogBox messageBox;
+    DialogManager messageBox;
     [SerializeField] Button button;
 
-    public void Initialization(InventorySystem currentSystem)
+    void Awake()
     {
-        inventory = currentSystem;
+        inventory = GameManager.instance.GetInventorySystem;
+        messageBox = GameManager.instance.GetDialogSystem;
     }
 
     public void SetData(Item item,Color missingColor)

@@ -68,7 +68,7 @@ public class TrainerController : Entity,IInteractable
 
         if (_hasLostToPlayer == false)
         {
-            StartCoroutine(DialogManager.instance.ShowDialogBox(trainerBase.GetPreBattleDialog, () =>
+            StartCoroutine(GameManager.instance.GetDialogSystem.ShowDialogBox(trainerBase.GetPreBattleDialog, () =>
             {
                 _idleTimer = 0;
                 GameManager.instance.StartTrainerBattle(this);
@@ -76,7 +76,7 @@ public class TrainerController : Entity,IInteractable
         }
         else
         {
-            StartCoroutine(DialogManager.instance.ShowDialogBox(trainerBase.GetPostDefeatOverworldDialog));
+            StartCoroutine(GameManager.instance.GetDialogSystem.ShowDialogBox(trainerBase.GetPostDefeatOverworldDialog));
         }
     }
 
@@ -181,7 +181,7 @@ public class TrainerController : Entity,IInteractable
         _anim.SetBool("isRunning", isRunning);
 
         player.LookAtTrainer(transform.position);
-        yield return DialogManager.instance.ShowDialogBox(trainerBase.GetPreBattleDialog, () =>
+        yield return GameManager.instance.GetDialogSystem.ShowDialogBox(trainerBase.GetPreBattleDialog, () =>
         {
             _idleTimer = 0;
             GameManager.instance.StartTrainerBattle(this);
