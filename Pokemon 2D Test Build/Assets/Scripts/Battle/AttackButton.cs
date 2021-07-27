@@ -6,30 +6,32 @@ using UnityEngine.UI;
 
 public class AttackButton : MonoBehaviour, ISelectHandler
 {
-    Move _move;
-    Text _pPText;
-    Text _typeText;
+    Move move;
+    [SerializeField] Text moveNameText;
+    Text pPText;
+    Text typeText;
+    [SerializeField] Button button;
 
-    Color _standardColour;
-    Color _orange = new Color32(255, 69, 0,255);
+    Color standardColour = new Color32(50,50,50,255);
+    Color orange = new Color32(255, 69, 0,255);
 
     public void OnSelect(BaseEventData eventData)
     {
-        _pPText.text = $"PP {_move.pP.ToString()}/{_move.moveBase.PowerPoints.ToString()}";
-        _pPText.color = setPpColourText(_move);
-        _typeText.text = $"Type { _move.moveBase.Type}";
+        pPText.text = $"PP {move.pP.ToString()}/{move.moveBase.PowerPoints.ToString()}";
+        pPText.color = setPpColourText(move);
+        typeText.text = $"Type { move.moveBase.Type}";
     }
 
-    public void SetMove(Move move)
+    public void SetMove(Move currentMove)
     {
-        _move = move;
+        move = currentMove;
+        moveNameText.text = currentMove.moveBase.MoveName;
     }
 
     public void SetPPValues(Text pp,Text type)
     {
-        _pPText = pp;
-        _typeText = type;
-        _standardColour = _pPText.color;
+        pPText = pp;
+        typeText = type;
     }
 
     Color setPpColourText(Move move)
@@ -42,11 +44,16 @@ public class AttackButton : MonoBehaviour, ISelectHandler
         }
         else if (movePercentageLeft <= 0.4f)
         {
-            return _orange;
+            return orange;
         }
         else
         {
-            return _standardColour;
+            return standardColour;
         }
+    }
+
+    public Button GetButton
+    {
+        get { return button; }
     }
 }

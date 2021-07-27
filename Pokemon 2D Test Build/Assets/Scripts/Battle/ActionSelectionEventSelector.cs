@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,54 +12,42 @@ public class ActionSelectionEventSelector : MonoBehaviour
     [SerializeField] GameObject pokemonButton;
     [SerializeField] GameObject runButton;
 
-    GameObject _lastSelected;
+    SelectableBoxUI selectableBox;
 
-    public void SelectBox()
+    public void Select()
     {
-        EventSystem.current.SetSelectedGameObject(null);
-        if (_lastSelected == null)
+        selectableBox.SelectBox();
+    }
+
+    public void Initialization(Action fight,Action bag,Action pokemon, Action run)
+    {
+        selectableBox = new SelectableBoxUI(fightButton);
+        selectableBox.SetLastSelected(null);
+        
+        fightButton.GetComponent<Button>().onClick.AddListener(() => 
         {
-            EventSystem.current.SetSelectedGameObject(fightButton);
-        }
-        else
+            selectableBox.SetLastSelected(fightButton);
+            fight.Invoke();
+        });
+        bagButton.GetComponent<Button>().onClick.AddListener(() => 
         {
-            EventSystem.current.SetSelectedGameObject(_lastSelected);
-        }
+            selectableBox.SetLastSelected(bagButton);
+            bag.Invoke();
+        });
+        pokemonButton.GetComponent<Button>().onClick.AddListener(() => 
+        {
+            selectableBox.SetLastSelected(pokemonButton);
+            pokemon.Invoke();
+        });
+        runButton.GetComponent<Button>().onClick.AddListener(() => 
+        {
+            selectableBox.SetLastSelected(runButton);
+            run.Invoke();
+        });
     }
 
-    public void SetUp()
+    public void NewBattle()
     {
-        //Removes all listeners to prevent the same delegate from being called multiple times
-        fightButton.GetComponent<Button>().onClick.RemoveAllListeners();
-        bagButton.GetComponent<Button>().onClick.RemoveAllListeners();
-        pokemonButton.GetComponent<Button>().onClick.RemoveAllListeners();
-        runButton.GetComponent<Button>().onClick.RemoveAllListeners();
-        _lastSelected = null;
-
-        //Setting up the last button pressed in the action button to be the first button pressed
-        fightButton.GetComponent<Button>().onClick.AddListener(delegate { _lastSelected = fightButton; });
-        bagButton.GetComponent<Button>().onClick.AddListener(delegate { _lastSelected = bagButton; });
-        pokemonButton.GetComponent<Button>().onClick.AddListener(delegate { _lastSelected = pokemonButton; });
-        runButton.GetComponent<Button>().onClick.AddListener(delegate { _lastSelected = runButton; });
-    }
-
-    public Button ReturnFightButton()
-    {
-        return fightButton.GetComponent<Button>();
-    }
-
-    public Button ReturnBagButton()
-    {
-        return bagButton.GetComponent<Button>();
-    }
-
-    public Button ReturnPokemonButton()
-    {
-        return pokemonButton.GetComponent<Button>();
-    }
-
-    public Button ReturnRunButton()
-    {
-        return runButton.GetComponent<Button>();
+        selectableBox.SetLastSelected(null);
     }
 }

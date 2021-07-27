@@ -7,15 +7,16 @@ using UnityEngine.UI;
 
 public class AttackSelectionEventSelector : MonoBehaviour
 {
-    [SerializeField] GameObject [] moveButton;
+    [SerializeField] AttackButton [] moveButton;
     [SerializeField] GameObject moveDetails;
 
     [SerializeField] Text pPText;
     [SerializeField] Text typeText;
 
-    GameObject _lastSelected;
+    SelectableBoxUI selectableBox;
+    BattleSystem battleSystem;
 
-    private void Awake()
+    public void Initialization()
     {
         if(moveButton.Length != 4)
         {
@@ -24,20 +25,16 @@ public class AttackSelectionEventSelector : MonoBehaviour
 
         for (int i = 0; i < 4; i++)
         {
-            moveButton[i].GetComponent<AttackButton>().SetPPValues(pPText, typeText);
+            moveButton[i].SetPPValues(pPText, typeText);
         }
+
+        selectableBox = new SelectableBoxUI(moveButton[0].gameObject);
+        battleSystem = GameManager.instance.GetBattleSystem;
     }
-    public void SelectBox()
+
+    public void Select()
     {
-        EventSystem.current.SetSelectedGameObject(null);
-        if (_lastSelected == null)
-        {
-            EventSystem.current.SetSelectedGameObject(moveButton[0]);
-        }
-        else
-        {
-            EventSystem.current.SetSelectedGameObject(_lastSelected);
-        }
+        selectableBox.SelectBox();
     }
 
     /// <summary>
@@ -46,38 +43,37 @@ public class AttackSelectionEventSelector : MonoBehaviour
     /// <param name="currentPokemon">The current Battle Unit Pokemon</param>
     /// <param name="moves">All available moves</param>
     /// <param name="currentBattleSystem">A reference to the battle system that gets passed down</param>
-    public void SetMovesList(BattleUnit currentPokemon, List<Move> moves,BattleSystem currentBattleSystem)
+    public void SetMovesList(BattleUnit currentPokemon, List<Move> moves)
     {
         for (int i = 0; i < moveButton.Length; i++)
         {
             if(i < moves.Count)
             {
                 int k = i;
-                moveButton[i].SetActive(true);
-                moveButton[i].GetComponentInChildren<Text>().text = moves[i].moveBase.MoveName;
-                moveButton[i].GetComponent<AttackButton>().SetMove(moves[i]);
-                moveButton[i].GetComponent<Button>().onClick.RemoveAllListeners();
-                moveButton[i].GetComponent<Button>().onClick.AddListener(() => 
+                moveButton[i].gameObject.SetActive(true);
+                moveButton[i].SetMove(moves[i]);
+                moveButton[i].GetButton.onClick.RemoveAllListeners();
+                moveButton[i].GetButton.onClick.AddListener(() => 
                 {
                     if(moves[k].pP > 0)
                     {
-                        currentBattleSystem.AttackSelected(currentPokemon, moves[k]);
+                        battleSystem.AttackSelected(currentPokemon, moves[k]);
                     }
                     else
                     {
-                        currentBattleSystem.AttackHasRunOutOfPP();
+                        battleSystem.AttackHasRunOutOfPP();
                     }
 
-                    EventSystem.current.SetSelectedGameObject(null);
-                    _lastSelected = moveButton[k];
+                    selectableBox.Deselect();
+                    selectableBox.SetLastSelected(moveButton[k].gameObject);
                 });
             }
             else
             {
-                moveButton[i].SetActive(false);
+                moveButton[i].gameObject.SetActive(false);
             }
         }
-        _lastSelected = null;
+        selectableBox.SetLastSelected(null);
     }
 
     public void EnableMoveSelector(bool enabled)

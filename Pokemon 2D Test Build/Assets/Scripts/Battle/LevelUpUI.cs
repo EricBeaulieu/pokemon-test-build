@@ -39,14 +39,6 @@ public class LevelUpUI : MonoBehaviour
         alternativePokemon.SetActive(false);
     }
 
-    void Update()
-    {
-        if (Input.anyKeyDown)
-        {
-            _waitingOnUserInput = false;
-        }
-    }
-
     public IEnumerator DisplayLevelUp(StandardStats StatsBeforeLevelUp,StandardStats StatsAfterLevelUp,Pokemon pokemon = null)
     {
         _waitingOnUserInput = true;
@@ -68,6 +60,10 @@ public class LevelUpUI : MonoBehaviour
 
         while(_waitingOnUserInput == true)
         {
+            if (Input.anyKeyDown)
+            {
+                _waitingOnUserInput = false;
+            }
             yield return null;
         }
 
@@ -80,6 +76,10 @@ public class LevelUpUI : MonoBehaviour
 
         while (_waitingOnUserInput == true)
         {
+            if (Input.anyKeyDown)
+            {
+                _waitingOnUserInput = false;
+            }
             yield return null;
         }
 

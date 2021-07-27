@@ -4,10 +4,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class DialogManager : MonoBehaviour
+public class DialogManager : CoreSystem
 {
     DialogBox currentDialogBox;
-    [SerializeField] DialogBox standardDialogBox;
 
     public static int lettersPerSecond { get; private set; } = 30;
     string message;
@@ -16,16 +15,16 @@ public class DialogManager : MonoBehaviour
 
     const string indicatorWhenWaitingOnInput = " >";
 
-    public void Initialization()
+    public override void Initialization()
     {
-        SetCurrentDialogBox(standardDialogBox);
+        SetCurrentDialogBox(dialogBox);
         if(currentDialogBox.gameObject.activeInHierarchy == true)
         {
             currentDialogBox.ShowDialogBox(false);
         }
     }
 
-    public void HandleUpdate()
+    public override void HandleUpdate()
     {
         if(Input.GetButtonDown("Fire1"))
         {
@@ -121,15 +120,13 @@ public class DialogManager : MonoBehaviour
     {
         if(newDialogBox == null)
         {
-            currentDialogBox = standardDialogBox;
+            currentDialogBox = dialogBox;
         }
         else
         {
             currentDialogBox = newDialogBox;
         }
     }
-
-
 
     string currentlyDisplaying
     {

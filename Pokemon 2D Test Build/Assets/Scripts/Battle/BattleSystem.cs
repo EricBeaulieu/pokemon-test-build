@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,7 +7,7 @@ using System.Linq;
 
 public enum BattleState { Start, ActionSelection, MoveSelection, PerformMove, Busy, BattleOver}
 
-public class BattleSystem : MonoBehaviour
+public class BattleSystem : CoreSystem
 {
     [SerializeField] Image backgroundArt;
     [SerializeField] BattleUnit playerBattleUnit;
@@ -18,7 +17,6 @@ public class BattleSystem : MonoBehaviour
     InventorySystem inventorySystem;
     DialogManager dialogSystem;
 
-    [SerializeField] DialogBox dialogBox;
     [SerializeField] ActionSelectionEventSelector actionSelectionEventSelector;
     [SerializeField] AttackSelectionEventSelector attackSelectionEventSelector;
 
@@ -141,7 +139,7 @@ public class BattleSystem : MonoBehaviour
 
     #endregion
 
-    public void Initialization()
+    public override void Initialization()
     {
         gameObject.SetActive(false);
         partySystem = GameManager.instance.GetPartySystem;
@@ -149,8 +147,10 @@ public class BattleSystem : MonoBehaviour
         dialogSystem = GameManager.instance.GetDialogSystem;
         inGameItemoffScreenPos = inGameItem.transform.localPosition;
         levelUpUI.HandleStart();
+        actionSelectionEventSelector.Initialization(PlayerActionFight, PlayerActionBag, PlayerActionPokemon, PlayerActionRun);
+        attackSelectionEventSelector.Initialization();
 
-        if(playerBattleUnit == null)
+        if (playerBattleUnit == null)
         {
             Debug.LogWarning($"playerBattleUnit has not been set");
         }
@@ -188,7 +188,7 @@ public class BattleSystem : MonoBehaviour
         alteredMove = MoveBase.CreateInstance<MoveBase>();
     }
 
-    public void HandleUpdate()
+    public override void HandleUpdate()
     {
         //If B button is pressed go back a menu
         if(Input.GetButtonDown("Fire2"))
@@ -293,14 +293,14 @@ public class BattleSystem : MonoBehaviour
         battleDuration = 0;
         enemyBattleUnit.AddPokemonToBattleList(playerBattleUnit.pokemon);
         BattleStartSetup();
-        attackSelectionEventSelector.SetMovesList(playerBattleUnit,playerBattleUnit.pokemon.moves,this);
+        attackSelectionEventSelector.SetMovesList(playerBattleUnit,playerBattleUnit.pokemon.moves);
 
         _currentWeather = null;
 
         yield return ActivatePokemonAbilityUponEntry(playerBattleUnit,enemyBattleUnit);
         yield return ActivatePokemonAbilityUponEntry(enemyBattleUnit,playerBattleUnit);
 
-        SetupPlayerActions();
+        actionSelectionEventSelector.NewBattle();
         PlayerActions();
     }
 
@@ -313,15 +313,6 @@ public class BattleSystem : MonoBehaviour
     #endregion
 
     #region Player Actions
-
-    void SetupPlayerActions()
-    {
-        actionSelectionEventSelector.SetUp();
-        actionSelectionEventSelector.ReturnFightButton().onClick.AddListener(delegate { PlayerActionFight(); });
-        actionSelectionEventSelector.ReturnPokemonButton().onClick.AddListener(delegate { PlayerActionPokemon(); });
-        actionSelectionEventSelector.ReturnBagButton().onClick.AddListener(delegate { PlayerActionBag(); });
-        actionSelectionEventSelector.ReturnRunButton().onClick.AddListener(delegate { PlayerActionRun(); });
-    }
 
     /// <summary>
     /// sets up the players action box, with the cursor/event system selected on the first box
@@ -361,7 +352,7 @@ public class BattleSystem : MonoBehaviour
     {
         if(playerBattleUnit.CanSwitchOutOrFlee() == true)
         {
-            partySystem.OpenPartySystem();
+            partySystem.OpenSystem();
         }
         else
         {
@@ -374,7 +365,7 @@ public class BattleSystem : MonoBehaviour
     /// </summary>
     void PlayerActionBag()
     {
-        inventorySystem.OpenInventorySystem();
+        inventorySystem.OpenSystem();
     }
 
     /// <summary>
@@ -395,7 +386,7 @@ public class BattleSystem : MonoBehaviour
         actionSelectionEventSelector.gameObject.SetActive(enabled);
         if (enabled == true)
         {
-            actionSelectionEventSelector.SelectBox();
+            actionSelectionEventSelector.Select();
         }
     }
 
@@ -408,7 +399,7 @@ public class BattleSystem : MonoBehaviour
         attackSelectionEventSelector.EnableMoveSelector(enabled);
         if (enabled == true)
         {
-            attackSelectionEventSelector.SelectBox();
+            attackSelectionEventSelector.Select();
         }
     }
 
@@ -468,7 +459,7 @@ public class BattleSystem : MonoBehaviour
 
     public void ReturnFromPokemonAlternateSystem()
     {
-        actionSelectionEventSelector.SelectBox();
+        actionSelectionEventSelector.Select();
         dialogSystem.SetCurrentDialogBox(dialogBox);
     }
 
@@ -539,7 +530,7 @@ public class BattleSystem : MonoBehaviour
         yield return dialogSystem.SetChoiceBox(() =>
         {
             waitUntilUserFinished = false;
-            partySystem.OpenPartySystem(true);
+            partySystem.OpenSystem(true);
         }
         , () =>
         {
@@ -652,7 +643,7 @@ public class BattleSystem : MonoBehaviour
         //If current pokemon has fainted then it goes to the party system and waits on the selector
         if (playerBattleUnit.SendOutPokemonOnTurnEnd == true)
         {
-            partySystem.OpenPartySystem();
+            partySystem.OpenSystem();
         }
         else
         {
@@ -1458,11 +1449,11 @@ public class BattleSystem : MonoBehaviour
                 int expYield = targetBattleUnit.pokemon.pokemonBase.RewardedExperienceYield;
                 int level = targetBattleUnit.pokemon.currentLevel;
                 float trainerBonus = (_isTrainerBattle == true) ? 1.5f : 1;
-                float pokemonSharingExp = 1;
+                int pokemonSharingExp = 1;
 
                 if (targetBattleUnit.GetListOfPokemonBattledAgainst.Count > 1)
                 {
-                    int sharing = 0;
+                    pokemonSharingExp = 0;
                     List<Pokemon> copyPokemonBattledAgainst = new List<Pokemon>(targetBattleUnit.GetListOfPokemonBattledAgainst);
                     foreach (Pokemon pokemon in copyPokemonBattledAgainst)
                     {
@@ -1471,11 +1462,7 @@ public class BattleSystem : MonoBehaviour
                             targetBattleUnit.GetListOfPokemonBattledAgainst.Remove(pokemon);
                             continue;
                         }
-                        sharing++;
-                    }
-                    if (sharing > 1)
-                    {
-                        pokemonSharingExp = sharing;
+                        pokemonSharingExp++;
                     }
                 }
 
@@ -1483,11 +1470,6 @@ public class BattleSystem : MonoBehaviour
 
                 foreach (Pokemon pokemon in targetBattleUnit.GetListOfPokemonBattledAgainst)
                 {
-                    if(pokemon.currentHitPoints <=0)
-                    {
-                        continue;
-                    }
-
                     if (pokemon == playerBattleUnit.pokemon)
                     {
                         yield return GainExperience(playerBattleUnit, expGained);
@@ -1594,7 +1576,7 @@ public class BattleSystem : MonoBehaviour
 
         if(battleUnit.isPlayerPokemon == true)
         {
-            attackSelectionEventSelector.SetMovesList(battleUnit, battleUnit.pokemon.moves, this);
+            attackSelectionEventSelector.SetMovesList(battleUnit, battleUnit.pokemon.moves);
             yield return dialogSystem.TypeDialog($"Go {battleUnit.pokemon.currentName}!");
         }
         else
@@ -1913,7 +1895,7 @@ public class BattleSystem : MonoBehaviour
             if (newMove.Count > 0)
             {
                 yield return LearnNewMove(targetUnit.pokemon,newMove);
-                attackSelectionEventSelector.SetMovesList(targetUnit, targetUnit.pokemon.moves, this);
+                attackSelectionEventSelector.SetMovesList(targetUnit, targetUnit.pokemon.moves);
             }
 
             if (targetUnit.pokemon.currentLevel >= 100)

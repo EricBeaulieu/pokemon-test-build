@@ -4,7 +4,6 @@ using UnityEngine;
 
 public static class DamageModifiers
 {
-    static List<MoveBase> _movesThatLeavesTargetWithOneHP = new List<MoveBase>();
     public static float CriticalHitModifier { get; } = 1.5f;
 
     static float[,] _typeChart =
@@ -94,7 +93,7 @@ public static class DamageModifiers
     {
         if(weather == WeatherEffectID.Sandstorm && defendingPokemon.pokemonBase.IsType(ElementType.Rock) && move.MoveType == MoveType.Special)
         {
-            return 1.5f;
+            return 0.5f;
         }
 
         return 1f;

@@ -115,8 +115,9 @@
     <Compile Include="Assets\Scripts\Data\Abilitys\List\Damp.cs" />
     <Compile Include="Assets\Scripts\Data\Abilitys\List\WaterAbsorb.cs" />
     <Compile Include="Assets\Scripts\Data\Abilitys\List\KeenEye.cs" />
-    <Compile Include="Assets\Scripts\Mechanics\NatureBase.cs" />
+    <Compile Include="Assets\Scripts\Pokemon\NatureBase.cs" />
     <Compile Include="Assets\Scripts\Data\Abilitys\List\Intimidate.cs" />
+    <Compile Include="Assets\Scripts\Dialog\DialogBox.cs" />
     <Compile Include="Assets\Scripts\Data\HoldItems\Standard\BlackGlasses.cs" />
     <Compile Include="Assets\Scripts\Data\Conditions\VolatileStatus\Bound.cs" />
     <Compile Include="Assets\Scripts\Saving\PokemonSaveData.cs" />
@@ -125,6 +126,7 @@
     <Compile Include="Assets\Scripts\Data\Abilitys\List\QuickFeet.cs" />
     <Compile Include="Assets\Scripts\Static Tables\ExperienceTable.cs" />
     <Compile Include="Assets\Scripts\Static Tables\CatchingMechanics.cs" />
+    <Compile Include="Assets\Scripts\Managers\CoreSystem.cs" />
     <Compile Include="Assets\Scripts\Pokemon\EffortValues.cs" />
     <Compile Include="Assets\Scripts\Data\Abilitys\List\PoisonPoint.cs" />
     <Compile Include="Assets\Scripts\Data\HoldItems\Standard\BindingBand.cs" />
@@ -184,7 +186,7 @@
     <Compile Include="Assets\Scripts\Battle\LearningMoves\SummaryAttackButton.cs" />
     <Compile Include="Assets\Scripts\Data\Abilitys\List\Galvanize.cs" />
     <Compile Include="Assets\Scripts\Items\UI\ItemOptionDetailsUI.cs" />
-    <Compile Include="Assets\Scripts\Mechanics\CaptureBallRoute.cs" />
+    <Compile Include="Assets\Scripts\Battle\CaptureBallRoute.cs" />
     <Compile Include="Assets\Scripts\Items\Item.cs" />
     <Compile Include="Assets\Scripts\Data\HoldItems\Standard\Charcoal.cs" />
     <Compile Include="Assets\Scripts\Saving\SavingSystem.cs" />
@@ -204,11 +206,12 @@
     <Compile Include="Assets\Scripts\Data\EntryHazards\EntryHazardsDB.cs" />
     <Compile Include="Assets\Scripts\Data\Abilitys\List\HugePower.cs" />
     <Compile Include="Assets\Scripts\Data\Weather\WeatherEffectBase.cs" />
-    <Compile Include="Assets\Scripts\Mechanics\ExpBar.cs" />
+    <Compile Include="Assets\Scripts\UI\ExpBar.cs" />
     <Compile Include="Assets\Scripts\Data\Conditions\Status\Paralyzed.cs" />
     <Compile Include="Assets\Scripts\Data\HoldItems\Standard\AirBalloon.cs" />
     <Compile Include="Assets\Scripts\ArtHolders\StatusConditionArt.cs" />
     <Compile Include="Assets\Scripts\Dialog\DialogManager.cs" />
+    <Compile Include="Assets\Scripts\UI\SelectableBoxUI.cs" />
     <Compile Include="Assets\Scripts\Characters\MonoBehavior\AIDecision.cs" />
     <Compile Include="Assets\Scripts\Data\Abilitys\List\SandForce.cs" />
     <Compile Include="Assets\Scripts\Data\Conditions\Status\Poison.cs" />
@@ -231,7 +234,7 @@
     <Compile Include="Assets\Scripts\Data\Abilitys\List\VitalSpirit.cs" />
     <Compile Include="Assets\Notes.cs" />
     <Compile Include="Assets\Scripts\Data\Abilitys\List\Pixilate.cs" />
-    <Compile Include="Assets\Scripts\Mechanics\HPBar.cs" />
+    <Compile Include="Assets\Scripts\UI\HPBar.cs" />
     <Compile Include="Assets\Scripts\Battle\BattleHUD.cs" />
     <Compile Include="Assets\Scripts\Data\Abilitys\AbilityBase.cs" />
     <Compile Include="Assets\Scripts\Party\SummarySkills.cs" />
@@ -289,13 +292,13 @@
     <Compile Include="Assets\Scripts\Scene\Portal.cs" />
     <Compile Include="Assets\Scripts\Data\HoldItems\Standard\BlackSludge.cs" />
     <Compile Include="Assets\Scripts\Static Tables\PokemonNameList.cs" />
-    <Compile Include="Assets\Scripts\Mechanics\InBattleItem.cs" />
+    <Compile Include="Assets\Scripts\Battle\InBattleItem.cs" />
     <Compile Include="Assets\Scripts\Items\UI\ItemOptionButtonUI.cs" />
     <Compile Include="Assets\Scripts\Data\Conditions\VolatileStatus\Cursed.cs" />
     <Compile Include="Assets\Scripts\Data\Abilitys\List\FullMetalBody.cs" />
     <Compile Include="Assets\Scripts\Data\HoldItems\Standard\ChoiceBand.cs" />
     <Compile Include="Assets\Scripts\Data\Abilitys\List\ThickFat.cs" />
-    <Compile Include="Assets\Scripts\Mechanics\IInteractable.cs" />
+    <Compile Include="Assets\Scripts\Interfaces\IInteractable.cs" />
     <Compile Include="Assets\Scripts\Data\Abilitys\List\SolidRock.cs" />
     <Compile Include="Assets\Scripts\ExtensionMethods\Vector2Extensions.cs" />
     <Compile Include="Assets\Scripts\Data\Abilitys\List\SapSipper.cs" />
@@ -312,7 +315,6 @@
     <Compile Include="Assets\Scripts\Data\Abilitys\List\RainDish.cs" />
     <Compile Include="Assets\Scripts\Data\Abilitys\List\Justified.cs" />
     <Compile Include="Assets\Scripts\Data\Abilitys\List\Soundproof.cs" />
-    <Compile Include="Assets\Scripts\Dialog\DialogBox.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">

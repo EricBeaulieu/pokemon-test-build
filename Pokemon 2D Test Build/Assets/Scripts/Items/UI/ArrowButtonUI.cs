@@ -40,7 +40,7 @@ public class ArrowButtonUI : MonoBehaviour, ISelectHandler
         EnableSelector(true);
         inventory.LoadNextPage(right);
         yield return new WaitForSeconds(0.25f);
-        EventSystem.current.SetSelectedGameObject(inventory.ReturnToLastButtonPressed());
+        inventory.ReturnToLastButtonPressed();
         yield return new WaitForSeconds(0.75f);
         EnableSelector(false);
     }

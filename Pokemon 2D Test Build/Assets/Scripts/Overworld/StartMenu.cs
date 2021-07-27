@@ -38,13 +38,13 @@ public class StartMenu : MonoBehaviour
         {
             lastSelected = pokemonPartyButton;
             EnableStartMenu(false);
-            GameManager.instance.GetPartySystem.OpenPartySystem();
+            GameManager.instance.GetPartySystem.OpenSystem();
         });
         bagButton.GetComponent<Button>().onClick.AddListener(delegate 
         {
             lastSelected = bagButton;
             EnableStartMenu(false);
-            GameManager.instance.GetInventorySystem.OpenInventorySystem();
+            GameManager.instance.GetInventorySystem.OpenSystem();
         });
         saveButton.GetComponent<Button>().onClick.AddListener(delegate
         {

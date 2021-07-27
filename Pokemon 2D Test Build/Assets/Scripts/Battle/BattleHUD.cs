@@ -7,7 +7,7 @@ public class BattleHUD : MonoBehaviour
 {
     Vector3 _originalPos;
 
-    Image hudBackground;
+    [SerializeField] Image hudBackground;
     [SerializeField] Text nameText;
     [SerializeField] Text levelText;
     [SerializeField] Image levelImageText;
@@ -27,17 +27,16 @@ public class BattleHUD : MonoBehaviour
     [SerializeField] Image pointerBody;
     [SerializeField] Image pointerHead;
 
-    Pokemon _pokemon;
+    Pokemon pokemon;
 
     void Awake()
     {
-        hudBackground = GetComponent<Image>();
         _originalPos = hudBackground.rectTransform.localPosition;
     }
 
     public void SetData(Pokemon currentPokemon,bool isPlayersPokemon)
     {
-        _pokemon = currentPokemon;
+        pokemon = currentPokemon;
         nameText.text = currentPokemon.currentName;
         SetLevel();
         hPBar.SetHPWithoutAnimation(currentPokemon.currentHitPoints,currentPokemon.maxHitPoints);
@@ -49,7 +48,7 @@ public class BattleHUD : MonoBehaviour
         }
 
         SetStatusSprite();
-        _pokemon.OnStatusChanged += SetStatusSprite;
+        pokemon.OnStatusChanged += SetStatusSprite;
 
         gender.sprite = StatusConditionArt.instance.ReturnGenderArt(currentPokemon.gender);
 
@@ -59,39 +58,39 @@ public class BattleHUD : MonoBehaviour
 
     void SetStatusSprite()
     {
-        if(_pokemon.status == null)
+        if(pokemon.status == null)
         {
             statusCondition.sprite = StatusConditionArt.instance.ReturnStatusConditionArt(ConditionID.NA);
         }
         else
         {
-            statusCondition.sprite = StatusConditionArt.instance.ReturnStatusConditionArt(_pokemon.status.Id);
+            statusCondition.sprite = StatusConditionArt.instance.ReturnStatusConditionArt(pokemon.status.Id);
         }
     }
 
     public void SetLevel()
     {
-        levelText.text = _pokemon.currentLevel.ToString();
+        levelText.text = pokemon.currentLevel.ToString();
     }
 
     public IEnumerator UpdateHPDamage(int hpBeforeDamage)
     {
-        yield return hPBar.SetHPDamageAnimation(_pokemon.currentHitPoints,hpBeforeDamage,_pokemon.maxHitPoints,currentHP);
+        yield return hPBar.SetHPDamageAnimation(pokemon.currentHitPoints,hpBeforeDamage,pokemon.maxHitPoints,currentHP);
     }
 
     public IEnumerator UpdateHPRecovered(int hphealed)
     {
-        yield return hPBar.SetHPRecoveredAnimation(_pokemon.currentHitPoints, hphealed, _pokemon.maxHitPoints, currentHP);
+        yield return hPBar.SetHPRecoveredAnimation(pokemon.currentHitPoints, hphealed, pokemon.maxHitPoints, currentHP);
     }
 
     public void UpdateHPWithoutAnimation()
     {
-        hPBar.SetHPWithoutAnimation(_pokemon.currentHitPoints,_pokemon.maxHitPoints,currentHP);
+        hPBar.SetHPWithoutAnimation(pokemon.currentHitPoints,pokemon.maxHitPoints,currentHP);
     }
 
     public IEnumerator GainExpAnimation(int expGained, int expBeforeAnim)
     {
-        yield return expBar.SetExpAnimation(expGained,expBeforeAnim, _pokemon.pokemonBase.GetExpForLevel(_pokemon.currentLevel), _pokemon.pokemonBase.GetExpForLevel(_pokemon.currentLevel+1));
+        yield return expBar.SetExpAnimation(expGained,expBeforeAnim, pokemon.pokemonBase.GetExpForLevel(pokemon.currentLevel), pokemon.pokemonBase.GetExpForLevel(pokemon.currentLevel+1));
     }
 
     public IEnumerator FaintedPokemonHUDAnimation(bool isPlayers)
@@ -243,7 +242,7 @@ public class BattleHUD : MonoBehaviour
 
     public void UpdateHud()
     {
-        hPBar.SetHPWithoutAnimation(_pokemon.currentHitPoints, _pokemon.maxHitPoints, currentHP);
+        hPBar.SetHPWithoutAnimation(pokemon.currentHitPoints, pokemon.maxHitPoints, currentHP);
         SetStatusSprite();
     }
 }

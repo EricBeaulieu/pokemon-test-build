@@ -3,10 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class InventorySystem : MonoBehaviour
+public class InventorySystem : CoreSystem
 {
     BattleSystem battleSystem;
     PartySystem partySystem;
@@ -20,7 +19,6 @@ public class InventorySystem : MonoBehaviour
     [SerializeField] InventoryColorSystem colorSystem;
     [SerializeField] Text inventoryIndex;
     [SerializeField] ItemColorScheme[] colorScheme;
-    [SerializeField] DialogBox dialogBox;
 
     [SerializeField] GameObject trashDetails;
     [SerializeField] Text trashDetailsCountText;
@@ -40,11 +38,11 @@ public class InventorySystem : MonoBehaviour
     int pages;
 
     Pokemon givingItemFromPartySystem = null;
-    GameObject lastSelected;
+    SelectableBoxUI selectableBox;
 
     const int MAX_ITEMS_DISPLAY = 6;
 
-    public void Initialization()
+    public override void Initialization()
     {
         gameObject.SetActive(false);
         battleSystem = GameManager.instance.GetBattleSystem;
@@ -55,29 +53,49 @@ public class InventorySystem : MonoBehaviour
         SetMenuButtonFunctionality();
         SetArrowButtonFunctionaility();
         SetTrashArrowButtonFunctionaility();
+        selectableBox = new SelectableBoxUI(menuButtons[(int)currentlySelected].gameObject);
     }
 
-    public void HandleUpdate()
+    public override void HandleUpdate()
     {
         //If B button is pressed go back a menu
         if (Input.GetButtonDown("Fire2"))
         {
-            CloseInventorySystem();
+            CloseSystem();
         }
     }
 
-    public void OpenInventorySystem()
+    public override void OpenSystem(bool specifiedBool = false)
+    {
+        StandardInventorySystemOpen();
+        SetUpCancelButton();
+    }
+
+    public void OpenUpInventorySystemDueToGivingItemFromParty(Pokemon pokemon)
+    {
+        StandardInventorySystemOpen(pokemon);
+        cancelButton.onClick.RemoveAllListeners();
+        cancelButton.onClick.AddListener(() =>
+        {
+            givingItemFromPartySystem = null;
+            CloseSystem();
+            partySystem.ReturnToPartySystemAfterGivingItemToHoldFromInventory();
+        });
+    }
+
+    void StandardInventorySystemOpen(Pokemon pokemon = null)
     {
         GameManager.SetGameState(GameState.Inventory);
         dialogSystem.SetCurrentDialogBox(dialogBox);
         gameObject.SetActive(true);
+        givingItemFromPartySystem = pokemon;
         SetData(currentlySelected);
         SpecificItemOptionDisplay(false);
-        SelectBox();
-        SetUpCancelButton();
+        selectableBox.SetLastSelected(null);
+        selectableBox.SelectBox();
     }
 
-    void CloseInventorySystem()
+    protected override void CloseSystem()
     {
         if (BattleSystem.inBattle == true)
         {
@@ -89,19 +107,6 @@ public class InventorySystem : MonoBehaviour
             dialogSystem.SetCurrentDialogBox();
         }
         gameObject.SetActive(false);
-    }
-
-    void SelectBox(GameObject gameObject = null)
-    {
-        EventSystem.current.SetSelectedGameObject(null);
-        if(gameObject == null)
-        {
-            EventSystem.current.SetSelectedGameObject(menuButtons[(int)currentlySelected].gameObject);
-        }
-        else
-        {
-            EventSystem.current.SetSelectedGameObject(gameObject);
-        }
     }
 
     void SetUpCancelButton()
@@ -149,9 +154,8 @@ public class InventorySystem : MonoBehaviour
                         if(item.ItemBase.GiveItemOption() == true)
                         {
                             givingItemFromPartySystem = null;
-                            CloseInventorySystem();
+                            CloseSystem();
                             partySystem.ReturnToPartySystemAfterGivingItemToHoldFromInventory(item);
-                            RemoveItem(item);
                         }
                         else
                         {
@@ -227,14 +231,14 @@ public class InventorySystem : MonoBehaviour
         }
     }
 
-    public GameObject ReturnToLastButtonPressed()
+    public void ReturnToLastButtonPressed()
     {
-        return lastSelected.gameObject;
+        selectableBox.SelectBox();
     }
 
     public void SetLastItemButton(GameObject gameObject)
     {
-        lastSelected = gameObject;
+        selectableBox.SetLastSelected(gameObject);
     }
 
     public void LoadNextPage(bool right)
@@ -337,24 +341,24 @@ public class InventorySystem : MonoBehaviour
         }
 
         SpecificItemOptionDisplay(true);
-        SelectBox(useOption.gameObject);
+        selectableBox.SelectBox(useOption.gameObject);
     }
 
     void UseOptionSelected(Item item)
     {
-        EventSystem.current.SetSelectedGameObject(null);
+        selectableBox.Deselect();
         switch (item.ItemBase.GetItemType)
         {
             case itemType.Basic:
                 break;
             case itemType.Medicine:
-                CloseInventorySystem();
+                CloseSystem();
                 partySystem.OpenPartySystemDueToInventoryItem(item, true);
                 break;
             case itemType.Pokeball:
                 battleSystem.UsePokeballFromInventory((PokeballItem)item.ItemBase);
                 RemoveItem(item);
-                CloseInventorySystem();
+                CloseSystem();
                 break;
             case itemType.TMHM:
                 break;
@@ -371,8 +375,8 @@ public class InventorySystem : MonoBehaviour
 
     void GiveOptionSelected(Item item)
     {
-        EventSystem.current.SetSelectedGameObject(null);
-        CloseInventorySystem();
+        selectableBox.Deselect();
+        CloseSystem();
         partySystem.OpenPartySystemDueToInventoryItem(item, false);
     }
 
@@ -383,7 +387,7 @@ public class InventorySystem : MonoBehaviour
         trashDetails.gameObject.SetActive(true);
         if(specifiedItem.Count > 1)
         {
-            EventSystem.current.SetSelectedGameObject(trashDetails);
+            selectableBox.SelectBox(trashDetails);
             Button trashDetailsButton = trashDetails.GetComponent<Button>();
             trashDetailsButton.onClick.RemoveAllListeners();
             trashDetailsButton.onClick.AddListener(() => { StartCoroutine(TrashAmountSetandSelected()); });
@@ -439,7 +443,7 @@ public class InventorySystem : MonoBehaviour
 
         if (standardMenu == true)
         {
-            cancelButton.onClick.AddListener(() => { CloseInventorySystem(); });
+            cancelButton.onClick.AddListener(() => { CloseSystem(); });
 
             var navigation = cancelButton.navigation;
             navigation.selectOnUp = itemButtons[5].GetButton;
@@ -467,8 +471,8 @@ public class InventorySystem : MonoBehaviour
                     SwitchArrowButtonsToActive(true);
                     inventoryIndex.gameObject.SetActive(true);
                 }
-
-                EventSystem.current.SetSelectedGameObject(lastSelected.gameObject);
+                selectableBox.SelectBox();
+                selectableBox.SetLastSelected(null);
             });
 
             var navigation = cancelButton.navigation;
@@ -489,11 +493,11 @@ public class InventorySystem : MonoBehaviour
             gameObject.SetActive(true);
             if(usingItem ==true)
             {
-                SelectBox(useOption.gameObject);
+                selectableBox.SelectBox(useOption.gameObject);
             }
             else
             {
-                SelectBox(giveOption.gameObject);
+                selectableBox.SelectBox(giveOption.gameObject);
             }
             SetUpCancelButtonFuntionality(false);
             itemDetails.SetData(specifiedItem);
@@ -503,7 +507,7 @@ public class InventorySystem : MonoBehaviour
             gameObject.SetActive(true);
             specifiedItem = null;
             SpecificItemOptionDisplay(false);
-            SelectBox(lastSelected);
+            selectableBox.SelectBox();
             SetUpCancelButtonFuntionality(true);
         }
     }
@@ -564,7 +568,7 @@ public class InventorySystem : MonoBehaviour
     IEnumerator TrashAmountSetandSelected()
     {
         dialogSystem.SetDialogText($"Is it Ok to throw away {itemTrashAmount} {specifiedItem.ItemBase.ItemName}");
-        EventSystem.current.SetSelectedGameObject(null);
+        selectableBox.Deselect();
 
         yield return new WaitForSeconds(1f);
         yield return dialogSystem.SetChoiceBox(
@@ -586,25 +590,7 @@ public class InventorySystem : MonoBehaviour
         trashDetails.SetActive(false);
         specifiedItem = null;
         SpecificItemOptionDisplay(false);
-        SelectBox(lastSelected);
+        selectableBox.SelectBox();
         SetUpCancelButtonFuntionality(true);
-    }
-
-    public void OpenUpInventorySystemDueToGivingItemFromParty(Pokemon pokemon)
-    {
-        GameManager.SetGameState(GameState.Inventory);
-        dialogSystem.SetCurrentDialogBox(dialogBox);
-        gameObject.SetActive(true);
-        givingItemFromPartySystem = pokemon;
-        SetData();
-        SpecificItemOptionDisplay(false);
-        SelectBox();
-        cancelButton.onClick.RemoveAllListeners();
-        cancelButton.onClick.AddListener(() =>
-        {
-            givingItemFromPartySystem = null;
-            CloseInventorySystem();
-            partySystem.ReturnToPartySystemAfterGivingItemToHoldFromInventory();
-        });
     }
 }

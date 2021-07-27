@@ -52,7 +52,7 @@ public static class CatchingMechanics
 
                 break;
             case PokeballCaptureID.Repeat:
-                //	A Ball that works better on Pokémon previously captured.
+                //A Ball that works better on Pokémon previously captured.
                 //If the Pokémon hasn't been in your Pokédex then * 1. If it has then * 3.
                 return 1f;
             case PokeballCaptureID.Timer:

@@ -369,6 +369,5 @@ public class GameManager : MonoBehaviour
     public static void SetGameState(GameState newState)
     {
         state = newState;
-        Debug.Log(state);
     }
 }
