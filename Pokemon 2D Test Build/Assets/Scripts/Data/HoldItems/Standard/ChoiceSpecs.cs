@@ -6,13 +6,13 @@ public class ChoiceSpecs : HoldItemBase
 {
     public override HoldItemID Id { get { return HoldItemID.ChoiceSpecs; } }
     public override HoldItemBase ReturnDerivedClassAsNew() { return new ChoiceSpecs(); }
-    public override float AlterStat(StatAttribute statAffected)
+    public override float AlterStat(Pokemon holder, StatAttribute statAffected)
     {
         if (statAffected == StatAttribute.SpecialAttack)
         {
             return 1.5f;
         }
-        return base.AlterStat(statAffected);
+        return base.AlterStat(holder, statAffected);
     }
     public override bool PreventTheUseOfCertainMoves(BattleUnit battleUnit, MoveBase move)
     {

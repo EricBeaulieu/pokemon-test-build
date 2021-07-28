@@ -6,13 +6,13 @@ public class ChoiceScarf : HoldItemBase
 {
     public override HoldItemID Id { get { return HoldItemID.ChoiceScarf; } }
     public override HoldItemBase ReturnDerivedClassAsNew() { return new ChoiceScarf(); }
-    public override float AlterStat(StatAttribute statAffected)
+    public override float AlterStat(Pokemon holder, StatAttribute statAffected)
     {
         if (statAffected == StatAttribute.Speed)
         {
             return 1.5f;
         }
-        return base.AlterStat(statAffected);
+        return base.AlterStat(holder, statAffected);
     }
     public override bool PreventTheUseOfCertainMoves(BattleUnit battleUnit, MoveBase move)
     {

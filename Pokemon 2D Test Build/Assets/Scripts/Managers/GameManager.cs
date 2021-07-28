@@ -298,6 +298,7 @@ public class GameManager : MonoBehaviour
     public void SaveGame()
     {
         SavingSystem.SavePlayer(playerController,_levelManager.GameSceneBase);
+        SavingSystem.SavePlayerInventorySystem(inventorySystem.SaveInventory());
         dialogManager.ShowMessage("The Game Has Been Saved");
     }
 
@@ -319,6 +320,7 @@ public class GameManager : MonoBehaviour
         yield return SavingSystem.LoadPlayerScene();
         SpawnInPlayer(SavingSystem.LoadPlayerPosition());
         playerController.pokemonParty.LoadPlayerParty(SavingSystem.LoadPlayerParty());
+        inventorySystem.LoadInventory(SavingSystem.LoadPlayerInventory());
         yield return Fade(FadeStyle.FullFade, false);
     }
 

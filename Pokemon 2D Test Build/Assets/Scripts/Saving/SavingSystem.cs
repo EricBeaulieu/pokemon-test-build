@@ -12,6 +12,10 @@ public static class SavingSystem
     const string PlayerYPos = "PlayerYPos";
     const string PlayerParty = "PlayerParty";
 
+    const string PlayerInventory = "PlayerInventory";
+
+    public const string split = "*";
+
     public static bool SaveFileAvailable()
     {
         return PlayerPrefs.HasKey(PlayerName);
@@ -95,5 +99,22 @@ public static class SavingSystem
             }
         }
         return savedParty;
+    }
+
+    public static string GetAssetPath(Object obj)
+    {
+        string currentPath = UnityEditor.AssetDatabase.GetAssetPath(obj);
+        currentPath = currentPath.Replace("Assets/Resources/", string.Empty);
+        return currentPath.Remove(currentPath.Length - 6);
+    }
+
+    public static void SavePlayerInventorySystem(List<Item> currentInventory)
+    {
+        InventorySavingSystem.SaveInventory(currentInventory, PlayerInventory);
+    }
+
+    public static List<Item> LoadPlayerInventory()
+    {
+        return InventorySavingSystem.LoadInventorySystem(PlayerInventory);
     }
 }

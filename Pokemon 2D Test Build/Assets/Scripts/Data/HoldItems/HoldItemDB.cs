@@ -8,7 +8,12 @@ public enum HoldItemID
     AbsorbBulb, AdamantOrb ,AirBalloon, AmuletCoin, AssaultVest,
     BigRoot, BindingBand, BlackBelt, BlackGlasses, BlackSludge,
     BlunderPolicy, BrightPowder, BugGem, CellBattery, Charcoal,
-    ChoiceBand, ChoiceScarf, ChoiceSpecs, CleanseTag, DampRock
+    ChoiceBand, ChoiceScarf, ChoiceSpecs, CleanseTag, DampRock,
+    DarkGem, DeepSeaScale, DeepSeaTooth, DestinyKnot, DragonFang,
+    DragonGem, EjectButton, EjectPack, ElectricGem, Everstone,
+    Eviolite, ExpertBelt, ExpShare, FairyGem,
+
+    //Berries
 }
 
 public class HoldItemDB

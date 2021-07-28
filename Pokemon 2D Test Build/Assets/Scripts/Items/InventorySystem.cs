@@ -593,4 +593,14 @@ public class InventorySystem : CoreSystem
         selectableBox.SelectBox();
         SetUpCancelButtonFuntionality(true);
     }
+
+    public List<Item> SaveInventory()
+    {
+        return currentInventory;
+    }
+
+    public void LoadInventory(List<Item> loadedInventory)
+    {
+        currentInventory = loadedInventory;
+    }
 }

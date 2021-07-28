@@ -104,6 +104,8 @@ public class Pokemon {
         LoadedMoves(saveData.currentMoves);
         SetStatus(saveData.currentCondition, false);
 
+        GivePokemonItemToHold(saveData.currentItem);
+
         Reset();
     }
 
@@ -433,7 +435,7 @@ public class Pokemon {
         }
 
         //Item effects
-        float itemBonus = attackingPokemon.GetHoldItemEffects.AlterDamageTaken(move);
+        float itemBonus = attackingPokemon.GetHoldItemEffects.AlterDamageTaken((damageDetails.criticalHit > 1),move);
         //itemBonus *= attackingPokemon.GetHoldItemBase.
 
         StatBoost itemStatBoost = GetHoldItemEffects.AlterStatAfterTakingDamageFromCertainType(move.Type);

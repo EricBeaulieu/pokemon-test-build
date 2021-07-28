@@ -4,7 +4,6 @@ using UnityEngine;
 
 public static class PokemonSavingSystem
 {
-    static string split = "*";
     static string pokemonData;
     static string empty = "_";
     static string[] splitArray;
@@ -20,7 +19,7 @@ public static class PokemonSavingSystem
             return;
         }
 
-        AddData(GetAssetPath(pokemon.pokemonBase));
+        AddData(SavingSystem.GetAssetPath(pokemon.pokemonBase));
         AddData(pokemon.currentLevel.ToString());
         AddData(pokemon.currentExp.ToString());
         AddData(pokemon.currentHitPoints.ToString());
@@ -29,7 +28,7 @@ public static class PokemonSavingSystem
         {
             if (i < pokemon.moves.Count)
             {
-                AddData(GetAssetPath(pokemon.moves[i].moveBase));
+                AddData(SavingSystem.GetAssetPath(pokemon.moves[i].moveBase));
                 AddData(pokemon.moves[i].pP.ToString());
             }
             else
@@ -44,7 +43,7 @@ public static class PokemonSavingSystem
         int genderPos = (int)pokemon.gender;
         AddData(genderPos.ToString());
 
-        AddData(GetAssetPath(pokemon.nature));
+        AddData(SavingSystem.GetAssetPath(pokemon.nature));
 
         for (int i = 0; i < IndividualValues.VALUES_SAVED_LENGTH; i++)
         {
@@ -78,7 +77,16 @@ public static class PokemonSavingSystem
         }
         AddData(pokemon.originalTrainer);
         AddData(pokemon.originalTrainerID);
-        AddData(GetAssetPath(pokemon.pokeballCapturedIn));
+        AddData(SavingSystem.GetAssetPath(pokemon.pokeballCapturedIn));
+
+        if (pokemon.GetCurrentItem == null)
+        {
+            AddData(empty);
+        }
+        else
+        {
+            AddData(SavingSystem.GetAssetPath(pokemon.GetCurrentItem));
+        }
 
         Debug.Log($"Location:{location}\n{pokemonData}");
 
@@ -96,7 +104,7 @@ public static class PokemonSavingSystem
 
         PokemonSaveData pokemonSaveData = new PokemonSaveData();
 
-        pokemonSaveData.currentBase = GetPokemonBase(pokemonData);
+        pokemonSaveData.currentBase = Resources.Load<PokemonBase>(pokemonData);
         pokemonData = NextLoadIndex();
 
         pokemonSaveData.currentLevel = int.Parse(pokemonData);
@@ -120,7 +128,7 @@ public static class PokemonSavingSystem
                 continue;
             }
 
-            Move move = new Move(GetMoveBase(pokemonData));
+            Move move = new Move(Resources.Load<MoveBase>(pokemonData));
             pokemonData = NextLoadIndex();
             move.pP = int.Parse(pokemonData);
             pokemonData = NextLoadIndex();
@@ -133,7 +141,7 @@ public static class PokemonSavingSystem
         pokemonSaveData.currentGender = (Gender)int.Parse(pokemonData);
         pokemonData = NextLoadIndex();
 
-        pokemonSaveData.currentNature = GetNature(pokemonData);
+        pokemonSaveData.currentNature = Resources.Load<NatureBase>(pokemonData);
         pokemonData = NextLoadIndex();
 
         int hp = int.Parse(pokemonData);
@@ -189,7 +197,12 @@ public static class PokemonSavingSystem
         pokemonData = NextLoadIndex();
         pokemonSaveData.currentOTId = pokemonData;
         pokemonData = NextLoadIndex();
-        pokemonSaveData.currentPokeball = GetPokeball(pokemonData);
+        pokemonSaveData.currentPokeball = Resources.Load<PokeballItem>(pokemonData);
+        pokemonData = NextLoadIndex();
+        if (pokemonData != empty)
+        {
+            pokemonSaveData.currentItem = Resources.Load<ItemBase>(pokemonData);
+        }
 
         return new Pokemon(pokemonSaveData);
     }
@@ -202,7 +215,7 @@ public static class PokemonSavingSystem
     static void AddData(string data)
     {
         pokemonData += data;
-        pokemonData += split;
+        pokemonData += SavingSystem.split;
     }
 
     static void StartLoadData(string location)
@@ -211,7 +224,7 @@ public static class PokemonSavingSystem
 
         location = PlayerPrefs.GetString(location);
 
-        splitArray = location.Split(char.Parse(split));
+        splitArray = location.Split(char.Parse(SavingSystem.split));
         indexPos = 0;
 
         pokemonData = splitArray[indexPos];
@@ -221,32 +234,5 @@ public static class PokemonSavingSystem
     {
         indexPos++;
         return splitArray[indexPos];
-    }
-
-    static PokemonBase GetPokemonBase(string path)
-    {
-        return Resources.Load<PokemonBase>(path);
-    }
-
-    static MoveBase GetMoveBase(string path)
-    {
-        return Resources.Load<MoveBase>(path);
-    }
-
-    static NatureBase GetNature(string path)
-    {
-        return Resources.Load<NatureBase>(path);
-    }
-
-    static PokeballItem GetPokeball(string path)
-    {
-        return Resources.Load<PokeballItem>(path);
-    }
-
-    static string GetAssetPath(Object obj)
-    {
-        string currentPath = UnityEditor.AssetDatabase.GetAssetPath(obj);
-        currentPath = currentPath.Replace("Assets/Resources/", string.Empty);
-        return currentPath.Remove(currentPath.Length - 6);
     }
 }

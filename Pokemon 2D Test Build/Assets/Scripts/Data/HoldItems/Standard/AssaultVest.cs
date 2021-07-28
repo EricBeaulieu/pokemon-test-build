@@ -18,12 +18,12 @@ public class AssaultVest : HoldItemBase
     {
         return "The effects of Assult Vest prevents status moves from being used!";
     }
-    public override float AlterStat(StatAttribute statAffected)
+    public override float AlterStat(Pokemon holder, StatAttribute statAffected)
     {
         if(statAffected == StatAttribute.SpecialDefense)
         {
             return 1.5f;
         }
-        return base.AlterStat(statAffected);
+        return base.AlterStat(holder,statAffected);
     }
 }
