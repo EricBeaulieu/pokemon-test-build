@@ -10,12 +10,12 @@ public class FurCoat : AbilityBase
     {
         return "Halves the damage from physical moves.";
     }
-    public override int DoublesAStat(StatAttribute stat)
+    public override float AlterStat(WeatherEffectID iD, StatAttribute statAffected)
     {
-        if (stat == StatAttribute.Defense)
+        if (statAffected == StatAttribute.Defense)
         {
             return 2;
         }
-        return base.DoublesAStat(stat);
+        return base.AlterStat(iD, statAffected);
     }
 }

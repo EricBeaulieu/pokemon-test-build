@@ -15,8 +15,8 @@ public class Pixilate : AbilityBase
         if (move.Type == ElementType.Normal)
         {
             move = move.Clone();
-            move.adjustedMoveType(ElementType.Fairy);
-            move.adjustedMovePower(0.2f);
+            move.AdjustedMoveType(ElementType.Fairy);
+            move.AdjustedMovePower(0.2f);
         }
         return base.AlterMoveDetails(move);
     }

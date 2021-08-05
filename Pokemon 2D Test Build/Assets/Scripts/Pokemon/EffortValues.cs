@@ -18,6 +18,12 @@ public class EarnableEV
     {
         get { return _statValue; }
     }
+
+    public EarnableEV(StatAttribute stat,int value)
+    {
+        _statAttribute = stat;
+        _statValue = value;
+    }
 }
 
 [System.Serializable]

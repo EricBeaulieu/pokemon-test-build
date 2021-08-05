@@ -11,7 +11,7 @@ public class BigRoot : HoldItemBase
         if (move.DrainsHP == true)
         {
             move = move.Clone();
-            move.adjustedHPRecovered(0.3f);
+            move.AdjustedHPRecovered(0.3f);
         }
         return base.AlterUserMoveDetails(move);
     }

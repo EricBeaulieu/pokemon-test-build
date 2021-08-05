@@ -15,8 +15,8 @@ public class Refrigerate : AbilityBase
         if (move.Type == ElementType.Normal)
         {
             move = move.Clone();
-            move.adjustedMoveType(ElementType.Ice);
-            move.adjustedMovePower(0.2f);
+            move.AdjustedMoveType(ElementType.Ice);
+            move.AdjustedMovePower(0.2f);
         }
         return base.AlterMoveDetails(move);
     }

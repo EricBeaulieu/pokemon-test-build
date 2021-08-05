@@ -23,7 +23,6 @@ MonoBehaviour:
     weatherEffect: 0
     entryHazard: 0
     specialStartMessage: 
-    specialEndTurnMessage: 
   secondaryEffects:
   - boosts: []
     status: 0
@@ -31,7 +30,6 @@ MonoBehaviour:
     weatherEffect: 0
     entryHazard: 0
     specialStartMessage: got trapped by Snap Trap
-    specialEndTurnMessage: is hurt by Snap Trap!
     percentChance: 100
     target: 0
   target: 0
@@ -40,7 +38,7 @@ MonoBehaviour:
   alwaysHits: 0
   priority: 0
   powerPoints: 15
-  baseCriticalHitRate: 4.17
+  baseCriticalHitRate: 0
   multiStrikeMove: 0
   fixedNumberOfStrikes: 0
   physicalContact: 1
@@ -55,3 +53,6 @@ MonoBehaviour:
   copyableByMirrorMove: 1
   recoilType: 0
   recoilPercentage: 0
+  drainsHP: 0
+  hpRecovered: 0
+  leavesTargetWith1HP: 0

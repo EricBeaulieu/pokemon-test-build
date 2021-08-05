@@ -6,7 +6,6 @@ public static class InventorySavingSystem
 {
     static string itemData;
     static string[] splitArray;
-    static string nextItem = "_";
     static int indexPos;
 
     public static void SaveInventory(List<Item> inventory, string location)

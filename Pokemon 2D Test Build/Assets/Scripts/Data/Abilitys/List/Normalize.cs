@@ -13,8 +13,8 @@ public class Normalize : AbilityBase
     public override MoveBase AlterMoveDetails(MoveBase move)
     {
         move = move.Clone();
-        move.adjustedMoveType(ElementType.Normal);
-        move.adjustedMovePower(0.2f);
+        move.AdjustedMoveType(ElementType.Normal);
+        move.AdjustedMovePower(0.2f);
         return move;
     }
 }

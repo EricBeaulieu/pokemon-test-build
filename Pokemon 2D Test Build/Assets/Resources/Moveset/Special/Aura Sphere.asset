@@ -23,6 +23,7 @@ MonoBehaviour:
     volatileStatus: 0
     weatherEffect: 0
     entryHazard: 0
+    specialStartMessage: 
   secondaryEffects: []
   target: 0
   power: 80
@@ -30,7 +31,9 @@ MonoBehaviour:
   alwaysHits: 1
   priority: 0
   powerPoints: 20
-  baseCriticalHitRate: 4.17
+  baseCriticalHitRate: 0
+  multiStrikeMove: 0
+  fixedNumberOfStrikes: 0
   physicalContact: 0
   soundType: 0
   punchMove: 0
@@ -43,3 +46,6 @@ MonoBehaviour:
   copyableByMirrorMove: 1
   recoilType: 0
   recoilPercentage: 0
+  drainsHP: 0
+  hpRecovered: 0
+  leavesTargetWith1HP: 0

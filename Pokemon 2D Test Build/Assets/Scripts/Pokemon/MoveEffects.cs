@@ -13,8 +13,8 @@ public class StatBoost
 public class MoveEffects
 {
     [SerializeField] List<StatBoost> boosts;
-    [SerializeField] ConditionID status;
-    [SerializeField] ConditionID volatileStatus;
+    [SerializeField] protected ConditionID status;
+    [SerializeField] protected ConditionID volatileStatus;
     [SerializeField] WeatherEffectID weatherEffect;
     [SerializeField] EntryHazardID entryHazard;
     [SerializeField] string specialStartMessage;

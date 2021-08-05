@@ -98,4 +98,21 @@ public static class DamageModifiers
 
         return 1f;
     }
+
+    public static float CriticalHitPercentage(MoveBase move,Pokemon attacker)
+    {
+        int criticalhitProbability = move.BaseCriticalHitRate + attacker.criticalHitRatio;
+
+        switch (criticalhitProbability)
+        {
+            case 1:
+                return 12.5f;
+            case 2:
+                return 50;
+            case int n when (n >= 3):
+                return 100;
+            default:
+                return 4.167f;
+        }
+    }
 }

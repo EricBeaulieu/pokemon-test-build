@@ -44,9 +44,7 @@ public class Pokemon {
     public Queue<string> statusChanges { get; private set; } = new Queue<string>();
 
     public ConditionBase status { get; private set; }
-    public int statusTime { get; set; }
-    public List<ConditionBase> volatileStatus { get; private set; }
-    public int volatileStatusTime { get; set; }
+    public List<ConditionBase> volatileStatus { get; private set; } = new List<ConditionBase>();
 
     #region Constructors
 
@@ -72,8 +70,6 @@ public class Pokemon {
         GivePokemonItemToHold(item);
 
         SetMoves(presetMoveList);
-
-        Reset();
     }
 
     public Pokemon(PokemonSaveData saveData)
@@ -105,8 +101,6 @@ public class Pokemon {
         SetStatus(saveData.currentCondition, false);
 
         GivePokemonItemToHold(saveData.currentItem);
-
-        Reset();
     }
 
     #endregion
@@ -172,8 +166,8 @@ public class Pokemon {
     public void Reset()
     {
         ResetStatBoosts();
-        volatileStatus = new List<ConditionBase>();
-        statusChanges = new Queue<string>();
+        volatileStatus.Clear();
+        statusChanges.Clear();
     }
 
     public void Obtained(PlayerController player,PokeballItem pokeball)
@@ -197,25 +191,43 @@ public class Pokemon {
         baseStats.Add(StatAttribute.Speed, Mathf.FloorToInt((((_individualValues.speed + 2 * pokemonBase.speed + (_effortValues.speed / 4)) * currentLevel / 100) + 5) * nature.NatureModifier(nature, StatAttribute.Speed)));
         baseStats.Add(StatAttribute.Accuracy, 1);
         baseStats.Add(StatAttribute.Evasion, 1);
+        baseStats.Add(StatAttribute.CriticalHitRatio, 0);
+
+        statBoosts = new Dictionary<StatAttribute, int>();
+        statBoosts.Add(StatAttribute.Attack, 0);
+        statBoosts.Add(StatAttribute.Defense, 0);
+        statBoosts.Add(StatAttribute.SpecialAttack, 0);
+        statBoosts.Add(StatAttribute.SpecialDefense, 0);
+        statBoosts.Add(StatAttribute.Speed, 0);
+        statBoosts.Add(StatAttribute.Accuracy, 0);
+        statBoosts.Add(StatAttribute.Evasion, 0);
+        statBoosts.Add(StatAttribute.CriticalHitRatio, 0);
     }
+    
 
     void ResetStatBoosts()
     {
-        statBoosts = new Dictionary<StatAttribute, int>()
-        {
-            {StatAttribute.Attack,0 },
-            {StatAttribute.Defense,0 },
-            {StatAttribute.SpecialAttack,0 },
-            {StatAttribute.SpecialDefense,0 },
-            {StatAttribute.Speed,0 },
-            {StatAttribute.Accuracy,0 },
-            {StatAttribute.Evasion,0 }
-        };
+        //foreach (StatAttribute stat in System.Enum.GetValues(typeof(StatAttribute)))
+        //{
+        //    if (statBoosts.ContainsKey(stat))
+        //    {
+        //        statBoosts[stat] = 0;
+        //    }
+        //}
+
+        statBoosts[StatAttribute.Attack] = 0;
+        statBoosts[StatAttribute.Defense] = 0;
+        statBoosts[StatAttribute.SpecialAttack] = 0;
+        statBoosts[StatAttribute.SpecialDefense] = 0;
+        statBoosts[StatAttribute.Speed] = 0;
+        statBoosts[StatAttribute.Accuracy] = 0;
+        statBoosts[StatAttribute.Evasion] = 0;
+        statBoosts[StatAttribute.CriticalHitRatio] = 0;
     }
 
     public void ApplyStatModifier(List<StatBoost> currentBoostModifiers)
     {
-        foreach (var modifier in currentBoostModifiers)
+        foreach (StatBoost modifier in currentBoostModifiers)
         {
             if(modifier.stat == StatAttribute.NA)
             {
@@ -243,6 +255,11 @@ public class Pokemon {
         if (currentStat == StatAttribute.Accuracy || currentStat == StatAttribute.Evasion)
         {
             boostValues = new float[] { 1f, 4f/3f, 5f / 3f, 6f / 3f, 7f / 3f, 8f / 3f, 9f / 3f };
+        }
+        else if(currentStat == StatAttribute.CriticalHitRatio)
+        {
+            boost += Mathf.FloorToInt(GetHoldItemEffects.AlterStat(this, currentStat));
+            return boost;
         }
         else
         {
@@ -287,8 +304,7 @@ public class Pokemon {
         }
 
         statValue *= ability.AlterStat(BattleSystem.GetCurrentWeather,currentStat);
-
-        statValue *= ability.DoublesAStat(currentStat);
+        statValue *= GetHoldItemEffects.AlterStat(this, currentStat);
 
         return statValue;
     }
@@ -329,6 +345,11 @@ public class Pokemon {
     public float evasion
     {
         get { return GetStatAfterModification(StatAttribute.Evasion); }
+    }
+
+    public int criticalHitRatio
+    {
+        get { return (int)GetStatAfterModification(StatAttribute.CriticalHitRatio); }
     }
 
     #endregion
@@ -388,7 +409,7 @@ public class Pokemon {
         }
 
         //Critical Hit Chance
-        if (Random.value * 100 <= move.BaseCriticalHitRate)
+        if (Random.value * 100 <= DamageModifiers.CriticalHitPercentage(move,attackingPokemon))
         {
             damageDetails.criticalHit = attackingPokemon.ability.AltersCriticalHitDamage();
 
@@ -650,7 +671,7 @@ public class Pokemon {
 
     public void CureAllVolatileStatus()
     {
-        volatileStatus = new List<ConditionBase>();
+        volatileStatus.Clear();
     }
 
     public void CureVolatileStatus(ConditionID conditionID)
@@ -758,6 +779,7 @@ public class Pokemon {
 
     public void GainEffortValue(List<EarnableEV> effortValuesEarned)
     {
+        effortValuesEarned = GetHoldItemEffects.AdditionalEffortValues(effortValuesEarned);
         foreach (EarnableEV eV in effortValuesEarned)
         {
             _effortValues.AddEffortValue(eV);

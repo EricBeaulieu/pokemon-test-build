@@ -15,8 +15,8 @@ public class Aerilate : AbilityBase
         if (move.Type == ElementType.Normal)
         {
             move = move.Clone();
-            move.adjustedMoveType(ElementType.Flying);
-            move.adjustedMovePower(0.2f);
+            move.AdjustedMoveType(ElementType.Flying);
+            move.AdjustedMovePower(0.2f);
         }
         return base.AlterMoveDetails(move);
     }

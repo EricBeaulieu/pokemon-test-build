@@ -11,12 +11,19 @@ public enum HoldItemID
     ChoiceBand, ChoiceScarf, ChoiceSpecs, CleanseTag, DampRock,
     DarkGem, DeepSeaScale, DeepSeaTooth, DestinyKnot, DragonFang,
     DragonGem, EjectButton, EjectPack, ElectricGem, Everstone,
-    Eviolite, ExpertBelt, ExpShare, FairyGem,
+    Eviolite, ExpertBelt, ExpShare, FairyGem, FightingGem,
+    FireGem, FlameOrb, FlyingGem, FocusBand, FocusSash,
+    GhostGem, GrassGem, GripClaw, GriseousOrb, GroundGem,
+    HardStone, HeatRock, HeavyDutyBoots, IceGem, IcyRock,
+    KingsRock, LaggingTail, Leek, Leftovers, LifeOrb,
+    LightBall, LightClay, LuckyEgg, LuckyPunch, LuminousMoss,
+    LustrousOrb, MachoBrace, Magnet, MentalHerb, MetalCoat,
+    MetalPowder,
 
     //Berries
 }
 
-public class HoldItemDB
+public static class HoldItemDB
 {
     public static void Initialization(List<HoldItemBase> holdItems)
     {

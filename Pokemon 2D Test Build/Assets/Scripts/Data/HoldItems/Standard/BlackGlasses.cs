@@ -11,7 +11,7 @@ public class BlackGlasses : HoldItemBase
         if (move.Type == ElementType.Dark)
         {
             move = move.Clone();
-            move.adjustedMovePower(0.2f);
+            move.AdjustedMovePower(0.2f);
         }
         return base.AlterUserMoveDetails(move);
     }

@@ -10,12 +10,12 @@ public class PurePower : AbilityBase
     {
         return "Using its pure power, the Pokémon doubles its Attack stat.";
     }
-    public override int DoublesAStat(StatAttribute stat)
+    public override float AlterStat(WeatherEffectID iD, StatAttribute statAffected)
     {
-        if (stat == StatAttribute.Attack)
+        if (statAffected == StatAttribute.Attack)
         {
             return 2;
         }
-        return base.DoublesAStat(stat);
+        return base.AlterStat(iD, statAffected);
     }
 }

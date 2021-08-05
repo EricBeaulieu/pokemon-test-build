@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class ExpertBelt : HoldItemBase
 {
-    public override HoldItemID Id { get { return HoldItemID.ExpShare; } }
-    public override HoldItemBase ReturnDerivedClassAsNew() { return new ExpShare(); }
+    public override HoldItemID Id { get { return HoldItemID.ExpertBelt; } }
+    public override HoldItemBase ReturnDerivedClassAsNew() { return new ExpertBelt(); }
     public override float AlterDamageTaken(bool superEffective, MoveBase move)
     {
         if(superEffective == false)

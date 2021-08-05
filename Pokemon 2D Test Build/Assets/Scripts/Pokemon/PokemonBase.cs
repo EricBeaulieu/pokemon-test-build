@@ -6,7 +6,7 @@ using UnityEngine;
 public enum ElementType { NA = -1, Bug, Dark, Dragon, Electric, Fairy, Fighting, Fire, Flying, Ghost,
                           Grass, Ground, Ice, Normal, Poison, Psychic, Rock, Steel, Water}
 
-public enum StatAttribute { NA, HitPoints, Attack, Defense, SpecialAttack, SpecialDefense, Speed, Evasion, Accuracy }
+public enum StatAttribute { NA, HitPoints, Attack, Defense, SpecialAttack, SpecialDefense, Speed, Evasion, Accuracy, CriticalHitRatio }
 
 public enum Gender { NA,Male,Female}
 
@@ -66,7 +66,7 @@ public class PokemonBase : ScriptableObject {
 
     public string GetPokedexName()
     {
-        return PokemonNameList.GetPokemonName(_pokedexNumber);
+        return PokemonNameList.GetPokeDexName(_pokedexNumber);
     }
 
     public int GetCatchRate()
@@ -207,7 +207,7 @@ public class PokemonBase : ScriptableObject {
 
     string GetStartingSpriteNameEntry(bool isShiny,Gender gender = Gender.NA)
     {
-        string spriteName = $"{GetPokedexNumber().ToString("000")}_{PokemonNameList.GetPokemonName(_pokedexNumber)}_";
+        string spriteName = $"{GetPokedexNumber().ToString("000")}_{PokemonNameList.GetPokeDexName(_pokedexNumber)}_";
 
         if (isShiny == true)
         {

@@ -24,6 +24,11 @@ public class Test : MonoBehaviour {
         //TestTypeChart();
 
         //sprite = GameManager.instance.SpriteAtlas.GetSprite("075_Graveler_FrontB");
+
+        //for (int i = 0; i < 255; i++)
+        //{
+        //    Debug.Log(PokemonNameList.GetPokeDexName(i));
+        //}
 	}
 
     void TestNatureName(NatureBase currentNature)

@@ -6,15 +6,14 @@ public class Eviolite : HoldItemBase
 {
     public override HoldItemID Id { get { return HoldItemID.Eviolite; } }
     public override HoldItemBase ReturnDerivedClassAsNew() { return new Eviolite(); }
-    public override float AlterStat(Pokemon Holder, StatAttribute statAffected)
+    public override MoveBase AlterUserMoveDetails(MoveBase move)
     {
-        //Check if pokemon can evolve
-
-        if(statAffected == StatAttribute.Defense || statAffected == StatAttribute.SpecialDefense)
+        if (move.Type == ElementType.Fairy && move.MoveType != MoveType.Status)
         {
-            return 1.5f;
+            RemoveItem = true;
+            move = move.Clone();
+            move.AdjustedMovePower(0.5f);
         }
-
-        return base.AlterStat(Holder, statAffected);
+        return base.AlterUserMoveDetails(move);
     }
 }

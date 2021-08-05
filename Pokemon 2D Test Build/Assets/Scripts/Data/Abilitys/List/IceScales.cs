@@ -10,12 +10,12 @@ public class IceScales : AbilityBase
     {
         return "The Pokémon is protected by ice scales, which halve the damage taken from special moves.";
     }
-    public override int DoublesAStat(StatAttribute stat)
+    public override float AlterStat(WeatherEffectID iD, StatAttribute statAffected)
     {
-        if (stat == StatAttribute.SpecialDefense)
+        if (statAffected == StatAttribute.SpecialDefense)
         {
             return 2;
         }
-        return base.DoublesAStat(stat);
+        return base.AlterStat(iD, statAffected);
     }
 }

@@ -30,7 +30,6 @@ public abstract class AbilityBase
     protected const float HpRequiredToActivatePinch = 1f / 3f;
     public virtual float AlterStat(WeatherEffectID iD,StatAttribute statAffected) { return 1f; }
     public virtual StatBoost BoostStatSharplyIfAnyStatLowered() { return null; }
-    public virtual int DoublesAStat(StatAttribute stat) { return 1; }
     public virtual bool NegatesWeatherEffects() { return false; }
     public virtual ConditionID ContactMoveMayCauseStatusEffect(Pokemon defendingPokemon, Pokemon attackingPokemon, MoveBase currentAttack) { return ConditionID.NA; }
     public virtual float PowerUpCertainMoves(Pokemon attackingPokemon, Pokemon defendingPokemon, MoveBase currentMove,WeatherEffectID weather) { return 1f; }

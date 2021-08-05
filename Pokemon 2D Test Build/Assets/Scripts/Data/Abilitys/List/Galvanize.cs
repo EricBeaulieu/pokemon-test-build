@@ -15,8 +15,8 @@ public class Galvanize : AbilityBase
         if (move.Type == ElementType.Normal)
         {
             move = move.Clone();
-            move.adjustedMoveType(ElementType.Electric);
-            move.adjustedMovePower(0.2f);
+            move.AdjustedMoveType(ElementType.Electric);
+            move.AdjustedMovePower(0.2f);
         }
         return base.AlterMoveDetails(move);
     }

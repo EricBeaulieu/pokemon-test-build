@@ -12,7 +12,7 @@ public class FairyGem : HoldItemBase
         {
             RemoveItem = true;
             move = move.Clone();
-            move.adjustedMovePower(0.5f);
+            move.AdjustedMovePower(0.5f);
         }
         return base.AlterUserMoveDetails(move);
     }

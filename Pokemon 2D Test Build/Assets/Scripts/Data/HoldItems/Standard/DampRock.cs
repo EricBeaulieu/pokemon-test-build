@@ -6,9 +6,12 @@ public class DampRock : HoldItemBase
 {
     public override HoldItemID Id { get { return HoldItemID.DampRock; } }
     public override HoldItemBase ReturnDerivedClassAsNew() { return new DampRock(); }
-    protected override WeatherEffectID WeatherEffectAmplified()
+    public override int IncreasedWeatherEffectDuration(WeatherEffectID currentWeatherEffect)
     {
-        return WeatherEffectID.Rain;
+        if (currentWeatherEffect != WeatherEffectID.NA && currentWeatherEffect == WeatherEffectID.Rain)
+        {
+            return 3;
+        }
+        return 0;
     }
-
 }

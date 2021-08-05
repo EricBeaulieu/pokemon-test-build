@@ -26,7 +26,7 @@ public class MoveBase : ScriptableObject {
     [SerializeField] bool alwaysHits;
     [SerializeField] int priority;
     [SerializeField] int powerPoints;
-    [SerializeField] float baseCriticalHitRate = 4.17f;
+    [SerializeField] int baseCriticalHitRate = 0;
 
     [SerializeField] bool multiStrikeMove;
     [SerializeField] int fixedNumberOfStrikes;
@@ -50,29 +50,41 @@ public class MoveBase : ScriptableObject {
 
     [SerializeField] bool leavesTargetWith1HP;
 
-    public void adjustedMovePower(float powerIncrease)
+    public void AdjustedMovePower(float powerIncrease)
     {
         power += Mathf.RoundToInt(power * powerIncrease);
     }
 
-    public void adjustedMoveType(ElementType newType)
+    public void AdjustedMoveType(ElementType newType)
     {
         elementType = newType;
     }
 
-    public void adjustedMoveAccuracyPercentage(float accuracyIncrease)
+    public void AdjustedMoveAccuracyPercentage(float accuracyIncrease)
     {
         accuracy += Mathf.RoundToInt(accuracy * accuracyIncrease);
     }
 
-    public void adjustedHPRecovered(float hpRecoveredIncrease)
+    public void AdjustedHPRecovered(float hpRecoveredIncrease)
     {
         hpRecovered += hpRecoveredIncrease;
     }
 
-    public void removeMoveSecondaryEffects()
+    public void RemoveMoveSecondaryEffects()
     {
         secondaryEffects.Clear();
+    }
+
+    public void AddSecondaryEffects(MoveSecondaryEffects newEffect)
+    {
+        if(secondaryEffects.Exists(x => x.Status == newEffect.Status || x.Status == newEffect.Volatiletatus))
+        {
+            secondaryEffects.Find(x => x.Status == newEffect.Status || x.Status == newEffect.Volatiletatus).PercentChance += newEffect.PercentChance;
+        }
+        else
+        {
+            secondaryEffects.Add(newEffect);
+        }
     }
 
     public MoveBase Clone()
@@ -136,7 +148,7 @@ public class MoveBase : ScriptableObject {
         get { return target; }
     }
 
-    public float BaseCriticalHitRate
+    public int BaseCriticalHitRate
     {
         get { return baseCriticalHitRate; }
     }

@@ -9,7 +9,7 @@ public class BrightPowder : HoldItemBase
     public override MoveBase AlterOpposingMoveDetails(MoveBase move)
     {
         move = move.Clone();
-        move.adjustedMoveAccuracyPercentage(-0.1f);
+        move.AdjustedMoveAccuracyPercentage(-0.1f);
         return move;
     }
 }

@@ -11,7 +11,7 @@ public class AdamantOrb : HoldItemBase
         if (move.Type == ElementType.Dragon || move.Type == ElementType.Steel)
         {
             move = move.Clone();
-            move.adjustedMovePower(0.2f);
+            move.AdjustedMovePower(0.2f);
         }
         return base.AlterUserMoveDetails(move);
     }
