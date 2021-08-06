@@ -8,7 +8,7 @@ public class TurnAttackDetails
     public BattleUnit attackingPokemon { get; private set; }
     public BattleUnit targetPokmeon { get; private set; }
 
-    public TurnAttackDetails(Move curMove,BattleUnit attPokemon,BattleUnit tarPokemon)
+    public void SetAttackDetails(Move curMove, BattleUnit attPokemon, BattleUnit tarPokemon)
     {
         currentMove = curMove;
         attackingPokemon = attPokemon;

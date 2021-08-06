@@ -6,6 +6,7 @@ public class ChoiceBand : HoldItemBase
 {
     public override HoldItemID Id { get { return HoldItemID.ChoiceBand; } }
     public override HoldItemBase ReturnDerivedClassAsNew() { return new ChoiceBand(); }
+    MoveBase lockedMove;
     public override float AlterStat(Pokemon holder,StatAttribute statAffected)
     {
         if(statAffected == StatAttribute.Attack)
@@ -23,6 +24,11 @@ public class ChoiceBand : HoldItemBase
                 return true;
             }
         }
+        lockedMove = move;
         return false;
+    }
+    public override string PreventTheUseOfCertainMoveMessage()
+    {
+        return $"The {GlobalTools.SplitCamelCase(Id.ToString())} only allows the use of {lockedMove.MoveName}";
     }
 }

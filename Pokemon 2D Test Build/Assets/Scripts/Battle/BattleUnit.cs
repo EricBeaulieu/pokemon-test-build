@@ -644,11 +644,9 @@ public class BattleUnit : MonoBehaviour
             return true;
         }
 
-        List<Move> currentMoveList = new List<Move>(pokemon.moves);
-
-        foreach (Move move in currentMoveList)
+        foreach (Move move in pokemon.moves)
         {
-            if(move.pP > 0 || move.disabled == false)
+            if(move.pP > 0 && move.disabled == false && pokemon.GetHoldItemEffects.PreventTheUseOfCertainMoves(this,move.moveBase) == false)
             {
                 return false;
             }

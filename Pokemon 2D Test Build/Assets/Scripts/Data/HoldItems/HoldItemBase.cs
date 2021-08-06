@@ -25,7 +25,6 @@ public abstract class HoldItemBase
     public virtual bool ExtendsBindToMaxPotential() { return false; }
     public virtual bool PreventsEffectsOfEntryHazards() { return false; }
     public virtual bool AlwaysLastInSpeedPriorityTurn() { return false; }
-    public virtual int EndTurnHolderAlterHp(Pokemon holder) { return 0; }
     public virtual int AlterUserHPAfterAttack(Pokemon holder,MoveBase move,int damageDealt) { return 0; }
     public virtual int ReflectLightScreenDuration(MoveBase move) { return 0; }
     public virtual float ExperienceModifier() { return 1; }

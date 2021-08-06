@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class MetalPowder : HoldItemBase
 {
-    public override HoldItemID Id { get { return HoldItemID.LightBall; } }
-    public override HoldItemBase ReturnDerivedClassAsNew() { return new LightBall(); }
+    public override HoldItemID Id { get { return HoldItemID.MetalPowder; } }
+    public override HoldItemBase ReturnDerivedClassAsNew() { return new MetalPowder(); }
     public override float AlterStat(Pokemon Holder, StatAttribute statAffected)
     {
         if (Holder.pokemonBase.GetPokedexName() == "Ditto" && statAffected == StatAttribute.Defense || statAffected == StatAttribute.SpecialDefense)

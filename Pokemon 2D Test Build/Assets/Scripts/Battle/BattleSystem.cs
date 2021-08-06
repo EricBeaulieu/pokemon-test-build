@@ -12,6 +12,8 @@ public class BattleSystem : CoreSystem
     [SerializeField] Image backgroundArt;
     [SerializeField] BattleUnit playerBattleUnit;
     [SerializeField] BattleUnit enemyBattleUnit;
+    TurnAttackDetails playerTurnAttackDetails = new TurnAttackDetails();
+    TurnAttackDetails enemyTurnAttackDetails = new TurnAttackDetails();
 
     PartySystem partySystem;
     InventorySystem inventorySystem;
@@ -185,7 +187,7 @@ public class BattleSystem : CoreSystem
             Debug.LogWarning($"learnNewMoveManager has not been set");
         }
 
-        alteredMove = MoveBase.CreateInstance<MoveBase>();
+        //alteredMove = MoveBase.CreateInstance<MoveBase>();
     }
 
     public override void HandleUpdate()
@@ -410,12 +412,18 @@ public class BattleSystem : CoreSystem
     /// <param name="moveBase">Current Move Being Used</param>
     public void AttackSelected(BattleUnit currentPokemon, Move move)
     {
+        if (playerBattleUnit.pokemon.GetHoldItemEffects.PreventTheUseOfCertainMoves(currentPokemon,move.moveBase) == true)
+        {
+            PlayerPokemonItemPreventsMoveFromBeingUsed(currentPokemon.pokemon.GetHoldItemEffects);
+            return;
+        }
+
         dialogSystem.SetDialogText("");
         EnableAttackMoveSelector(false);
-        TurnAttackDetails turnAttack = new TurnAttackDetails(move, currentPokemon, enemyBattleUnit);
+        playerTurnAttackDetails.SetAttackDetails(move, currentPokemon, enemyBattleUnit);
 
         _escapeAttempts = 0;
-        currentTurnDetails.Add(turnAttack);
+        currentTurnDetails.Add(playerTurnAttackDetails);
         StartCoroutine(EnemyMove());
     }
 
@@ -443,6 +451,20 @@ public class BattleSystem : CoreSystem
         yield return dialogSystem.TypeDialog($"{playerBattleUnit.pokemon.currentName} has no available moves left");
         yield return new WaitForSeconds(1);
         AttackSelected(playerBattleUnit, new Move(struggle));
+    }
+
+    public void PlayerPokemonItemPreventsMoveFromBeingUsed(HoldItemBase holdItem)
+    {
+        StartCoroutine(PlayerPokemonItemPreventsMoveFromBeingUsedIEnumerator(holdItem));
+    }
+
+    IEnumerator PlayerPokemonItemPreventsMoveFromBeingUsedIEnumerator(HoldItemBase holdItem)
+    {
+        EnableAttackMoveSelector(false);
+        yield return dialogSystem.TypeDialog($"{holdItem.PreventTheUseOfCertainMoveMessage()}");
+        yield return new WaitForSeconds(1);
+        dialogSystem.SetDialogText($"What will {playerBattleUnit.pokemon.currentName} do?");
+        EnableAttackMoveSelector(true);
     }
 
     public void PlayerCantEscapeActiveWhenTryingToSwitch()
@@ -515,8 +537,8 @@ public class BattleSystem : CoreSystem
             currentAttack = new Move(struggle);
         }
 
-        TurnAttackDetails turnAttack = new TurnAttackDetails(currentAttack, enemyBattleUnit, playerBattleUnit);
-        currentTurnDetails.Add(turnAttack);
+        enemyTurnAttackDetails.SetAttackDetails(currentAttack, enemyBattleUnit, playerBattleUnit);
+        currentTurnDetails.Add(enemyTurnAttackDetails);
 
         yield return RunThroughTurns(currentTurnDetails);
     }
@@ -678,6 +700,7 @@ public class BattleSystem : CoreSystem
             }
         }
 
+        sourceUnit.lastMoveUsed = move;
         //This is here incase the pokemon hits itself in confusion for the smooth animation
         int previousHP = sourceUnit.pokemon.currentHitPoints;
 
@@ -949,8 +972,6 @@ public class BattleSystem : CoreSystem
                     }
                 }
             }
-
-            sourceUnit.lastMoveUsed = move;
         }
         else
         {
@@ -1467,16 +1488,19 @@ public class BattleSystem : CoreSystem
                 }
 
                 int expGained = Mathf.FloorToInt(expYield * level * trainerBonus / pokemonSharingExp) / 7;
+                int expGainedAfteritemAffects;
 
                 foreach (Pokemon pokemon in targetBattleUnit.GetListOfPokemonBattledAgainst)
                 {
+                    expGainedAfteritemAffects = Mathf.FloorToInt(pokemon.GetHoldItemEffects.ExperienceModifier() * expGained);
                     if (pokemon == playerBattleUnit.pokemon)
                     {
-                        yield return GainExperience(playerBattleUnit, expGained);
+                        
+                        yield return GainExperience(playerBattleUnit, expGainedAfteritemAffects);
                     }
                     else
                     {
-                        yield return GainExperience(pokemon, expGained);
+                        yield return GainExperience(pokemon, expGainedAfteritemAffects);
                     }
                     pokemon.GainEffortValue(targetBattleUnit.pokemon.pokemonBase.rewardedEfforValue);
                 }

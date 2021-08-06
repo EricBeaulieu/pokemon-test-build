@@ -6,8 +6,16 @@ public class Leftovers : HoldItemBase
 {
     public override HoldItemID Id { get { return HoldItemID.Leftovers; } }
     public override HoldItemBase ReturnDerivedClassAsNew() { return new Leftovers(); }
-    public override int EndTurnHolderAlterHp(Pokemon holder)
+    public override void OnTurnEnd(Pokemon defendingPokemon)
     {
-        return Mathf.FloorToInt(holder.maxHitPoints / 16);
+        int hpHealed = Mathf.FloorToInt(defendingPokemon.maxHitPoints / 16);
+
+        if (hpHealed <= 0)
+        {
+            hpHealed = 1;
+        }
+
+        defendingPokemon.UpdateHPRestored(hpHealed);
+        defendingPokemon.statusChanges.Enqueue($"{defendingPokemon.currentName} restored HP using Leftovers!");
     }
 }

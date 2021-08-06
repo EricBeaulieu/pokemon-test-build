@@ -6,6 +6,7 @@ public class ChoiceScarf : HoldItemBase
 {
     public override HoldItemID Id { get { return HoldItemID.ChoiceScarf; } }
     public override HoldItemBase ReturnDerivedClassAsNew() { return new ChoiceScarf(); }
+    MoveBase lockedMove;
     public override float AlterStat(Pokemon holder, StatAttribute statAffected)
     {
         if (statAffected == StatAttribute.Speed)
@@ -23,6 +24,11 @@ public class ChoiceScarf : HoldItemBase
                 return true;
             }
         }
+        lockedMove = move;
         return false;
+    }
+    public override string PreventTheUseOfCertainMoveMessage()
+    {
+        return $"The {GlobalTools.SplitCamelCase(Id.ToString())} only allows the use of {lockedMove.MoveName}";
     }
 }

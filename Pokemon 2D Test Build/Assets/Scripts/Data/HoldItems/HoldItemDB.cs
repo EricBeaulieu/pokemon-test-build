@@ -18,7 +18,10 @@ public enum HoldItemID
     KingsRock, LaggingTail, Leek, Leftovers, LifeOrb,
     LightBall, LightClay, LuckyEgg, LuckyPunch, LuminousMoss,
     LustrousOrb, MachoBrace, Magnet, MentalHerb, MetalCoat,
-    MetalPowder,
+    MetalPowder, Metronome, MiracleSeed, MuscleBand, MysticWater,
+    NeverMeltIce, NormalGem, PoisonBarb, PoisonGem, PowerAnklet,
+    PowerBand, PowerBelt, PowerBracer, PowerHerb, PowerLens,
+    PowerWeight,
 
     //Berries
 }
