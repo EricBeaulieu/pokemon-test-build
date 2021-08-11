@@ -21,7 +21,7 @@ public class LifeOrb : HoldItemBase
 
         if (move.MoveType != MoveType.Status)
         {
-            return Mathf.CeilToInt(holder.maxHitPoints / 10);
+            return -Mathf.CeilToInt(holder.maxHitPoints / 10);
         }
         return base.AlterUserHPAfterAttack(holder, move, damageDealt);
     }

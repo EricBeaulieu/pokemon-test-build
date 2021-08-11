@@ -207,14 +207,6 @@ public class Pokemon {
 
     void ResetStatBoosts()
     {
-        //foreach (StatAttribute stat in System.Enum.GetValues(typeof(StatAttribute)))
-        //{
-        //    if (statBoosts.ContainsKey(stat))
-        //    {
-        //        statBoosts[stat] = 0;
-        //    }
-        //}
-
         statBoosts[StatAttribute.Attack] = 0;
         statBoosts[StatAttribute.Defense] = 0;
         statBoosts[StatAttribute.SpecialAttack] = 0;
@@ -223,6 +215,44 @@ public class Pokemon {
         statBoosts[StatAttribute.Accuracy] = 0;
         statBoosts[StatAttribute.Evasion] = 0;
         statBoosts[StatAttribute.CriticalHitRatio] = 0;
+    }
+
+    public void RestoreAllLoweredStatBoosts()
+    {
+        if(statBoosts[StatAttribute.Attack] < 0)
+        {
+            statBoosts[StatAttribute.Attack] = 0;
+        }
+
+        if (statBoosts[StatAttribute.Defense] < 0)
+        {
+            statBoosts[StatAttribute.Defense] = 0;
+        }
+
+        if (statBoosts[StatAttribute.SpecialAttack] < 0)
+        {
+            statBoosts[StatAttribute.SpecialAttack] = 0;
+        }
+
+        if (statBoosts[StatAttribute.SpecialDefense] < 0)
+        {
+            statBoosts[StatAttribute.SpecialDefense] = 0;
+        }
+
+        if (statBoosts[StatAttribute.Speed] < 0)
+        {
+            statBoosts[StatAttribute.Speed] = 0;
+        }
+
+        if (statBoosts[StatAttribute.Evasion] < 0)
+        {
+            statBoosts[StatAttribute.Evasion] = 0;
+        }
+
+        if (statBoosts[StatAttribute.Accuracy] < 0)
+        {
+            statBoosts[StatAttribute.Accuracy] = 0;
+        }
     }
 
     public void ApplyStatModifier(List<StatBoost> currentBoostModifiers)
@@ -459,7 +489,7 @@ public class Pokemon {
         float itemBonus = attackingPokemon.GetHoldItemEffects.AlterDamageTaken((damageDetails.criticalHit > 1),move);
         //itemBonus *= attackingPokemon.GetHoldItemBase.
 
-        StatBoost itemStatBoost = GetHoldItemEffects.AlterStatAfterTakingDamageFromCertainType(move.Type);
+        List<StatBoost> itemStatBoost = GetHoldItemEffects.AlterStatAfterTakingDamageFromCertainType(move.Type,damageDetails.typeEffectiveness > 1);
 
         if(GetHoldItemEffects.RemoveItem == true)
         {
@@ -469,7 +499,7 @@ public class Pokemon {
 
         if (itemStatBoost != null)
         {
-            damageDetails.alterStatAfterTakingDamageFromCertainTypeItem.Add(itemStatBoost);
+            damageDetails.alterStatAfterTakingDamageFromCertainTypeItem = itemStatBoost;
         }
 
         if (itemBonus == 0)

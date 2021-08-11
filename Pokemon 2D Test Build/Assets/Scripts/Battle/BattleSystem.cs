@@ -461,7 +461,7 @@ public class BattleSystem : CoreSystem
     IEnumerator PlayerPokemonItemPreventsMoveFromBeingUsedIEnumerator(HoldItemBase holdItem)
     {
         EnableAttackMoveSelector(false);
-        yield return dialogSystem.TypeDialog($"{holdItem.PreventTheUseOfCertainMoveMessage()}");
+        yield return dialogSystem.TypeDialog($"{holdItem.SpecializedMessage()}");
         yield return new WaitForSeconds(1);
         dialogSystem.SetDialogText($"What will {playerBattleUnit.pokemon.currentName} do?");
         EnableAttackMoveSelector(true);
@@ -915,6 +915,11 @@ public class BattleSystem : CoreSystem
             }
 
             ConditionID newCondition = targetUnit.pokemon.ability.ContactMoveMayCauseStatusEffect(targetUnit.pokemon, sourceUnit.pokemon, alteredMove);
+
+            if(sourceUnit.pokemon.GetHoldItemEffects.ProtectHolderFromEffectsCausedByMakingDirectContact() == true)
+            {
+                newCondition = ConditionID.NA;
+            }
 
             if (newCondition > ConditionID.NA && newCondition <= ConditionID.ToxicPoison)
             {

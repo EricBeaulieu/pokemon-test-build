@@ -54,6 +54,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\Characters\ScriptableObjects\CharacterArtSO.cs" />
+    <Compile Include="Assets\Scripts\Data\HoldItems\Standard\RazorFang.cs" />
     <Compile Include="Assets\Scripts\Data\Conditions\VolatileStatus\Infatuation.cs" />
     <Compile Include="Assets\Scripts\Data\Abilitys\List\Steelworker.cs" />
     <Compile Include="Assets\Scripts\Items\InventoryColorSystem.cs" />
@@ -65,6 +66,7 @@
     <Compile Include="Assets\Scripts\Pokemon\IndividualValues.cs" />
     <Compile Include="Assets\Scripts\Data\Abilitys\List\SteamEngine.cs" />
     <Compile Include="Assets\Scripts\Data\Conditions\Status\ToxicPoison.cs" />
+    <Compile Include="Assets\Scripts\Data\HoldItems\Standard\ScopeLens.cs" />
     <Compile Include="Assets\Scripts\Data\Abilitys\List\Transistor.cs" />
     <Compile Include="Assets\Scripts\Data\Abilitys\List\NoGuard.cs" />
     <Compile Include="Assets\Scripts\Data\Abilitys\List\Competitive.cs" />
@@ -75,6 +77,7 @@
     <Compile Include="Assets\Scripts\Data\Abilitys\List\Reckless.cs" />
     <Compile Include="Assets\Scripts\Data\Abilitys\List\Scrappy.cs" />
     <Compile Include="Assets\Scripts\Data\HoldItems\Standard\FocusBand.cs" />
+    <Compile Include="Assets\Scripts\Data\HoldItems\Standard\ProtectivePads.cs" />
     <Compile Include="Assets\Scripts\Data\Abilitys\List\Download.cs" />
     <Compile Include="Assets\Scripts\Pokemon\PokemonBase.cs" />
     <Compile Include="Assets\Scripts\Data\HoldItems\Standard\BrightPowder.cs" />
@@ -93,6 +96,7 @@
     <Compile Include="Assets\Scripts\Data\Weather\Weather Effects\Hail.cs" />
     <Compile Include="Assets\Scripts\Data\Conditions\ConditionBase.cs" />
     <Compile Include="Assets\Scripts\Data\Abilitys\List\ToxicBoost.cs" />
+    <Compile Include="Assets\Scripts\Data\HoldItems\Standard\SafetyGoggles.cs" />
     <Compile Include="Assets\Scripts\Battle\DamageDetails.cs" />
     <Compile Include="Assets\Scripts\Data\Abilitys\List\TanglingHair.cs" />
     <Compile Include="Assets\Scripts\Managers\SpriteAtlas.cs" />
@@ -100,11 +104,13 @@
     <Compile Include="Assets\Scripts\Data\HoldItems\Standard\LuminousMoss.cs" />
     <Compile Include="Assets\Scripts\Data\HoldItems\Standard\LaggingTail.cs" />
     <Compile Include="Assets\Scripts\Data\EntryHazards\Hazards\StealthRock.cs" />
+    <Compile Include="Assets\Scripts\Data\HoldItems\Standard\QuickClaw.cs" />
     <Compile Include="Assets\Scripts\Items\InventorySystem.cs" />
     <Compile Include="Assets\Scripts\Data\Abilitys\List\Rattled.cs" />
     <Compile Include="Assets\Scripts\Data\Abilitys\List\AirLock.cs" />
     <Compile Include="Assets\Scripts\Data\Abilitys\List\CompoundEyes.cs" />
     <Compile Include="Assets\Scripts\Data\HoldItems\Standard\Leftovers.cs" />
+    <Compile Include="Assets\Scripts\Data\HoldItems\Standard\RockGem.cs" />
     <Compile Include="Assets\Scripts\Characters\MonoBehavior\PlayerController.cs" />
     <Compile Include="Assets\Scripts\Data\HoldItems\Standard\DragonFang.cs" />
     <Compile Include="Assets\Scripts\Data\Abilitys\List\Oblivious.cs" />
@@ -123,8 +129,10 @@
     <Compile Include="Assets\Scripts\Items\UI\ArrowButtonUI.cs" />
     <Compile Include="Assets\Scripts\Data\Conditions\VolatileStatus\LeechSeed.cs" />
     <Compile Include="Assets\CuttableTree.cs" />
+    <Compile Include="Assets\Scripts\Data\HoldItems\Standard\PoisonBarb.cs" />
     <Compile Include="Assets\Scripts\Data\Abilitys\List\Damp.cs" />
     <Compile Include="Assets\Scripts\Data\Abilitys\List\WaterAbsorb.cs" />
+    <Compile Include="Assets\Scripts\Data\HoldItems\Standard\SharpBeak.cs" />
     <Compile Include="Assets\Scripts\Data\HoldItems\Standard\LifeOrb.cs" />
     <Compile Include="Assets\Scripts\Data\Abilitys\List\KeenEye.cs" />
     <Compile Include="Assets\Scripts\Pokemon\NatureBase.cs" />
@@ -141,9 +149,11 @@
     <Compile Include="Assets\Scripts\Data\HoldItems\Standard\FlyingGem.cs" />
     <Compile Include="Assets\Scripts\Static Tables\ExperienceTable.cs" />
     <Compile Include="Assets\Scripts\Static Tables\CatchingMechanics.cs" />
+    <Compile Include="Assets\Scripts\Data\HoldItems\Standard\PowerBand.cs" />
     <Compile Include="Assets\Scripts\Managers\CoreSystem.cs" />
     <Compile Include="Assets\Scripts\Pokemon\EffortValues.cs" />
     <Compile Include="Assets\Scripts\Data\HoldItems\Standard\GripClaw.cs" />
+    <Compile Include="Assets\Scripts\Data\HoldItems\Standard\NeverMeltIce.cs" />
     <Compile Include="Assets\Scripts\Data\Abilitys\List\PoisonPoint.cs" />
     <Compile Include="Assets\Scripts\Data\HoldItems\Standard\BindingBand.cs" />
     <Compile Include="Assets\Scripts\Data\Abilitys\List\SkillLink.cs" />
@@ -183,6 +193,7 @@
     <Compile Include="Assets\Scripts\Data\HoldItems\HoldItemsNull.cs" />
     <Compile Include="Assets\Scripts\Data\Abilitys\List\BigPecks.cs" />
     <Compile Include="Assets\Scripts\ExtensionMethods\ColorExtensions.cs" />
+    <Compile Include="Assets\Scripts\Data\HoldItems\Standard\RockyHelmet.cs" />
     <Compile Include="Assets\Scripts\Items\UI\TrashArrowButtons.cs" />
     <Compile Include="Assets\Scripts\Data\Abilitys\List\MegaLauncher.cs" />
     <Compile Include="Assets\Scripts\Data\Abilitys\List\ToughClaws.cs" />
@@ -208,9 +219,12 @@
     <Compile Include="Assets\Scripts\Data\Conditions\VolatileStatus\HealBlock.cs" />
     <Compile Include="Assets\Scripts\Data\HoldItems\Standard\DragonGem.cs" />
     <Compile Include="Assets\Scripts\Data\Abilitys\List\RockHead.cs" />
+    <Compile Include="Assets\Scripts\Data\HoldItems\Standard\MysticWater.cs" />
+    <Compile Include="Assets\Scripts\Data\HoldItems\Standard\Metronome.cs" />
     <Compile Include="Assets\Scripts\Data\HoldItems\Standard\ElectricGem.cs" />
     <Compile Include="Assets\Scripts\Battle\LearningMoves\SummaryAttackButton.cs" />
     <Compile Include="Assets\Scripts\Data\Abilitys\List\Galvanize.cs" />
+    <Compile Include="Assets\Scripts\Data\HoldItems\Standard\PsychicGem.cs" />
     <Compile Include="Assets\Scripts\Items\UI\ItemOptionDetailsUI.cs" />
     <Compile Include="Assets\Scripts\Data\HoldItems\Standard\DarkGem.cs" />
     <Compile Include="Assets\Scripts\Battle\CaptureBallRoute.cs" />
@@ -228,6 +242,7 @@
     <Compile Include="Assets\Scripts\Battle\LevelUpUI.cs" />
     <Compile Include="Assets\Scripts\Party\SummaryUIBase.cs" />
     <Compile Include="Assets\Scripts\Data\Abilitys\List\InnerFocus.cs" />
+    <Compile Include="Assets\Scripts\Data\HoldItems\Standard\PowerWeight.cs" />
     <Compile Include="Assets\Scripts\Data\HoldItems\Standard\BugGem.cs" />
     <Compile Include="Assets\Scripts\Items\ScriptableObjects\HoldItem.cs" />
     <Compile Include="Assets\Scripts\Dialog\Dialog.cs" />
@@ -254,6 +269,7 @@
     <Compile Include="Assets\Scripts\Pokemon\PokemonParty.cs" />
     <Compile Include="Assets\Scripts\Data\Abilitys\List\Defiant.cs" />
     <Compile Include="Assets\Scripts\Data\Abilitys\List\FlameBody.cs" />
+    <Compile Include="Assets\Scripts\Data\HoldItems\Standard\RazorClaw.cs" />
     <Compile Include="Assets\Scripts\Data\Abilitys\List\SandVeil.cs" />
     <Compile Include="Assets\Scripts\Characters\MonoBehavior\Entity.cs" />
     <Compile Include="Assets\Scripts\Data\HoldItems\Standard\AbsorbBulb.cs" />
@@ -261,7 +277,10 @@
     <Compile Include="Assets\Scripts\Data\Abilitys\List\Chlorophyll.cs" />
     <Compile Include="Assets\Scripts\Data\Conditions\Status\Frozen.cs" />
     <Compile Include="Assets\Scripts\Data\Abilitys\List\Filter.cs" />
+    <Compile Include="Assets\Scripts\Data\HoldItems\Standard\NormalGem.cs" />
+    <Compile Include="Assets\Scripts\Data\HoldItems\Standard\PowerBelt.cs" />
     <Compile Include="Assets\Scripts\Data\HoldItems\Standard\DampRock.cs" />
+    <Compile Include="Assets\Scripts\Data\HoldItems\Standard\MiracleSeed.cs" />
     <Compile Include="Assets\Scripts\Data\Abilitys\List\SolarPower.cs" />
     <Compile Include="Assets\Scripts\Data\Abilitys\List\PurePower.cs" />
     <Compile Include="Assets\Scripts\Data\Abilitys\List\VitalSpirit.cs" />
@@ -273,6 +292,7 @@
     <Compile Include="Assets\Scripts\Party\SummarySkills.cs" />
     <Compile Include="Assets\Scripts\Data\Abilitys\List\WhiteSmoke.cs" />
     <Compile Include="Assets\Scripts\Data\Weather\Weather Effects\Sunshine.cs" />
+    <Compile Include="Assets\Scripts\Data\HoldItems\Standard\PowerAnklet.cs" />
     <Compile Include="Assets\Scripts\Items\ScriptableObjects\ItemColorScheme.cs" />
     <Compile Include="Assets\Scripts\Data\Conditions\VolatileStatus\Flinch.cs" />
     <Compile Include="Assets\Scripts\Data\HoldItems\Standard\ExpShare.cs" />
@@ -280,6 +300,7 @@
     <Compile Include="Assets\Scripts\Data\EntryHazards\Hazards\Spikes.cs" />
     <Compile Include="Assets\Scripts\Data\HoldItems\Standard\BigRoot.cs" />
     <Compile Include="Assets\Scripts\Battle\ScriptableObjects\BattleFieldLayoutBaseSO.cs" />
+    <Compile Include="Assets\Scripts\Data\HoldItems\Standard\PowerBracer.cs" />
     <Compile Include="Assets\Scripts\Data\Abilitys\List\SlushRush.cs" />
     <Compile Include="Assets\Scripts\Data\Abilitys\List\TintedLens.cs" />
     <Compile Include="Assets\Scripts\Data\Abilitys\List\SwiftSwim.cs" />
@@ -325,6 +346,7 @@
     <Compile Include="Assets\Scripts\Data\Abilitys\List\Immunity.cs" />
     <Compile Include="Assets\Scripts\Data\Abilitys\List\SpeedBoost.cs" />
     <Compile Include="Assets\Scripts\Data\Abilitys\List\Blaze.cs" />
+    <Compile Include="Assets\Scripts\Data\HoldItems\Standard\MuscleBand.cs" />
     <Compile Include="Assets\Scripts\Data\Abilitys\List\StrongJaw.cs" />
     <Compile Include="Assets\Scripts\Pokemon\LearnableMove.cs" />
     <Compile Include="Assets\Scripts\Battle\BattleUnit.cs" />
@@ -332,10 +354,12 @@
     <Compile Include="Assets\Scripts\Scene\GameSceneBaseSO.cs" />
     <Compile Include="Assets\Scripts\Scene\Portal.cs" />
     <Compile Include="Assets\Scripts\Data\HoldItems\Standard\BlackSludge.cs" />
+    <Compile Include="Assets\Scripts\Data\HoldItems\Standard\PoisonGem.cs" />
     <Compile Include="Assets\Scripts\Static Tables\PokemonNameList.cs" />
     <Compile Include="Assets\Scripts\Battle\InBattleItem.cs" />
     <Compile Include="Assets\Scripts\Items\UI\ItemOptionButtonUI.cs" />
     <Compile Include="Assets\Scripts\Data\Conditions\VolatileStatus\Cursed.cs" />
+    <Compile Include="Assets\Scripts\Data\HoldItems\Standard\PowerLens.cs" />
     <Compile Include="Assets\Scripts\Data\Abilitys\List\FullMetalBody.cs" />
     <Compile Include="Assets\Scripts\Data\HoldItems\Standard\ChoiceBand.cs" />
     <Compile Include="Assets\Scripts\Data\Abilitys\List\ThickFat.cs" />
@@ -351,6 +375,7 @@
     <Compile Include="Assets\Scripts\Battle\TurnAttackDetails.cs" />
     <Compile Include="Assets\Scripts\Data\Abilitys\List\Aerilate.cs" />
     <Compile Include="Assets\Scripts\Data\Conditions\VolatileStatus\Nightmare.cs" />
+    <Compile Include="Assets\Scripts\Data\HoldItems\Standard\QuickPowder.cs" />
     <Compile Include="Assets\Scripts\Data\HoldItems\Standard\Everstone.cs" />
     <Compile Include="Assets\Scripts\Data\HoldItems\Standard\KingsRock.cs" />
     <Compile Include="Assets\Scripts\Data\Weather\Weather Effects\Rain.cs" />
@@ -359,20 +384,27 @@
     <Compile Include="Assets\Scripts\Data\Abilitys\List\RainDish.cs" />
     <Compile Include="Assets\Scripts\Data\Abilitys\List\Justified.cs" />
     <Compile Include="Assets\Scripts\Data\Abilitys\List\Soundproof.cs" />
-    <Compile Include="Assets\Scripts\Data\HoldItems\Standard\Metronome.cs" />
-    <Compile Include="Assets\Scripts\Data\HoldItems\Standard\MiracleSeed.cs" />
-    <Compile Include="Assets\Scripts\Data\HoldItems\Standard\MuscleBand.cs" />
-    <Compile Include="Assets\Scripts\Data\HoldItems\Standard\MysticWater.cs" />
-    <Compile Include="Assets\Scripts\Data\HoldItems\Standard\NeverMeltIce.cs" />
-    <Compile Include="Assets\Scripts\Data\HoldItems\Standard\NormalGem.cs" />
-    <Compile Include="Assets\Scripts\Data\HoldItems\Standard\PoisonBarb.cs" />
-    <Compile Include="Assets\Scripts\Data\HoldItems\Standard\PoisonGem.cs" />
-    <Compile Include="Assets\Scripts\Data\HoldItems\Standard\PowerAnklet.cs" />
-    <Compile Include="Assets\Scripts\Data\HoldItems\Standard\PowerBand.cs" />
-    <Compile Include="Assets\Scripts\Data\HoldItems\Standard\PowerBelt.cs" />
-    <Compile Include="Assets\Scripts\Data\HoldItems\Standard\PowerBracer.cs" />
-    <Compile Include="Assets\Scripts\Data\HoldItems\Standard\PowerLens.cs" />
-    <Compile Include="Assets\Scripts\Data\HoldItems\Standard\PowerWeight.cs" />
+    <Compile Include="Assets\Scripts\Data\HoldItems\Standard\ShedShell.cs" />
+    <Compile Include="Assets\Scripts\Data\HoldItems\Standard\ShellBell.cs" />
+    <Compile Include="Assets\Scripts\Data\HoldItems\Standard\SilkScarf.cs" />
+    <Compile Include="Assets\Scripts\Data\HoldItems\Standard\SilverPowder.cs" />
+    <Compile Include="Assets\Scripts\Data\HoldItems\Standard\SmokeBall.cs" />
+    <Compile Include="Assets\Scripts\Data\HoldItems\Standard\SmoothRock.cs" />
+    <Compile Include="Assets\Scripts\Data\HoldItems\Standard\Snowball.cs" />
+    <Compile Include="Assets\Scripts\Data\HoldItems\Standard\SoftSand.cs" />
+    <Compile Include="Assets\Scripts\Data\HoldItems\Standard\SoulDew.cs" />
+    <Compile Include="Assets\Scripts\Data\HoldItems\Standard\SpellTag.cs" />
+    <Compile Include="Assets\Scripts\Data\HoldItems\Standard\SteelGem.cs" />
+    <Compile Include="Assets\Scripts\Data\HoldItems\Standard\StickyBarb.cs" />
+    <Compile Include="Assets\Scripts\Data\HoldItems\Standard\ThickClub.cs" />
+    <Compile Include="Assets\Scripts\Data\HoldItems\Standard\ThroatSpray.cs" />
+    <Compile Include="Assets\Scripts\Data\HoldItems\Standard\ToxicOrb.cs" />
+    <Compile Include="Assets\Scripts\Data\HoldItems\Standard\TwistedSpoon.cs" />
+    <Compile Include="Assets\Scripts\Data\HoldItems\Standard\WaterGem.cs" />
+    <Compile Include="Assets\Scripts\Data\HoldItems\Standard\WeaknessPolicy.cs" />
+    <Compile Include="Assets\Scripts\Data\HoldItems\Standard\WhiteHerb.cs" />
+    <Compile Include="Assets\Scripts\Data\HoldItems\Standard\WideLens.cs" />
+    <Compile Include="Assets\Scripts\Data\HoldItems\Standard\WiseGlasses.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">

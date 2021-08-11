@@ -6,13 +6,17 @@ public class LuminousMoss : HoldItemBase
 {
     public override HoldItemID Id { get { return HoldItemID.LuminousMoss; } }
     public override HoldItemBase ReturnDerivedClassAsNew() { return new LuminousMoss(); }
-    public override StatBoost AlterStatAfterTakingDamageFromCertainType(ElementType attackType)
+    List<StatBoost> statBoosts = new List<StatBoost>()
+    {
+        new StatBoost() { stat = StatAttribute.SpecialDefense, boost = 1 }
+    };
+    public override List<StatBoost> AlterStatAfterTakingDamageFromCertainType(ElementType attackType, bool superEffective)
     {
         if (attackType == ElementType.Water)
         {
             RemoveItem = true;
-            return new StatBoost() { stat = StatAttribute.SpecialDefense, boost = 1 };
+            return statBoosts;
         }
-        return base.AlterStatAfterTakingDamageFromCertainType(attackType);
+        return base.AlterStatAfterTakingDamageFromCertainType(attackType,superEffective);
     }
 }

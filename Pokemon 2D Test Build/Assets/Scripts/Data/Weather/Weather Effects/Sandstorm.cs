@@ -33,6 +33,11 @@ public class Sandstorm : WeatherEffectBase
             return;
         }
 
+        if (pokemon.GetHoldItemEffects.ProtectsHolderFromWeatherConditions() == true)
+        {
+            return;
+        }
+
         int damage = pokemon.maxHitPoints / 16;
 
         if (damage <= 0)

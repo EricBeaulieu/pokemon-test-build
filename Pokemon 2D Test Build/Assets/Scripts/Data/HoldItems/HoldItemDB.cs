@@ -5,7 +5,7 @@ using UnityEngine;
 public enum HoldItemID
 {
     NA,
-    AbsorbBulb, AdamantOrb ,AirBalloon, AmuletCoin, AssaultVest,
+    AbsorbBulb, AdamantOrb, AirBalloon, AmuletCoin, AssaultVest,
     BigRoot, BindingBand, BlackBelt, BlackGlasses, BlackSludge,
     BlunderPolicy, BrightPowder, BugGem, CellBattery, Charcoal,
     ChoiceBand, ChoiceScarf, ChoiceSpecs, CleanseTag, DampRock,
@@ -21,9 +21,19 @@ public enum HoldItemID
     MetalPowder, Metronome, MiracleSeed, MuscleBand, MysticWater,
     NeverMeltIce, NormalGem, PoisonBarb, PoisonGem, PowerAnklet,
     PowerBand, PowerBelt, PowerBracer, PowerHerb, PowerLens,
-    PowerWeight,
+    PowerWeight, ProtectivePads, PsychicGem, QuickClaw, QuickPowder,
+    RazorClaw, RazorFang, RedCard, RockGem, RockyHelmet,
+    RoomService, SafetyGoggles, ScopeLens, SharpBeak, ShedShell,
+    ShellBell, SilkScarf, SilverPowder, SmokeBall, SmoothRock,
+    Snowball, SoftSand, SootheBell, SoulDew, SpellTag,
+    SteelGem, StickyBarb, ThickClub, ThroatSpray, ToxicOrb,
+    TwistedSpoon, UtilityUmbrella, WaterGem, WeaknessPolicy, WhiteHerb,
+    WideLens, WiseGlasses, ZoomLens,
 
     //Berries
+
+    Aguav,
+    
 }
 
 public static class HoldItemDB

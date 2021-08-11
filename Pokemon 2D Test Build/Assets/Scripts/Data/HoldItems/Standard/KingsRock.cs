@@ -9,11 +9,8 @@ public class KingsRock : HoldItemBase
     MoveSecondaryEffects secondaryEffects = new MoveSecondaryEffects(ConditionID.Flinch, 10);
     public override MoveBase AlterUserMoveDetails(MoveBase move)
     {
-        if (move.Type == ElementType.Rock)
-        {
-            move = move.Clone();
-            move.AddSecondaryEffects(secondaryEffects);
-        }
-        return base.AlterUserMoveDetails(move);
+        move = move.Clone();
+        move.AddSecondaryEffects(secondaryEffects);
+        return move;
     }
 }
