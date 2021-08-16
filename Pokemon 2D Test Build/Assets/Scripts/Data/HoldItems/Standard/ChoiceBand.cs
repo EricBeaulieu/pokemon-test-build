@@ -27,7 +27,7 @@ public class ChoiceBand : HoldItemBase
         lockedMove = move;
         return false;
     }
-    public override string SpecializedMessage()
+    public override string SpecializedMessage(Pokemon holder, Pokemon opposingPokemon)
     {
         return $"The {GlobalTools.SplitCamelCase(Id.ToString())} only allows the use of {lockedMove.MoveName}";
     }

@@ -19,4 +19,8 @@ public class WhiteHerb : HoldItemBase
         }
         return false;
     }
+    public override string SpecializedMessage(Pokemon holder, Pokemon opposingPokemon)
+    {
+        return $"{holder.currentName} returned its stats to normal using {GlobalTools.SplitCamelCase(Id.ToString())}";
+    }
 }

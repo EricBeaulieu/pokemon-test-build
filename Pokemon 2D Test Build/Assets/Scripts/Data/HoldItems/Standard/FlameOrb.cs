@@ -10,4 +10,8 @@ public class FlameOrb : HoldItemBase
     {
         return ConditionID.Burn;
     }
+    public override string SpecializedMessage(Pokemon holder, Pokemon opposingPokemon)
+    {
+        return $"{holder.currentName} was burnt by {GlobalTools.SplitCamelCase(Id.ToString())}";
+    }
 }

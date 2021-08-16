@@ -23,6 +23,7 @@ public class BattleSystem : CoreSystem
     [SerializeField] AttackSelectionEventSelector attackSelectionEventSelector;
 
     List<TurnAttackDetails> currentTurnDetails = new List<TurnAttackDetails>();
+    TurnAttackDetails currentAttack;
     MoveBase alteredMove;
 
     PlayerController _playerController;
@@ -358,7 +359,14 @@ public class BattleSystem : CoreSystem
         }
         else
         {
-            PlayerCantEscapeActiveWhenTryingToSwitch();
+            if(playerBattleUnit.pokemon.GetHoldItemEffects.AlwaysAllowsToSwitchOut() == true)
+            {
+                partySystem.OpenSystem();
+            }
+            else
+            {
+                PlayerCantEscapeActiveWhenTryingToSwitch();
+            }
         }
     }
 
@@ -461,7 +469,7 @@ public class BattleSystem : CoreSystem
     IEnumerator PlayerPokemonItemPreventsMoveFromBeingUsedIEnumerator(HoldItemBase holdItem)
     {
         EnableAttackMoveSelector(false);
-        yield return dialogSystem.TypeDialog($"{holdItem.SpecializedMessage()}");
+        yield return dialogSystem.TypeDialog($"{holdItem.SpecializedMessage(playerBattleUnit.pokemon,enemyBattleUnit.pokemon)}");
         yield return new WaitForSeconds(1);
         dialogSystem.SetDialogText($"What will {playerBattleUnit.pokemon.currentName} do?");
         EnableAttackMoveSelector(true);
@@ -490,6 +498,20 @@ public class BattleSystem : CoreSystem
         if (_isTrainerBattle == true)
         {
             yield return dialogSystem.TypeDialog($"You cant run from a trainer battle", true);
+            PlayerActions();
+            yield break;
+        }
+
+        if(playerBattleUnit.pokemon.GetHoldItemEffects.FleeWithoutFail() == true)
+        {
+            yield return dialogSystem.TypeDialog(playerBattleUnit.pokemon.GetHoldItemEffects.SpecializedMessage(playerBattleUnit.pokemon,enemyBattleUnit.pokemon), true);
+            OnBattleOver(true);
+            yield break;
+        }
+
+        if(playerBattleUnit.CanSwitchOutOrFlee() == false)
+        {
+            yield return dialogSystem.TypeDialog($"Can't Escape", true);
             PlayerActions();
             yield break;
         }
@@ -592,8 +614,6 @@ public class BattleSystem : CoreSystem
 
     IEnumerator RunThroughTurns(List<TurnAttackDetails> attacksChosen)
     {
-        TurnAttackDetails currentAttack;
-
         while(attacksChosen.Count > 0)
         {
             currentAttack = attacksChosen[0];
@@ -977,10 +997,52 @@ public class BattleSystem : CoreSystem
                     }
                 }
             }
+
+            int hpDifference = sourceUnit.pokemon.GetHoldItemEffects.AlterUserHPAfterAttack(sourceUnit.pokemon, alteredMove, (hpPriorToAttack - targetUnit.pokemon.currentHitPoints));
+            if(hpDifference > 0)
+            {
+                previousHP = sourceUnit.pokemon.currentHitPoints;
+                sourceUnit.pokemon.UpdateHPRestored(hpDifference);
+                yield return sourceUnit.PlayItemUsedAnimation();
+                yield return sourceUnit.HUD.UpdateHPRecovered(previousHP);
+                yield return dialogSystem.TypeDialog(sourceUnit.pokemon.GetHoldItemEffects.SpecializedMessage(sourceUnit.pokemon, targetUnit.pokemon));
+            }
+            else if (hpDifference < 0)
+            {
+                previousHP = sourceUnit.pokemon.currentHitPoints;
+                sourceUnit.pokemon.UpdateHPDamage(hpDifference);
+                yield return sourceUnit.PlayItemUsedAnimation();
+                yield return sourceUnit.HUD.UpdateHPDamage(previousHP);
+                yield return dialogSystem.TypeDialog(sourceUnit.pokemon.GetHoldItemEffects.SpecializedMessage(sourceUnit.pokemon, targetUnit.pokemon));
+            }
+            
+            if(targetUnit.pokemon.GetHoldItemEffects.RemovesMoveBindingEffectsAfterMoveUsed(targetUnit.pokemon) == true)
+            {
+                if(targetUnit.pokemon.GetHoldItemEffects.RemoveItem == true)
+                {
+                    yield return targetUnit.PlayItemUsedAnimation();
+                    targetUnit.pokemon.ItemUsed();
+                }
+            }
+
+            StatBoost statBoost = sourceUnit.pokemon.GetHoldItemEffects.AlterStatAfterUsingSpecificMove(move.moveBase);
+            if (statBoost != null)
+            {
+                yield return sourceUnit.PlayItemUsedAnimation();
+                sourceUnit.pokemon.ItemUsed();
+                yield return ApplyStatChanges(new List<StatBoost>() { statBoost }, targetUnit, MoveTarget.Self,sourceUnit);
+            }
         }
         else
         {
             yield return dialogSystem.TypeDialog($"{sourceUnit.pokemon.currentName}'s attack missed!");
+            StatBoost statBoost = sourceUnit.pokemon.GetHoldItemEffects.RaisesStatUponMissing();
+            if(statBoost != null)
+            {
+                yield return sourceUnit.PlayItemUsedAnimation();
+                sourceUnit.pokemon.ItemUsed();
+                yield return ApplyStatChanges(new List<StatBoost>() { statBoost }, sourceUnit, MoveTarget.Foe);
+            }
         }
 
         //explosive moves incase they miss
@@ -999,6 +1061,15 @@ public class BattleSystem : CoreSystem
         if (targetUnit.pokemon.currentHitPoints <= 0)
         {
             yield return PokemonHasFainted(targetUnit);
+        }
+        else
+        {
+            if(targetUnit.pokemon.GetHoldItemEffects.RestoresAllLoweredStatsToNormalAfterAttackFinished(targetUnit.pokemon) == true)
+            {
+                yield return targetUnit.PlayItemUsedAnimation();
+                yield return dialogSystem.TypeDialog(targetUnit.pokemon.GetHoldItemEffects.SpecializedMessage(targetUnit.pokemon, sourceUnit.pokemon));
+                targetUnit.pokemon.ItemUsed();
+            }
         }
     }
 
@@ -1217,6 +1288,27 @@ public class BattleSystem : CoreSystem
                     yield return targetUnit.HUD.UpdateHPRecovered(leechSeed.HealthStolen);
                 }
             }
+        }
+
+        //Item effects
+        if (sourceUnit.pokemon.currentHitPoints <= 0)
+        {
+            yield return PokemonHasFainted(sourceUnit);
+        }
+        else
+        {
+            currentHP = sourceUnit.pokemon.currentHitPoints;
+
+            sourceUnit.pokemon.GetHoldItemEffects.OnTurnEnd(sourceUnit.pokemon);
+
+            ConditionID condition = sourceUnit.pokemon.GetHoldItemEffects.InflictConditionAtTurnEnd();
+            if(condition != ConditionID.NA)
+            {
+                sourceUnit.pokemon.SetStatusByItem(condition, sourceUnit.pokemon.GetHoldItemEffects.SpecializedMessage(sourceUnit.pokemon,targetUnit.pokemon));
+            }
+            
+            yield return ShowStatusChanges(sourceUnit.pokemon);
+            yield return sourceUnit.HUD.UpdateHPDamage(currentHP);
         }
 
         if (sourceUnit.pokemon.currentHitPoints <= 0)
@@ -1481,6 +1573,20 @@ public class BattleSystem : CoreSystem
                 {
                     pokemonSharingExp = 0;
                     List<Pokemon> copyPokemonBattledAgainst = new List<Pokemon>(targetBattleUnit.GetListOfPokemonBattledAgainst);
+
+                    //Pokemon in party holding EXP share
+                    List<Pokemon> playerParty = _playerController.pokemonParty.CurrentPokemonList();
+                    for (int i = 0; i < playerParty.Count; i++)
+                    {
+                        if(playerParty[i].GetHoldItemEffects.ExperienceShared() == true && playerParty[i].currentHitPoints > 0)
+                        {
+                            if(copyPokemonBattledAgainst.Contains(playerParty[i]) == false)
+                            {
+                                copyPokemonBattledAgainst.Add(playerParty[i]);
+                            }
+                        }
+                    }
+
                     foreach (Pokemon pokemon in copyPokemonBattledAgainst)
                     {
                         if (pokemon.currentLevel >= 100 || pokemon.currentHitPoints <= 0)
@@ -1653,7 +1759,7 @@ public class BattleSystem : CoreSystem
 
     IEnumerator ApplyEntryHazardOnSentOut(BattleUnit target)
     {
-        if (target.pokemon.currentHitPoints <= 0)
+        if (target.pokemon.currentHitPoints <= 0 || target.pokemon.GetHoldItemEffects.PreventsEffectsOfEntryHazards() == true)
         {
             yield break;
         }

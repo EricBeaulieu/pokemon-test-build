@@ -25,4 +25,8 @@ public class LifeOrb : HoldItemBase
         }
         return base.AlterUserHPAfterAttack(holder, move, damageDealt);
     }
+    public override string SpecializedMessage(Pokemon holder, Pokemon opposingPokemon)
+    {
+        return $"{holder.currentName} lost some of its HP";
+    }
 }

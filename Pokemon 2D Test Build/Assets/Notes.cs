@@ -24,8 +24,6 @@ public class Notes
 
     //roost creating it so the pokemon can get hit by ground moves
     //double check abilities dropping or raising higher then stated
-    //test out bug on new pokemon, in summary
-    //add in trainer details to said pokemon and trainer
     //finish all different types of animations with conditions
     //money set for trainer
     //camera effects when entering battle either with trainers,wild pokemon or specialized pokemon
@@ -40,7 +38,7 @@ public class Notes
     //Overworld effects with abilitities
 
     //Bugs
-    
+
     //if the player moves out of site after the trainer looks it will still see him and battle him
     //on turn end for bound moves the pokemon doesnt play flash of hit animation
     //trainer when walking for some reason got into a half positionand stuck while walking. no idea how i created the bug
@@ -50,4 +48,13 @@ public class Notes
     //if reflect/light screen are added in then make sure that crits cut through it
     //When items are added in that effect the weather duration update the weather duration
     //set/Shift option, if set just keep pokemon out
+
+    /* Items
+     * 
+     * list of enum items that are added but not implimented
+     * CleanseTag,DestinyKnot,EjectButton, EjectPack,PowerHerb,RedCard,Ring Target,RoomService,SootheBell,UtilityUmbrella,ZoomLens,'
+     * 
+     * items missing their sprites
+     * Griseous Orb,Protective Pads,Thick Club
+     */
 }

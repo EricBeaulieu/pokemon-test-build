@@ -10,4 +10,8 @@ public class ToxicOrb : HoldItemBase
     {
         return ConditionID.ToxicPoison;
     }
+    public override string SpecializedMessage(Pokemon holder, Pokemon opposingPokemon)
+    {
+        return $"{holder.currentName} was badly poisned by {GlobalTools.SplitCamelCase(Id.ToString())}";
+    }
 }

@@ -14,4 +14,8 @@ public class RockyHelmet : HoldItemBase
         }
         return base.AlterUserHPAfterAttack(holder, move, damageDealt);
     }
+    public override string SpecializedMessage(Pokemon holder, Pokemon opposingPokemon)
+    {
+        return $"{opposingPokemon.currentName} lost some of its HP due to {GlobalTools.SplitCamelCase(Id.ToString())}";
+    }
 }

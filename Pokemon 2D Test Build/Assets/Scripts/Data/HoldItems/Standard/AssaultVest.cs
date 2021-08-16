@@ -14,7 +14,7 @@ public class AssaultVest : HoldItemBase
         }
         return base.PreventTheUseOfCertainMoves(battleUnit,move);
     }
-    public override string SpecializedMessage()
+    public override string SpecializedMessage(Pokemon holder,Pokemon opposingPokemon)
     {
         return "The effects of Assult Vest prevents status moves from being used!";
     }

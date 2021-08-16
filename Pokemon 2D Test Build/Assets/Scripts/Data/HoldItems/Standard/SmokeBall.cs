@@ -10,4 +10,8 @@ public class SmokeBall : HoldItemBase
     {
         return true;
     }
+    public override string SpecializedMessage(Pokemon holder, Pokemon opposingPokemon)
+    {
+        return $"{holder.currentName} fled using its {GlobalTools.SplitCamelCase(Id.ToString())}";
+    }
 }

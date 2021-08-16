@@ -540,9 +540,15 @@ public class Pokemon {
             damage = 1;
         }
 
-        if(move.LeavesTargetWith1HP == true)
+        if(move.LeavesTargetWith1HP == true || GetHoldItemEffects.EndureOHKOAttack(this) == true)
         {
-            if(damage >= currentHitPoints)
+            if (GetHoldItemEffects.RemoveItem == true)
+            {
+                ItemUsed();
+                damageDetails.itemUsed = true;
+            }
+
+            if (damage >= currentHitPoints)
             {
                 damage = currentHitPoints - 1;
             }
@@ -619,6 +625,16 @@ public class Pokemon {
 
         status = ConditionsDB.GetConditionBase(conditionID);
         statusChanges.Enqueue(status.StartMessage(this));
+
+        OnStatusChanged?.Invoke();
+    }
+
+    public void SetStatusByItem(ConditionID conditionID, string itemMessage)
+    {
+        if (conditionID == ConditionID.NA || status != null|| CheckStatusImmunities(conditionID) == true) { return; }
+
+        status = ConditionsDB.GetConditionBase(conditionID);
+        statusChanges.Enqueue(itemMessage);
 
         OnStatusChanged?.Invoke();
     }

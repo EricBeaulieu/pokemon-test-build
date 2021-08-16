@@ -22,4 +22,8 @@ public class ShellBell : HoldItemBase
         
         return damageDealt;
     }
+    public override string SpecializedMessage(Pokemon holder, Pokemon opposingPokemon)
+    {
+        return $"{holder.currentName} restored HP using {GlobalTools.SplitCamelCase(Id.ToString())}";
+    }
 }

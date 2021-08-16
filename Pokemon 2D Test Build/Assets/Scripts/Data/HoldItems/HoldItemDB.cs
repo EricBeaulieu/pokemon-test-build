@@ -22,13 +22,13 @@ public enum HoldItemID
     NeverMeltIce, NormalGem, PoisonBarb, PoisonGem, PowerAnklet,
     PowerBand, PowerBelt, PowerBracer, PowerHerb, PowerLens,
     PowerWeight, ProtectivePads, PsychicGem, QuickClaw, QuickPowder,
-    RazorClaw, RazorFang, RedCard, RockGem, RockyHelmet,
-    RoomService, SafetyGoggles, ScopeLens, SharpBeak, ShedShell,
-    ShellBell, SilkScarf, SilverPowder, SmokeBall, SmoothRock,
-    Snowball, SoftSand, SootheBell, SoulDew, SpellTag,
-    SteelGem, StickyBarb, ThickClub, ThroatSpray, ToxicOrb,
-    TwistedSpoon, UtilityUmbrella, WaterGem, WeaknessPolicy, WhiteHerb,
-    WideLens, WiseGlasses, ZoomLens,
+    RazorClaw, RazorFang, RedCard, RingTarget, RockGem,
+    RockyHelmet, RoomService, SafetyGoggles, ScopeLens, SharpBeak,
+    ShedShell, ShellBell, SilkScarf, SilverPowder, SmokeBall,
+    SmoothRock, Snowball, SoftSand, SootheBell, SoulDew,
+    SpellTag, SteelGem, StickyBarb, ThickClub, ThroatSpray,
+    ToxicOrb, TwistedSpoon, UtilityUmbrella, WaterGem, WeaknessPolicy,
+    WhiteHerb, WideLens, WiseGlasses, ZoomLens,
 
     //Berries
 

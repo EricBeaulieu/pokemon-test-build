@@ -8,7 +8,12 @@ public class Bound : ConditionBase
     public override ConditionBase ReturnDerivedClassAsNew() { return new Bound(); }
     public override string StartMessage(Pokemon pokemon, Pokemon attackingPokemon)
     {
+        poweredUp = attackingPokemon.GetHoldItemEffects.BindingDamageIncreased();
         StatusTime = Random.Range(4, 6);
+        if(attackingPokemon.GetHoldItemEffects.ExtendsBindToMaxPotential() == true)
+        {
+            StatusTime = 7;
+        }
         return $"{pokemon.currentName} {GlobalTools.ReplaceUserWithPokemonName(boundMove.SecondaryEffects[0].SpecialStartMessage, attackingPokemon)}";
     }
     public override bool OnEndTurn(Pokemon pokemon)
@@ -21,7 +26,7 @@ public class Bound : ConditionBase
             return false;
         }
 
-        int damage = Mathf.FloorToInt(pokemon.maxHitPoints / 8);
+        int damage = Mathf.FloorToInt(pokemon.maxHitPoints / healthPercentage);
 
         if (damage <= 0)
         {
@@ -34,4 +39,16 @@ public class Bound : ConditionBase
     }
     public MoveBase SetBoundMove { set { boundMove = value; } }
     MoveBase boundMove = null;
+    bool poweredUp;
+    int healthPercentage
+    {
+        get
+        {
+            if (poweredUp == true)
+            {
+                return 6;
+            }
+            return 8;
+        }
+    }
 }
