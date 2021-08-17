@@ -300,8 +300,8 @@ public class BattleSystem : CoreSystem
 
         _currentWeather = null;
 
-        yield return ActivatePokemonAbilityUponEntry(playerBattleUnit,enemyBattleUnit);
-        yield return ActivatePokemonAbilityUponEntry(enemyBattleUnit,playerBattleUnit);
+        yield return PokemonEntry(playerBattleUnit,enemyBattleUnit);
+        yield return PokemonEntry(enemyBattleUnit,playerBattleUnit);
 
         actionSelectionEventSelector.NewBattle();
         PlayerActions();
@@ -614,6 +614,31 @@ public class BattleSystem : CoreSystem
 
     IEnumerator RunThroughTurns(List<TurnAttackDetails> attacksChosen)
     {
+        if(attacksChosen.Count > 1)
+        {
+            if(attacksChosen[0].currentMove.moveBase.Priority == attacksChosen[1].currentMove.moveBase.Priority)
+            {
+                for (int i = 0; i < attacksChosen.Count; i++)
+                {
+                    int adjustedPriority = attacksChosen[i].attackingPokemon.pokemon.GetHoldItemEffects.AdjustSpeedPriorityTurn();
+                    if (adjustedPriority != 0)
+                    {
+                        if (adjustedPriority > 0)
+                        {
+                            yield return attacksChosen[i].attackingPokemon.PlayItemUsedAnimation();
+                        }
+
+                        TurnAttackDetails turnAttackDetails = attacksChosen[i];
+                        currentAttack = attacksChosen[1 - i];
+                        attacksChosen.Clear();
+                        attacksChosen.Add(currentAttack);
+                        attacksChosen.Add(turnAttackDetails);
+                        break;
+                    }
+                }
+            }
+        }
+
         while(attacksChosen.Count > 0)
         {
             currentAttack = attacksChosen[0];
@@ -806,14 +831,24 @@ public class BattleSystem : CoreSystem
 
                 if (damageDetails.sourceItemUsed == true)
                 {
-                    yield return sourceUnit.PlayItemUsedAnimation();
+                    if(sourceUnit.pokemon.GetHoldItemEffects.PlayAnimationWhenUsed() == true)
+                    {
+                        yield return sourceUnit.PlayItemUsedAnimation();
+                        yield return dialogSystem.TypeDialog(sourceUnit.pokemon.GetHoldItemEffects.SpecializedMessage(sourceUnit.pokemon, targetUnit.pokemon));
+                    }
+                    sourceUnit.pokemon.ItemUsed();
                 }
 
                 yield return sourceUnit.PlayAttackAnimation();
 
                 if (damageDetails.targetItemUsed == true)
                 {
-                    yield return targetUnit.PlayItemUsedAnimation();
+                    if(targetUnit.pokemon.GetHoldItemEffects.PlayAnimationWhenUsed() == true)
+                    {
+                        yield return targetUnit.PlayItemUsedAnimation();
+                    }
+                    yield return dialogSystem.TypeDialog(targetUnit.pokemon.GetHoldItemEffects.SpecializedMessage(targetUnit.pokemon, sourceUnit.pokemon));
+                    targetUnit.pokemon.ItemUsed();
                 }
 
                 if (attackLoop > 1)
@@ -917,7 +952,6 @@ public class BattleSystem : CoreSystem
                 {
                     yield break;
                 }
-                
             }
 
             if (alteredMove.SecondaryEffects != null && alteredMove.SecondaryEffects.Count > 0 && targetUnit.pokemon.currentHitPoints > 0)
@@ -1524,48 +1558,48 @@ public class BattleSystem : CoreSystem
         }
     }
 
-    IEnumerator ActivatePokemonAbilityUponEntry(BattleUnit sourceUnit, BattleUnit targetUnit)
+    IEnumerator PokemonEntry(BattleUnit sourceUnit, BattleUnit targetUnit)
     {
-        if (sourceUnit.pokemon.ability == null)
+        if(sourceUnit.pokemon.ability != null)
         {
-            yield break;
-        }
-
-        WeatherEffectID weatherEffect = sourceUnit.pokemon.ability.OnStartWeatherEffect();
-        if (weatherEffect != WeatherEffectID.NA)
-        {
-            sourceUnit.OnAbilityActivation();
-            yield return StartWeatherEffect(weatherEffect,sourceUnit,targetUnit, true);
-            yield break;
-        }
-
-        StatBoost statBoost = sourceUnit.pokemon.ability.OnEntryLowerStat(targetUnit.pokemon.ability.Id);
-        if (statBoost != null)
-        {
-            sourceUnit.OnAbilityActivation();
-            List<StatBoost> abilityStatBoosts = new List<StatBoost>() { statBoost };
-            yield return ApplyStatChanges(abilityStatBoosts, targetUnit, MoveTarget.Foe, sourceUnit);
-        }
-
-        statBoost = sourceUnit.pokemon.ability.OnEntryRaiseStat(targetUnit.pokemon);
-        if (statBoost != null)
-        {
-            sourceUnit.OnAbilityActivation();
-            List<StatBoost> abilityStatBoosts = new List<StatBoost>() { statBoost };
-            yield return ApplyStatChanges(abilityStatBoosts, targetUnit, MoveTarget.Self, sourceUnit);
-        }
-
-
-        if (sourceUnit.pokemon.ability.NegatesWeatherEffects() == true)
-        {
-            if(_currentWeather != null || _currentWeather?.Id == WeatherEffectID.NA)
+            WeatherEffectID weatherEffect = sourceUnit.pokemon.ability.OnStartWeatherEffect();
+            if (weatherEffect != WeatherEffectID.NA)
             {
                 sourceUnit.OnAbilityActivation();
-                _currentWeather = null;
-                yield return dialogSystem.TypeDialog($"{sourceUnit.pokemon.currentName}'s {sourceUnit.pokemon.ability.Name} cleared the battlefield");
+                yield return StartWeatherEffect(weatherEffect, sourceUnit, targetUnit, true);
                 yield break;
             }
+
+            StatBoost statBoost = sourceUnit.pokemon.ability.OnEntryLowerStat(targetUnit.pokemon.ability.Id);
+            if (statBoost != null)
+            {
+                sourceUnit.OnAbilityActivation();
+                List<StatBoost> abilityStatBoosts = new List<StatBoost>() { statBoost };
+                yield return ApplyStatChanges(abilityStatBoosts, targetUnit, MoveTarget.Foe, sourceUnit);
+            }
+
+            statBoost = sourceUnit.pokemon.ability.OnEntryRaiseStat(targetUnit.pokemon);
+            if (statBoost != null)
+            {
+                sourceUnit.OnAbilityActivation();
+                List<StatBoost> abilityStatBoosts = new List<StatBoost>() { statBoost };
+                yield return ApplyStatChanges(abilityStatBoosts, targetUnit, MoveTarget.Self, sourceUnit);
+            }
+
+
+            if (sourceUnit.pokemon.ability.NegatesWeatherEffects() == true)
+            {
+                if (_currentWeather != null || _currentWeather?.Id == WeatherEffectID.NA)
+                {
+                    sourceUnit.OnAbilityActivation();
+                    _currentWeather = null;
+                    yield return dialogSystem.TypeDialog($"{sourceUnit.pokemon.currentName}'s {sourceUnit.pokemon.ability.Name} cleared the battlefield");
+                    yield break;
+                }
+            }
         }
+
+        yield return dialogSystem.TypeDialog(sourceUnit.pokemon.GetHoldItemEffects.EntryMessage(sourceUnit.pokemon));
     }
 
     void OnBattleOver(bool hasWon)
@@ -1753,7 +1787,7 @@ public class BattleSystem : CoreSystem
 
         if (battleUnit.isPlayerPokemon)
         {
-            yield return ActivatePokemonAbilityUponEntry(playerBattleUnit, enemyBattleUnit);
+            yield return PokemonEntry(playerBattleUnit, enemyBattleUnit);
 
             if (enemyBattleUnit.pokemon.currentHitPoints <= 0)
             {
@@ -1771,7 +1805,7 @@ public class BattleSystem : CoreSystem
         }
         else
         {
-            yield return ActivatePokemonAbilityUponEntry(enemyBattleUnit, playerBattleUnit);
+            yield return PokemonEntry(enemyBattleUnit, playerBattleUnit);
         }
     }
 

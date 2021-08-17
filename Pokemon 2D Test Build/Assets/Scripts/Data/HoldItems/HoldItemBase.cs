@@ -8,13 +8,15 @@ public abstract class HoldItemBase
     public abstract HoldItemBase ReturnDerivedClassAsNew();
     public bool RemoveItem { get; protected set; }
     public virtual bool PlayAnimationWhenUsed() { return true; }
-    public virtual float AlterDamageTaken(bool superEffective,MoveBase move) { return 1f; }
+    public virtual float AlterDamageTaken(MoveBase move) { return 1f; }
+    public virtual float PowersUpSuperEffectiveAttacks(bool superEffective) { return 1f; }
     public virtual void OnTurnEnd(Pokemon defendingPokemon) { }
     public virtual List<StatBoost> AlterStatAfterTakingDamageFromCertainType(ElementType attackType,bool superEffective) { return null; }
     public virtual MoveBase AlterUserMoveDetails(MoveBase move) { return move; }
     public virtual MoveBase AlterOpposingMoveDetails(MoveBase move) { return move; }
     public virtual bool DoublesPrizeMoneyRecieved() { return false; }//not implimented
     public virtual bool PreventTheUseOfCertainMoves(BattleUnit battleUnit,MoveBase move) { return false; }
+    public virtual string EntryMessage(Pokemon holder) { return ""; }
     public virtual string SpecializedMessage(Pokemon holder,Pokemon opposingPokemon) { return ""; }
     public virtual bool BindingDamageIncreased() { return false; }
     public virtual float AlterStat(Pokemon Holder,StatAttribute statAffected)
@@ -49,4 +51,5 @@ public abstract class HoldItemBase
     public virtual StatBoost AlterStatAfterUsingSpecificMove(MoveBase move) { return null; }
     public virtual bool RestoresAllLoweredStatsToNormalAfterAttackFinished(Pokemon holder) { return false; }
     public virtual StatBoost RaisesStatUponMissing() { return null; }
+    public virtual bool TransferToPokemon(MoveBase move) { return false; }
 }

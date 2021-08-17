@@ -60,6 +60,11 @@ public class DialogManager : CoreSystem
 
     public IEnumerator TypeDialog(string line, bool makeUserWait = false)
     {
+        if(line == "")
+        {
+            yield break;
+        }
+
         currentlyDisplaying = "";
 
         foreach (char letter in line.ToCharArray())

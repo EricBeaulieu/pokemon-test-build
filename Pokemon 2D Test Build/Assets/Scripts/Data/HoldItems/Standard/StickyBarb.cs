@@ -18,4 +18,8 @@ public class StickyBarb : HoldItemBase
         defendingPokemon.UpdateHPDamage(damageDealt);
         defendingPokemon.statusChanges.Enqueue($"{defendingPokemon.currentName} was damaged by Sticky Barb");
     }
+    public override bool TransferToPokemon(MoveBase move)
+    {
+        return move.PhysicalContact;
+    }
 }

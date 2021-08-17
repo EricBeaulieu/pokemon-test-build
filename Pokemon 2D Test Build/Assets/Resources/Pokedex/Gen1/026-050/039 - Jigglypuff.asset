@@ -16,10 +16,8 @@ MonoBehaviour:
   _pokedexDescription: "It hugely inflates its stomach and sings a mysterious melody.
     If you hear this melody, you\u2019ll become sleepy right away."
   _classification: 
-  _heightInFeet: 0
   _heightInMeters: 0
   _weightInPounds: 0
-  _weightInKilograms: 0
   _captureRate: 170
   rewardedEffortValue:
   - _statAttribute: 1
@@ -41,4 +39,6 @@ MonoBehaviour:
   firstAbility: 11
   secondAbility: 10
   hiddenAbility: 0
-  _learnableMoves: []
+  _learnableMoves:
+  - _moveBase: {fileID: 11400000, guid: 3cee35cefcca6c94ab2fb4099742c7e2, type: 2}
+    _levelLeanred: 0

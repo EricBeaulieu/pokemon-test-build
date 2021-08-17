@@ -474,8 +474,7 @@ public class Pokemon {
             damageDetails.abilityActivation = true;
             damageDetails.attackersStatBoostByDefendersAbility.Add(attackerAbilityStatBoost);
         }
-
-
+        
         if (abilityBonus == 0)
         {
             damageDetails.criticalHit = 1f;
@@ -486,21 +485,10 @@ public class Pokemon {
         }
 
         //Item effects
-        float itemBonus = attackingPokemon.GetHoldItemEffects.AlterDamageTaken((damageDetails.criticalHit > 1),move);
+        float itemBonus = GetHoldItemEffects.AlterDamageTaken(move);
+        itemBonus *= attackingPokemon.GetHoldItemEffects.PowersUpSuperEffectiveAttacks((damageDetails.criticalHit > 1));
 
         List<StatBoost> itemStatBoost = GetHoldItemEffects.AlterStatAfterTakingDamageFromCertainType(move.Type,damageDetails.typeEffectiveness > 1);
-
-        if(GetHoldItemEffects.RemoveItem == true)
-        {
-            damageDetails.targetItemUsed = GetHoldItemEffects.PlayAnimationWhenUsed();
-            ItemUsed();
-        }
-
-        if (attackingPokemon.GetHoldItemEffects.RemoveItem == true)
-        {
-            damageDetails.sourceItemUsed = attackingPokemon.GetHoldItemEffects.PlayAnimationWhenUsed();
-            attackingPokemon.ItemUsed();
-        }
 
         if (itemStatBoost != null)
         {
@@ -511,6 +499,8 @@ public class Pokemon {
         {
             damageDetails.criticalHit = 1f;
             damageDetails.typeEffectiveness = 0;
+            damageDetails.targetItemUsed = GetHoldItemEffects.RemoveItem;
+            damageDetails.sourceItemUsed = attackingPokemon.GetHoldItemEffects.RemoveItem;
             return damageDetails;
         }
 
@@ -547,12 +537,6 @@ public class Pokemon {
 
         if(move.LeavesTargetWith1HP == true || GetHoldItemEffects.EndureOHKOAttack(this) == true)
         {
-            if (GetHoldItemEffects.RemoveItem == true)
-            {
-                damageDetails.targetItemUsed = GetHoldItemEffects.PlayAnimationWhenUsed();
-                ItemUsed();
-            }
-
             if (damage >= currentHitPoints)
             {
                 damage = currentHitPoints - 1;
@@ -564,8 +548,17 @@ public class Pokemon {
             damage = maxHitPoints - 1;
             damageDetails.abilityActivation = true;
         }
-
+        
         UpdateHPDamage(damage);
+
+        if(GetHoldItemEffects.TransferToPokemon(move) && attackingPokemon.GetCurrentItem == null)
+        {
+            attackingPokemon.GivePokemonItemToHold(GetCurrentItem);
+            ItemUsed();
+        }
+
+        damageDetails.targetItemUsed = GetHoldItemEffects.RemoveItem;
+        damageDetails.sourceItemUsed = attackingPokemon.GetHoldItemEffects.RemoveItem;
 
         return damageDetails;
     }

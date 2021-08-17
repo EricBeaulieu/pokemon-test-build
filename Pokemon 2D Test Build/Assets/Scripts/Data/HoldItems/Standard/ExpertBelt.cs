@@ -6,9 +6,9 @@ public class ExpertBelt : HoldItemBase
 {
     public override HoldItemID Id { get { return HoldItemID.ExpertBelt; } }
     public override HoldItemBase ReturnDerivedClassAsNew() { return new ExpertBelt(); }
-    public override float AlterDamageTaken(bool superEffective, MoveBase move)
+    public override float PowersUpSuperEffectiveAttacks(bool superEffective)
     {
-        if(superEffective == false)
+        if (superEffective == false)
         {
             return 1f;
         }

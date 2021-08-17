@@ -7,7 +7,7 @@ public class AirBalloon : HoldItemBase
     public override HoldItemID Id { get { return HoldItemID.AirBalloon; } }
     public override HoldItemBase ReturnDerivedClassAsNew() { return new AirBalloon(); }
     public override bool PlayAnimationWhenUsed() { return false; }
-    public override float AlterDamageTaken(bool superEffective,MoveBase move)
+    public override float AlterDamageTaken(MoveBase move)
     {
         if(move.Type == ElementType.Ground)
         {
@@ -19,4 +19,15 @@ public class AirBalloon : HoldItemBase
             return 1;
         }
     }
+    public override string EntryMessage(Pokemon holder)
+    {
+        return $"{holder.currentName} floats in the air with its {GlobalTools.SplitCamelCase(Id.ToString())}";
+    }
+    public override string SpecializedMessage(Pokemon holder, Pokemon opposingPokemon)
+    {
+        return $"{holder.currentName} {GlobalTools.SplitCamelCase(Id.ToString())} popped!";
+    }
+
+    //Pokemon name floats with its air balloon
+    //pokemon name air balloon popped!
 }
