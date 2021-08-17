@@ -733,7 +733,7 @@ public class BattleSystem : CoreSystem
             yield return ShowStatusChanges(sourceUnit.pokemon);
             yield return sourceUnit.StatusConditionAnimation(canUseMove);
             //If it hit itself in its confusion update the HUD
-            yield return sourceUnit.HUD.UpdateHPDamage(previousHP);
+            yield return sourceUnit.HUD.UpdateHP(previousHP);
             if (sourceUnit.pokemon.currentHitPoints <= 0)
             {
                 yield return PokemonHasFainted(sourceUnit);
@@ -759,12 +759,11 @@ public class BattleSystem : CoreSystem
             yield break;
         }
 
-        //Moved here so it shows an attack animation, just skips out on the pokemon recieving the hit animation
-        yield return sourceUnit.PlayAttackAnimation();
         int hpPriorToAttack = targetUnit.pokemon.currentHitPoints;//for the animator in UpdateHP and recoil
 
         if (CheckIfMoveHasSpecializedConditionAndSuccessful(sourceUnit, targetUnit, move.moveBase) == false)
         {
+            yield return sourceUnit.PlayAttackAnimation();
             yield return dialogSystem.TypeDialog($"{BUT_IT_FAILED}");
             yield break;
         }
@@ -777,6 +776,7 @@ public class BattleSystem : CoreSystem
         {
             if (alteredMove.MoveType == MoveType.Status)
             {
+                yield return sourceUnit.PlayAttackAnimation();
                 yield return RunMoveEffects(alteredMove.MoveEffects, sourceUnit, targetUnit, alteredMove, alteredMove.Target);
             }
             else
@@ -804,7 +804,14 @@ public class BattleSystem : CoreSystem
 
                 DamageDetails damageDetails = targetUnit.pokemon.TakeDamage(alteredMove, sourceUnit.pokemon);
 
-                if(damageDetails.itemUsed == true)
+                if (damageDetails.sourceItemUsed == true)
+                {
+                    yield return sourceUnit.PlayItemUsedAnimation();
+                }
+
+                yield return sourceUnit.PlayAttackAnimation();
+
+                if (damageDetails.targetItemUsed == true)
                 {
                     yield return targetUnit.PlayItemUsedAnimation();
                 }
@@ -830,7 +837,7 @@ public class BattleSystem : CoreSystem
                             break;
                         }
 
-                        yield return targetUnit.HUD.UpdateHPDamage(hpPriorToAttack);
+                        yield return targetUnit.HUD.UpdateHP(hpPriorToAttack);
 
                         if(damageDetails.criticalHit > 1 && i < attackLoop)
                         {
@@ -862,14 +869,14 @@ public class BattleSystem : CoreSystem
 
                     if(hpPriorToAttack > targetUnit.pokemon.currentHitPoints)
                     {
-                        yield return targetUnit.HUD.UpdateHPDamage(hpPriorToAttack);
+                        yield return targetUnit.HUD.UpdateHP(hpPriorToAttack);
                     }
                 }
                 
                 yield return ShowDamageDetails(damageDetails, targetUnit);
                 if(damageDetails.damageNullified == true)
                 {
-                    yield return targetUnit.HUD.UpdateHPRecovered(targetUnit.pokemon.currentHitPoints- hpPriorToAttack);
+                    yield return targetUnit.HUD.UpdateHP(targetUnit.pokemon.currentHitPoints- hpPriorToAttack);
                     yield return ApplyStatChanges(damageDetails.defendersStatBoostByAbility, targetUnit, MoveTarget.Foe);
                     yield return ApplyStatChanges(damageDetails.attackersStatBoostByDefendersAbility, sourceUnit, MoveTarget.Self, sourceUnit);
 
@@ -900,7 +907,7 @@ public class BattleSystem : CoreSystem
 
                         hpHealed = Mathf.Clamp(hpHealed, 1, sourceUnit.pokemon.maxHitPoints - sourceUnit.pokemon.currentHitPoints);
                         sourceUnit.pokemon.UpdateHPRestored(hpHealed);
-                        yield return sourceUnit.HUD.UpdateHPRecovered(hpHealed);
+                        yield return sourceUnit.HUD.UpdateHP(previousHP);
                         yield return dialogSystem.TypeDialog($"{targetUnit.pokemon.currentName} had its energy drained");
                     }
                 }
@@ -924,7 +931,7 @@ public class BattleSystem : CoreSystem
 
                         if (secondaryEffect.Volatiletatus == ConditionID.CursedUser)
                         {
-                            yield return sourceUnit.HUD.UpdateHPDamage(previousHP);
+                            yield return sourceUnit.HUD.UpdateHP(previousHP);
                             if (sourceUnit.pokemon.currentHitPoints <= 0)
                             {
                                 yield return PokemonHasFainted(sourceUnit);
@@ -985,7 +992,7 @@ public class BattleSystem : CoreSystem
 
                     previousHP = sourceUnit.pokemon.currentHitPoints;
                     sourceUnit.pokemon.UpdateHPDamage(recoilDamage);
-                    yield return sourceUnit.HUD.UpdateHPDamage(previousHP);
+                    yield return sourceUnit.HUD.UpdateHP(previousHP);
                     if(alteredMove.RecoilPercentage < 100)
                     {
                         yield return dialogSystem.TypeDialog($"{sourceUnit.pokemon.currentName} is hit with recoil!");
@@ -998,21 +1005,26 @@ public class BattleSystem : CoreSystem
                 }
             }
 
+            //Item altering HP
             int hpDifference = sourceUnit.pokemon.GetHoldItemEffects.AlterUserHPAfterAttack(sourceUnit.pokemon, alteredMove, (hpPriorToAttack - targetUnit.pokemon.currentHitPoints));
-            if(hpDifference > 0)
+            previousHP = sourceUnit.pokemon.currentHitPoints;
+
+            if(hpDifference != 0)
             {
-                previousHP = sourceUnit.pokemon.currentHitPoints;
-                sourceUnit.pokemon.UpdateHPRestored(hpDifference);
-                yield return sourceUnit.PlayItemUsedAnimation();
-                yield return sourceUnit.HUD.UpdateHPRecovered(previousHP);
-                yield return dialogSystem.TypeDialog(sourceUnit.pokemon.GetHoldItemEffects.SpecializedMessage(sourceUnit.pokemon, targetUnit.pokemon));
-            }
-            else if (hpDifference < 0)
-            {
-                previousHP = sourceUnit.pokemon.currentHitPoints;
-                sourceUnit.pokemon.UpdateHPDamage(hpDifference);
-                yield return sourceUnit.PlayItemUsedAnimation();
-                yield return sourceUnit.HUD.UpdateHPDamage(previousHP);
+                if (hpDifference > 0)
+                {
+                    sourceUnit.pokemon.UpdateHPRestored(hpDifference);
+                }
+                else if (hpDifference < 0)
+                {
+                    sourceUnit.pokemon.UpdateHPDamage(-hpDifference);
+                }
+
+                if(sourceUnit.pokemon.GetHoldItemEffects.PlayAnimationWhenUsed() == true)
+                {
+                    yield return sourceUnit.PlayItemUsedAnimation();
+                }
+                yield return sourceUnit.HUD.UpdateHP(previousHP);
                 yield return dialogSystem.TypeDialog(sourceUnit.pokemon.GetHoldItemEffects.SpecializedMessage(sourceUnit.pokemon, targetUnit.pokemon));
             }
             
@@ -1020,7 +1032,10 @@ public class BattleSystem : CoreSystem
             {
                 if(targetUnit.pokemon.GetHoldItemEffects.RemoveItem == true)
                 {
-                    yield return targetUnit.PlayItemUsedAnimation();
+                    if(targetUnit.pokemon.GetHoldItemEffects.PlayAnimationWhenUsed() == true)
+                    {
+                        yield return targetUnit.PlayItemUsedAnimation();
+                    }
                     targetUnit.pokemon.ItemUsed();
                 }
             }
@@ -1035,6 +1050,7 @@ public class BattleSystem : CoreSystem
         }
         else
         {
+            yield return sourceUnit.PlayAttackAnimation();
             yield return dialogSystem.TypeDialog($"{sourceUnit.pokemon.currentName}'s attack missed!");
             StatBoost statBoost = sourceUnit.pokemon.GetHoldItemEffects.RaisesStatUponMissing();
             if(statBoost != null)
@@ -1050,7 +1066,7 @@ public class BattleSystem : CoreSystem
         {
             int recoilDamage = sourceUnit.pokemon.currentHitPoints;
             sourceUnit.pokemon.UpdateHPDamage(recoilDamage);
-            yield return sourceUnit.HUD.UpdateHPDamage(previousHP);
+            yield return sourceUnit.HUD.UpdateHP(previousHP);
 
             if (sourceUnit.pokemon.currentHitPoints <= 0)
             {
@@ -1186,7 +1202,7 @@ public class BattleSystem : CoreSystem
                 hpHealed = Mathf.CeilToInt(hpHealed * HealthRecoveryModifiers(currentMove, weatherEffectID));
                 hpHealed = Mathf.Clamp(hpHealed, 1, source.pokemon.maxHitPoints - source.pokemon.currentHitPoints);
                 source.pokemon.UpdateHPRestored(hpHealed);
-                yield return source.HUD.UpdateHPRecovered(hpHealed);
+                yield return source.HUD.UpdateHP(hpHealed);
                 source.pokemon.statusChanges.Enqueue($"{source.pokemon.currentName}'s hp was restored");
             }
             else
@@ -1272,7 +1288,7 @@ public class BattleSystem : CoreSystem
             }
 
             yield return ShowStatusChanges(sourceUnit.pokemon);
-            yield return sourceUnit.HUD.UpdateHPDamage(currentHP);
+            yield return sourceUnit.HUD.UpdateHP(currentHP);
 
             if(currentCondition.Id == ConditionID.LeechSeed)
             {
@@ -1285,7 +1301,7 @@ public class BattleSystem : CoreSystem
                 {
                     int hpHealed = Mathf.Clamp(leechSeed.HealthStolen, 1, targetUnit.pokemon.maxHitPoints - targetUnit.pokemon.currentHitPoints);
                     targetUnit.pokemon.UpdateHPRestored(hpHealed);
-                    yield return targetUnit.HUD.UpdateHPRecovered(leechSeed.HealthStolen);
+                    yield return targetUnit.HUD.UpdateHP(leechSeed.HealthStolen);
                 }
             }
         }
@@ -1294,9 +1310,11 @@ public class BattleSystem : CoreSystem
         if (sourceUnit.pokemon.currentHitPoints <= 0)
         {
             yield return PokemonHasFainted(sourceUnit);
+            yield break;
         }
         else
         {
+
             currentHP = sourceUnit.pokemon.currentHitPoints;
 
             sourceUnit.pokemon.GetHoldItemEffects.OnTurnEnd(sourceUnit.pokemon);
@@ -1306,14 +1324,20 @@ public class BattleSystem : CoreSystem
             {
                 sourceUnit.pokemon.SetStatusByItem(condition, sourceUnit.pokemon.GetHoldItemEffects.SpecializedMessage(sourceUnit.pokemon,targetUnit.pokemon));
             }
-            
+
+            if(currentHP != sourceUnit.pokemon.currentHitPoints)
+            {
+                yield return sourceUnit.PlayItemUsedAnimation();
+            }
+
+            yield return sourceUnit.HUD.UpdateHP(currentHP);
             yield return ShowStatusChanges(sourceUnit.pokemon);
-            yield return sourceUnit.HUD.UpdateHPDamage(currentHP);
         }
 
         if (sourceUnit.pokemon.currentHitPoints <= 0)
         {
             yield return PokemonHasFainted(sourceUnit);
+            yield break;
         }
         else
         {
@@ -1569,33 +1593,31 @@ public class BattleSystem : CoreSystem
                 float trainerBonus = (_isTrainerBattle == true) ? 1.5f : 1;
                 int pokemonSharingExp = 1;
 
-                if (targetBattleUnit.GetListOfPokemonBattledAgainst.Count > 1)
+                pokemonSharingExp = 0;
+
+                //Pokemon in party holding EXP share
+                List<Pokemon> playerParty = _playerController.pokemonParty.CurrentPokemonList();
+                for (int i = 0; i < playerParty.Count; i++)
                 {
-                    pokemonSharingExp = 0;
-                    List<Pokemon> copyPokemonBattledAgainst = new List<Pokemon>(targetBattleUnit.GetListOfPokemonBattledAgainst);
-
-                    //Pokemon in party holding EXP share
-                    List<Pokemon> playerParty = _playerController.pokemonParty.CurrentPokemonList();
-                    for (int i = 0; i < playerParty.Count; i++)
+                    if (playerParty[i].GetHoldItemEffects.ExperienceShared() == true && playerParty[i].currentHitPoints > 0)
                     {
-                        if(playerParty[i].GetHoldItemEffects.ExperienceShared() == true && playerParty[i].currentHitPoints > 0)
+                        if (targetBattleUnit.GetListOfPokemonBattledAgainst.Contains(playerParty[i]) == false)
                         {
-                            if(copyPokemonBattledAgainst.Contains(playerParty[i]) == false)
-                            {
-                                copyPokemonBattledAgainst.Add(playerParty[i]);
-                            }
+                            targetBattleUnit.AddPokemonToBattleList(playerParty[i]);
                         }
                     }
+                }
 
-                    foreach (Pokemon pokemon in copyPokemonBattledAgainst)
+                List<Pokemon> copyPokemonBattledAgainst = new List<Pokemon>(targetBattleUnit.GetListOfPokemonBattledAgainst);
+
+                foreach (Pokemon pokemon in copyPokemonBattledAgainst)
+                {
+                    if (pokemon.currentLevel >= 100 || pokemon.currentHitPoints <= 0)
                     {
-                        if (pokemon.currentLevel >= 100 || pokemon.currentHitPoints <= 0)
-                        {
-                            targetBattleUnit.GetListOfPokemonBattledAgainst.Remove(pokemon);
-                            continue;
-                        }
-                        pokemonSharingExp++;
+                        targetBattleUnit.GetListOfPokemonBattledAgainst.Remove(pokemon);
+                        continue;
                     }
+                    pokemonSharingExp++;
                 }
 
                 int expGained = Mathf.FloorToInt(expYield * level * trainerBonus / pokemonSharingExp) / 7;
@@ -1780,7 +1802,7 @@ public class BattleSystem : CoreSystem
             {
                 target.PlayHitAnimation();
             }
-            yield return target.HUD.UpdateHPDamage(currentHP);
+            yield return target.HUD.UpdateHP(currentHP);
 
             if (target.pokemon.currentHitPoints <= 0)
             {
@@ -1859,7 +1881,7 @@ public class BattleSystem : CoreSystem
         if(currentHP != sourceUnit.pokemon.currentHitPoints)
         {
             sourceUnit.PlayHitAnimation();
-            yield return sourceUnit.HUD.UpdateHPDamage(currentHP);
+            yield return sourceUnit.HUD.UpdateHP(currentHP);
         }
 
         currentHP = sourceUnit.pokemon.currentHitPoints;
@@ -1869,11 +1891,11 @@ public class BattleSystem : CoreSystem
             yield return ShowStatusChanges(sourceUnit.pokemon);
             if (currentHP < sourceUnit.pokemon.currentHitPoints)
             {
-                yield return sourceUnit.HUD.UpdateHPRecovered(sourceUnit.pokemon.currentHitPoints - currentHP);
+                yield return sourceUnit.HUD.UpdateHP(sourceUnit.pokemon.currentHitPoints - currentHP);
             }
             else
             {
-                yield return sourceUnit.HUD.UpdateHPDamage(currentHP);
+                yield return sourceUnit.HUD.UpdateHP(currentHP);
             }
         }
 

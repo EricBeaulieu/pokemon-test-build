@@ -73,14 +73,20 @@ public class BattleHUD : MonoBehaviour
         levelText.text = pokemon.currentLevel.ToString();
     }
 
-    public IEnumerator UpdateHPDamage(int hpBeforeDamage)
+    public IEnumerator UpdateHP(int hpBeforeChange)
     {
-        yield return hPBar.SetHPDamageAnimation(pokemon.currentHitPoints,hpBeforeDamage,pokemon.maxHitPoints,currentHP);
-    }
-
-    public IEnumerator UpdateHPRecovered(int hphealed)
-    {
-        yield return hPBar.SetHPRecoveredAnimation(pokemon.currentHitPoints, hphealed, pokemon.maxHitPoints, currentHP);
+        if (hpBeforeChange == pokemon.currentHitPoints)
+        {
+            yield break;
+        }
+        else if (hpBeforeChange > pokemon.currentHitPoints)
+        {
+            yield return hPBar.SetHPDamageAnimation(pokemon.currentHitPoints, hpBeforeChange, pokemon.maxHitPoints, currentHP);
+        }
+        else if (hpBeforeChange < pokemon.currentHitPoints)
+        {
+            yield return hPBar.SetHPRecoveredAnimation(pokemon.currentHitPoints,pokemon.currentHitPoints - hpBeforeChange, pokemon.maxHitPoints, currentHP);
+        }
     }
 
     public void UpdateHPWithoutAnimation()

@@ -8,6 +8,11 @@ public class Leftovers : HoldItemBase
     public override HoldItemBase ReturnDerivedClassAsNew() { return new Leftovers(); }
     public override void OnTurnEnd(Pokemon defendingPokemon)
     {
+        if (defendingPokemon.currentHitPoints == defendingPokemon.maxHitPoints)
+        {
+            return;
+        }
+
         int hpHealed = Mathf.FloorToInt(defendingPokemon.maxHitPoints / 16);
 
         if (hpHealed <= 0)

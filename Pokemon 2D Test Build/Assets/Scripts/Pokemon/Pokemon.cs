@@ -487,14 +487,19 @@ public class Pokemon {
 
         //Item effects
         float itemBonus = attackingPokemon.GetHoldItemEffects.AlterDamageTaken((damageDetails.criticalHit > 1),move);
-        //itemBonus *= attackingPokemon.GetHoldItemBase.
 
         List<StatBoost> itemStatBoost = GetHoldItemEffects.AlterStatAfterTakingDamageFromCertainType(move.Type,damageDetails.typeEffectiveness > 1);
 
         if(GetHoldItemEffects.RemoveItem == true)
         {
+            damageDetails.targetItemUsed = GetHoldItemEffects.PlayAnimationWhenUsed();
             ItemUsed();
-            damageDetails.itemUsed = true;
+        }
+
+        if (attackingPokemon.GetHoldItemEffects.RemoveItem == true)
+        {
+            damageDetails.sourceItemUsed = attackingPokemon.GetHoldItemEffects.PlayAnimationWhenUsed();
+            attackingPokemon.ItemUsed();
         }
 
         if (itemStatBoost != null)
@@ -544,8 +549,8 @@ public class Pokemon {
         {
             if (GetHoldItemEffects.RemoveItem == true)
             {
+                damageDetails.targetItemUsed = GetHoldItemEffects.PlayAnimationWhenUsed();
                 ItemUsed();
-                damageDetails.itemUsed = true;
             }
 
             if (damage >= currentHitPoints)

@@ -17,6 +17,10 @@ public class BlackSludge : HoldItemBase
 
         if (defendingPokemon.pokemonBase.IsType(ElementType.Poison) == true)
         {
+            if (defendingPokemon.currentHitPoints == defendingPokemon.maxHitPoints)
+            {
+                return;
+            }
             defendingPokemon.UpdateHPRestored(damage);
             defendingPokemon.statusChanges.Enqueue($"{defendingPokemon.currentName} restored HP using Black Sludge!");
         }

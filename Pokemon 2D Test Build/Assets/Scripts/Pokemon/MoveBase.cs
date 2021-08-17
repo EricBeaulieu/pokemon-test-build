@@ -44,10 +44,8 @@ public class MoveBase : ScriptableObject {
 
     [SerializeField] Recoil recoilType;
     [SerializeField] float recoilPercentage;
-
-    [SerializeField] bool drainsHP;
+    
     [SerializeField] float hpRecovered;
-
     [SerializeField] bool leavesTargetWith1HP;
 
     public void AdjustedMovePower(float powerIncrease)
@@ -224,7 +222,7 @@ public class MoveBase : ScriptableObject {
 
     public bool DrainsHP
     {
-        get { return drainsHP; }
+        get { return hpRecovered > 0; }
     }
 
     public float HpRecovered

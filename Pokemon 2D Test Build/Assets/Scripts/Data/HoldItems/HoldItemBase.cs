@@ -7,6 +7,7 @@ public abstract class HoldItemBase
     public abstract HoldItemID Id { get; }
     public abstract HoldItemBase ReturnDerivedClassAsNew();
     public bool RemoveItem { get; protected set; }
+    public virtual bool PlayAnimationWhenUsed() { return true; }
     public virtual float AlterDamageTaken(bool superEffective,MoveBase move) { return 1f; }
     public virtual void OnTurnEnd(Pokemon defendingPokemon) { }
     public virtual List<StatBoost> AlterStatAfterTakingDamageFromCertainType(ElementType attackType,bool superEffective) { return null; }

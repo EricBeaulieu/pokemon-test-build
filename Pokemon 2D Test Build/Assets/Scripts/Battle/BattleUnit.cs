@@ -692,7 +692,6 @@ public class BattleUnit : MonoBehaviour
 
     public IEnumerator PlayItemUsedAnimation()
     {
-        Debug.Log("Playing Item animation");
         if(isPlayerPokemon == true)
         {
             yield return PlayPlayerItemUsedAnimation();

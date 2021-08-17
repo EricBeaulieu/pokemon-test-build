@@ -6,6 +6,10 @@ public class LifeOrb : HoldItemBase
 {
     public override HoldItemID Id { get { return HoldItemID.LifeOrb; } }
     public override HoldItemBase ReturnDerivedClassAsNew() { return new LifeOrb(); }
+    public override bool PlayAnimationWhenUsed()
+    {
+        return false;
+    }
     public override MoveBase AlterUserMoveDetails(MoveBase move)
     {
         move = move.Clone();
