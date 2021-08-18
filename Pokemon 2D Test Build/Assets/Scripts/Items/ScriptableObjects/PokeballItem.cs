@@ -25,11 +25,7 @@ public class PokeballItem : ItemBase
 
     public override bool UseItemOption()
     {
-        if(BattleSystem.inBattle == true)
-        {
-            return true;
-        }
-        return false;
+        return BattleSystem.inBattle;
     }
 
     public PokeballCaptureID PokeballId

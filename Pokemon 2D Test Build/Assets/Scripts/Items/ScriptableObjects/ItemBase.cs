@@ -13,24 +13,25 @@ public abstract class ItemBase : ScriptableObject
     [SerializeField] string itemDescription;
     [SerializeField] Sprite itemSprite;
 
+    /// <summary>
+    /// Checks to see if the item is compatable with the pokemon
+    /// </summary>
+    /// <param name="pokemon">Pokemon the item is being used on</param>
+    /// <returns>uses the item</returns>
     public abstract bool UseItem(Pokemon pokemon);
 
+    /// <summary>
+    /// Checks if this item type can be used in the current situation, if overworld or battle
+    /// </summary>
+    /// <returns></returns>
     public abstract bool UseItemOption();
     public virtual bool GiveItemOption()
     {
-        if (BattleSystem.inBattle == true)
-        {
-            return false;
-        }
-        return true;
+        return !BattleSystem.inBattle;
     }
     public virtual bool TrashItemOption()//Key item will always be false when implimented
     {
-        if (BattleSystem.inBattle == true)
-        {
-            return false;
-        }
-        return true;
+        return !BattleSystem.inBattle;
     }
 
     public itemType GetItemType
@@ -38,12 +39,12 @@ public abstract class ItemBase : ScriptableObject
         get { return itemType; }
     }
 
-    public string ItemName
+    public virtual string ItemName
     {
         get { return itemName; }
     }
 
-    public string ItemDescription
+    public virtual string ItemDescription
     {
         get { return itemDescription; }
     }
@@ -56,5 +57,19 @@ public abstract class ItemBase : ScriptableObject
     public virtual HoldItemBase HoldItemAffects()
     {
         return HoldItemDB.GetHoldItem(HoldItemID.NA);
+    }
+
+    /// <summary>
+    /// If false show the Usable UI
+    /// </summary>
+    /// <returns></returns>
+    public virtual bool ShowStandardUI()
+    {
+        return true;
+    }
+
+    public virtual bool AbleOrUnableToUseOnPokemon(PokemonBase pokemon)
+    {
+        return false;
     }
 }

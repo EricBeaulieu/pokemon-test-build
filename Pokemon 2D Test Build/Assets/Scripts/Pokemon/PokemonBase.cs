@@ -55,6 +55,7 @@ public class PokemonBase : ScriptableObject {
 
     [Header("Moveset")]
     [SerializeField] List<LearnableMove> _learnableMoves;
+    [SerializeField] List<MoveBase> learnableTMHMMoves;
     public static int MAX_NUMBER_OF_MOVES { get; } = 4;
 
     #region Getters/Setters
@@ -188,6 +189,11 @@ public class PokemonBase : ScriptableObject {
     public List<LearnableMove> LearnableMoves
     {
         get { return _learnableMoves; }
+    }
+
+    public List<MoveBase> LearnableTMHMMoves
+    {
+        get { return learnableTMHMMoves; }
     }
 
     public AbilityID FirstAbility

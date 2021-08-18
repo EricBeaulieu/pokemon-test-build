@@ -361,6 +361,8 @@ public class InventorySystem : CoreSystem
                 CloseSystem();
                 break;
             case itemType.TMHM:
+                CloseSystem();
+                partySystem.OpenPartySystemDueToInventoryItem(item, true);
                 break;
             case itemType.Berry:
                 break;

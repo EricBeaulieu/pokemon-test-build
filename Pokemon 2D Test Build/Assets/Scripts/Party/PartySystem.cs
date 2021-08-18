@@ -222,7 +222,7 @@ public class PartySystem : CoreSystem
             if (i < currentParty.Count)
             {
                 _partyMemberSlots[i].gameObject.SetActive(true);
-                _partyMemberSlots[i].SetData(currentParty[i]);
+                _partyMemberSlots[i].SetData(currentParty[i],item.ItemBase);
 
                 int k = i;
                 _partyMemberSlots[k].GetButton.onClick.RemoveAllListeners();
@@ -232,6 +232,12 @@ public class PartySystem : CoreSystem
                     {
                         Pokemon currentPokemon = _partyMemberSlots[k].CurrentPokemon();
                         int hpDif = currentPokemon.currentHitPoints;
+                        if(item.ItemBase is TMHMItem)
+                        {
+                            Debug.Log("Check if item can be used");
+                            return;
+                        }
+
                         if (item.ItemBase.UseItem(currentPokemon) == true)
                         {
                             dialogSystem.SetDialogText($"{item.ItemBase.ItemName} was used on {currentPokemon.currentName}");

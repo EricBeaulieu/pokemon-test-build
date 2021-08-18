@@ -10,11 +10,14 @@ public class PartyMemberUI : MonoBehaviour, ISelectHandler, IDeselectHandler
     bool _isFirstSlot = false;
 
     [SerializeField] Text nameText;
+    [SerializeField] Image levelImage;
     [SerializeField] Text levelText;
+    [SerializeField] GameObject hpBarParentImage;
     [SerializeField] HPBar hPBar;
     [SerializeField] Text currentHP;
     [SerializeField] Image gender;
     [SerializeField] Image status;
+    [SerializeField] Text itemCompatablilityText;
 
     [SerializeField] Image pokemonSprite;
     Sprite[] _animatedSprite;
@@ -58,7 +61,7 @@ public class PartyMemberUI : MonoBehaviour, ISelectHandler, IDeselectHandler
         }
     }
 
-    public void SetData(Pokemon currentPokemon)
+    public void SetData(Pokemon currentPokemon, ItemBase currentItem = null)
     {
         _pokemon = currentPokemon;
 
@@ -86,6 +89,7 @@ public class PartyMemberUI : MonoBehaviour, ISelectHandler, IDeselectHandler
         _currentIndex = 0;
         pokemonSprite.sprite = _animatedSprite[_currentIndex];
         UpdateHoldItem();
+        ItemBeingUsed(currentItem);
 
         Deselected();
     }
@@ -191,5 +195,30 @@ public class PartyMemberUI : MonoBehaviour, ISelectHandler, IDeselectHandler
     public void UpdateHoldItem()
     {
         heldItem.sprite = (_pokemon.GetCurrentItem != null) ? PartyBackgroundArt.instance.HoldItemSprite() : StatusConditionArt.instance.Nothing;
+    }
+
+    void ItemBeingUsed(ItemBase currentItem)
+    {
+        if (currentItem != null)
+        {
+            levelImage.gameObject.SetActive(currentItem.ShowStandardUI());
+            levelText.gameObject.SetActive(currentItem.ShowStandardUI());
+            hpBarParentImage.SetActive(currentItem.ShowStandardUI());
+            currentHP.gameObject.SetActive(currentItem.ShowStandardUI());
+            itemCompatablilityText.gameObject.SetActive(!currentItem.ShowStandardUI());
+
+            if (currentItem.ShowStandardUI() == false)
+            {
+                itemCompatablilityText.text = (currentItem.AbleOrUnableToUseOnPokemon(_pokemon.pokemonBase)) ? "Able" : "Unable";
+            }
+        }
+        else
+        {
+            levelImage.gameObject.SetActive(true);
+            levelText.gameObject.SetActive(true);
+            hpBarParentImage.SetActive(true);
+            currentHP.gameObject.SetActive(true);
+            itemCompatablilityText.gameObject.SetActive(false);
+        }
     }
 }

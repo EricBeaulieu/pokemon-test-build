@@ -614,30 +614,7 @@ public class BattleSystem : CoreSystem
 
     IEnumerator RunThroughTurns(List<TurnAttackDetails> attacksChosen)
     {
-        if(attacksChosen.Count > 1)
-        {
-            if(attacksChosen[0].currentMove.moveBase.Priority == attacksChosen[1].currentMove.moveBase.Priority)
-            {
-                for (int i = 0; i < attacksChosen.Count; i++)
-                {
-                    int adjustedPriority = attacksChosen[i].attackingPokemon.pokemon.GetHoldItemEffects.AdjustSpeedPriorityTurn();
-                    if (adjustedPriority != 0)
-                    {
-                        if (adjustedPriority > 0)
-                        {
-                            yield return attacksChosen[i].attackingPokemon.PlayItemUsedAnimation();
-                        }
-
-                        TurnAttackDetails turnAttackDetails = attacksChosen[i];
-                        currentAttack = attacksChosen[1 - i];
-                        attacksChosen.Clear();
-                        attacksChosen.Add(currentAttack);
-                        attacksChosen.Add(turnAttackDetails);
-                        break;
-                    }
-                }
-            }
-        }
+        yield return RearrangeAttackOrder();
 
         while(attacksChosen.Count > 0)
         {
@@ -1607,6 +1584,45 @@ public class BattleSystem : CoreSystem
         inBattle = false;
         dialogSystem.SetCurrentDialogBox();
         GameManager.instance.EndBattle(hasWon);
+    }
+
+    IEnumerator RearrangeAttackOrder()
+    {
+        if (currentTurnDetails.Count <= 1)
+        {
+            yield break;
+        }
+
+        if (currentTurnDetails[0].currentMove.moveBase.Priority == currentTurnDetails[1].currentMove.moveBase.Priority)
+        {
+            for (int i = 0; i < currentTurnDetails.Count; i++)
+            {
+                int adjustedPriority = currentTurnDetails[i].attackingPokemon.pokemon.GetHoldItemEffects.AdjustSpeedPriorityTurn();
+                if (adjustedPriority != 0)
+                {
+                    if (adjustedPriority > 0)
+                    {
+                        yield return currentTurnDetails[i].attackingPokemon.PlayItemUsedAnimation();
+                    }
+
+                    TurnAttackDetails firstAttack = currentTurnDetails[i];
+                    currentAttack = currentTurnDetails[1 - i];//Second Attack
+                    currentTurnDetails.Clear();
+                    if(adjustedPriority > 0)
+                    {
+                        currentTurnDetails.Add(firstAttack);
+                        currentTurnDetails.Add(currentAttack);
+                    }
+                    else
+                    {
+                        currentTurnDetails.Add(currentAttack);
+                        currentTurnDetails.Add(firstAttack);
+                    }
+
+                    break;
+                }
+            }
+        }
     }
 
     #endregion
