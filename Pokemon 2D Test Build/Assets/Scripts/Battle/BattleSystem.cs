@@ -996,7 +996,7 @@ public class BattleSystem : CoreSystem
                     yield return dialogSystem.TypeDialog(targetUnit.pokemon.GetHoldItemEffects.SpecializedMessage(targetUnit.pokemon, sourceUnit.pokemon));
                 }
             }
-            else
+            else if(sourceUnit.pokemon.GetHoldItemEffects.HurtsAttacker() == false)
             {
                 hpDifference = sourceUnit.pokemon.GetHoldItemEffects.AlterUserHPAfterAttack(sourceUnit.pokemon, alteredMove, (hpPriorToAttack - targetUnit.pokemon.currentHitPoints));
                 previousHP = sourceUnit.pokemon.currentHitPoints;
