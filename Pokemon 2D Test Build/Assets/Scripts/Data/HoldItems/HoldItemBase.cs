@@ -39,6 +39,7 @@ public abstract class HoldItemBase
     /// </summary>
     /// <returns>1 means this pokemon is going first, 0 means no changes and -1 means its always last</returns>
     public virtual int AdjustSpeedPriorityTurn() { return 0; }//not implimented
+    public virtual bool HurtsAttacker() { return false; }
     public virtual int AlterUserHPAfterAttack(Pokemon holder,MoveBase move,int damageDealt) { return 0; }
     public virtual int ReflectLightScreenDuration(MoveBase move) { return 0; }
     public virtual float ExperienceModifier() { return 1; }

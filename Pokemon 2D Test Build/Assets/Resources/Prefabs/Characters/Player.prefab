@@ -225,6 +225,32 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pokemonParty:
+  - _pokemonBase: {fileID: 11400000, guid: c29d8f34d67e33d48a426af6f23c9e0c, type: 2}
+    _level: 7
+    _presetMoves:
+    - {fileID: 11400000, guid: 25ced48a08587044d803fdfe6e980c37, type: 2}
+    - {fileID: 11400000, guid: 5474c4670e883354e817c33a207c3c12, type: 2}
+    - {fileID: 11400000, guid: 064cc14c0b8320743b2084d041f0b619, type: 2}
+    - {fileID: 11400000, guid: f1ba31bada5652040942d192b0b700d3, type: 2}
+    _isShiny: 0
+    _gender: 0
+    _nature: {fileID: 11400000, guid: 44ab6eaa34011774a94ade5bcb2a6422, type: 2}
+    _individualValues:
+      _hitPoints: 0
+      _attack: 0
+      _defense: 0
+      _specialAttack: 0
+      _specialDefense: 0
+      _speed: 0
+    _effortValues:
+      _hitPoints: 0
+      _attack: 0
+      _defense: 0
+      _specialAttack: 0
+      _specialDefense: 0
+      _speed: 0
+    _currentName: 
+    currentHeldItem: {fileID: 11400000, guid: 8f2c4b786d1f69043bf406beb1488738, type: 2}
   - _pokemonBase: {fileID: 11400000, guid: c4dd55ad047f5cb4d9c167f439657170, type: 2}
     _level: 10
     _presetMoves: []
@@ -246,11 +272,11 @@ MonoBehaviour:
       _specialDefense: 0
       _speed: 0
     _currentName: 
-    currentHeldItem: {fileID: 11400000, guid: c27446e2bb65ce344a6ad0fe2f68ad80, type: 2}
-  - _pokemonBase: {fileID: 11400000, guid: 43b86e842137c924aa868272bd5d0f45, type: 2}
+    currentHeldItem: {fileID: 11400000, guid: 2da269b0d7ff96a4abc055a3888ae908, type: 2}
+  - _pokemonBase: {fileID: 11400000, guid: 9619426948da384479f16ac51d34710d, type: 2}
     _level: 7
     _presetMoves: []
-    _isShiny: 0
+    _isShiny: 1
     _gender: 0
     _nature: {fileID: 0}
     _individualValues:
@@ -268,9 +294,9 @@ MonoBehaviour:
       _specialDefense: 0
       _speed: 0
     _currentName: 
-    currentHeldItem: {fileID: 11400000, guid: 0de3b2c8e9bba15468ad8418809a15f5, type: 2}
+    currentHeldItem: {fileID: 11400000, guid: c6737df4cf197444aa0084db8ba52173, type: 2}
   - _pokemonBase: {fileID: 11400000, guid: 699cdb8144bb5e546bd7c06c113ccb97, type: 2}
-    _level: 1
+    _level: 8
     _presetMoves: []
     _isShiny: 0
     _gender: 0
@@ -314,7 +340,7 @@ MonoBehaviour:
       _specialDefense: 0
       _speed: 0
     _currentName: 
-    currentHeldItem: {fileID: 11400000, guid: 8fd61c875d7a3cd45805ed036d03523b, type: 2}
+    currentHeldItem: {fileID: 11400000, guid: e23552926e6b36a4e822580d7a36a04e, type: 2}
 --- !u!50 &5712684506751752015
 Rigidbody2D:
   serializedVersion: 4

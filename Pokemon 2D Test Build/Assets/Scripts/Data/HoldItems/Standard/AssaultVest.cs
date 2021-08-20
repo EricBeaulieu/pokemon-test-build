@@ -16,7 +16,7 @@ public class AssaultVest : HoldItemBase
     }
     public override string SpecializedMessage(Pokemon holder,Pokemon opposingPokemon)
     {
-        return "The effects of Assult Vest prevents status moves from being used!";
+        return $"The effects of {GlobalTools.SplitCamelCase(Id.ToString())} prevents status moves from being used!";
     }
     public override float AlterStat(Pokemon holder, StatAttribute statAffected)
     {

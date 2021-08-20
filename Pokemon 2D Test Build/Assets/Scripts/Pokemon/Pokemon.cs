@@ -255,8 +255,9 @@ public class Pokemon {
         }
     }
 
-    public void ApplyStatModifier(List<StatBoost> currentBoostModifiers)
+    public bool ApplyStatModifier(List<StatBoost> currentBoostModifiers)
     {
+        bool showAnimation = false;
         foreach (StatBoost modifier in currentBoostModifiers)
         {
             if(modifier.stat == StatAttribute.NA)
@@ -267,12 +268,30 @@ public class Pokemon {
             StatAttribute statModified = modifier.stat;
             int boost = modifier.boost;
 
+            if(modifier.boost > 0)
+            {
+                if(statBoosts[statModified] == 6)
+                {
+                    statusChanges.Enqueue($"{currentName} {modifier.stat.ToString()} can't go any higher");
+                    continue;
+                }
+            }
+            else
+            {
+                if (statBoosts[statModified] == -6)
+                {
+                    statusChanges.Enqueue($"{currentName} {modifier.stat.ToString()} can't go any lower");
+                    continue;
+                }
+            }
             statBoosts[statModified] = Mathf.Clamp(statBoosts[statModified] + boost, -6, 6);
 
             statusChanges.Enqueue(StatChangesMessage(currentName, statModified,boost));
 
             Debug.Log($"{currentName} {statModified} has been changed to {statBoosts[statModified]}");
+            showAnimation = true;
         }
+        return showAnimation;
     }
 
     float GetStatAfterModification(StatAttribute currentStat)

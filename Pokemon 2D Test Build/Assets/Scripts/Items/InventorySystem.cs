@@ -513,8 +513,9 @@ public class InventorySystem : CoreSystem
             {
                 selectableBox.SelectBox(giveOption.gameObject);
             }
-            SetUpCancelButtonFuntionality(false);
             itemDetails.SetData(specifiedItem);
+            SpecificItemOptionDisplay(true);
+            SetUpCancelButtonFuntionality(false);
         }
         else
         {

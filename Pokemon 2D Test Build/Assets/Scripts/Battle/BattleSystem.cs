@@ -631,9 +631,11 @@ public class BattleSystem : CoreSystem
         if(_currentWeather != null)
         {
             yield return ShowWeatherEffect(_currentWeather);
-
-            yield return ApplyWeatherEffectsOnEndTurn(_currentWeather, playerBattleUnit);
-            yield return ApplyWeatherEffectsOnEndTurn(_currentWeather, enemyBattleUnit);
+            if (_currentWeather != null)
+            {
+                yield return ApplyWeatherEffectsOnEndTurn(_currentWeather, playerBattleUnit);
+                yield return ApplyWeatherEffectsOnEndTurn(_currentWeather, enemyBattleUnit);
+            }
         }
 
         //Called after all attacks have been done
@@ -973,26 +975,56 @@ public class BattleSystem : CoreSystem
             }
 
             //Item altering HP
-            int hpDifference = sourceUnit.pokemon.GetHoldItemEffects.AlterUserHPAfterAttack(sourceUnit.pokemon, alteredMove, (hpPriorToAttack - targetUnit.pokemon.currentHitPoints));
-            previousHP = sourceUnit.pokemon.currentHitPoints;
-
-            if(hpDifference != 0)
+            int hpDifference;
+            if (targetUnit.pokemon.GetHoldItemEffects.HurtsAttacker() == true)
             {
-                if (hpDifference > 0)
+                hpDifference = targetUnit.pokemon.GetHoldItemEffects.AlterUserHPAfterAttack(sourceUnit.pokemon, alteredMove, (hpPriorToAttack - targetUnit.pokemon.currentHitPoints));
+                previousHP = sourceUnit.pokemon.currentHitPoints;
+
+                if (hpDifference != 0)
                 {
-                    sourceUnit.pokemon.UpdateHPRestored(hpDifference);
+                    if (hpDifference > 0)
+                    {
+                        sourceUnit.pokemon.UpdateHPRestored(hpDifference);
+                    }
+                    else if (hpDifference < 0)
+                    {
+                        sourceUnit.pokemon.UpdateHPDamage(-hpDifference);
+                    }
+
+                    yield return sourceUnit.HUD.UpdateHP(previousHP);
+                    yield return dialogSystem.TypeDialog(targetUnit.pokemon.GetHoldItemEffects.SpecializedMessage(targetUnit.pokemon, sourceUnit.pokemon));
                 }
-                else if (hpDifference < 0)
+            }
+            else
+            {
+                hpDifference = sourceUnit.pokemon.GetHoldItemEffects.AlterUserHPAfterAttack(sourceUnit.pokemon, alteredMove, (hpPriorToAttack - targetUnit.pokemon.currentHitPoints));
+                previousHP = sourceUnit.pokemon.currentHitPoints;
+
+                if (hpDifference != 0)
                 {
-                    sourceUnit.pokemon.UpdateHPDamage(-hpDifference);
+                    if (hpDifference > 0)
+                    {
+                        sourceUnit.pokemon.UpdateHPRestored(hpDifference);
+                    }
+                    else if (hpDifference < 0)
+                    {
+                        sourceUnit.pokemon.UpdateHPDamage(-hpDifference);
+                    }
+
+                    if (sourceUnit.pokemon.GetHoldItemEffects.PlayAnimationWhenUsed() == true)
+                    {
+                        yield return sourceUnit.PlayItemUsedAnimation();
+                    }
+                    yield return sourceUnit.HUD.UpdateHP(previousHP);
+                    yield return dialogSystem.TypeDialog(sourceUnit.pokemon.GetHoldItemEffects.SpecializedMessage(sourceUnit.pokemon, targetUnit.pokemon));
                 }
 
-                if(sourceUnit.pokemon.GetHoldItemEffects.PlayAnimationWhenUsed() == true)
+
+                if (sourceUnit.pokemon.currentHitPoints <= 0)
                 {
-                    yield return sourceUnit.PlayItemUsedAnimation();
+                    yield return PokemonHasFainted(sourceUnit);
                 }
-                yield return sourceUnit.HUD.UpdateHP(previousHP);
-                yield return dialogSystem.TypeDialog(sourceUnit.pokemon.GetHoldItemEffects.SpecializedMessage(sourceUnit.pokemon, targetUnit.pokemon));
             }
             
             if(targetUnit.pokemon.GetHoldItemEffects.RemovesMoveBindingEffectsAfterMoveUsed(targetUnit.pokemon) == true)
@@ -1275,7 +1307,8 @@ public class BattleSystem : CoreSystem
                     targetUnit.pokemon.UpdateHPRestored(hpHealed);
                     yield return ShowStatusChanges(sourceUnit.pokemon);
                     yield return sourceUnit.HUD.UpdateHP(currentHP);
-                    yield return targetUnit.HUD.UpdateHP(leechSeed.HealthStolen);
+                    yield return targetUnit.HUD.UpdateHP(targetUnit.pokemon.currentHitPoints - hpHealed);
+                    continue;
                 }
             }
             else if(sourceUnit.pokemon.OnEndTurn(currentCondition) == true)
@@ -1449,8 +1482,10 @@ public class BattleSystem : CoreSystem
 
         if (moveTarget == MoveTarget.Foe)
         {
-            targetUnit.pokemon.ApplyStatModifier(positiveEffects);
-            yield return targetUnit.ShowStatChanges(positiveEffects, true);
+            if(targetUnit.pokemon.ApplyStatModifier(positiveEffects) == true)
+            {
+                yield return targetUnit.ShowStatChanges(positiveEffects, true);
+            }
             yield return ShowStatusChanges(targetUnit.pokemon);
 
             bool abilityActivated = false;//This is for multiple stats prevented from being lowered so it doesnt stack the Queue
@@ -1483,18 +1518,24 @@ public class BattleSystem : CoreSystem
                 }
             }
 
-            targetUnit.pokemon.ApplyStatModifier(negativeEffects);
-            yield return targetUnit.ShowStatChanges(negativeEffects, false);
+            if(targetUnit.pokemon.ApplyStatModifier(negativeEffects) == true)
+            {
+                yield return targetUnit.ShowStatChanges(negativeEffects, false);
+            }
             yield return ShowStatusChanges(targetUnit.pokemon);
         }
         else if (moveTarget == MoveTarget.Self && sourceUnit != null)
         {
-            sourceUnit.pokemon.ApplyStatModifier(positiveEffects);
-            yield return sourceUnit.ShowStatChanges(positiveEffects, true);
+            if(sourceUnit.pokemon.ApplyStatModifier(positiveEffects) == true)
+            {
+                yield return sourceUnit.ShowStatChanges(positiveEffects, true);
+            }
             yield return ShowStatusChanges(sourceUnit.pokemon);
 
-            sourceUnit.pokemon.ApplyStatModifier(negativeEffects);
-            yield return sourceUnit.ShowStatChanges(negativeEffects, false);
+            if(sourceUnit.pokemon.ApplyStatModifier(negativeEffects) == true)
+            {
+                yield return sourceUnit.ShowStatChanges(negativeEffects, false);
+            }
             yield return ShowStatusChanges(sourceUnit.pokemon);
         }
 
