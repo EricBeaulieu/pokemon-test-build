@@ -67,9 +67,4 @@ public abstract class ItemBase : ScriptableObject
     {
         return true;
     }
-
-    public virtual bool AbleOrUnableToUseOnPokemon(PokemonBase pokemon)
-    {
-        return false;
-    }
 }

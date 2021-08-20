@@ -15,6 +15,7 @@ public class LearnNewMoveUI : MonoBehaviour
 
     [SerializeField] GameObject[] moveButton;
 
+    bool playerInMenuMakingDecision;
     bool playerDoesNotWantToLearnMove = false;
     Move previousMove;
 
@@ -28,23 +29,13 @@ public class LearnNewMoveUI : MonoBehaviour
         }
     }
 
-    public void OpenToLearnNewMove(Pokemon pokemon ,MoveBase newMove,Action finished)
+    public IEnumerator OpenToLearnNewMove(Pokemon pokemon ,MoveBase newMove)
     {
         Setup(pokemon, newMove);
         gameObject.SetActive(true);
-        OnFinished = finished;
-    }
-
-    public void Close()
-    {
-        if(BattleSystem.inBattle == true)
-        {
-
-        }
-        else
-        {
-            //Return to party Screen in certain state
-        }
+        playerInMenuMakingDecision = false;
+        SelectBox();
+        yield return new WaitUntil(() => playerInMenuMakingDecision == true);
         gameObject.SetActive(false);
     }
 
@@ -92,14 +83,13 @@ public class LearnNewMoveUI : MonoBehaviour
                     //Remove that move, if it is the current move wanting to be learned then stop learning it
                     previousMove = pokemon.moves[k];
                     pokemon.moves[k] = new Move(newMove);
-                    Close();
-                    OnFinished?.Invoke();
+                    playerInMenuMakingDecision = true;
                 });
             }
         }
     }
 
-    public void SelectBox()
+    void SelectBox()
     {
         EventSystem.current.SetSelectedGameObject(null);
         EventSystem.current.SetSelectedGameObject(moveButton[0]);
@@ -113,8 +103,7 @@ public class LearnNewMoveUI : MonoBehaviour
     void RefuseToLearnMove()
     {
         playerDoesNotWantToLearnMove = true;
-        Close();
-        OnFinished?.Invoke();
+        playerInMenuMakingDecision = true;
     }
 
     public string previousMoveName

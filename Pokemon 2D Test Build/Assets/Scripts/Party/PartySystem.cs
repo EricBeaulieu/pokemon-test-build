@@ -706,16 +706,9 @@ public class PartySystem : CoreSystem
             yield return dialogSystem.TypeDialog($"Delete a move to make room for {newMove.GetMove.MoveName}?");
 
             bool playerSelection = false;
-            bool playerSelectingNewMove = true;
 
             yield return dialogSystem.SetChoiceBox(() =>
             {
-                //Open up UI to learn new move
-                learnNewMoveUI.OpenToLearnNewMove(currentPokemon, newMove.GetMove, () =>
-                {
-                    playerSelectingNewMove = false;
-                });
-                learnNewMoveUI.SelectBox();
                 playerSelection = true;
             }
             , () =>
@@ -726,10 +719,8 @@ public class PartySystem : CoreSystem
 
             if(playerSelection == true)
             {
-                while(playerSelectingNewMove == true)
-                {
-                    yield return new WaitForSeconds(0.1f);
-                }
+                yield return learnNewMoveUI.OpenToLearnNewMove(currentPokemon, newMove.GetMove);
+
                 playerSelection = learnNewMoveUI.PlayerDoesNotWantToLearnMove;
                 if(playerSelection == false)
                 {

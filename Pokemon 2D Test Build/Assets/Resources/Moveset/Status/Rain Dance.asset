@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: Rain Dance
   m_EditorClassIdentifier: 
   moveName: Rain Dance
-  moveDescription: 
+  moveDescription: The user summons a heavy rain that falls for five turns, powering
+    up Water-type moves. It lowers the power of Fire-type moves.
   elementType: 17
   moveType: 2
   moveEffects:
@@ -21,6 +22,8 @@ MonoBehaviour:
     status: 0
     volatileStatus: 0
     weatherEffect: 2
+    entryHazard: 0
+    specialStartMessage: 
   secondaryEffects: []
   target: 1
   power: 0
@@ -28,3 +31,20 @@ MonoBehaviour:
   alwaysHits: 1
   priority: 0
   powerPoints: 20
+  baseCriticalHitRate: 0
+  multiStrikeMove: 0
+  fixedNumberOfStrikes: 0
+  physicalContact: 0
+  soundType: 0
+  punchMove: 0
+  bitingMove: 0
+  snatchable: 0
+  affectedByGravity: 0
+  defrostsWhenUsed: 0
+  reflectedByMagicCoatMagicBounce: 0
+  blockedByProtectDetect: 0
+  copyableByMirrorMove: 0
+  recoilType: 0
+  recoilPercentage: 0
+  hpRecovered: 0
+  leavesTargetWith1HP: 0

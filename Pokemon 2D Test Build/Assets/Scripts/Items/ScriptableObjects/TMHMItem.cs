@@ -14,7 +14,7 @@ public class TMHMItem : ItemBase
 
     public override bool UseItem(Pokemon pokemon)
     {
-        return AbleOrUnableToUseOnPokemon(pokemon.pokemonBase);
+        return pokemon.pokemonBase.LearnableTMHMMoves.Exists(x => x == moveBase);
     }
 
     public override bool UseItemOption()
@@ -45,10 +45,5 @@ public class TMHMItem : ItemBase
     public override bool ShowStandardUI()
     {
         return false;
-    }
-
-    public override bool AbleOrUnableToUseOnPokemon(PokemonBase pokemon)
-    {
-        return pokemon.LearnableTMHMMoves.Exists(x => x == moveBase);
     }
 }

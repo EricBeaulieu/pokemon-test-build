@@ -13,13 +13,16 @@ MonoBehaviour:
   m_Name: Confuse Ray
   m_EditorClassIdentifier: 
   moveName: Confuse Ray
-  moveDescription: 
+  moveDescription: The target is exposed to a sinister ray that triggers confusion.
   elementType: 12
   moveType: 2
   moveEffects:
     boosts: []
     status: 0
     volatileStatus: 7
+    weatherEffect: 0
+    entryHazard: 0
+    specialStartMessage: 
   secondaryEffects: []
   target: 0
   power: 0
@@ -27,3 +30,20 @@ MonoBehaviour:
   alwaysHits: 0
   priority: 0
   powerPoints: 20
+  baseCriticalHitRate: 0
+  multiStrikeMove: 0
+  fixedNumberOfStrikes: 0
+  physicalContact: 0
+  soundType: 0
+  punchMove: 0
+  bitingMove: 0
+  snatchable: 0
+  affectedByGravity: 0
+  defrostsWhenUsed: 0
+  reflectedByMagicCoatMagicBounce: 1
+  blockedByProtectDetect: 1
+  copyableByMirrorMove: 1
+  recoilType: 0
+  recoilPercentage: 0
+  hpRecovered: 0
+  leavesTargetWith1HP: 0

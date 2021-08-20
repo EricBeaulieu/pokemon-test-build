@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Vine Whip
   m_EditorClassIdentifier: 
   moveName: VineWhip
-  moveDescription: 
+  moveDescription: The target is struck with slender, whiplike vines to inflict damage.
   elementType: 9
   moveType: 0
   moveEffects:
@@ -22,6 +22,7 @@ MonoBehaviour:
     volatileStatus: 0
     weatherEffect: 0
     entryHazard: 0
+    specialStartMessage: 
   secondaryEffects: []
   target: 0
   power: 40
@@ -30,6 +31,8 @@ MonoBehaviour:
   priority: 0
   powerPoints: 40
   baseCriticalHitRate: 0
+  multiStrikeMove: 0
+  fixedNumberOfStrikes: 0
   physicalContact: 1
   soundType: 0
   punchMove: 0
@@ -40,3 +43,7 @@ MonoBehaviour:
   reflectedByMagicCoatMagicBounce: 0
   blockedByProtectDetect: 0
   copyableByMirrorMove: 0
+  recoilType: 0
+  recoilPercentage: 0
+  hpRecovered: 0
+  leavesTargetWith1HP: 0

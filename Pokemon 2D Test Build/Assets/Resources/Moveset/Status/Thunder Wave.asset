@@ -13,13 +13,38 @@ MonoBehaviour:
   m_Name: Thunder Wave
   m_EditorClassIdentifier: 
   moveName: Thunder Wave
-  moveDescription: 
+  moveDescription: The user launches a weak jolt of electricity that paralyzes the
+    target.
   elementType: 3
   moveType: 2
   moveEffects:
     boosts: []
     status: 4
+    volatileStatus: 0
+    weatherEffect: 0
+    entryHazard: 0
+    specialStartMessage: 
+  secondaryEffects: []
   target: 0
   power: 0
-  accuracy: 100
+  accuracy: 90
+  alwaysHits: 0
+  priority: 0
   powerPoints: 40
+  baseCriticalHitRate: 0
+  multiStrikeMove: 0
+  fixedNumberOfStrikes: 0
+  physicalContact: 0
+  soundType: 0
+  punchMove: 0
+  bitingMove: 0
+  snatchable: 0
+  affectedByGravity: 0
+  defrostsWhenUsed: 0
+  reflectedByMagicCoatMagicBounce: 1
+  blockedByProtectDetect: 1
+  copyableByMirrorMove: 1
+  recoilType: 0
+  recoilPercentage: 0
+  hpRecovered: 0
+  leavesTargetWith1HP: 0

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Poison Powder
   m_EditorClassIdentifier: 
   moveName: Poison Powder
-  moveDescription: 
+  moveDescription: The user scatters a cloud of poisonous dust that poisons the target.
   elementType: 13
   moveType: 2
   moveEffects:
@@ -21,7 +21,31 @@ MonoBehaviour:
     - stat: 0
       boost: 0
     status: 1
+    volatileStatus: 0
+    weatherEffect: 0
+    entryHazard: 0
+    specialStartMessage: 
+  secondaryEffects: []
   target: 0
   power: 0
   accuracy: 100
+  alwaysHits: 0
+  priority: 0
   powerPoints: 20
+  baseCriticalHitRate: 0
+  multiStrikeMove: 0
+  fixedNumberOfStrikes: 0
+  physicalContact: 0
+  soundType: 0
+  punchMove: 0
+  bitingMove: 0
+  snatchable: 0
+  affectedByGravity: 0
+  defrostsWhenUsed: 0
+  reflectedByMagicCoatMagicBounce: 1
+  blockedByProtectDetect: 1
+  copyableByMirrorMove: 1
+  recoilType: 0
+  recoilPercentage: 0
+  hpRecovered: 0
+  leavesTargetWith1HP: 0

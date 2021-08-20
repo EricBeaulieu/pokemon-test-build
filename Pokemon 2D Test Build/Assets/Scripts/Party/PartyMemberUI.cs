@@ -209,7 +209,7 @@ public class PartyMemberUI : MonoBehaviour, ISelectHandler, IDeselectHandler
 
             if (currentItem.ShowStandardUI() == false)
             {
-                itemCompatablilityText.text = (currentItem.AbleOrUnableToUseOnPokemon(_pokemon.pokemonBase)) ? "Able" : "Unable";
+                itemCompatablilityText.text = (currentItem.UseItem(_pokemon)) ? "Able" : "Unable";
                 if(currentItem is TMHMItem)
                 {
                     if(currentPokemon.moves.Exists(x => x.moveBase == ((TMHMItem)currentItem).GetMove) == true)

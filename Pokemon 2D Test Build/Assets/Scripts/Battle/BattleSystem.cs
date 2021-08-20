@@ -620,49 +620,6 @@ public class BattleSystem : CoreSystem
         {
             currentAttack = attacksChosen[0];
 
-            if (attacksChosen.Count > 1)
-            {
-                foreach(TurnAttackDetails attack in attacksChosen)
-                {
-                    if(currentAttack == attack)
-                    {
-                        continue;
-                    }
-
-                    if(currentAttack.currentMove.moveBase.Priority > attack.currentMove.moveBase.Priority)
-                    {
-                        continue;
-                    }
-
-                    if(currentAttack.currentMove.moveBase.Priority == attack.currentMove.moveBase.Priority)
-                    {
-                        if (currentAttack.attackingPokemon.pokemon.speed > attack.attackingPokemon.pokemon.speed)
-                        {
-                            continue;
-                        }
-                        else if (currentAttack.attackingPokemon.pokemon.speed == attack.attackingPokemon.pokemon.speed)
-                        {
-                            bool coinFlip = (Random.value > 0.5f);
-                            if (coinFlip == true)
-                            {
-                                currentAttack = attack;
-                            }
-                            else
-                            {
-                                continue;
-                            }
-                        }
-                        else //currentAttack.attackingPokemon.pokemon.speed < attack.attackingPokemon.pokemon.speed
-                        {
-                            currentAttack = attack;
-                        }
-                    }
-                    else //currentAttack.currentMove.Priority < attack.currentMove.Priority
-                    {
-                        currentAttack = attack;
-                    }
-                }
-            }
             if (currentAttack.attackingPokemon.pokemon.currentHitPoints > 0)
             {
                 yield return RunMove(currentAttack.attackingPokemon, currentAttack.targetPokmeon, currentAttack.currentMove);
@@ -879,7 +836,7 @@ public class BattleSystem : CoreSystem
                         targetUnit.PlayHitAnimation();
                     }
 
-                    if(hpPriorToAttack > targetUnit.pokemon.currentHitPoints)
+                    if(hpPriorToAttack != targetUnit.pokemon.currentHitPoints)
                     {
                         yield return targetUnit.HUD.UpdateHP(hpPriorToAttack);
                     }
@@ -888,7 +845,6 @@ public class BattleSystem : CoreSystem
                 yield return ShowDamageDetails(damageDetails, targetUnit);
                 if(damageDetails.damageNullified == true)
                 {
-                    yield return targetUnit.HUD.UpdateHP(targetUnit.pokemon.currentHitPoints- hpPriorToAttack);
                     yield return ApplyStatChanges(damageDetails.defendersStatBoostByAbility, targetUnit, MoveTarget.Foe);
                     yield return ApplyStatChanges(damageDetails.attackersStatBoostByDefendersAbility, sourceUnit, MoveTarget.Self, sourceUnit);
 
@@ -1293,28 +1249,42 @@ public class BattleSystem : CoreSystem
             }
             currentHP = sourceUnit.pokemon.currentHitPoints;
 
-            if(sourceUnit.pokemon.OnEndTurn(currentCondition) == true)
+            if(currentCondition is LeechSeed)
+            {
+                LeechSeed leechSeed = ((LeechSeed)currentCondition);
+                if (targetUnit.pokemon.currentHitPoints <= 0)
+                {
+                    continue;
+                }
+
+                sourceUnit.pokemon.OnEndTurn(currentCondition);//user will take the damage regardless if they have heal block or not
+
+                if (targetUnit.pokemon.HasCurrentVolatileStatus(ConditionID.HealBlock) == true)
+                {
+                    continue;
+                }
+
+
+                if (targetUnit.pokemon.maxHitPoints - targetUnit.pokemon.currentHitPoints > 0)
+                {
+                    int hpHealed = Mathf.Clamp(leechSeed.HealthStolen, 1, targetUnit.pokemon.maxHitPoints - targetUnit.pokemon.currentHitPoints);
+                    if(targetUnit.pokemon.GetHoldItemEffects.Id == HoldItemID.BigRoot)
+                    {
+                        hpHealed = Mathf.Clamp(Mathf.FloorToInt(hpHealed * 0.3f), 1, targetUnit.pokemon.maxHitPoints - targetUnit.pokemon.currentHitPoints);
+                    }
+                    targetUnit.pokemon.UpdateHPRestored(hpHealed);
+                    yield return ShowStatusChanges(sourceUnit.pokemon);
+                    yield return sourceUnit.HUD.UpdateHP(currentHP);
+                    yield return targetUnit.HUD.UpdateHP(leechSeed.HealthStolen);
+                }
+            }
+            else if(sourceUnit.pokemon.OnEndTurn(currentCondition) == true)
             {
                 yield return sourceUnit.StatusConditionAnimation(currentCondition.Id);
             }
 
             yield return ShowStatusChanges(sourceUnit.pokemon);
             yield return sourceUnit.HUD.UpdateHP(currentHP);
-
-            if(currentCondition.Id == ConditionID.LeechSeed)
-            {
-                LeechSeed leechSeed = ((LeechSeed)currentCondition);
-                if(targetUnit.pokemon.HasCurrentVolatileStatus(ConditionID.HealBlock) == true)
-                {
-                    continue;
-                }
-                if(targetUnit.pokemon.maxHitPoints - targetUnit.pokemon.currentHitPoints > 0)
-                {
-                    int hpHealed = Mathf.Clamp(leechSeed.HealthStolen, 1, targetUnit.pokemon.maxHitPoints - targetUnit.pokemon.currentHitPoints);
-                    targetUnit.pokemon.UpdateHPRestored(hpHealed);
-                    yield return targetUnit.HUD.UpdateHP(leechSeed.HealthStolen);
-                }
-            }
         }
 
         //Item effects
@@ -1619,6 +1589,54 @@ public class BattleSystem : CoreSystem
                         currentTurnDetails.Add(firstAttack);
                     }
 
+                    break;
+                }
+                else
+                {
+                    if (currentTurnDetails[i].attackingPokemon.pokemon.speed > currentTurnDetails[1-i].attackingPokemon.pokemon.speed)
+                    {
+                        TurnAttackDetails firstAttack = currentTurnDetails[i];
+                        currentAttack = currentTurnDetails[1 - i];//Second Attack
+                        currentTurnDetails.Clear();
+                        currentTurnDetails.Add(firstAttack);
+                        currentTurnDetails.Add(currentAttack);
+                        break;
+                    }
+                    else if (currentTurnDetails[i].attackingPokemon.pokemon.speed == currentTurnDetails[1-i].attackingPokemon.pokemon.speed)
+                    {
+                        bool coinFlip = (Random.value > 0.5f);
+                        if (coinFlip == true)
+                        {
+                            TurnAttackDetails firstAttack = currentTurnDetails[i];
+                            currentAttack = currentTurnDetails[1 - i];//Second Attack
+                            currentTurnDetails.Clear();
+                            currentTurnDetails.Add(firstAttack);
+                            currentTurnDetails.Add(currentAttack);
+                        }
+                        else
+                        {
+                            TurnAttackDetails firstAttack = currentTurnDetails[i];
+                            currentAttack = currentTurnDetails[1 - i];//Second Attack
+                            currentTurnDetails.Clear();
+                            currentTurnDetails.Add(currentAttack);
+                            currentTurnDetails.Add(firstAttack);
+                        }
+                        break;
+                    }
+                }
+            }
+        }
+        else
+        {
+            for (int i = 0; i < currentTurnDetails.Count; i++)
+            {
+                if (currentTurnDetails[i].currentMove.moveBase.Priority > currentTurnDetails[1-i].currentMove.moveBase.Priority)
+                {
+                    TurnAttackDetails firstAttack = currentTurnDetails[i];
+                    currentAttack = currentTurnDetails[1 - i];//Second Attack
+                    currentTurnDetails.Clear();
+                    currentTurnDetails.Add(firstAttack);
+                    currentTurnDetails.Add(currentAttack);
                     break;
                 }
             }
@@ -2158,55 +2176,54 @@ public class BattleSystem : CoreSystem
             else
             {
 
-                bool playerSelectingNewMove = true;
+                bool playerSelection = true;
 
-                while (playerSelectingNewMove == true)
+                while (playerSelection == true)
                 {
                     yield return dialogSystem.TypeDialog($"{currentPokemon.currentName} is trying to learn {learnableMove.moveBase.MoveName}.", true);
                     yield return dialogSystem.TypeDialog($"But {currentPokemon.currentName} can't learn more than four moves.", true);
                     yield return dialogSystem.TypeDialog($"Delete a move to make room for {learnableMove.moveBase.MoveName}?");
 
-                    bool ifPlayerSelectsNo = false;
-
                     yield return dialogSystem.SetChoiceBox(() =>
                     {
-                        learnNewMoveUI.OpenToLearnNewMove(currentPokemon, learnableMove.moveBase, () =>
-                        {
-                            playerSelectingNewMove = false;
-                        });
-                        learnNewMoveUI.SelectBox();
+                        playerSelection = true;
                     }
                     , () =>
                     {
-                        ifPlayerSelectsNo = true;
+                        playerSelection = false;
                     });
 
-                    if (ifPlayerSelectsNo == false)
+                    if(playerSelection == true)
                     {
-                        ifPlayerSelectsNo = learnNewMoveUI.PlayerDoesNotWantToLearnMove;
+                        yield return learnNewMoveUI.OpenToLearnNewMove(currentPokemon, learnableMove.moveBase);
+
+                        if(learnNewMoveUI.PlayerDoesNotWantToLearnMove == false)
+                        {
+                            yield return dialogSystem.TypeDialog($"{currentPokemon.currentName} forgot how to use {learnNewMoveUI.previousMoveName}", true);
+                            yield return dialogSystem.TypeDialog($"{currentPokemon.currentName} learned {learnableMove.moveBase.MoveName}!", true);
+                            playerSelection = false;
+                            continue;
+                        }
                     }
 
-                    if (ifPlayerSelectsNo == true)
+                    playerSelection = !learnNewMoveUI.PlayerDoesNotWantToLearnMove;
+
+                    if (playerSelection == false)
                     {
                         yield return dialogSystem.TypeDialog($"Stop Learning {learnableMove.moveBase.MoveName}?");
                         yield return dialogSystem.SetChoiceBox(() =>
                         {
-                            playerSelectingNewMove = false;
+                            playerSelection = false;
                         }
                         , () =>
                         {
-                            playerSelectingNewMove = true;
+                            playerSelection = true;
                         });
 
-                        if (playerSelectingNewMove == false)
+                        if (playerSelection == false)
                         {
                             yield return dialogSystem.TypeDialog($"{currentPokemon.currentName} did not learn {learnableMove.moveBase.MoveName}");
                         }
-                    }
-                    else if (ifPlayerSelectsNo == false && playerSelectingNewMove == false)
-                    {
-                        yield return dialogSystem.TypeDialog($"{currentPokemon.currentName} forgot how to use {learnNewMoveUI.previousMoveName}", true);
-                        yield return dialogSystem.TypeDialog($"{currentPokemon.currentName} learned {learnableMove.moveBase.MoveName}!", true);
                     }
                 }
             }
