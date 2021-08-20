@@ -2152,7 +2152,7 @@ public class BattleSystem : CoreSystem
         {
             if (currentPokemon.moves.Count < PokemonBase.MAX_NUMBER_OF_MOVES)
             {
-                currentPokemon.LearnMove(learnableMove);
+                currentPokemon.LearnMove(learnableMove.moveBase);
                 yield return dialogSystem.TypeDialog($"{currentPokemon.currentName} learned {learnableMove.moveBase.MoveName}!", true);
             }
             else

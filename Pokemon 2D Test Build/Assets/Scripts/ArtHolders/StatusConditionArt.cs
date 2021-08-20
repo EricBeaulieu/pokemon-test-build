@@ -55,6 +55,11 @@ public class StatusConditionArt : MonoBehaviour
     [SerializeField] Sprite steel;
     [SerializeField] Sprite water;
 
+    [Header("Move Category")]
+    [SerializeField] Sprite physical;
+    [SerializeField] Sprite special;
+    [SerializeField] Sprite status;
+
     [Header("Stat Effects")]
     [SerializeField] Sprite attack;
     [SerializeField] Sprite defense;
@@ -69,6 +74,27 @@ public class StatusConditionArt : MonoBehaviour
     [SerializeField] Color highHP;
     [SerializeField] Color mediumHP;
     [SerializeField] Color lowHP;
+
+    [Header("TMs")]
+    [SerializeField] Sprite tmBug;
+    [SerializeField] Sprite tmDark;
+    [SerializeField] Sprite tmDragon;
+    [SerializeField] Sprite tmElectric;
+    [SerializeField] Sprite tmFairy;
+    [SerializeField] Sprite tmFighting;
+    [SerializeField] Sprite tmFire;
+    [SerializeField] Sprite tmFlying;
+    [SerializeField] Sprite tmGhost;
+    [SerializeField] Sprite tmGrass;
+    [SerializeField] Sprite tmGround;
+    [SerializeField] Sprite tmIce;
+    [SerializeField] Sprite tmNormal;
+    [SerializeField] Sprite tmPoison;
+    [SerializeField] Sprite tmPsychic;
+    [SerializeField] Sprite tmRock;
+    [SerializeField] Sprite tmSteel;
+    [SerializeField] Sprite tmWater;
+
 
     public static StatusConditionArt instance
     {
@@ -357,6 +383,21 @@ public class StatusConditionArt : MonoBehaviour
         }
     }
 
+    public Sprite ReturnMoveCategoryArt(MoveType type)
+    {
+        switch (type)
+        {
+            case MoveType.Physical:
+                return physical;
+            case MoveType.Special:
+                return special;
+            case MoveType.Status:
+                return status;
+            default:
+                return nothing;
+        }
+    }
+
     /// <summary>
     /// if it is mixed pass in NA/HP
     /// </summary>
@@ -410,6 +451,51 @@ public class StatusConditionArt : MonoBehaviour
         else
         {
             return nothing;
+        }
+    }
+
+    public Sprite ReturnTMArt(ElementType type)
+    {
+        switch (type)
+        {
+            case ElementType.Bug:
+                return tmBug;
+            case ElementType.Dark:
+                return tmDark;
+            case ElementType.Dragon:
+                return tmDragon;
+            case ElementType.Electric:
+                return tmElectric;
+            case ElementType.Fairy:
+                return tmFairy;
+            case ElementType.Fighting:
+                return tmFighting;
+            case ElementType.Fire:
+                return tmFire;
+            case ElementType.Flying:
+                return tmFlying;
+            case ElementType.Ghost:
+                return tmGhost;
+            case ElementType.Grass:
+                return tmGrass;
+            case ElementType.Ground:
+                return tmGround;
+            case ElementType.Ice:
+                return tmIce;
+            case ElementType.Normal:
+                return tmNormal;
+            case ElementType.Poison:
+                return tmPoison;
+            case ElementType.Psychic:
+                return tmPsychic;
+            case ElementType.Rock:
+                return tmRock;
+            case ElementType.Steel:
+                return tmSteel;
+            case ElementType.Water:
+                return tmWater;
+            default:
+                return nothing;
         }
     }
 }

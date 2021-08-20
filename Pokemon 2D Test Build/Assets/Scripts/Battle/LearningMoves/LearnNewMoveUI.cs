@@ -13,13 +13,14 @@ public class LearnNewMoveUI : MonoBehaviour
     [SerializeField] Image type1;
     [SerializeField] Image type2;
 
+    //[SerializeField] MoveDetails moveDetails;
     [SerializeField] Text movePower;
     [SerializeField] Text moveAccuracy;
     [SerializeField] Text moveDetails;
 
     [SerializeField] GameObject[] moveButton;
 
-    bool _playerDoesNotWantToLearnMove = false;
+    bool playerDoesNotWantToLearnMove = false;
     Move previousMove;
 
     Action OnFinished;
@@ -41,6 +42,14 @@ public class LearnNewMoveUI : MonoBehaviour
 
     public void Close()
     {
+        if(BattleSystem.inBattle == true)
+        {
+
+        }
+        else
+        {
+            //Return to party Screen in certain state
+        }
         gameObject.SetActive(false);
     }
 
@@ -50,18 +59,12 @@ public class LearnNewMoveUI : MonoBehaviour
         pokemonName.text = pokemon.currentName;
         gender.sprite = StatusConditionArt.instance.ReturnGenderArt(pokemon.gender);
         type1.sprite = StatusConditionArt.instance.ReturnElementArt(pokemon.pokemonBase.pokemonType1);
-        if(pokemon.pokemonBase.pokemonType2 != ElementType.NA)
-        {
-            type2.sprite = StatusConditionArt.instance.ReturnElementArt(pokemon.pokemonBase.pokemonType2);
-        }
-        else
-        {
-            type2.sprite = StatusConditionArt.instance.Nothing;
-        }
+        type2.sprite = (pokemon.pokemonBase.pokemonType2 != ElementType.NA) ? 
+            StatusConditionArt.instance.ReturnElementArt(pokemon.pokemonBase.pokemonType2) : StatusConditionArt.instance.Nothing;
 
         SetMoveReplacementList(pokemon,pokemon.moves,newMove);
 
-        _playerDoesNotWantToLearnMove = false;
+        playerDoesNotWantToLearnMove = false;
     }
 
     void SetupMoveDetails(MoveBase currentMove)
@@ -117,12 +120,12 @@ public class LearnNewMoveUI : MonoBehaviour
 
     public bool PlayerDoesNotWantToLearnMove
     {
-        get { return _playerDoesNotWantToLearnMove; }
+        get { return playerDoesNotWantToLearnMove; }
     }
 
     void RefuseToLearnMove()
     {
-        _playerDoesNotWantToLearnMove = true;
+        playerDoesNotWantToLearnMove = true;
         Close();
         OnFinished?.Invoke();
     }

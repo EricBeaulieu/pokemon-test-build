@@ -89,7 +89,7 @@ public class PartyMemberUI : MonoBehaviour, ISelectHandler, IDeselectHandler
         _currentIndex = 0;
         pokemonSprite.sprite = _animatedSprite[_currentIndex];
         UpdateHoldItem();
-        ItemBeingUsed(currentItem);
+        ItemBeingUsed(currentPokemon,currentItem);
 
         Deselected();
     }
@@ -197,7 +197,7 @@ public class PartyMemberUI : MonoBehaviour, ISelectHandler, IDeselectHandler
         heldItem.sprite = (_pokemon.GetCurrentItem != null) ? PartyBackgroundArt.instance.HoldItemSprite() : StatusConditionArt.instance.Nothing;
     }
 
-    void ItemBeingUsed(ItemBase currentItem)
+    void ItemBeingUsed(Pokemon currentPokemon,ItemBase currentItem)
     {
         if (currentItem != null)
         {
@@ -210,6 +210,13 @@ public class PartyMemberUI : MonoBehaviour, ISelectHandler, IDeselectHandler
             if (currentItem.ShowStandardUI() == false)
             {
                 itemCompatablilityText.text = (currentItem.AbleOrUnableToUseOnPokemon(_pokemon.pokemonBase)) ? "Able" : "Unable";
+                if(currentItem is TMHMItem)
+                {
+                    if(currentPokemon.moves.Exists(x => x.moveBase == ((TMHMItem)currentItem).GetMove) == true)
+                    {
+                        itemCompatablilityText.text = "Learned";
+                    }
+                }
             }
         }
         else

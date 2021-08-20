@@ -49,7 +49,7 @@ public abstract class ItemBase : ScriptableObject
         get { return itemDescription; }
     }
 
-    public Sprite ItemSprite
+    public virtual Sprite ItemSprite
     {
         get { return itemSprite; }
     }

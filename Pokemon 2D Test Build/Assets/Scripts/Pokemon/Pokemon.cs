@@ -811,14 +811,14 @@ public class Pokemon {
         return learnableMoves;
     }
 
-    public void LearnMove(LearnableMove moveLearned)
+    public void LearnMove(MoveBase moveLearned)
     {
         if(moves.Count > PokemonBase.MAX_NUMBER_OF_MOVES)
         {
             Debug.LogError($"{currentName} tried to add a move when it was beyond 4");
             return;
         }
-        moves.Add(new Move(moveLearned.moveBase));
+        moves.Add(new Move(moveLearned));
     }
 
     public void GainEffortValue(List<EarnableEV> effortValuesEarned)

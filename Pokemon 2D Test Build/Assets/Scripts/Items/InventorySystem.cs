@@ -30,6 +30,7 @@ public class InventorySystem : CoreSystem
     [SerializeField] ItemOptionButtonUI useOption;
     [SerializeField] ItemOptionButtonUI giveOption;
     [SerializeField] ItemOptionButtonUI trashOption;
+    [SerializeField] MoveDetails tmDetails;
     static Item specifiedItem;
 
     List<Item> currentItemsDisplayed = new List<Item>();
@@ -320,6 +321,16 @@ public class InventorySystem : CoreSystem
         Color background = ColorScheme(item.ItemBase.GetItemType).GetMissingItemFadeColor;
 
         itemDetails.SetData(item);
+        if(item.ItemBase is TMHMItem)
+        {
+            tmDetails.gameObject.SetActive(true);
+            tmDetails.SetData(((TMHMItem)item.ItemBase).GetMove);
+        }
+        else
+        {
+            tmDetails.gameObject.SetActive(false);
+        }
+
         useOption.SetData(background, item.ItemBase.UseItemOption());
         giveOption.SetData(background, item.ItemBase.GiveItemOption());
         trashOption.SetData(background, item.ItemBase.TrashItemOption());
@@ -489,6 +500,7 @@ public class InventorySystem : CoreSystem
     public void ReturnFromPartySystemAfterItemUsage(bool usingItem)
     {
         GameManager.SetGameState(GameState.Inventory);
+        dialogSystem.SetCurrentDialogBox(dialogBox);
         SetData(specifiedItem.ItemBase.GetItemType);
         if (specifiedItem.Count > 0)
         {

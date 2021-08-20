@@ -14,7 +14,7 @@ public class TMHMItem : ItemBase
 
     public override bool UseItem(Pokemon pokemon)
     {
-        return true;
+        return AbleOrUnableToUseOnPokemon(pokemon.pokemonBase);
     }
 
     public override bool UseItemOption()
@@ -35,6 +35,11 @@ public class TMHMItem : ItemBase
     public override string ItemDescription
     {
         get { return moveBase.MoveDescription; }
+    }
+
+    public override Sprite ItemSprite
+    {
+        get { return StatusConditionArt.instance.ReturnTMArt(moveBase.Type); }
     }
 
     public override bool ShowStandardUI()

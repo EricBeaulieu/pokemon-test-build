@@ -7,6 +7,7 @@ using UnityEngine.UI;
 public class PartySystem : CoreSystem
 {
     [SerializeField] SummarySystem summarySystem;
+    [SerializeField] LearnNewMoveUI learnNewMoveUI;
 
     PartyMemberUI[] _partyMemberSlots;
     [SerializeField] Button cancelButton;
@@ -222,7 +223,14 @@ public class PartySystem : CoreSystem
             if (i < currentParty.Count)
             {
                 _partyMemberSlots[i].gameObject.SetActive(true);
-                _partyMemberSlots[i].SetData(currentParty[i],item.ItemBase);
+                if(useItem == true)
+                {
+                    _partyMemberSlots[i].SetData(currentParty[i],item.ItemBase);
+                }
+                else
+                {
+                    _partyMemberSlots[i].SetData(currentParty[i]);
+                }
 
                 int k = i;
                 _partyMemberSlots[k].GetButton.onClick.RemoveAllListeners();
@@ -232,18 +240,20 @@ public class PartySystem : CoreSystem
                     {
                         Pokemon currentPokemon = _partyMemberSlots[k].CurrentPokemon();
                         int hpDif = currentPokemon.currentHitPoints;
-                        if(item.ItemBase is TMHMItem)
-                        {
-                            Debug.Log("Check if item can be used");
-                            return;
-                        }
 
                         if (item.ItemBase.UseItem(currentPokemon) == true)
                         {
-                            dialogSystem.SetDialogText($"{item.ItemBase.ItemName} was used on {currentPokemon.currentName}");
-                            hpDif = (hpDif != currentPokemon.currentHitPoints) ? currentPokemon.currentHitPoints - hpDif : 0;
-                            inventorySystem.RemoveItem(item);
-                            StartCoroutine(WaitForInputAfterItemUsage(true, _partyMemberSlots[k], hpDif));
+                            if (item.ItemBase is TMHMItem)
+                            {
+                                StartCoroutine(LearnNewMove(currentPokemon, (TMHMItem)item.ItemBase));
+                            }
+                            else
+                            {
+                                dialogSystem.SetDialogText($"{item.ItemBase.ItemName} was used on {currentPokemon.currentName}");
+                                hpDif = (hpDif != currentPokemon.currentHitPoints) ? currentPokemon.currentHitPoints - hpDif : 0;
+                                inventorySystem.RemoveItem(item);
+                                StartCoroutine(WaitForInputAfterItemUsage(true, _partyMemberSlots[k], hpDif));
+                            }
                             _partyMemberSlots[k].GetButton.onClick.RemoveAllListeners();
                         }
                         else
@@ -667,6 +677,78 @@ public class PartySystem : CoreSystem
             {
                 StartCoroutine(WaitForInputAfterItemGiven(item, specificPartyMemberUI, false));
             }
+        }
+    }
+
+    IEnumerator LearnNewMove(Pokemon currentPokemon, TMHMItem newMove)
+    {
+        if(currentPokemon.moves.Exists(x => x.moveBase == newMove.GetMove) == true)
+        {
+            yield return dialogSystem.TypeDialog($"{currentPokemon.currentName} already knows {newMove.GetMove.MoveName}!", true);
+            CloseSystem();
+            inventorySystem.ReturnFromPartySystemAfterItemUsage(true);
+            yield break;
+        }
+
+        if (currentPokemon.moves.Count < PokemonBase.MAX_NUMBER_OF_MOVES)
+        {
+            currentPokemon.LearnMove(newMove.GetMove);
+            yield return dialogSystem.TypeDialog($"{currentPokemon.currentName} learned {newMove.GetMove.MoveName}!", true);
+            inventorySystem.RemoveItem(newMove);
+            CloseSystem();
+            inventorySystem.ReturnFromPartySystemAfterItemUsage(true);
+            yield break;
+        }
+        else
+        {
+            yield return dialogSystem.TypeDialog($"{currentPokemon.currentName} is trying to learn {newMove.GetMove.MoveName}.", true);
+            yield return dialogSystem.TypeDialog($"But {currentPokemon.currentName} can't learn more than four moves.", true);
+            yield return dialogSystem.TypeDialog($"Delete a move to make room for {newMove.GetMove.MoveName}?");
+
+            bool playerSelection = false;
+            bool playerSelectingNewMove = true;
+
+            yield return dialogSystem.SetChoiceBox(() =>
+            {
+                //Open up UI to learn new move
+                learnNewMoveUI.OpenToLearnNewMove(currentPokemon, newMove.GetMove, () =>
+                {
+                    playerSelectingNewMove = false;
+                });
+                learnNewMoveUI.SelectBox();
+                playerSelection = true;
+            }
+            , () =>
+            {
+                playerSelection = false;
+            });
+
+
+            if(playerSelection == true)
+            {
+                while(playerSelectingNewMove == true)
+                {
+                    yield return new WaitForSeconds(0.1f);
+                }
+                playerSelection = learnNewMoveUI.PlayerDoesNotWantToLearnMove;
+                if(playerSelection == false)
+                {
+                    yield return dialogSystem.TypeDialog($"{currentPokemon.currentName} forgot how to use {learnNewMoveUI.previousMoveName}", true);
+                    yield return dialogSystem.TypeDialog($"{currentPokemon.currentName} learned {newMove.GetMove.MoveName}!",true);
+                    inventorySystem.RemoveItem(newMove);
+                }
+                else
+                {
+                    yield return dialogSystem.TypeDialog($"{currentPokemon.currentName} did not learn {newMove.GetMove.MoveName}",true);
+                }
+            }
+            else
+            {
+                yield return dialogSystem.TypeDialog($"{currentPokemon.currentName} did not learn {newMove.GetMove.MoveName}",true);
+            }
+
+            CloseSystem();
+            inventorySystem.ReturnFromPartySystemAfterItemUsage(true);
         }
     }
 }
