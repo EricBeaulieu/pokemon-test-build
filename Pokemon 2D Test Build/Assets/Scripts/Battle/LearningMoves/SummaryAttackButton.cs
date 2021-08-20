@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class SummaryAttackButton : MonoBehaviour, ISelectHandler, IDeselectHandler
 {
     MoveBase _move;
-    public event Action<MoveBase> OnMoveSelected;
+    [SerializeField]MoveDetails moveDetails;
 
     [SerializeField] GameObject selector;
     [SerializeField] Text moveNameText;
@@ -45,7 +45,7 @@ public class SummaryAttackButton : MonoBehaviour, ISelectHandler, IDeselectHandl
     public void OnSelect(BaseEventData eventData)
     {
         EnableSelector(true);
-        OnMoveSelected?.Invoke(_move);
+        moveDetails.SetData(_move);
     }
 
     public void OnDeselect(BaseEventData eventData)

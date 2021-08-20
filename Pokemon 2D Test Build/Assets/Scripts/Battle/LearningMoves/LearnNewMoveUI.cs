@@ -13,11 +13,6 @@ public class LearnNewMoveUI : MonoBehaviour
     [SerializeField] Image type1;
     [SerializeField] Image type2;
 
-    //[SerializeField] MoveDetails moveDetails;
-    [SerializeField] Text movePower;
-    [SerializeField] Text moveAccuracy;
-    [SerializeField] Text moveDetails;
-
     [SerializeField] GameObject[] moveButton;
 
     bool playerDoesNotWantToLearnMove = false;
@@ -67,13 +62,6 @@ public class LearnNewMoveUI : MonoBehaviour
         playerDoesNotWantToLearnMove = false;
     }
 
-    void SetupMoveDetails(MoveBase currentMove)
-    {
-        movePower.text = currentMove.MovePower.ToString();
-        moveAccuracy.text = currentMove.MoveAccuracy.ToString();
-        moveDetails.text = currentMove.MoveDescription;
-    }
-
     public void SetMoveReplacementList(Pokemon pokemon,List<Move> moves,MoveBase newMove)
     {
         for (int i = 0; i < moveButton.Length; i++)
@@ -88,7 +76,6 @@ public class LearnNewMoveUI : MonoBehaviour
                 moveButton[i].GetComponent<SummaryAttackButton>().SetMove(moves[i]);
             }
 
-            moveButton[i].GetComponent<SummaryAttackButton>().OnMoveSelected += SetupMoveDetails;
             moveButton[i].GetComponent<Button>().onClick.RemoveAllListeners();
             if(i == PokemonBase.MAX_NUMBER_OF_MOVES)
             {

@@ -10,13 +10,28 @@ public class MoveDetails : MonoBehaviour
     [SerializeField] Text movePower;
     [SerializeField] Text movePp;
     [SerializeField] Text moveAccuracy;
+    [SerializeField] Text moveDetails;
 
     public void SetData(MoveBase move)
     {
-        elementTypeSprite.sprite = StatusConditionArt.instance.ReturnElementArt(move.Type);
+        if(elementTypeSprite != null)
+        {
+            elementTypeSprite.sprite = StatusConditionArt.instance.ReturnElementArt(move.Type);
+        }
+
         moveCategorySprite.sprite = StatusConditionArt.instance.ReturnMoveCategoryArt(move.MoveType);
         movePower.text = (move.MovePower > 0) ? move.MovePower.ToString() : "--";
-        movePp.text = move.PowerPoints.ToString();
+
+        if(movePp != null)
+        {
+            movePp.text = move.PowerPoints.ToString();
+        }
+
         moveAccuracy.text = (move.AlwaysHits == false) ? move.MoveAccuracy.ToString() : "--";
+
+        if(moveDetails != null)
+        {
+            moveDetails.text = move.MoveDescription;
+        }
     }
 }
