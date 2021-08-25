@@ -361,6 +361,8 @@ public class InventorySystem : CoreSystem
         switch (item.ItemBase.GetItemType)
         {
             case itemType.Basic:
+                CloseSystem();
+                partySystem.OpenPartySystemDueToInventoryItem(item, true);
                 break;
             case itemType.Medicine:
                 CloseSystem();

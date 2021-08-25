@@ -26,6 +26,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] StartMenu startMenu;
     [SerializeField] PokeballItem standardPokeball;
     [SerializeField] InventorySystem inventorySystem;
+    [SerializeField] EvolutionEggUI evolutionSystem;
+    List<Pokemon> pokemonEvolving = new List<Pokemon>();
 
     static GameState state = GameState.Overworld;
 
@@ -59,6 +61,7 @@ public class GameManager : MonoBehaviour
         dialogManager.Initialization();
         startMenu.Initialization();
         inventorySystem.Initialization();
+        evolutionSystem.Initialization();
 
         currentScenesLoaded = GetAllOpenScenes(currentScenesLoaded);
 
@@ -132,11 +135,35 @@ public class GameManager : MonoBehaviour
         {
             playerController.PlayerHasLostBattle();
         }
-
-        SetGameState(GameState.Overworld);
+        
         battleSystem.gameObject.SetActive(false);
         overWorldCamera.gameObject.SetActive(true);
         playerController.pokemonParty.SetPositionstoBeforeBattle();
+
+        if(wasWon == true)
+        {
+            for (int i = 0; i < playerController.pokemonParty.CurrentPokemonList().Count; i++)
+            {
+                Pokemon pokemon = playerController.pokemonParty.CurrentPokemonList()[i];
+                if (pokemon.pokemonBase.EvolveLevelBased != null)
+                {
+                    foreach (EvolveLevelBased evolution in pokemon.pokemonBase.EvolveLevelBased)
+                    {
+                        if (evolution.CanEvolve(pokemon, pokemon.GetCurrentItem) == true && pokemon.currentHitPoints > 0)
+                        {
+                            pokemonEvolving.Add(pokemon);
+                        }
+                    }
+                }
+            }
+            if(pokemonEvolving.Count > 0)
+            {
+                StartCoroutine(PokemonEvolvingAtEndOfBattle());
+                return;
+            }
+
+        }
+        SetGameState(GameState.Overworld);
     }
 
     void RunAllEntities()
@@ -368,8 +395,26 @@ public class GameManager : MonoBehaviour
         get { return standardPokeball; }
     }
 
+    public EvolutionEggUI GetEvolutionSystem
+    {
+        get { return evolutionSystem; }
+    }
+
     public static void SetGameState(GameState newState)
     {
         state = newState;
+    }
+
+    IEnumerator PokemonEvolvingAtEndOfBattle()
+    {
+        Pokemon pokemon;
+        for (int i = 0; i < pokemonEvolving.Count(); i++)
+        {
+            pokemon = pokemonEvolving[i];
+            PokemonBase newEvolution = pokemonEvolving[i].pokemonBase.EvolveLevelBased.Find(x => x.CanEvolve(pokemon, pokemon.GetCurrentItem) == true).NewPokemonEvolution();
+            yield return evolutionSystem.PokemonEvolving(pokemon, newEvolution);
+        }
+        pokemonEvolving.Clear();
+        SetGameState(GameState.Overworld);
     }
 }

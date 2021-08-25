@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
-public class LearnableMove{
+public class LearnableMove
+{
     [SerializeField]
     MoveBase _moveBase;
     [SerializeField]

@@ -16,10 +16,8 @@ MonoBehaviour:
   _pokedexDescription: "Tough fights could excite this Pok\xE9mon. When excited,
     it may breathe out bluish-white flames."
   _classification: 
-  _heightInFeet: 0
   _heightInMeters: 0
   _weightInPounds: 0
-  _weightInKilograms: 0
   _captureRate: 45
   rewardedEffortValue:
   - _statAttribute: 6
@@ -44,3 +42,9 @@ MonoBehaviour:
   secondAbility: 0
   hiddenAbility: 0
   _learnableMoves: []
+  learnableTMHMMoves: []
+  evolveLevelBased:
+  - evolvedPokemon: {fileID: 11400000, guid: c4dd55ad047f5cb4d9c167f439657170, type: 2}
+    levelRequirement: 36
+    maxFriendShipRequired: 0
+  evolutionsByStone: []

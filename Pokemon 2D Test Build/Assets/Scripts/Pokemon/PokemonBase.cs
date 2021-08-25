@@ -58,6 +58,11 @@ public class PokemonBase : ScriptableObject {
     [SerializeField] List<MoveBase> learnableTMHMMoves;
     public static int MAX_NUMBER_OF_MOVES { get; } = 4;
 
+    [Header("Evolving")]
+    [SerializeField] List<EvolveLevelBased> evolveLevelBased;
+    [SerializeField] List<EvolutionStone> evolutionsByStone;
+    List<EvolutionBase> evolutions;
+
     #region Getters/Setters
 
     public int GetPokedexNumber()
@@ -234,4 +239,16 @@ public class PokemonBase : ScriptableObject {
 
         return spriteName;
     }
+
+
+    public List<EvolveLevelBased> EvolveLevelBased
+    {
+        get { return evolveLevelBased; }
+    }
+
+    public List<EvolutionStone> EvolutionsByStone
+    {
+        get { return evolutionsByStone; }
+    }
+
 }

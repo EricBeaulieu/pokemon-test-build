@@ -67,6 +67,7 @@
     <Compile Include="Assets\Scripts\Data\HoldItems\Standard\SilverPowder.cs" />
     <Compile Include="Assets\Scripts\Pokemon\IndividualValues.cs" />
     <Compile Include="Assets\Scripts\Data\Abilitys\List\SteamEngine.cs" />
+    <Compile Include="Assets\Scripts\UI\MoveDetails.cs" />
     <Compile Include="Assets\Scripts\Data\Conditions\Status\ToxicPoison.cs" />
     <Compile Include="Assets\Scripts\Data\HoldItems\Standard\ScopeLens.cs" />
     <Compile Include="Assets\Scripts\Data\Abilitys\List\Transistor.cs" />
@@ -203,7 +204,9 @@
     <Compile Include="Assets\Scripts\Data\HoldItems\Standard\RockyHelmet.cs" />
     <Compile Include="Assets\Scripts\Items\UI\TrashArrowButtons.cs" />
     <Compile Include="Assets\Scripts\Data\Abilitys\List\MegaLauncher.cs" />
+    <Compile Include="Assets\Scripts\Pokemon\Evolution\EvolutionBase.cs" />
     <Compile Include="Assets\Scripts\Data\Abilitys\List\ToughClaws.cs" />
+    <Compile Include="Assets\Scripts\Items\ScriptableObjects\EvolutionStoneBase.cs" />
     <Compile Include="Assets\Scripts\Data\Abilitys\List\CloudNine.cs" />
     <Compile Include="Assets\Scripts\Party\SummaryMoves.cs" />
     <Compile Include="Assets\Scripts\Data\Abilitys\List\ShellArmor.cs" />
@@ -222,6 +225,7 @@
     <Compile Include="Assets\Scripts\Data\HoldItems\HoldItemDB.cs" />
     <Compile Include="Assets\Scripts\Data\Abilitys\List\WaterVeil.cs" />
     <Compile Include="Assets\Scripts\Data\HoldItems\Standard\MentalHerb.cs" />
+    <Compile Include="Assets\Scripts\Pokemon\Evolution\EvolveLevelBased.cs" />
     <Compile Include="Assets\Scripts\Data\Weather\WeatherEffectDB.cs" />
     <Compile Include="Assets\Scripts\Data\HoldItems\Standard\Snowball.cs" />
     <Compile Include="Assets\Scripts\Data\HoldItems\Standard\ToxicOrb.cs" />
@@ -240,6 +244,7 @@
     <Compile Include="Assets\Scripts\Data\HoldItems\Standard\DarkGem.cs" />
     <Compile Include="Assets\Scripts\Data\HoldItems\Standard\WaterGem.cs" />
     <Compile Include="Assets\Scripts\Battle\CaptureBallRoute.cs" />
+    <Compile Include="Assets\Scripts\Pokemon\Evolution\EvolveMoveSpecified.cs" />
     <Compile Include="Assets\Scripts\Items\Item.cs" />
     <Compile Include="Assets\Scripts\Data\HoldItems\Standard\Charcoal.cs" />
     <Compile Include="Assets\Scripts\Data\HoldItems\Standard\FlameOrb.cs" />
@@ -268,6 +273,7 @@
     <Compile Include="Assets\Scripts\ArtHolders\StatusConditionArt.cs" />
     <Compile Include="Assets\Scripts\Dialog\DialogManager.cs" />
     <Compile Include="Assets\Scripts\UI\SelectableBoxUI.cs" />
+    <Compile Include="Assets\Scripts\Pokemon\Evolution\EvolutionStone.cs" />
     <Compile Include="Assets\Scripts\Data\HoldItems\Standard\Magnet.cs" />
     <Compile Include="Assets\Scripts\Characters\MonoBehavior\AIDecision.cs" />
     <Compile Include="Assets\Scripts\Data\Abilitys\List\SandForce.cs" />
@@ -335,6 +341,7 @@
     <Compile Include="Assets\Scripts\Data\Abilitys\List\ClearBody.cs" />
     <Compile Include="Assets\Scripts\Data\Abilitys\List\IceScales.cs" />
     <Compile Include="Assets\Scripts\Static Tables\DamageModifiers.cs" />
+    <Compile Include="Assets\Scripts\Pokemon\Evolution\EvolveFriendshipBased.cs" />
     <Compile Include="Assets\Scripts\Data\HoldItems\Standard\Eviolite.cs" />
     <Compile Include="Assets\Scripts\Data\Abilitys\List\SnowWarning.cs" />
     <Compile Include="Assets\Scripts\Data\Abilitys\List\Bulletproof.cs" />
@@ -407,7 +414,7 @@
     <Compile Include="Assets\Scripts\Data\Abilitys\List\RainDish.cs" />
     <Compile Include="Assets\Scripts\Data\Abilitys\List\Justified.cs" />
     <Compile Include="Assets\Scripts\Data\Abilitys\List\Soundproof.cs" />
-    <Compile Include="Assets\Scripts\UI\MoveDetails.cs" />
+    <Compile Include="Assets\Scripts\UI\EvolutionEggUI.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">

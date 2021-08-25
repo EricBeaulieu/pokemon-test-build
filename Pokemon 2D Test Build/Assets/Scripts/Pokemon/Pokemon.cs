@@ -62,7 +62,7 @@ public class Pokemon {
 
         nature = specifiedNature == null ? SetNature() : specifiedNature;
         isShiny = shiny.HasValue ? shiny.Value: (Random.value > 0.5f);
-        currentName = nickname == null|| nickname == "" ? _pokemonBase.GetPokedexName() : nickname;
+        currentName = nickname;
 
         SetDataStats();
         currentHitPoints = maxHitPoints;
@@ -596,7 +596,7 @@ public class Pokemon {
     {
         get
         {
-            if(_currentName == null)
+            if(_currentName == null|| _currentName == "")
             {
                 return pokemonBase.GetPokedexName();
             }
@@ -801,13 +801,13 @@ public class Pokemon {
         {
             currentExp = _pokemonBase.GetExpForLevel(currentLevel);
             //This is incase of changes in Ev's
-            UpdateStatsUponLevel();
+            UpdateStats();
             return false;
         }
         else if(currentExp >= _pokemonBase.GetExpForLevel(currentLevel + 1))
         {
             currentLevel++;
-            UpdateStatsUponLevel();
+            UpdateStats();
             return true;
         }
         return false;
@@ -891,7 +891,7 @@ public class Pokemon {
             baseStats[StatAttribute.SpecialAttack], baseStats[StatAttribute.SpecialDefense], baseStats[StatAttribute.Speed]);
     }
 
-    void UpdateStatsUponLevel()
+    void UpdateStats()
     {
         int diffInHP = maxHitPoints;
 
@@ -965,4 +965,15 @@ public class Pokemon {
         currentHeldItem = null;
         currentHoldItemEffects = null;
     }
+
+    public void NewEvolution(PokemonBase newEvolution)
+    {
+        if(currentName == pokemonBase.GetPokedexName())
+        {
+            currentName = newEvolution.GetPokedexName();
+        }
+        pokemonBase = newEvolution;
+        UpdateStats();
+    }
+
 }

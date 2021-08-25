@@ -247,6 +247,11 @@ public class PartySystem : CoreSystem
                             {
                                 StartCoroutine(LearnNewMove(currentPokemon, (TMHMItem)item.ItemBase));
                             }
+                            else if (item.ItemBase is EvolutionStoneBase)
+                            {
+                                StartCoroutine(PlayerEvolvedFromPartyScene(currentPokemon, (EvolutionStoneBase)item.ItemBase));
+                                inventorySystem.RemoveItem(item);
+                            }
                             else
                             {
                                 dialogSystem.SetDialogText($"{item.ItemBase.ItemName} was used on {currentPokemon.currentName}");
@@ -741,5 +746,14 @@ public class PartySystem : CoreSystem
             CloseSystem();
             inventorySystem.ReturnFromPartySystemAfterItemUsage(true);
         }
+    }
+
+    IEnumerator PlayerEvolvedFromPartyScene(Pokemon pokemon,EvolutionStoneBase evolutionStone)
+    {
+        PokemonBase newEvolution = pokemon.pokemonBase.EvolutionsByStone.Find(x => x.RequiredStone == evolutionStone).NewPokemonEvolution();
+        yield return GameManager.instance.GetEvolutionSystem.PokemonEvolving(pokemon, newEvolution);
+
+        CloseSystem();
+        inventorySystem.ReturnFromPartySystemAfterItemUsage(true);
     }
 }

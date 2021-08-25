@@ -31,7 +31,7 @@ public class BattleUnit : MonoBehaviour
     [SerializeField] Image overtopImage;
 
     const float STATUS_EFFECT_ANIMATION_SPEED = 1f;
-    const float ENTRY_SPRITE_ANIMATION_SPEED = 0.8f;
+    public const float ENTRY_SPRITE_ANIMATION_SPEED = 0.8f;
     const float START_ANIMATION_SPEED = 2.25f;
     const float HUD_ANIMATION_SPEED = 0.75f;
 

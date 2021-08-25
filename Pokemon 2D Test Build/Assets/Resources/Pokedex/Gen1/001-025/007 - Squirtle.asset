@@ -16,10 +16,8 @@ MonoBehaviour:
   _pokedexDescription: When it retracts its long neck into its shell, it squirts
     out water with vigorous force.
   _classification: 
-  _heightInFeet: 0
   _heightInMeters: 0
   _weightInPounds: 0
-  _weightInKilograms: 0
   _captureRate: 45
   rewardedEffortValue:
   - _statAttribute: 3
@@ -48,3 +46,9 @@ MonoBehaviour:
     _levelLeanred: 0
   - _moveBase: {fileID: 11400000, guid: 12cb40ea7baae404d993c36a1986da00, type: 2}
     _levelLeanred: 7
+  learnableTMHMMoves: []
+  evolveLevelBased:
+  - evolvedPokemon: {fileID: 11400000, guid: e96d7890106cb5d4b9e0c84b09228acd, type: 2}
+    levelRequirement: 16
+    maxFriendShipRequired: 0
+  evolutionsByStone: []

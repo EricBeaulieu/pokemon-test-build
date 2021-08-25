@@ -16,10 +16,8 @@ MonoBehaviour:
   _pokedexDescription: Its nature is to store up electricity. Forests where nests
     of Pikachu live are dangerous, since the trees are so often struck by lightning.
   _classification: 
-  _heightInFeet: 0
   _heightInMeters: 0
   _weightInPounds: 0
-  _weightInKilograms: 0
   _captureRate: 190
   rewardedEffortValue:
   - _statAttribute: 6
@@ -44,3 +42,8 @@ MonoBehaviour:
   _learnableMoves:
   - _moveBase: {fileID: 11400000, guid: eaacb93f3a58b714aaa416b436af1927, type: 2}
     _levelLeanred: 0
+  learnableTMHMMoves: []
+  evolveLevelBased: []
+  evolutionsByStone:
+  - evolvedPokemon: {fileID: 11400000, guid: cbb853d24a164014f9d23627ba842ecd, type: 2}
+    evolutionStone: {fileID: 11400000, guid: 493310ab6c125f944b59d7fffc0d970c, type: 2}
