@@ -16,10 +16,8 @@ MonoBehaviour:
   _pokedexDescription: "A mild-mannered Pok\xE9mon that does not like to fight. Beware\u2014its
     small horn secretes venom."
   _classification: 
-  _heightInFeet: 0
   _heightInMeters: 0
   _weightInPounds: 0
-  _weightInKilograms: 0
   _captureRate: 235
   rewardedEffortValue:
   - _statAttribute: 1
@@ -42,3 +40,9 @@ MonoBehaviour:
   secondAbility: 0
   hiddenAbility: 0
   _learnableMoves: []
+  learnableTMHMMoves: []
+  evolveLevelBased:
+  - evolvedPokemon: {fileID: 11400000, guid: 35589fd6172c9a543ae61dd6f129ad8a, type: 2}
+    levelRequirement: 16
+    maxFriendShipRequired: 0
+  evolutionsByStone: []

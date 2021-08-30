@@ -16,10 +16,8 @@ MonoBehaviour:
   _pokedexDescription: "When attacked by bird Pok\xE9mon, it resists by releasing
     a terrifically strong odor from its antennae, but it often becomes their prey."
   _classification: "Cocoon Pok\xE9mon"
-  _heightInFeet: 1
   _heightInMeters: 0.3
   _weightInPounds: 0
-  _weightInKilograms: 0
   _captureRate: 120
   rewardedEffortValue:
   - _statAttribute: 3
@@ -44,3 +42,9 @@ MonoBehaviour:
   _learnableMoves:
   - _moveBase: {fileID: 11400000, guid: 74776a55aab78af45a268d0b4777c811, type: 2}
     _levelLeanred: 0
+  learnableTMHMMoves: []
+  evolveLevelBased:
+  - evolvedPokemon: {fileID: 11400000, guid: 2644f0f0225129649abafceda30c462a, type: 2}
+    levelRequirement: 10
+    maxFriendShipRequired: 0
+  evolutionsByStone: []

@@ -16,10 +16,8 @@ MonoBehaviour:
   _pokedexDescription: "This Pok\xE9mon is full of vitality. It constantly flies
     around its large territory in search of prey."
   _classification: 
-  _heightInFeet: 0
   _heightInMeters: 0
   _weightInPounds: 0
-  _weightInKilograms: 0
   _captureRate: 255
   rewardedEffortValue:
   - _statAttribute: 6
@@ -44,3 +42,9 @@ MonoBehaviour:
   _learnableMoves:
   - _moveBase: {fileID: 11400000, guid: 74776a55aab78af45a268d0b4777c811, type: 2}
     _levelLeanred: 0
+  learnableTMHMMoves: []
+  evolveLevelBased:
+  - evolvedPokemon: {fileID: 11400000, guid: 9dce8017dd2bf2d42819e96434f2b806, type: 2}
+    levelRequirement: 36
+    maxFriendShipRequired: 0
+  evolutionsByStone: []

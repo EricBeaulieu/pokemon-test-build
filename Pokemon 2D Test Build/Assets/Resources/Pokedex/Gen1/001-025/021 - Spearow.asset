@@ -16,10 +16,8 @@ MonoBehaviour:
   _pokedexDescription: "Its reckless nature leads it to stand up to others\u2014even
     large Pok\xE9mon\u2014if it has to protect its territory."
   _classification: 
-  _heightInFeet: 0
   _heightInMeters: 0
   _weightInPounds: 0
-  _weightInKilograms: 0
   _captureRate: 255
   rewardedEffortValue:
   - _statAttribute: 6
@@ -42,3 +40,9 @@ MonoBehaviour:
   secondAbility: 0
   hiddenAbility: 0
   _learnableMoves: []
+  learnableTMHMMoves: []
+  evolveLevelBased:
+  - evolvedPokemon: {fileID: 11400000, guid: 03cb67a8e85edfd41a30ebf87a6e4ff4, type: 2}
+    levelRequirement: 20
+    maxFriendShipRequired: 0
+  evolutionsByStone: []

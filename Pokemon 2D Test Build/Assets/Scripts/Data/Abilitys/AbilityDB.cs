@@ -56,7 +56,7 @@ public enum AbilityID
     ToughClaws, ToxicBoost, Transistor,
     //U
     //V
-    VitalSpirit,
+    VitalSpirit, VoltAbsorb,
     //W
     WaterAbsorb, WaterBubble, WaterCompaction, WaterVeil, WhiteSmoke,
     WonderGuard,

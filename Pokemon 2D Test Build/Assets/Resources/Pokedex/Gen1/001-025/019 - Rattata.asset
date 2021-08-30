@@ -17,10 +17,8 @@ MonoBehaviour:
     incisors get too long, this Pok\xE9mon becomes unable to eat, and it starves
     to death."
   _classification: 
-  _heightInFeet: 0
   _heightInMeters: 0
   _weightInPounds: 0
-  _weightInKilograms: 0
   _captureRate: 255
   rewardedEffortValue:
   - _statAttribute: 6
@@ -43,3 +41,9 @@ MonoBehaviour:
   secondAbility: 0
   hiddenAbility: 0
   _learnableMoves: []
+  learnableTMHMMoves: []
+  evolveLevelBased:
+  - evolvedPokemon: {fileID: 11400000, guid: e9e17018b48fd0447a37f475d1f258ae, type: 2}
+    levelRequirement: 20
+    maxFriendShipRequired: 0
+  evolutionsByStone: []

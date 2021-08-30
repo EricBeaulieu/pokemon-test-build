@@ -16,10 +16,8 @@ MonoBehaviour:
   _pokedexDescription: It can roll its body into a ball. It moves through the desert
     by rolling at high speeds.
   _classification: 
-  _heightInFeet: 0
   _heightInMeters: 0
   _weightInPounds: 0
-  _weightInKilograms: 0
   _captureRate: 255
   rewardedEffortValue:
   - _statAttribute: 3
@@ -42,3 +40,9 @@ MonoBehaviour:
   secondAbility: 0
   hiddenAbility: 0
   _learnableMoves: []
+  learnableTMHMMoves: []
+  evolveLevelBased:
+  - evolvedPokemon: {fileID: 11400000, guid: b2cbdc29d3a35d94bb3848b0817423e8, type: 2}
+    levelRequirement: 22
+    maxFriendShipRequired: 0
+  evolutionsByStone: []

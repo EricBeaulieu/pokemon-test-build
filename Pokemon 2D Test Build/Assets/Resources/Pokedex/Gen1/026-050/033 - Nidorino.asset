@@ -16,10 +16,8 @@ MonoBehaviour:
   _pokedexDescription: Its horn contains venom. If it stabs an enemy with the horn,
     the impact makes the poison leak out.
   _classification: 
-  _heightInFeet: 0
   _heightInMeters: 0
   _weightInPounds: 0
-  _weightInKilograms: 0
   _captureRate: 120
   rewardedEffortValue:
   - _statAttribute: 2
@@ -42,3 +40,8 @@ MonoBehaviour:
   secondAbility: 0
   hiddenAbility: 0
   _learnableMoves: []
+  learnableTMHMMoves: []
+  evolveLevelBased: []
+  evolutionsByStone:
+  - evolvedPokemon: {fileID: 11400000, guid: f638338f4fe81a04f92e962a21a0d788, type: 2}
+    evolutionStone: {fileID: 11400000, guid: 39f747eb120365142850ce10723021b4, type: 2}

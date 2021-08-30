@@ -22,7 +22,7 @@ public class WaterAbsorb : AbilityBase
                 return 0;
             }
             defendingPokemon.UpdateHPRestored(hpHealed);
-            defendingPokemon.statusChanges.Enqueue($"{defendingPokemon.currentName} restored HP using its Water Absorb!");
+            defendingPokemon.statusChanges.Enqueue($"{defendingPokemon.currentName} restored HP using its {GlobalTools.SplitCamelCase(Id.ToString())}!");
             return 0;
         }
 

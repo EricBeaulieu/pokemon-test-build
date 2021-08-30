@@ -16,10 +16,8 @@ MonoBehaviour:
   _pokedexDescription: Able to move only slightly. When endangered, it may stick
     out its stinger and poison its enemy.
   _classification: "Cocoon Pok\xE9mon"
-  _heightInFeet: 0
   _heightInMeters: 0
   _weightInPounds: 0
-  _weightInKilograms: 0
   _captureRate: 120
   rewardedEffortValue:
   - _statAttribute: 3
@@ -44,3 +42,9 @@ MonoBehaviour:
   _learnableMoves:
   - _moveBase: {fileID: 11400000, guid: 2848c84d0da4cb04fac0ba2516f3df92, type: 2}
     _levelLeanred: 0
+  learnableTMHMMoves: []
+  evolveLevelBased:
+  - evolvedPokemon: {fileID: 11400000, guid: bd6a8be22068ca044bb8f65d3b00184a, type: 2}
+    levelRequirement: 10
+    maxFriendShipRequired: 0
+  evolutionsByStone: []

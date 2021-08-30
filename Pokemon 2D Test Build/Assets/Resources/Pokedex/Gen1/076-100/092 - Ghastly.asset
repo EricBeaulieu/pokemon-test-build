@@ -19,14 +19,16 @@ MonoBehaviour:
   _heightInMeters: 0
   _weightInPounds: 0
   _captureRate: 190
-  rewardedEffortValue: []
+  rewardedEffortValue:
+  - _statAttribute: 4
+    _statValue: 1
   _hasGender: 1
   _maleFemaleRatio: 50
-  _baseGroup: 0
+  _baseGroup: 3
   rewardedBaseExp: 62
   _type1: 8
   _type2: 13
-  _eggGroup1: 0
+  _eggGroup1: 9
   _eggGroup2: 0
   _maxHitPoints: 30
   _attack: 35
@@ -34,7 +36,7 @@ MonoBehaviour:
   _specialAttack: 100
   _specialDefense: 35
   _speed: 80
-  firstAbility: 15
+  firstAbility: 46
   secondAbility: 0
   hiddenAbility: 0
   _learnableMoves:
@@ -44,3 +46,8 @@ MonoBehaviour:
     _levelLeanred: 0
   learnableTMHMMoves:
   - {fileID: 11400000, guid: 88ebf4bead5cc4a4fa81828f041330f6, type: 2}
+  evolveLevelBased:
+  - evolvedPokemon: {fileID: 11400000, guid: b3b13eeb8340f404fbd0557900f9e214, type: 2}
+    levelRequirement: 25
+    maxFriendShipRequired: 0
+  evolutionsByStone: []

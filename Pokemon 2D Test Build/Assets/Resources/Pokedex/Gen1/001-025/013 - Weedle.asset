@@ -16,10 +16,8 @@ MonoBehaviour:
   _pokedexDescription: Beware of the sharp stinger on its head. It hides in grass
     and bushes where it eats leaves.
   _classification: "Hairy Pok\xE9mon"
-  _heightInFeet: 1
   _heightInMeters: 0.3
   _weightInPounds: 0
-  _weightInKilograms: 0
   _captureRate: 255
   rewardedEffortValue:
   - _statAttribute: 6
@@ -44,3 +42,9 @@ MonoBehaviour:
   _learnableMoves:
   - _moveBase: {fileID: 11400000, guid: 2848c84d0da4cb04fac0ba2516f3df92, type: 2}
     _levelLeanred: 0
+  learnableTMHMMoves: []
+  evolveLevelBased:
+  - evolvedPokemon: {fileID: 11400000, guid: 6dc615c563c682f48bc38c2fcbc86006, type: 2}
+    levelRequirement: 7
+    maxFriendShipRequired: 0
+  evolutionsByStone: []
