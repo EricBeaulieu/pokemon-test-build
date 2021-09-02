@@ -105,15 +105,13 @@ public class NpcController : Entity, IInteractable
         _anim.SetBool("isRunning", isRunning);
     }
 
-    void IInteractable.OnInteract(Vector2 initiator)
+    IEnumerator IInteractable.OnInteract(Vector2 initiator)
     {
         if(IsMoving == false)
         {
             FaceTowardsDirection(initiator);
-            StartCoroutine(GameManager.instance.GetDialogSystem.ShowDialogBox(nPCBase.GetDialog, () =>
-            {
-                _idleTimer = 0;
-            }));
+            yield return GameManager.instance.GetDialogSystem.ShowDialogBox(nPCBase.GetDialog);
+            _idleTimer = 0;
         }
     }
 

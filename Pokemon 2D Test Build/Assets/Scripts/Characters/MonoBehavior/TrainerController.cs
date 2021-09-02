@@ -61,22 +61,20 @@ public class TrainerController : Entity,IInteractable
         }
     }
 
-    void IInteractable.OnInteract(Vector2 initiator)
+    IEnumerator IInteractable.OnInteract(Vector2 initiator)
     {
         _playerSpotted = true;
         FaceTowardsDirection(initiator);
 
         if (_hasLostToPlayer == false)
         {
-            StartCoroutine(GameManager.instance.GetDialogSystem.ShowDialogBox(trainerBase.GetPreBattleDialog, () =>
-            {
-                _idleTimer = 0;
-                GameManager.instance.StartTrainerBattle(this);
-            }));
+            yield return GameManager.instance.GetDialogSystem.ShowDialogBox(trainerBase.GetPreBattleDialog);
+            _idleTimer = 0;
+            GameManager.instance.StartTrainerBattle(this);
         }
         else
         {
-            StartCoroutine(GameManager.instance.GetDialogSystem.ShowDialogBox(trainerBase.GetPostDefeatOverworldDialog));
+            yield return GameManager.instance.GetDialogSystem.ShowDialogBox(trainerBase.GetPostDefeatOverworldDialog);
         }
     }
 
@@ -151,14 +149,28 @@ public class TrainerController : Entity,IInteractable
     {
         if(col.CompareTag("Player")&& _playerSpotted == false && _hasLostToPlayer == false && _changingSight == false)
         {
-            _playerSpotted = true;
             PlayerController player = col.GetComponent<PlayerController>();
+
+            Vector2 playerFinalPos = player.CurrentWalkingToPos() - (Vector2)transform.position;
+            playerFinalPos.Normalize();
+            if (Mathf.Abs(playerFinalPos.x) != 1 && Mathf.Abs(playerFinalPos.y) != 1)
+            {
+                Debug.Log($"Player position moving to {playerFinalPos}, Trainer current Position {transform.position}, normalized vecotr {playerFinalPos}");
+                return;
+            }
+
+            _playerSpotted = true;
             StartCoroutine(TriggerTrainerBattle(player));
         }
     }
 
     public IEnumerator TriggerTrainerBattle(PlayerController player)
     {
+        if(player.IsMoving == true)
+        {
+            yield return null;
+        }
+        
         player.spottedByTrainer = true;
         exclamationMark.SetActive(true);
         yield return new WaitForSeconds(1.5f);
@@ -181,12 +193,10 @@ public class TrainerController : Entity,IInteractable
         _anim.SetBool("isRunning", isRunning);
 
         player.LookAtTrainer(transform.position);
-        yield return GameManager.instance.GetDialogSystem.ShowDialogBox(trainerBase.GetPreBattleDialog, () =>
-        {
-            _idleTimer = 0;
-            GameManager.instance.StartTrainerBattle(this);
-        });
+        yield return GameManager.instance.GetDialogSystem.ShowDialogBox(trainerBase.GetPreBattleDialog);
 
+        _idleTimer = 0;
+        GameManager.instance.StartTrainerBattle(this);
         player.spottedByTrainer = false;
     }
 
@@ -200,26 +210,6 @@ public class TrainerController : Entity,IInteractable
         get { return trainerBase.TrainerName; }
     }
 
-    Vector2 TestDirection()
-    {
-        switch (Random.Range(0, 4))
-        {
-            case 0:
-                return Vector2.up + (Vector2)transform.position;
-            case 1:
-                return Vector2.right + (Vector2)transform.position;
-            case 2:
-                return Vector2.down + (Vector2)transform.position;
-            case 3:
-                return Vector2.left + (Vector2)transform.position;
-            default:
-                Debug.Log("This is going higher then expected and breaking");
-                break;
-        }
-
-        return Vector2.zero + (Vector2)transform.position;
-    }
-
     FacingDirections TestDirectionF()
     {
         switch (Random.Range(0, 4))
@@ -230,14 +220,9 @@ public class TrainerController : Entity,IInteractable
                 return FacingDirections.Down;
             case 2:
                 return FacingDirections.Right;
-            case 3:
-                return FacingDirections.Left;
             default:
-                Debug.Log("This is going higher then expected and breaking");
-                break;
+                return FacingDirections.Left;
         }
-
-        return FacingDirections.Down;
     }
 
     /// <summary>

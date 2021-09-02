@@ -1,0 +1,59 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1bad4d665bd6f7f438fdb0d0edd2ee35, type: 3}
+  m_Name: 152 Chikorita
+  m_EditorClassIdentifier: 
+  _pokedexNumber: 152
+  _pokedexDescription: "In battle, Chikorita waves its leaf around to keep the foe
+    at bay. However, a sweet fragrance also wafts from the leaf, becalming the battling
+    Pok\xE9mon and creating a cozy, friendly atmosphere all around."
+  _classification: 
+  _heightInMeters: 0
+  _weightInPounds: 0
+  _captureRate: 45
+  rewardedEffortValue:
+  - _statAttribute: 5
+    _statValue: 1
+  _hasGender: 1
+  _maleFemaleRatio: 87.5
+  _baseGroup: 3
+  rewardedBaseExp: 64
+  _type1: 9
+  _type2: -1
+  _eggGroup1: 11
+  _eggGroup2: 7
+  _maxHitPoints: 45
+  _attack: 49
+  _defense: 65
+  _specialAttack: 49
+  _specialDefense: 65
+  _speed: 45
+  firstAbility: 58
+  secondAbility: 0
+  hiddenAbility: 45
+  _learnableMoves:
+  - _moveBase: {fileID: 11400000, guid: 74776a55aab78af45a268d0b4777c811, type: 2}
+    _levelLeanred: 0
+  - _moveBase: {fileID: 11400000, guid: 2159c5df54cc71f489b7ca1fdf333cd6, type: 2}
+    _levelLeanred: 0
+  - _moveBase: {fileID: 11400000, guid: d6fc7f10715c1cd44aa2930f9b5b41be, type: 2}
+    _levelLeanred: 6
+  - _moveBase: {fileID: 11400000, guid: 39816f40946f34e4b8ba6c0f86d71e66, type: 2}
+    _levelLeanred: 9
+  - _moveBase: {fileID: 11400000, guid: 8e9b69ed0ebf0324a96f0594f973e190, type: 2}
+    _levelLeanred: 12
+  learnableTMHMMoves: []
+  evolveLevelBased:
+  - evolvedPokemon: {fileID: 11400000, guid: 91369cf0cb9d17842b29e2916c9bdfbb, type: 2}
+    levelRequirement: 16
+    maxFriendShipRequired: 0
+  evolutionsByStone: []

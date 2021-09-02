@@ -23,11 +23,7 @@ public class LevelManager : MonoBehaviour
             Debug.LogWarning("currentAreaDetails not set", gameObject);
         }
 
-        if(wildPokemon.Count <= 0)
-        {
-            Debug.LogWarning("no wild pokemon have been set", gameObject);
-        }
-        else
+        if(wildPokemon.Count > 0)
         {
             for (int i = 0; i < wildPokemon.Count; i++)
             {

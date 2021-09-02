@@ -145,7 +145,7 @@ public class PlayerController : Entity
         }
     }
 
-    void Interact()
+    IEnumerator Interact()
     {
         Vector2 facingDirection = new Vector2(_anim.GetFloat("moveX"), _anim.GetFloat("moveY"));
         Vector2 interactablePOS = (Vector2)transform.position + facingDirection;
@@ -164,17 +164,17 @@ public class PlayerController : Entity
                     if(interactablePOS == currentInteractable.CurrentWalkingToPos())
                     {
                         _ignorePlayerInput = true;
-                        StartCoroutine(InteractWhenPossible(currentInteractable));
+                        yield return InteractWhenPossible(currentInteractable);
                     }
                 }
                 else
                 {
-                    currentInteractable.GetComponent<IInteractable>()?.OnInteract((Vector2)transform.position);
+                    yield return currentInteractable.GetComponent<IInteractable>()?.OnInteract((Vector2)transform.position);
                 }
             }
             else
             {
-                collider.GetComponent<IInteractable>()?.OnInteract((Vector2)transform.position);
+                yield return collider.GetComponent<IInteractable>()?.OnInteract((Vector2)transform.position);
             }
         }
     }
@@ -188,7 +188,7 @@ public class PlayerController : Entity
             yield return null;
         }
 
-        currentNPC.GetComponent<IInteractable>()?.OnInteract((Vector2)transform.position);
+        yield return currentNPC.GetComponent<IInteractable>()?.OnInteract((Vector2)transform.position);
         _ignorePlayerInput = false;
     }
 

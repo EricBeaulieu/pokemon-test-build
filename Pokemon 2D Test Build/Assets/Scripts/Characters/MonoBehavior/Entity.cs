@@ -182,7 +182,11 @@ public abstract class Entity : MonoBehaviour
 
     public Vector2 CurrentWalkingToPos()
     {
-        return positionMovingTo.transform.position;
+        Vector2 newPos = positionMovingTo.transform.position;
+
+        newPos.x = Mathf.FloorToInt(newPos.x) + TILE_CENTER_OFFSET;
+        newPos.y = Mathf.FloorToInt(newPos.y) + TILE_CENTER_OFFSET;
+        return newPos;
     }
 
     public virtual void PlayerInteractingWithWhenDoneMoving() { }

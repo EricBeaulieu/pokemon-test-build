@@ -994,6 +994,11 @@ public class BattleSystem : CoreSystem
 
                     yield return sourceUnit.HUD.UpdateHP(previousHP);
                     yield return dialogSystem.TypeDialog(targetUnit.pokemon.GetHoldItemEffects.SpecializedMessage(targetUnit.pokemon, sourceUnit.pokemon));
+
+                    if (sourceUnit.pokemon.currentHitPoints <= 0)
+                    {
+                        yield return PokemonHasFainted(sourceUnit);
+                    }
                 }
             }
             else if(sourceUnit.pokemon.GetHoldItemEffects.HurtsAttacker() == false)

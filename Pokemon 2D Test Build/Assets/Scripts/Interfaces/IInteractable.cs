@@ -1,6 +1,7 @@
+using System.Collections;
 using UnityEngine;
 
 public interface IInteractable
 {
-    void OnInteract(Vector2 vector2);
+    IEnumerator OnInteract(Vector2 vector2);
 }
