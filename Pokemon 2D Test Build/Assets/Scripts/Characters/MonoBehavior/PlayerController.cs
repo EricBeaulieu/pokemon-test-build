@@ -105,7 +105,7 @@ public class PlayerController : Entity
 
                 if (Input.GetButtonDown("Fire1"))
                 {
-                    Interact();
+                    StartCoroutine(Interact());
                     isRunning = false;
                 }
             }

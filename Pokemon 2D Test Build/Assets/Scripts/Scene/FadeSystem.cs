@@ -15,8 +15,14 @@ public class FadeSystem : MonoBehaviour
 
     const int INNER_MAX_CIRCLE_MAX = 1000;
 
+    private void Start()
+    {
+        gameObject.SetActive(false);
+    }
+
     public IEnumerator FadeIn(FadeStyle style)
     {
+        gameObject.SetActive(true);
         switch (style)
         {
             case FadeStyle.FullFade:
@@ -56,6 +62,7 @@ public class FadeSystem : MonoBehaviour
             default:
                 break;
         }
+        gameObject.SetActive(false);
     }
 
     void TurnAllOtherStylesOff(FadeStyle currentStyle)

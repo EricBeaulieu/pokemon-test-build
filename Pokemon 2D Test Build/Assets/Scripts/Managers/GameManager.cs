@@ -106,7 +106,7 @@ public class GameManager : MonoBehaviour
     {
         SetGameState(GameState.Battle);
         battleSystem.gameObject.SetActive(true);
-        overWorldCamera.gameObject.SetActive(false);
+        //overWorldCamera.gameObject.SetActive(false);
 
         Pokemon currentWildPokemon = _levelManager.WildPokemon();
 
@@ -118,7 +118,7 @@ public class GameManager : MonoBehaviour
     {
         SetGameState(GameState.Battle);
         battleSystem.gameObject.SetActive(true);
-        overWorldCamera.gameObject.SetActive(false);
+        //overWorldCamera.gameObject.SetActive(false);
         trainerController = currentTrainer;
 
         trainerController.pokemonParty.HealAllPokemonInParty();
@@ -137,7 +137,7 @@ public class GameManager : MonoBehaviour
         }
         
         battleSystem.gameObject.SetActive(false);
-        overWorldCamera.gameObject.SetActive(true);
+        //overWorldCamera.gameObject.SetActive(true);
         playerController.pokemonParty.SetPositionstoBeforeBattle();
 
         if(wasWon == true)
