@@ -119,4 +119,11 @@ public class LevelManager : MonoBehaviour
     {
         get { return grassOnlyWildPokemon; }
     }
+
+    public void ReloadStartingArea()
+    {
+        //load all items that were not picked up
+        //load all NPC states and positions
+        //load all trees only in the area that wasnt saved right in the area
+    }
 }

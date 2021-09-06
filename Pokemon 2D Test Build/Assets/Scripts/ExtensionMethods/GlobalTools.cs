@@ -33,4 +33,13 @@ public static class GlobalTools
         }
         return original;
     }
+
+    public static Vector3 SnapToGrid(Vector3 currentPos)
+    {
+        currentPos.x = Mathf.FloorToInt(currentPos.x) + Entity.TILE_CENTER_OFFSET;
+        currentPos.y = Mathf.FloorToInt(currentPos.y) + Entity.TILE_CENTER_OFFSET;
+        currentPos.z = 0;
+
+        return currentPos;
+    }
 }

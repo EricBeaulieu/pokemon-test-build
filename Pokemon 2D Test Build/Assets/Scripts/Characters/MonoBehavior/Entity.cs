@@ -23,7 +23,7 @@ public abstract class Entity : MonoBehaviour
     /// </summary>
     [SerializeField] protected GameObject positionMovingTo;
 
-    protected const float TILE_CENTER_OFFSET = 0.5f;
+    public const float TILE_CENTER_OFFSET = 0.5f;
     protected const float STANDARD_WALKING_SPEED = 5f;
     protected const float STANDARD_RUNNING_SPEED = 12.5f;
     const float ENTITY_Y_OFFSET = -0.3f;
@@ -170,13 +170,7 @@ public abstract class Entity : MonoBehaviour
 
     public void SnapToGrid()
     {
-        Vector3 currentPos = transform.position;
-
-        currentPos.x = Mathf.FloorToInt(currentPos.x) + TILE_CENTER_OFFSET;
-        currentPos.y = Mathf.FloorToInt(currentPos.y) + TILE_CENTER_OFFSET;
-        currentPos.z = 0;
-
-        transform.position = currentPos;
+        transform.position = GlobalTools.SnapToGrid(transform.position);
         positionMovingTo.transform.localPosition = Vector3.zero;
     }
 

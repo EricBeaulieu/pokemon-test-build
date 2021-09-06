@@ -292,6 +292,8 @@ public class GameManager : MonoBehaviour
         AsyncOperation sceneToLoad = SceneManager.LoadSceneAsync(gameSceneBase.GetSceneName, LoadSceneMode.Additive);
         currentScenesLoaded.Add(gameSceneBase);
         yield return OnLevelLoaded(sceneToLoad, gameSceneBase);
+
+        gameSceneBase.GetLevelManager.ReloadStartingArea();
     }
 
     void PlayerEnteredPortal(Portal portal)

@@ -53,7 +53,7 @@ public class DialogManager : CoreSystem
         onFinished?.Invoke();
     }
 
-    public void ShowMessage(string message, Action onFinished = null)
+    public void ShowMessage(string message)
     {
         StartCoroutine(ShowDialogBox(new Dialog(message)));
     }
@@ -161,5 +161,18 @@ public class DialogManager : CoreSystem
     public IEnumerator SetChoiceBox(Action onYesSelected, Action onNoSelected = null)
     {
         yield return currentDialogBox.SetChoiceBox(onYesSelected, onNoSelected);
+    }
+
+    public void ActivateDialog(bool turnOn)
+    {
+        currentDialogBox.ShowDialogBox(turnOn);
+        if (turnOn == true)
+        {
+            OnShowDialog();
+        }
+        else
+        {
+            OnCloseDialog();
+        }
     }
 }

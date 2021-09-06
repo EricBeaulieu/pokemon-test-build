@@ -5,16 +5,22 @@ using UnityEngine;
 [System.Serializable]
 public class Dialog
 {
-    [SerializeField] List<string> lines;
+    [SerializeField] List<string> lines = new List<string>();
 
     public List<string> Lines
     {
         get { return lines; }
     }
 
-    public Dialog(string Message)
+    public Dialog(string message)
     {
-        lines = new List<string>();
-        lines.Add(Message);
+        lines.Clear();
+        lines.Add(message);
+    }
+
+    public Dialog(List<string> messages)
+    {
+        lines.Clear();
+        lines = messages;
     }
 }

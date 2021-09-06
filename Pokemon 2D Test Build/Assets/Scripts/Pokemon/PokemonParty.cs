@@ -130,4 +130,17 @@ public class PokemonParty : MonoBehaviour
     {
         pokemonParty = loadedParty;
     }
+
+    public Pokemon ContainsCut()
+    {
+        for (int i = 0; i < pokemonParty.Count; i++)
+        {
+            if (pokemonParty[i].moves.Exists(x => x.moveBase.MoveName == "Cut"))
+            {
+                return pokemonParty[i];
+            }
+        }
+
+        return null;
+    }
 }
