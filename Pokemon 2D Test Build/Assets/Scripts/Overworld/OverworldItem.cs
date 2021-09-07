@@ -3,14 +3,20 @@ using System.Collections.Generic;
 using System;
 using UnityEngine;
 
+[RequireComponent(typeof(SaveableEntity))]
 public class OverworldItem : MonoBehaviour,IInteractable,ISaveable
 {
+    [SerializeField] SaveableEntity saveableEntity;
     [SerializeField] ItemBase itemBase;
     [SerializeField] int count = 1;
 
     void Start()
     {
-        //TO DO save item and delete if not needed
+        object previousSave = SavingSystem.ReturnSpecificSave(saveableEntity.GetID);
+        if(previousSave != null)
+        {
+            saveableEntity.RestoreState(previousSave);
+        }
         transform.position = GlobalTools.SnapToGrid(transform.position);
     }
 
@@ -28,6 +34,7 @@ public class OverworldItem : MonoBehaviour,IInteractable,ISaveable
         gameObject.SetActive(false);
         yield return GameManager.instance.GetDialogSystem.ShowDialogBox(new Dialog(inGameText));
         GameManager.instance.GetInventorySystem.AddItem(itemBase, count);
+        SavingSystem.AddInfoTobeSaved(saveableEntity);
 
         yield break;
     }

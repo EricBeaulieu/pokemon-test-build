@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+[RequireComponent(typeof(SaveableEntity))]
 public class CuttableTree : MonoBehaviour,IInteractable, ISaveable
 {
     SpriteRenderer spriteRenderer;
@@ -43,9 +44,10 @@ public class CuttableTree : MonoBehaviour,IInteractable, ISaveable
             {
                 yield return dialogManager.TypeDialog(pokemonUse);
                 dialogManager.ActivateDialog(false);
+                GameManager.SetGameState(GameState.Dialog);
                 yield return CutAnimation();
-
                 gameObject.SetActive(false);
+                GameManager.SetGameState(GameState.Overworld);
             }
             else
             {

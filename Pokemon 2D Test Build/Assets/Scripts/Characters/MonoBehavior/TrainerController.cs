@@ -1,14 +1,16 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 [RequireComponent(typeof(PokemonParty))]
-public class TrainerController : Entity,IInteractable
+public class TrainerController : Entity,IInteractable,ISaveable
 {
     [Header("Trainer Controller")]
     [SerializeField] TrainerBaseSO trainerBase;
     int uniqueID;
-    bool _hasLostToPlayer = false;
+    bool hasLostToPlayer = false;
     
     public PokemonParty pokemonParty { get; private set; }
 
@@ -37,19 +39,13 @@ public class TrainerController : Entity,IInteractable
 
         if(GameManager.instance.startNewSaveEveryStart == false)
         {
-            _hasLostToPlayer = SavingSystem.GetTrainerSave(uniqueID);
+            hasLostToPlayer = SavingSystem.GetTrainerSave(uniqueID);
         }
 
         FaceTowardsDirection(Vector2.down + (Vector2)transform.position);
         _idleTimerLimit = SetNewIdleTimer();
         exclamationMark.SetActive(false);
         pokemonParty = GetComponent<PokemonParty>();
-
-        if (trainerBase == null)
-        {
-            Debug.LogWarning("This trainer has no Data Entered", gameObject);
-            return;
-        }
 
         if (trainerBase.TrainerName == "")
         {
@@ -66,7 +62,7 @@ public class TrainerController : Entity,IInteractable
         _playerSpotted = true;
         FaceTowardsDirection(initiator);
 
-        if (_hasLostToPlayer == false)
+        if (hasLostToPlayer == false)
         {
             yield return GameManager.instance.GetDialogSystem.ShowDialogBox(trainerBase.GetPreBattleDialog);
             _idleTimer = 0;
@@ -147,7 +143,7 @@ public class TrainerController : Entity,IInteractable
 
     void OnTriggerEnter2D(Collider2D col)
     {
-        if(col.CompareTag("Player")&& _playerSpotted == false && _hasLostToPlayer == false && _changingSight == false)
+        if(col.CompareTag("Player")&& _playerSpotted == false && hasLostToPlayer == false && _changingSight == false)
         {
             PlayerController player = col.GetComponent<PlayerController>();
 
@@ -232,7 +228,7 @@ public class TrainerController : Entity,IInteractable
     /// <returns></returns>
     public List<string> OnBattleOverDialog(bool playerHasWon)
     {
-        _hasLostToPlayer = playerHasWon;
+        hasLostToPlayer = playerHasWon;
         _playerSpotted = false;
 
         if (playerHasWon == true)
@@ -244,5 +240,42 @@ public class TrainerController : Entity,IInteractable
         {
             return trainerBase.GetInBattleDialogOnVictory.Lines;
         }
+    }
+
+    public object CaptureState()
+    {
+        return new StartingLevelTrainerSaveData
+        {
+            lostToPlayer = hasLostToPlayer
+        };
+    }
+
+    public void RestoreState(object state)
+    {
+        if(state is TrainerSaveData)
+        {
+            var saveData = (TrainerSaveData)state;
+            hasLostToPlayer = saveData.lostToPlayer;
+        }
+        else
+        {
+            var saveData = (StartingLevelTrainerSaveData)state;
+            hasLostToPlayer = saveData.lostToPlayer;
+            transform.position = saveData.savedPos;
+            FaceTowardsDirection(saveData.savedDirection);
+        }
+    }
+
+    [Serializable]
+    struct TrainerSaveData
+    {
+        public bool lostToPlayer;
+    }
+
+    struct StartingLevelTrainerSaveData
+    {
+        public bool lostToPlayer;
+        public Vector2 savedPos;
+        public FacingDirections savedDirection;
     }
 }

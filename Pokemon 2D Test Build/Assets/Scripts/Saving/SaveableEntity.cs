@@ -2,11 +2,21 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
+[ExecuteInEditMode]
 public class SaveableEntity : MonoBehaviour
 {
     [SerializeField] string id;
     [ContextMenu("Generate ID")]
-    private void GenerateID() => id = Guid.NewGuid().ToString();
+    void GenerateID()
+    {
+        id = Guid.NewGuid().ToString();
+    }
+
+    void Awake()
+    {
+        if(id == "")
+        GenerateID();
+    }
 
     public object CaptureState()
     {
@@ -32,5 +42,10 @@ public class SaveableEntity : MonoBehaviour
                 saveable.RestoreState(value);
             }
         }
+    }
+
+    public string GetID
+    {
+        get { return id; }
     }
 }

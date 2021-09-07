@@ -126,4 +126,22 @@ public class LevelManager : MonoBehaviour
         //load all NPC states and positions
         //load all trees only in the area that wasnt saved right in the area
     }
+
+    public void LoadSceneStandard()
+    {
+
+    }
+
+    public List<SaveableEntity> SaveableEntities()
+    {
+        List<SaveableEntity> saveableEntities = new List<SaveableEntity>();
+        GameObject[] temp = SceneManager.GetSceneByName(sceneReference.GetSceneName).GetRootGameObjects();
+
+        for (int i = 0; i < temp.Length; i++)
+        {
+            saveableEntities.AddRange(temp[i].GetComponentsInChildren<SaveableEntity>());
+        }
+
+        return saveableEntities;
+    }
 }

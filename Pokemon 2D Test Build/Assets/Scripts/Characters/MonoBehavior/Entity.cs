@@ -67,6 +67,12 @@ public abstract class Entity : MonoBehaviour
 
     protected virtual void Initialization(EntityBaseSO entityBaseSO)
     {
+        if (entityBaseSO == null)
+        {
+            Debug.LogWarning("This trainer has no Data Entered", gameObject);
+            return;
+        }
+
         _anim = GetComponentInChildren<Animator>();
 
         solidObjectLayermask = LayerMask.GetMask("SolidObjects");

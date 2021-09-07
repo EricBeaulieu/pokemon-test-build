@@ -1,9 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine;
 
 public static class SavingSystem
 {
+    public readonly static string savePath = $"{Application.persistentDataPath}/save.txt";
+    static Dictionary<string, object> saveInfo = new Dictionary<string, object>();
+    static Dictionary<string, object> infoTobeSaved = new Dictionary<string, object>();
+
     static Stack<int> trainersToBeSaved = new Stack<int>();
 
     //keys
@@ -54,6 +61,10 @@ public static class SavingSystem
         }
 
         PlayerPrefs.Save();
+        
+        saveInfo = LoadFile();
+        OverrideSave(saveInfo, currentScene);
+        SaveFile(saveInfo);
     }
 
     public static IEnumerator LoadPlayerScene()
@@ -62,6 +73,9 @@ public static class SavingSystem
 
         string currentLevel = PlayerPrefs.GetString("CurrentLevel");
         yield return GameManager.instance.LoadScenethatPlayerSavedIn(currentLevel);
+
+        saveInfo = LoadFile();
+        RestoreSave(saveInfo, Resources.FindObjectsOfTypeAll<GameSceneBaseSO>().FirstOrDefault(x => x.GetSceneName == currentLevel));
     }
 
     public static Vector2 LoadPlayerPosition()
@@ -116,5 +130,69 @@ public static class SavingSystem
     public static List<Item> LoadPlayerInventory()
     {
         return InventorySavingSystem.LoadInventorySystem(PlayerInventory);
+    }
+
+    public static void SaveFile(object state)
+    {
+        using (var stream = File.Open(savePath, FileMode.Create))
+        {
+            var formater = new BinaryFormatter();
+            formater.Serialize(stream, state);
+        }
+    }
+
+    public static Dictionary<string,object> LoadFile()
+    {
+        if(File.Exists(savePath) == false)
+        {
+            return new Dictionary<string, object>();
+        }
+
+        using (FileStream stream = File.Open(savePath, FileMode.Open))
+        {
+            var formater = new BinaryFormatter();
+            return (Dictionary<string, object>)formater.Deserialize(stream);
+        }
+    }
+
+    static void OverrideSave(Dictionary<string,object> state, GameSceneBaseSO playerSavedScene)
+    {
+        state.Concat(infoTobeSaved.Where(kvp => !state.ContainsKey(kvp.Key))).ToDictionary(kvp => kvp.Key, kvp => kvp.Value);
+
+        foreach (SaveableEntity saveable in playerSavedScene.GetLevelManager.SaveableEntities())
+        {
+            state[saveable.GetID] = saveable.CaptureState();
+        }
+    }
+
+    static void RestoreSave(Dictionary<string, object> state, GameSceneBaseSO playerSavedScene)
+    {
+        foreach (SaveableEntity saveable in playerSavedScene.GetLevelManager.SaveableEntities())
+        {
+            if(state.TryGetValue(saveable.GetID,out object value))
+            {
+                saveable.RestoreState(value);
+            }
+        }
+    }
+
+    public static object ReturnSpecificSave(string iD)
+    {
+        if (saveInfo.TryGetValue(iD, out object saveInfoValue))
+        {
+            return saveInfoValue;
+        }
+
+        if (infoTobeSaved.TryGetValue(iD, out object infoTobeSavedValue))
+        {
+            return infoTobeSavedValue;
+        }
+
+        return null;
+    }
+
+    public static void AddInfoTobeSaved(SaveableEntity saveable)
+    {
+        infoTobeSaved[saveable.GetID] = saveable.CaptureState();
     }
 }
