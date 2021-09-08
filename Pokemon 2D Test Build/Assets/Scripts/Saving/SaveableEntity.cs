@@ -2,20 +2,19 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-[ExecuteInEditMode]
 public class SaveableEntity : MonoBehaviour
 {
+    [ReadOnly]
     [SerializeField] string id;
-    [ContextMenu("Generate ID")]
+    //[ContextMenu("Generate ID")]
     void GenerateID()
     {
         id = Guid.NewGuid().ToString();
     }
 
-    void Awake()
+    void OnValidate()
     {
-        if(id == "")
-        GenerateID();
+        if (gameObject.scene.name != null || gameObject.scene.rootCount != 0 && string.IsNullOrEmpty(id)) GenerateID();
     }
 
     public object CaptureState()

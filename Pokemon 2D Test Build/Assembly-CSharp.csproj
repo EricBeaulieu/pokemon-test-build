@@ -211,6 +211,7 @@
     <Compile Include="Assets\Scripts\Data\Abilitys\List\ToughClaws.cs" />
     <Compile Include="Assets\Scripts\Items\ScriptableObjects\EvolutionStoneBase.cs" />
     <Compile Include="Assets\Scripts\Data\Abilitys\List\CloudNine.cs" />
+    <Compile Include="Assets\Scripts\Overworld\OverworldItem.cs" />
     <Compile Include="Assets\Scripts\Party\SummaryMoves.cs" />
     <Compile Include="Assets\Scripts\Data\Abilitys\List\ShellArmor.cs" />
     <Compile Include="Assets\Scripts\Data\Abilitys\List\IronFist.cs" />
@@ -235,6 +236,7 @@
     <Compile Include="Assets\Scripts\Data\Conditions\VolatileStatus\HealBlock.cs" />
     <Compile Include="Assets\Scripts\Data\HoldItems\Standard\DragonGem.cs" />
     <Compile Include="Assets\Scripts\Data\Abilitys\List\RockHead.cs" />
+    <Compile Include="Assets\Scripts\Saving\SaveableEntity.cs" />
     <Compile Include="Assets\Scripts\Data\HoldItems\Standard\MysticWater.cs" />
     <Compile Include="Assets\Scripts\Data\HoldItems\Standard\Metronome.cs" />
     <Compile Include="Assets\Scripts\Data\HoldItems\Standard\SpellTag.cs" />
@@ -304,6 +306,7 @@
     <Compile Include="Assets\Scripts\Data\Conditions\Status\Frozen.cs" />
     <Compile Include="Assets\Scripts\Data\Abilitys\List\Filter.cs" />
     <Compile Include="Assets\Scripts\Data\HoldItems\Standard\NormalGem.cs" />
+    <Compile Include="Assets\Scripts\Saving\ISaveable.cs" />
     <Compile Include="Assets\Scripts\Data\HoldItems\Standard\PowerBelt.cs" />
     <Compile Include="Assets\Scripts\Data\HoldItems\Standard\DampRock.cs" />
     <Compile Include="Assets\Scripts\Data\HoldItems\Standard\MiracleSeed.cs" />
@@ -417,9 +420,7 @@
     <Compile Include="Assets\Scripts\Data\Abilitys\List\RainDish.cs" />
     <Compile Include="Assets\Scripts\Data\Abilitys\List\Justified.cs" />
     <Compile Include="Assets\Scripts\Data\Abilitys\List\Soundproof.cs" />
-    <Compile Include="Assets\Scripts\Overworld\OverworldItem.cs" />
-    <Compile Include="Assets\Scripts\Saving\ISaveable.cs" />
-    <Compile Include="Assets\Scripts\Saving\SaveableEntity.cs" />
+    <Compile Include="Assets\Scripts\Attribute\ReadOnly.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
