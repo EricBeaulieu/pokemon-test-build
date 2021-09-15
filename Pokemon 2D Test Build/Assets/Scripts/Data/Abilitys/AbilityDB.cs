@@ -74,11 +74,6 @@ public class AbilityDB
         foreach (AbilityBase ability in abilityBases)
         {
             AbilityDex.Add(ability.Id, ability);
-
-            if (ability.Description() == "")
-            {
-                Debug.LogWarning($"{ability.Id} Description is not preset");
-            }
         }
     }
 

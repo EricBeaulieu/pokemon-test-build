@@ -6,7 +6,9 @@ public class Notes
 {
     //To do list
 
-    //when you select a pokemon in the party menu, when the selection menu is selected it should still show the current pokemon as selected so you know what pokemon youre in the sub menu for
+    //Battle unit, remove the event from pokemon and put it over to battle unit and have it update the HUD upon so, change in battlesystem the set status
+    //fix the saving for items, currently it will save correctly but when it loads the items loadouts are not coming out correctly
+
     //complete trainer controller, as of right now the ai decisions are not implimented
     //add in specific moves
     //hidden power

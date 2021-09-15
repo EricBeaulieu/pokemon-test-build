@@ -14,6 +14,7 @@ public class BattleSystem : CoreSystem
     [SerializeField] BattleUnit enemyBattleUnit;
     TurnAttackDetails playerTurnAttackDetails = new TurnAttackDetails();
     TurnAttackDetails enemyTurnAttackDetails = new TurnAttackDetails();
+    DamageDetails damageDetails = new DamageDetails();
 
     PartySystem partySystem;
     InventorySystem inventorySystem;
@@ -763,7 +764,7 @@ public class BattleSystem : CoreSystem
                     }
                 }
 
-                DamageDetails damageDetails = targetUnit.pokemon.TakeDamage(alteredMove, sourceUnit.pokemon);
+                targetUnit.pokemon.TakeDamage(damageDetails, alteredMove, sourceUnit.pokemon);
 
                 if (damageDetails.sourceItemUsed == true)
                 {
@@ -795,7 +796,7 @@ public class BattleSystem : CoreSystem
                     {
                         if (i > 0)
                         {
-                            damageDetails = targetUnit.pokemon.TakeDamage(alteredMove, sourceUnit.pokemon);
+                            targetUnit.pokemon.TakeDamage(damageDetails,alteredMove, sourceUnit.pokemon);
                         }
 
                         if (alteredMove.Target == MoveTarget.Foe && damageDetails.typeEffectiveness != 0)
@@ -1422,7 +1423,7 @@ public class BattleSystem : CoreSystem
 
     IEnumerator ApplyStatChanges(List<StatBoost> statBoosts,BattleUnit targetUnit, MoveTarget moveTarget,BattleUnit sourceUnit = null)
     {
-        if (statBoosts.Count == 0)
+        if (statBoosts == null || statBoosts.Count == 0)
         {
             yield break;
         }
@@ -1972,7 +1973,7 @@ public class BattleSystem : CoreSystem
 
         _currentWeather = WeatherEffectDB.WeatherEffects[weatherID];
         yield return dialogSystem.TypeDialog(_currentWeather.StartMessage());
-        _currentWeather.duration += sourceUnit.pokemon.GetCurrentItem.HoldItemAffects().IncreasedWeatherEffectDuration(weatherID);
+        _currentWeather.duration += sourceUnit.pokemon.GetHoldItemEffects.IncreasedWeatherEffectDuration(weatherID);
     }
 
     public static void RemoveWeatherEffect()

@@ -12,11 +12,6 @@ public class OverworldItem : MonoBehaviour,IInteractable,ISaveable
 
     void Start()
     {
-        object previousSave = SavingSystem.ReturnSpecificSave(saveableEntity.GetID);
-        if(previousSave != null)
-        {
-            saveableEntity.RestoreState(previousSave);
-        }
         transform.position = GlobalTools.SnapToGrid(transform.position);
     }
 
@@ -39,7 +34,7 @@ public class OverworldItem : MonoBehaviour,IInteractable,ISaveable
         yield break;
     }
 
-    public object CaptureState()
+    public object CaptureState(bool playerSave = false)
     {
         return new OverworldItemSaveData { itemPickedUp = (gameObject.activeInHierarchy) };
     }

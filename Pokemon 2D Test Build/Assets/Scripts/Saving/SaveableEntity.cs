@@ -6,7 +6,7 @@ public class SaveableEntity : MonoBehaviour
 {
     [ReadOnly]
     [SerializeField] string id;
-    //[ContextMenu("Generate ID")]
+    [ContextMenu("Generate ID")]
     void GenerateID()
     {
         id = Guid.NewGuid().ToString();
@@ -14,16 +14,20 @@ public class SaveableEntity : MonoBehaviour
 
     void OnValidate()
     {
-        if (gameObject.scene.name != null || gameObject.scene.rootCount != 0 && string.IsNullOrEmpty(id)) GenerateID();
+        if ((gameObject.scene.name != null || gameObject.scene.rootCount != 0) && string.IsNullOrEmpty(id) == true)
+        {
+            GenerateID();
+            Debug.Log(id, gameObject);
+        }
     }
 
-    public object CaptureState()
+    public object CaptureState(bool playerSave = false)
     {
         var state = new Dictionary<string, object>();
 
         foreach (var saveable in GetComponents<ISaveable>())
         {
-            state[saveable.GetType().ToString()] = saveable.CaptureState();
+            state[saveable.GetType().ToString()] = saveable.CaptureState(playerSave);
         }
 
         return state;

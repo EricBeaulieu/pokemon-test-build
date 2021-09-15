@@ -15,7 +15,7 @@ public class DamageDetails
     public bool sourceItemUsed { get; set; }
     public bool targetItemUsed { get; set; }
 
-    public DamageDetails()
+    public void Clear()
     {
         hasFainted = false;
         criticalHit = 1;

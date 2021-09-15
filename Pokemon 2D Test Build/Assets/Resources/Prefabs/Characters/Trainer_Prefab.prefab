@@ -268,6 +268,7 @@ GameObject:
   - component: {fileID: 2072594005822930160}
   - component: {fileID: 5864479954145141597}
   - component: {fileID: 5864479954145141596}
+  - component: {fileID: -5716534250426172903}
   m_Layer: 8
   m_Name: Trainer_Prefab
   m_TagString: Untagged
@@ -308,6 +309,7 @@ MonoBehaviour:
   movementSpeed: 5
   positionMovingTo: {fileID: 483150110}
   trainerBase: {fileID: 11400000, guid: c1e6b74e042f0ee418f01008f16ec6c0, type: 2}
+  saveableEntity: {fileID: -5716534250426172903}
   lineOfSightSize: 7
   lineofSight: {fileID: 4292511139321701667}
   timeUntilMoveMin: 5
@@ -328,10 +330,70 @@ MonoBehaviour:
   pokemonParty:
   - _pokemonBase: {fileID: 11400000, guid: 035955532a56c544eba76cdb240c24e3, type: 2}
     _level: 5
+    _presetMoves: []
+    _isShiny: 0
+    _gender: 0
+    _nature: {fileID: 0}
+    _individualValues:
+      _hitPoints: 0
+      _attack: 0
+      _defense: 0
+      _specialAttack: 0
+      _specialDefense: 0
+      _speed: 0
+    _effortValues:
+      _hitPoints: 0
+      _attack: 0
+      _defense: 0
+      _specialAttack: 0
+      _specialDefense: 0
+      _speed: 0
+    _currentName: 
+    currentHeldItem: {fileID: 0}
   - _pokemonBase: {fileID: 11400000, guid: c4dd55ad047f5cb4d9c167f439657170, type: 2}
     _level: 5
+    _presetMoves: []
+    _isShiny: 0
+    _gender: 0
+    _nature: {fileID: 0}
+    _individualValues:
+      _hitPoints: 0
+      _attack: 0
+      _defense: 0
+      _specialAttack: 0
+      _specialDefense: 0
+      _speed: 0
+    _effortValues:
+      _hitPoints: 0
+      _attack: 0
+      _defense: 0
+      _specialAttack: 0
+      _specialDefense: 0
+      _speed: 0
+    _currentName: 
+    currentHeldItem: {fileID: 0}
   - _pokemonBase: {fileID: 11400000, guid: a5077a98ad912594f8e38408d3ce9f02, type: 2}
     _level: 12
+    _presetMoves: []
+    _isShiny: 0
+    _gender: 0
+    _nature: {fileID: 0}
+    _individualValues:
+      _hitPoints: 0
+      _attack: 0
+      _defense: 0
+      _specialAttack: 0
+      _specialDefense: 0
+      _speed: 0
+    _effortValues:
+      _hitPoints: 0
+      _attack: 0
+      _defense: 0
+      _specialAttack: 0
+      _specialDefense: 0
+      _speed: 0
+    _currentName: 
+    currentHeldItem: {fileID: 0}
 --- !u!50 &5864479954145141597
 Rigidbody2D:
   serializedVersion: 4
@@ -379,6 +441,19 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &-5716534250426172903
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5864479954145141585}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a7a63665f8ec1b340a2666d3395770d5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  id: 
 --- !u!1 &8984052746201963540
 GameObject:
   m_ObjectHideFlags: 0

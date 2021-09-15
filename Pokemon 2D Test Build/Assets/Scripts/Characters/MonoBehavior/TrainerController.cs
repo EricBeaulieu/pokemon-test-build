@@ -9,7 +9,7 @@ public class TrainerController : Entity,IInteractable,ISaveable
 {
     [Header("Trainer Controller")]
     [SerializeField] TrainerBaseSO trainerBase;
-    int uniqueID;
+    [SerializeField] SaveableEntity saveableEntity;
     bool hasLostToPlayer = false;
     
     public PokemonParty pokemonParty { get; private set; }
@@ -35,11 +35,13 @@ public class TrainerController : Entity,IInteractable,ISaveable
     {
         base.Initialization(trainerBase);
 
-        uniqueID = trainerBase.GetInstanceID();
-
-        if(GameManager.instance.startNewSaveEveryStart == false)
+        if (GameManager.instance.startNewSaveEveryStart == false)
         {
-            hasLostToPlayer = SavingSystem.GetTrainerSave(uniqueID);
+            object previousSave = SavingSystem.ReturnSpecificSave(saveableEntity.GetID);
+            if (previousSave != null)
+            {
+                saveableEntity.RestoreState(previousSave);
+            }
         }
 
         FaceTowardsDirection(Vector2.down + (Vector2)transform.position);
@@ -233,7 +235,7 @@ public class TrainerController : Entity,IInteractable,ISaveable
 
         if (playerHasWon == true)
         {
-            SavingSystem.AddDefeatedTrainerToStack(uniqueID);
+            SavingSystem.AddInfoTobeSaved(saveableEntity);
             return trainerBase.GetInBattleDialogOnDefeat.Lines;
         }
         else
@@ -242,12 +244,25 @@ public class TrainerController : Entity,IInteractable,ISaveable
         }
     }
 
-    public object CaptureState()
+    public object CaptureState(bool PlayerSave = false)
     {
-        return new StartingLevelTrainerSaveData
+        if(PlayerSave == true && gameObject.scene.name == SceneSystem.currentLevelManager.GameSceneBase.GetSceneName)
         {
-            lostToPlayer = hasLostToPlayer
-        };
+            return new StartingLevelTrainerSaveData
+            {
+                lostToPlayer = hasLostToPlayer,
+                savedPosX = Mathf.FloorToInt(transform.position.x),
+                savedPosY = Mathf.FloorToInt(transform.position.y),
+                savedDirection = GlobalTools.CurrentDirectionFacing(_anim)
+            };
+        }
+        else
+        {
+            return new TrainerSaveData
+            {
+                lostToPlayer = hasLostToPlayer
+            };
+        }
     }
 
     public void RestoreState(object state)
@@ -261,8 +276,11 @@ public class TrainerController : Entity,IInteractable,ISaveable
         {
             var saveData = (StartingLevelTrainerSaveData)state;
             hasLostToPlayer = saveData.lostToPlayer;
-            transform.position = saveData.savedPos;
+            transform.position = new Vector2(saveData.savedPosX,saveData.savedPosY);
+            SnapToGrid();
             FaceTowardsDirection(saveData.savedDirection);
+
+            SavingSystem.AddInfoTobeSaved(saveableEntity);
         }
     }
 
@@ -272,10 +290,12 @@ public class TrainerController : Entity,IInteractable,ISaveable
         public bool lostToPlayer;
     }
 
+    [Serializable]
     struct StartingLevelTrainerSaveData
     {
         public bool lostToPlayer;
-        public Vector2 savedPos;
+        public int savedPosX;
+        public int savedPosY;
         public FacingDirections savedDirection;
     }
 }

@@ -42,4 +42,21 @@ public static class GlobalTools
 
         return currentPos;
     }
+
+    public static FacingDirections CurrentDirectionFacing(Animator entityAnim)
+    {
+        Vector2 facingDirection = new Vector2(entityAnim.GetFloat("moveX"), entityAnim.GetFloat("moveY"));
+
+        switch (facingDirection)
+        {
+            case Vector2 v when v.Equals(Vector2.up):
+                return FacingDirections.Up;
+            case Vector2 v when v.Equals(Vector2.down):
+                return FacingDirections.Down;
+            case Vector2 v when v.Equals(Vector2.left):
+                return FacingDirections.Left;
+            default:
+                return FacingDirections.Right;
+        }
+    }
 }

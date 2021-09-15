@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public enum GameState { Overworld, Battle, Party,Inventory, Dialog, Fade}
 
@@ -13,7 +12,7 @@ public class GameManager : MonoBehaviour
     public bool startNewSaveEveryStart;
 
     [SerializeField] PlayerController playerPrefab;
-    PlayerController playerController;
+    static PlayerController playerController;
     [SerializeField] GameSceneBaseSO startingScene;
     [SerializeField] Transform defaultSpawnLocation;
     TrainerController trainerController = null;
@@ -22,7 +21,6 @@ public class GameManager : MonoBehaviour
     [SerializeField] PartySystem partySystem;
     [SerializeField] FadeSystem fadeSystem;
     [SerializeField] DialogManager dialogManager;
-    LevelManager _levelManager;
     [SerializeField] StartMenu startMenu;
     [SerializeField] PokeballItem standardPokeball;
     [SerializeField] InventorySystem inventorySystem;
@@ -31,8 +29,7 @@ public class GameManager : MonoBehaviour
 
     static GameState state = GameState.Overworld;
 
-    public List<Entity> allActiveEntities = new List<Entity>();
-    List<GameSceneBaseSO> currentScenesLoaded = new List<GameSceneBaseSO>();
+    public static List<Entity> allActiveEntities = new List<Entity>();
 
     public static GameManager instance
     {
@@ -62,8 +59,7 @@ public class GameManager : MonoBehaviour
         startMenu.Initialization();
         inventorySystem.Initialization();
         evolutionSystem.Initialization();
-
-        currentScenesLoaded = GetAllOpenScenes(currentScenesLoaded);
+        SceneSystem.Initialization();
 
         if(startNewSaveEveryStart == false)
         {
@@ -71,7 +67,7 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-            StartCoroutine(LoadScenethatPlayerSavedIn(startingScene.GetSceneName));
+            StartCoroutine(SceneSystem.LoadScenethatPlayerSavedIn(startingScene));
             SpawnInPlayer(defaultSpawnLocation.position);
         }
     }
@@ -106,11 +102,10 @@ public class GameManager : MonoBehaviour
     {
         SetGameState(GameState.Battle);
         battleSystem.gameObject.SetActive(true);
-        //overWorldCamera.gameObject.SetActive(false);
 
-        Pokemon currentWildPokemon = _levelManager.WildPokemon();
+        Pokemon currentWildPokemon = SceneSystem.currentLevelManager.WildPokemon();
 
-        battleSystem.SetupBattleArt(_levelManager.GetBattleEnvironmentArt);
+        battleSystem.SetupBattleArt(SceneSystem.GetBattleEnvironmentArt);
         battleSystem.StartBattle(playerController, currentWildPokemon);
     }
 
@@ -118,12 +113,11 @@ public class GameManager : MonoBehaviour
     {
         SetGameState(GameState.Battle);
         battleSystem.gameObject.SetActive(true);
-        //overWorldCamera.gameObject.SetActive(false);
         trainerController = currentTrainer;
 
         trainerController.pokemonParty.HealAllPokemonInParty();
 
-        battleSystem.SetupBattleArt(_levelManager.GetBattleEnvironmentArt);
+        battleSystem.SetupBattleArt(SceneSystem.GetBattleEnvironmentArt);
         battleSystem.StartBattle(playerController, trainerController);
     }
 
@@ -137,7 +131,6 @@ public class GameManager : MonoBehaviour
         }
         
         battleSystem.gameObject.SetActive(false);
-        //overWorldCamera.gameObject.SetActive(true);
         playerController.pokemonParty.SetPositionstoBeforeBattle();
 
         if(wasWon == true)
@@ -193,69 +186,6 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void NewAreaEntered(LevelManager newLevel)
-    {
-        if(_levelManager == null)
-        {
-            newLevel.Initilization();
-            allActiveEntities.AddRange(newLevel.GetAllEntities());
-        }
-        _levelManager = newLevel;
-        playerController.SetWildEncounter(newLevel.GetWildEncountersGrassSpecific);
-        
-
-        for (int i = currentScenesLoaded.Count-1; i >= 0; i--)
-        {
-            if (currentScenesLoaded[i] == newLevel.GameSceneBase || newLevel.GameSceneBase.AdjacentGameScenes.Contains(currentScenesLoaded[i]) == true)
-            {
-                continue;
-            }
-            allActiveEntities.RemoveAll(x => currentScenesLoaded[i].GetLevelManager.GetAllEntities().Contains(x) == true);
-            SceneManager.UnloadSceneAsync(currentScenesLoaded[i].GetScenePath);
-            currentScenesLoaded.RemoveAt(i);
-        }
-
-        foreach (GameSceneBaseSO newScene in newLevel.GameSceneBase.AdjacentGameScenes)
-        {
-            if (currentScenesLoaded.Contains(newScene) == true)
-            {
-                continue;
-            }
-            AsyncOperation sceneToLoad = SceneManager.LoadSceneAsync(newScene.GetSceneName,LoadSceneMode.Additive);
-            currentScenesLoaded.Add(newScene);
-            StartCoroutine(OnLevelLoaded(sceneToLoad,newScene));
-        }
-    }
-
-    List<GameSceneBaseSO> GetAllOpenScenes(List<GameSceneBaseSO> current)
-    {
-        int countLoaded = SceneManager.sceneCount;
-        Scene[] loadedScenes = new Scene[countLoaded];
-
-        for (int i = 0; i < countLoaded; i++)
-        {
-            loadedScenes[i] = SceneManager.GetSceneAt(i);
-        }
-
-        GameSceneBaseSO[] allGameSceneBaseSO;
-        allGameSceneBaseSO = Resources.LoadAll<GameSceneBaseSO>("SceneData");
-
-        for (int i = 0; i < loadedScenes.Length; i++)
-        {
-            GameSceneBaseSO matching = allGameSceneBaseSO.FirstOrDefault(x => x.GetSceneName == loadedScenes[i].name);
-            if(matching != null)
-            {
-                if(current.Contains(matching) == false)
-                {
-                    current.Add(matching);
-                    matching.GetLevelManager.Initilization();
-                }
-            }
-        }
-
-        return current;
-    }
-
     void SpawnInPlayer(Vector3 spawnLocation)
     {
         if(playerController != null)
@@ -279,23 +209,6 @@ public class GameManager : MonoBehaviour
         partySystem.SetPlayersParty(playerController.pokemonParty);
     }
 
-    public IEnumerator LoadScenethatPlayerSavedIn(string sceneName)
-    {
-        for (int i = currentScenesLoaded.Count - 1; i >= 0; i--)
-        {
-            allActiveEntities.RemoveAll(x => currentScenesLoaded[i].GetLevelManager.GetAllEntities().Contains(x) == true);
-            SceneManager.UnloadSceneAsync(currentScenesLoaded[i].GetScenePath);
-            currentScenesLoaded.RemoveAt(i);
-        }
-
-        GameSceneBaseSO gameSceneBase = Resources.FindObjectsOfTypeAll<GameSceneBaseSO>().FirstOrDefault(x => x.GetSceneName == sceneName);
-        AsyncOperation sceneToLoad = SceneManager.LoadSceneAsync(gameSceneBase.GetSceneName, LoadSceneMode.Additive);
-        currentScenesLoaded.Add(gameSceneBase);
-        yield return OnLevelLoaded(sceneToLoad, gameSceneBase);
-
-        gameSceneBase.GetLevelManager.ReloadStartingArea();
-    }
-
     void PlayerEnteredPortal(Portal portal)
     {
         if(portal.canPlayerPassThrough == true)
@@ -314,19 +227,9 @@ public class GameManager : MonoBehaviour
         yield return Fade(exit.FadeStyle, false);
     }
 
-    IEnumerator OnLevelLoaded(AsyncOperation asyncScene, GameSceneBaseSO gameScene)
-    {
-        while (asyncScene.isDone == false)
-        {
-            yield return null;
-        }
-        gameScene.GetLevelManager.Initilization();
-        allActiveEntities.AddRange(gameScene.GetLevelManager.GetAllEntities());
-    }
-
     public void SaveGame()
     {
-        SavingSystem.SavePlayer(playerController,_levelManager.GameSceneBase);
+        SavingSystem.SavePlayer(playerController, SceneSystem.currentLevelManager.GameSceneBase);
         SavingSystem.SavePlayerInventorySystem(inventorySystem.SaveInventory());
         dialogManager.ShowMessage("The Game Has Been Saved");
     }

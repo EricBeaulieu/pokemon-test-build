@@ -11,12 +11,26 @@ public class CuttableTree : MonoBehaviour,IInteractable, ISaveable
     const string standardMessage = "This tree looks like it can be cut down!";
     const string cutAvailable = "Would you like to cut it?";
 
+    [SerializeField] Sprite standardTree;
     [SerializeField] List<Sprite> treeCutAnimation;
 
-    void Start()
+    void Awake()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
         transform.position = GlobalTools.SnapToGrid(transform.position);
+    }
+
+    public void RestoreTree()
+    {
+        if(gameObject.activeInHierarchy == true)
+        {
+            return;
+        }
+
+        Debug.Log("help", gameObject);
+
+        spriteRenderer.sprite = standardTree;
+        gameObject.SetActive(true);
     }
 
     public IEnumerator OnInteract(Vector2 vector2)
@@ -66,7 +80,7 @@ public class CuttableTree : MonoBehaviour,IInteractable, ISaveable
         yield return new WaitForSeconds(0.25f);
     }
 
-    public object CaptureState()
+    public object CaptureState(bool playerSave = false)
     {
         return new Tree { treeIsCutInLevel = (gameObject.activeInHierarchy) };
     }

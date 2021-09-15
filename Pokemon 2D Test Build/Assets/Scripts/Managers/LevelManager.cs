@@ -12,6 +12,7 @@ public class LevelManager : MonoBehaviour
     [SerializeField] GameSceneBaseSO sceneReference;
     List<Portal> allInLevelPortals = new List<Portal>();
     List<Entity> allEntitiesInScene = new List<Entity>();
+    List<CuttableTree> allTreesInScene = new List<CuttableTree>();
     bool loaded;
 
     void Awake()
@@ -49,8 +50,10 @@ public class LevelManager : MonoBehaviour
 
         GameObject[] temp = SceneManager.GetSceneByName(sceneReference.GetSceneName).GetRootGameObjects();
 
+        ReloadSavedSettings();
         allEntitiesInScene = ReturnAllEntities(temp);
         allInLevelPortals = ReturnAllPortals(temp);
+        allTreesInScene = ReturnAllCuttableTrees(temp);
 
         loaded = true;
     }
@@ -76,7 +79,18 @@ public class LevelManager : MonoBehaviour
         if (col.CompareTag("Player"))
         {
             Debug.Log($"entered", gameObject);
-            GameManager.instance.NewAreaEntered(this);
+            StartCoroutine(SceneSystem.NewAreaEntered(this));
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D col)
+    {
+        if (col.CompareTag("Player"))
+        {
+            for (int i = 0; i < allTreesInScene.Count; i++)
+            {
+                allTreesInScene[i].RestoreTree();
+            }
         }
     }
 
@@ -115,21 +129,53 @@ public class LevelManager : MonoBehaviour
         return portals;
     }
 
+    List<CuttableTree> ReturnAllCuttableTrees(GameObject[] gameObjects)
+    {
+        List<CuttableTree> trees = new List<CuttableTree>();
+
+        for (int i = 0; i < gameObjects.Length; i++)
+        {
+            trees.AddRange(gameObjects[i].GetComponentsInChildren<CuttableTree>());
+        }
+
+        return trees;
+    }
+
     public bool GetWildEncountersGrassSpecific
     {
         get { return grassOnlyWildPokemon; }
     }
 
-    public void ReloadStartingArea()
+    public void ReloadSavedSettings()
     {
-        //load all items that were not picked up
-        //load all NPC states and positions
-        //load all trees only in the area that wasnt saved right in the area
-    }
+        if(SavingSystem.savedLevel == sceneReference)
+        {
+            SavingSystem.savedLevel = null;
 
-    public void LoadSceneStandard()
-    {
-
+            foreach (SaveableEntity saveable in SaveableEntities())
+            {
+                object previousSave = SavingSystem.ReturnSpecificSave(saveable.GetID);
+                if (previousSave != null)
+                {
+                    saveable.RestoreState(previousSave);
+                }
+            }
+        }
+        else
+        {
+            foreach (SaveableEntity saveable in SaveableEntities())
+            {
+                if(saveable.GetComponent<CuttableTree>() == true)
+                {
+                    continue;
+                }
+                object previousSave = SavingSystem.ReturnSpecificSave(saveable.GetID);
+                if (previousSave != null)
+                {
+                    saveable.RestoreState(previousSave);
+                }
+            }
+        }
     }
 
     public List<SaveableEntity> SaveableEntities()

@@ -18,13 +18,12 @@ public class Pokemon {
     [SerializeField] string _currentName;
     [SerializeField] AbilityBase _ability;
     [SerializeField] ItemBase currentHeldItem;
-    HoldItemBase currentHoldItemEffects;
+    int hitPoints;
     public System.Action OnStatusChanged;
 
     //properties
     public PokemonBase pokemonBase { get { return _pokemonBase; } private set { _pokemonBase = value; } }
     public int currentLevel { get { return _level; } private set { _level = value; } }
-    int hitPoints;
     public int currentHitPoints { get { return hitPoints; } set { if (value <= 0) status = null; hitPoints = value; } }
     public int currentExp { get; set; }
     public NatureBase nature { get { return _nature; } set { _nature = value; } }
@@ -36,6 +35,7 @@ public class Pokemon {
     public bool isShiny { get { return _isShiny; } private set { _isShiny = value; } }
     public IndividualValues individualValues { get { return _individualValues; } private set { _individualValues = value; } }
     public EffortValues effortValues { get { return _effortValues; } private set { _effortValues = value; } }
+    public ItemBase GetCurrentItem { get { return currentHeldItem; } }
 
     public List<Move> moves { get; set; }
     public List<MoveBase> presetMoves { get { return _presetMoves; } }
@@ -82,8 +82,8 @@ public class Pokemon {
         gender = SetGender(saveData.currentGender);
 
         nature = saveData.currentNature;
-        isShiny = saveData.isShiny;
-        currentName = saveData.currentNickname == null || saveData.currentNickname == "" ? _pokemonBase.GetPokedexName() : saveData.currentNickname;
+        isShiny = saveData.isShiny; 
+        currentName = string.IsNullOrEmpty(saveData.currentNickname) ? _pokemonBase.GetPokedexName() : saveData.currentNickname;
 
         currentExp = saveData.currentExp;
 
@@ -439,9 +439,9 @@ public class Pokemon {
 
     #endregion
 
-    public DamageDetails TakeDamage(MoveBase move,Pokemon attackingPokemon)
+    public void TakeDamage(DamageDetails damageDetails,MoveBase move,Pokemon attackingPokemon)
     {
-        DamageDetails damageDetails = new DamageDetails();
+        damageDetails.Clear();
 
         damageDetails.typeEffectiveness = DamageModifiers.TypeChartEffectiveness(pokemonBase, move.Type);
 
@@ -453,7 +453,7 @@ public class Pokemon {
             }
             else
             {
-                return damageDetails;
+                return;
             }
         }
 
@@ -500,19 +500,14 @@ public class Pokemon {
             damageDetails.typeEffectiveness = 1;
             damageDetails.abilityActivation = true;
             damageDetails.damageNullified = true;
-            return damageDetails;
+            return;
         }
 
         //Item effects
         float itemBonus = GetHoldItemEffects.AlterDamageTaken(move);
         itemBonus *= attackingPokemon.GetHoldItemEffects.PowersUpSuperEffectiveAttacks((damageDetails.criticalHit > 1));
 
-        List<StatBoost> itemStatBoost = GetHoldItemEffects.AlterStatAfterTakingDamageFromCertainType(move.Type,damageDetails.typeEffectiveness > 1);
-
-        if (itemStatBoost != null)
-        {
-            damageDetails.alterStatAfterTakingDamageFromCertainTypeItem = itemStatBoost;
-        }
+        damageDetails.alterStatAfterTakingDamageFromCertainTypeItem = GetHoldItemEffects.AlterStatAfterTakingDamageFromCertainType(move.Type,damageDetails.typeEffectiveness > 1);
 
         if (itemBonus == 0)
         {
@@ -520,7 +515,7 @@ public class Pokemon {
             damageDetails.typeEffectiveness = 0;
             damageDetails.targetItemUsed = GetHoldItemEffects.RemoveItem;
             damageDetails.sourceItemUsed = attackingPokemon.GetHoldItemEffects.RemoveItem;
-            return damageDetails;
+            return;
         }
 
         modifier *= abilityBonus;
@@ -578,8 +573,6 @@ public class Pokemon {
 
         damageDetails.targetItemUsed = GetHoldItemEffects.RemoveItem;
         damageDetails.sourceItemUsed = attackingPokemon.GetHoldItemEffects.RemoveItem;
-
-        return damageDetails;
     }
 
     public void UpdateHPDamage(int damage)
@@ -596,7 +589,7 @@ public class Pokemon {
     {
         get
         {
-            if(_currentName == null|| _currentName == "")
+            if(string.IsNullOrEmpty(_currentName))
             {
                 return pokemonBase.GetPokedexName();
             }
@@ -753,7 +746,6 @@ public class Pokemon {
     /// <returns></returns>
     public ConditionID OnBeforeMove(Pokemon targetPokemon)
     {
-
         if (status?.OnBeforeMove(this, targetPokemon) == false)
         {
             return status.Id;
@@ -815,10 +807,9 @@ public class Pokemon {
 
     public List<LearnableMove> GetLearnableMoveAtCurrentLevel()
     {
-        List<LearnableMove> copyOfLearnableMoves = _pokemonBase.LearnableMoves.FindAll(x => x.levelLearned == currentLevel);
         List<LearnableMove> learnableMoves = new List<LearnableMove>();
 
-        foreach (LearnableMove move in copyOfLearnableMoves)
+        foreach (LearnableMove move in _pokemonBase.LearnableMoves.FindAll(x => x.levelLearned == currentLevel))
         {
             if(moves.Exists(x => x.moveBase == move.moveBase)|| learnableMoves.Exists(x => x.moveBase == move.moveBase))
             {
@@ -849,7 +840,7 @@ public class Pokemon {
         }
     }
 
-    AbilityBase SetAbility(AbilityBase presetAbility)
+    AbilityBase SetAbility(AbilityBase presetAbility = null)
     {
         List<AbilityBase> abilities = new List<AbilityBase>();
 
@@ -934,10 +925,6 @@ public class Pokemon {
     public void GivePokemonItemToHold(ItemBase item)
     {
         currentHeldItem = item;
-        if(item != null)
-        {
-            currentHoldItemEffects = item.HoldItemAffects();
-        }
     }
 
     public HoldItemBase GetHoldItemEffects
@@ -950,20 +937,14 @@ public class Pokemon {
             }
             else
             {
-                return currentHoldItemEffects;
+                return currentHeldItem.HoldItemAffects();
             }
         }
-    }
-
-    public ItemBase GetCurrentItem
-    {
-        get { return currentHeldItem; }
     }
 
     public void ItemUsed()
     {
         currentHeldItem = null;
-        currentHoldItemEffects = null;
     }
 
     public void NewEvolution(PokemonBase newEvolution)
@@ -972,8 +953,55 @@ public class Pokemon {
         {
             currentName = newEvolution.GetPokedexName();
         }
+        int currentAbilityIndex = PreviousAbilityIndex();
         pokemonBase = newEvolution;
         UpdateStats();
+        ability = UpdateAbility(currentAbilityIndex);
+    }
+
+    int PreviousAbilityIndex()
+    {
+        if(ability.Id == pokemonBase.FirstAbility)
+        {
+            return 1;
+        }
+        else if (ability.Id == pokemonBase.SecondAbility)
+        {
+            return 2;
+        }
+        else if (ability.Id == pokemonBase.HiddenAbility)
+        {
+            return 3;
+        }
+        return 0;
+    }
+
+    AbilityBase UpdateAbility(int previousIndex)
+    {
+        switch (previousIndex)
+        {
+            case 1:
+                if(pokemonBase.FirstAbility != AbilityID.NA)
+                {
+                    return AbilityDB.GetAbilityBase(pokemonBase.FirstAbility);
+                }
+                break;
+            case 2:
+                if (pokemonBase.SecondAbility != AbilityID.NA)
+                {
+                    return AbilityDB.GetAbilityBase(pokemonBase.SecondAbility);
+                }
+                break;
+            case 3:
+                if (pokemonBase.HiddenAbility != AbilityID.NA)
+                {
+                    return AbilityDB.GetAbilityBase(pokemonBase.HiddenAbility);
+                }
+                break;
+            default:
+                break;
+        }
+        return SetAbility();
     }
 
 }

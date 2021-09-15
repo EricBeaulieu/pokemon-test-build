@@ -10,6 +10,8 @@ public static class SavingSystem
     public readonly static string savePath = $"{Application.persistentDataPath}/save.txt";
     static Dictionary<string, object> saveInfo = new Dictionary<string, object>();
     static Dictionary<string, object> infoTobeSaved = new Dictionary<string, object>();
+    
+    public static GameSceneBaseSO savedLevel { get; set; }
 
     static Stack<int> trainersToBeSaved = new Stack<int>();
 
@@ -20,6 +22,7 @@ public static class SavingSystem
     const string PlayerParty = "PlayerParty";
 
     const string PlayerInventory = "PlayerInventory";
+    const string PlayerLevelSaved = "CurrentLevel";
 
     public const string split = "*";
 
@@ -36,8 +39,8 @@ public static class SavingSystem
         PlayerPrefs.SetInt(PlayerYPos, playerYPos);
         PlayerPrefs.SetString(PlayerName, player.TrainerName);
 
-        string currentLevel = currentScene.GetSceneName;
-        PlayerPrefs.SetString("CurrentLevel", currentLevel);
+        string currentLevel = GetAssetPath(currentScene);
+        PlayerPrefs.SetString(PlayerLevelSaved, currentLevel);
 
         List<Pokemon> currentParty = player.pokemonParty.CurrentPokemonList();
         int partysize = currentParty.Count;
@@ -71,11 +74,10 @@ public static class SavingSystem
     {
         trainersToBeSaved.Clear();
 
-        string currentLevel = PlayerPrefs.GetString("CurrentLevel");
-        yield return GameManager.instance.LoadScenethatPlayerSavedIn(currentLevel);
+        savedLevel = Resources.Load<GameSceneBaseSO>(PlayerPrefs.GetString(PlayerLevelSaved));
+        yield return SceneSystem.LoadScenethatPlayerSavedIn(savedLevel);
 
         saveInfo = LoadFile();
-        RestoreSave(saveInfo, Resources.FindObjectsOfTypeAll<GameSceneBaseSO>().FirstOrDefault(x => x.GetSceneName == currentLevel));
     }
 
     public static Vector2 LoadPlayerPosition()
@@ -157,35 +159,26 @@ public static class SavingSystem
 
     static void OverrideSave(Dictionary<string,object> state, GameSceneBaseSO playerSavedScene)
     {
-        state.Concat(infoTobeSaved.Where(kvp => !state.ContainsKey(kvp.Key))).ToDictionary(kvp => kvp.Key, kvp => kvp.Value);
+        state = infoTobeSaved.Concat(state.Where(kvp => !infoTobeSaved.ContainsKey(kvp.Key))).ToDictionary(kvp => kvp.Key, kvp => kvp.Value);
 
         foreach (SaveableEntity saveable in playerSavedScene.GetLevelManager.SaveableEntities())
         {
-            state[saveable.GetID] = saveable.CaptureState();
+            state[saveable.GetID] = saveable.CaptureState(true);
         }
-    }
 
-    static void RestoreSave(Dictionary<string, object> state, GameSceneBaseSO playerSavedScene)
-    {
-        foreach (SaveableEntity saveable in playerSavedScene.GetLevelManager.SaveableEntities())
-        {
-            if(state.TryGetValue(saveable.GetID,out object value))
-            {
-                saveable.RestoreState(value);
-            }
-        }
+        saveInfo = state;
     }
 
     public static object ReturnSpecificSave(string iD)
     {
-        if (saveInfo.TryGetValue(iD, out object saveInfoValue))
-        {
-            return saveInfoValue;
-        }
-
         if (infoTobeSaved.TryGetValue(iD, out object infoTobeSavedValue))
         {
             return infoTobeSavedValue;
+        }
+
+        if (saveInfo.TryGetValue(iD, out object saveInfoValue))
+        {
+            return saveInfoValue;
         }
 
         return null;
