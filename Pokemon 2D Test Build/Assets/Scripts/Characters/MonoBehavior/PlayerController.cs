@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -9,6 +10,7 @@ public class PlayerController : Entity
 {
     [Header("Player Controller")]
     [SerializeField] TrainerBaseSO trainerBase;
+    string trainerName;
     int trainerIDNumber;
     public PokemonParty pokemonParty { get; private set; }
     
@@ -39,6 +41,7 @@ public class PlayerController : Entity
             Debug.LogWarning("Current Player is missing their battle back sprite Sheet");
         }
 
+        trainerName = trainerBase.TrainerName;
         trainerIDNumber = UnityEngine.Random.Range(0, 99999);
 
         _ignorePlayerInput = false;
@@ -205,7 +208,7 @@ public class PlayerController : Entity
 
     public string TrainerName
     {
-        get { return trainerBase.TrainerName; }
+        get { return trainerName; }
     }
 
     public string TrainerIDNumber
@@ -242,4 +245,26 @@ public class PlayerController : Entity
             GameManager.instance.StartWildPokemonBattle();
         }
     }
+
+    public object CaptureState()
+    {
+        return new PlayerSaveData
+        {
+            playerPosX = Mathf.FloorToInt(transform.position.x),
+            playerPosY = Mathf.FloorToInt(transform.position.y),
+            trainerName = TrainerName,
+            savedParty = pokemonParty.CurrentPokemonList().Select(x => x.GetSaveData()).ToList(),
+            savedDirection = GlobalTools.CurrentDirectionFacing(_anim)
+        };
+    }
+
+    public void RestoreState(object state)
+    {
+        var saveData = (PlayerSaveData)state;
+        SnapToGrid();
+        trainerName = saveData.trainerName;
+        pokemonParty.LoadPlayerParty(saveData.savedParty.Select(x => new Pokemon(x)).ToList());
+        FaceTowardsDirection(saveData.savedDirection);
+    }
+   
 }

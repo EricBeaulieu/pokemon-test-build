@@ -104,8 +104,8 @@ public static class PokemonSavingSystem
 
         PokemonSaveData pokemonSaveData = new PokemonSaveData();
 
-        pokemonSaveData.currentBase = Resources.Load<PokemonBase>(pokemonData);
-        pokemonData = NextLoadIndex();
+        //pokemonSaveData.currentBase = Resources.Load<PokemonBase>(pokemonData);
+        //pokemonData = NextLoadIndex();
 
         pokemonSaveData.currentLevel = int.Parse(pokemonData);
         pokemonData = NextLoadIndex();
@@ -116,7 +116,7 @@ public static class PokemonSavingSystem
         pokemonSaveData.currentHitPoints = int.Parse(pokemonData);
         pokemonData = NextLoadIndex();
 
-        pokemonSaveData.currentMoves = new List<Move>();
+        //pokemonSaveData.currentMoves = new List<Move>();
         for (int i = 0; i < PokemonBase.MAX_NUMBER_OF_MOVES; i++)
         {
             if (pokemonData == empty)
@@ -132,7 +132,7 @@ public static class PokemonSavingSystem
             pokemonData = NextLoadIndex();
             move.pP = int.Parse(pokemonData);
             pokemonData = NextLoadIndex();
-            pokemonSaveData.currentMoves.Add(move);
+            //pokemonSaveData.currentMoves.Add(move);
         }
 
         pokemonSaveData.isShiny = bool.Parse(pokemonData);
@@ -141,8 +141,8 @@ public static class PokemonSavingSystem
         pokemonSaveData.currentGender = (Gender)int.Parse(pokemonData);
         pokemonData = NextLoadIndex();
 
-        pokemonSaveData.currentNature = Resources.Load<NatureBase>(pokemonData);
-        pokemonData = NextLoadIndex();
+        //pokemonSaveData.currentNature = Resources.Load<NatureBase>(pokemonData);
+        //pokemonData = NextLoadIndex();
 
         int hp = int.Parse(pokemonData);
         pokemonData = NextLoadIndex();
@@ -197,12 +197,12 @@ public static class PokemonSavingSystem
         pokemonData = NextLoadIndex();
         pokemonSaveData.currentOTId = pokemonData;
         pokemonData = NextLoadIndex();
-        pokemonSaveData.currentPokeball = Resources.Load<PokeballItem>(pokemonData);
-        pokemonData = NextLoadIndex();
-        if (pokemonData != empty)
-        {
-            pokemonSaveData.currentItem = Resources.Load<ItemBase>(pokemonData);
-        }
+        //pokemonSaveData.currentPokeball = Resources.Load<PokeballItem>(pokemonData);
+        //pokemonData = NextLoadIndex();
+        //if (pokemonData != empty)
+        //{
+        //    pokemonSaveData.currentItem = Resources.Load<ItemBase>(pokemonData);
+        //}
 
         return new Pokemon(pokemonSaveData);
     }

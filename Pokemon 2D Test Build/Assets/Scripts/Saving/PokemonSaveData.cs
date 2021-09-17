@@ -2,16 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[System.Serializable]
 public class PokemonSaveData
 {
-    public PokemonBase currentBase;
+    public string currentBase;
     public int currentLevel;
     public int currentExp;
     public int currentHitPoints;
-    public List<Move> currentMoves;
+    public List<MoveSaveData> currentMoves;
     public bool isShiny;
     public Gender currentGender;
-    public NatureBase currentNature;
+    public string currentNature;
     public IndividualValues currentIndividualValues;
     public EffortValues currentEffortValues;
     public string currentNickname = "";
@@ -19,6 +20,6 @@ public class PokemonSaveData
     public ConditionID currentCondition = ConditionID.NA;
     public string currentOT;
     public string currentOTId;
-    public PokeballItem currentPokeball;
-    public ItemBase currentItem = null;
+    public string currentPokeball;
+    public string currentItem = null;
 }

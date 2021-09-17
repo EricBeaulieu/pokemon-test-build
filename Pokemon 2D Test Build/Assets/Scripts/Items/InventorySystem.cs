@@ -551,7 +551,7 @@ public class InventorySystem : CoreSystem
         }
         else
         {
-            Item newItem = new Item() { ItemBase = item, Count = count };
+            Item newItem = new Item(item,count);
             currentInventory.Add(newItem);
         }
     }

@@ -26,4 +26,26 @@ public class Item
             count = value;
         }
     }
+
+    public Item(ItemBase newItem,int newCount = 1)
+    {
+        itemBase = newItem;
+        count = newCount;
+    }
+
+    public Item(ItemSaveData savedItem)
+    {
+        itemBase = Resources.Load<ItemBase>(savedItem.item);
+        count = savedItem.count;
+    }
+
+    public ItemSaveData GetSaveData()
+    {
+        ItemSaveData itemSaveData = new ItemSaveData();
+
+        itemSaveData.item = SavingSystem.GetAssetPath(itemBase);
+        itemSaveData.count = count;
+
+        return itemSaveData;
+    }
 }

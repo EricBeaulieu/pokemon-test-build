@@ -13,14 +13,8 @@ public static class SavingSystem
     
     public static GameSceneBaseSO savedLevel { get; set; }
 
-    static Stack<int> trainersToBeSaved = new Stack<int>();
-
     //keys
-    const string PlayerName = "PlayerName";
-    const string PlayerXPos = "PlayerXPos";
-    const string PlayerYPos = "PlayerYPos";
-    const string PlayerParty = "PlayerParty";
-
+    public const string PlayerID = "Player";
     const string PlayerInventory = "PlayerInventory";
     const string PlayerLevelSaved = "CurrentLevel";
 
@@ -28,93 +22,24 @@ public static class SavingSystem
 
     public static bool SaveFileAvailable()
     {
-        return PlayerPrefs.HasKey(PlayerName);
+        return File.Exists(savePath);
     }
 
-    public static void SavePlayer(PlayerController player,GameSceneBaseSO currentScene)
+    public static void SavePlayer(PlayerController player,GameSceneBaseSO currentScene, List<Item> currentInventory)
     {
-        int playerXPos = Mathf.FloorToInt(player.transform.position.x);
-        int playerYPos = Mathf.FloorToInt(player.transform.position.y);
-        PlayerPrefs.SetInt(PlayerXPos, playerXPos);
-        PlayerPrefs.SetInt(PlayerYPos, playerYPos);
-        PlayerPrefs.SetString(PlayerName, player.TrainerName);
-
-        string currentLevel = GetAssetPath(currentScene);
-        PlayerPrefs.SetString(PlayerLevelSaved, currentLevel);
-
-        List<Pokemon> currentParty = player.pokemonParty.CurrentPokemonList();
-        int partysize = currentParty.Count;
-
-        for (int i = 0; i < PokemonParty.MAX_PARTY_POKEMON_SIZE; i++)
-        {
-            string location = $"{PlayerParty}{i}";
-            if(i < partysize)
-            {
-                PokemonSavingSystem.SavePokemon(currentParty[i], location);
-            }
-            else
-            {
-                PokemonSavingSystem.SavePokemon(null, location);
-            }
-        }
-
-        while(trainersToBeSaved.Count > 0)
-        {
-            PlayerPrefs.SetInt(trainersToBeSaved.Pop().ToString(), 1);
-        }
-
-        PlayerPrefs.Save();
-        
         saveInfo = LoadFile();
-        OverrideSave(saveInfo, currentScene);
+        OverrideSave(saveInfo, player, currentScene,currentInventory);
         SaveFile(saveInfo);
     }
 
     public static IEnumerator LoadPlayerScene()
     {
-        trainersToBeSaved.Clear();
-
-        savedLevel = Resources.Load<GameSceneBaseSO>(PlayerPrefs.GetString(PlayerLevelSaved));
-        yield return SceneSystem.LoadScenethatPlayerSavedIn(savedLevel);
-
         saveInfo = LoadFile();
-    }
 
-    public static Vector2 LoadPlayerPosition()
-    {
-        return new Vector2(PlayerPrefs.GetInt("PlayerXPos"), PlayerPrefs.GetInt("PlayerYPos"));
-    }
+        object previousLevelSaved = SavingSystem.ReturnSpecificSave(PlayerLevelSaved);
 
-    public static void AddDefeatedTrainerToStack(int trainerID)
-    {
-        trainersToBeSaved.Push(trainerID);
-    }
-
-    public static bool GetTrainerSave(int trainerID)
-    {
-        if (trainersToBeSaved.Contains(trainerID))
-        {
-            return true;
-        }
-
-        return (PlayerPrefs.GetInt(trainerID.ToString()) == 1);
-    }
-
-    public static List<Pokemon> LoadPlayerParty()
-    {
-        List<Pokemon> savedParty = new List<Pokemon>();
-
-        for (int i = 0; i < PokemonParty.MAX_PARTY_POKEMON_SIZE; i++)
-        {
-            string location = $"{PlayerParty}{i}";
-            Pokemon currentPokemon = PokemonSavingSystem.LoadPokemon(location);
-
-            if(currentPokemon != null)
-            {
-                savedParty.Add(currentPokemon);
-            }
-        }
-        return savedParty;
+        savedLevel = Resources.Load<GameSceneBaseSO>((string)previousLevelSaved);
+        yield return SceneSystem.LoadScenethatPlayerSavedIn(savedLevel);
     }
 
     public static string GetAssetPath(Object obj)
@@ -124,14 +49,11 @@ public static class SavingSystem
         return currentPath.Remove(currentPath.Length - 6);
     }
 
-    public static void SavePlayerInventorySystem(List<Item> currentInventory)
-    {
-        InventorySavingSystem.SaveInventory(currentInventory, PlayerInventory);
-    }
-
     public static List<Item> LoadPlayerInventory()
     {
-        return InventorySavingSystem.LoadInventorySystem(PlayerInventory);
+        object previousInventorySaved = SavingSystem.ReturnSpecificSave(PlayerInventory);
+
+        return ((List<ItemSaveData>)previousInventorySaved).Select(x => new Item(x)).ToList();
     }
 
     public static void SaveFile(object state)
@@ -157,13 +79,43 @@ public static class SavingSystem
         }
     }
 
-    static void OverrideSave(Dictionary<string,object> state, GameSceneBaseSO playerSavedScene)
+    static void OverrideSave(Dictionary<string,object> state,PlayerController player, GameSceneBaseSO playerSavedScene, List<Item> playerInventory)
     {
         state = infoTobeSaved.Concat(state.Where(kvp => !infoTobeSaved.ContainsKey(kvp.Key))).ToDictionary(kvp => kvp.Key, kvp => kvp.Value);
 
         foreach (SaveableEntity saveable in playerSavedScene.GetLevelManager.SaveableEntities())
         {
             state[saveable.GetID] = saveable.CaptureState(true);
+        }
+
+        //PlayerData
+        if (state.ContainsKey(PlayerID))
+        {
+            state[PlayerID] = player.CaptureState();
+        }
+        else
+        {
+            state.Add(PlayerID, player.CaptureState());
+        }
+
+        //PlayerLevel
+        if (state.ContainsKey(PlayerLevelSaved))
+        {
+            state[PlayerLevelSaved] = GetAssetPath(playerSavedScene);
+        }
+        else
+        {
+            state.Add(PlayerLevelSaved, GetAssetPath(playerSavedScene));
+        }
+
+        //PlayerInventory
+        if (state.ContainsKey(PlayerInventory))
+        {
+            state[PlayerInventory] = playerInventory.Select(x => x.GetSaveData()).ToList();
+        }
+        else
+        {
+            state.Add(PlayerInventory, playerInventory.Select(x => x.GetSaveData()).ToList());
         }
 
         saveInfo = state;

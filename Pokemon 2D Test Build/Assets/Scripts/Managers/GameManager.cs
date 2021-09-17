@@ -68,7 +68,7 @@ public class GameManager : MonoBehaviour
         else
         {
             StartCoroutine(SceneSystem.LoadScenethatPlayerSavedIn(startingScene));
-            SpawnInPlayer(defaultSpawnLocation.position);
+            SpawnInPlayer();
         }
     }
 
@@ -186,7 +186,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    void SpawnInPlayer(Vector3 spawnLocation)
+    void SpawnInPlayer()
     {
         if(playerController != null)
         {
@@ -195,7 +195,18 @@ public class GameManager : MonoBehaviour
             Destroy(playerController.gameObject);
         }
 
-        playerController = Instantiate(playerPrefab,spawnLocation,Quaternion.identity);
+        object previousSave = SavingSystem.ReturnSpecificSave(SavingSystem.PlayerID);
+        if (previousSave != null)
+        {
+            Vector2 savedPos = new Vector2(((PlayerSaveData)previousSave).playerPosX, ((PlayerSaveData)previousSave).playerPosY);
+            playerController = Instantiate(playerPrefab, savedPos, Quaternion.identity);
+            playerController.RestoreState(previousSave);
+        }
+        else
+        {
+            playerController = Instantiate(playerPrefab, defaultSpawnLocation.position, Quaternion.identity);
+        }
+        
         playerController.OpenStartMenu += () =>
         {
             SetGameState(GameState.Dialog);
@@ -229,8 +240,7 @@ public class GameManager : MonoBehaviour
 
     public void SaveGame()
     {
-        SavingSystem.SavePlayer(playerController, SceneSystem.currentLevelManager.GameSceneBase);
-        SavingSystem.SavePlayerInventorySystem(inventorySystem.SaveInventory());
+        SavingSystem.SavePlayer(playerController, SceneSystem.currentLevelManager.GameSceneBase, inventorySystem.SaveInventory());
         dialogManager.ShowMessage("The Game Has Been Saved");
     }
 
@@ -250,8 +260,8 @@ public class GameManager : MonoBehaviour
     {
         yield return Fade(FadeStyle.FullFade,true);
         yield return SavingSystem.LoadPlayerScene();
-        SpawnInPlayer(SavingSystem.LoadPlayerPosition());
-        playerController.pokemonParty.LoadPlayerParty(SavingSystem.LoadPlayerParty());
+
+        SpawnInPlayer();
         inventorySystem.LoadInventory(SavingSystem.LoadPlayerInventory());
         yield return Fade(FadeStyle.FullFade, false);
     }

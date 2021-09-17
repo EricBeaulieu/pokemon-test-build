@@ -74,14 +74,14 @@ public class Pokemon {
 
     public Pokemon(PokemonSaveData saveData)
     {
-        _pokemonBase = saveData.currentBase;
+        _pokemonBase = Resources.Load<PokemonBase>(saveData.currentBase);
         currentLevel = saveData.currentLevel;
 
         _individualValues.SetValues(saveData.currentIndividualValues);
         _effortValues.SetValues(saveData.currentEffortValues);
         gender = SetGender(saveData.currentGender);
 
-        nature = saveData.currentNature;
+        nature = Resources.Load<NatureBase>(saveData.currentNature);
         isShiny = saveData.isShiny; 
         currentName = string.IsNullOrEmpty(saveData.currentNickname) ? _pokemonBase.GetPokedexName() : saveData.currentNickname;
 
@@ -92,15 +92,18 @@ public class Pokemon {
 
         originalTrainer = saveData.currentOT;
         originalTrainerID = saveData.currentOTId;
-        pokeballCapturedIn = saveData.currentPokeball;
+        pokeballCapturedIn = Resources.Load<PokeballItem>(saveData.currentPokeball);
 
         AbilityBase savedAbility = AbilityDB.GetAbilityBase(saveData.currentAbilityID);
         ability = SetAbility(savedAbility);
 
-        LoadedMoves(saveData.currentMoves);
+        moves = saveData.currentMoves.Select(x => new Move(x)).ToList();
         SetStatus(saveData.currentCondition, false);
 
-        GivePokemonItemToHold(saveData.currentItem);
+        if(string.IsNullOrEmpty(saveData.currentItem) == false)
+        {
+            GivePokemonItemToHold(Resources.Load<ItemBase>(saveData.currentItem));
+        }
     }
 
     #endregion
@@ -141,22 +144,22 @@ public class Pokemon {
         }
     }
 
-    void LoadedMoves(List<Move> savedMoves)
-    {
-        moves = new List<Move>();
-        foreach (Move move in savedMoves)
-        {
-            if (moves.Exists(x => x == move) == true)
-            {
-                continue;
-            }
-            if (moves.Count >= PokemonBase.MAX_NUMBER_OF_MOVES)
-            {
-                moves.RemoveAt(0);
-            }
-            moves.Add(move);
-        }
-    }
+    //void LoadedMoves(List<Move> savedMoves)
+    //{
+    //    moves = new List<Move>();
+    //    foreach (Move move in savedMoves)
+    //    {
+    //        if (moves.Exists(x => x == move) == true)
+    //        {
+    //            continue;
+    //        }
+    //        if (moves.Count >= PokemonBase.MAX_NUMBER_OF_MOVES)
+    //        {
+    //            moves.RemoveAt(0);
+    //        }
+    //        moves.Add(move);
+    //    }
+    //}
 
 
     /// <summary>
@@ -1004,4 +1007,38 @@ public class Pokemon {
         return SetAbility();
     }
 
+    public PokemonSaveData GetSaveData()
+    {
+        PokemonSaveData pokemonSaveData = new PokemonSaveData();
+
+        pokemonSaveData.currentBase = SavingSystem.GetAssetPath(_pokemonBase);
+        pokemonSaveData.currentLevel = currentLevel;
+        pokemonSaveData.currentExp = currentExp;
+        pokemonSaveData.currentHitPoints = currentHitPoints;
+        pokemonSaveData.currentMoves = moves.Select(x => x.GetSaveData()).ToList();
+        pokemonSaveData.isShiny = isShiny;
+        pokemonSaveData.currentGender = gender;
+        pokemonSaveData.currentNature = SavingSystem.GetAssetPath(nature);
+        pokemonSaveData.currentIndividualValues = individualValues;
+        pokemonSaveData.currentEffortValues = effortValues;
+        pokemonSaveData.currentNickname = currentName;
+        pokemonSaveData.currentAbilityID = ability.Id;
+        if(status == null)
+        {
+            pokemonSaveData.currentCondition = ConditionID.NA;
+        }
+        else
+        {
+            pokemonSaveData.currentCondition = status.Id;
+        }
+        pokemonSaveData.currentOT = originalTrainer;
+        pokemonSaveData.currentOTId = originalTrainerID;
+        pokemonSaveData.currentPokeball = SavingSystem.GetAssetPath(pokeballCapturedIn);
+        if(currentHeldItem != null)
+        {
+            pokemonSaveData.currentItem = SavingSystem.GetAssetPath(currentHeldItem);
+        }
+        
+        return pokemonSaveData;
+    }
 }

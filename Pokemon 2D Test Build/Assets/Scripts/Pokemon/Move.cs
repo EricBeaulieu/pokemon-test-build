@@ -22,4 +22,20 @@ public class Move
         moveBase = mBase;
         pP = mBase.PowerPoints;
     }
+
+    public Move(MoveSaveData savedMove)
+    {
+        moveBase = Resources.Load<MoveBase>(savedMove.move);
+        pP = savedMove.pp;
+    }
+
+    public MoveSaveData GetSaveData()
+    {
+        MoveSaveData moveSaveData = new MoveSaveData();
+
+        moveSaveData.move = SavingSystem.GetAssetPath(moveBase);
+        moveSaveData.pp = pP;
+
+        return moveSaveData;
+    }
 }
