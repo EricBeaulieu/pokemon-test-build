@@ -1202,12 +1202,13 @@ public class BattleSystem : CoreSystem
         {
             if (source.pokemon.maxHitPoints - source.pokemon.currentHitPoints > 0 && source.pokemon.HasCurrentVolatileStatus(ConditionID.HealBlock) == false)
             {
+                int hpPriorToHealing = source.pokemon.currentHitPoints;
                 int hpHealed = Mathf.CeilToInt(source.pokemon.maxHitPoints * (currentMove.HpRecovered * source.pokemon.ability.PowerUpCertainMoves(source.pokemon, target.pokemon, currentMove,GetCurrentWeather)));
                 WeatherEffectID weatherEffectID = (_currentWeather == null) ? WeatherEffectID.NA : _currentWeather.Id;
                 hpHealed = Mathf.CeilToInt(hpHealed * HealthRecoveryModifiers(currentMove, weatherEffectID));
                 hpHealed = Mathf.Clamp(hpHealed, 1, source.pokemon.maxHitPoints - source.pokemon.currentHitPoints);
                 source.pokemon.UpdateHPRestored(hpHealed);
-                yield return source.HUD.UpdateHP(hpHealed);
+                yield return source.HUD.UpdateHP(hpPriorToHealing);
                 source.pokemon.statusChanges.Enqueue($"{source.pokemon.currentName}'s hp was restored");
             }
             else

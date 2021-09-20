@@ -230,6 +230,7 @@
     <Compile Include="Assets\Scripts\Data\HoldItems\HoldItemDB.cs" />
     <Compile Include="Assets\Scripts\Data\Abilitys\List\WaterVeil.cs" />
     <Compile Include="Assets\Scripts\Data\HoldItems\Standard\MentalHerb.cs" />
+    <Compile Include="Assets\Scripts\Saving\MoveSaveData.cs" />
     <Compile Include="Assets\Scripts\Pokemon\Evolution\EvolveLevelBased.cs" />
     <Compile Include="Assets\Scripts\Data\Weather\WeatherEffectDB.cs" />
     <Compile Include="Assets\Scripts\Data\HoldItems\Standard\Snowball.cs" />
@@ -335,6 +336,7 @@
     <Compile Include="Assets\Scripts\Data\HoldItems\Standard\SoftSand.cs" />
     <Compile Include="Assets\Scripts\Data\Abilitys\List\SlushRush.cs" />
     <Compile Include="Assets\Scripts\Data\Abilitys\List\TintedLens.cs" />
+    <Compile Include="Assets\Scripts\Saving\PlayerSaveData.cs" />
     <Compile Include="Assets\Scripts\Data\Abilitys\List\SwiftSwim.cs" />
     <Compile Include="Assets\Scripts\Data\Conditions\VolatileStatus\PerishSong.cs" />
     <Compile Include="Assets\Scripts\Data\Conditions\VolatileStatus\Encore.cs" />
@@ -384,6 +386,7 @@
     <Compile Include="Assets\Scripts\Data\Abilitys\List\Blaze.cs" />
     <Compile Include="Assets\Scripts\Data\HoldItems\Standard\MuscleBand.cs" />
     <Compile Include="Assets\Scripts\Data\Abilitys\List\StrongJaw.cs" />
+    <Compile Include="Assets\Scripts\Saving\ItemSaveData.cs" />
     <Compile Include="Assets\Scripts\Pokemon\LearnableMove.cs" />
     <Compile Include="Assets\Scripts\Battle\BattleUnit.cs" />
     <Compile Include="Assets\Scripts\Characters\ScriptableObjects\EntityBaseSO.cs" />
@@ -421,9 +424,8 @@
     <Compile Include="Assets\Scripts\Data\Abilitys\List\RainDish.cs" />
     <Compile Include="Assets\Scripts\Data\Abilitys\List\Justified.cs" />
     <Compile Include="Assets\Scripts\Data\Abilitys\List\Soundproof.cs" />
-    <Compile Include="Assets\Scripts\Saving\PlayerSaveData.cs" />
-    <Compile Include="Assets\Scripts\Saving\MoveSaveData.cs" />
-    <Compile Include="Assets\Scripts\Saving\ItemSaveData.cs" />
+    <Compile Include="Assets\Scripts\Characters\MonoBehavior\HealerNpcController.cs" />
+    <Compile Include="Assets\Scripts\Characters\ScriptableObjects\HealerNpcBaseSO.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">

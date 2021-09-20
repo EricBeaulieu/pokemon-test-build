@@ -6,8 +6,8 @@ public class SaveableEntity : MonoBehaviour
 {
     [ReadOnly]
     [SerializeField] string id;
-    [ContextMenu("Generate ID")]
-    void GenerateID()
+
+    public void GenerateID()
     {
         id = Guid.NewGuid().ToString();
     }

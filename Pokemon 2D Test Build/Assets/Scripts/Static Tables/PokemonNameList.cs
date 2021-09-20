@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public static class PokemonNameList
@@ -298,6 +299,19 @@ public static class PokemonNameList
                 return PokemonNameJohto152to251[pokedexNumber];
             default:
                 return "MissingNo";
+        }
+    }
+
+    public static bool GenderExclusive(int pokedexNumber)
+    {
+        switch (pokedexNumber)
+        {
+            case int n when (n >= 0 && n < PokemonNameKanto1to151.Length):
+                return PokemonKantoDifferentGenderSprites.Contains(pokedexNumber);
+            case int n when (n >= PokemonNameKanto1to151.Length && n < PokemonNameKanto1to151.Length + PokemonNameJohto152to251.Length):
+                return PokemonJohtoDifferentGenderSprites.Contains(pokedexNumber);
+            default:
+                return false;
         }
     }
 }

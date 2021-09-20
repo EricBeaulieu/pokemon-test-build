@@ -6,7 +6,7 @@ public enum FacingDirections { Up,Down,Left,Right}
 
 public abstract class Entity : MonoBehaviour
 {
-    CharacterArtSO characterArt;
+    public CharacterArtSO characterArt { get; set; }
     [SerializeField] protected float movementSpeed = STANDARD_WALKING_SPEED;
     protected LayerMask solidObjectLayermask;
     protected LayerMask interactableLayermask;
@@ -26,6 +26,7 @@ public abstract class Entity : MonoBehaviour
     public const float TILE_CENTER_OFFSET = 0.5f;
     protected const float STANDARD_WALKING_SPEED = 5f;
     protected const float STANDARD_RUNNING_SPEED = 12.5f;
+    protected const int OVER_THE_COUNTER_MAX_DISTANCE = 2;
     const float ENTITY_Y_OFFSET = -0.3f;
 
     #region Getters/Setters
@@ -57,12 +58,6 @@ public abstract class Entity : MonoBehaviour
         }
     }
 
-    public CharacterArtSO CharacterArt
-    {
-        get { return characterArt; }
-        private set { characterArt = value; }
-    }
-
     #endregion
 
     protected virtual void Initialization(EntityBaseSO entityBaseSO)
@@ -89,7 +84,10 @@ public abstract class Entity : MonoBehaviour
         }
 
         entityBaseSO.Initialization();
-        CharacterArt = entityBaseSO.GetCharacterArt;
+        if(characterArt == null)
+        {
+            characterArt = entityBaseSO.GetCharacterArt;
+        }
     }
 
     public abstract void HandleUpdate();

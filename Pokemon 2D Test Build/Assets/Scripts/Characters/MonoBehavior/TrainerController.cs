@@ -298,4 +298,9 @@ public class TrainerController : Entity,IInteractable,ISaveable
         public int savedPosY;
         public FacingDirections savedDirection;
     }
+
+    public TrainerBaseSO GetTrainerBase
+    {
+        get { return trainerBase; }
+    }
 }

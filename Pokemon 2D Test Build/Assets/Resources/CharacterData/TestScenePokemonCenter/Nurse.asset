@@ -9,10 +9,19 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f7c5e82f05cec9b4eb871090daf6ddc2, type: 3}
+  m_Script: {fileID: 11500000, guid: e121e29f740d5cd418cf8e94bcac1e1f, type: 3}
   m_Name: Nurse
   m_EditorClassIdentifier: 
   characterArt: {fileID: 11400000, guid: d27968dc82ba50e41af7625ceac34cb2, type: 2}
-  dialog:
+  greetingDialog:
     lines:
-    - Fuck my tight little pussy
+    - Welcome to our Pokemon Center
+    - Would you like me to heal your Pokemon Back to perfect Health?
+  yesSelectedDialog:
+    lines:
+    - Okay, I'll take your Pokemon for a few second's
+    - Thank you for waiting. We've Restored your Pokemon to full health
+    - We Hope to see you again!
+  noSelectedDialog:
+    lines:
+    - We Hope to see you again

@@ -10,7 +10,8 @@ public static class SavingSystem
     public readonly static string savePath = $"{Application.persistentDataPath}/save.txt";
     static Dictionary<string, object> saveInfo = new Dictionary<string, object>();
     static Dictionary<string, object> infoTobeSaved = new Dictionary<string, object>();
-    
+    static char[] delimiterChars = {'.'};
+
     public static GameSceneBaseSO savedLevel { get; set; }
 
     //keys
@@ -46,7 +47,8 @@ public static class SavingSystem
     {
         string currentPath = UnityEditor.AssetDatabase.GetAssetPath(obj);
         currentPath = currentPath.Replace("Assets/Resources/", string.Empty);
-        return currentPath.Remove(currentPath.Length - 6);
+        currentPath = currentPath.Split(delimiterChars)[0];
+        return currentPath;
     }
 
     public static List<Item> LoadPlayerInventory()

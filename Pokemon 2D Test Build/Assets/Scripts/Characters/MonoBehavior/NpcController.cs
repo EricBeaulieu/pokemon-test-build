@@ -105,7 +105,7 @@ public class NpcController : Entity, IInteractable
         _anim.SetBool("isRunning", isRunning);
     }
 
-    IEnumerator IInteractable.OnInteract(Vector2 initiator)
+    public IEnumerator OnInteract(Vector2 initiator)
     {
         if(IsMoving == false)
         {
@@ -217,5 +217,10 @@ public class NpcController : Entity, IInteractable
     public override void PlayerInteractingWithWhenDoneMoving()
     {
         _interactWhenPossible = true;
+    }
+
+    public NPCBaseSO GetNPCBase
+    {
+        get { return nPCBase; }
     }
 }

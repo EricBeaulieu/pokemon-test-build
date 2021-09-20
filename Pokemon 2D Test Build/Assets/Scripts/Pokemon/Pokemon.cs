@@ -36,6 +36,7 @@ public class Pokemon {
     public IndividualValues individualValues { get { return _individualValues; } private set { _individualValues = value; } }
     public EffortValues effortValues { get { return _effortValues; } private set { _effortValues = value; } }
     public ItemBase GetCurrentItem { get { return currentHeldItem; } }
+    public bool evolvePokemonAfterBattle { get; private set; } = false;
 
     public List<Move> moves { get; set; }
     public List<MoveBase> presetMoves { get { return _presetMoves; } }
@@ -144,24 +145,6 @@ public class Pokemon {
         }
     }
 
-    //void LoadedMoves(List<Move> savedMoves)
-    //{
-    //    moves = new List<Move>();
-    //    foreach (Move move in savedMoves)
-    //    {
-    //        if (moves.Exists(x => x == move) == true)
-    //        {
-    //            continue;
-    //        }
-    //        if (moves.Count >= PokemonBase.MAX_NUMBER_OF_MOVES)
-    //        {
-    //            moves.RemoveAt(0);
-    //        }
-    //        moves.Add(move);
-    //    }
-    //}
-
-
     /// <summary>
     /// resets all pokemon stats and volatile status, this is for when the pokmon is sent out or 
     /// when the battle is over to prevent bugs when pokemon is being viewed in the summary
@@ -171,6 +154,7 @@ public class Pokemon {
         ResetStatBoosts();
         volatileStatus.Clear();
         statusChanges.Clear();
+        evolvePokemonAfterBattle = false;
     }
 
     public void Obtained(PlayerController player,PokeballItem pokeball)
@@ -803,6 +787,18 @@ public class Pokemon {
         {
             currentLevel++;
             UpdateStats();
+
+            if (_pokemonBase.EvolveLevelBased != null)
+            {
+                foreach (EvolveLevelBased evolution in _pokemonBase.EvolveLevelBased)
+                {
+                    if (evolution.CanEvolve(this, GetCurrentItem) == true && currentHitPoints > 0)
+                    {
+                        evolvePokemonAfterBattle = true;
+                    }
+                }
+            }
+
             return true;
         }
         return false;

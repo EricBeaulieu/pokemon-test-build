@@ -138,24 +138,19 @@ public class GameManager : MonoBehaviour
             for (int i = 0; i < playerController.pokemonParty.CurrentPokemonList().Count; i++)
             {
                 Pokemon pokemon = playerController.pokemonParty.CurrentPokemonList()[i];
-                if (pokemon.pokemonBase.EvolveLevelBased != null)
+                if (pokemon.evolvePokemonAfterBattle == true)
                 {
-                    foreach (EvolveLevelBased evolution in pokemon.pokemonBase.EvolveLevelBased)
-                    {
-                        if (evolution.CanEvolve(pokemon, pokemon.GetCurrentItem) == true && pokemon.currentHitPoints > 0)
-                        {
-                            pokemonEvolving.Add(pokemon);
-                        }
-                    }
+                    pokemonEvolving.Add(pokemon);
                 }
             }
+
             if(pokemonEvolving.Count > 0)
             {
                 StartCoroutine(PokemonEvolvingAtEndOfBattle());
                 return;
             }
-
         }
+
         SetGameState(GameState.Overworld);
     }
 

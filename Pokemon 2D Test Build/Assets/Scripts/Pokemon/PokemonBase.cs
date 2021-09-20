@@ -225,7 +225,7 @@ public class PokemonBase : ScriptableObject {
             spriteName += "Shiny_";
         }
 
-        if (PokemonNameList.PokemonKantoDifferentGenderSprites.Contains(GetPokedexNumber()) == true)
+        if (PokemonNameList.GenderExclusive(GetPokedexNumber()) == true)
         {
             if (gender == Gender.Male)
             {

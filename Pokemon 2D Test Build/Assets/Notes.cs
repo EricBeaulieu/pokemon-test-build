@@ -7,7 +7,7 @@ public class Notes
     //To do list
 
     //Battle unit, remove the event from pokemon and put it over to battle unit and have it update the HUD upon so, change in battlesystem the set status
-    //fix the saving for items, currently it will save correctly but when it loads the items loadouts are not coming out correctly
+    //alter xp modifier if they can evolve
 
     //complete trainer controller, as of right now the ai decisions are not implimented
     //add in specific moves
@@ -40,8 +40,7 @@ public class Notes
     //Overworld effects with abilitities
 
     //Bugs
-
-    //if the player moves out of site after the trainer looks it will still see him and battle him
+    
     //on turn end for bound moves the pokemon doesnt play flash of hit animation
     //trainer when walking for some reason got into a half positionand stuck while walking. no idea how i created the bug
     //place trainer in path off start, let them stand and hit them and recreate this bug
