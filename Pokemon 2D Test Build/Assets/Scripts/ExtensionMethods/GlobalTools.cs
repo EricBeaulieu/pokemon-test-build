@@ -59,4 +59,36 @@ public static class GlobalTools
                 return FacingDirections.Right;
         }
     }
+
+    public static string FacingDirectionEditorHelper(FacingDirections direction)
+    {
+        switch (direction)
+        {
+            case FacingDirections.Up:
+                return "Up_Idle";
+            case FacingDirections.Down:
+                return "Down_Idle";
+            case FacingDirections.Left:
+                return "Left_Idle";
+            default:
+                return "Right_Idle";
+        }
+    }
+
+    public static FacingDirections GetDirectionFacingOnStart(Entity entity)
+    {
+        string facing = entity.GetComponentInChildren<SpriteRenderer>().sprite.name;
+
+        switch (facing)
+        {
+            case "Up_Idle":
+                return FacingDirections.Up;
+            case "Left_Idle":
+                return FacingDirections.Left;
+            case "Right_Idle":
+                return FacingDirections.Right;
+            default:
+                return FacingDirections.Down;//Make down the default
+        }
+    }
 }

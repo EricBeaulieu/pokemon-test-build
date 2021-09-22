@@ -12,7 +12,7 @@ public class NpcController : Entity, IInteractable
     float _idleTimer = 0f;
     float _idleTimerLimit = 0f;
 
-    [Tooltip("This is the amount of tim e the NPC will sit and when finished they will move")]
+    [Tooltip("This is the amount of time the NPC will sit and when finished they will move")]
     [SerializeField] float timeUntilMoveMin;
     [Tooltip("This is to add a random timer to the Idle amount time, if this is less then the min then there will be no random range timer")]
     [SerializeField] float timeUntilMoveMax;

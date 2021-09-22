@@ -16,9 +16,10 @@ public class Pokemon {
     [SerializeField] IndividualValues _individualValues = new IndividualValues();
     [SerializeField] EffortValues _effortValues = new EffortValues();
     [SerializeField] string _currentName;
-    [SerializeField] AbilityBase _ability;
+    [SerializeField] AbilityID abilityID = AbilityID.NA;
     [SerializeField] ItemBase currentHeldItem;
     int hitPoints;
+    AbilityBase _ability;
     public System.Action OnStatusChanged;
 
     //properties
@@ -31,6 +32,7 @@ public class Pokemon {
     public string originalTrainerID { get; private set; }
     public PokeballItem pokeballCapturedIn { get; private set; }
     public AbilityBase ability { get { return _ability; } private set { _ability = value; } }
+    public AbilityID startingAbilityID { get { return abilityID; } private set { abilityID = value; } }
     public Gender gender { get { return _gender; } private set { _gender = value; } }
     public bool isShiny { get { return _isShiny; } private set { _isShiny = value; } }
     public IndividualValues individualValues { get { return _individualValues; } private set { _individualValues = value; } }
@@ -51,7 +53,7 @@ public class Pokemon {
 
     public Pokemon(PokemonBase pokemonBase,int level,IndividualValues iV = null,EffortValues eV = null, Gender specifiedgender = Gender.NA, 
         bool? shiny = null,NatureBase specifiedNature = null,string nickname = null, List<MoveBase> presetMoveList = null, 
-        AbilityBase abilityBase = null,ItemBase item = null)
+        AbilityID presetAbilityID = AbilityID.NA,ItemBase item = null)
     {
         _pokemonBase = pokemonBase;
         currentLevel = level;
@@ -67,7 +69,16 @@ public class Pokemon {
 
         SetDataStats();
         currentHitPoints = maxHitPoints;
-        ability = SetAbility(abilityBase);
+
+        if(presetAbilityID == AbilityID.NA)
+        {
+            ability = SetAbility(AbilityDB.GetAbilityBase(presetAbilityID));
+        }
+        else
+        {
+            ability = SetAbility();
+        }
+        
         GivePokemonItemToHold(item);
 
         SetMoves(presetMoveList);

@@ -6,7 +6,7 @@ public enum AbilityID
 {
     NA,
     //A
-    Adaptability, Aerilate, AirLock, AngerPoint,
+    Adaptability, Aerilate, Aftermath, AirLock, Analytic, AngerPoint,
     //B
     BattleArmor, BigPecks, Blaze, Bulletproof,
     //C
@@ -40,7 +40,7 @@ public enum AbilityID
     //O
     Oblivious, Overgrown, OwnTempo,
     //P
-    Pixilate, PoisonPoint, PrismArmor, PunkRock, PurePower,
+    Pixilate, PoisonPoint, Pressure, PrismArmor, PunkRock, PurePower,
     //Q
     QuickFeet,
     //R

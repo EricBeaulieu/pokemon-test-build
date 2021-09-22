@@ -55,11 +55,13 @@
   <ItemGroup>
     <Compile Include="Assets\Scripts\Editor\AssetProcessorPokemonArt.cs" />
     <Compile Include="Assets\Scripts\Editor\PokemonBaseEditor.cs" />
-    <Compile Include="Assets\Scripts\Editor\OrganizePokemonArt.cs" />
-    <Compile Include="Assets\Scripts\Editor\PropertyDrawer\ReadOnlyDrawer.cs" />
     <Compile Include="Assets\Scripts\Editor\EntityEditor.cs" />
+    <Compile Include="Assets\Scripts\Editor\OrganizePokemonArt.cs" />
+    <Compile Include="Assets\Scripts\Editor\Characters\TrainerControllerEditor.cs" />
     <Compile Include="Assets\Scripts\Editor\SaveableEntityEditor.cs" />
-    <Compile Include="Assets\Scripts\Editor\TrainerControllerEditor.cs" />
+    <Compile Include="Assets\Scripts\Editor\Characters\HealerNpcControllerEditor.cs" />
+    <Compile Include="Assets\Scripts\Editor\Characters\NPCControllerEditor.cs" />
+    <Compile Include="Assets\Scripts\Editor\PropertyDrawer\ReadOnlyDrawer.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">

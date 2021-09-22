@@ -708,6 +708,11 @@ public class BattleSystem : CoreSystem
         yield return dialogSystem.TypeDialog($"{sourceUnit.pokemon.currentName} used {move.moveBase.MoveName}");
         move.pP--;
 
+        if(targetUnit.pokemon.ability.ReducesPowerPointsBy2() == true)
+        {
+            move.pP--;
+        }
+
         if (targetUnit.pokemon.currentHitPoints <= 0 && move.moveBase.Target == MoveTarget.Foe && move.moveBase.RecoilPercentage < 100)
         {
             yield return dialogSystem.TypeDialog($"There is no target Pokemon");
@@ -733,6 +738,7 @@ public class BattleSystem : CoreSystem
         alteredMove = sourceUnit.pokemon.ability.AlterMoveDetails(move.moveBase);
         alteredMove = sourceUnit.pokemon.GetHoldItemEffects.AlterUserMoveDetails(alteredMove);
         alteredMove = targetUnit.pokemon.GetHoldItemEffects.AlterOpposingMoveDetails(alteredMove);
+        alteredMove = sourceUnit.pokemon.ability.BoostsMovePowerWhenLast(currentTurnDetails.Count <= 1, alteredMove);
 
         if (CheckIfMoveHits(alteredMove, sourceUnit.pokemon, targetUnit.pokemon) == true)
         {
@@ -870,7 +876,16 @@ public class BattleSystem : CoreSystem
                     yield return dialogSystem.TypeDialog($"Hit {attackLoop} time(s)!");
                 }
 
-                if(sourceUnit.pokemon.HasCurrentVolatileStatus(ConditionID.HealBlock) == false)
+                if (targetUnit.pokemon.ability.DamagesAttackerUponFinishingHit(targetUnit.pokemon, sourceUnit.pokemon, alteredMove) == true)
+                {
+                    targetUnit.OnAbilityActivation();
+                    yield return ShowStatusChanges(sourceUnit.pokemon);
+                    yield return sourceUnit.HUD.UpdateHP(previousHP);
+                    previousHP = sourceUnit.pokemon.currentHitPoints;
+                }
+
+                //Healing
+                if (sourceUnit.pokemon.HasCurrentVolatileStatus(ConditionID.HealBlock) == false)
                 {
                     if (alteredMove.DrainsHP == true && sourceUnit.pokemon.currentHitPoints != sourceUnit.pokemon.maxHitPoints && hpPriorToAttack - targetUnit.pokemon.currentHitPoints > 0)
                     {
@@ -1091,6 +1106,11 @@ public class BattleSystem : CoreSystem
                 yield return dialogSystem.TypeDialog(targetUnit.pokemon.GetHoldItemEffects.SpecializedMessage(targetUnit.pokemon, sourceUnit.pokemon));
                 targetUnit.pokemon.ItemUsed();
             }
+        }
+
+        if (sourceUnit.pokemon.currentHitPoints <= 0)
+        {
+            yield return PokemonHasFainted(sourceUnit);
         }
     }
 

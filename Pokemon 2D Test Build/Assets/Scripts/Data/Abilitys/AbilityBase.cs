@@ -53,4 +53,7 @@ public abstract class AbilityBase
     public virtual float AltersCriticalHitDamage() { return DamageModifiers.CriticalHitModifier; }
     public virtual bool PreventsOneHitKO(Pokemon defendingPokemon,int damage) { return false; }
     public virtual bool PreventsRecoilDamage(MoveBase move) { return false; }
+    public virtual bool ReducesPowerPointsBy2() { return false; }
+    public virtual MoveBase BoostsMovePowerWhenLast(bool isLast, MoveBase move) { return move; }
+    public virtual bool DamagesAttackerUponFinishingHit(Pokemon defendingPokemon, Pokemon attackingPokemon, MoveBase currentAttack) { return false; }
 }
