@@ -70,7 +70,7 @@ public class Pokemon {
         SetDataStats();
         currentHitPoints = maxHitPoints;
 
-        if(presetAbilityID == AbilityID.NA)
+        if(presetAbilityID != AbilityID.NA)
         {
             ability = SetAbility(AbilityDB.GetAbilityBase(presetAbilityID));
         }
@@ -118,9 +118,32 @@ public class Pokemon {
         }
     }
 
+    public Pokemon(WildPokemon wildPokemon)
+    {
+        _pokemonBase = wildPokemon.PokemonBase;
+        currentLevel = wildPokemon.Level;
+        currentExp = pokemonBase.GetExpForLevel(wildPokemon.Level);
+
+        _individualValues.SetValues();
+        _effortValues.SetValues();
+        gender = SetGender();
+
+        nature = SetNature();
+        isShiny = (Random.value > 0.5f);
+
+        SetDataStats();
+        currentHitPoints = maxHitPoints;
+
+        ability = SetAbility();
+
+        GivePokemonItemToHold(wildPokemon.HoldItemUponBeingFound());
+
+        SetMoves();
+    }
+
     #endregion
 
-    void SetMoves(List<MoveBase> presetMoves)
+    void SetMoves(List<MoveBase> presetMoves = null)
     {
         moves = new List<Move>();
         foreach(LearnableMove move in _pokemonBase.LearnableMoves)
@@ -411,7 +434,7 @@ public class Pokemon {
         return natureBases[Random.Range(0, natureBases.Length)];
     }
 
-    Gender SetGender(Gender serializedGender)
+    Gender SetGender(Gender serializedGender = Gender.NA)
     {
         if (pokemonBase.HasGender == true)
         {

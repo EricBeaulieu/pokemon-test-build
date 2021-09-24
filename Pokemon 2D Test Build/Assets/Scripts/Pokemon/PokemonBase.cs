@@ -63,6 +63,9 @@ public class PokemonBase : ScriptableObject {
     [SerializeField] List<EvolutionStone> evolutionsByStone;
     List<EvolutionBase> evolutions;
 
+    [Header("Wild")]
+    [SerializeField] List<WildPokemonHoldItems> wildPokemonHoldItems;
+
     #region Getters/Setters
 
     public int GetPokedexNumber()
@@ -249,6 +252,11 @@ public class PokemonBase : ScriptableObject {
     public List<EvolutionStone> EvolutionsByStone
     {
         get { return evolutionsByStone; }
+    }
+
+    public List<WildPokemonHoldItems> WildPokemonHoldItems
+    {
+        get { return wildPokemonHoldItems; }
     }
 
 }

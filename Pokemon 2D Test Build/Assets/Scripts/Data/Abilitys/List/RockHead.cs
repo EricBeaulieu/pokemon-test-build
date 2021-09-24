@@ -12,6 +12,11 @@ public class RockHead : AbilityBase
     }
     public override bool PreventsRecoilDamage(MoveBase move)
     {
+        if(move.MoveName == "Struggle")
+        {
+            return false;
+        }
+
         if(move.RecoilPercentage < 100)
         {
             return true;

@@ -8,7 +8,8 @@ public class LevelManager : MonoBehaviour
     [SerializeField] BattleFieldLayoutBaseSO currentAreaDetails;
     [SerializeField] bool showLabelUponEntry = true;
     [SerializeField] bool grassOnlyWildPokemon = true;
-    [SerializeField] List<Pokemon> wildPokemon;
+    [SerializeField] List<WildPokemon> standardWalking;
+    [SerializeField] List<WildPokemon> standardSurfing;
     [SerializeField] GameSceneBaseSO sceneReference;
     List<Portal> allInLevelPortals = new List<Portal>();
     List<Entity> allEntitiesInScene = new List<Entity>();
@@ -24,15 +25,15 @@ public class LevelManager : MonoBehaviour
             Debug.LogWarning("currentAreaDetails not set", gameObject);
         }
 
-        if(wildPokemon.Count > 0)
+        if(standardWalking.Count > 0)
         {
-            for (int i = 0; i < wildPokemon.Count; i++)
+            for (int i = 0; i < standardWalking.Count; i++)
             {
-                if (wildPokemon[i].pokemonBase == null)
+                if (standardWalking[i].PokemonBase == null)
                 {
                     Debug.LogWarning($"pokemon at position {i} has not been set", gameObject);
                 }
-                if(wildPokemon[i].currentLevel == 0)
+                if(standardWalking[i].Level == 0)
                 {
                     Debug.LogWarning($"pokemon at position {i} level has not been set", gameObject);
                 }
@@ -60,8 +61,18 @@ public class LevelManager : MonoBehaviour
 
     public Pokemon WildPokemon()
     {
-        Pokemon temp = wildPokemon[Random.Range(0, wildPokemon.Count)];
-        return temp;
+        int olderValuesChecked = 0;
+        int pokemonFound = Random.Range(0, 100);
+        for (int i = 0; i < standardWalking.Count; i++)
+        {
+            if(pokemonFound <= (olderValuesChecked + standardWalking[i].WildEncounterChance))
+            {
+                return new Pokemon(standardWalking[i]);
+            }
+            olderValuesChecked += standardWalking[i].WildEncounterChance;
+        }
+
+        return new Pokemon(standardWalking[standardWalking.Count]);
     }
 
     public List<Entity> GetAllEntities()

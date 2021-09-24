@@ -36,7 +36,7 @@ public abstract class AbilityBase
     public virtual bool MaximizeMultistrikeMovesHit() { return false; }
     public virtual MoveBase AlterMoveDetails(MoveBase move) { return move; }
     public virtual bool PreventCertainStatusCondition(ConditionID iD, WeatherEffectID weather) { return false; }
-    public virtual bool PreventFoeFromEscapingBattle() { return false; }
+    public virtual bool PreventFoeFromEscapingBattle(BattleUnit opposingUnit) { return false; }
     public virtual bool AffectsHpByXEachTurnWithWeather(Pokemon pokemon,WeatherEffectID weather) { return false; }
     protected const float HpAmountDeductedByWeather = 1f / 8f;
     protected const float HpAmountHealedByWeather = 1f / 16f;
@@ -56,4 +56,5 @@ public abstract class AbilityBase
     public virtual bool ReducesPowerPointsBy2() { return false; }
     public virtual MoveBase BoostsMovePowerWhenLast(bool isLast, MoveBase move) { return move; }
     public virtual bool DamagesAttackerUponFinishingHit(Pokemon defendingPokemon, Pokemon attackingPokemon, MoveBase currentAttack) { return false; }
+    public virtual bool ActivateAbilityUponEntry(Pokemon defendingPokemon, BattleUnit opposingTarget) { return false; }
 }

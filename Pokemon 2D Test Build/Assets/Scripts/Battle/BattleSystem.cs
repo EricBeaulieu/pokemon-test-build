@@ -955,7 +955,8 @@ public class BattleSystem : CoreSystem
             //Recoil
             if (alteredMove.RecoilType != Recoil.NA)
             {
-                if(sourceUnit.pokemon.ability.PreventsRecoilDamage(alteredMove) == false && move.moveBase != struggle)
+                
+                if(sourceUnit.pokemon.ability.PreventsRecoilDamage(alteredMove) == false)
                 {
                     int recoilDamage = 0;
 
@@ -992,7 +993,7 @@ public class BattleSystem : CoreSystem
 
             //Item altering HP
             int hpDifference;
-            if (targetUnit.pokemon.GetHoldItemEffects.HurtsAttacker() == true)
+            if (targetUnit.pokemon.GetHoldItemEffects.HurtsAttacker() == true && sourceUnit.pokemon.currentHitPoints > 0)
             {
                 hpDifference = targetUnit.pokemon.GetHoldItemEffects.AlterUserHPAfterAttack(sourceUnit.pokemon, alteredMove, (hpPriorToAttack - targetUnit.pokemon.currentHitPoints));
                 previousHP = sourceUnit.pokemon.currentHitPoints;
@@ -1017,7 +1018,7 @@ public class BattleSystem : CoreSystem
                     }
                 }
             }
-            else if(sourceUnit.pokemon.GetHoldItemEffects.HurtsAttacker() == false)
+            else if(sourceUnit.pokemon.GetHoldItemEffects.HurtsAttacker() == false && sourceUnit.pokemon.currentHitPoints > 0)
             {
                 hpDifference = sourceUnit.pokemon.GetHoldItemEffects.AlterUserHPAfterAttack(sourceUnit.pokemon, alteredMove, (hpPriorToAttack - targetUnit.pokemon.currentHitPoints));
                 previousHP = sourceUnit.pokemon.currentHitPoints;
@@ -1717,6 +1718,11 @@ public class BattleSystem : CoreSystem
 
     IEnumerator PokemonHasFainted(BattleUnit targetBattleUnit)
     {
+        if(targetBattleUnit.pokemonHasFainted == true)
+        {
+            yield break;
+        }
+
         if (targetBattleUnit.pokemon.currentHitPoints <= 0)
         {
             yield return dialogSystem.TypeDialog($"{targetBattleUnit.pokemon.currentName} has fainted");
@@ -1791,6 +1797,12 @@ public class BattleSystem : CoreSystem
             }
             else
             {
+                if(enemyBattleUnit.pokemon.currentHitPoints <= 0)
+                {
+                    yield return dialogSystem.TypeDialog($"{enemyBattleUnit.pokemon.currentName} has fainted");
+                    enemyBattleUnit.PlayFaintAnimation();
+                }
+
                 if(_isTrainerBattle == true)
                 {
                     yield return TrainerBattleOver(false);
@@ -1809,6 +1821,11 @@ public class BattleSystem : CoreSystem
                 }
                 else
                 {
+                    if (playerBattleUnit.pokemon.currentHitPoints <= 0)
+                    {
+                        yield return dialogSystem.TypeDialog($"{playerBattleUnit.pokemon.currentName} has fainted");
+                        playerBattleUnit.PlayFaintAnimation();
+                    }
                     yield return TrainerBattleOver(true);
                     OnBattleOver(true);
                 }

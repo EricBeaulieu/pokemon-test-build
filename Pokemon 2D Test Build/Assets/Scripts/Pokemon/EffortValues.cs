@@ -32,7 +32,7 @@ public class EffortValues : SpecifiedValues
     const int MAXIMUM_EV_Value = 255;
     const int MAXIMUM_EV_Total = 510;
 
-    public override void SetValues(SpecifiedValues effortValues)
+    public override void SetValues(SpecifiedValues effortValues = null)
     {
         if (effortValues == null) { return; }
         if (IsCorrectClass(effortValues) == false) { return; }

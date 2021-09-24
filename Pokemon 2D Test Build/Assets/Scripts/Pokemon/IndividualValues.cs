@@ -8,7 +8,7 @@ public class IndividualValues : SpecifiedValues
     const int MINIMUM_IV_VALUE = 1;
     const int MAXIMUM_IV_VALUE = 31;
 
-    public override void SetValues(SpecifiedValues individualValues)
+    public override void SetValues(SpecifiedValues individualValues = null)
     {
         if (individualValues == null)
         {

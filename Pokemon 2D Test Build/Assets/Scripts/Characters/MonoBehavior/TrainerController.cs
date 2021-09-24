@@ -32,6 +32,7 @@ public class TrainerController : Entity,IInteractable,ISaveable
     [SerializeField] bool canLookRight = true;
 
     [SerializeField] List<AIDecision> aiDecisionList;
+    bool currentlyExecutingDecision = false;
     int _currentMovementPattern = 0;
     float _idleTimer = 0f;
     float _idleTimerLimit = 0f;
@@ -74,6 +75,7 @@ public class TrainerController : Entity,IInteractable,ISaveable
     IEnumerator Walk()
     {
         Vector2 desiredPosition = aiDecisionList[_currentMovementPattern].movement - (Vector2)transform.position;
+        currentlyExecutingDecision = true;
 
         while ((Vector2)transform.position != aiDecisionList[_currentMovementPattern].movement)
         {
@@ -88,6 +90,7 @@ public class TrainerController : Entity,IInteractable,ISaveable
             }
             yield return MoveToPosition(desiredPosition.normalized);
         }
+        currentlyExecutingDecision = false;
         _currentMovementPattern = (_currentMovementPattern + 1) % aiDecisionList.Count;
 
         _anim.SetBool("isMoving", IsMoving);
@@ -97,6 +100,7 @@ public class TrainerController : Entity,IInteractable,ISaveable
     public IEnumerator OnInteract(Vector2 initiator)
     {
         _playerSpotted = true;
+        currentlyExecutingDecision = false;
         FaceTowardsDirection(initiator);
 
         if (hasLostToPlayer == false)
@@ -113,7 +117,7 @@ public class TrainerController : Entity,IInteractable,ISaveable
 
     public override void HandleUpdate()
     {
-        if(_playerSpotted == false)
+        if(_playerSpotted == false && currentlyExecutingDecision == false)
         {
             _idleTimer += Time.deltaTime;
 
@@ -122,6 +126,7 @@ public class TrainerController : Entity,IInteractable,ISaveable
                 if(standAroundAndLook == true)
                 {
                     FaceTowardsDirection(LookTowards());
+                    _idleTimerLimit = SetNewIdleTimer();
                 }
                 else
                 {
@@ -142,10 +147,13 @@ public class TrainerController : Entity,IInteractable,ISaveable
                             _idleTimerLimit = aiDecisionList[_currentMovementPattern].specificTimeUniltNextExecution;
                             _currentMovementPattern = (_currentMovementPattern + 1) % aiDecisionList.Count;
                         }
+                        else
+                        {
+                            _idleTimerLimit = SetNewIdleTimer();
+                        }
                     }
                 }
                 _idleTimer = 0;
-                _idleTimerLimit = SetNewIdleTimer();
             }
         }
 
@@ -218,6 +226,7 @@ public class TrainerController : Entity,IInteractable,ISaveable
             }
 
             _playerSpotted = true;
+            currentlyExecutingDecision = false;
             StartCoroutine(TriggerTrainerBattle(player));
         }
     }

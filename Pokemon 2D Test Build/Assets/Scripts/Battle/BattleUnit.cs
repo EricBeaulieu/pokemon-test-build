@@ -18,6 +18,7 @@ public class BattleUnit : MonoBehaviour
 
     [SerializeField] bool isPlayersPokemon;
     public bool isPlayerPokemon { get { return isPlayersPokemon; } }
+    public bool pokemonHasFainted { get; private set; }
 
     [SerializeField] BattleHUD hud;
     public BattleHUD HUD { get { return hud; } }
@@ -131,6 +132,7 @@ public class BattleUnit : MonoBehaviour
         hud.SetData(pokemon, isPlayersPokemon);
         pokemon.Reset();
         _sendOutPokemonOnTurnEnd = false;
+        pokemonHasFainted = false;
 
         cantEscapeGivenToSelf = false;
         lastMoveUsed = null;
@@ -294,6 +296,7 @@ public class BattleUnit : MonoBehaviour
 
     public void PlayFaintAnimation()
     {
+        pokemonHasFainted = true;
         StartCoroutine(FaintAnimation());
         StartCoroutine(hud.FaintedPokemonHUDAnimation(isPlayersPokemon));
     }

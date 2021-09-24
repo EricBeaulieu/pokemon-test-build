@@ -6,9 +6,9 @@ public enum AbilityID
 {
     NA,
     //A
-    Adaptability, Aerilate, Aftermath, AirLock, Analytic, AngerPoint,
+    Adaptability, Aerilate, Aftermath, AirLock, Analytic, AngerPoint, Anticipation, ArenaTrap, AromaVeil,
     //B
-    BattleArmor, BigPecks, Blaze, Bulletproof,
+    BadDreams,BattleArmor, BigPecks, Blaze, Bulletproof,
     //C
     Chlorophyll, ClearBody, CloudNine, Competitive, CompoundEyes,
     CuteCharm,
