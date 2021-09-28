@@ -7,6 +7,7 @@ using UnityEngine;
 
 public static class SavingSystem
 {
+    //C:\Users\Eric\AppData\LocalLow\DefaultCompany\Pokemon 2D Test Build
     public readonly static string savePath = $"{Application.persistentDataPath}/save.txt";
     static Dictionary<string, object> saveInfo = new Dictionary<string, object>();
     static Dictionary<string, object> infoTobeSaved = new Dictionary<string, object>();

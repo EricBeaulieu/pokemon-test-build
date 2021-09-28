@@ -185,6 +185,8 @@ GameObject:
   - component: {fileID: 2133970087045245651}
   - component: {fileID: 2133970087045245648}
   - component: {fileID: 2133970087045245649}
+  - component: {fileID: -7837695269829072206}
+  - component: {fileID: -3200909109639792030}
   m_Layer: 8
   m_Name: NPC_Prefab
   m_TagString: Untagged
@@ -223,19 +225,12 @@ MonoBehaviour:
   movementSpeed: 5
   positionMovingTo: {fileID: 607308306}
   nPCBase: {fileID: 0}
-  aiDecisionList:
-  - movement: {x: 2, y: 0}
-    directionToFace: {x: -1, y: 0}
-    specificTimeUniltNextExecution: 0
-  - movement: {x: 0, y: -2}
-    directionToFace: {x: 0, y: 1}
-    specificTimeUniltNextExecution: 0
-  - movement: {x: -2, y: 0}
-    directionToFace: {x: 0, y: -1}
-    specificTimeUniltNextExecution: 0
-  - movement: {x: 0, y: 2}
-    directionToFace: {x: 0, y: 0}
-    specificTimeUniltNextExecution: 10
+  standAroundAndLook: 1
+  canLookUp: 1
+  canLookDown: 1
+  canLookLeft: 1
+  canLookRight: 1
+  aiDecisionList: []
   timeUntilMoveMin: 5
   timeUntilMoveMax: 0
 --- !u!50 &2133970087045245648
@@ -285,3 +280,35 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &-7837695269829072206
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2133970087045245660}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 48791a1f2d58b47438ab0172f78ac863, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  saveableEntity: {fileID: -3200909109639792030}
+  item: {fileID: 0}
+  itemCount: 1
+  dialogBeforeItemGiven:
+    lines: []
+  dialogAfterItemGiven:
+    lines: []
+--- !u!114 &-3200909109639792030
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2133970087045245660}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a7a63665f8ec1b340a2666d3395770d5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  id: 6b968072-0a2f-4d28-a0c4-bc0320db6f31

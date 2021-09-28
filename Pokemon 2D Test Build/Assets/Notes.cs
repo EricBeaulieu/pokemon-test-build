@@ -8,6 +8,7 @@ public class Notes
 
     //To do list
 
+    //fix the save for the player. currently after every save the player seems to be stuck running
     //when a player looses a battle, reset everything, the pokemon trainers were still standing in the positions that they last were
     //if pokemon kills itself due to recoil, as well as curse it will show the pokemon animation has fainted twice
     //Battle unit, remove the event from pokemon and put it over to battle unit and have it update the HUD upon so, change in battlesystem the set status

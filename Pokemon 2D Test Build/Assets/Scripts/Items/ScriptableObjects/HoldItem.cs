@@ -8,6 +8,11 @@ public class HoldItem : ItemBase
     [Header("Hold Item Attributes")]
     [SerializeField] HoldItemID holdItemID;
 
+    public HoldItem()
+    {
+        itemType = itemType.Basic;
+    }
+
     public override HoldItemBase HoldItemAffects()
     {
         return HoldItemDB.GetHoldItem(holdItemID);

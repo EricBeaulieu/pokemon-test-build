@@ -10,6 +10,8 @@ public class OverworldItem : MonoBehaviour,IInteractable,ISaveable
     [SerializeField] ItemBase itemBase;
     [SerializeField] int count = 1;
 
+    bool itemPickedUp;
+
     void Start()
     {
         transform.position = GlobalTools.SnapToGrid(transform.position);
@@ -26,6 +28,7 @@ public class OverworldItem : MonoBehaviour,IInteractable,ISaveable
         {
             inGameText = $"You found {itemBase.ItemName}";
         }
+        itemPickedUp = true;
         gameObject.SetActive(false);
         yield return GameManager.instance.GetDialogSystem.ShowDialogBox(new Dialog(inGameText));
         GameManager.instance.GetInventorySystem.AddItem(itemBase, count);
@@ -36,18 +39,12 @@ public class OverworldItem : MonoBehaviour,IInteractable,ISaveable
 
     public object CaptureState(bool playerSave = false)
     {
-        return new OverworldItemSaveData { itemPickedUp = (gameObject.activeInHierarchy) };
+        return itemPickedUp;
     }
 
     public void RestoreState(object state)
     {
-        var saveData = (OverworldItemSaveData)state;
-        gameObject.SetActive(saveData.itemPickedUp);
-    }
-
-    [Serializable]
-    struct OverworldItemSaveData
-    {
-        public bool itemPickedUp;
+        itemPickedUp = (bool)state;
+        gameObject.SetActive(!itemPickedUp);
     }
 }
