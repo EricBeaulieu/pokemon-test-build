@@ -23,7 +23,7 @@ public class StealthRock : EntryHazardBase
     }
     public override void OnEntry(Pokemon pokemon)
     {
-        float damageEffectiveness = DamageModifiers.TypeChartEffectiveness(pokemon.pokemonBase, ElementType.Rock);
+        float damageEffectiveness = DamageModifiers.TypeChartEffectiveness(pokemon, ElementType.Rock);
 
         int damage = Mathf.FloorToInt(pokemon.maxHitPoints / (8 / damageEffectiveness));
 

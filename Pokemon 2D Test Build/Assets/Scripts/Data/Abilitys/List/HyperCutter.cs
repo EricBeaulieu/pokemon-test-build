@@ -20,6 +20,6 @@ public class HyperCutter : AbilityBase
     }
     public override string OnAbilitityActivation(Pokemon pokemon)
     {
-        return $"{pokemon.currentName}'s Hyper Cutter prevents Attack loss";
+        return $"{pokemon.currentName}'s {Name} prevents Attack loss";
     }
 }

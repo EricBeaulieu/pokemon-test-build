@@ -14,7 +14,7 @@ public class Anticipation : AbilityBase
     {
         for (int i = 0; i < opposingTarget.pokemon.moves.Count; i++)
         {
-            if(DamageModifiers.TypeChartEffectiveness(defendingPokemon.pokemonBase, opposingTarget.pokemon.moves[i].moveBase.Type) > 1)
+            if(DamageModifiers.TypeChartEffectiveness(defendingPokemon, opposingTarget.pokemon.moves[i].moveBase.Type) > 1)
             {
                 return true;
             }

@@ -12,7 +12,7 @@ public class Neuroforce : AbilityBase
     }
     public override float PowerUpCertainMoves(Pokemon attackingPokemon, Pokemon defendingPokemon, MoveBase currentMove, WeatherEffectID weather)
     {
-        if (DamageModifiers.TypeChartEffectiveness(defendingPokemon.pokemonBase, currentMove.Type) > 1)
+        if (DamageModifiers.TypeChartEffectiveness(defendingPokemon, currentMove.Type) > 1)
         {
             return 1.25f;
         }

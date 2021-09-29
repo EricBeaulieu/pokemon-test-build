@@ -37,7 +37,7 @@ MonoBehaviour:
   _specialAttack: 49
   _specialDefense: 65
   _speed: 45
-  firstAbility: 4
+  firstAbility: 24
   secondAbility: 0
   hiddenAbility: 0
   _learnableMoves:
@@ -51,6 +51,8 @@ MonoBehaviour:
     _levelLeanred: 9
   - _moveBase: {fileID: 11400000, guid: 8e9b69ed0ebf0324a96f0594f973e190, type: 2}
     _levelLeanred: 12
+  - _moveBase: {fileID: 11400000, guid: ba50f71abd3d62b448537792dbbded86, type: 2}
+    _levelLeanred: 12
   learnableTMHMMoves:
   - {fileID: 11400000, guid: 88ebf4bead5cc4a4fa81828f041330f6, type: 2}
   evolveLevelBased:
@@ -58,3 +60,4 @@ MonoBehaviour:
     levelRequirement: 16
     maxFriendShipRequired: 0
   evolutionsByStone: []
+  wildPokemonHoldItems: []

@@ -20,6 +20,6 @@ public class Oblivious : AbilityBase
     }
     public override string OnAbilitityActivation(Pokemon pokemon)
     {
-        return $"{pokemon.currentName} is Oblivious to Inflantuation and Taunts";
+        return $"{pokemon.currentName} is {Name} to Inflantuation and Taunts";
     }
 }

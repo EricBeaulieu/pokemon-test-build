@@ -111,6 +111,7 @@ public class BattleHUD : MonoBehaviour
             SetAllHudAlphas(tempAlpha,isPlayers);
             yield return new WaitForSeconds(0.01f);
         }
+        pokemon.Reset();
     }
 
     void SetHudOffScreen(bool isPlayers)

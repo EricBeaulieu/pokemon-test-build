@@ -20,6 +20,6 @@ public class Immunity : AbilityBase
     }
     public override string OnAbilitityActivation(Pokemon pokemon)
     {
-        return $"{pokemon.currentName}'s Immunity prevents poisoning";
+        return $"{pokemon.currentName}'s {Name} prevents poisoning";
     }
 }

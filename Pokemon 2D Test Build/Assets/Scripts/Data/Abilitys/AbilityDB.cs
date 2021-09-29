@@ -8,9 +8,9 @@ public enum AbilityID
     //A
     Adaptability, Aerilate, Aftermath, AirLock, Analytic, AngerPoint, Anticipation, ArenaTrap, AromaVeil,
     //B
-    BadDreams,BattleArmor, BigPecks, Blaze, Bulletproof,
+    BadDreams, BallFetch, BattleArmor, BeastBoost, Berserk, BigPecks, Blaze, Bulletproof,
     //C
-    Chlorophyll, ClearBody, CloudNine, Competitive, CompoundEyes,
+    Chlorophyll, ClearBody, CloudNine, ColorChange, Competitive, CompoundEyes, Contrary,
     CuteCharm,
     //D
     Damp, Defiant, Download, DragonsMaw, Drizzle,

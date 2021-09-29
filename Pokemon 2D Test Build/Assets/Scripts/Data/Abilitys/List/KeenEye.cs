@@ -28,6 +28,6 @@ public class KeenEye : AbilityBase
     }
     public override string OnAbilitityActivation(Pokemon pokemon)
     {
-        return $"{pokemon.currentName}'s Keen Eye prevents Accuracy loss";
+        return $"{pokemon.currentName}'s {Name} prevents Accuracy loss";
     }
 }

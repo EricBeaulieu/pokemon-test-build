@@ -20,6 +20,6 @@ public class MagmaArmor : AbilityBase
     }
     public override string OnAbilitityActivation(Pokemon pokemon)
     {
-        return $"{pokemon.currentName} Magma Armor prevents freezing";
+        return $"{pokemon.currentName} {Name} prevents freezing";
     }
 }

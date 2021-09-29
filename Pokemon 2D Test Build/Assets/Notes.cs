@@ -4,10 +4,14 @@ using UnityEngine;
 
 public class Notes
 {
-    //last finished at bad dreams
+    //Corrosion is the last ability being added
 
     //To do list
 
+    //Cheek pouch ability, for when berries are implimented
+    //Comatose ability for later
+    //bullet proof fix the list to contain moves that it shall adjust
+    //if the pokemon is the last one and the player knocks out the pokemon, then skip over the boost stat or lowering for the attacker.
     //fix the save for the player. currently after every save the player seems to be stuck running
     //when a player looses a battle, reset everything, the pokemon trainers were still standing in the positions that they last were
     //if pokemon kills itself due to recoil, as well as curse it will show the pokemon animation has fainted twice
@@ -50,6 +54,7 @@ public class Notes
 
     //Bugs
 
+    //if the player backs out of the bag menu via "X" it will not select any button when back in battle
     //on turn end for bound moves the pokemon doesnt play flash of hit animation
     //trainer when walking for some reason got into a half positionand stuck while walking. no idea how i created the bug
     //place trainer in path off start, let them stand and hit them and recreate this bug

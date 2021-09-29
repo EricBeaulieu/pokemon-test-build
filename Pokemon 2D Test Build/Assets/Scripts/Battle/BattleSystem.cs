@@ -868,6 +868,13 @@ public class BattleSystem : CoreSystem
 
                 if (sourceUnit.pokemon.currentHitPoints > 0)
                 {
+                    //TO DO
+                    //check if the pokemon was the last one, if it is then dont go through this code
+
+                    if (damageDetails.attackersAbilityActivation == true)
+                    {
+                        sourceUnit.OnAbilityActivation();
+                    }
                     yield return ApplyStatChanges(damageDetails.attackersStatBoostByDefendersAbility, targetUnit, MoveTarget.Self,sourceUnit);
                 }
 
@@ -1348,6 +1355,19 @@ public class BattleSystem : CoreSystem
             yield return sourceUnit.HUD.UpdateHP(currentHP);
         }
 
+        //Ability
+
+        if(sourceUnit.pokemon.currentHitPoints > 0)
+        {
+            int targetPreviousHP = targetUnit.pokemon.currentHitPoints;
+            if(sourceUnit.pokemon.ability.ApplyEffectsToOpposingPokemonOnTurnEnd(targetUnit))
+            {
+                sourceUnit.OnAbilityActivation();
+                yield return ShowStatusChanges(targetUnit.pokemon);
+                yield return targetUnit.HUD.UpdateHP(targetPreviousHP);
+            }
+        }
+
         //Item effects
         if (sourceUnit.pokemon.currentHitPoints <= 0)
         {
@@ -1436,7 +1456,7 @@ public class BattleSystem : CoreSystem
             yield return dialogSystem.TypeDialog($"It's super effective!");
         }
 
-        if(damageDetails.abilityActivation == true && battleUnit.pokemon.currentHitPoints > 0)
+        if(damageDetails.defendersAbilityActivation == true && battleUnit.pokemon.currentHitPoints > 0)
         {
             battleUnit.OnAbilityActivation();
             yield return ShowStatusChanges(battleUnit.pokemon);
@@ -1512,7 +1532,14 @@ public class BattleSystem : CoreSystem
         {
             if(targetUnit.pokemon.ApplyStatModifier(positiveEffects) == true)
             {
-                yield return targetUnit.ShowStatChanges(positiveEffects, true);
+                if(targetUnit.pokemon.ability.StatChangesHaveOppositeEffect() == true)
+                {
+                    yield return targetUnit.ShowStatChanges(positiveEffects, false);
+                }
+                else
+                {
+                    yield return targetUnit.ShowStatChanges(positiveEffects, true);
+                }
             }
             yield return ShowStatusChanges(targetUnit.pokemon);
 
@@ -1548,7 +1575,14 @@ public class BattleSystem : CoreSystem
 
             if(targetUnit.pokemon.ApplyStatModifier(negativeEffects) == true)
             {
-                yield return targetUnit.ShowStatChanges(negativeEffects, false);
+                if (targetUnit.pokemon.ability.StatChangesHaveOppositeEffect() == true)
+                {
+                    yield return targetUnit.ShowStatChanges(negativeEffects, true);
+                }
+                else
+                {
+                    yield return targetUnit.ShowStatChanges(negativeEffects, false);
+                }
             }
             yield return ShowStatusChanges(targetUnit.pokemon);
         }
@@ -1556,13 +1590,28 @@ public class BattleSystem : CoreSystem
         {
             if(sourceUnit.pokemon.ApplyStatModifier(positiveEffects) == true)
             {
+                if (sourceUnit.pokemon.ability.StatChangesHaveOppositeEffect() == true)
+                {
+                    yield return sourceUnit.ShowStatChanges(positiveEffects, false);
+                }
+                else
+                {
+                    yield return sourceUnit.ShowStatChanges(positiveEffects, true);
+                }
                 yield return sourceUnit.ShowStatChanges(positiveEffects, true);
             }
             yield return ShowStatusChanges(sourceUnit.pokemon);
 
             if(sourceUnit.pokemon.ApplyStatModifier(negativeEffects) == true)
             {
-                yield return sourceUnit.ShowStatChanges(negativeEffects, false);
+                if (sourceUnit.pokemon.ability.StatChangesHaveOppositeEffect() == true)
+                {
+                    yield return sourceUnit.ShowStatChanges(negativeEffects, true);
+                }
+                else
+                {
+                    yield return sourceUnit.ShowStatChanges(negativeEffects, false);
+                }
             }
             yield return ShowStatusChanges(sourceUnit.pokemon);
         }
@@ -2162,6 +2211,9 @@ public class BattleSystem : CoreSystem
             {
                 yield return dialogSystem.TypeDialog($"Gah! It was so close, too!",true);
             }
+
+            playerBattleUnit.pokemon.ability.FetchPokeBallFirstFailedThrow(currentPokeball, playerBattleUnit.pokemon);
+
             StartCoroutine(EnemyMove());
         }
     }

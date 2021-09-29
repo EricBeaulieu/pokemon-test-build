@@ -12,7 +12,7 @@ public class WonderGuard : AbilityBase
     }
     public override float AlterDamageTaken(Pokemon defendingPokemon, MoveBase move, WeatherEffectID weather)
     {
-        if (DamageModifiers.TypeChartEffectiveness(defendingPokemon.pokemonBase,move.Type) < 2)
+        if (DamageModifiers.TypeChartEffectiveness(defendingPokemon,move.Type) < 2)
         {
             defendingPokemon.statusChanges.Enqueue($"{Name} prevents damage");
             return 0;

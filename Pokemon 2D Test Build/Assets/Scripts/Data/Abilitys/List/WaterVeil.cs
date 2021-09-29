@@ -20,6 +20,6 @@ public class WaterVeil : AbilityBase
     }
     public override string OnAbilitityActivation(Pokemon pokemon)
     {
-        return $"{pokemon.currentName}'s Water Veil prevents burning";
+        return $"{pokemon.currentName}'s {Name} prevents burning";
     }
 }

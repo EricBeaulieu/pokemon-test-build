@@ -57,4 +57,10 @@ public abstract class AbilityBase
     public virtual MoveBase BoostsMovePowerWhenLast(bool isLast, MoveBase move) { return move; }
     public virtual bool DamagesAttackerUponFinishingHit(Pokemon defendingPokemon, Pokemon attackingPokemon, MoveBase currentAttack) { return false; }
     public virtual bool ActivateAbilityUponEntry(Pokemon defendingPokemon, BattleUnit opposingTarget) { return false; }
+    public virtual bool ApplyEffectsToOpposingPokemonOnTurnEnd(BattleUnit opposingTarget) { return false; }
+    public virtual void FetchPokeBallFirstFailedThrow(PokeballItem pokeballItem, Pokemon defendingPokemon) { }
+    public virtual StatBoost BoostStatUponKO(Pokemon attackingPokemon) { return null; }
+    public virtual StatBoost BoostStatUponCertainConditions(Pokemon defendingPokemon) { return null; }
+    public virtual ElementType ChangePokemonToCurrentType(Pokemon defendingPokemon, MoveBase currentAttack) { return ElementType.NA; }
+    public virtual bool StatChangesHaveOppositeEffect() { return false; }
 }

@@ -20,6 +20,6 @@ public class OwnTempo : AbilityBase
     }
     public override string OnAbilitityActivation(Pokemon pokemon)
     {
-        return $"{pokemon.currentName}'s Own Tempo prevents Confusion";
+        return $"{pokemon.currentName}'s {Name} prevents Confusion";
     }
 }

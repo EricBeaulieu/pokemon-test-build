@@ -20,6 +20,6 @@ public class BigPecks : AbilityBase
     }
     public override string OnAbilitityActivation(Pokemon pokemon)
     {
-        return $"{pokemon.currentName}'s Big Pecks prevents Defense loss";
+        return $"{pokemon.currentName}'s {Name} prevents Defense loss";
     }
 }

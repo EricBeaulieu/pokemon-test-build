@@ -28,11 +28,11 @@ public class SummarySkills : SummaryUIBase
     public override void SetupData(Pokemon pokemon)
     {
         hPBar.SetHPWithoutAnimation(pokemon.currentHitPoints, pokemon.maxHitPoints, hitPoints);
-        attack.text = $"{pokemon.attack}";
-        defense.text = $"{pokemon.defense}";
-        specialAttack.text = $"{pokemon.specialAttack}";
-        specialDefense.text = $"{pokemon.specialDefense}";
-        speed.text = $"{pokemon.speed}";
+        attack.text = $"{pokemon.baseStats[StatAttribute.Attack]}";
+        defense.text = $"{pokemon.baseStats[StatAttribute.Defense]}";
+        specialAttack.text = $"{pokemon.baseStats[StatAttribute.SpecialAttack]}";
+        specialDefense.text = $"{pokemon.baseStats[StatAttribute.SpecialDefense]}";
+        speed.text = $"{pokemon.baseStats[StatAttribute.Speed]}";
 
         totalExperience.text = $"{pokemon.currentExp}";
         experienceRequiredToNextLevel.text = $"{pokemon.pokemonBase.GetExpForLevel(pokemon.currentLevel+1) - pokemon.currentExp}";

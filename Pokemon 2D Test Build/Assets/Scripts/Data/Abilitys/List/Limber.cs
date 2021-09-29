@@ -20,6 +20,6 @@ public class Limber : AbilityBase
     }
     public override string OnAbilitityActivation(Pokemon pokemon)
     {
-        return $"{pokemon.currentName}'s Limber protects it from paralysis";
+        return $"{pokemon.currentName}'s {Name} protects it from paralysis";
     }
 }

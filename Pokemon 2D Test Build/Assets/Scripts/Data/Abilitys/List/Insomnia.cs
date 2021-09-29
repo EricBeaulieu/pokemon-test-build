@@ -20,6 +20,6 @@ public class Insomnia : AbilityBase
     }
     public override string OnAbilitityActivation(Pokemon pokemon)
     {
-        return $"{pokemon.currentName} can't sleep due to Insomnia";
+        return $"{pokemon.currentName} can't sleep due to {Name}";
     }
 }

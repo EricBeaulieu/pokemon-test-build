@@ -39,6 +39,16 @@ public class Pokemon {
     public EffortValues effortValues { get { return _effortValues; } private set { _effortValues = value; } }
     public ItemBase GetCurrentItem { get { return currentHeldItem; } }
     public bool evolvePokemonAfterBattle { get; private set; } = false;
+    public ElementType pokemonType1 { get; private set; }
+    public ElementType pokemonType2 { get; private set; }
+    public bool IsType(ElementType elementType)
+    {
+        if (elementType == pokemonType1 || elementType == pokemonType2)
+        {
+            return true;
+        }
+        return false;
+    }
 
     public List<Move> moves { get; set; }
     public List<MoveBase> presetMoves { get { return _presetMoves; } }
@@ -189,6 +199,7 @@ public class Pokemon {
         volatileStatus.Clear();
         statusChanges.Clear();
         evolvePokemonAfterBattle = false;
+        SetPokemonTypeToStandard();
     }
 
     public void Obtained(PlayerController player,PokeballItem pokeball)
@@ -223,6 +234,8 @@ public class Pokemon {
         statBoosts.Add(StatAttribute.Accuracy, 0);
         statBoosts.Add(StatAttribute.Evasion, 0);
         statBoosts.Add(StatAttribute.CriticalHitRatio, 0);
+
+        SetPokemonTypeToStandard();
     }
     
 
@@ -288,6 +301,11 @@ public class Pokemon {
 
             StatAttribute statModified = modifier.stat;
             int boost = modifier.boost;
+
+            if(ability.StatChangesHaveOppositeEffect() == true)
+            {
+                boost = -boost;
+            }
 
             if(modifier.boost > 0)
             {
@@ -464,7 +482,7 @@ public class Pokemon {
     {
         damageDetails.Clear();
 
-        damageDetails.typeEffectiveness = DamageModifiers.TypeChartEffectiveness(pokemonBase, move.Type);
+        damageDetails.typeEffectiveness = DamageModifiers.TypeChartEffectiveness(this, move.Type);
 
         if(damageDetails.typeEffectiveness == 0)//If it doesnt effect the pokemon then just end it right here
         {
@@ -505,13 +523,13 @@ public class Pokemon {
 
         if(defenderAbilityStatBoost != null)
         {
-            damageDetails.abilityActivation = true;
+            damageDetails.defendersAbilityActivation = true;
             damageDetails.defendersStatBoostByAbility.Add(defenderAbilityStatBoost);
         }
 
         if (attackerAbilityStatBoost != null)
         {
-            damageDetails.abilityActivation = true;
+            damageDetails.defendersAbilityActivation = true;
             damageDetails.attackersStatBoostByDefendersAbility.Add(attackerAbilityStatBoost);
         }
         
@@ -519,7 +537,7 @@ public class Pokemon {
         {
             damageDetails.criticalHit = 1f;
             damageDetails.typeEffectiveness = 1;
-            damageDetails.abilityActivation = true;
+            damageDetails.defendersAbilityActivation = true;
             damageDetails.damageNullified = true;
             return;
         }
@@ -581,7 +599,7 @@ public class Pokemon {
         if(ability.PreventsOneHitKO(this,damage) == true)
         {
             damage = maxHitPoints - 1;
-            damageDetails.abilityActivation = true;
+            damageDetails.defendersAbilityActivation = true;
         }
         
         UpdateHPDamage(damage);
@@ -590,6 +608,36 @@ public class Pokemon {
         {
             attackingPokemon.GivePokemonItemToHold(GetCurrentItem);
             ItemUsed();
+        }
+
+        if(currentHitPoints <= 0)
+        {
+            attackerAbilityStatBoost = attackingPokemon.ability.BoostStatUponKO(attackingPokemon);
+            if (attackerAbilityStatBoost != null)
+            {
+                damageDetails.attackersAbilityActivation = true;
+                damageDetails.attackersStatBoostByDefendersAbility.Add(attackerAbilityStatBoost);
+            }
+        }
+
+        if(currentHitPoints > 0)
+        {
+            defenderAbilityStatBoost = ability.BoostStatUponCertainConditions(this);
+
+            if (defenderAbilityStatBoost != null)
+            {
+                damageDetails.defendersAbilityActivation = true;
+                damageDetails.defendersStatBoostByAbility.Add(defenderAbilityStatBoost);
+            }
+
+            ElementType elementType = ability.ChangePokemonToCurrentType(this,move);
+
+            if(elementType != ElementType.NA)
+            {
+                damageDetails.defendersAbilityActivation = true;
+                AlterPokemonTyping(elementType);
+                statusChanges.Enqueue(ability.OnAbilitityActivation(this));
+            }
         }
 
         damageDetails.targetItemUsed = GetHoldItemEffects.RemoveItem;
@@ -1070,5 +1118,17 @@ public class Pokemon {
         }
         
         return pokemonSaveData;
+    }
+
+    void AlterPokemonTyping(ElementType newType)
+    {
+        pokemonType1 = newType;
+        pokemonType2 = ElementType.NA;
+    }
+
+    void SetPokemonTypeToStandard()
+    {
+        pokemonType1 = _pokemonBase.pokemonType1;
+        pokemonType2 = _pokemonBase.pokemonType2;
     }
 }

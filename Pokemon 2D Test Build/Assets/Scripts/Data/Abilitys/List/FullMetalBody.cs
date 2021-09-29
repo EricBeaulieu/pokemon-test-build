@@ -20,6 +20,6 @@ public class FullMetalBody : AbilityBase
     }
     public override string OnAbilitityActivation(Pokemon pokemon)
     {
-        return $"{pokemon.currentName}'s Full Metal Body prevents stat loss";
+        return $"{pokemon.currentName}'s {Name} Body prevents stat loss";
     }
 }

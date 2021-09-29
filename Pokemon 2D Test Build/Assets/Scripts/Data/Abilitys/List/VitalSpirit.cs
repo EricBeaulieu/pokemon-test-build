@@ -20,6 +20,6 @@ public class VitalSpirit : AbilityBase
     }
     public override string OnAbilitityActivation(Pokemon pokemon)
     {
-        return $"{pokemon.currentName} can't sleep due to Vital Spirit";
+        return $"{pokemon.currentName} can't sleep due to {Name}";
     }
 }

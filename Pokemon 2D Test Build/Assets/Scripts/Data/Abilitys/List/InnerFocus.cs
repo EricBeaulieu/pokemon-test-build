@@ -20,6 +20,6 @@ public class InnerFocus : AbilityBase
     }
     public override string OnAbilitityActivation(Pokemon pokemon)
     {
-        return $"{pokemon.currentName} won't flinch because of its Inner Focus!";
+        return $"{pokemon.currentName} won't flinch because of its {Name}!";
     }
 }

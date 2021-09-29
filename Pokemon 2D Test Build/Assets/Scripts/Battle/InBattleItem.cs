@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class InBattleItem : MonoBehaviour
 {
@@ -9,11 +10,11 @@ public class InBattleItem : MonoBehaviour
 
     [SerializeField] float speedModifier = 0.5f;
 
-    SpriteRenderer _spriteRenderer;
+    Image image;
 
     void Awake()
     {
-        _spriteRenderer = GetComponent<SpriteRenderer>();
+        image = GetComponent<Image>();
     }
 
     public IEnumerator FollowTheRoute()
@@ -73,18 +74,18 @@ public class InBattleItem : MonoBehaviour
                 currentAnimation = totalAnim - Mathf.FloorToInt(elapsedTime / differenceTime);
             }
             
-            _spriteRenderer.sprite = pokeballAnimations[currentAnimation];
+            image.sprite = pokeballAnimations[currentAnimation];
             elapsedTime += Time.deltaTime;
             yield return null;
         }
 
         if(isOpening == true)
         {
-            _spriteRenderer.sprite = pokeballAnimations[pokeballAnimations.Length - 1];
+            image.sprite = pokeballAnimations[pokeballAnimations.Length - 1];
         }
         else
         {
-            _spriteRenderer.sprite = pokeballAnimations[0];
+            image.sprite = pokeballAnimations[0];
         }
     }
 
@@ -139,10 +140,10 @@ public class InBattleItem : MonoBehaviour
             while (tempAlpha < 1)
             {
                 tempAlpha += (0.01f * animationTime);
-                _spriteRenderer.color = _spriteRenderer.color.SetAlpha(tempAlpha);
+                image.color = image.color.SetAlpha(tempAlpha);
                 yield return new WaitForSeconds(0.01f);
             }
-            _spriteRenderer.color = _spriteRenderer.color.SetAlpha(1);
+            image.color = image.color.SetAlpha(1);
         }
         else
         {
@@ -150,10 +151,10 @@ public class InBattleItem : MonoBehaviour
             while (tempAlpha > 0)
             {
                 tempAlpha -= (0.01f * animationTime);
-                _spriteRenderer.color = _spriteRenderer.color.SetAlpha(tempAlpha);
+                image.color = image.color.SetAlpha(tempAlpha);
                 yield return new WaitForSeconds(0.01f);
             }
-            _spriteRenderer.color = _spriteRenderer.color.SetAlpha(0);
+            image.color = image.color.SetAlpha(0);
         }
     }
 
@@ -164,8 +165,8 @@ public class InBattleItem : MonoBehaviour
             case itemType.Pokeball:
                 PokeballItem pokeball = (PokeballItem)_itemBase;
                 Sprite[] pokeballAnimations = pokeball.CaptureSprites();
-                _spriteRenderer.sprite = pokeballAnimations[0];
-                _spriteRenderer.color = _spriteRenderer.color.SetAlpha(1);
+                image.sprite = pokeballAnimations[0];
+                image.color = image.color.SetAlpha(1);
                 break;
             default:
                 break;

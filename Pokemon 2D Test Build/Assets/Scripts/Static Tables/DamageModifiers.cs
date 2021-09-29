@@ -47,7 +47,7 @@ public static class DamageModifiers
         return 1f;
     }
 
-    public static float TypeChartEffectiveness(PokemonBase defendingPokemon,ElementType attackType)
+    public static float TypeChartEffectiveness(Pokemon defendingPokemon,ElementType attackType)
     {
         float damageMultiplier = 1f;
 

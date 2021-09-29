@@ -20,6 +20,6 @@ public class WhiteSmoke : AbilityBase
     }
     public override string OnAbilitityActivation(Pokemon pokemon)
     {
-        return $"{pokemon.currentName}'s White Smoke prevents stat loss";
+        return $"{pokemon.currentName}'s {Name} prevents stat loss";
     }
 }
