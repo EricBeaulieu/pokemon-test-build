@@ -62,6 +62,10 @@ public class BattleSystem : CoreSystem
     [SerializeField] MoveBase shoreUp;
     [SerializeField] MoveBase purify;
     [SerializeField] MoveBase rest;
+    [SerializeField] MoveBase disabled;
+    [SerializeField] MoveBase reflect;
+    [SerializeField] MoveBase lightScreen;
+    [SerializeField] MoveBase auroraVeil;
 
     //pooling all the conditions on the pokemon prior to checking them
     List<ConditionBase> allConditionsOnPokemon = new List<ConditionBase>();
@@ -427,6 +431,12 @@ public class BattleSystem : CoreSystem
             return;
         }
 
+        if(move.disabled == true)
+        {
+            PlayerPokemonAttackIsDisabled(currentPokemon.pokemon, move);
+            return;
+        }
+
         dialogSystem.SetDialogText("");
         EnableAttackMoveSelector(false);
         playerTurnAttackDetails.SetAttackDetails(move, currentPokemon, enemyBattleUnit);
@@ -471,6 +481,20 @@ public class BattleSystem : CoreSystem
     {
         EnableAttackMoveSelector(false);
         yield return dialogSystem.TypeDialog($"{holdItem.SpecializedMessage(playerBattleUnit.pokemon,enemyBattleUnit.pokemon)}");
+        yield return new WaitForSeconds(1);
+        dialogSystem.SetDialogText($"What will {playerBattleUnit.pokemon.currentName} do?");
+        EnableAttackMoveSelector(true);
+    }
+
+    public void PlayerPokemonAttackIsDisabled(Pokemon pokemon,Move move)
+    {
+        StartCoroutine(PlayerPokemonAttackIsDisabledIEnumerator(pokemon,move));
+    }
+
+    IEnumerator PlayerPokemonAttackIsDisabledIEnumerator(Pokemon pokemon, Move move)
+    {
+        EnableAttackMoveSelector(false);
+        yield return dialogSystem.TypeDialog($"{pokemon.currentName}'s {move.moveBase.MoveName} is disabled");
         yield return new WaitForSeconds(1);
         dialogSystem.SetDialogText($"What will {playerBattleUnit.pokemon.currentName} do?");
         EnableAttackMoveSelector(true);
@@ -682,6 +706,12 @@ public class BattleSystem : CoreSystem
             }
         }
 
+        if(move.disabled == true)
+        {
+            yield return dialogSystem.TypeDialog($"{sourceUnit.pokemon.currentName}'s {move.moveBase.MoveName} is disabled");
+            yield break;
+        }
+
         sourceUnit.lastMoveUsed = move;
         //This is here incase the pokemon hits itself in confusion for the smooth animation
         int previousHP = sourceUnit.pokemon.currentHitPoints;
@@ -770,7 +800,7 @@ public class BattleSystem : CoreSystem
                     }
                 }
 
-                targetUnit.pokemon.TakeDamage(damageDetails, alteredMove, sourceUnit.pokemon);
+                targetUnit.pokemon.TakeDamage(damageDetails, alteredMove, sourceUnit.pokemon,targetUnit.shields);
 
                 if (damageDetails.sourceItemUsed == true)
                 {
@@ -794,6 +824,15 @@ public class BattleSystem : CoreSystem
                     targetUnit.pokemon.ItemUsed();
                 }
 
+                bool disableMoveAfterAnimation = targetUnit.pokemon.ability.DisableMove(sourceUnit, move);
+                if (disableMoveAfterAnimation == true)
+                {
+                    if (attackLoop > 1)
+                    {
+                        attackLoop = 1;
+                    }
+                }
+
                 if (attackLoop > 1)
                 {
                     dialogSystem.SetDialogText("");
@@ -802,12 +841,20 @@ public class BattleSystem : CoreSystem
                     {
                         if (i > 0)
                         {
-                            targetUnit.pokemon.TakeDamage(damageDetails,alteredMove, sourceUnit.pokemon);
+                            targetUnit.pokemon.TakeDamage(damageDetails,alteredMove, sourceUnit.pokemon, targetUnit.shields);
                         }
 
                         if (alteredMove.Target == MoveTarget.Foe && damageDetails.typeEffectiveness != 0)
                         {
                             targetUnit.PlayHitAnimation();
+                        }
+
+                        if (targetUnit.pokemon.ability.DisableMove(sourceUnit, move) == true)
+                        {
+                            targetUnit.OnAbilityActivation();
+                            yield return dialogSystem.TypeDialog($"{sourceUnit.pokemon.currentName}'s {move.moveBase.MoveName} is disabled");
+                            attackLoop = i + 1;
+                            break;
                         }
 
                         if (damageDetails.damageNullified == true)
@@ -845,7 +892,13 @@ public class BattleSystem : CoreSystem
                         targetUnit.PlayHitAnimation();
                     }
 
-                    if(hpPriorToAttack != targetUnit.pokemon.currentHitPoints)
+                    if (disableMoveAfterAnimation == true)
+                    {
+                        targetUnit.OnAbilityActivation();
+                        yield return dialogSystem.TypeDialog($"{sourceUnit.pokemon.currentName}'s {move.moveBase.MoveName} is disabled");
+                    }
+
+                    if (hpPriorToAttack != targetUnit.pokemon.currentHitPoints)
                     {
                         yield return targetUnit.HUD.UpdateHP(hpPriorToAttack);
                     }
@@ -1293,6 +1346,12 @@ public class BattleSystem : CoreSystem
 
         int currentHP = sourceUnit.pokemon.currentHitPoints;
 
+        if(sourceUnit.pokemon.ability.CuresStatusAtTurnEnd(sourceUnit.pokemon,GetCurrentWeather))
+        {
+            sourceUnit.OnAbilityActivation();
+            yield return dialogSystem.TypeDialog($"{sourceUnit.pokemon.ability.OnAbilitityActivation(sourceUnit.pokemon)}");
+        }
+
         allConditionsOnPokemon.Clear();
 
         if(sourceUnit.pokemon.status != null)
@@ -1411,6 +1470,34 @@ public class BattleSystem : CoreSystem
                 sourceUnit.OnAbilityActivation();
             }
             yield return ApplyStatChanges(statBoosts, targetUnit, MoveTarget.Self,sourceUnit);
+        }
+
+        //Disabled
+        if(sourceUnit.disabledDuration > 0)
+        {
+            sourceUnit.disabledDuration--;
+            if(sourceUnit.disabledDuration == 0)
+            {
+                sourceUnit.pokemon.moves.FirstOrDefault(x => x.disabled == true).disabled = false;
+                if (sourceUnit.isPlayerPokemon == true)
+                {
+                    yield return dialogSystem.TypeDialog($"{sourceUnit.pokemon.currentName} is disabled no more");
+                }
+            }
+        }
+
+        //Shields
+        if(sourceUnit.shields.Count > 0)
+        {
+            for (int i = sourceUnit.shields.Count - 1; i >= 0; i--)
+            {
+                sourceUnit.shields[i].TurnEndReduction();
+                if(sourceUnit.shields[i].duration <= 0)
+                {
+                    yield return dialogSystem.TypeDialog(sourceUnit.shields[i].EndMessage(sourceUnit.isPlayerPokemon));
+                    sourceUnit.shields.RemoveAt(i);
+                }
+            }
         }
     }
 
@@ -1598,7 +1685,6 @@ public class BattleSystem : CoreSystem
                 {
                     yield return sourceUnit.ShowStatChanges(positiveEffects, true);
                 }
-                yield return sourceUnit.ShowStatChanges(positiveEffects, true);
             }
             yield return ShowStatusChanges(sourceUnit.pokemon);
 
@@ -1632,7 +1718,6 @@ public class BattleSystem : CoreSystem
             {
                 sourceUnit.OnAbilityActivation();
                 yield return StartWeatherEffect(weatherEffect, sourceUnit, targetUnit, true);
-                yield break;
             }
 
             StatBoost statBoost = sourceUnit.pokemon.ability.OnEntryLowerStat(targetUnit.pokemon.ability.Id);
@@ -1659,8 +1744,13 @@ public class BattleSystem : CoreSystem
                     sourceUnit.OnAbilityActivation();
                     _currentWeather = null;
                     yield return dialogSystem.TypeDialog($"{sourceUnit.pokemon.currentName}'s {sourceUnit.pokemon.ability.Name} cleared the battlefield");
-                    yield break;
                 }
+            }
+
+            if(sourceUnit.pokemon.ability.ActivateAbilityUponEntry(sourceUnit.pokemon,targetUnit) == true)
+            {
+                sourceUnit.OnAbilityActivation();
+                yield return dialogSystem.TypeDialog($"{sourceUnit.pokemon.ability.OnAbilitityActivation(sourceUnit.pokemon)}");
             }
         }
 
@@ -1681,11 +1771,28 @@ public class BattleSystem : CoreSystem
             yield break;
         }
 
-        if (currentTurnDetails[0].currentMove.moveBase.Priority == currentTurnDetails[1].currentMove.moveBase.Priority)
+        int firstAttackPriority = currentTurnDetails[0].currentMove.moveBase.Priority;
+        int secondAttackPriority = currentTurnDetails[1].currentMove.moveBase.Priority;
+
+        firstAttackPriority += currentTurnDetails[0].attackingPokemon.pokemon.ability.AdjustSpeedPriorityOfMove(currentTurnDetails[0].attackingPokemon.pokemon, currentTurnDetails[0].currentMove.moveBase);
+        secondAttackPriority += currentTurnDetails[1].attackingPokemon.pokemon.ability.AdjustSpeedPriorityOfMove(currentTurnDetails[1].attackingPokemon.pokemon, currentTurnDetails[1].currentMove.moveBase);
+
+        if (currentTurnDetails[0].targetPokmeon.pokemon.ability.RemovesSpeedPriorityOfOpposingPokemon() == true)
+        {
+            firstAttackPriority = 0;
+        }
+
+        if (currentTurnDetails[1].targetPokmeon.pokemon.ability.RemovesSpeedPriorityOfOpposingPokemon() == true)
+        {
+            secondAttackPriority = 0;
+        }
+
+        if (firstAttackPriority == secondAttackPriority)
         {
             for (int i = 0; i < currentTurnDetails.Count; i++)
             {
                 int adjustedPriority = currentTurnDetails[i].attackingPokemon.pokemon.GetHoldItemEffects.AdjustSpeedPriorityTurn();
+
                 if (adjustedPriority != 0)
                 {
                     if (adjustedPriority > 0)
@@ -2427,6 +2534,14 @@ public class BattleSystem : CoreSystem
         {
             return (RestSuccessful(sourceUnit));
         }
+        else if(moveBase == disabled)
+        {
+            return (DisableSucessful(targetUnit));
+        }
+        else if (moveBase == reflect || moveBase == lightScreen || moveBase == auroraVeil)
+        {
+            return (ShieldSucessful(sourceUnit,targetUnit, moveBase));
+        }
 
         return true;
     }
@@ -2510,6 +2625,32 @@ public class BattleSystem : CoreSystem
         return false;
     }
 
+    bool DisableSucessful(BattleUnit targetUnit)
+    {
+        if(targetUnit.lastMoveUsed == null)
+        {
+            return false;
+        }
+
+        if(targetUnit.NoMovesAvailable() == true)
+        {
+            return false;
+        }
+
+        foreach (Move move in targetUnit.pokemon.moves)
+        {
+            if (move.disabled == true)
+            {
+                return false;
+            }
+        }
+
+        targetUnit.lastMoveUsed.disabled = true;
+        targetUnit.disabledDuration = 5;
+        targetUnit.pokemon.statusChanges.Enqueue($"{targetUnit.pokemon.currentName}'s {targetUnit.lastMoveUsed.moveBase.MoveName} was disabled!");
+        return true;
+    }
+
     float HealthRecoveryModifiers(MoveBase moveBase,WeatherEffectID iD)
     {
         if(moveBase == moonlight||moveBase == synthesis|| moveBase == morningSun)
@@ -2533,6 +2674,62 @@ public class BattleSystem : CoreSystem
         }
 
         return 1f;
+    }
+
+    bool ShieldSucessful(BattleUnit sourceUnit,BattleUnit targetUnit,MoveBase shieldType)
+    {
+        ShieldType shield;
+
+        switch (shieldType)
+        {
+            case MoveBase n when (n == lightScreen):
+                shield = ShieldType.LightScreen;
+                break;
+            case MoveBase n when (n == reflect):
+                shield = ShieldType.Reflect;
+                break;
+            default://AuroraVeil
+                shield = ShieldType.AuroraVeil;
+                break;
+        }
+
+        if (sourceUnit.shields.Exists(x => x.GetShieldType == shield) == true)
+        {
+            return false;
+        }
+
+        if(shield == ShieldType.AuroraVeil)
+        {
+            if(GetCurrentWeather != WeatherEffectID.Hail)
+            {
+                return false;
+            }
+
+            if(sourceUnit.pokemon.ability.NegatesWeatherEffects() == true || targetUnit.pokemon.ability.NegatesWeatherEffects() == true)
+            {
+                return false;
+            }
+        }
+
+        ShieldBase shieldBase;
+
+        switch (shield)
+        {
+            case ShieldType.LightScreen:
+                shieldBase = new LightScreen(sourceUnit.pokemon.GetCurrentItem);
+                break;
+            case ShieldType.Reflect:
+                shieldBase = new Reflect(sourceUnit.pokemon.GetCurrentItem);
+                break;
+            default://AuroraVeil
+                shieldBase = new AuroraVeil(sourceUnit.pokemon.GetCurrentItem);
+                break;
+        }
+
+        sourceUnit.shields.Add(shieldBase);
+        sourceUnit.pokemon.statusChanges.Clear();
+        sourceUnit.pokemon.statusChanges.Enqueue(shieldBase.StartMessage(sourceUnit.isPlayerPokemon));
+        return true;
     }
 
     #endregion

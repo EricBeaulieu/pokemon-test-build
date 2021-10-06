@@ -1,0 +1,14 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class #SCRIPTNAME# : AbilityBase
+{
+    public override AbilityID Id { get { return AbilityID.#SCRIPTNAME#; } }
+    public override AbilityBase ReturnDerivedClassAsNew() { return new #SCRIPTNAME#(); }
+    public override string Description()
+    {
+        return "";
+    }
+
+}

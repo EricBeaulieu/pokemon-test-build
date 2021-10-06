@@ -493,5 +493,4 @@ public class TrainerController : Entity,IInteractable,ISaveable
             Debug.Log($"Obstruction detected in this Trainer Path along start {hit.transform.gameObject}", gameObject);
         }
     }
-
 }

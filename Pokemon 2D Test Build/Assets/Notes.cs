@@ -4,12 +4,11 @@ using UnityEngine;
 
 public class Notes
 {
-    //Corrosion is the last ability being added
-
     //To do list
 
-    //Cheek pouch ability, for when berries are implimented
-    //Comatose ability for later
+    //Change the way the pokemon gets its nature
+    //Cheek pouch ability,Gluttony,Harvest for when berries are implimented
+    //Comatose, Corrosion,dancer , majority of complicated abilities for later
     //bullet proof fix the list to contain moves that it shall adjust
     //if the pokemon is the last one and the player knocks out the pokemon, then skip over the boost stat or lowering for the attacker.
     //fix the save for the player. currently after every save the player seems to be stuck running

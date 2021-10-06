@@ -63,4 +63,9 @@ public abstract class AbilityBase
     public virtual StatBoost BoostStatUponCertainConditions(Pokemon defendingPokemon) { return null; }
     public virtual ElementType ChangePokemonToCurrentType(Pokemon defendingPokemon, MoveBase currentAttack) { return ElementType.NA; }
     public virtual bool StatChangesHaveOppositeEffect() { return false; }
+    public virtual bool DisableMove(BattleUnit sourceUnit,Move move) { return false; }
+    public virtual bool RemovesSpeedPriorityOfOpposingPokemon() { return false; }
+    public virtual bool HalfDurationOfSleep() { return false; }
+    public virtual int AdjustSpeedPriorityOfMove(Pokemon attackingPokemon,MoveBase move) { return 0; }
+    public virtual bool CuresStatusAtTurnEnd(Pokemon defendingPokemon,WeatherEffectID weather) { return false; }
 }

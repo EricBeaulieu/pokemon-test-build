@@ -10,20 +10,20 @@ public enum AbilityID
     //B
     BadDreams, BallFetch, BattleArmor, BeastBoost, Berserk, BigPecks, Blaze, Bulletproof,
     //C
-    Chlorophyll, ClearBody, CloudNine, ColorChange, Competitive, CompoundEyes, Contrary,
+    Chlorophyll, ClearBody, CloudNine, ColorChange, Competitive, CompoundEyes, Contrary, CottonDown, CursedBody,
     CuteCharm,
     //D
-    Damp, Defiant, Download, DragonsMaw, Drizzle,
+    Damp, DauntlessShield, Dazzling, Defeatist, Defiant, Download, DragonsMaw, Drizzle,
     Drought, DrySkin,
     //E
-    EffectSpore,
+    EarlyBird,EffectSpore,
     //F
-    Filter, FlameBody, FlareBoost, FlashFire, FullMetalBody,
+    Filter, FlameBody, FlareBoost, FlashFire, FlowerGift, Fluffy, Forewarn, Frisk, FullMetalBody,
     FurCoat,
     //G
-    Galvanize, Gooey, Guts,
+    GaleWings,Galvanize, Gooey, Guts,
     //H
-    Heatproof, HugePower, Hustle, HyperCutter,
+    Heatproof, HugePower, Hustle, Hydration, HyperCutter, 
     //I
     IceBody, IceScales, Immunity, InnerFocus, Insomnia,
     Intimidate, IronFist,

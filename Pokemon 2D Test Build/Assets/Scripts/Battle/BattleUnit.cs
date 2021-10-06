@@ -41,6 +41,8 @@ public class BattleUnit : MonoBehaviour
 
     public bool cantEscapeGivenToSelf { get; set; }
     public Move lastMoveUsed { get; set; }
+    public int disabledDuration { get; set; }
+    public List<ShieldBase> shields { get; set; } = new List<ShieldBase>();
 
     void Awake()
     {
@@ -136,6 +138,7 @@ public class BattleUnit : MonoBehaviour
 
         cantEscapeGivenToSelf = false;
         lastMoveUsed = null;
+        disabledDuration = 0;
 
         pokemonBattledAgainst.Clear();
     }
@@ -665,7 +668,7 @@ public class BattleUnit : MonoBehaviour
             return null;
         }
 
-        List<Move> movesWithPp = pokemon.moves.Where(x => x.pP > 0).ToList();
+        List<Move> movesWithPp = pokemon.moves.Where(x => x.pP > 0 && x.disabled == false).ToList();
 
         if (movesWithPp.Count == 0)
         {

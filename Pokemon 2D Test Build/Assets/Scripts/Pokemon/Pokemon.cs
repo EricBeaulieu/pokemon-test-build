@@ -478,7 +478,7 @@ public class Pokemon {
 
     #endregion
 
-    public void TakeDamage(DamageDetails damageDetails,MoveBase move,Pokemon attackingPokemon)
+    public void TakeDamage(DamageDetails damageDetails,MoveBase move,Pokemon attackingPokemon,List<ShieldBase> currentShields)
     {
         damageDetails.Clear();
 
@@ -578,6 +578,20 @@ public class Pokemon {
             if (statBoosts[currentStat] > 0)
             {
                 defendersDefense = baseStats[currentStat];
+            }
+        }
+        else
+        {
+            StatAttribute currentStat = (move.MoveType == MoveType.Physical) ? StatAttribute.Defense : StatAttribute.SpecialDefense;
+
+            //Shield bonuses
+            foreach (ShieldBase shield in currentShields)
+            {
+                if(shield.ProtectedStat(currentStat) > 1)
+                {
+                    attackPower /= shield.ProtectedStat(currentStat);
+                    break;
+                }
             }
         }
 

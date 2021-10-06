@@ -9,6 +9,10 @@ public class Sleep : ConditionBase
     public override string StartMessage(Pokemon pokemon, Pokemon attackingPokemon)
     {
         StatusTime = Random.Range(1, 4);
+        if(pokemon.ability.HalfDurationOfSleep() == true)
+        {
+            StatusTime = Mathf.FloorToInt(StatusTime / 2);
+        }
         return $"{pokemon.currentName} has fallen asleep";
     }
     public override string HasConditionMessage(Pokemon pokemon)
