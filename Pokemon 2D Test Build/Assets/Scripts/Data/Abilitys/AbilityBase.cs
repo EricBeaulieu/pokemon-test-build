@@ -55,17 +55,21 @@ public abstract class AbilityBase
     public virtual bool PreventsRecoilDamage(MoveBase move) { return false; }
     public virtual bool ReducesPowerPointsBy2() { return false; }
     public virtual MoveBase BoostsMovePowerWhenLast(bool isLast, MoveBase move) { return move; }
-    public virtual bool DamagesAttackerUponFinishingHit(Pokemon defendingPokemon, Pokemon attackingPokemon, MoveBase currentAttack) { return false; }
+    public virtual bool DamagesAttackerUponHit(Pokemon defendingPokemon, Pokemon attackingPokemon, MoveBase currentAttack) { return false; }
     public virtual bool ActivateAbilityUponEntry(Pokemon defendingPokemon, BattleUnit opposingTarget) { return false; }
     public virtual bool ApplyEffectsToOpposingPokemonOnTurnEnd(BattleUnit opposingTarget) { return false; }
     public virtual void FetchPokeBallFirstFailedThrow(PokeballItem pokeballItem, Pokemon defendingPokemon) { }
     public virtual StatBoost BoostStatUponKO(Pokemon attackingPokemon) { return null; }
     public virtual StatBoost BoostStatUponCertainConditions(Pokemon defendingPokemon) { return null; }
     public virtual ElementType ChangePokemonToCurrentType(Pokemon defendingPokemon, MoveBase currentAttack) { return ElementType.NA; }
+    public virtual ElementType ChangePokemonToCurrentAttackType(BattleUnit sourceUnit, MoveBase currentAttack) { return ElementType.NA; }
     public virtual bool StatChangesHaveOppositeEffect() { return false; }
     public virtual bool DisableMove(BattleUnit sourceUnit,Move move) { return false; }
     public virtual bool RemovesSpeedPriorityOfOpposingPokemon() { return false; }
     public virtual bool HalfDurationOfSleep() { return false; }
     public virtual int AdjustSpeedPriorityOfMove(Pokemon attackingPokemon,MoveBase move) { return 0; }
     public virtual bool CuresStatusAtTurnEnd(Pokemon defendingPokemon,WeatherEffectID weather) { return false; }
+    public virtual bool CutsThroughProtections() { return false; }
+    public virtual bool CantUseAnyHeldItems(HoldItemBase holdItem) { return false; }
+    public virtual bool DamagesOpponentUponAbsorbingHP() { return false; }
 }

@@ -12,7 +12,7 @@ public abstract class ShieldBase
 
         if (item != null)
         {
-            duration += item.HoldItemAffects().ShieldDurationBonus(shield);
+            duration += item.HoldItemAffects().ShieldDurationBonus();
         }
     }
 

@@ -73,6 +73,11 @@ public class MoveBase : ScriptableObject {
         secondaryEffects.Clear();
     }
 
+    public void RemoveContact()
+    {
+        PhysicalContact = false;
+    }
+
     public void AddSecondaryEffects(MoveSecondaryEffects newEffect)
     {
         if(secondaryEffects.Exists(x => x.Status == newEffect.Status || x.Status == newEffect.Volatiletatus))
@@ -154,6 +159,7 @@ public class MoveBase : ScriptableObject {
     public bool PhysicalContact
     {
         get { return physicalContact; }
+        private set { physicalContact = value; }
     }
 
     public bool SoundType

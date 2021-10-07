@@ -41,7 +41,7 @@ public abstract class HoldItemBase
     public virtual int AdjustSpeedPriorityTurn() { return 0; }//not implimented
     public virtual bool HurtsAttacker() { return false; }
     public virtual int AlterUserHPAfterAttack(Pokemon holder,MoveBase move,int damageDealt) { return 0; }
-    public virtual int ShieldDurationBonus(ShieldType shield) { return 0; }
+    public virtual int ShieldDurationBonus() { return 0; }
     public virtual float ExperienceModifier() { return 1; }
     public virtual List<EarnableEV> AdditionalEffortValues(List<EarnableEV> earnedEv) { return earnedEv; }
     public virtual bool RemovesMoveBindingEffectsAfterMoveUsed(Pokemon defendingPokemon) { return false; }

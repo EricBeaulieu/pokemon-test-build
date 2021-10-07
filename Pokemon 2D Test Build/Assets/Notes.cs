@@ -6,6 +6,7 @@ public class Notes
 {
     //To do list
 
+    //Safeguard and substitute, when made add in infiltrator
     //Change the way the pokemon gets its nature
     //Cheek pouch ability,Gluttony,Harvest for when berries are implimented
     //Comatose, Corrosion,dancer , majority of complicated abilities for later

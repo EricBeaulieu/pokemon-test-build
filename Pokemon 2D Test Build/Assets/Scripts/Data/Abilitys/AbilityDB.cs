@@ -25,14 +25,14 @@ public enum AbilityID
     //H
     Heatproof, HugePower, Hustle, Hydration, HyperCutter, 
     //I
-    IceBody, IceScales, Immunity, InnerFocus, Insomnia,
-    Intimidate, IronFist,
+    IceBody, IceScales, Immunity, Infiltrator, InnerFocus, Insomnia,
+    Intimidate, IntrepidSword, IronBarbs, IronFist,
     //J
     Justified,
     //K
-    KeenEye,
+    KeenEye, Klutz,
     //L
-    LeafGuard,Levitate, LightningRod, Limber,
+    LeafGuard,Levitate, Libero,LightningRod, Limber, LiquidOoze, LiquidVoice, LongReach,
     //M
     MagmaArmor, MarvelScale, MegaLauncher, MotorDrive, Multiscale,
     //N
@@ -40,11 +40,11 @@ public enum AbilityID
     //O
     Oblivious, Overgrown, OwnTempo,
     //P
-    Pixilate, PoisonPoint, Pressure, PrismArmor, PunkRock, PurePower,
+    Pixilate, PoisonPoint, Pressure, PrismArmor, Protean, PunkRock, PurePower,
     //Q
     QuickFeet,
     //R
-    RainDish, Rattled, Reckless, Refrigerate, RockHead,
+    RainDish, Rattled, Reckless, Refrigerate, RoughSkin, RockHead,
     //S
     SandForce, SandRush, SandStream, SandVeil, SapSipper,
     Scrappy, ShellArmor, SkillLink, SlushRush, Sniper,

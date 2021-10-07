@@ -10,7 +10,7 @@ public class Aftermath : AbilityBase
     {
         return "Damages the attacker if it contacts the Pokémon with a finishing hit.";
     }
-    public override bool DamagesAttackerUponFinishingHit(Pokemon defendingPokemon, Pokemon attackingPokemon, MoveBase currentAttack)
+    public override bool DamagesAttackerUponHit(Pokemon defendingPokemon, Pokemon attackingPokemon, MoveBase currentAttack)
     {
         if(defendingPokemon.currentHitPoints > 0)
         {

@@ -584,13 +584,16 @@ public class Pokemon {
         {
             StatAttribute currentStat = (move.MoveType == MoveType.Physical) ? StatAttribute.Defense : StatAttribute.SpecialDefense;
 
-            //Shield bonuses
-            foreach (ShieldBase shield in currentShields)
+            if(attackingPokemon.ability.CutsThroughProtections() == false)
             {
-                if(shield.ProtectedStat(currentStat) > 1)
+                //Shield bonuses
+                foreach (ShieldBase shield in currentShields)
                 {
-                    attackPower /= shield.ProtectedStat(currentStat);
-                    break;
+                    if (shield.ProtectedStat(currentStat) > 1)
+                    {
+                        attackPower /= shield.ProtectedStat(currentStat);
+                        break;
+                    }
                 }
             }
         }
@@ -1032,7 +1035,12 @@ public class Pokemon {
             }
             else
             {
-                return currentHeldItem.HoldItemAffects();
+                HoldItemBase holdItem = currentHeldItem.HoldItemAffects();
+                if (ability.CantUseAnyHeldItems(holdItem) == true)
+                {
+                    return HoldItemDB.GetHoldItem(HoldItemID.NA);
+                }
+                return holdItem;
             }
         }
     }
@@ -1134,7 +1142,7 @@ public class Pokemon {
         return pokemonSaveData;
     }
 
-    void AlterPokemonTyping(ElementType newType)
+    public void AlterPokemonTyping(ElementType newType)
     {
         pokemonType1 = newType;
         pokemonType2 = ElementType.NA;

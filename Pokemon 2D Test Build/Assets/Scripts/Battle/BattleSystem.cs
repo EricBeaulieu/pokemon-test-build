@@ -781,7 +781,16 @@ public class BattleSystem : CoreSystem
             {
                 int attackLoop = 1;
 
-                if(alteredMove.MultiStrikeMove == true)
+                ElementType elementType = sourceUnit.pokemon.ability.ChangePokemonToCurrentAttackType(sourceUnit, move.moveBase);
+
+                if (elementType != ElementType.NA)
+                {
+                    sourceUnit.OnAbilityActivation();
+                    yield return dialogSystem.TypeDialog(sourceUnit.pokemon.ability.OnAbilitityActivation(sourceUnit.pokemon));
+                    sourceUnit.pokemon.AlterPokemonTyping(elementType);
+                }
+
+                if (alteredMove.MultiStrikeMove == true)
                 {
                     if(alteredMove.FixedNumberOfStrikes > 0)
                     {
@@ -882,6 +891,14 @@ public class BattleSystem : CoreSystem
 
                         hpPriorToAttack = targetUnit.pokemon.currentHitPoints;
 
+                        if (targetUnit.pokemon.ability.DamagesAttackerUponHit(targetUnit.pokemon, sourceUnit.pokemon, alteredMove) == true)
+                        {
+                            targetUnit.OnAbilityActivation();
+                            yield return ShowStatusChanges(sourceUnit.pokemon);
+                            yield return sourceUnit.HUD.UpdateHP(previousHP);
+                            previousHP = sourceUnit.pokemon.currentHitPoints;
+                        }
+
                         yield return new WaitForSeconds(1f);
                     }
                 }
@@ -936,7 +953,7 @@ public class BattleSystem : CoreSystem
                     yield return dialogSystem.TypeDialog($"Hit {attackLoop} time(s)!");
                 }
 
-                if (targetUnit.pokemon.ability.DamagesAttackerUponFinishingHit(targetUnit.pokemon, sourceUnit.pokemon, alteredMove) == true)
+                if (targetUnit.pokemon.ability.DamagesAttackerUponHit(targetUnit.pokemon, sourceUnit.pokemon, alteredMove) == true)
                 {
                     targetUnit.OnAbilityActivation();
                     yield return ShowStatusChanges(sourceUnit.pokemon);
@@ -947,14 +964,27 @@ public class BattleSystem : CoreSystem
                 //Healing
                 if (sourceUnit.pokemon.HasCurrentVolatileStatus(ConditionID.HealBlock) == false)
                 {
-                    if (alteredMove.DrainsHP == true && sourceUnit.pokemon.currentHitPoints != sourceUnit.pokemon.maxHitPoints && hpPriorToAttack - targetUnit.pokemon.currentHitPoints > 0)
+                    if (alteredMove.DrainsHP == true && hpPriorToAttack - targetUnit.pokemon.currentHitPoints > 0)
                     {
                         int hpHealed = Mathf.CeilToInt((hpPriorToAttack - targetUnit.pokemon.currentHitPoints) * (alteredMove.HpRecovered));
-
-                        hpHealed = Mathf.Clamp(hpHealed, 1, sourceUnit.pokemon.maxHitPoints - sourceUnit.pokemon.currentHitPoints);
-                        sourceUnit.pokemon.UpdateHPRestored(hpHealed);
-                        yield return sourceUnit.HUD.UpdateHP(previousHP);
-                        yield return dialogSystem.TypeDialog($"{targetUnit.pokemon.currentName} had its energy drained");
+                        
+                        if(targetUnit.pokemon.ability.DamagesOpponentUponAbsorbingHP() == true)
+                        {
+                            sourceUnit.pokemon.UpdateHPDamage(hpHealed);
+                            yield return sourceUnit.HUD.UpdateHP(previousHP);
+                            targetUnit.OnAbilityActivation();
+                            yield return dialogSystem.TypeDialog($"{targetUnit.pokemon.ability.OnAbilitityActivation(sourceUnit.pokemon)}");
+                        }
+                        else
+                        {
+                            hpHealed = Mathf.Clamp(hpHealed, 1, sourceUnit.pokemon.maxHitPoints - sourceUnit.pokemon.currentHitPoints);
+                            if (sourceUnit.pokemon.currentHitPoints != sourceUnit.pokemon.maxHitPoints)
+                            {
+                                sourceUnit.pokemon.UpdateHPRestored(hpHealed);
+                                yield return sourceUnit.HUD.UpdateHP(previousHP);
+                                yield return dialogSystem.TypeDialog($"{targetUnit.pokemon.currentName} had its energy drained");
+                            }
+                        }
                     }
                 }
 
@@ -1384,25 +1414,42 @@ public class BattleSystem : CoreSystem
                 }
 
                 sourceUnit.pokemon.OnEndTurn(currentCondition);//user will take the damage regardless if they have heal block or not
+                yield return ShowStatusChanges(sourceUnit.pokemon);
+                yield return sourceUnit.HUD.UpdateHP(currentHP);
+                currentHP = sourceUnit.pokemon.currentHitPoints;
 
                 if (targetUnit.pokemon.HasCurrentVolatileStatus(ConditionID.HealBlock) == true)
                 {
                     continue;
                 }
 
-
-                if (targetUnit.pokemon.maxHitPoints - targetUnit.pokemon.currentHitPoints > 0)
+                int hpHealed = leechSeed.HealthStolen;
+                if (targetUnit.pokemon.GetHoldItemEffects.Id == HoldItemID.BigRoot)
                 {
-                    int hpHealed = Mathf.Clamp(leechSeed.HealthStolen, 1, targetUnit.pokemon.maxHitPoints - targetUnit.pokemon.currentHitPoints);
-                    if(targetUnit.pokemon.GetHoldItemEffects.Id == HoldItemID.BigRoot)
+                    hpHealed = Mathf.FloorToInt(hpHealed * 0.3f);
+                }
+
+                if (sourceUnit.pokemon.ability.DamagesOpponentUponAbsorbingHP() == true)
+                {
+                    hpHealed = Mathf.Clamp(hpHealed, 1,targetUnit.pokemon.currentHitPoints);
+                    targetUnit.pokemon.UpdateHPDamage(hpHealed);
+                    yield return targetUnit.HUD.UpdateHP(targetUnit.pokemon.currentHitPoints + hpHealed);
+                    sourceUnit.OnAbilityActivation();
+                    yield return dialogSystem.TypeDialog($"{sourceUnit.pokemon.ability.OnAbilitityActivation(targetUnit.pokemon)}");
+
+                    if(targetUnit.pokemon.currentHitPoints <= 0)
                     {
-                        hpHealed = Mathf.Clamp(Mathf.FloorToInt(hpHealed * 0.3f), 1, targetUnit.pokemon.maxHitPoints - targetUnit.pokemon.currentHitPoints);
+                        yield return PokemonHasFainted(targetUnit);
                     }
-                    targetUnit.pokemon.UpdateHPRestored(hpHealed);
-                    yield return ShowStatusChanges(sourceUnit.pokemon);
-                    yield return sourceUnit.HUD.UpdateHP(currentHP);
-                    yield return targetUnit.HUD.UpdateHP(targetUnit.pokemon.currentHitPoints - hpHealed);
-                    continue;
+                }
+                else
+                {
+                    hpHealed = Mathf.Clamp(hpHealed, 1, targetUnit.pokemon.maxHitPoints - targetUnit.pokemon.currentHitPoints);
+                    if (targetUnit.pokemon.maxHitPoints - targetUnit.pokemon.currentHitPoints > 0)
+                    {
+                        targetUnit.pokemon.UpdateHPRestored(hpHealed);
+                        yield return targetUnit.HUD.UpdateHP(targetUnit.pokemon.currentHitPoints - hpHealed);
+                    }
                 }
             }
             else if(sourceUnit.pokemon.OnEndTurn(currentCondition) == true)
