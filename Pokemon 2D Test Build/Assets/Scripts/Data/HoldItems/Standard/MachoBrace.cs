@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class MachoBrace : HoldItemBase
 {
-    public override HoldItemID Id { get { return HoldItemID.MachoBrace; } }
+    public override HoldItemID HoldItemId { get { return HoldItemID.MachoBrace; } }
     public override HoldItemBase ReturnDerivedClassAsNew() { return new MachoBrace(); }
     public override float AlterStat(Pokemon Holder, StatAttribute statAffected)
     {

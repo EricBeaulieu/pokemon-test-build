@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class AdamantOrb : HoldItemBase
 {
-    public override HoldItemID Id { get { return HoldItemID.AdamantOrb; } }
+    public override HoldItemID HoldItemId { get { return HoldItemID.AdamantOrb; } }
     public override HoldItemBase ReturnDerivedClassAsNew() { return new AdamantOrb(); }
     public override MoveBase AlterUserMoveDetails(MoveBase move)
     {

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class SmokeBall : HoldItemBase
 {
-    public override HoldItemID Id { get { return HoldItemID.SmokeBall; } }
+    public override HoldItemID HoldItemId { get { return HoldItemID.SmokeBall; } }
     public override HoldItemBase ReturnDerivedClassAsNew() { return new SmokeBall(); }
     public override bool FleeWithoutFail()
     {
@@ -12,6 +12,6 @@ public class SmokeBall : HoldItemBase
     }
     public override string SpecializedMessage(Pokemon holder, Pokemon opposingPokemon)
     {
-        return $"{holder.currentName} fled using its {GlobalTools.SplitCamelCase(Id.ToString())}";
+        return $"{holder.currentName} fled using its {GlobalTools.SplitCamelCase(HoldItemId.ToString())}";
     }
 }

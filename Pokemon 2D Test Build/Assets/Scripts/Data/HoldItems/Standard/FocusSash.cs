@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class FocusSash : HoldItemBase
 {
-    public override HoldItemID Id { get { return HoldItemID.FocusSash; } }
+    public override HoldItemID HoldItemId { get { return HoldItemID.FocusSash; } }
     public override HoldItemBase ReturnDerivedClassAsNew() { return new FocusSash(); }
     public override bool EndureOHKOAttack(Pokemon defendingPokemon)
     {

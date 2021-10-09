@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class DarkGem : HoldItemBase
 {
-    public override HoldItemID Id { get { return HoldItemID.DarkGem; } }
+    public override HoldItemID HoldItemId { get { return HoldItemID.DarkGem; } }
     public override HoldItemBase ReturnDerivedClassAsNew() { return new DarkGem(); }
     public override MoveBase AlterUserMoveDetails(MoveBase move)
     {

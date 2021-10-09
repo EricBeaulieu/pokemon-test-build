@@ -1138,6 +1138,39 @@ public class BattleSystem : CoreSystem
                     yield return PokemonHasFainted(sourceUnit);
                 }
             }
+
+            hpDifference = targetUnit.pokemon.currentHitPoints;
+            if (targetUnit.pokemon.GetHoldItemEffects.HealsPokemonAfterAttack(targetUnit.pokemon) == true && targetUnit.pokemon.currentHitPoints > 0)
+            {
+                yield return targetUnit.PlayItemUsedAnimation();
+
+                yield return ShowStatusChanges(targetUnit.pokemon);
+                yield return targetUnit.HUD.UpdateHP(previousHP);
+                
+                ConditionID conditionAquiredThroughItem = targetUnit.pokemon.GetHoldItemEffects.AdditionalEffects();
+                if (conditionAquiredThroughItem != ConditionID.NA)
+                {
+                    yield return dialogSystem.TypeDialog(targetUnit.pokemon.GetHoldItemEffects.SpecializedMessage(targetUnit.pokemon, sourceUnit.pokemon));
+                    
+                    if(conditionAquiredThroughItem <= ConditionID.ToxicPoison)
+                    {
+
+                    }
+                    else//volatile status
+                    {
+                        if (targetUnit.pokemon.HasCurrentVolatileStatus(conditionAquiredThroughItem) == false)
+                        {
+                            targetUnit.pokemon.SetVolatileStatus(conditionAquiredThroughItem);
+                            yield return targetUnit.StatusConditionAnimation(conditionAquiredThroughItem);
+                        }
+                    }
+                }
+
+                if(targetUnit.pokemon.GetHoldItemEffects.RemoveItem == true)
+                {
+                    targetUnit.pokemon.ItemUsed();
+                }
+            }
             
             if(targetUnit.pokemon.GetHoldItemEffects.RemovesMoveBindingEffectsAfterMoveUsed(targetUnit.pokemon) == true)
             {
@@ -1424,10 +1457,7 @@ public class BattleSystem : CoreSystem
                 }
 
                 int hpHealed = leechSeed.HealthStolen;
-                if (targetUnit.pokemon.GetHoldItemEffects.Id == HoldItemID.BigRoot)
-                {
-                    hpHealed = Mathf.FloorToInt(hpHealed * 0.3f);
-                }
+                hpHealed = Mathf.FloorToInt(hpHealed * targetUnit.pokemon.GetHoldItemEffects.HpDrainModifier());
 
                 if (sourceUnit.pokemon.ability.DamagesOpponentUponAbsorbingHP() == true)
                 {
@@ -1482,7 +1512,6 @@ public class BattleSystem : CoreSystem
         }
         else
         {
-
             currentHP = sourceUnit.pokemon.currentHitPoints;
 
             sourceUnit.pokemon.GetHoldItemEffects.OnTurnEnd(sourceUnit.pokemon);

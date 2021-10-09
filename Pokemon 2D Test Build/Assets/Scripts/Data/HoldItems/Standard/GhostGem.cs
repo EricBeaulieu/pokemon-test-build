@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class GhostGem : HoldItemBase
 {
-    public override HoldItemID Id { get { return HoldItemID.GhostGem; } }
+    public override HoldItemID HoldItemId { get { return HoldItemID.GhostGem; } }
     public override HoldItemBase ReturnDerivedClassAsNew() { return new GhostGem(); }
     public override MoveBase AlterUserMoveDetails(MoveBase move)
     {

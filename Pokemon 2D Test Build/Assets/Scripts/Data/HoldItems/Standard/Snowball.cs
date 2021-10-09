@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Snowball : HoldItemBase
 {
-    public override HoldItemID Id { get { return HoldItemID.Snowball; } }
+    public override HoldItemID HoldItemId { get { return HoldItemID.Snowball; } }
     public override HoldItemBase ReturnDerivedClassAsNew() { return new Snowball(); }
     List<StatBoost> statBoosts = new List<StatBoost>()
     {

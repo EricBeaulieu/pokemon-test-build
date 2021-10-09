@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class BlackBelt : HoldItemBase
 {
-    public override HoldItemID Id { get { return HoldItemID.BlackBelt; } }
+    public override HoldItemID HoldItemId { get { return HoldItemID.BlackBelt; } }
     public override HoldItemBase ReturnDerivedClassAsNew() { return new BlackBelt(); }
     public override MoveBase AlterUserMoveDetails(MoveBase move)
     {

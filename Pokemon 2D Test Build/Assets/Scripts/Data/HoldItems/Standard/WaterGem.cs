@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class WaterGem : HoldItemBase
 {
-    public override HoldItemID Id { get { return HoldItemID.WaterGem; } }
+    public override HoldItemID HoldItemId { get { return HoldItemID.WaterGem; } }
     public override HoldItemBase ReturnDerivedClassAsNew() { return new WaterGem(); }
     public override MoveBase AlterUserMoveDetails(MoveBase move)
     {

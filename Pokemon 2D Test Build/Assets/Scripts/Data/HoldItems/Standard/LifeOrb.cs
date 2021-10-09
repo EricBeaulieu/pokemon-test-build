@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class LifeOrb : HoldItemBase
 {
-    public override HoldItemID Id { get { return HoldItemID.LifeOrb; } }
+    public override HoldItemID HoldItemId { get { return HoldItemID.LifeOrb; } }
     public override HoldItemBase ReturnDerivedClassAsNew() { return new LifeOrb(); }
     public override bool PlayAnimationWhenUsed()
     {

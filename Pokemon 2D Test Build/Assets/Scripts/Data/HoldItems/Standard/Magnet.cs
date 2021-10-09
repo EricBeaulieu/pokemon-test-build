@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Magnet : HoldItemBase
 {
-    public override HoldItemID Id { get { return HoldItemID.Magnet; } }
+    public override HoldItemID HoldItemId { get { return HoldItemID.Magnet; } }
     public override HoldItemBase ReturnDerivedClassAsNew() { return new Magnet(); }
     public override MoveBase AlterUserMoveDetails(MoveBase move)
     {

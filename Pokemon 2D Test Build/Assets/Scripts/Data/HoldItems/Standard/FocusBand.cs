@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class FocusBand : HoldItemBase
 {
-    public override HoldItemID Id { get { return HoldItemID.FocusBand; } }
+    public override HoldItemID HoldItemId { get { return HoldItemID.FocusBand; } }
     public override HoldItemBase ReturnDerivedClassAsNew() { return new FocusBand(); }
     public override bool EndureOHKOAttack(Pokemon defendingPokemon)
     {

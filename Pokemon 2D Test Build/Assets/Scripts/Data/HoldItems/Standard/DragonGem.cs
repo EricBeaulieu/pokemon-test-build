@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class DragonGem : HoldItemBase
 {
-    public override HoldItemID Id { get { return HoldItemID.DragonGem; } }
+    public override HoldItemID HoldItemId { get { return HoldItemID.DragonGem; } }
     public override HoldItemBase ReturnDerivedClassAsNew() { return new DragonGem(); }
     public override MoveBase AlterUserMoveDetails(MoveBase move)
     {

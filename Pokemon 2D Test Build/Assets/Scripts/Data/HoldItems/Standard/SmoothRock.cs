@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class SmoothRock : HoldItemBase
 {
-    public override HoldItemID Id { get { return HoldItemID.SmoothRock; } }
+    public override HoldItemID HoldItemId { get { return HoldItemID.SmoothRock; } }
     public override HoldItemBase ReturnDerivedClassAsNew() { return new SmoothRock(); }
     public override int IncreasedWeatherEffectDuration(WeatherEffectID currentWeatherEffect)
     {

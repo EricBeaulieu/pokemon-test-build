@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum Flavor { NA,Spicy,Sour,Dry,Bitter,Sweet}
+
 [CreateAssetMenu(menuName = "Mechanics/Nature")]
 public class NatureBase : ScriptableObject {
 
@@ -49,5 +51,61 @@ public class NatureBase : ScriptableObject {
         }
 
         return defaultValue;
+    }
+
+    Flavor FavoriteFlavor
+    {
+        get
+        {
+            switch (raisedAttribute)
+            {
+                case StatAttribute.Attack:
+                    return Flavor.Spicy;
+                case StatAttribute.Defense:
+                    return Flavor.Sour;
+                case StatAttribute.SpecialAttack:
+                    return Flavor.Dry;
+                case StatAttribute.SpecialDefense:
+                    return Flavor.Bitter;
+                default://speed
+                    return Flavor.Sweet;
+            }
+        }
+    }
+
+    Flavor HatedFlavor
+    {
+        get
+        {
+            switch (raisedAttribute)
+            {
+                case StatAttribute.Attack:
+                    return Flavor.Spicy;
+                case StatAttribute.Defense:
+                    return Flavor.Sour;
+                case StatAttribute.SpecialAttack:
+                    return Flavor.Dry;
+                case StatAttribute.SpecialDefense:
+                    return Flavor.Bitter;
+                default://speed
+                    return Flavor.Sweet;
+            }
+        }
+    }
+
+    public int GetFlavourRating(Flavor flavor)
+    {
+        if(raisedAttribute == loweredAttribute)
+        {
+            return 0;
+        }
+        if(flavor == FavoriteFlavor)
+        {
+            return 1;
+        }
+        else
+        {
+            return -1;
+        }
     }
 }

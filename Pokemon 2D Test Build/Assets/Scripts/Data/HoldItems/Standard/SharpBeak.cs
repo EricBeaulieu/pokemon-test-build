@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class SharpBeak : HoldItemBase
 {
-    public override HoldItemID Id { get { return HoldItemID.SharpBeak; } }
+    public override HoldItemID HoldItemId { get { return HoldItemID.SharpBeak; } }
     public override HoldItemBase ReturnDerivedClassAsNew() { return new SharpBeak(); }
     public override MoveBase AlterUserMoveDetails(MoveBase move)
     {

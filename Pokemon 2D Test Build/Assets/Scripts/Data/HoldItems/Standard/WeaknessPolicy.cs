@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class WeaknessPolicy : HoldItemBase
 {
-    public override HoldItemID Id { get { return HoldItemID.WeaknessPolicy; } }
+    public override HoldItemID HoldItemId { get { return HoldItemID.WeaknessPolicy; } }
     public override HoldItemBase ReturnDerivedClassAsNew() { return new WeaknessPolicy(); }
     List<StatBoost> statBoosts = new List<StatBoost>()
     {

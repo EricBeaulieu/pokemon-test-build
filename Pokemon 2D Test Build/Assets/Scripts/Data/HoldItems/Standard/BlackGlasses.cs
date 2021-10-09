@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class BlackGlasses : HoldItemBase
 {
-    public override HoldItemID Id { get { return HoldItemID.BlackGlasses; } }
+    public override HoldItemID HoldItemId { get { return HoldItemID.BlackGlasses; } }
     public override HoldItemBase ReturnDerivedClassAsNew() { return new BlackGlasses(); }
     public override MoveBase AlterUserMoveDetails(MoveBase move)
     {

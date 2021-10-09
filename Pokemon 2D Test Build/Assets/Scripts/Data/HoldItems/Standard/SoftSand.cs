@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class SoftSand : HoldItemBase
 {
-    public override HoldItemID Id { get { return HoldItemID.SoftSand; } }
+    public override HoldItemID HoldItemId { get { return HoldItemID.SoftSand; } }
     public override HoldItemBase ReturnDerivedClassAsNew() { return new SoftSand(); }
     public override MoveBase AlterUserMoveDetails(MoveBase move)
     {

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class BindingBand : HoldItemBase
 {
-    public override HoldItemID Id { get { return HoldItemID.BindingBand; } }
+    public override HoldItemID HoldItemId { get { return HoldItemID.BindingBand; } }
     public override HoldItemBase ReturnDerivedClassAsNew() { return new BindingBand(); }
     public override bool BindingDamageIncreased() { return true; }
 }

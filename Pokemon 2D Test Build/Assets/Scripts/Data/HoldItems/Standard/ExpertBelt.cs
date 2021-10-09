@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ExpertBelt : HoldItemBase
 {
-    public override HoldItemID Id { get { return HoldItemID.ExpertBelt; } }
+    public override HoldItemID HoldItemId { get { return HoldItemID.ExpertBelt; } }
     public override HoldItemBase ReturnDerivedClassAsNew() { return new ExpertBelt(); }
     public override float PowersUpSuperEffectiveAttacks(bool superEffective)
     {

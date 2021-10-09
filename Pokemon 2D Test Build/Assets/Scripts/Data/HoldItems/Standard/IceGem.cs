@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class IceGem : HoldItemBase
 {
-    public override HoldItemID Id { get { return HoldItemID.IceGem; } }
+    public override HoldItemID HoldItemId { get { return HoldItemID.IceGem; } }
     public override HoldItemBase ReturnDerivedClassAsNew() { return new IceGem(); }
     public override MoveBase AlterUserMoveDetails(MoveBase move)
     {

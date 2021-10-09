@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class FlameOrb : HoldItemBase
 {
-    public override HoldItemID Id { get { return HoldItemID.FlameOrb; } }
+    public override HoldItemID HoldItemId { get { return HoldItemID.FlameOrb; } }
     public override HoldItemBase ReturnDerivedClassAsNew() { return new FlameOrb(); }
     public override ConditionID InflictConditionAtTurnEnd()
     {
@@ -12,6 +12,6 @@ public class FlameOrb : HoldItemBase
     }
     public override string SpecializedMessage(Pokemon holder, Pokemon opposingPokemon)
     {
-        return $"{holder.currentName} was burnt by {GlobalTools.SplitCamelCase(Id.ToString())}";
+        return $"{holder.currentName} was burnt by {GlobalTools.SplitCamelCase(HoldItemId.ToString())}";
     }
 }

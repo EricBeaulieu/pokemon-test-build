@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class DeepSeaTooth : HoldItemBase
 {
-    public override HoldItemID Id { get { return HoldItemID.DeepSeaTooth; } }
+    public override HoldItemID HoldItemId { get { return HoldItemID.DeepSeaTooth; } }
     public override HoldItemBase ReturnDerivedClassAsNew() { return new DeepSeaTooth(); }
     public override float AlterStat(Pokemon holder, StatAttribute statAffected)
     {

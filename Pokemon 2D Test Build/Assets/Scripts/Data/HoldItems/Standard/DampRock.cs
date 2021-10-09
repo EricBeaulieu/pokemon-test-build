@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class DampRock : HoldItemBase
 {
-    public override HoldItemID Id { get { return HoldItemID.DampRock; } }
+    public override HoldItemID HoldItemId { get { return HoldItemID.DampRock; } }
     public override HoldItemBase ReturnDerivedClassAsNew() { return new DampRock(); }
     public override int IncreasedWeatherEffectDuration(WeatherEffectID currentWeatherEffect)
     {

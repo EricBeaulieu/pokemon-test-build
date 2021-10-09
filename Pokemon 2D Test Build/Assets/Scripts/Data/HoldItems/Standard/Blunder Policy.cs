@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class BlunderPolicy : HoldItemBase
 {
-    public override HoldItemID Id { get { return HoldItemID.BlunderPolicy; } }
+    public override HoldItemID HoldItemId { get { return HoldItemID.BlunderPolicy; } }
     public override HoldItemBase ReturnDerivedClassAsNew() { return new BlunderPolicy(); }
     StatBoost statBoost = new StatBoost() { stat = StatAttribute.Speed, boost = 2 };
     public override StatBoost RaisesStatUponMissing()

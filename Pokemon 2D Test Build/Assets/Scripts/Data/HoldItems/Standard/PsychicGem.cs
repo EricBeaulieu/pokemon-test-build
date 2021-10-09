@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PsychicGem : HoldItemBase
 {
-    public override HoldItemID Id { get { return HoldItemID.PsychicGem; } }
+    public override HoldItemID HoldItemId { get { return HoldItemID.PsychicGem; } }
     public override HoldItemBase ReturnDerivedClassAsNew() { return new PsychicGem(); }
     public override MoveBase AlterUserMoveDetails(MoveBase move)
     {

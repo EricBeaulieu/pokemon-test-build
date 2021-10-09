@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class SteelGem : HoldItemBase
 {
-    public override HoldItemID Id { get { return HoldItemID.SteelGem; } }
+    public override HoldItemID HoldItemId { get { return HoldItemID.SteelGem; } }
     public override HoldItemBase ReturnDerivedClassAsNew() { return new SteelGem(); }
     public override bool PlayAnimationWhenUsed() { return true; }
     public override MoveBase AlterUserMoveDetails(MoveBase move)

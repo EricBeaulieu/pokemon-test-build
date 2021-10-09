@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class AssaultVest : HoldItemBase
 {
-    public override HoldItemID Id { get { return HoldItemID.AssaultVest; } }
+    public override HoldItemID HoldItemId { get { return HoldItemID.AssaultVest; } }
     public override HoldItemBase ReturnDerivedClassAsNew() { return new AssaultVest(); }
     public override bool PreventTheUseOfCertainMoves(BattleUnit battleUnit, MoveBase move)
     {
@@ -16,7 +16,7 @@ public class AssaultVest : HoldItemBase
     }
     public override string SpecializedMessage(Pokemon holder,Pokemon opposingPokemon)
     {
-        return $"The effects of {GlobalTools.SplitCamelCase(Id.ToString())} prevents status moves from being used!";
+        return $"The effects of {GlobalTools.SplitCamelCase(HoldItemId.ToString())} prevents status moves from being used!";
     }
     public override float AlterStat(Pokemon holder, StatAttribute statAffected)
     {

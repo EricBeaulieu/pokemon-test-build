@@ -59,12 +59,11 @@ public class EvolutionEggUI : MonoBehaviour
         yield return new WaitForSeconds(BattleUnit.ENTRY_SPRITE_ANIMATION_SPEED);
         pokemonEvolving.sprite = pokemonSpriteAnimations[2];
 
-        yield return dialogSystem.TypeDialog($"congratulations!, {pokemon.currentName} evolved into {newEvolution.GetPokedexName()}",true);
+        yield return dialogSystem.TypeDialog($"Congratulations! {pokemon.currentName} evolved into {newEvolution.GetPokedexName()}",true);
 
         pokemon.NewEvolution(newEvolution);
 
         //Learn new moves from evolution
-
 
         gameObject.SetActive(false);
     }

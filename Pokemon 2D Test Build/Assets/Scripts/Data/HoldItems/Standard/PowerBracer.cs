@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PowerBracer : HoldItemBase
 {
-    public override HoldItemID Id { get { return HoldItemID.PowerBracer; } }
+    public override HoldItemID HoldItemId { get { return HoldItemID.PowerBracer; } }
     public override HoldItemBase ReturnDerivedClassAsNew() { return new PowerBracer(); }
     public override float AlterStat(Pokemon Holder, StatAttribute statAffected)
     {

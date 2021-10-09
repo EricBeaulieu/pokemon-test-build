@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PoisonGem : HoldItemBase
 {
-    public override HoldItemID Id { get { return HoldItemID.PoisonGem; } }
+    public override HoldItemID HoldItemId { get { return HoldItemID.PoisonGem; } }
     public override HoldItemBase ReturnDerivedClassAsNew() { return new PoisonGem(); }
     public override MoveBase AlterUserMoveDetails(MoveBase move)
     {

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class WhiteHerb : HoldItemBase
 {
-    public override HoldItemID Id { get { return HoldItemID.WhiteHerb; } }
+    public override HoldItemID HoldItemId { get { return HoldItemID.WhiteHerb; } }
     public override HoldItemBase ReturnDerivedClassAsNew() { return new WhiteHerb(); }
     public override bool RestoresAllLoweredStatsToNormalAfterAttackFinished(Pokemon defendingPokemon)
     {
@@ -21,6 +21,6 @@ public class WhiteHerb : HoldItemBase
     }
     public override string SpecializedMessage(Pokemon holder, Pokemon opposingPokemon)
     {
-        return $"{holder.currentName} returned its stats to normal using {GlobalTools.SplitCamelCase(Id.ToString())}";
+        return $"{holder.currentName} returned its stats to normal using {GlobalTools.SplitCamelCase(HoldItemId.ToString())}";
     }
 }

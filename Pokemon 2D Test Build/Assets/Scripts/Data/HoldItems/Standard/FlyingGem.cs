@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class FlyingGem : HoldItemBase
 {
-    public override HoldItemID Id { get { return HoldItemID.FlyingGem; } }
+    public override HoldItemID HoldItemId { get { return HoldItemID.FlyingGem; } }
     public override HoldItemBase ReturnDerivedClassAsNew() { return new FlyingGem(); }
     public override MoveBase AlterUserMoveDetails(MoveBase move)
     {

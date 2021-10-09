@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class SpellTag : HoldItemBase
 {
-    public override HoldItemID Id { get { return HoldItemID.SpellTag; } }
+    public override HoldItemID HoldItemId { get { return HoldItemID.SpellTag; } }
     public override HoldItemBase ReturnDerivedClassAsNew() { return new SpellTag(); }
     public override MoveBase AlterUserMoveDetails(MoveBase move)
     {

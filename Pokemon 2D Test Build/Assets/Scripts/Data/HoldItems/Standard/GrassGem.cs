@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class GrassGem : HoldItemBase
 {
-    public override HoldItemID Id { get { return HoldItemID.GrassGem; } }
+    public override HoldItemID HoldItemId { get { return HoldItemID.GrassGem; } }
     public override HoldItemBase ReturnDerivedClassAsNew() { return new GrassGem(); }
     public override MoveBase AlterUserMoveDetails(MoveBase move)
     {

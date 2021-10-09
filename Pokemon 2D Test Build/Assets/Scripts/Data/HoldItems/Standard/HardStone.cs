@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class HardStone : HoldItemBase
 {
-    public override HoldItemID Id { get { return HoldItemID.HardStone; } }
+    public override HoldItemID HoldItemId { get { return HoldItemID.HardStone; } }
     public override HoldItemBase ReturnDerivedClassAsNew() { return new HardStone(); }
     public override MoveBase AlterUserMoveDetails(MoveBase move)
     {

@@ -72,4 +72,5 @@ public abstract class AbilityBase
     public virtual bool CutsThroughProtections() { return false; }
     public virtual bool CantUseAnyHeldItems(HoldItemBase holdItem) { return false; }
     public virtual bool DamagesOpponentUponAbsorbingHP() { return false; }
+    public virtual bool UseBerryEarly() { return false; }
 }

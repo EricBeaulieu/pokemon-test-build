@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class LightClay : HoldItemBase
 {
-    public override HoldItemID Id { get { return HoldItemID.LightClay; } }
+    public override HoldItemID HoldItemId { get { return HoldItemID.LightClay; } }
     public override HoldItemBase ReturnDerivedClassAsNew() { return new LightClay(); }
     public override int ShieldDurationBonus()
     {

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Eviolite : HoldItemBase
 {
-    public override HoldItemID Id { get { return HoldItemID.Eviolite; } }
+    public override HoldItemID HoldItemId { get { return HoldItemID.Eviolite; } }
     public override HoldItemBase ReturnDerivedClassAsNew() { return new Eviolite(); }
     public override float AlterStat(Pokemon Holder, StatAttribute statAffected)
     {

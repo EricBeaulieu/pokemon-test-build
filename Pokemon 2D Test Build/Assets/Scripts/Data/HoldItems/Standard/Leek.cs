@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Leek : HoldItemBase
 {
-    public override HoldItemID Id { get { return HoldItemID.Leek; } }
+    public override HoldItemID HoldItemId { get { return HoldItemID.Leek; } }
     public override HoldItemBase ReturnDerivedClassAsNew() { return new Leek(); }
     public override float AlterStat(Pokemon holder, StatAttribute statAffected)
     {

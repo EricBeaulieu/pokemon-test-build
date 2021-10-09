@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PowerWeight : HoldItemBase
 {
-    public override HoldItemID Id { get { return HoldItemID.PowerWeight; } }
+    public override HoldItemID HoldItemId { get { return HoldItemID.PowerWeight; } }
     public override HoldItemBase ReturnDerivedClassAsNew() { return new PowerWeight(); }
     public override float AlterStat(Pokemon Holder, StatAttribute statAffected)
     {

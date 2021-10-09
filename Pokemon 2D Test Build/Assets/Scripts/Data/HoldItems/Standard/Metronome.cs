@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Metronome : HoldItemBase
 {
-    public override HoldItemID Id { get { return HoldItemID.Metronome; } }
+    public override HoldItemID HoldItemId { get { return HoldItemID.Metronome; } }
     public override HoldItemBase ReturnDerivedClassAsNew() { return new Metronome(); }
     MoveBase compoundingMove;
     float moveBonus;

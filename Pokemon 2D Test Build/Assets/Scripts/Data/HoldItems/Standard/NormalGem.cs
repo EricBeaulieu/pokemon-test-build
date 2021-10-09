@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class NormalGem : HoldItemBase
 {
-    public override HoldItemID Id { get { return HoldItemID.NormalGem; } }
+    public override HoldItemID HoldItemId { get { return HoldItemID.NormalGem; } }
     public override HoldItemBase ReturnDerivedClassAsNew() { return new NormalGem(); }
     public override MoveBase AlterUserMoveDetails(MoveBase move)
     {

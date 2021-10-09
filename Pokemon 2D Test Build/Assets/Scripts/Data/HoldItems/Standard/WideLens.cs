@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class WideLens : HoldItemBase
 {
-    public override HoldItemID Id { get { return HoldItemID.WideLens; } }
+    public override HoldItemID HoldItemId { get { return HoldItemID.WideLens; } }
     public override HoldItemBase ReturnDerivedClassAsNew() { return new WideLens(); }
     public override MoveBase AlterUserMoveDetails(MoveBase move)
     {

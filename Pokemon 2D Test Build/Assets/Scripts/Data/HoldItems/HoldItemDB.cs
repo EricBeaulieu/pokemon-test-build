@@ -28,12 +28,13 @@ public enum HoldItemID
     SmoothRock, Snowball, SoftSand, SootheBell, SoulDew,
     SpellTag, SteelGem, StickyBarb, ThickClub, ThroatSpray,
     ToxicOrb, TwistedSpoon, UtilityUmbrella, WaterGem, WeaknessPolicy,
-    WhiteHerb, WideLens, WiseGlasses, ZoomLens,
+    WhiteHerb, WideLens, WiseGlasses, ZoomLens,    
+}
 
-    //Berries
-
-    Aguav,
-    
+public enum BerryID
+{
+    NA,
+    Aguav,Cheri
 }
 
 public static class HoldItemDB
@@ -46,10 +47,20 @@ public static class HoldItemDB
         }
     }
 
-    static Dictionary<HoldItemID, HoldItemBase> HoldItemDex = new Dictionary<HoldItemID, HoldItemBase>();
+    static Dictionary<string, HoldItemBase> HoldItemDex = new Dictionary<string, HoldItemBase>();
+
+    public static HoldItemBase GetHoldItem()
+    {
+        return HoldItemDex[HoldItemID.NA.ToString()].ReturnDerivedClassAsNew();
+    }
 
     public static HoldItemBase GetHoldItem(HoldItemID iD)
     {
-        return HoldItemDex[iD].ReturnDerivedClassAsNew();
+        return HoldItemDex[iD.ToString()].ReturnDerivedClassAsNew();
+    }
+
+    public static HoldItemBase GetHoldItem(BerryID iD)
+    {
+        return HoldItemDex[iD.ToString()].ReturnDerivedClassAsNew();
     }
 }

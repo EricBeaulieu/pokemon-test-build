@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PowerBelt : HoldItemBase
 {
-    public override HoldItemID Id { get { return HoldItemID.PowerBelt; } }
+    public override HoldItemID HoldItemId { get { return HoldItemID.PowerBelt; } }
     public override HoldItemBase ReturnDerivedClassAsNew() { return new PowerBelt(); }
     public override float AlterStat(Pokemon Holder, StatAttribute statAffected)
     {

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class QuickPowder : HoldItemBase
 {
-    public override HoldItemID Id { get { return HoldItemID.QuickPowder; } }
+    public override HoldItemID HoldItemId { get { return HoldItemID.QuickPowder; } }
     public override HoldItemBase ReturnDerivedClassAsNew() { return new QuickPowder(); }
     public override float AlterStat(Pokemon Holder, StatAttribute statAffected)
     {

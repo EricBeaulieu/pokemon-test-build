@@ -7,17 +7,16 @@ public class WildPokemon
 {
     [SerializeField] PokemonBase pokemonBase;
     public PokemonBase PokemonBase { get { return pokemonBase; } }
-    [SerializeField] int minLevelRange;
-    [SerializeField] int maxLevelRange;
+    [SerializeField] Vector2 levelRange;
     public int Level
     {
         get
         {
-            if(maxLevelRange <= minLevelRange)
+            if(levelRange.y <= levelRange.x)
             {
-                return minLevelRange;
+                return (int)levelRange.x;
             }
-            return Random.Range(minLevelRange, maxLevelRange);
+            return Random.Range((int)levelRange.x, (int)levelRange.y);
         }
     }
     [Range(0, 100)]

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class MiracleSeed : HoldItemBase
 {
-    public override HoldItemID Id { get { return HoldItemID.MiracleSeed; } }
+    public override HoldItemID HoldItemId { get { return HoldItemID.MiracleSeed; } }
     public override HoldItemBase ReturnDerivedClassAsNew() { return new MiracleSeed(); }
     public override MoveBase AlterUserMoveDetails(MoveBase move)
     {

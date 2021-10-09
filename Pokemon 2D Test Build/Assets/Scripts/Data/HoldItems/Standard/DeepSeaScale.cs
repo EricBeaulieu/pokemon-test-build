@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class DeepSeaScale : HoldItemBase
 {
-    public override HoldItemID Id { get { return HoldItemID.DeepSeaScale; } }
+    public override HoldItemID HoldItemId { get { return HoldItemID.DeepSeaScale; } }
     public override HoldItemBase ReturnDerivedClassAsNew() { return new DeepSeaScale(); }
     public override float AlterStat(Pokemon holder, StatAttribute statAffected)
     {

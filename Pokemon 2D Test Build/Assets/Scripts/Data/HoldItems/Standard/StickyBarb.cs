@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class StickyBarb : HoldItemBase
 {
-    public override HoldItemID Id { get { return HoldItemID.StickyBarb; } }
+    public override HoldItemID HoldItemId { get { return HoldItemID.StickyBarb; } }
     public override HoldItemBase ReturnDerivedClassAsNew() { return new StickyBarb(); }
     public override void OnTurnEnd(Pokemon defendingPokemon)
     {

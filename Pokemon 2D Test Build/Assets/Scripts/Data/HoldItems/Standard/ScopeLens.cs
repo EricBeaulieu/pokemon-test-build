@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ScopeLens : HoldItemBase
 {
-    public override HoldItemID Id { get { return HoldItemID.ScopeLens; } }
+    public override HoldItemID HoldItemId { get { return HoldItemID.ScopeLens; } }
     public override HoldItemBase ReturnDerivedClassAsNew() { return new ScopeLens(); }
     public override float AlterStat(Pokemon holder, StatAttribute statAffected)
     {

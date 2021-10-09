@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class SilverPowder : HoldItemBase
 {
-    public override HoldItemID Id { get { return HoldItemID.SilverPowder; } }
+    public override HoldItemID HoldItemId { get { return HoldItemID.SilverPowder; } }
     public override HoldItemBase ReturnDerivedClassAsNew() { return new SilverPowder(); }
     public override MoveBase AlterUserMoveDetails(MoveBase move)
     {

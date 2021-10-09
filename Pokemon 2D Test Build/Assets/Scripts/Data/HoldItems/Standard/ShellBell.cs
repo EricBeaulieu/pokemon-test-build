@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ShellBell : HoldItemBase
 {
-    public override HoldItemID Id { get { return HoldItemID.ShellBell; } }
+    public override HoldItemID HoldItemId { get { return HoldItemID.ShellBell; } }
     public override HoldItemBase ReturnDerivedClassAsNew() { return new ShellBell(); }
     public override int AlterUserHPAfterAttack(Pokemon holder, MoveBase move, int damageDealt)
     {
@@ -24,6 +24,6 @@ public class ShellBell : HoldItemBase
     }
     public override string SpecializedMessage(Pokemon holder, Pokemon opposingPokemon)
     {
-        return $"{holder.currentName} restored HP using {GlobalTools.SplitCamelCase(Id.ToString())}";
+        return $"{holder.currentName} restored HP using {GlobalTools.SplitCamelCase(HoldItemId.ToString())}";
     }
 }

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class DragonFang : HoldItemBase
 {
-    public override HoldItemID Id { get { return HoldItemID.DragonFang; } }
+    public override HoldItemID HoldItemId { get { return HoldItemID.DragonFang; } }
     public override HoldItemBase ReturnDerivedClassAsNew() { return new DragonFang(); }
     public override MoveBase AlterUserMoveDetails(MoveBase move)
     {

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class AbsorbBulb : HoldItemBase
 {
-    public override HoldItemID Id { get { return HoldItemID.AbsorbBulb; } }
+    public override HoldItemID HoldItemId { get { return HoldItemID.AbsorbBulb; } }
     public override HoldItemBase ReturnDerivedClassAsNew() { return new AbsorbBulb(); }
     List<StatBoost> statBoosts = new List<StatBoost>()
     {

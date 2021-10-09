@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class RockyHelmet : HoldItemBase
 {
-    public override HoldItemID Id { get { return HoldItemID.RockyHelmet; } }
+    public override HoldItemID HoldItemId { get { return HoldItemID.RockyHelmet; } }
     public override HoldItemBase ReturnDerivedClassAsNew() { return new RockyHelmet(); }
     public override bool HurtsAttacker()
     {
@@ -20,6 +20,6 @@ public class RockyHelmet : HoldItemBase
     }
     public override string SpecializedMessage(Pokemon holder, Pokemon opposingPokemon)
     {
-        return $"{opposingPokemon.currentName} lost some of its HP due to {GlobalTools.SplitCamelCase(Id.ToString())}";
+        return $"{opposingPokemon.currentName} lost some of its HP due to {GlobalTools.SplitCamelCase(HoldItemId.ToString())}";
     }
 }

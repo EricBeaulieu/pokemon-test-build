@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class NeverMeltIce : HoldItemBase
 {
-    public override HoldItemID Id { get { return HoldItemID.NeverMeltIce; } }
+    public override HoldItemID HoldItemId { get { return HoldItemID.NeverMeltIce; } }
     public override HoldItemBase ReturnDerivedClassAsNew() { return new NeverMeltIce(); }
     public override MoveBase AlterUserMoveDetails(MoveBase move)
     {

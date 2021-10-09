@@ -4,7 +4,22 @@ using UnityEngine;
 
 public abstract class HoldItemBase
 {
-    public abstract HoldItemID Id { get; }
+    public string Id
+    {
+        get
+        {
+            if(HoldItemId != HoldItemID.NA)
+            {
+                return HoldItemId.ToString();
+            }
+            if(BerryId != BerryID.NA)
+            {
+                return BerryId.ToString();
+            }
+            return HoldItemID.NA.ToString();
+        }
+    }
+    public virtual HoldItemID HoldItemId { get; }
     public abstract HoldItemBase ReturnDerivedClassAsNew();
     public bool RemoveItem { get; protected set; }
     public virtual bool PlayAnimationWhenUsed() { return true; }
@@ -21,11 +36,13 @@ public abstract class HoldItemBase
     public virtual bool BindingDamageIncreased() { return false; }
     public virtual float AlterStat(Pokemon Holder,StatAttribute statAffected)
     {
-        if (statAffected == StatAttribute.CriticalHitRatio)
         {
-            return 0;
+            if (statAffected == StatAttribute.CriticalHitRatio)
+            {
+                return 0;
+            }
+            return 1f;
         }
-        return 1f;
     }
     public virtual int IncreasedWeatherEffectDuration(WeatherEffectID currentWeatherEffect) { return 0; }
     public virtual bool PreventsPokemonFromEvolving() { return false; }//not implimented
@@ -53,4 +70,14 @@ public abstract class HoldItemBase
     public virtual bool RestoresAllLoweredStatsToNormalAfterAttackFinished(Pokemon holder) { return false; }
     public virtual StatBoost RaisesStatUponMissing() { return null; }
     public virtual bool TransferToPokemon(MoveBase move) { return false; }
+    public virtual float HpDrainModifier() { return 0; }
+
+    //Berries effects
+    public virtual BerryID BerryId { get; }
+    public virtual bool UsedInInventoryEffect(Pokemon pokemon) { return false; }
+    protected float StandardBerryUseage(Pokemon pokemon) { if (pokemon.ability.UseBerryEarly() == true) return standardHealthRequirement; else return adjustedHealthRequirement; }
+    float standardHealthRequirement = 0.25f;
+    float adjustedHealthRequirement = 0.5f;
+    public virtual bool HealsPokemonAfterAttack(Pokemon pokemon) { return false; }
+    public virtual ConditionID AdditionalEffects() { return ConditionID.NA; }
 }

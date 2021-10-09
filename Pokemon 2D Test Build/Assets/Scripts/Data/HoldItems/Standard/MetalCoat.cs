@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class MetalCoat : HoldItemBase
 {
-    public override HoldItemID Id { get { return HoldItemID.MetalCoat; } }
+    public override HoldItemID HoldItemId { get { return HoldItemID.MetalCoat; } }
     public override HoldItemBase ReturnDerivedClassAsNew() { return new MetalCoat(); }
     public override MoveBase AlterUserMoveDetails(MoveBase move)
     {

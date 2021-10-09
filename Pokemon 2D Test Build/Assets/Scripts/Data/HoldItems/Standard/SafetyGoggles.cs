@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class SafetyGoggles : HoldItemBase
 {
-    public override HoldItemID Id { get { return HoldItemID.SafetyGoggles; } }
+    public override HoldItemID HoldItemId { get { return HoldItemID.SafetyGoggles; } }
     public override HoldItemBase ReturnDerivedClassAsNew() { return new SafetyGoggles(); }
     public override float AlterDamageTaken(MoveBase move)
     {

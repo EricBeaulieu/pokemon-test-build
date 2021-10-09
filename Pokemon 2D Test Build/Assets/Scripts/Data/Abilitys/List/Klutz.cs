@@ -12,9 +12,9 @@ public class Klutz : AbilityBase
     }
     public override bool CantUseAnyHeldItems(HoldItemBase holdItem)
     {
-        if (holdItem.Id == HoldItemID.ExpShare || holdItem.Id == HoldItemID.MachoBrace || holdItem.Id == HoldItemID.PowerAnklet ||
-            holdItem.Id == HoldItemID.PowerBand || holdItem.Id == HoldItemID.PowerBelt || holdItem.Id == HoldItemID.PowerBracer ||
-            holdItem.Id == HoldItemID.PowerLens || holdItem.Id == HoldItemID.PowerWeight || holdItem.Id == HoldItemID.LuckyEgg)
+        if (holdItem.HoldItemId == HoldItemID.ExpShare || holdItem.HoldItemId == HoldItemID.MachoBrace || holdItem.HoldItemId == HoldItemID.PowerAnklet ||
+            holdItem.HoldItemId == HoldItemID.PowerBand || holdItem.HoldItemId == HoldItemID.PowerBelt || holdItem.HoldItemId == HoldItemID.PowerBracer ||
+            holdItem.HoldItemId == HoldItemID.PowerLens || holdItem.HoldItemId == HoldItemID.PowerWeight || holdItem.HoldItemId == HoldItemID.LuckyEgg)
         {
             return false;
         }

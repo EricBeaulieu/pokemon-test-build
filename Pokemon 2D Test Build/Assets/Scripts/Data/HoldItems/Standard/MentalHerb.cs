@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class MentalHerb : HoldItemBase
 {
-    public override HoldItemID Id { get { return HoldItemID.MentalHerb; } }
+    public override HoldItemID HoldItemId { get { return HoldItemID.MentalHerb; } }
     public override HoldItemBase ReturnDerivedClassAsNew() { return new MentalHerb(); }
     public override bool RemovesMoveBindingEffectsAfterMoveUsed(Pokemon defendingPokemon)
     {

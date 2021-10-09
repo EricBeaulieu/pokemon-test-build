@@ -97,6 +97,7 @@
     <Compile Include="Assets\Scripts\Party\SummarySystem.cs" />
     <Compile Include="Assets\Scripts\Data\Abilitys\List\Adaptability.cs" />
     <Compile Include="Assets\Scripts\Data\HoldItems\Standard\HeatRock.cs" />
+    <Compile Include="Assets\Scripts\Data\Abilitys\List\Klutz.cs" />
     <Compile Include="Assets\Scripts\Saving\PokemonSavingSystem.cs" />
     <Compile Include="Assets\Scripts\Data\Abilitys\List\GaleWings.cs" />
     <Compile Include="Assets\Scripts\Data\Abilitys\List\MagmaArmor.cs" />
@@ -146,6 +147,7 @@
     <Compile Include="Assets\Scripts\Items\UI\ItemCancelUI.cs" />
     <Compile Include="Assets\Scripts\Characters\MonoBehavior\HealerNpcController.cs" />
     <Compile Include="Assets\Scripts\Items\UI\ArrowButtonUI.cs" />
+    <Compile Include="Assets\Scripts\Data\HoldItems\Berries\Aguav.cs" />
     <Compile Include="Assets\Scripts\Data\Conditions\VolatileStatus\LeechSeed.cs" />
     <Compile Include="Assets\Scripts\Overworld\CuttableTree.cs" />
     <Compile Include="Assets\Scripts\Data\HoldItems\Standard\PoisonBarb.cs" />
@@ -156,6 +158,7 @@
     <Compile Include="Assets\Scripts\Data\Abilitys\List\KeenEye.cs" />
     <Compile Include="Assets\Scripts\Pokemon\NatureBase.cs" />
     <Compile Include="Assets\Scripts\Data\Abilitys\List\Intimidate.cs" />
+    <Compile Include="Assets\Scripts\Data\Abilitys\List\RoughSkin.cs" />
     <Compile Include="Assets\Scripts\Data\Abilitys\List\DauntlessShield.cs" />
     <Compile Include="Assets\Scripts\Dialog\DialogBox.cs" />
     <Compile Include="Assets\Scripts\Data\HoldItems\Standard\LustrousOrb.cs" />
@@ -164,6 +167,7 @@
     <Compile Include="Assets\Scripts\Saving\PokemonSaveData.cs" />
     <Compile Include="Assets\Scripts\Data\Abilitys\List\EffectSpore.cs" />
     <Compile Include="Assets\Scripts\Data\Abilitys\List\FlowerGift.cs" />
+    <Compile Include="Assets\Scripts\Data\Abilitys\List\LiquidOoze.cs" />
     <Compile Include="Assets\Scripts\Data\Abilitys\List\Hustle.cs" />
     <Compile Include="Assets\Scripts\Data\Abilitys\List\QuickFeet.cs" />
     <Compile Include="Assets\Scripts\Data\HoldItems\Standard\FlyingGem.cs" />
@@ -203,6 +207,7 @@
     <Compile Include="Assets\Scripts\Overworld\StartMenu.cs" />
     <Compile Include="Assets\Scripts\Pokemon\Pokemon.cs" />
     <Compile Include="Assets\Scripts\Battle\AttackButton.cs" />
+    <Compile Include="Assets\Scripts\Data\Abilitys\List\LongReach.cs" />
     <Compile Include="Assets\Scripts\Data\Abilitys\List\Swarm.cs" />
     <Compile Include="Assets\Scripts\Data\HoldItems\Standard\HeavyDutyBoots.cs" />
     <Compile Include="Assets\Scripts\Battle\AttackSelectionEventSelector.cs" />
@@ -234,6 +239,7 @@
     <Compile Include="Assets\Scripts\Scene\SceneSystem.cs" />
     <Compile Include="Assets\Scripts\Data\Abilitys\List\Gooey.cs" />
     <Compile Include="Assets\Scripts\Data\Conditions\Status\Sleep.cs" />
+    <Compile Include="Assets\Scripts\Data\Abilitys\List\Libero.cs" />
     <Compile Include="Assets\Scripts\Data\Abilitys\List\IceBody.cs" />
     <Compile Include="Assets\Scripts\Items\UI\ItemMenuButtonUI.cs" />
     <Compile Include="Assets\Scripts\Party\PartyMemberUI.cs" />
@@ -246,11 +252,13 @@
     <Compile Include="Assets\Scripts\Data\Abilitys\List\WaterVeil.cs" />
     <Compile Include="Assets\Scripts\Data\HoldItems\Standard\MentalHerb.cs" />
     <Compile Include="Assets\Scripts\Saving\MoveSaveData.cs" />
+    <Compile Include="Assets\Scripts\Data\Abilitys\List\Infiltrator.cs" />
     <Compile Include="Assets\Scripts\Pokemon\Evolution\EvolveLevelBased.cs" />
     <Compile Include="Assets\Scripts\Data\Weather\WeatherEffectDB.cs" />
     <Compile Include="Assets\Scripts\Data\HoldItems\Standard\Snowball.cs" />
     <Compile Include="Assets\Scripts\Data\Abilitys\List\ArenaTrap.cs" />
     <Compile Include="Assets\Scripts\Data\HoldItems\Standard\ToxicOrb.cs" />
+    <Compile Include="Assets\Scripts\Data\Abilitys\List\IntrepidSword.cs" />
     <Compile Include="Assets\Scripts\Data\Conditions\VolatileStatus\HealBlock.cs" />
     <Compile Include="Assets\Scripts\Data\HoldItems\Standard\DragonGem.cs" />
     <Compile Include="Assets\Scripts\Data\Abilitys\List\Frisk.cs" />
@@ -265,6 +273,7 @@
     <Compile Include="Assets\Scripts\Data\Abilitys\List\Berserk.cs" />
     <Compile Include="Assets\Scripts\Data\Abilitys\List\Galvanize.cs" />
     <Compile Include="Assets\Scripts\Data\HoldItems\Standard\PsychicGem.cs" />
+    <Compile Include="Assets\Scripts\Data\Abilitys\List\LiquidVoice.cs" />
     <Compile Include="Assets\Scripts\Data\HoldItems\Standard\ThroatSpray.cs" />
     <Compile Include="Assets\Scripts\Items\UI\ItemOptionDetailsUI.cs" />
     <Compile Include="Assets\Scripts\Data\HoldItems\Standard\DarkGem.cs" />
@@ -298,6 +307,7 @@
     <Compile Include="Assets\Scripts\Data\Conditions\Status\Paralyzed.cs" />
     <Compile Include="Assets\Scripts\Data\HoldItems\Standard\AirBalloon.cs" />
     <Compile Include="Assets\Scripts\Data\HoldItems\Standard\Blunder Policy.cs" />
+    <Compile Include="Assets\Scripts\Data\Abilitys\List\IronBarbs.cs" />
     <Compile Include="Assets\Scripts\ArtHolders\StatusConditionArt.cs" />
     <Compile Include="Assets\Scripts\Dialog\DialogManager.cs" />
     <Compile Include="Assets\Scripts\Pokemon\Shield\Reflect.cs" />
@@ -374,6 +384,8 @@
     <Compile Include="Assets\Scripts\Data\Abilitys\List\ClearBody.cs" />
     <Compile Include="Assets\Scripts\Data\Abilitys\List\IceScales.cs" />
     <Compile Include="Assets\Scripts\Static Tables\DamageModifiers.cs" />
+    <Compile Include="Assets\Scripts\Items\ScriptableObjects\BerryItem.cs" />
+    <Compile Include="Assets\Scripts\Data\Abilitys\List\Protean.cs" />
     <Compile Include="Assets\Scripts\Pokemon\Evolution\EvolveFriendshipBased.cs" />
     <Compile Include="Assets\Scripts\Data\HoldItems\Standard\Eviolite.cs" />
     <Compile Include="Assets\Scripts\Data\Abilitys\List\SnowWarning.cs" />
@@ -455,19 +467,11 @@
     <Compile Include="Assets\Scripts\Data\Abilitys\List\RainDish.cs" />
     <Compile Include="Assets\Scripts\Data\Abilitys\List\Justified.cs" />
     <Compile Include="Assets\Scripts\Data\Abilitys\List\Soundproof.cs" />
-    <Compile Include="Assets\Scripts\Data\Abilitys\List\Infiltrator.cs" />
-    <Compile Include="Assets\Scripts\Data\Abilitys\List\IntrepidSword.cs" />
-    <Compile Include="Assets\Scripts\Data\Abilitys\List\IronBarbs.cs" />
-    <Compile Include="Assets\Scripts\Data\Abilitys\List\RoughSkin.cs" />
-    <Compile Include="Assets\Scripts\Data\Abilitys\List\Klutz.cs" />
-    <Compile Include="Assets\Scripts\Data\Abilitys\List\Libero.cs" />
-    <Compile Include="Assets\Scripts\Data\Abilitys\List\Protean.cs" />
-    <Compile Include="Assets\Scripts\Data\Abilitys\List\LiquidOoze.cs" />
-    <Compile Include="Assets\Scripts\Data\Abilitys\List\LiquidVoice.cs" />
-    <Compile Include="Assets\Scripts\Data\Abilitys\List\LongReach.cs" />
+    <Compile Include="Assets\Scripts\Data\HoldItems\Berries\Cheri.cs" />
   </ItemGroup>
   <ItemGroup>
-     <None Include="Assets\ScriptTemplates\82-EricBeaulieu__AbilityBase-NewAbilityBase.cs.txt" />
+     <None Include="Assets\ScriptTemplates\82-EricBeaulieu__BerryBase-NewBerryBase.cs.txt" />
+     <None Include="Assets\ScriptTemplates\82-EricBeaulieu__AbilityBase-NewAbilityBase.cs - Copy.txt" />
     <Reference Include="UnityEngine">
       <HintPath>C:\Program Files\Unity\Hub\Editor\2020.2.5f1\Editor\Data\Managed\UnityEngine\UnityEngine.dll</HintPath>
     </Reference>

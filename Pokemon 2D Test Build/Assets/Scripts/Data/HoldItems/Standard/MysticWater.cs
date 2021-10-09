@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class MysticWater : HoldItemBase
 {
-    public override HoldItemID Id { get { return HoldItemID.MysticWater; } }
+    public override HoldItemID HoldItemId { get { return HoldItemID.MysticWater; } }
     public override HoldItemBase ReturnDerivedClassAsNew() { return new MysticWater(); }
     public override MoveBase AlterUserMoveDetails(MoveBase move)
     {

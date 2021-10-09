@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class RazorClaw : HoldItemBase
 {
-    public override HoldItemID Id { get { return HoldItemID.RazorClaw; } }
+    public override HoldItemID HoldItemId { get { return HoldItemID.RazorClaw; } }
     public override HoldItemBase ReturnDerivedClassAsNew() { return new RazorClaw(); }
     public override float AlterStat(Pokemon holder, StatAttribute statAffected)
     {

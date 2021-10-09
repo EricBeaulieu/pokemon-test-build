@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class IcyRock : HoldItemBase
 {
-    public override HoldItemID Id { get { return HoldItemID.IcyRock; } }
+    public override HoldItemID HoldItemId { get { return HoldItemID.IcyRock; } }
     public override HoldItemBase ReturnDerivedClassAsNew() { return new IcyRock(); }
     public override int IncreasedWeatherEffectDuration(WeatherEffectID currentWeatherEffect)
     {

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class BugGem : HoldItemBase
 {
-    public override HoldItemID Id { get { return HoldItemID.BugGem; } }
+    public override HoldItemID HoldItemId { get { return HoldItemID.BugGem; } }
     public override HoldItemBase ReturnDerivedClassAsNew() { return new BugGem(); }
     public override MoveBase AlterUserMoveDetails(MoveBase move)
     {

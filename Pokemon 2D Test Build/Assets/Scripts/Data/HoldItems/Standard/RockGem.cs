@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class RockGem : HoldItemBase
 {
-    public override HoldItemID Id { get { return HoldItemID.RockGem; } }
+    public override HoldItemID HoldItemId { get { return HoldItemID.RockGem; } }
     public override HoldItemBase ReturnDerivedClassAsNew() { return new RockGem(); }
     public override MoveBase AlterUserMoveDetails(MoveBase move)
     {

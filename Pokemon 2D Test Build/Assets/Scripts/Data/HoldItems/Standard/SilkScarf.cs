@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class SilkScarf : HoldItemBase
 {
-    public override HoldItemID Id { get { return HoldItemID.SilkScarf; } }
+    public override HoldItemID HoldItemId { get { return HoldItemID.SilkScarf; } }
     public override HoldItemBase ReturnDerivedClassAsNew() { return new SilkScarf(); }
     public override MoveBase AlterUserMoveDetails(MoveBase move)
     {

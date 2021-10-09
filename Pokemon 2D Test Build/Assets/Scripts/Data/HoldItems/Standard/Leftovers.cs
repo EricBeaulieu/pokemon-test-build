@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Leftovers : HoldItemBase
 {
-    public override HoldItemID Id { get { return HoldItemID.Leftovers; } }
+    public override HoldItemID HoldItemId { get { return HoldItemID.Leftovers; } }
     public override HoldItemBase ReturnDerivedClassAsNew() { return new Leftovers(); }
     public override void OnTurnEnd(Pokemon defendingPokemon)
     {

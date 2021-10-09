@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class FireGem : HoldItemBase
 {
-    public override HoldItemID Id { get { return HoldItemID.FireGem; } }
+    public override HoldItemID HoldItemId { get { return HoldItemID.FireGem; } }
     public override HoldItemBase ReturnDerivedClassAsNew() { return new FireGem(); }
     public override MoveBase AlterUserMoveDetails(MoveBase move)
     {

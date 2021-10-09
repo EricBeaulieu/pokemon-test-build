@@ -811,6 +811,16 @@ public class Pokemon {
         statusChanges.Enqueue(newVolatileStatus.StartMessage(this,sourceBattleUnit.pokemon));
     }
 
+    public void SetVolatileStatus(ConditionID conditionID)
+    {
+        if(HasCurrentVolatileStatus(conditionID) == true)
+        {
+            return;
+        }
+
+        volatileStatus.Add(ConditionsDB.GetConditionBase(conditionID));
+    }
+
     public void CureAllVolatileStatus()
     {
         volatileStatus.Clear();
@@ -1031,14 +1041,14 @@ public class Pokemon {
         {
             if (currentHeldItem == null)
             {
-                return HoldItemDB.GetHoldItem(HoldItemID.NA);
+                return HoldItemDB.GetHoldItem();
             }
             else
             {
                 HoldItemBase holdItem = currentHeldItem.HoldItemAffects();
                 if (ability.CantUseAnyHeldItems(holdItem) == true)
                 {
-                    return HoldItemDB.GetHoldItem(HoldItemID.NA);
+                    return HoldItemDB.GetHoldItem();
                 }
                 return holdItem;
             }

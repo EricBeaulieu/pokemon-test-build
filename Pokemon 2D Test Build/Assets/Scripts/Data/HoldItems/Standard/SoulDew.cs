@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class SoulDew : HoldItemBase
 {
-    public override HoldItemID Id { get { return HoldItemID.SoulDew; } }
+    public override HoldItemID HoldItemId { get { return HoldItemID.SoulDew; } }
     public override HoldItemBase ReturnDerivedClassAsNew() { return new SoulDew(); }
     public override float AlterStat(Pokemon Holder, StatAttribute statAffected)
     {

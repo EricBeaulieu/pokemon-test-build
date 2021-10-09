@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class MuscleBand : HoldItemBase
 {
-    public override HoldItemID Id { get { return HoldItemID.MuscleBand; } }
+    public override HoldItemID HoldItemId { get { return HoldItemID.MuscleBand; } }
     public override HoldItemBase ReturnDerivedClassAsNew() { return new MuscleBand(); }
     public override MoveBase AlterUserMoveDetails(MoveBase move)
     {

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class QuickClaw : HoldItemBase
 {
-    public override HoldItemID Id { get { return HoldItemID.QuickClaw; } }
+    public override HoldItemID HoldItemId { get { return HoldItemID.QuickClaw; } }
     public override HoldItemBase ReturnDerivedClassAsNew() { return new QuickClaw(); }
     public override int AdjustSpeedPriorityTurn()
     {

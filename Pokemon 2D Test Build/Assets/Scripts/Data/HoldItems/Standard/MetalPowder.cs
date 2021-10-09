@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class MetalPowder : HoldItemBase
 {
-    public override HoldItemID Id { get { return HoldItemID.MetalPowder; } }
+    public override HoldItemID HoldItemId { get { return HoldItemID.MetalPowder; } }
     public override HoldItemBase ReturnDerivedClassAsNew() { return new MetalPowder(); }
     public override float AlterStat(Pokemon Holder, StatAttribute statAffected)
     {
