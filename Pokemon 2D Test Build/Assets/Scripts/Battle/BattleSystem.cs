@@ -1140,12 +1140,12 @@ public class BattleSystem : CoreSystem
             }
 
             hpDifference = targetUnit.pokemon.currentHitPoints;
-            if (targetUnit.pokemon.GetHoldItemEffects.HealsPokemonAfterAttack(targetUnit.pokemon) == true && targetUnit.pokemon.currentHitPoints > 0)
+            if (targetUnit.pokemon.GetHoldItemEffects.HealsPokemonAfterTakingDamage(targetUnit.pokemon) == true && targetUnit.pokemon.currentHitPoints > 0)
             {
                 yield return targetUnit.PlayItemUsedAnimation();
 
                 yield return ShowStatusChanges(targetUnit.pokemon);
-                yield return targetUnit.HUD.UpdateHP(previousHP);
+                yield return targetUnit.HUD.UpdateHP(hpDifference);
                 
                 ConditionID conditionAquiredThroughItem = targetUnit.pokemon.GetHoldItemEffects.AdditionalEffects();
                 if (conditionAquiredThroughItem != ConditionID.NA)
@@ -1171,8 +1171,30 @@ public class BattleSystem : CoreSystem
                     targetUnit.pokemon.ItemUsed();
                 }
             }
-            
-            if(targetUnit.pokemon.GetHoldItemEffects.RemovesMoveBindingEffectsAfterMoveUsed(targetUnit.pokemon) == true)
+
+            if (targetUnit.pokemon.GetHoldItemEffects.HealConditionAfterTakingDamage(targetUnit.pokemon) == true && targetUnit.pokemon.currentHitPoints > 0)
+            {
+                yield return targetUnit.PlayItemUsedAnimation();
+
+                yield return dialogSystem.TypeDialog(targetUnit.pokemon.GetHoldItemEffects.SpecializedMessage(targetUnit.pokemon, sourceUnit.pokemon));
+
+                ConditionID curedCondition = targetUnit.pokemon.GetHoldItemEffects.AdditionalEffects();
+                if (curedCondition <= ConditionID.ToxicPoison)
+                {
+                    targetUnit.pokemon.CureStatus();
+                }
+                else
+                {
+                    targetUnit.pokemon.CureVolatileStatus(curedCondition);
+                }
+
+                if (targetUnit.pokemon.GetHoldItemEffects.RemoveItem == true)
+                {
+                    targetUnit.pokemon.ItemUsed();
+                }
+            }
+
+            if (targetUnit.pokemon.GetHoldItemEffects.RemovesMoveBindingEffectsAfterMoveUsed(targetUnit.pokemon) == true)
             {
                 if(targetUnit.pokemon.GetHoldItemEffects.RemoveItem == true)
                 {

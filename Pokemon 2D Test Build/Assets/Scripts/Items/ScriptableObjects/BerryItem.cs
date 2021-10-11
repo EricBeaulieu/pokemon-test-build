@@ -25,7 +25,7 @@ public class BerryItem : ItemBase
 
     public override bool UseItemOption()
     {
-        return false;
+        return HoldItemDB.GetHoldItem(berryID).UseInInventory();
     }
 
     public override string ItemName

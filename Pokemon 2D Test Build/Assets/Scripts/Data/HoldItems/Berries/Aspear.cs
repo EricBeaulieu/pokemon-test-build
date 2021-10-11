@@ -1,0 +1,26 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class Aspear : HoldItemBase
+{
+    public override BerryID BerryId { get { return BerryID.Aspear; } }
+    public override HoldItemBase ReturnDerivedClassAsNew() { return new Aspear(); }
+    public override bool HealConditionAfterTakingDamage(Pokemon holder)
+    {
+        if (holder.GetCurrentStatus() == ConditionID.Frozen)
+        {
+            RemoveItem = true;
+            return true;
+        }
+        return base.HealConditionAfterTakingDamage(holder);
+    }
+    public override string SpecializedMessage(Pokemon holder, Pokemon opposingPokemon)
+    {
+        return $"{holder.currentName} cured its freezing using the {GlobalTools.SplitCamelCase(BerryId.ToString())} berry!";
+    }
+    public override ConditionID AdditionalEffects()
+    {
+        return ConditionID.Frozen;
+    }
+}

@@ -8,9 +8,10 @@ public class Aguav : HoldItemBase
     public override HoldItemBase ReturnDerivedClassAsNew() { return new Aguav(); }
     ConditionID condition = ConditionID.NA;
     Flavor hatedFlavor = Flavor.Sweet;
-    public override bool HealsPokemonAfterAttack(Pokemon pokemon)
+    public override bool HealsPokemonAfterTakingDamage(Pokemon pokemon)
     {
-        if((pokemon.currentHitPoints/pokemon.maxHitPoints) <= StandardBerryUseage(pokemon))
+        float pokemonHealthPercentage = (float)pokemon.currentHitPoints / (float)pokemon.maxHitPoints;
+        if (pokemonHealthPercentage <= StandardBerryUseage(pokemon))
         {
             RemoveItem = true;
             int hpHealed = Mathf.FloorToInt(pokemon.maxHitPoints / 3);
@@ -21,7 +22,7 @@ public class Aguav : HoldItemBase
             }
 
             pokemon.UpdateHPRestored(hpHealed);
-            pokemon.statusChanges.Enqueue($"{pokemon.currentName} restored HP using {GlobalTools.SplitCamelCase(BerryId.ToString())} berry!");
+            pokemon.statusChanges.Enqueue($"{pokemon.currentName} restored HP using the {GlobalTools.SplitCamelCase(BerryId.ToString())} berry!");
 
             if(pokemon.nature.GetFlavourRating(hatedFlavor) < 0)
             {
@@ -30,7 +31,7 @@ public class Aguav : HoldItemBase
 
             return true;
         }
-        return base.HealsPokemonAfterAttack(pokemon);
+        return base.HealsPokemonAfterTakingDamage(pokemon);
     }
     public override ConditionID AdditionalEffects()
     {

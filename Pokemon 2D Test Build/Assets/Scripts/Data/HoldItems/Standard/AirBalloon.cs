@@ -7,7 +7,7 @@ public class AirBalloon : HoldItemBase
     public override HoldItemID HoldItemId { get { return HoldItemID.AirBalloon; } }
     public override HoldItemBase ReturnDerivedClassAsNew() { return new AirBalloon(); }
     public override bool PlayAnimationWhenUsed() { return false; }
-    public override float AlterDamageTaken(MoveBase move)
+    public override float AlterDamageTaken(MoveBase move, bool superEffective)
     {
         if(move.Type == ElementType.Ground)
         {

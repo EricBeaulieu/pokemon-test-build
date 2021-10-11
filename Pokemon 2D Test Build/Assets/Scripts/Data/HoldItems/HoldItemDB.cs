@@ -34,7 +34,7 @@ public enum HoldItemID
 public enum BerryID
 {
     NA,
-    Aguav,Cheri
+    Aguav, Aspear, Babiri, Charti,Cheri, Chesto, Chilan, Chople, Coba, Colbur, Figy, Grepa, Haban,Hondew, Iapapa, Kasib, Kebia,Kelpsy, Leppa, Lum, Mago, Occa,Oran, Passho, Payapa, Pecha, Persim, Pomeg, Qualot,Rawst, Rindo, Roseli, Shuca, Sitrus, Tamato, Tanga,Wacan, Wiki, Yache
 }
 
 public static class HoldItemDB

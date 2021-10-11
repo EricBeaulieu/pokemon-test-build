@@ -23,7 +23,7 @@ public abstract class HoldItemBase
     public abstract HoldItemBase ReturnDerivedClassAsNew();
     public bool RemoveItem { get; protected set; }
     public virtual bool PlayAnimationWhenUsed() { return true; }
-    public virtual float AlterDamageTaken(MoveBase move) { return 1f; }
+    public virtual float AlterDamageTaken(MoveBase move, bool superEffective) { return 1f; }
     public virtual float PowersUpSuperEffectiveAttacks(bool superEffective) { return 1f; }
     public virtual void OnTurnEnd(Pokemon defendingPokemon) { }
     public virtual List<StatBoost> AlterStatAfterTakingDamageFromCertainType(ElementType attackType,bool superEffective) { return null; }
@@ -55,7 +55,7 @@ public abstract class HoldItemBase
     /// checks if the item adjust this pokemons attack order if all Pokémon use are within the same Speed Priority level.
     /// </summary>
     /// <returns>1 means this pokemon is going first, 0 means no changes and -1 means its always last</returns>
-    public virtual int AdjustSpeedPriorityTurn() { return 0; }//not implimented
+    public virtual int AdjustSpeedPriorityTurn() { return 0; }
     public virtual bool HurtsAttacker() { return false; }
     public virtual int AlterUserHPAfterAttack(Pokemon holder,MoveBase move,int damageDealt) { return 0; }
     public virtual int ShieldDurationBonus() { return 0; }
@@ -74,10 +74,12 @@ public abstract class HoldItemBase
 
     //Berries effects
     public virtual BerryID BerryId { get; }
+    public virtual bool UseInInventory() { return false; }
     public virtual bool UsedInInventoryEffect(Pokemon pokemon) { return false; }
-    protected float StandardBerryUseage(Pokemon pokemon) { if (pokemon.ability.UseBerryEarly() == true) return standardHealthRequirement; else return adjustedHealthRequirement; }
+    protected float StandardBerryUseage(Pokemon pokemon) { if (pokemon.ability.UseBerryEarly() == true) return adjustedHealthRequirement; else return standardHealthRequirement; }
     float standardHealthRequirement = 0.25f;
     float adjustedHealthRequirement = 0.5f;
-    public virtual bool HealsPokemonAfterAttack(Pokemon pokemon) { return false; }
+    public virtual bool HealsPokemonAfterTakingDamage(Pokemon pokemon) { return false; }
     public virtual ConditionID AdditionalEffects() { return ConditionID.NA; }
+    public virtual bool HealConditionAfterTakingDamage(Pokemon holder) { return false; }
 }

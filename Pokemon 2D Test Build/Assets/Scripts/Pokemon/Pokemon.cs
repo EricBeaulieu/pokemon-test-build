@@ -543,7 +543,7 @@ public class Pokemon {
         }
 
         //Item effects
-        float itemBonus = GetHoldItemEffects.AlterDamageTaken(move);
+        float itemBonus = GetHoldItemEffects.AlterDamageTaken(move, (damageDetails.criticalHit > 1));
         itemBonus *= attackingPokemon.GetHoldItemEffects.PowersUpSuperEffectiveAttacks((damageDetails.criticalHit > 1));
 
         damageDetails.alterStatAfterTakingDamageFromCertainTypeItem = GetHoldItemEffects.AlterStatAfterTakingDamageFromCertainType(move.Type,damageDetails.typeEffectiveness > 1);
@@ -946,6 +946,11 @@ public class Pokemon {
         {
             _effortValues.AddEffortValue(eV);
         }
+    }
+
+    public bool RemoveEffortValue(EarnableEV effortValuesRemoved)
+    {
+        return effortValues.RemoveEffortValue(effortValuesRemoved);
     }
 
     AbilityBase SetAbility(AbilityBase presetAbility = null)

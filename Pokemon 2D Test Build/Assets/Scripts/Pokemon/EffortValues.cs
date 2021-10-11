@@ -80,6 +80,69 @@ public class EffortValues : SpecifiedValues
         }
     }
 
+    public bool RemoveEffortValue(EarnableEV removedEV)
+    {
+        if (TotalsEvEarned <= 0)
+        {
+            return false;
+        }
+
+        if(removedEV.statValue <= 0)
+        {
+            return false;
+        }
+
+        switch (removedEV.statAttribute)
+        {
+            case StatAttribute.HitPoints:
+                if(hitPoints >0)
+                {
+                    hitPoints -= removedEV.statValue;
+                    return true;
+                }
+                return false;
+            case StatAttribute.Attack:
+                if (attack > 0)
+                {
+                    attack -= removedEV.statValue;
+                    return true;
+                }
+                return false;
+            case StatAttribute.Defense:
+                if (defense > 0)
+                {
+                    defense -= removedEV.statValue;
+                    return true;
+                }
+                return false;
+            case StatAttribute.SpecialAttack:
+                specialAttack += removedEV.statValue;
+                if (specialAttack > 0)
+                {
+                    specialAttack -= removedEV.statValue;
+                    return true;
+                }
+                return false;
+            case StatAttribute.SpecialDefense:
+                specialDefense += removedEV.statValue;
+                if (specialDefense > 0)
+                {
+                    specialDefense -= removedEV.statValue;
+                    return true;
+                }
+                return false;
+            case StatAttribute.Speed:
+                speed += removedEV.statValue;
+                if (attack > 0)
+                {
+                    speed -= removedEV.statValue;
+                    return true;
+                }
+                return false;
+        }
+        return false;
+    }
+
     int TotalsEvEarned
     {
         get { return hitPoints + attack + defense + specialAttack + specialDefense + speed; }
@@ -91,10 +154,7 @@ public class EffortValues : SpecifiedValues
         protected set
         {
             base.hitPoints = value;
-            if(base.hitPoints > MAXIMUM_EV_Value)
-            {
-                base.hitPoints = MAXIMUM_EV_Value;
-            }
+            Mathf.Clamp(base.hitPoints, 0, MAXIMUM_EV_Value);
         }
     }
 
@@ -104,10 +164,7 @@ public class EffortValues : SpecifiedValues
         protected set
         {
             base.attack = value;
-            if (base.attack > MAXIMUM_EV_Value)
-            {
-                base.attack = MAXIMUM_EV_Value;
-            }
+            Mathf.Clamp(base.attack, 0, MAXIMUM_EV_Value);
         }
     }
 
@@ -117,10 +174,7 @@ public class EffortValues : SpecifiedValues
         protected set
         {
             base.defense = value;
-            if (base.defense > MAXIMUM_EV_Value)
-            {
-                base.defense = MAXIMUM_EV_Value;
-            }
+            Mathf.Clamp(base.defense, 0, MAXIMUM_EV_Value);
         }
     }
 
@@ -130,10 +184,7 @@ public class EffortValues : SpecifiedValues
         protected set
         {
             base.specialAttack = value;
-            if (base.specialAttack > MAXIMUM_EV_Value)
-            {
-                base.specialAttack = MAXIMUM_EV_Value;
-            }
+            Mathf.Clamp(base.specialAttack, 0, MAXIMUM_EV_Value);
         }
     }
 
@@ -143,10 +194,7 @@ public class EffortValues : SpecifiedValues
         protected set
         {
             base.specialDefense = value;
-            if (base.specialDefense > MAXIMUM_EV_Value)
-            {
-                base.specialDefense = MAXIMUM_EV_Value;
-            }
+            Mathf.Clamp(base.specialDefense, 0, MAXIMUM_EV_Value);
         }
     }
 
@@ -156,10 +204,7 @@ public class EffortValues : SpecifiedValues
         protected set
         {
             base.speed = value;
-            if (base.speed > MAXIMUM_EV_Value)
-            {
-                base.speed = MAXIMUM_EV_Value;
-            }
+            Mathf.Clamp(base.speed, 0, MAXIMUM_EV_Value);
         }
     }
 }
