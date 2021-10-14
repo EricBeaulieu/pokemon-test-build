@@ -14,7 +14,7 @@ public class AngerPoint : AbilityBase
     {
         if (defendingPokemon.statBoosts[StatAttribute.Attack] < 6)
         {
-            return new StatBoost() { stat = StatAttribute.Attack, boost = 12 };
+            return new StatBoost(StatAttribute.Attack,12);
         }
         return base.MaxOutStatUponCriticalHit(defendingPokemon);
     }

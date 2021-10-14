@@ -14,7 +14,7 @@ public class TanglingHair : AbilityBase
     {
         if (move.PhysicalContact == true)
         {
-            return new StatBoost() { stat = StatAttribute.Speed, boost = -1 };
+            return new StatBoost(StatAttribute.Speed, -1);
         }
         return base.AlterStatAfterTakingDamage(move);
     }

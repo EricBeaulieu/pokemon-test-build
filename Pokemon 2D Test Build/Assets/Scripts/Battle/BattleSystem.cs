@@ -5,8 +5,6 @@ using Random = UnityEngine.Random;
 using UnityEngine.UI;
 using System.Linq;
 
-public enum BattleState { Start, ActionSelection, MoveSelection, PerformMove, Busy, BattleOver}
-
 public class BattleSystem : CoreSystem
 {
     [SerializeField] Image backgroundArt;
@@ -480,7 +478,7 @@ public class BattleSystem : CoreSystem
     IEnumerator PlayerPokemonItemPreventsMoveFromBeingUsedIEnumerator(HoldItemBase holdItem)
     {
         EnableAttackMoveSelector(false);
-        yield return dialogSystem.TypeDialog($"{holdItem.SpecializedMessage(playerBattleUnit.pokemon,enemyBattleUnit.pokemon)}");
+        yield return dialogSystem.TypeDialog($"{holdItem.SpecializedMessage(playerBattleUnit,enemyBattleUnit.pokemon)}");
         yield return new WaitForSeconds(1);
         dialogSystem.SetDialogText($"What will {playerBattleUnit.pokemon.currentName} do?");
         EnableAttackMoveSelector(true);
@@ -529,7 +527,7 @@ public class BattleSystem : CoreSystem
 
         if(playerBattleUnit.pokemon.GetHoldItemEffects.FleeWithoutFail() == true)
         {
-            yield return dialogSystem.TypeDialog(playerBattleUnit.pokemon.GetHoldItemEffects.SpecializedMessage(playerBattleUnit.pokemon,enemyBattleUnit.pokemon), true);
+            yield return dialogSystem.TypeDialog(playerBattleUnit.pokemon.GetHoldItemEffects.SpecializedMessage(playerBattleUnit,enemyBattleUnit.pokemon), true);
             OnBattleOver(true);
             yield break;
         }
@@ -712,7 +710,15 @@ public class BattleSystem : CoreSystem
             yield break;
         }
 
-        sourceUnit.lastMoveUsed = move;
+        if(sourceUnit.lastMoveUsed == move)
+        {
+            sourceUnit.lastMoveUsedConsecutively++;
+        }
+        else
+        {
+            sourceUnit.lastMoveUsed = move;
+            sourceUnit.lastMoveUsedConsecutively = 0;
+        }
         //This is here incase the pokemon hits itself in confusion for the smooth animation
         int previousHP = sourceUnit.pokemon.currentHitPoints;
 
@@ -766,7 +772,7 @@ public class BattleSystem : CoreSystem
         }
 
         alteredMove = sourceUnit.pokemon.ability.AlterMoveDetails(move.moveBase);
-        alteredMove = sourceUnit.pokemon.GetHoldItemEffects.AlterUserMoveDetails(alteredMove);
+        alteredMove = sourceUnit.pokemon.GetHoldItemEffects.AlterUserMoveDetails(sourceUnit,alteredMove);
         alteredMove = targetUnit.pokemon.GetHoldItemEffects.AlterOpposingMoveDetails(alteredMove);
         alteredMove = sourceUnit.pokemon.ability.BoostsMovePowerWhenLast(currentTurnDetails.Count <= 1, alteredMove);
 
@@ -809,28 +815,28 @@ public class BattleSystem : CoreSystem
                     }
                 }
 
-                targetUnit.pokemon.TakeDamage(damageDetails, alteredMove, sourceUnit.pokemon,targetUnit.shields);
+                targetUnit.pokemon.TakeDamage(damageDetails, alteredMove, sourceUnit,targetUnit);
 
-                if (damageDetails.sourceItemUsed == true)
+                if (sourceUnit.removeItem == true)
                 {
                     if(sourceUnit.pokemon.GetHoldItemEffects.PlayAnimationWhenUsed() == true)
                     {
                         yield return sourceUnit.PlayItemUsedAnimation();
-                        yield return dialogSystem.TypeDialog(sourceUnit.pokemon.GetHoldItemEffects.SpecializedMessage(sourceUnit.pokemon, targetUnit.pokemon));
+                        yield return dialogSystem.TypeDialog(sourceUnit.pokemon.GetHoldItemEffects.SpecializedMessage(sourceUnit, targetUnit.pokemon));
                     }
-                    sourceUnit.pokemon.ItemUsed();
+                    sourceUnit.RemoveCurrentItemFromPokemon();
                 }
 
                 yield return sourceUnit.PlayAttackAnimation();
 
-                if (damageDetails.targetItemUsed == true)
+                if (targetUnit.removeItem == true)
                 {
                     if(targetUnit.pokemon.GetHoldItemEffects.PlayAnimationWhenUsed() == true)
                     {
                         yield return targetUnit.PlayItemUsedAnimation();
                     }
-                    yield return dialogSystem.TypeDialog(targetUnit.pokemon.GetHoldItemEffects.SpecializedMessage(targetUnit.pokemon, sourceUnit.pokemon));
-                    targetUnit.pokemon.ItemUsed();
+                    yield return dialogSystem.TypeDialog(targetUnit.pokemon.GetHoldItemEffects.SpecializedMessage(targetUnit, sourceUnit.pokemon));
+                    targetUnit.RemoveCurrentItemFromPokemon();
                 }
 
                 bool disableMoveAfterAnimation = targetUnit.pokemon.ability.DisableMove(sourceUnit, move);
@@ -850,7 +856,7 @@ public class BattleSystem : CoreSystem
                     {
                         if (i > 0)
                         {
-                            targetUnit.pokemon.TakeDamage(damageDetails,alteredMove, sourceUnit.pokemon, targetUnit.shields);
+                            targetUnit.pokemon.TakeDamage(damageDetails,alteredMove, sourceUnit,targetUnit);
                         }
 
                         if (alteredMove.Target == MoveTarget.Foe && damageDetails.typeEffectiveness != 0)
@@ -933,7 +939,7 @@ public class BattleSystem : CoreSystem
                 if(targetUnit.pokemon.currentHitPoints > 0)
                 {
                     yield return ApplyStatChanges(damageDetails.defendersStatBoostByAbility, targetUnit, MoveTarget.Foe);
-                    yield return ApplyStatChanges(damageDetails.alterStatAfterTakingDamageFromCertainTypeItem, targetUnit, MoveTarget.Foe);
+                    yield return ApplyStatChanges(damageDetails.alterStatAfterTakingDamage, targetUnit, MoveTarget.Foe);
                 }
 
                 if (sourceUnit.pokemon.currentHitPoints > 0)
@@ -1085,7 +1091,7 @@ public class BattleSystem : CoreSystem
             int hpDifference;
             if (targetUnit.pokemon.GetHoldItemEffects.HurtsAttacker() == true && sourceUnit.pokemon.currentHitPoints > 0)
             {
-                hpDifference = targetUnit.pokemon.GetHoldItemEffects.AlterUserHPAfterAttack(sourceUnit.pokemon, alteredMove, (hpPriorToAttack - targetUnit.pokemon.currentHitPoints));
+                hpDifference = targetUnit.pokemon.GetHoldItemEffects.AlterUserHPAfterAttack(sourceUnit, alteredMove, (hpPriorToAttack - targetUnit.pokemon.currentHitPoints));
                 previousHP = sourceUnit.pokemon.currentHitPoints;
 
                 if (hpDifference != 0)
@@ -1099,8 +1105,12 @@ public class BattleSystem : CoreSystem
                         sourceUnit.pokemon.UpdateHPDamage(-hpDifference);
                     }
 
+                    if (targetUnit.pokemon.GetHoldItemEffects.PlayAnimationWhenUsed() == true)
+                    {
+                        yield return targetUnit.PlayItemUsedAnimation();
+                    }
                     yield return sourceUnit.HUD.UpdateHP(previousHP);
-                    yield return dialogSystem.TypeDialog(targetUnit.pokemon.GetHoldItemEffects.SpecializedMessage(targetUnit.pokemon, sourceUnit.pokemon));
+                    yield return dialogSystem.TypeDialog(targetUnit.pokemon.GetHoldItemEffects.SpecializedMessage(targetUnit, sourceUnit.pokemon));
 
                     if (sourceUnit.pokemon.currentHitPoints <= 0)
                     {
@@ -1110,7 +1120,7 @@ public class BattleSystem : CoreSystem
             }
             else if(sourceUnit.pokemon.GetHoldItemEffects.HurtsAttacker() == false && sourceUnit.pokemon.currentHitPoints > 0)
             {
-                hpDifference = sourceUnit.pokemon.GetHoldItemEffects.AlterUserHPAfterAttack(sourceUnit.pokemon, alteredMove, (hpPriorToAttack - targetUnit.pokemon.currentHitPoints));
+                hpDifference = sourceUnit.pokemon.GetHoldItemEffects.AlterUserHPAfterAttack(sourceUnit, alteredMove, (hpPriorToAttack - targetUnit.pokemon.currentHitPoints));
                 previousHP = sourceUnit.pokemon.currentHitPoints;
 
                 if (hpDifference != 0)
@@ -1129,7 +1139,7 @@ public class BattleSystem : CoreSystem
                         yield return sourceUnit.PlayItemUsedAnimation();
                     }
                     yield return sourceUnit.HUD.UpdateHP(previousHP);
-                    yield return dialogSystem.TypeDialog(sourceUnit.pokemon.GetHoldItemEffects.SpecializedMessage(sourceUnit.pokemon, targetUnit.pokemon));
+                    yield return dialogSystem.TypeDialog(sourceUnit.pokemon.GetHoldItemEffects.SpecializedMessage(sourceUnit, targetUnit.pokemon));
                 }
 
 
@@ -1140,7 +1150,7 @@ public class BattleSystem : CoreSystem
             }
 
             hpDifference = targetUnit.pokemon.currentHitPoints;
-            if (targetUnit.pokemon.GetHoldItemEffects.HealsPokemonAfterTakingDamage(targetUnit.pokemon) == true && targetUnit.pokemon.currentHitPoints > 0)
+            if (targetUnit.pokemon.GetHoldItemEffects.HealsPokemonAfterTakingDamage(targetUnit, damageDetails.typeEffectiveness > 1) == true && targetUnit.pokemon.currentHitPoints > 0)
             {
                 yield return targetUnit.PlayItemUsedAnimation();
 
@@ -1150,7 +1160,7 @@ public class BattleSystem : CoreSystem
                 ConditionID conditionAquiredThroughItem = targetUnit.pokemon.GetHoldItemEffects.AdditionalEffects();
                 if (conditionAquiredThroughItem != ConditionID.NA)
                 {
-                    yield return dialogSystem.TypeDialog(targetUnit.pokemon.GetHoldItemEffects.SpecializedMessage(targetUnit.pokemon, sourceUnit.pokemon));
+                    yield return dialogSystem.TypeDialog(targetUnit.pokemon.GetHoldItemEffects.SpecializedMessage(targetUnit, sourceUnit.pokemon));
                     
                     if(conditionAquiredThroughItem <= ConditionID.ToxicPoison)
                     {
@@ -1166,17 +1176,17 @@ public class BattleSystem : CoreSystem
                     }
                 }
 
-                if(targetUnit.pokemon.GetHoldItemEffects.RemoveItem == true)
+                if(targetUnit.removeItem == true)
                 {
-                    targetUnit.pokemon.ItemUsed();
+                    targetUnit.RemoveCurrentItemFromPokemon();
                 }
             }
 
-            if (targetUnit.pokemon.GetHoldItemEffects.HealConditionAfterTakingDamage(targetUnit.pokemon) == true && targetUnit.pokemon.currentHitPoints > 0)
+            if (targetUnit.pokemon.GetHoldItemEffects.HealConditionAfterTakingDamage(targetUnit) == true && targetUnit.pokemon.currentHitPoints > 0)
             {
                 yield return targetUnit.PlayItemUsedAnimation();
 
-                yield return dialogSystem.TypeDialog(targetUnit.pokemon.GetHoldItemEffects.SpecializedMessage(targetUnit.pokemon, sourceUnit.pokemon));
+                yield return dialogSystem.TypeDialog(targetUnit.pokemon.GetHoldItemEffects.SpecializedMessage(targetUnit, sourceUnit.pokemon));
 
                 ConditionID curedCondition = targetUnit.pokemon.GetHoldItemEffects.AdditionalEffects();
                 if (curedCondition <= ConditionID.ToxicPoison)
@@ -1188,42 +1198,60 @@ public class BattleSystem : CoreSystem
                     targetUnit.pokemon.CureVolatileStatus(curedCondition);
                 }
 
-                if (targetUnit.pokemon.GetHoldItemEffects.RemoveItem == true)
+                if (targetUnit.removeItem == true)
                 {
-                    targetUnit.pokemon.ItemUsed();
+                    targetUnit.RemoveCurrentItemFromPokemon();
                 }
             }
 
-            if (targetUnit.pokemon.GetHoldItemEffects.RemovesMoveBindingEffectsAfterMoveUsed(targetUnit.pokemon) == true)
+            if (targetUnit.pokemon.GetHoldItemEffects.RemovesMoveBindingEffectsAfterMoveUsed(targetUnit) == true)
             {
-                if(targetUnit.pokemon.GetHoldItemEffects.RemoveItem == true)
+                if(targetUnit.removeItem == true)
                 {
                     if(targetUnit.pokemon.GetHoldItemEffects.PlayAnimationWhenUsed() == true)
                     {
                         yield return targetUnit.PlayItemUsedAnimation();
                     }
-                    targetUnit.pokemon.ItemUsed();
+                    targetUnit.RemoveCurrentItemFromPokemon();
                 }
             }
 
-            StatBoost statBoost = sourceUnit.pokemon.GetHoldItemEffects.AlterStatAfterUsingSpecificMove(move.moveBase);
+            StatBoost statBoost = sourceUnit.pokemon.GetHoldItemEffects.AlterStatAfterUsingSpecificMove(sourceUnit,move.moveBase);
             if (statBoost != null)
             {
                 yield return sourceUnit.PlayItemUsedAnimation();
-                sourceUnit.pokemon.ItemUsed();
                 yield return ApplyStatChanges(new List<StatBoost>() { statBoost }, targetUnit, MoveTarget.Self,sourceUnit);
+            }
+
+            if(sourceUnit.removeItem == true)
+            {
+                sourceUnit.RemoveCurrentItemFromPokemon();
             }
         }
         else
         {
+            if(sourceUnit.removeItem == true)
+            {
+                if (sourceUnit.pokemon.GetHoldItemEffects.PlayAnimationWhenUsed() == true)
+                {
+                    yield return sourceUnit.PlayItemUsedAnimation();
+                    yield return dialogSystem.TypeDialog(sourceUnit.pokemon.GetHoldItemEffects.SpecializedMessage(sourceUnit, targetUnit.pokemon));
+                }
+                sourceUnit.RemoveCurrentItemFromPokemon();
+            }
+
             yield return sourceUnit.PlayAttackAnimation();
             yield return dialogSystem.TypeDialog($"{sourceUnit.pokemon.currentName}'s attack missed!");
-            StatBoost statBoost = sourceUnit.pokemon.GetHoldItemEffects.RaisesStatUponMissing();
+            StatBoost statBoost = sourceUnit.pokemon.GetHoldItemEffects.RaisesStatUponMissing(sourceUnit);
             if(statBoost != null)
             {
                 yield return sourceUnit.PlayItemUsedAnimation();
-                sourceUnit.pokemon.ItemUsed();
                 yield return ApplyStatChanges(new List<StatBoost>() { statBoost }, sourceUnit, MoveTarget.Foe);
+            }
+
+            if (sourceUnit.removeItem == true)
+            {
+                sourceUnit.RemoveCurrentItemFromPokemon();
             }
         }
 
@@ -1246,11 +1274,15 @@ public class BattleSystem : CoreSystem
         }
         else
         {
-            if(targetUnit.pokemon.GetHoldItemEffects.RestoresAllLoweredStatsToNormalAfterAttackFinished(targetUnit.pokemon) == true)
+            if(targetUnit.pokemon.GetHoldItemEffects.RestoresAllLoweredStatsToNormalAfterAttackFinished(targetUnit) == true)
             {
                 yield return targetUnit.PlayItemUsedAnimation();
-                yield return dialogSystem.TypeDialog(targetUnit.pokemon.GetHoldItemEffects.SpecializedMessage(targetUnit.pokemon, sourceUnit.pokemon));
-                targetUnit.pokemon.ItemUsed();
+                yield return dialogSystem.TypeDialog(targetUnit.pokemon.GetHoldItemEffects.SpecializedMessage(targetUnit, sourceUnit.pokemon));
+            }
+
+            if(targetUnit.removeItem == true)
+            {
+                targetUnit.RemoveCurrentItemFromPokemon();
             }
         }
 
@@ -1411,6 +1443,11 @@ public class BattleSystem : CoreSystem
 
         moveAccuracy *= source.accuracy;
 
+        if(source.GetHoldItemEffects.AdjustAccuracyTo100(source) == true)
+        {
+            moveAccuracy = 100;
+        }
+
         float targetEvasion = target.evasion;
 
         if (source.ability.IgnoreStatIncreases(StatAttribute.Evasion) == true && targetEvasion > 1)
@@ -1541,7 +1578,7 @@ public class BattleSystem : CoreSystem
             ConditionID condition = sourceUnit.pokemon.GetHoldItemEffects.InflictConditionAtTurnEnd();
             if(condition != ConditionID.NA)
             {
-                sourceUnit.pokemon.SetStatusByItem(condition, sourceUnit.pokemon.GetHoldItemEffects.SpecializedMessage(sourceUnit.pokemon,targetUnit.pokemon));
+                sourceUnit.pokemon.SetStatusByItem(condition, sourceUnit.pokemon.GetHoldItemEffects.SpecializedMessage(sourceUnit,targetUnit.pokemon));
             }
 
             if(currentHP != sourceUnit.pokemon.currentHitPoints)
@@ -1889,13 +1926,19 @@ public class BattleSystem : CoreSystem
         {
             for (int i = 0; i < currentTurnDetails.Count; i++)
             {
-                int adjustedPriority = currentTurnDetails[i].attackingPokemon.pokemon.GetHoldItemEffects.AdjustSpeedPriorityTurn();
+                int adjustedPriority = currentTurnDetails[i].attackingPokemon.pokemon.GetHoldItemEffects.AdjustSpeedPriorityTurn(currentTurnDetails[i].attackingPokemon);
 
                 if (adjustedPriority != 0)
                 {
                     if (adjustedPriority > 0)
                     {
                         yield return currentTurnDetails[i].attackingPokemon.PlayItemUsedAnimation();
+                        yield return dialogSystem.TypeDialog(currentTurnDetails[i].attackingPokemon.pokemon.GetHoldItemEffects.SpecializedMessage(currentTurnDetails[i].attackingPokemon, currentTurnDetails[1 - i].attackingPokemon.pokemon));
+                    }
+
+                    if(currentTurnDetails[i].attackingPokemon.removeItem == true)
+                    {
+                        currentTurnDetails[i].attackingPokemon.RemoveCurrentItemFromPokemon();
                     }
 
                     TurnAttackDetails firstAttack = currentTurnDetails[i];
@@ -2419,7 +2462,7 @@ public class BattleSystem : CoreSystem
 
             playerBattleUnit.pokemon.ability.FetchPokeBallFirstFailedThrow(currentPokeball, playerBattleUnit.pokemon);
 
-            StartCoroutine(EnemyMove());
+            yield return EnemyMove();
         }
     }
 
@@ -2429,6 +2472,21 @@ public class BattleSystem : CoreSystem
         playerBattleUnit.HUD.UpdateHud();
         StartCoroutine(EnemyMove());
         EnableActionSelector(false);
+    }
+
+    public void UseBattleEffectFromInventory(BattleEffectItem battleitem)
+    {
+        dialogSystem.SetCurrentDialogBox(dialogBox);
+        EnableActionSelector(false);
+        StartCoroutine(PlayerUsedBattleEffectItem(battleitem));
+    }
+
+    IEnumerator PlayerUsedBattleEffectItem(BattleEffectItem battleitem)
+    {
+        yield return dialogSystem.TypeDialog($"{_playerController.TrainerName} used {battleitem.ItemName}");
+        List<StatBoost> abilityStatBoosts = new List<StatBoost>() { new StatBoost(battleitem.GetStatAttribute, 1) };
+        yield return ApplyStatChanges(abilityStatBoosts, playerBattleUnit, MoveTarget.Foe);
+        yield return EnemyMove();
     }
 
     #endregion

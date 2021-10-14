@@ -14,7 +14,7 @@ public class Berserk : AbilityBase
     {
         if(defendingPokemon.currentHitPoints <= (defendingPokemon.maxHitPoints/2))
         {
-            return new StatBoost() { stat = StatAttribute.SpecialAttack, boost = 1 };
+            return new StatBoost(StatAttribute.SpecialAttack,1);
         }
         return base.BoostStatUponCertainConditions(defendingPokemon);
     }

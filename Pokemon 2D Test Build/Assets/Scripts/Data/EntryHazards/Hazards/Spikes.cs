@@ -6,7 +6,7 @@ public class Spikes : EntryHazardBase
 {
     public override EntryHazardID Id { get { return EntryHazardID.Spikes; } }
     public override EntryHazardBase ReturnDerivedClassAsNew() { return new Spikes(); }
-    protected override int _maxLayers() { return 3; }
+    protected override int maxLayers() { return 3; }
     public override string StartMessage(BattleUnit battleUnit)
     {
         string message = "Spikes were scattered all around the feet of the ";

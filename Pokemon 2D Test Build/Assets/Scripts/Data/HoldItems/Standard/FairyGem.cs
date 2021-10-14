@@ -5,16 +5,15 @@ using UnityEngine;
 public class FairyGem : HoldItemBase
 {
     public override HoldItemID HoldItemId { get { return HoldItemID.FairyGem; } }
-    public override HoldItemBase ReturnDerivedClassAsNew() { return new FairyGem(); }
     public override bool PlayAnimationWhenUsed() { return true; }
-    public override MoveBase AlterUserMoveDetails(MoveBase move)
+    public override MoveBase AlterUserMoveDetails(BattleUnit holder, MoveBase move)
     {
         if (move.Type == ElementType.Fairy && move.MoveType != MoveType.Status)
         {
-            RemoveItem = true;
+            holder.removeItem = true;
             move = move.Clone();
             move.AdjustedMovePower(0.5f);
         }
-        return base.AlterUserMoveDetails(move);
+        return base.AlterUserMoveDetails(holder,move);
     }
 }

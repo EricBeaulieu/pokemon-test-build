@@ -378,8 +378,13 @@ public class InventorySystem : CoreSystem
                 partySystem.OpenPartySystemDueToInventoryItem(item, true);
                 break;
             case itemType.Berry:
+                CloseSystem();
+                partySystem.OpenPartySystemDueToInventoryItem(item, true);
                 break;
             case itemType.Battle:
+                battleSystem.UseBattleEffectFromInventory((BattleEffectItem)item.ItemBase);
+                RemoveItem(item);
+                CloseSystem();
                 break;
             case itemType.KeyItem:
                 break;

@@ -5,18 +5,17 @@ using UnityEngine;
 public class CellBattery : HoldItemBase
 {
     public override HoldItemID HoldItemId { get { return HoldItemID.CellBattery; } }
-    public override HoldItemBase ReturnDerivedClassAsNew() { return new CellBattery(); }
     List<StatBoost> statBoosts = new List<StatBoost>()
     {
-        new StatBoost() { stat = StatAttribute.Attack, boost = 1 }
+        new StatBoost(StatAttribute.Attack,1)
     };
-    public override List<StatBoost> AlterStatAfterTakingDamageFromCertainType(ElementType attackType, bool superEffective)
+    public override List<StatBoost> AlterStatAfterTakingDamageFromCertainType(BattleUnit holder, MoveBase move, bool superEffective)
     {
-        if (attackType == ElementType.Electric)
+        if (move.Type == ElementType.Electric)
         {
-            RemoveItem = true;
+            holder.removeItem = true;
             return statBoosts;
         }
-        return base.AlterStatAfterTakingDamageFromCertainType(attackType,superEffective);
+        return base.AlterStatAfterTakingDamageFromCertainType(holder,move,superEffective);
     }
 }

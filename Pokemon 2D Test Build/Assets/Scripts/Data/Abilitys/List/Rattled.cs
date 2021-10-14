@@ -14,7 +14,7 @@ public class Rattled : AbilityBase
     {
         if (attackType == ElementType.Dark|| attackType == ElementType.Ghost || attackType == ElementType.Bug)
         {
-            return new StatBoost() { stat = StatAttribute.Speed, boost = 1 };
+            return new StatBoost(StatAttribute.Speed,1);
         }
         return base.AlterStatAfterTakingDamageFromCertainType(attackType);
     }

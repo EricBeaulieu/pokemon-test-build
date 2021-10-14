@@ -5,7 +5,6 @@ using UnityEngine;
 public class AmuletCoin : HoldItemBase
 {
     public override HoldItemID HoldItemId { get { return HoldItemID.AmuletCoin; } }
-    public override HoldItemBase ReturnDerivedClassAsNew() { return new AmuletCoin(); }
     public override bool DoublesPrizeMoneyRecieved()
     {
         return true;

@@ -5,14 +5,13 @@ using UnityEngine;
 public class Tanga : HoldItemBase
 {
     public override BerryID BerryId { get { return BerryID.Tanga; } }
-    public override HoldItemBase ReturnDerivedClassAsNew() { return new Tanga(); }
-    public override float AlterDamageTaken(MoveBase move, bool superEffective)
+    public override float AlterDamageTaken(BattleUnit holder, MoveBase move, bool superEffective)
     {
         if (move.Type == ElementType.Bug && superEffective == true)
         {
-            RemoveItem = true;
+            holder.removeItem = true;
             return 0.5f;
         }
-        return base.AlterDamageTaken(move, superEffective);
+        return base.AlterDamageTaken(holder,move, superEffective);
     }
 }

@@ -5,7 +5,6 @@ using UnityEngine;
 public class Oran : HoldItemBase
 {
     public override BerryID BerryId { get { return BerryID.Oran; } }
-    public override HoldItemBase ReturnDerivedClassAsNew() { return new Oran(); }
     const int hpHealed = 10;
     public override bool UseInInventory()
     {
@@ -20,18 +19,18 @@ public class Oran : HoldItemBase
         }
         return false;
     }
-    public override bool HealsPokemonAfterTakingDamage(Pokemon pokemon)
+    public override bool HealsPokemonAfterTakingDamage(BattleUnit holder, bool superEffective)
     {
-        float pokemonHealthPercentage = (float)pokemon.currentHitPoints / (float)pokemon.maxHitPoints;
-        if (pokemonHealthPercentage <= StandardBerryUseage(pokemon))
+        float pokemonHealthPercentage = (float)holder.pokemon.currentHitPoints / (float)holder.pokemon.maxHitPoints;
+        if (pokemonHealthPercentage <= StandardBerryUseage(holder.pokemon))
         {
-            RemoveItem = true;
+            holder.removeItem = true;
 
-            pokemon.UpdateHPRestored(hpHealed);
-            pokemon.statusChanges.Enqueue($"{pokemon.currentName} restored HP using the {GlobalTools.SplitCamelCase(BerryId.ToString())} berry!");
+            holder.pokemon.UpdateHPRestored(hpHealed);
+            holder.pokemon.statusChanges.Enqueue($"{holder.pokemon.currentName} restored HP using the {GlobalTools.SplitCamelCase(BerryId.ToString())} berry!");
 
             return true;
         }
-        return base.HealsPokemonAfterTakingDamage(pokemon);
+        return base.HealsPokemonAfterTakingDamage(holder,superEffective);
     }
 }

@@ -5,7 +5,6 @@ using UnityEngine;
 public class Kelpsy : HoldItemBase
 {
     public override BerryID BerryId { get { return BerryID.Kelpsy; } }
-    public override HoldItemBase ReturnDerivedClassAsNew() { return new Kelpsy(); }
     public override bool UseInInventory()
     {
         return true;

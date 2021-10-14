@@ -5,33 +5,32 @@ using UnityEngine;
 public class MentalHerb : HoldItemBase
 {
     public override HoldItemID HoldItemId { get { return HoldItemID.MentalHerb; } }
-    public override HoldItemBase ReturnDerivedClassAsNew() { return new MentalHerb(); }
-    public override bool RemovesMoveBindingEffectsAfterMoveUsed(Pokemon defendingPokemon)
+    public override bool RemovesMoveBindingEffectsAfterMoveUsed(BattleUnit holder)
     {
-        for (int i = 0; i < defendingPokemon.moves.Count; i++)
+        for (int i = 0; i < holder.pokemon.moves.Count; i++)
         {
-            if(defendingPokemon.moves[i].disabled == true)
+            if(holder.pokemon.moves[i].disabled == true)
             {
-                RemoveItem = true;
-                defendingPokemon.moves[i].disabled = false;
+                holder.removeItem = true;
+                holder.pokemon.moves[i].disabled = false;
                 return true;
             }
         }
 
-        if(defendingPokemon.volatileStatus.Exists(x => x.Id == ConditionID.Infatuation))
+        if(holder.pokemon.HasCurrentVolatileStatus(ConditionID.Infatuation) == true)
         {
-            RemoveItem = true;
-            defendingPokemon.CureVolatileStatus(ConditionID.Infatuation);
+            holder.removeItem = true;
+            holder.pokemon.CureVolatileStatus(ConditionID.Infatuation);
             return true;
         }
 
-        if (defendingPokemon.volatileStatus.Exists(x => x.Id == ConditionID.Encore))
+        if (holder.pokemon.HasCurrentVolatileStatus(ConditionID.Encore) == true)
         {
-            RemoveItem = true;
-            defendingPokemon.CureVolatileStatus(ConditionID.Encore);
+            holder.removeItem = true;
+            holder.pokemon.CureVolatileStatus(ConditionID.Encore);
             return true;
         }
 
-        return base.RemovesMoveBindingEffectsAfterMoveUsed(defendingPokemon);
+        return base.RemovesMoveBindingEffectsAfterMoveUsed(holder);
     }
 }

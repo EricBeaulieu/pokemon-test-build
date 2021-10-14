@@ -5,16 +5,15 @@ using UnityEngine;
 public class SteelGem : HoldItemBase
 {
     public override HoldItemID HoldItemId { get { return HoldItemID.SteelGem; } }
-    public override HoldItemBase ReturnDerivedClassAsNew() { return new SteelGem(); }
     public override bool PlayAnimationWhenUsed() { return true; }
-    public override MoveBase AlterUserMoveDetails(MoveBase move)
+    public override MoveBase AlterUserMoveDetails(BattleUnit holder, MoveBase move)
     {
         if (move.Type == ElementType.Steel && move.MoveType != MoveType.Status)
         {
-            RemoveItem = true;
+            holder.removeItem = true;
             move = move.Clone();
             move.AdjustedMovePower(0.5f);
         }
-        return base.AlterUserMoveDetails(move);
+        return base.AlterUserMoveDetails(holder, move);
     }
 }

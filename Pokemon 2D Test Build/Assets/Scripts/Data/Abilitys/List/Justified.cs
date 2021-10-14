@@ -14,7 +14,7 @@ public class Justified : AbilityBase
     {
         if (attackType == ElementType.Dark)
         {
-            return new StatBoost() { stat = StatAttribute.Attack, boost = 1 };
+            return new StatBoost(StatAttribute.Attack, 1);
         }
         return base.AlterStatAfterTakingDamageFromCertainType(attackType);
     }

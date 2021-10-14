@@ -6,7 +6,7 @@ public class StickyWeb : EntryHazardBase
 {
     public override EntryHazardID Id { get { return EntryHazardID.StickyWeb; } }
     public override EntryHazardBase ReturnDerivedClassAsNew() { return new StickyWeb(); }
-    protected override int _maxLayers() { return 1; }
+    protected override int maxLayers() { return 1; }
     public override string StartMessage(BattleUnit battleUnit)
     {
         string message = "A sticky web has been laid out all around the ";
@@ -50,6 +50,6 @@ public class StickyWeb : EntryHazardBase
             return null;
         }
 
-        return new StatBoost() { stat = StatAttribute.Speed, boost = -1 };
+        return new StatBoost(StatAttribute.Speed,-1);
     }
 }

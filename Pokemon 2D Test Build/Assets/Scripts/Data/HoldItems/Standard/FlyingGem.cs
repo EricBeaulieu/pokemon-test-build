@@ -5,15 +5,15 @@ using UnityEngine;
 public class FlyingGem : HoldItemBase
 {
     public override HoldItemID HoldItemId { get { return HoldItemID.FlyingGem; } }
-    public override HoldItemBase ReturnDerivedClassAsNew() { return new FlyingGem(); }
-    public override MoveBase AlterUserMoveDetails(MoveBase move)
+    public override bool PlayAnimationWhenUsed() { return true; }
+    public override MoveBase AlterUserMoveDetails(BattleUnit holder, MoveBase move)
     {
         if (move.Type == ElementType.Flying && move.MoveType != MoveType.Status)
         {
-            RemoveItem = true;
+            holder.removeItem = true;
             move = move.Clone();
             move.AdjustedMovePower(0.5f);
         }
-        return base.AlterUserMoveDetails(move);
+        return base.AlterUserMoveDetails(holder, move);
     }
 }

@@ -5,14 +5,13 @@ using UnityEngine;
 public class SoftSand : HoldItemBase
 {
     public override HoldItemID HoldItemId { get { return HoldItemID.SoftSand; } }
-    public override HoldItemBase ReturnDerivedClassAsNew() { return new SoftSand(); }
-    public override MoveBase AlterUserMoveDetails(MoveBase move)
+    public override MoveBase AlterUserMoveDetails(BattleUnit holder, MoveBase move)
     {
         if (move.Type == ElementType.Ground)
         {
             move = move.Clone();
             move.AdjustedMovePower(0.2f);
         }
-        return base.AlterUserMoveDetails(move);
+        return base.AlterUserMoveDetails(holder, move);
     }
 }

@@ -5,14 +5,13 @@ using UnityEngine;
 public class PoisonBarb : HoldItemBase
 {
     public override HoldItemID HoldItemId { get { return HoldItemID.PoisonBarb; } }
-    public override HoldItemBase ReturnDerivedClassAsNew() { return new PoisonBarb(); }
-    public override MoveBase AlterUserMoveDetails(MoveBase move)
+    public override MoveBase AlterUserMoveDetails(BattleUnit holder, MoveBase move)
     {
         if (move.Type == ElementType.Poison)
         {
             move = move.Clone();
             move.AdjustedMovePower(0.2f);
         }
-        return base.AlterUserMoveDetails(move);
+        return base.AlterUserMoveDetails(holder, move);
     }
 }

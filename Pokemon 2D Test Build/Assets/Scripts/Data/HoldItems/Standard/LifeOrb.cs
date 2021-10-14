@@ -5,18 +5,17 @@ using UnityEngine;
 public class LifeOrb : HoldItemBase
 {
     public override HoldItemID HoldItemId { get { return HoldItemID.LifeOrb; } }
-    public override HoldItemBase ReturnDerivedClassAsNew() { return new LifeOrb(); }
     public override bool PlayAnimationWhenUsed()
     {
         return false;
     }
-    public override MoveBase AlterUserMoveDetails(MoveBase move)
+    public override MoveBase AlterUserMoveDetails(BattleUnit holder, MoveBase move)
     {
         move = move.Clone();
         move.AdjustedMovePower(0.3f);
-        return base.AlterUserMoveDetails(move);
+        return base.AlterUserMoveDetails(holder, move);
     }
-    public override int AlterUserHPAfterAttack(Pokemon holder, MoveBase move, int damageDealt)
+    public override int AlterUserHPAfterAttack(BattleUnit holder, MoveBase move, int damageDealt)
     {
         //if(holder.ability.Id == AbilityID.Sheer force)
         //{
@@ -25,12 +24,12 @@ public class LifeOrb : HoldItemBase
 
         if (move.MoveType != MoveType.Status)
         {
-            return -Mathf.CeilToInt(holder.maxHitPoints / 10);
+            return -Mathf.CeilToInt(holder.pokemon.maxHitPoints / 10);
         }
         return base.AlterUserHPAfterAttack(holder, move, damageDealt);
     }
-    public override string SpecializedMessage(Pokemon holder, Pokemon opposingPokemon)
+    public override string SpecializedMessage(BattleUnit holder, Pokemon opposingPokemon)
     {
-        return $"{holder.currentName} lost some of its HP";
+        return $"{holder.pokemon.currentName} lost some of its HP";
     }
 }

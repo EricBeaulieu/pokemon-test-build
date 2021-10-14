@@ -5,7 +5,6 @@ using UnityEngine;
 public class Grepa : HoldItemBase
 {
     public override BerryID BerryId { get { return BerryID.Grepa; } }
-    public override HoldItemBase ReturnDerivedClassAsNew() { return new Grepa(); }
     public override bool UseInInventory()
     {
         return true;

@@ -5,7 +5,6 @@ using UnityEngine;
 public class SmoothRock : HoldItemBase
 {
     public override HoldItemID HoldItemId { get { return HoldItemID.SmoothRock; } }
-    public override HoldItemBase ReturnDerivedClassAsNew() { return new SmoothRock(); }
     public override int IncreasedWeatherEffectDuration(WeatherEffectID currentWeatherEffect)
     {
         if (currentWeatherEffect != WeatherEffectID.NA && currentWeatherEffect == WeatherEffectID.Sandstorm)

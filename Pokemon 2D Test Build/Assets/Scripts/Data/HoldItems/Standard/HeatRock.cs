@@ -5,7 +5,6 @@ using UnityEngine;
 public class HeatRock : HoldItemBase
 {
     public override HoldItemID HoldItemId { get { return HoldItemID.HeatRock; } }
-    public override HoldItemBase ReturnDerivedClassAsNew() { return new HeatRock(); }
     public override int IncreasedWeatherEffectDuration(WeatherEffectID currentWeatherEffect)
     {
         if (currentWeatherEffect != WeatherEffectID.NA && currentWeatherEffect == WeatherEffectID.Sunshine)

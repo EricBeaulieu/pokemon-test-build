@@ -5,18 +5,17 @@ using UnityEngine;
 public class AbsorbBulb : HoldItemBase
 {
     public override HoldItemID HoldItemId { get { return HoldItemID.AbsorbBulb; } }
-    public override HoldItemBase ReturnDerivedClassAsNew() { return new AbsorbBulb(); }
     List<StatBoost> statBoosts = new List<StatBoost>()
     {
-        new StatBoost() { stat = StatAttribute.SpecialAttack, boost = 1 }
+        new StatBoost(StatAttribute.SpecialAttack,1)
     };
-    public override List<StatBoost> AlterStatAfterTakingDamageFromCertainType(ElementType attackType, bool superEffective)
+    public override List<StatBoost> AlterStatAfterTakingDamageFromCertainType(BattleUnit holder, MoveBase move, bool superEffective)
     {
-        if(attackType == ElementType.Water)
+        if(move.Type == ElementType.Water)
         {
-            RemoveItem = true;
+            holder.removeItem = true;
             return statBoosts;
         }
-        return base.AlterStatAfterTakingDamageFromCertainType(attackType,superEffective);
+        return base.AlterStatAfterTakingDamageFromCertainType(holder,move,superEffective);
     }
 }

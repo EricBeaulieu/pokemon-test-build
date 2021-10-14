@@ -5,18 +5,17 @@ using UnityEngine;
 public class Snowball : HoldItemBase
 {
     public override HoldItemID HoldItemId { get { return HoldItemID.Snowball; } }
-    public override HoldItemBase ReturnDerivedClassAsNew() { return new Snowball(); }
     List<StatBoost> statBoosts = new List<StatBoost>()
     {
-        new StatBoost() { stat = StatAttribute.Attack, boost = 1 }
+        new StatBoost(StatAttribute.Attack,1)
     };
-    public override List<StatBoost> AlterStatAfterTakingDamageFromCertainType(ElementType attackType, bool superEffective)
+    public override List<StatBoost> AlterStatAfterTakingDamageFromCertainType(BattleUnit holder, MoveBase move, bool superEffective)
     {
-        if (attackType == ElementType.Ice)
+        if (move.Type == ElementType.Ice)
         {
-            RemoveItem = true;
+            holder.removeItem = true;
             return statBoosts;
         }
-        return base.AlterStatAfterTakingDamageFromCertainType(attackType,superEffective);
+        return base.AlterStatAfterTakingDamageFromCertainType(holder,move,superEffective);
     }
 }

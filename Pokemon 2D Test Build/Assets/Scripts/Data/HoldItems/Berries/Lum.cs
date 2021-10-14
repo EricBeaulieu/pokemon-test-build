@@ -5,19 +5,18 @@ using UnityEngine;
 public class Lum : HoldItemBase
 {
     public override BerryID BerryId { get { return BerryID.Lum; } }
-    public override HoldItemBase ReturnDerivedClassAsNew() { return new Lum(); }
-    public override bool HealConditionAfterTakingDamage(Pokemon holder)
+    public override bool HealConditionAfterTakingDamage(BattleUnit holder)
     {
-        if (holder.volatileStatus.Count > 0)
+        if (holder.pokemon.volatileStatus.Count > 0)
         {
-            RemoveItem = true;
+            holder.removeItem = true;
             return true;
         }
         return base.HealConditionAfterTakingDamage(holder);
     }
-    public override string SpecializedMessage(Pokemon holder, Pokemon opposingPokemon)
+    public override string SpecializedMessage(BattleUnit holder, Pokemon opposingPokemon)
     {
-        return $"{holder.currentName} cured its ailment using the {GlobalTools.SplitCamelCase(BerryId.ToString())} berry!";
+        return $"{holder.pokemon.currentName} cured its ailment using the {GlobalTools.SplitCamelCase(BerryId.ToString())} berry!";
     }
     public override ConditionID AdditionalEffects()
     {

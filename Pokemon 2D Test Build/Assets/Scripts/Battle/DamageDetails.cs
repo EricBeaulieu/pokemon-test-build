@@ -12,9 +12,7 @@ public class DamageDetails
     public bool damageNullified { get; set; }
     public List<StatBoost> defendersStatBoostByAbility { get; set; }
     public List<StatBoost> attackersStatBoostByDefendersAbility { get; set; }
-    public List<StatBoost> alterStatAfterTakingDamageFromCertainTypeItem { get; set; }
-    public bool sourceItemUsed { get; set; }
-    public bool targetItemUsed { get; set; }
+    public List<StatBoost> alterStatAfterTakingDamage { get; set; }
 
     public void Clear()
     {
@@ -26,8 +24,6 @@ public class DamageDetails
         damageNullified = false;
         defendersStatBoostByAbility = new List<StatBoost>();
         attackersStatBoostByDefendersAbility = new List<StatBoost>();
-        alterStatAfterTakingDamageFromCertainTypeItem = new List<StatBoost>();
-        sourceItemUsed = false;
-        targetItemUsed = false;
+        alterStatAfterTakingDamage = new List<StatBoost>();
     }
 }

@@ -5,19 +5,18 @@ using UnityEngine;
 public class Rawst : HoldItemBase
 {
     public override BerryID BerryId { get { return BerryID.Rawst; } }
-    public override HoldItemBase ReturnDerivedClassAsNew() { return new Rawst(); }
-    public override bool HealConditionAfterTakingDamage(Pokemon holder)
+    public override bool HealConditionAfterTakingDamage(BattleUnit holder)
     {
-        if (holder.GetCurrentStatus() == ConditionID.Burn)
+        if (holder.pokemon.GetCurrentStatus() == ConditionID.Burn)
         {
-            RemoveItem = true;
+            holder.removeItem = true;
             return true;
         }
         return base.HealConditionAfterTakingDamage(holder);
     }
-    public override string SpecializedMessage(Pokemon holder, Pokemon opposingPokemon)
+    public override string SpecializedMessage(BattleUnit holder, Pokemon opposingPokemon)
     {
-        return $"{holder.currentName} cured its burn using the {GlobalTools.SplitCamelCase(BerryId.ToString())} berry!";
+        return $"{holder.pokemon.currentName} cured its burn using the {GlobalTools.SplitCamelCase(BerryId.ToString())} berry!";
     }
     public override ConditionID AdditionalEffects()
     {

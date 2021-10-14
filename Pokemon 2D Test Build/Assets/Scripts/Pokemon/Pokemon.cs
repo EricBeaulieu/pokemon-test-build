@@ -478,7 +478,7 @@ public class Pokemon {
 
     #endregion
 
-    public void TakeDamage(DamageDetails damageDetails,MoveBase move,Pokemon attackingPokemon,List<ShieldBase> currentShields)
+    public void TakeDamage(DamageDetails damageDetails,MoveBase move,BattleUnit attackingUnit,BattleUnit selfRef)
     {
         damageDetails.Clear();
 
@@ -486,7 +486,7 @@ public class Pokemon {
 
         if(damageDetails.typeEffectiveness == 0)//If it doesnt effect the pokemon then just end it right here
         {
-            if(attackingPokemon.ability.DamageDealingMovesCutThroughNaturalImmunity(this,move.Type) == true)
+            if(attackingUnit.pokemon.ability.DamageDealingMovesCutThroughNaturalImmunity(this,move.Type) == true)
             {
                 damageDetails.typeEffectiveness = 1;
             }
@@ -497,9 +497,9 @@ public class Pokemon {
         }
 
         //Critical Hit Chance
-        if (Random.value * 100 <= DamageModifiers.CriticalHitPercentage(move,attackingPokemon))
+        if (Random.value * 100 <= DamageModifiers.CriticalHitPercentage(move,attackingUnit.pokemon))
         {
-            damageDetails.criticalHit = attackingPokemon.ability.AltersCriticalHitDamage();
+            damageDetails.criticalHit = attackingUnit.pokemon.ability.AltersCriticalHitDamage();
 
             if (ability.PreventsCriticalHits() == true)
             {
@@ -509,12 +509,12 @@ public class Pokemon {
 
         float modifier = damageDetails.criticalHit * damageDetails.typeEffectiveness;
         modifier *= DamageModifiers.StandardRandomAttackPowerModifier();
-        modifier *= DamageModifiers.SameTypeAttackBonus(move, attackingPokemon.pokemonBase);
+        modifier *= DamageModifiers.SameTypeAttackBonus(move, attackingUnit.pokemon.pokemonBase);
         modifier *= DamageModifiers.WeatherConditionModifiers(BattleSystem.GetCurrentWeather, move);
 
         //Ability
-        float abilityBonus = attackingPokemon.ability.BoostACertainTypeInAPinch(attackingPokemon, move.Type);
-        abilityBonus *= attackingPokemon.ability.PowerUpCertainMoves(attackingPokemon,this, move,BattleSystem.GetCurrentWeather);
+        float abilityBonus = attackingUnit.pokemon.ability.BoostACertainTypeInAPinch(attackingUnit.pokemon, move.Type);
+        abilityBonus *= attackingUnit.pokemon.ability.PowerUpCertainMoves(attackingUnit.pokemon, this, move,BattleSystem.GetCurrentWeather);
         abilityBonus *= ability.AlterDamageTaken(this, move,BattleSystem.GetCurrentWeather);
         abilityBonus *= ability.LowersDamageTakeSuperEffectiveMoves(damageDetails.typeEffectiveness);
 
@@ -543,24 +543,22 @@ public class Pokemon {
         }
 
         //Item effects
-        float itemBonus = GetHoldItemEffects.AlterDamageTaken(move, (damageDetails.criticalHit > 1));
-        itemBonus *= attackingPokemon.GetHoldItemEffects.PowersUpSuperEffectiveAttacks((damageDetails.criticalHit > 1));
+        float itemBonus = GetHoldItemEffects.AlterDamageTaken(selfRef,move, (damageDetails.criticalHit > 1));
+        itemBonus *= attackingUnit.pokemon.GetHoldItemEffects.PowersUpSuperEffectiveAttacks((damageDetails.criticalHit > 1));
 
-        damageDetails.alterStatAfterTakingDamageFromCertainTypeItem = GetHoldItemEffects.AlterStatAfterTakingDamageFromCertainType(move.Type,damageDetails.typeEffectiveness > 1);
+        damageDetails.alterStatAfterTakingDamage = GetHoldItemEffects.AlterStatAfterTakingDamageFromCertainType(selfRef,move,damageDetails.typeEffectiveness > 1);
 
         if (itemBonus == 0)
         {
             damageDetails.criticalHit = 1f;
             damageDetails.typeEffectiveness = 0;
-            damageDetails.targetItemUsed = GetHoldItemEffects.RemoveItem;
-            damageDetails.sourceItemUsed = attackingPokemon.GetHoldItemEffects.RemoveItem;
             return;
         }
 
         modifier *= abilityBonus;
         modifier *= itemBonus;
 
-        float attackPower = (move.MoveType == MoveType.Physical) ? attackingPokemon.attack : attackingPokemon.specialAttack;
+        float attackPower = (move.MoveType == MoveType.Physical) ? attackingUnit.pokemon.attack : attackingUnit.pokemon.specialAttack;
         float defendersDefense = (move.MoveType == MoveType.Physical) ? defense : specialDefense;
 
         defendersDefense *= DamageModifiers.SandStormSpecialDefenseBonus(BattleSystem.GetCurrentWeather, this, move);
@@ -569,9 +567,9 @@ public class Pokemon {
         if(damageDetails.criticalHit > 1)
         {
             StatAttribute currentStat = (move.MoveType == MoveType.Physical) ? StatAttribute.Attack : StatAttribute.SpecialAttack;
-            if (attackingPokemon.statBoosts[currentStat] < 0)
+            if (attackingUnit.pokemon.statBoosts[currentStat] < 0)
             {
-                attackPower = attackingPokemon.baseStats[currentStat];
+                attackPower = attackingUnit.pokemon.baseStats[currentStat];
             }
 
             currentStat = (move.MoveType == MoveType.Physical) ? StatAttribute.Defense : StatAttribute.SpecialDefense;
@@ -584,10 +582,10 @@ public class Pokemon {
         {
             StatAttribute currentStat = (move.MoveType == MoveType.Physical) ? StatAttribute.Defense : StatAttribute.SpecialDefense;
 
-            if(attackingPokemon.ability.CutsThroughProtections() == false)
+            if(attackingUnit.pokemon.ability.CutsThroughProtections() == false)
             {
                 //Shield bonuses
-                foreach (ShieldBase shield in currentShields)
+                foreach (ShieldBase shield in selfRef.shields)
                 {
                     if (shield.ProtectedStat(currentStat) > 1)
                     {
@@ -598,14 +596,14 @@ public class Pokemon {
             }
         }
 
-        int damage = Mathf.FloorToInt((((((2 * attackingPokemon.currentLevel) / 5) + 2) * move.MovePower * attackPower / defendersDefense / 50) + 2) * modifier);
+        int damage = Mathf.FloorToInt((((((2 * attackingUnit.pokemon.currentLevel) / 5) + 2) * move.MovePower * attackPower / defendersDefense / 50) + 2) * modifier);
 
         if(damage <=0)
         {
             damage = 1;
         }
 
-        if(move.LeavesTargetWith1HP == true || GetHoldItemEffects.EndureOHKOAttack(this) == true)
+        if(move.LeavesTargetWith1HP == true || GetHoldItemEffects.EndureOHKOAttack(selfRef) == true)
         {
             if (damage >= currentHitPoints)
             {
@@ -618,18 +616,18 @@ public class Pokemon {
             damage = maxHitPoints - 1;
             damageDetails.defendersAbilityActivation = true;
         }
-        
+
         UpdateHPDamage(damage);
 
-        if(GetHoldItemEffects.TransferToPokemon(move) && attackingPokemon.GetCurrentItem == null)
+        if(GetHoldItemEffects.TransferToPokemon(move) && attackingUnit.pokemon.GetCurrentItem == null)
         {
-            attackingPokemon.GivePokemonItemToHold(GetCurrentItem);
+            attackingUnit.pokemon.GivePokemonItemToHold(GetCurrentItem);
             ItemUsed();
         }
 
         if(currentHitPoints <= 0)
         {
-            attackerAbilityStatBoost = attackingPokemon.ability.BoostStatUponKO(attackingPokemon);
+            attackerAbilityStatBoost = attackingUnit.pokemon.ability.BoostStatUponKO(attackingUnit.pokemon);
             if (attackerAbilityStatBoost != null)
             {
                 damageDetails.attackersAbilityActivation = true;
@@ -656,9 +654,6 @@ public class Pokemon {
                 statusChanges.Enqueue(ability.OnAbilitityActivation(this));
             }
         }
-
-        damageDetails.targetItemUsed = GetHoldItemEffects.RemoveItem;
-        damageDetails.sourceItemUsed = attackingPokemon.GetHoldItemEffects.RemoveItem;
     }
 
     public void UpdateHPDamage(int damage)

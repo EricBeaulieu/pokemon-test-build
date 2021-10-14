@@ -5,8 +5,14 @@ using UnityEngine;
 [System.Serializable]
 public class StatBoost
 {
-    public StatAttribute stat;
-    public int boost;
+    public StatAttribute stat { get; private set; }
+    public int boost { get; set; }
+
+    public StatBoost(StatAttribute statAttribute,int boostAmount)
+    {
+        stat = statAttribute;
+        boost = boostAmount;
+    }
 }
 
 [System.Serializable]

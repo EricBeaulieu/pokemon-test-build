@@ -5,7 +5,6 @@ using UnityEngine;
 public class PowerLens : HoldItemBase
 {
     public override HoldItemID HoldItemId { get { return HoldItemID.PowerLens; } }
-    public override HoldItemBase ReturnDerivedClassAsNew() { return new PowerLens(); }
     public override float AlterStat(Pokemon Holder, StatAttribute statAffected)
     {
         if (statAffected == StatAttribute.Speed)

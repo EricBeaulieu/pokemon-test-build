@@ -5,19 +5,18 @@ using UnityEngine;
 public class Pecha : HoldItemBase
 {
     public override BerryID BerryId { get { return BerryID.Pecha; } }
-    public override HoldItemBase ReturnDerivedClassAsNew() { return new Pecha(); }
-    public override bool HealConditionAfterTakingDamage(Pokemon holder)
+    public override bool HealConditionAfterTakingDamage(BattleUnit holder)
     {
-        if (holder.GetCurrentStatus() == ConditionID.Poison || holder.GetCurrentStatus() == ConditionID.ToxicPoison)
+        if (holder.pokemon.GetCurrentStatus() == ConditionID.Poison || holder.pokemon.GetCurrentStatus() == ConditionID.ToxicPoison)
         {
-            RemoveItem = true;
+            holder.removeItem = true;
             return true;
         }
         return base.HealConditionAfterTakingDamage(holder);
     }
-    public override string SpecializedMessage(Pokemon holder, Pokemon opposingPokemon)
+    public override string SpecializedMessage(BattleUnit holder, Pokemon opposingPokemon)
     {
-        return $"{holder.currentName} cured its poisoning using the {GlobalTools.SplitCamelCase(BerryId.ToString())} berry!";
+        return $"{holder.pokemon.currentName} cured its poisoning using the {GlobalTools.SplitCamelCase(BerryId.ToString())} berry!";
     }
     public override ConditionID AdditionalEffects()
     {

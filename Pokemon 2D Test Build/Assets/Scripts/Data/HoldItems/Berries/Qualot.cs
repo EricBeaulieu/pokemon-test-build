@@ -5,7 +5,6 @@ using UnityEngine;
 public class Qualot : HoldItemBase
 {
     public override BerryID BerryId { get { return BerryID.Qualot; } }
-    public override HoldItemBase ReturnDerivedClassAsNew() { return new Qualot(); }
     public override bool UseInInventory()
     {
         return true;

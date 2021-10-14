@@ -22,7 +22,7 @@ public class SapSipper : AbilityBase
     {
         if (attackType == ElementType.Grass)
         {
-            return new StatBoost() { stat = StatAttribute.Attack, boost = 1 };
+            return new StatBoost(StatAttribute.Attack,1);
         }
         return base.AlterStatAfterTakingDamageFromCertainType(attackType);
     }

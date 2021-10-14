@@ -34,7 +34,12 @@ public enum HoldItemID
 public enum BerryID
 {
     NA,
-    Aguav, Aspear, Babiri, Charti,Cheri, Chesto, Chilan, Chople, Coba, Colbur, Figy, Grepa, Haban,Hondew, Iapapa, Kasib, Kebia,Kelpsy, Leppa, Lum, Mago, Occa,Oran, Passho, Payapa, Pecha, Persim, Pomeg, Qualot,Rawst, Rindo, Roseli, Shuca, Sitrus, Tamato, Tanga,Wacan, Wiki, Yache
+    Aguav, Apicot,Aspear, Babiri, Charti,Cheri, Chesto, Chilan, Chople,
+    Coba, Colbur, Custap, Enigma,Figy, Ganlon, Grepa, Haban,Hondew,
+    Iapapa, Jaboca, Kasib, Kebia, Kee,Kelpsy, Lansat, Leppa, Liechi,
+    Lum, Mago, Maranga, Micle, Occa,Oran, Passho, Payapa, Pecha, Persim,
+    Petaya, Pomeg, Qualot,Rawst, Rindo, Roseli, Rowap, Salac, Shuca,
+    Sitrus, Starf, Tamato, Tanga,Wacan, Wiki, Yache
 }
 
 public static class HoldItemDB
@@ -51,16 +56,16 @@ public static class HoldItemDB
 
     public static HoldItemBase GetHoldItem()
     {
-        return HoldItemDex[HoldItemID.NA.ToString()].ReturnDerivedClassAsNew();
+        return HoldItemDex[HoldItemID.NA.ToString()];
     }
 
     public static HoldItemBase GetHoldItem(HoldItemID iD)
     {
-        return HoldItemDex[iD.ToString()].ReturnDerivedClassAsNew();
+        return HoldItemDex[iD.ToString()];
     }
 
     public static HoldItemBase GetHoldItem(BerryID iD)
     {
-        return HoldItemDex[iD.ToString()].ReturnDerivedClassAsNew();
+        return HoldItemDex[iD.ToString()];
     }
 }

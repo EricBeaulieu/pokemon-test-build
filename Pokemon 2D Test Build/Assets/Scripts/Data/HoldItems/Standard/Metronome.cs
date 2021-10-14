@@ -5,29 +5,15 @@ using UnityEngine;
 public class Metronome : HoldItemBase
 {
     public override HoldItemID HoldItemId { get { return HoldItemID.Metronome; } }
-    public override HoldItemBase ReturnDerivedClassAsNew() { return new Metronome(); }
-    MoveBase compoundingMove;
     float moveBonus;
-    public override bool PreventTheUseOfCertainMoves(BattleUnit battleUnit, MoveBase move)
+    public override MoveBase AlterUserMoveDetails(BattleUnit holder, MoveBase move)
     {
-        if(move != compoundingMove)
-        {
-            compoundingMove = move;
-            moveBonus = 0;
-        }
-        else
-        {
-            moveBonus += 0.2f;
-            moveBonus = Mathf.Clamp01(moveBonus);
-        }
+        moveBonus = 0.2f * holder.lastMoveUsedConsecutively;
+        moveBonus = Mathf.Clamp01(moveBonus);
 
-        return base.PreventTheUseOfCertainMoves(battleUnit, move);
-    }
-    public override MoveBase AlterUserMoveDetails(MoveBase move)
-    {
         move = move.Clone();
         move.AdjustedMovePower(moveBonus);
 
-        return base.AlterUserMoveDetails(move);
+        return base.AlterUserMoveDetails(holder, move);
     }
 }

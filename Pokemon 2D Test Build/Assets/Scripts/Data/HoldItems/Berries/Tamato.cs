@@ -5,7 +5,6 @@ using UnityEngine;
 public class Tamato : HoldItemBase
 {
     public override BerryID BerryId { get { return BerryID.Tamato; } }
-    public override HoldItemBase ReturnDerivedClassAsNew() { return new Tamato(); }
     public override bool UseInInventory()
     {
         return true;

@@ -63,6 +63,11 @@ public class MoveBase : ScriptableObject {
         accuracy += Mathf.RoundToInt(accuracy * accuracyIncrease);
     }
 
+    public void AdjustedMoveAccuracy(int accuracySet)
+    {
+        accuracy = accuracySet;
+    }
+
     public void AdjustedHPRecovered(float hpRecoveredIncrease)
     {
         hpRecovered += hpRecoveredIncrease;

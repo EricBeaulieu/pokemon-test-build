@@ -5,8 +5,7 @@ using UnityEngine;
 public class LaggingTail : HoldItemBase
 {
     public override HoldItemID HoldItemId { get { return HoldItemID.LaggingTail; } }
-    public override HoldItemBase ReturnDerivedClassAsNew() { return new LaggingTail(); }
-    public override int AdjustSpeedPriorityTurn()
+    public override int AdjustSpeedPriorityTurn(BattleUnit holder)
     {
         return -1;
     }

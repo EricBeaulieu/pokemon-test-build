@@ -22,7 +22,7 @@ public class MotorDrive : AbilityBase
     {
         if (attackType == ElementType.Electric)
         {
-            return new StatBoost() { stat = StatAttribute.Speed, boost = 1 };
+            return new StatBoost(StatAttribute.Speed,1);
         }
         return base.AlterStatAfterTakingDamageFromCertainType(attackType);
     }

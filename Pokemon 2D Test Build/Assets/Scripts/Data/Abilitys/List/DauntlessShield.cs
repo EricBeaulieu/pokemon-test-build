@@ -12,6 +12,6 @@ public class DauntlessShield : AbilityBase
     }
     public override StatBoost OnEntryRaiseStat(Pokemon opposingPokemon)
     {
-        return new StatBoost() { stat = StatAttribute.Defense, boost = 1 };
+        return new StatBoost(StatAttribute.Defense,1);
     }
 }

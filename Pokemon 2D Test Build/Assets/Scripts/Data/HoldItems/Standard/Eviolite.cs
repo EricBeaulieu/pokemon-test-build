@@ -5,16 +5,15 @@ using UnityEngine;
 public class Eviolite : HoldItemBase
 {
     public override HoldItemID HoldItemId { get { return HoldItemID.Eviolite; } }
-    public override HoldItemBase ReturnDerivedClassAsNew() { return new Eviolite(); }
-    public override float AlterStat(Pokemon Holder, StatAttribute statAffected)
+    public override float AlterStat(Pokemon holder, StatAttribute statAffected)
     {
-        //if pokemon can evolve
-
-        if(statAffected == StatAttribute.Defense || statAffected == StatAttribute.SpecialDefense)
+        if(holder.pokemonBase.EvolutionsByStone.Count > 0|| holder.pokemonBase.EvolveLevelBased.Count>0)
         {
-            return 1.5f;
+            if (statAffected == StatAttribute.Defense || statAffected == StatAttribute.SpecialDefense)
+            {
+                return 1.5f;
+            }
         }
-
-        return base.AlterStat(Holder, statAffected);
+        return base.AlterStat(holder, statAffected);
     }
 }

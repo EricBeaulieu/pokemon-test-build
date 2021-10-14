@@ -5,6 +5,5 @@ using UnityEngine;
 public class #SCRIPTNAME# : HoldItemBase
 {
     public override BerryID BerryId { get { return BerryID.#SCRIPTNAME#; } }
-    public override HoldItemBase ReturnDerivedClassAsNew() { return new #SCRIPTNAME#(); }
 
 }

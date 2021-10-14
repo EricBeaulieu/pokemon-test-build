@@ -5,7 +5,6 @@ using UnityEngine;
 public class BlackSludge : HoldItemBase
 {
     public override HoldItemID HoldItemId { get { return HoldItemID.BlackSludge; } }
-    public override HoldItemBase ReturnDerivedClassAsNew() { return new BlackSludge(); }
     public override void OnTurnEnd(Pokemon defendingPokemon)
     {
         int damage = Mathf.FloorToInt(defendingPokemon.maxHitPoints / 16);

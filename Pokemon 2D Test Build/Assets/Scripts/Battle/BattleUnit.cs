@@ -41,8 +41,10 @@ public class BattleUnit : MonoBehaviour
 
     public bool cantEscapeGivenToSelf { get; set; }
     public Move lastMoveUsed { get; set; }
+    public int lastMoveUsedConsecutively { get; set; }
     public int disabledDuration { get; set; }
     public List<ShieldBase> shields { get; set; } = new List<ShieldBase>();
+    public bool removeItem { get; set; }
 
     void Awake()
     {
@@ -138,7 +140,9 @@ public class BattleUnit : MonoBehaviour
 
         cantEscapeGivenToSelf = false;
         lastMoveUsed = null;
+        lastMoveUsedConsecutively = 0;
         disabledDuration = 0;
+        removeItem = false;
 
         pokemonBattledAgainst.Clear();
     }
@@ -760,5 +764,11 @@ public class BattleUnit : MonoBehaviour
         }
 
         pokemonSprite.rectTransform.localEulerAngles = new Vector3(0,0,0);
+    }
+
+    public void RemoveCurrentItemFromPokemon()
+    {
+        pokemon.ItemUsed();
+        removeItem = false;
     }
 }

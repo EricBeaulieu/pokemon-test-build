@@ -5,7 +5,6 @@ using UnityEngine;
 public class LuckyEgg : HoldItemBase
 {
     public override HoldItemID HoldItemId { get { return HoldItemID.LuckyEgg; } }
-    public override HoldItemBase ReturnDerivedClassAsNew() { return new LuckyEgg(); }
     public override float ExperienceModifier()
     {
         return 1.5f;

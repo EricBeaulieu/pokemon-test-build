@@ -5,13 +5,12 @@ using UnityEngine;
 public class FlameOrb : HoldItemBase
 {
     public override HoldItemID HoldItemId { get { return HoldItemID.FlameOrb; } }
-    public override HoldItemBase ReturnDerivedClassAsNew() { return new FlameOrb(); }
     public override ConditionID InflictConditionAtTurnEnd()
     {
         return ConditionID.Burn;
     }
-    public override string SpecializedMessage(Pokemon holder, Pokemon opposingPokemon)
+    public override string SpecializedMessage(BattleUnit holder, Pokemon opposingPokemon)
     {
-        return $"{holder.currentName} was burnt by {GlobalTools.SplitCamelCase(HoldItemId.ToString())}";
+        return $"{holder.pokemon.currentName} was burnt by {GlobalTools.SplitCamelCase(HoldItemId.ToString())}";
     }
 }

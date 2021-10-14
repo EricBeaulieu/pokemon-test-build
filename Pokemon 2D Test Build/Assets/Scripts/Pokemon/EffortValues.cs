@@ -116,7 +116,6 @@ public class EffortValues : SpecifiedValues
                 }
                 return false;
             case StatAttribute.SpecialAttack:
-                specialAttack += removedEV.statValue;
                 if (specialAttack > 0)
                 {
                     specialAttack -= removedEV.statValue;
@@ -124,7 +123,6 @@ public class EffortValues : SpecifiedValues
                 }
                 return false;
             case StatAttribute.SpecialDefense:
-                specialDefense += removedEV.statValue;
                 if (specialDefense > 0)
                 {
                     specialDefense -= removedEV.statValue;
@@ -132,8 +130,7 @@ public class EffortValues : SpecifiedValues
                 }
                 return false;
             case StatAttribute.Speed:
-                speed += removedEV.statValue;
-                if (attack > 0)
+                if (speed > 0)
                 {
                     speed -= removedEV.statValue;
                     return true;

@@ -5,19 +5,18 @@ using UnityEngine;
 public class Aspear : HoldItemBase
 {
     public override BerryID BerryId { get { return BerryID.Aspear; } }
-    public override HoldItemBase ReturnDerivedClassAsNew() { return new Aspear(); }
-    public override bool HealConditionAfterTakingDamage(Pokemon holder)
+    public override bool HealConditionAfterTakingDamage(BattleUnit holder)
     {
-        if (holder.GetCurrentStatus() == ConditionID.Frozen)
+        if (holder.pokemon.GetCurrentStatus() == ConditionID.Frozen)
         {
-            RemoveItem = true;
+            holder.removeItem = true;
             return true;
         }
         return base.HealConditionAfterTakingDamage(holder);
     }
-    public override string SpecializedMessage(Pokemon holder, Pokemon opposingPokemon)
+    public override string SpecializedMessage(BattleUnit holder, Pokemon opposingPokemon)
     {
-        return $"{holder.currentName} cured its freezing using the {GlobalTools.SplitCamelCase(BerryId.ToString())} berry!";
+        return $"{holder.pokemon.currentName} cured its freezing using the {GlobalTools.SplitCamelCase(BerryId.ToString())} berry!";
     }
     public override ConditionID AdditionalEffects()
     {

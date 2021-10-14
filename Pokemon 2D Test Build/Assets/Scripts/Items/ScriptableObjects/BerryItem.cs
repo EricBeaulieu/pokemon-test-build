@@ -20,7 +20,7 @@ public class BerryItem : ItemBase
 
     public override bool UseItem(Pokemon pokemon)
     {
-        return true;
+        return HoldItemDB.GetHoldItem(berryID).UsedInInventoryEffect(pokemon);
     }
 
     public override bool UseItemOption()

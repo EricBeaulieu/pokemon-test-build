@@ -12,6 +12,6 @@ public class Defiant : AbilityBase
     }
     public override StatBoost BoostStatSharplyIfAnyStatLowered()
     {
-        return new StatBoost() { stat = StatAttribute.Attack, boost = 2 };
+        return new StatBoost(StatAttribute.Attack,2);
     }
 }

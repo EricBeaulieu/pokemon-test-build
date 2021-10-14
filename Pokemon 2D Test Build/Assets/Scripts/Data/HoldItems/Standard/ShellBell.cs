@@ -5,15 +5,14 @@ using UnityEngine;
 public class ShellBell : HoldItemBase
 {
     public override HoldItemID HoldItemId { get { return HoldItemID.ShellBell; } }
-    public override HoldItemBase ReturnDerivedClassAsNew() { return new ShellBell(); }
-    public override int AlterUserHPAfterAttack(Pokemon holder, MoveBase move, int damageDealt)
+    public override int AlterUserHPAfterAttack(BattleUnit holder, MoveBase move, int damageDealt)
     {
         //if(holder.ability.Id == AbilityID.Sheer force)
         //{
         // return 0;
         //}
 
-        damageDealt = Mathf.FloorToInt(holder.maxHitPoints / 8);
+        damageDealt = Mathf.FloorToInt(holder.pokemon.maxHitPoints / 8);
 
         if(damageDealt <= 0)
         {
@@ -22,8 +21,8 @@ public class ShellBell : HoldItemBase
         
         return damageDealt;
     }
-    public override string SpecializedMessage(Pokemon holder, Pokemon opposingPokemon)
+    public override string SpecializedMessage(BattleUnit holder, Pokemon opposingPokemon)
     {
-        return $"{holder.currentName} restored HP using {GlobalTools.SplitCamelCase(HoldItemId.ToString())}";
+        return $"{holder.pokemon.currentName} restored HP using {GlobalTools.SplitCamelCase(HoldItemId.ToString())}";
     }
 }

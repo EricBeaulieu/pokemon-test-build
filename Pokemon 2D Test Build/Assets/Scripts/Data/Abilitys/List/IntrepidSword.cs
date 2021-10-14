@@ -12,6 +12,6 @@ public class IntrepidSword : AbilityBase
     }
     public override StatBoost OnEntryRaiseStat(Pokemon opposingPokemon)
     {
-        return new StatBoost() { stat = StatAttribute.Attack, boost = 1 };
+        return new StatBoost(StatAttribute.Attack,1);
     }
 }

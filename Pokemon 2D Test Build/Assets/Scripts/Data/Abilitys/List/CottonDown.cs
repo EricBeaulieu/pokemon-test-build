@@ -12,6 +12,6 @@ public class CottonDown : AbilityBase
     }
     public override StatBoost AlterStatAfterTakingDamage(MoveBase move)
     {
-        return new StatBoost() { stat = StatAttribute.Speed, boost = -1 };
+        return new StatBoost(StatAttribute.Speed,-1);
     }
 }

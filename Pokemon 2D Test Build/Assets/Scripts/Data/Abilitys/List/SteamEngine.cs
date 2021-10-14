@@ -14,7 +14,7 @@ public class SteamEngine : AbilityBase
     {
         if (attackType == ElementType.Water|| attackType == ElementType.Fire)
         {
-            return new StatBoost() { stat = StatAttribute.Speed, boost = 6 };
+            return new StatBoost(StatAttribute.Speed,6);
         }
         return base.AlterStatAfterTakingDamageFromCertainType(attackType);
     }

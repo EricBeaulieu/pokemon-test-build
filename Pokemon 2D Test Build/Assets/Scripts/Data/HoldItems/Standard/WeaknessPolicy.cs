@@ -5,19 +5,18 @@ using UnityEngine;
 public class WeaknessPolicy : HoldItemBase
 {
     public override HoldItemID HoldItemId { get { return HoldItemID.WeaknessPolicy; } }
-    public override HoldItemBase ReturnDerivedClassAsNew() { return new WeaknessPolicy(); }
     List<StatBoost> statBoosts = new List<StatBoost>()
     {
-        new StatBoost() { stat = StatAttribute.Attack, boost = 2 },
-        new StatBoost() { stat = StatAttribute.SpecialAttack, boost = 2 }
+        new StatBoost(StatAttribute.Attack,2),
+        new StatBoost(StatAttribute.SpecialAttack,2)
     };
-    public override List<StatBoost> AlterStatAfterTakingDamageFromCertainType(ElementType attackType, bool superEffective)
+    public override List<StatBoost> AlterStatAfterTakingDamageFromCertainType(BattleUnit holder, MoveBase move, bool superEffective)
     {
         if (superEffective == true)
         {
-            RemoveItem = true;
+            holder.removeItem = true;
             return statBoosts;
         }
-        return base.AlterStatAfterTakingDamageFromCertainType(attackType, superEffective);
+        return base.AlterStatAfterTakingDamageFromCertainType(holder,move, superEffective);
     }
 }

@@ -5,7 +5,6 @@ using UnityEngine;
 public class Sitrus : HoldItemBase
 {
     public override BerryID BerryId { get { return BerryID.Sitrus; } }
-    public override HoldItemBase ReturnDerivedClassAsNew() { return new Sitrus(); }
     int hpHealed;
     public override bool UseInInventory()
     {
@@ -22,19 +21,19 @@ public class Sitrus : HoldItemBase
         }
         return false;
     }
-    public override bool HealsPokemonAfterTakingDamage(Pokemon pokemon)
+    public override bool HealsPokemonAfterTakingDamage(BattleUnit holder, bool superEffective)
     {
-        float pokemonHealthPercentage = (float)pokemon.currentHitPoints / (float)pokemon.maxHitPoints;
-        if (pokemonHealthPercentage <= StandardBerryUseage(pokemon))
+        float pokemonHealthPercentage = (float)holder.pokemon.currentHitPoints / (float)holder.pokemon.maxHitPoints;
+        if (pokemonHealthPercentage <= StandardBerryUseage(holder.pokemon))
         {
-            RemoveItem = true;
-            hpHealed = Mathf.FloorToInt(pokemon.maxHitPoints/3);
+            holder.removeItem = true;
+            hpHealed = Mathf.FloorToInt(holder.pokemon.maxHitPoints/3);
 
-            pokemon.UpdateHPRestored(hpHealed);
-            pokemon.statusChanges.Enqueue($"{pokemon.currentName} restored HP using the {GlobalTools.SplitCamelCase(BerryId.ToString())} berry!");
+            holder.pokemon.UpdateHPRestored(hpHealed);
+            holder.pokemon.statusChanges.Enqueue($"{holder.pokemon.currentName} restored HP using the {GlobalTools.SplitCamelCase(BerryId.ToString())} berry!");
 
             return true;
         }
-        return base.HealsPokemonAfterTakingDamage(pokemon);
+        return base.HealsPokemonAfterTakingDamage(holder,superEffective);
     }
 }

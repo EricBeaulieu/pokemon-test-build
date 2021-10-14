@@ -12,6 +12,6 @@ public class Competitive : AbilityBase
     }
     public override StatBoost BoostStatSharplyIfAnyStatLowered()
     {
-        return new StatBoost() { stat = StatAttribute.SpecialAttack, boost = 2 };
+        return new StatBoost(StatAttribute.SpecialAttack, 2);
     }
 }

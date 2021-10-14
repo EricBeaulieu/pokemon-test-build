@@ -5,14 +5,13 @@ using UnityEngine;
 public class ThroatSpray : HoldItemBase
 {
     public override HoldItemID HoldItemId { get { return HoldItemID.ThroatSpray; } }
-    public override HoldItemBase ReturnDerivedClassAsNew() { return new ThroatSpray(); }
-    public override StatBoost AlterStatAfterUsingSpecificMove(MoveBase move)
+    public override StatBoost AlterStatAfterUsingSpecificMove(BattleUnit holder, MoveBase move)
     {
         if(move.SoundType == true)
         {
-            RemoveItem = true;
-            return new StatBoost() { stat = StatAttribute.SpecialAttack, boost = 1 };
+            holder.removeItem = true;
+            return new StatBoost(StatAttribute.SpecialAttack,1);
         }
-        return base.AlterStatAfterUsingSpecificMove(move);
+        return base.AlterStatAfterUsingSpecificMove(holder,move);
     }
 }

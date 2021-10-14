@@ -5,15 +5,15 @@ using UnityEngine;
 public class PsychicGem : HoldItemBase
 {
     public override HoldItemID HoldItemId { get { return HoldItemID.PsychicGem; } }
-    public override HoldItemBase ReturnDerivedClassAsNew() { return new PsychicGem(); }
-    public override MoveBase AlterUserMoveDetails(MoveBase move)
+    public override bool PlayAnimationWhenUsed() { return true; }
+    public override MoveBase AlterUserMoveDetails(BattleUnit holder, MoveBase move)
     {
         if (move.Type == ElementType.Psychic && move.MoveType != MoveType.Status)
         {
-            RemoveItem = true;
+            holder.removeItem = true;
             move = move.Clone();
             move.AdjustedMovePower(0.5f);
         }
-        return base.AlterUserMoveDetails(move);
+        return base.AlterUserMoveDetails(holder, move);
     }
 }

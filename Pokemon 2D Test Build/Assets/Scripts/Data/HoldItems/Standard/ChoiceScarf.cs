@@ -5,8 +5,6 @@ using UnityEngine;
 public class ChoiceScarf : HoldItemBase
 {
     public override HoldItemID HoldItemId { get { return HoldItemID.ChoiceScarf; } }
-    public override HoldItemBase ReturnDerivedClassAsNew() { return new ChoiceScarf(); }
-    MoveBase lockedMove;
     public override float AlterStat(Pokemon holder, StatAttribute statAffected)
     {
         if (statAffected == StatAttribute.Speed)
@@ -24,11 +22,10 @@ public class ChoiceScarf : HoldItemBase
                 return true;
             }
         }
-        lockedMove = move;
         return false;
     }
-    public override string SpecializedMessage(Pokemon holder, Pokemon opposingPokemon)
+    public override string SpecializedMessage(BattleUnit holder, Pokemon opposingPokemon)
     {
-        return $"The {GlobalTools.SplitCamelCase(HoldItemId.ToString())} only allows the use of {lockedMove.MoveName}";
+        return $"The {GlobalTools.SplitCamelCase(HoldItemId.ToString())} only allows the use of {holder.lastMoveUsed.moveBase.MoveName}";
     }
 }

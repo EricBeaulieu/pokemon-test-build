@@ -5,7 +5,6 @@ using UnityEngine;
 public class ExpShare : HoldItemBase
 {
     public override HoldItemID HoldItemId { get { return HoldItemID.ExpShare; } }
-    public override HoldItemBase ReturnDerivedClassAsNew() { return new ExpShare(); }
     public override bool ExperienceShared()
     {
         return true;

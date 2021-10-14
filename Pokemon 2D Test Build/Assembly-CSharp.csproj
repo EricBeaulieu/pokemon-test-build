@@ -54,6 +54,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\Characters\ScriptableObjects\CharacterArtSO.cs" />
+    <Compile Include="Assets\Scripts\Data\HoldItems\Berries\Yache.cs" />
     <Compile Include="Assets\Scripts\Data\HoldItems\Standard\RazorFang.cs" />
     <Compile Include="Assets\Scripts\Data\HoldItems\Standard\ShellBell.cs" />
     <Compile Include="Assets\Scripts\Data\Conditions\VolatileStatus\Infatuation.cs" />
@@ -69,6 +70,7 @@
     <Compile Include="Assets\Scripts\Pokemon\IndividualValues.cs" />
     <Compile Include="Assets\Scripts\Data\Abilitys\List\SteamEngine.cs" />
     <Compile Include="Assets\Scripts\UI\MoveDetails.cs" />
+    <Compile Include="Assets\Scripts\Data\HoldItems\Berries\Jaboca.cs" />
     <Compile Include="Assets\Scripts\Data\Conditions\Status\ToxicPoison.cs" />
     <Compile Include="Assets\Scripts\Data\HoldItems\Standard\ScopeLens.cs" />
     <Compile Include="Assets\Scripts\Data\Abilitys\List\Transistor.cs" />
@@ -81,6 +83,7 @@
     <Compile Include="Assets\Scripts\Data\Abilitys\List\PrismArmor.cs" />
     <Compile Include="Assets\Scripts\Data\Abilitys\List\FlareBoost.cs" />
     <Compile Include="Assets\Scripts\Data\Abilitys\List\CottonDown.cs" />
+    <Compile Include="Assets\Scripts\Data\HoldItems\Berries\Maranga.cs" />
     <Compile Include="Assets\Scripts\Data\Abilitys\List\Reckless.cs" />
     <Compile Include="Assets\Scripts\Data\Abilitys\List\Scrappy.cs" />
     <Compile Include="Assets\Scripts\Data\HoldItems\Standard\FocusBand.cs" />
@@ -98,12 +101,15 @@
     <Compile Include="Assets\Scripts\Data\Abilitys\List\Adaptability.cs" />
     <Compile Include="Assets\Scripts\Data\HoldItems\Standard\HeatRock.cs" />
     <Compile Include="Assets\Scripts\Data\Abilitys\List\Klutz.cs" />
+    <Compile Include="Assets\Scripts\Data\HoldItems\Berries\Enigma.cs" />
     <Compile Include="Assets\Scripts\Saving\PokemonSavingSystem.cs" />
     <Compile Include="Assets\Scripts\Data\Abilitys\List\GaleWings.cs" />
     <Compile Include="Assets\Scripts\Data\Abilitys\List\MagmaArmor.cs" />
     <Compile Include="Assets\Scripts\Data\HoldItems\Berries\Pomeg.cs" />
     <Compile Include="Assets\Scripts\Characters\ScriptableObjects\HealerNpcBaseSO.cs" />
     <Compile Include="Assets\Scripts\Data\HoldItems\Berries\Aspear.cs" />
+    <Compile Include="Assets\Scripts\Data\HoldItems\Berries\Roseli.cs" />
+    <Compile Include="Assets\Scripts\Data\HoldItems\Berries\Kebia.cs" />
     <Compile Include="Assets\Scripts\Data\Abilitys\List\BadDreams.cs" />
     <Compile Include="Assets\Scripts\Data\Abilitys\List\PunkRock.cs" />
     <Compile Include="Assets\Scripts\Characters\ScriptableObjects\TrainerBaseSO.cs" />
@@ -112,6 +118,7 @@
     <Compile Include="Assets\Scripts\Data\Abilitys\List\ToxicBoost.cs" />
     <Compile Include="Assets\Scripts\Attribute\ReadOnly.cs" />
     <Compile Include="Assets\Scripts\Data\HoldItems\Standard\SoulDew.cs" />
+    <Compile Include="Assets\Scripts\Data\HoldItems\Berries\Wacan.cs" />
     <Compile Include="Assets\Scripts\Data\HoldItems\Standard\SafetyGoggles.cs" />
     <Compile Include="Assets\Scripts\Battle\DamageDetails.cs" />
     <Compile Include="Assets\Scripts\Data\HoldItems\Standard\WeaknessPolicy.cs" />
@@ -155,17 +162,22 @@
     <Compile Include="Assets\Scripts\Data\HoldItems\Standard\PoisonBarb.cs" />
     <Compile Include="Assets\Scripts\Data\Abilitys\List\Damp.cs" />
     <Compile Include="Assets\Scripts\Data\Abilitys\List\WaterAbsorb.cs" />
+    <Compile Include="Assets\Scripts\Data\HoldItems\Berries\Coba.cs" />
     <Compile Include="Assets\Scripts\Data\HoldItems\Standard\SharpBeak.cs" />
     <Compile Include="Assets\Scripts\Data\HoldItems\Standard\LifeOrb.cs" />
     <Compile Include="Assets\Scripts\Data\Abilitys\List\KeenEye.cs" />
     <Compile Include="Assets\Scripts\Pokemon\NatureBase.cs" />
+    <Compile Include="Assets\Scripts\Data\HoldItems\Berries\Kasib.cs" />
     <Compile Include="Assets\Scripts\Data\Abilitys\List\Intimidate.cs" />
+    <Compile Include="Assets\Scripts\Data\HoldItems\Berries\Lansat.cs" />
     <Compile Include="Assets\Scripts\Data\Abilitys\List\RoughSkin.cs" />
     <Compile Include="Assets\Scripts\Data\Abilitys\List\DauntlessShield.cs" />
     <Compile Include="Assets\Scripts\Dialog\DialogBox.cs" />
     <Compile Include="Assets\Scripts\Data\HoldItems\Standard\LustrousOrb.cs" />
     <Compile Include="Assets\Scripts\Data\HoldItems\Standard\BlackGlasses.cs" />
     <Compile Include="Assets\Scripts\Data\Conditions\VolatileStatus\Bound.cs" />
+    <Compile Include="Assets\Scripts\Data\HoldItems\Berries\Charti.cs" />
+    <Compile Include="Assets\Scripts\Data\HoldItems\Berries\Haban.cs" />
     <Compile Include="Assets\Scripts\Saving\PokemonSaveData.cs" />
     <Compile Include="Assets\Scripts\Data\Abilitys\List\EffectSpore.cs" />
     <Compile Include="Assets\Scripts\Data\Abilitys\List\FlowerGift.cs" />
@@ -173,9 +185,11 @@
     <Compile Include="Assets\Scripts\Data\Abilitys\List\Hustle.cs" />
     <Compile Include="Assets\Scripts\Data\Abilitys\List\QuickFeet.cs" />
     <Compile Include="Assets\Scripts\Data\HoldItems\Standard\FlyingGem.cs" />
+    <Compile Include="Assets\Scripts\Data\HoldItems\Berries\Babiri.cs" />
     <Compile Include="Assets\Scripts\Static Tables\ExperienceTable.cs" />
     <Compile Include="Assets\Scripts\Static Tables\CatchingMechanics.cs" />
     <Compile Include="Assets\Scripts\Data\HoldItems\Standard\PowerBand.cs" />
+    <Compile Include="Assets\Scripts\Data\HoldItems\Berries\Passho.cs" />
     <Compile Include="Assets\Scripts\Managers\CoreSystem.cs" />
     <Compile Include="Assets\Scripts\Pokemon\EffortValues.cs" />
     <Compile Include="Assets\Scripts\Data\HoldItems\Standard\GripClaw.cs" />
@@ -201,6 +215,7 @@
     <Compile Include="Assets\Scripts\Data\Abilitys\List\Heatproof.cs" />
     <Compile Include="Assets\Scripts\Data\Conditions\ConditionsDB.cs" />
     <Compile Include="Assets\Scripts\Data\HoldItems\Standard\BlackBelt.cs" />
+    <Compile Include="Assets\Scripts\Data\HoldItems\Berries\Starf.cs" />
     <Compile Include="Assets\Scripts\Data\Abilitys\List\Drizzle.cs" />
     <Compile Include="Assets\Scripts\Managers\LevelManager.cs" />
     <Compile Include="Assets\Scripts\Data\HoldItems\Standard\LuckyEgg.cs" />
@@ -227,6 +242,7 @@
     <Compile Include="Assets\Scripts\Data\Abilitys\List\BigPecks.cs" />
     <Compile Include="Assets\Scripts\ExtensionMethods\ColorExtensions.cs" />
     <Compile Include="Assets\Scripts\Data\HoldItems\Standard\RockyHelmet.cs" />
+    <Compile Include="Assets\Scripts\Data\HoldItems\Berries\Tamato.cs" />
     <Compile Include="Assets\Scripts\Items\UI\TrashArrowButtons.cs" />
     <Compile Include="Assets\Scripts\Data\Abilitys\List\MegaLauncher.cs" />
     <Compile Include="Assets\Scripts\Pokemon\Evolution\EvolutionBase.cs" />
@@ -242,11 +258,14 @@
     <Compile Include="Assets\Scripts\Scene\SceneSystem.cs" />
     <Compile Include="Assets\Scripts\Data\Abilitys\List\Gooey.cs" />
     <Compile Include="Assets\Scripts\Data\Conditions\Status\Sleep.cs" />
+    <Compile Include="Assets\Scripts\Data\HoldItems\Berries\Tanga.cs" />
     <Compile Include="Assets\Scripts\Data\Abilitys\List\Libero.cs" />
     <Compile Include="Assets\Scripts\Data\Abilitys\List\IceBody.cs" />
     <Compile Include="Assets\Scripts\Items\UI\ItemMenuButtonUI.cs" />
     <Compile Include="Assets\Scripts\Party\PartyMemberUI.cs" />
     <Compile Include="Assets\Scripts\Pokemon\SpecifiedValues.cs" />
+    <Compile Include="Assets\Scripts\Data\HoldItems\Berries\Custap.cs" />
+    <Compile Include="Assets\Scripts\Data\HoldItems\Berries\Colbur.cs" />
     <Compile Include="Assets\Scripts\Items\ScriptableObjects\PokeballItem.cs" />
     <Compile Include="Assets\Scripts\Data\Abilitys\List\Levitate.cs" />
     <Compile Include="Assets\Scripts\Data\HoldItems\Berries\Figy.cs" />
@@ -259,9 +278,11 @@
     <Compile Include="Assets\Scripts\Data\HoldItems\Berries\Leppa.cs" />
     <Compile Include="Assets\Scripts\Data\Abilitys\List\Infiltrator.cs" />
     <Compile Include="Assets\Scripts\Pokemon\Evolution\EvolveLevelBased.cs" />
+    <Compile Include="Assets\Scripts\Data\HoldItems\Berries\Qualot.cs" />
     <Compile Include="Assets\Scripts\Data\Weather\WeatherEffectDB.cs" />
     <Compile Include="Assets\Scripts\Data\HoldItems\Standard\Snowball.cs" />
     <Compile Include="Assets\Scripts\Data\Abilitys\List\ArenaTrap.cs" />
+    <Compile Include="Assets\Scripts\Data\HoldItems\Berries\Chople.cs" />
     <Compile Include="Assets\Scripts\Data\HoldItems\Standard\ToxicOrb.cs" />
     <Compile Include="Assets\Scripts\Data\Abilitys\List\IntrepidSword.cs" />
     <Compile Include="Assets\Scripts\Data\Conditions\VolatileStatus\HealBlock.cs" />
@@ -271,6 +292,7 @@
     <Compile Include="Assets\Scripts\Data\Abilitys\List\RockHead.cs" />
     <Compile Include="Assets\Scripts\Saving\SaveableEntity.cs" />
     <Compile Include="Assets\Scripts\Data\HoldItems\Standard\MysticWater.cs" />
+    <Compile Include="Assets\Scripts\Data\HoldItems\Berries\Ganlon.cs" />
     <Compile Include="Assets\Scripts\Data\HoldItems\Standard\Metronome.cs" />
     <Compile Include="Assets\Scripts\Data\HoldItems\Standard\SpellTag.cs" />
     <Compile Include="Assets\Scripts\Data\HoldItems\Standard\ElectricGem.cs" />
@@ -285,6 +307,8 @@
     <Compile Include="Assets\Scripts\Data\HoldItems\Standard\WaterGem.cs" />
     <Compile Include="Assets\Scripts\Battle\CaptureBallRoute.cs" />
     <Compile Include="Assets\Scripts\Pokemon\Evolution\EvolveMoveSpecified.cs" />
+    <Compile Include="Assets\Scripts\Data\HoldItems\Berries\Salac.cs" />
+    <Compile Include="Assets\Scripts\Data\HoldItems\Berries\Petaya.cs" />
     <Compile Include="Assets\Scripts\Items\Item.cs" />
     <Compile Include="Assets\Scripts\Data\HoldItems\Standard\Charcoal.cs" />
     <Compile Include="Assets\Scripts\Data\HoldItems\Standard\FlameOrb.cs" />
@@ -294,6 +318,7 @@
     <Compile Include="Assets\Scripts\Characters\MonoBehavior\NpcController.cs" />
     <Compile Include="Assets\Scripts\Party\SummaryDisplay.cs" />
     <Compile Include="Assets\Scripts\Party\SummaryInfo.cs" />
+    <Compile Include="Assets\Scripts\Data\HoldItems\Berries\Hondew.cs" />
     <Compile Include="Assets\Scripts\Overworld\Ledge.cs" />
     <Compile Include="Assets\Scripts\Battle\BattleAbilityUI.cs" />
     <Compile Include="Assets\Scripts\Battle\LevelUpUI.cs" />
@@ -313,6 +338,7 @@
     <Compile Include="Assets\Scripts\Data\Conditions\Status\Paralyzed.cs" />
     <Compile Include="Assets\Scripts\Data\HoldItems\Standard\AirBalloon.cs" />
     <Compile Include="Assets\Scripts\Data\HoldItems\Standard\Blunder Policy.cs" />
+    <Compile Include="Assets\Scripts\Data\HoldItems\Berries\Shuca.cs" />
     <Compile Include="Assets\Scripts\Data\Abilitys\List\IronBarbs.cs" />
     <Compile Include="Assets\Scripts\ArtHolders\StatusConditionArt.cs" />
     <Compile Include="Assets\Scripts\Dialog\DialogManager.cs" />
@@ -336,6 +362,7 @@
     <Compile Include="Assets\Scripts\Data\HoldItems\Standard\WideLens.cs" />
     <Compile Include="Assets\Scripts\Data\Abilitys\List\FlameBody.cs" />
     <Compile Include="Assets\Scripts\Data\HoldItems\Standard\RazorClaw.cs" />
+    <Compile Include="Assets\Scripts\Data\HoldItems\Berries\Chilan.cs" />
     <Compile Include="Assets\Scripts\Data\Abilitys\List\SandVeil.cs" />
     <Compile Include="Assets\Scripts\Characters\MonoBehavior\Entity.cs" />
     <Compile Include="Assets\Scripts\Data\HoldItems\Standard\AbsorbBulb.cs" />
@@ -367,6 +394,8 @@
     <Compile Include="Assets\Scripts\Data\Weather\Weather Effects\Sunshine.cs" />
     <Compile Include="Assets\Scripts\Data\HoldItems\Standard\PowerAnklet.cs" />
     <Compile Include="Assets\Scripts\Items\ScriptableObjects\ItemColorScheme.cs" />
+    <Compile Include="Assets\Scripts\Data\HoldItems\Berries\Payapa.cs" />
+    <Compile Include="Assets\Scripts\Data\HoldItems\Berries\Liechi.cs" />
     <Compile Include="Assets\Scripts\Data\Conditions\VolatileStatus\Flinch.cs" />
     <Compile Include="Assets\Scripts\Data\HoldItems\Standard\ExpShare.cs" />
     <Compile Include="Assets\Scripts\Data\Abilitys\List\Guts.cs" />
@@ -406,6 +435,7 @@
     <Compile Include="Assets\Scripts\Data\Abilitys\List\DrySkin.cs" />
     <Compile Include="Assets\Scripts\Data\Abilitys\List\SnowCloak.cs" />
     <Compile Include="Assets\Scripts\Pokemon\Move.cs" />
+    <Compile Include="Assets\Scripts\Data\HoldItems\Berries\Rindo.cs" />
     <Compile Include="Assets\Scripts\Pokemon\Shield\ShieldBase.cs" />
     <Compile Include="Assets\Scripts\Data\HoldItems\Berries\Mago.cs" />
     <Compile Include="Assets\Scripts\Data\Abilitys\List\MotorDrive.cs" />
@@ -415,10 +445,12 @@
     <Compile Include="Assets\Scripts\Data\Abilitys\AbilityDB.cs" />
     <Compile Include="Assets\Scripts\Pokemon\MoveEffects.cs" />
     <Compile Include="Assets\Scripts\Data\Abilitys\List\Torrent.cs" />
+    <Compile Include="Assets\Scripts\Data\HoldItems\Berries\Occa.cs" />
     <Compile Include="Assets\Scripts\Data\Abilitys\List\FurCoat.cs" />
     <Compile Include="Assets\Scripts\Data\Abilitys\List\SandStream.cs" />
     <Compile Include="Assets\Scripts\Characters\MonoBehavior\TrainerController.cs" />
     <Compile Include="Assets\Scripts\Data\HoldItems\Standard\SteelGem.cs" />
+    <Compile Include="Assets\Scripts\Data\HoldItems\Berries\Rowap.cs" />
     <Compile Include="Assets\Scripts\Data\HoldItems\Standard\FightingGem.cs" />
     <Compile Include="Assets\Scripts\Characters\MonoBehavior\SpriteSheetSwap.cs" />
     <Compile Include="Assets\Scripts\Scene\FadeSystem.cs" />
@@ -427,6 +459,7 @@
     <Compile Include="Assets\Scripts\Data\HoldItems\Standard\IceGem.cs" />
     <Compile Include="Assets\Scripts\Data\HoldItems\Standard\FocusSash.cs" />
     <Compile Include="Assets\Scripts\Data\HoldItems\Standard\ChoiceScarf.cs" />
+    <Compile Include="Assets\Scripts\Data\HoldItems\Berries\Micle.cs" />
     <Compile Include="Assets\Scripts\Data\HoldItems\Standard\AdamantOrb.cs" />
     <Compile Include="Assets\Scripts\Data\Abilitys\List\Immunity.cs" />
     <Compile Include="Assets\Scripts\Data\Abilitys\List\SpeedBoost.cs" />
@@ -434,10 +467,12 @@
     <Compile Include="Assets\Scripts\Data\HoldItems\Standard\MuscleBand.cs" />
     <Compile Include="Assets\Scripts\Data\Abilitys\List\StrongJaw.cs" />
     <Compile Include="Assets\Scripts\Saving\ItemSaveData.cs" />
+    <Compile Include="Assets\Scripts\Data\HoldItems\Berries\Apicot.cs" />
     <Compile Include="Assets\Scripts\Pokemon\LearnableMove.cs" />
     <Compile Include="Assets\Scripts\Data\HoldItems\Berries\Persim.cs" />
     <Compile Include="Assets\Scripts\Battle\BattleUnit.cs" />
     <Compile Include="Assets\Scripts\Characters\ScriptableObjects\EntityBaseSO.cs" />
+    <Compile Include="Assets\Scripts\Data\HoldItems\Berries\Grepa.cs" />
     <Compile Include="Assets\Scripts\Scene\GameSceneBaseSO.cs" />
     <Compile Include="Assets\Scripts\Scene\Portal.cs" />
     <Compile Include="Assets\Scripts\Data\HoldItems\Standard\BlackSludge.cs" />
@@ -451,6 +486,8 @@
     <Compile Include="Assets\Scripts\Data\Abilitys\List\BallFetch.cs" />
     <Compile Include="Assets\Scripts\Data\Abilitys\List\CursedBody.cs" />
     <Compile Include="Assets\Scripts\Data\Abilitys\List\Forewarn.cs" />
+    <Compile Include="Assets\Scripts\Data\HoldItems\Berries\Kelpsy.cs" />
+    <Compile Include="Assets\Scripts\Data\HoldItems\Berries\Kee.cs" />
     <Compile Include="Assets\Scripts\Data\HoldItems\Standard\PowerLens.cs" />
     <Compile Include="Assets\Scripts\Data\Abilitys\List\FullMetalBody.cs" />
     <Compile Include="Assets\Scripts\Data\HoldItems\Standard\ChoiceBand.cs" />
@@ -482,29 +519,7 @@
     <Compile Include="Assets\Scripts\Data\Abilitys\List\RainDish.cs" />
     <Compile Include="Assets\Scripts\Data\Abilitys\List\Justified.cs" />
     <Compile Include="Assets\Scripts\Data\Abilitys\List\Soundproof.cs" />
-    <Compile Include="Assets\Scripts\Data\HoldItems\Berries\Kelpsy.cs" />
-    <Compile Include="Assets\Scripts\Data\HoldItems\Berries\Qualot.cs" />
-    <Compile Include="Assets\Scripts\Data\HoldItems\Berries\Hondew.cs" />
-    <Compile Include="Assets\Scripts\Data\HoldItems\Berries\Grepa.cs" />
-    <Compile Include="Assets\Scripts\Data\HoldItems\Berries\Tamato.cs" />
-    <Compile Include="Assets\Scripts\Data\HoldItems\Berries\Occa.cs" />
-    <Compile Include="Assets\Scripts\Data\HoldItems\Berries\Passho.cs" />
-    <Compile Include="Assets\Scripts\Data\HoldItems\Berries\Wacan.cs" />
-    <Compile Include="Assets\Scripts\Data\HoldItems\Berries\Rindo.cs" />
-    <Compile Include="Assets\Scripts\Data\HoldItems\Berries\Yache.cs" />
-    <Compile Include="Assets\Scripts\Data\HoldItems\Berries\Chople.cs" />
-    <Compile Include="Assets\Scripts\Data\HoldItems\Berries\Kebia.cs" />
-    <Compile Include="Assets\Scripts\Data\HoldItems\Berries\Shuca.cs" />
-    <Compile Include="Assets\Scripts\Data\HoldItems\Berries\Coba.cs" />
-    <Compile Include="Assets\Scripts\Data\HoldItems\Berries\Payapa.cs" />
-    <Compile Include="Assets\Scripts\Data\HoldItems\Berries\Tanga.cs" />
-    <Compile Include="Assets\Scripts\Data\HoldItems\Berries\Charti.cs" />
-    <Compile Include="Assets\Scripts\Data\HoldItems\Berries\Kasib.cs" />
-    <Compile Include="Assets\Scripts\Data\HoldItems\Berries\Haban.cs" />
-    <Compile Include="Assets\Scripts\Data\HoldItems\Berries\Colbur.cs" />
-    <Compile Include="Assets\Scripts\Data\HoldItems\Berries\Babiri.cs" />
-    <Compile Include="Assets\Scripts\Data\HoldItems\Berries\Chilan.cs" />
-    <Compile Include="Assets\Scripts\Data\HoldItems\Berries\Roseli.cs" />
+    <Compile Include="Assets\Scripts\Items\ScriptableObjects\BattleEffectItem.cs" />
   </ItemGroup>
   <ItemGroup>
      <None Include="Assets\ScriptTemplates\82-EricBeaulieu__BerryBase-NewBerryBase.cs.txt" />

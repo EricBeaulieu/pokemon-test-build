@@ -5,14 +5,13 @@ using UnityEngine;
 public class MuscleBand : HoldItemBase
 {
     public override HoldItemID HoldItemId { get { return HoldItemID.MuscleBand; } }
-    public override HoldItemBase ReturnDerivedClassAsNew() { return new MuscleBand(); }
-    public override MoveBase AlterUserMoveDetails(MoveBase move)
+    public override MoveBase AlterUserMoveDetails(BattleUnit holder, MoveBase move)
     {
         if (move.MoveType == MoveType.Physical)
         {
             move = move.Clone();
             move.AdjustedMovePower(0.2f);
         }
-        return base.AlterUserMoveDetails(move);
+        return base.AlterUserMoveDetails(holder, move);
     }
 }

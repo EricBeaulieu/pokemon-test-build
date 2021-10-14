@@ -22,7 +22,7 @@ public class LightningRod : AbilityBase
     {
         if (attackType == ElementType.Electric)
         {
-            return new StatBoost() { stat = StatAttribute.SpecialAttack, boost = 1 };
+            return new StatBoost(StatAttribute.SpecialAttack,1);
         }
         return base.AlterStatAfterTakingDamageFromCertainType(attackType);
     }

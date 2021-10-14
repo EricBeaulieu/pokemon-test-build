@@ -5,44 +5,47 @@ using UnityEngine;
 public class Wiki : HoldItemBase
 {
     public override BerryID BerryId { get { return BerryID.Wiki; } }
-    public override HoldItemBase ReturnDerivedClassAsNew() { return new Wiki(); }
     ConditionID condition = ConditionID.NA;
     Flavor hatedFlavor = Flavor.Dry;
-    public override bool HealsPokemonAfterTakingDamage(Pokemon pokemon)
+    public override bool HealsPokemonAfterTakingDamage(BattleUnit holder, bool superEffective)
     {
-        float pokemonHealthPercentage = (float)pokemon.currentHitPoints / (float)pokemon.maxHitPoints;
-        if (pokemonHealthPercentage <= StandardBerryUseage(pokemon))
+        float pokemonHealthPercentage = (float)holder.pokemon.currentHitPoints / (float)holder.pokemon.maxHitPoints;
+        if (pokemonHealthPercentage <= StandardBerryUseage(holder.pokemon))
         {
-            RemoveItem = true;
-            int hpHealed = Mathf.FloorToInt(pokemon.maxHitPoints / 3);
+            holder.removeItem = true;
+            int hpHealed = Mathf.FloorToInt(holder.pokemon.maxHitPoints / 3);
 
             if (hpHealed <= 0)
             {
                 hpHealed = 1;
             }
 
-            pokemon.UpdateHPRestored(hpHealed);
-            pokemon.statusChanges.Enqueue($"{pokemon.currentName} restored HP using the {GlobalTools.SplitCamelCase(BerryId.ToString())} berry!");
+            holder.pokemon.UpdateHPRestored(hpHealed);
+            holder.pokemon.statusChanges.Enqueue($"{holder.pokemon.currentName} restored HP using the {GlobalTools.SplitCamelCase(BerryId.ToString())} berry!");
 
-            if (pokemon.nature.GetFlavourRating(hatedFlavor) < 0)
+            if (holder.pokemon.nature.GetFlavourRating(hatedFlavor) < 0)
             {
                 condition = ConditionID.Confused;
+            }
+            else
+            {
+                condition = ConditionID.NA;
             }
 
             return true;
         }
-        return base.HealsPokemonAfterTakingDamage(pokemon);
+        return base.HealsPokemonAfterTakingDamage(holder,superEffective);
     }
     public override ConditionID AdditionalEffects()
     {
         return condition;
     }
-    public override string SpecializedMessage(Pokemon holder, Pokemon opposingPokemon)
+    public override string SpecializedMessage(BattleUnit holder, Pokemon opposingPokemon)
     {
         if (condition == ConditionID.NA)
         {
             return "";
         }
-        return $"For {holder.currentName}, the {GlobalTools.SplitCamelCase(BerryId.ToString())} berry was too {hatedFlavor}!";
+        return $"For {holder.pokemon.currentName}, the {GlobalTools.SplitCamelCase(BerryId.ToString())} berry was too {hatedFlavor}!";
     }
 }

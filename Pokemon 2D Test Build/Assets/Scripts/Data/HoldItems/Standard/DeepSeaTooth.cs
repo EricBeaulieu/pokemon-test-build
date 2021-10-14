@@ -5,7 +5,6 @@ using UnityEngine;
 public class DeepSeaTooth : HoldItemBase
 {
     public override HoldItemID HoldItemId { get { return HoldItemID.DeepSeaTooth; } }
-    public override HoldItemBase ReturnDerivedClassAsNew() { return new DeepSeaTooth(); }
     public override float AlterStat(Pokemon holder, StatAttribute statAffected)
     {
         if (statAffected == StatAttribute.SpecialAttack && holder.pokemonBase.GetPokedexName() == "Clamperl")

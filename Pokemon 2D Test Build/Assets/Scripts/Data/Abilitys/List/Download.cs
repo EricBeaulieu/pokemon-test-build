@@ -14,8 +14,8 @@ public class Download : AbilityBase
     {
         if(opposingPokemon.defense > opposingPokemon.specialDefense)
         {
-            return new StatBoost() { stat = StatAttribute.Attack, boost = 1 }; ;
+            return new StatBoost(StatAttribute.Attack,1);
         }
-        return new StatBoost() { stat = StatAttribute.SpecialAttack, boost = 1 }; ;
+        return new StatBoost(StatAttribute.SpecialAttack,1);
     }
 }

@@ -9,14 +9,14 @@ public abstract class EntryHazardBase
     public abstract EntryHazardBase ReturnDerivedClassAsNew();
     public string Name { get { return Id.ToString(); } }
     public abstract string StartMessage(BattleUnit battleUnit);
-    protected int layers { get { return _currentLayers; } set { _currentLayers = Mathf.Clamp(value + _currentLayers, 0, _maxLayers()); } }
-    int _currentLayers;
-    abstract protected int _maxLayers();
+    protected int layers { get { return currentLayers; } set { currentLayers = Mathf.Clamp(currentLayers, 0, maxLayers()); } }
+    int currentLayers;
+    abstract protected int maxLayers();
     public virtual void OnEntry(Pokemon pokemon) { }
-    public virtual StatBoost OnEntryLowerStat(Pokemon pokemon) { return new StatBoost() { stat = StatAttribute.Speed, boost = 0 }; ; }
+    public virtual StatBoost OnEntryLowerStat(Pokemon pokemon) { return null; }
     public bool CanBeUsed()
     {
-        if((layers >= _maxLayers()))
+        if((layers >= maxLayers()))
         {
             return false;
         }

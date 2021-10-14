@@ -5,7 +5,6 @@ using UnityEngine;
 public class PowerBand : HoldItemBase
 {
     public override HoldItemID HoldItemId { get { return HoldItemID.PowerBand; } }
-    public override HoldItemBase ReturnDerivedClassAsNew() { return new PowerBand(); }
     public override float AlterStat(Pokemon Holder, StatAttribute statAffected)
     {
         if (statAffected == StatAttribute.Speed)

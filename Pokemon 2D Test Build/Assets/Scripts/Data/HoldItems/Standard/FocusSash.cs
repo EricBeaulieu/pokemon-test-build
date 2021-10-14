@@ -5,12 +5,11 @@ using UnityEngine;
 public class FocusSash : HoldItemBase
 {
     public override HoldItemID HoldItemId { get { return HoldItemID.FocusSash; } }
-    public override HoldItemBase ReturnDerivedClassAsNew() { return new FocusSash(); }
-    public override bool EndureOHKOAttack(Pokemon defendingPokemon)
+    public override bool EndureOHKOAttack(BattleUnit holder)
     {
-        if (defendingPokemon.currentHitPoints == defendingPokemon.maxHitPoints)
+        if (holder.pokemon.currentHitPoints == holder.pokemon.maxHitPoints)
         {
-            RemoveItem = true;
+            holder.removeItem = true;
             return true;
         }
 

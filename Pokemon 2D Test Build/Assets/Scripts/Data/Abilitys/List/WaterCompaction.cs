@@ -14,7 +14,7 @@ public class WaterCompaction : AbilityBase
     {
         if (attackType == ElementType.Water)
         {
-            return new StatBoost() { stat = StatAttribute.Defense, boost = 2 };
+            return new StatBoost(StatAttribute.Defense,2);
         }
         return base.AlterStatAfterTakingDamageFromCertainType(attackType);
     }

@@ -6,6 +6,8 @@ public class Notes
 {
     //To do list
 
+    //power points stuff not implimented for when item is used on pokemon
+    //in regards to specialized messages, they can be thrown into stat boost and displayed when given into effect
     //Safeguard and substitute, when made add in infiltrator
     //Change the way the pokemon gets its nature
     //Cheek pouch ability,Gluttony,Harvest for when berries are implimented
@@ -36,7 +38,6 @@ public class Notes
     //normalize to change the type of status moves as well
 
     //roost creating it so the pokemon can get hit by ground moves
-    //double check abilities dropping or raising higher then stated
     //finish all different types of animations with conditions
     //money set for trainer
     //camera effects when entering battle either with trainers,wild pokemon or specialized pokemon

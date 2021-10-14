@@ -30,7 +30,7 @@ public class BeastBoost : AbilityBase
             {
                 if (attackingPokemon.statBoosts[statAttribute] < 6)
                 {
-                    return new StatBoost() { stat = statAttribute, boost = 1 };
+                    return new StatBoost(statAttribute,1);
                 }
                 else
                 {
