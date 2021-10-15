@@ -64,6 +64,12 @@ public class BattleSystem : CoreSystem
     [SerializeField] MoveBase reflect;
     [SerializeField] MoveBase lightScreen;
     [SerializeField] MoveBase auroraVeil;
+    [SerializeField] MoveBase mist;
+    [SerializeField] MoveBase acrobatics;
+    [SerializeField] MoveBase assurance;
+    [SerializeField] MoveBase avalanche;
+    [SerializeField] MoveBase brickBreak;
+    [SerializeField] MoveBase crushGrip;
 
     //pooling all the conditions on the pokemon prior to checking them
     List<ConditionBase> allConditionsOnPokemon = new List<ConditionBase>();
@@ -775,6 +781,7 @@ public class BattleSystem : CoreSystem
         alteredMove = sourceUnit.pokemon.GetHoldItemEffects.AlterUserMoveDetails(sourceUnit,alteredMove);
         alteredMove = targetUnit.pokemon.GetHoldItemEffects.AlterOpposingMoveDetails(alteredMove);
         alteredMove = sourceUnit.pokemon.ability.BoostsMovePowerWhenLast(currentTurnDetails.Count <= 1, alteredMove);
+        alteredMove = SpecifiedMovesWithConditions(sourceUnit,targetUnit,move.moveBase, alteredMove);
 
         if (CheckIfMoveHits(alteredMove, sourceUnit.pokemon, targetUnit.pokemon) == true)
         {
@@ -794,6 +801,14 @@ public class BattleSystem : CoreSystem
                     sourceUnit.OnAbilityActivation();
                     yield return dialogSystem.TypeDialog(sourceUnit.pokemon.ability.OnAbilitityActivation(sourceUnit.pokemon));
                     sourceUnit.pokemon.AlterPokemonTyping(elementType);
+                }
+
+                if(move.moveBase == brickBreak)
+                {
+                    if(targetUnit.BrickBreakRemovedShields(alteredMove.Type) == true)
+                    {
+                        yield return dialogSystem.TypeDialog("It shattered the Barrier");
+                    }
                 }
 
                 if (alteredMove.MultiStrikeMove == true)
@@ -1296,7 +1311,7 @@ public class BattleSystem : CoreSystem
     {
         if (effects.Boosts != null)
         {
-            yield return ApplyStatChanges(effects.Boosts, target, moveTarget, source);
+            yield return ApplyStatChanges(effects.Boosts, target, moveTarget, wasSecondaryEffect, source);
         }
 
         //Status Condition
@@ -1466,6 +1481,7 @@ public class BattleSystem : CoreSystem
             yield break;
         }
 
+        sourceUnit.damagedThisTurn = false;
         int currentHP = sourceUnit.pokemon.currentHitPoints;
 
         if(sourceUnit.pokemon.ability.CuresStatusAtTurnEnd(sourceUnit.pokemon,GetCurrentWeather))
@@ -1685,7 +1701,7 @@ public class BattleSystem : CoreSystem
         }
     }
 
-    IEnumerator ApplyStatChanges(List<StatBoost> statBoosts,BattleUnit targetUnit, MoveTarget moveTarget,BattleUnit sourceUnit = null)
+    IEnumerator ApplyStatChanges(List<StatBoost> statBoosts,BattleUnit targetUnit, MoveTarget moveTarget,bool secondaryEffects = false ,BattleUnit sourceUnit = null)
     {
         if (statBoosts == null || statBoosts.Count == 0)
         {
@@ -1709,9 +1725,9 @@ public class BattleSystem : CoreSystem
                             statBoosts.RemoveAt(j);
                         }
 
-                        if(statBoosts[i].stat == statBoosts[j].stat)// && i != j)
+                        if(statBoosts[i].Stat == statBoosts[j].Stat)// && i != j)
                         {
-                            statBoosts[i].boost += statBoosts[j].boost;
+                            statBoosts[i].Boost += statBoosts[j].Boost;
                             statBoosts.RemoveAt(j);
                         }
                     }
@@ -1729,11 +1745,11 @@ public class BattleSystem : CoreSystem
             {
                 continue;
             }
-            else if (currentStat.boost == 0)
+            else if (currentStat.Boost == 0)
             {
                 continue;
             }
-            else if (currentStat.boost > 0)
+            else if (currentStat.Boost > 0)
             {
                 positiveEffects.Add(currentStat);
             }
@@ -1768,11 +1784,21 @@ public class BattleSystem : CoreSystem
             bool abilityActivated = false;//This is for multiple stats prevented from being lowered so it doesnt stack the Queue
 
             List<StatBoost> negativeEffectsCopy = new List<StatBoost>(negativeEffects);
+
+            if(secondaryEffects == false)
+            {
+                if(targetUnit.shields.Exists(x => x.PreventsStatLoss() == true))
+                {
+                    negativeEffectsCopy.Clear();
+                    yield return dialogSystem.TypeDialog($"{targetUnit.pokemon.currentName} is protected by the mist");
+                }
+            }
+
             foreach (StatBoost stat in negativeEffectsCopy)
             {
-                if (stat.boost < 0)
+                if (stat.Boost < 0)
                 {
-                    bool negated = targetUnit.pokemon.ability.PreventStatFromBeingLowered(stat.stat);
+                    bool negated = targetUnit.pokemon.ability.PreventStatFromBeingLowered(stat.Stat);
                     if (negated == true)
                     {
                         if (abilityActivated == false)
@@ -2484,8 +2510,17 @@ public class BattleSystem : CoreSystem
     IEnumerator PlayerUsedBattleEffectItem(BattleEffectItem battleitem)
     {
         yield return dialogSystem.TypeDialog($"{_playerController.TrainerName} used {battleitem.ItemName}");
-        List<StatBoost> abilityStatBoosts = new List<StatBoost>() { new StatBoost(battleitem.GetStatAttribute, 1) };
-        yield return ApplyStatChanges(abilityStatBoosts, playerBattleUnit, MoveTarget.Foe);
+        if(battleitem.GetStatAttribute == StatAttribute.HitPoints)//Guard Spec
+        {
+            ShieldBase shieldBase = new Mist(playerBattleUnit.pokemon.GetCurrentItem);
+            playerBattleUnit.shields.Add(shieldBase);
+            yield return dialogSystem.TypeDialog($"{shieldBase.StartMessage(playerBattleUnit.isPlayerPokemon)}");
+        }
+        else
+        {
+            List<StatBoost> abilityStatBoosts = new List<StatBoost>() { new StatBoost(battleitem.GetStatAttribute, 1) };
+            yield return ApplyStatChanges(abilityStatBoosts, enemyBattleUnit, MoveTarget.Self,playerBattleUnit);
+        }
         yield return EnemyMove();
     }
 
@@ -2844,8 +2879,11 @@ public class BattleSystem : CoreSystem
             case MoveBase n when (n == reflect):
                 shield = ShieldType.Reflect;
                 break;
-            default://AuroraVeil
+            case MoveBase n when (n == auroraVeil):
                 shield = ShieldType.AuroraVeil;
+                break;
+            default:
+                shield = ShieldType.Mist;
                 break;
         }
 
@@ -2877,8 +2915,11 @@ public class BattleSystem : CoreSystem
             case ShieldType.Reflect:
                 shieldBase = new Reflect(sourceUnit.pokemon.GetCurrentItem);
                 break;
-            default://AuroraVeil
+            case ShieldType.AuroraVeil:
                 shieldBase = new AuroraVeil(sourceUnit.pokemon.GetCurrentItem);
+                break;
+            default:
+                shieldBase = new Mist(sourceUnit.pokemon.GetCurrentItem);
                 break;
         }
 
@@ -2886,6 +2927,31 @@ public class BattleSystem : CoreSystem
         sourceUnit.pokemon.statusChanges.Clear();
         sourceUnit.pokemon.statusChanges.Enqueue(shieldBase.StartMessage(sourceUnit.isPlayerPokemon));
         return true;
+    }
+
+    MoveBase SpecifiedMovesWithConditions(BattleUnit attackingUnit,BattleUnit defendingUnit,MoveBase originalMove,MoveBase alteredMove)
+    {
+        if(originalMove == acrobatics)
+        {
+            alteredMove = alteredMove.Clone();
+            alteredMove.AdjustedMovePower(2);
+        }
+        else if(originalMove == assurance|| originalMove == avalanche)
+        {
+            if(attackingUnit.damagedThisTurn == true)
+            {
+                alteredMove = alteredMove.Clone();
+                alteredMove.AdjustedMovePower(2);
+            }
+        }
+        else if(originalMove == crushGrip)
+        {
+            alteredMove = alteredMove.Clone();
+            float adjustment = 1 - ((float)defendingUnit.pokemon.currentHitPoints / (float)defendingUnit.pokemon.maxHitPoints);
+            alteredMove.AdjustedMovePower(adjustment,true);
+        }
+
+        return alteredMove;
     }
 
     #endregion

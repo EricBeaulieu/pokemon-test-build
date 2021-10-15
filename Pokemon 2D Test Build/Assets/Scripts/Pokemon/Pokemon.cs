@@ -294,24 +294,24 @@ public class Pokemon {
         bool showAnimation = false;
         foreach (StatBoost modifier in currentBoostModifiers)
         {
-            if(modifier.stat == StatAttribute.NA)
+            if(modifier.Stat == StatAttribute.NA)
             {
                 continue;
             }
 
-            StatAttribute statModified = modifier.stat;
-            int boost = modifier.boost;
+            StatAttribute statModified = modifier.Stat;
+            int boost = modifier.Boost;
 
             if(ability.StatChangesHaveOppositeEffect() == true)
             {
                 boost = -boost;
             }
 
-            if(modifier.boost > 0)
+            if(modifier.Boost > 0)
             {
                 if(statBoosts[statModified] == 6)
                 {
-                    statusChanges.Enqueue($"{currentName} {modifier.stat.ToString()} can't go any higher");
+                    statusChanges.Enqueue($"{currentName} {modifier.Stat.ToString()} can't go any higher");
                     continue;
                 }
             }
@@ -319,7 +319,7 @@ public class Pokemon {
             {
                 if (statBoosts[statModified] == -6)
                 {
-                    statusChanges.Enqueue($"{currentName} {modifier.stat.ToString()} can't go any lower");
+                    statusChanges.Enqueue($"{currentName} {modifier.Stat.ToString()} can't go any lower");
                     continue;
                 }
             }
@@ -618,6 +618,7 @@ public class Pokemon {
         }
 
         UpdateHPDamage(damage);
+        selfRef.damagedThisTurn = true;
 
         if(GetHoldItemEffects.TransferToPokemon(move) && attackingUnit.pokemon.GetCurrentItem == null)
         {

@@ -45,6 +45,7 @@ public class BattleUnit : MonoBehaviour
     public int disabledDuration { get; set; }
     public List<ShieldBase> shields { get; set; } = new List<ShieldBase>();
     public bool removeItem { get; set; }
+    public bool damagedThisTurn { get; set; }
 
     void Awake()
     {
@@ -143,6 +144,7 @@ public class BattleUnit : MonoBehaviour
         lastMoveUsedConsecutively = 0;
         disabledDuration = 0;
         removeItem = false;
+        damagedThisTurn = false;
 
         pokemonBattledAgainst.Clear();
     }
@@ -400,8 +402,8 @@ public class BattleUnit : MonoBehaviour
 
             foreach (StatBoost stat in statChanges)
             {
-                currentStat = stat.stat;
-                isMixed = statChanges.First(x => x.stat != currentStat) != null;
+                currentStat = stat.Stat;
+                isMixed = statChanges.First(x => x.Stat != currentStat) != null;
 
                 if(isMixed == true)
                 {
@@ -417,8 +419,8 @@ public class BattleUnit : MonoBehaviour
         }
         else
         {
-            statusEffectA.sprite = StatusConditionArt.instance.ReturnStatusChangesArt(statChanges.First().stat);
-            statusEffectB.sprite = StatusConditionArt.instance.ReturnStatusChangesArt(statChanges.First().stat);
+            statusEffectA.sprite = StatusConditionArt.instance.ReturnStatusChangesArt(statChanges.First().Stat);
+            statusEffectB.sprite = StatusConditionArt.instance.ReturnStatusChangesArt(statChanges.First().Stat);
         }
 
         int direction = (increased == true) ? 1 : -1;
@@ -770,5 +772,29 @@ public class BattleUnit : MonoBehaviour
     {
         pokemon.ItemUsed();
         removeItem = false;
+    }
+
+    public bool BrickBreakRemovedShields(ElementType attackType)
+    {
+        if(shields.Count <= 0)
+        {
+            return false;
+        }
+
+        if(DamageModifiers.TypeChartEffectiveness(pokemon, attackType) <= 0)
+        {
+            return false;
+        }
+
+        bool shieldremoved = false;
+        for (int i = shields.Count - 1; i >= 0; i--)
+        {
+            if(shields[i].GetShieldType != ShieldType.Mist)
+            {
+                shields.RemoveAt(i);
+                shieldremoved = true;
+            }
+        }
+        return shieldremoved;
     }
 }

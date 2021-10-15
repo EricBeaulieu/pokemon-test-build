@@ -6,6 +6,7 @@ public class Notes
 {
     //To do list
 
+    //attacks not implimented beak blast, beat up, bide,Bounce,Bug Bite, Chip Away,Circle Throw,Counter, Covet
     //power points stuff not implimented for when item is used on pokemon
     //in regards to specialized messages, they can be thrown into stat boost and displayed when given into effect
     //Safeguard and substitute, when made add in infiltrator

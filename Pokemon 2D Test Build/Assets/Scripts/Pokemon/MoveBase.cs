@@ -48,9 +48,16 @@ public class MoveBase : ScriptableObject {
     [SerializeField] float hpRecovered;
     [SerializeField] bool leavesTargetWith1HP;
 
-    public void AdjustedMovePower(float powerIncrease)
+    public void AdjustedMovePower(float powerIncrease,bool decrease = false)
     {
-        power += Mathf.RoundToInt(power * powerIncrease);
+        if(decrease == false)
+        {
+            power += Mathf.RoundToInt(power * powerIncrease);
+        }
+        else
+        {
+            power -= Mathf.RoundToInt(power * powerIncrease);
+        }
     }
 
     public void AdjustedMoveType(ElementType newType)

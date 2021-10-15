@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum ShieldType { LightScreen, Reflect, AuroraVeil }
+public enum ShieldType { LightScreen, Reflect, AuroraVeil, Mist }
 
 public abstract class ShieldBase
 {
@@ -20,8 +20,9 @@ public abstract class ShieldBase
     const int standardDuration = 5;
     protected ShieldType shield;
     public ShieldType GetShieldType { get { return shield; } }
-    public abstract int ProtectedStat(StatAttribute stat);
+    public virtual int ProtectedStat(StatAttribute stat) { return 1; }
     public void TurnEndReduction() { duration--; }
     public abstract string StartMessage(bool isPlayer);
     public abstract string EndMessage(bool isPlayer);
+    public virtual bool PreventsStatLoss() { return false; }
 }
