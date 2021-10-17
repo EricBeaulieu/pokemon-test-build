@@ -54,6 +54,7 @@ public class PokemonBase : ScriptableObject {
     [SerializeField] AbilityID hiddenAbility;
 
     [Header("Moveset")]
+    [Tooltip("Any moves that are learned upon evolution will be a negative value")]
     [SerializeField] List<LearnableMove> _learnableMoves;
     [SerializeField] List<MoveBase> learnableTMHMMoves;
     public static int MAX_NUMBER_OF_MOVES { get; } = 4;
@@ -61,7 +62,6 @@ public class PokemonBase : ScriptableObject {
     [Header("Evolving")]
     [SerializeField] List<EvolveLevelBased> evolveLevelBased;
     [SerializeField] List<EvolutionStone> evolutionsByStone;
-    List<EvolutionBase> evolutions;
 
     [Header("Wild")]
     [SerializeField] List<WildPokemonHoldItems> wildPokemonHoldItems;

@@ -14,7 +14,9 @@ public class EvolutionEggUI : MonoBehaviour
     [SerializeField] Image pokemonEvolving;
     [SerializeField] Image overlay;
     [SerializeField] DialogBox dialogBox;
+    LearnNewMoveUI learnNewMoveUI;
     List<Sprite> pokemonSpriteAnimations;
+    List<LearnableMove> newMovesLearned = new List<LearnableMove>();
 
     float tempAlpha;
     float animationTime = 1.5f;
@@ -22,6 +24,7 @@ public class EvolutionEggUI : MonoBehaviour
     public void Initialization()
     {
         dialogSystem = GameManager.instance.GetDialogSystem;
+        learnNewMoveUI = GameManager.instance.GetLearnNewMoveSystem;
         gameObject.SetActive(false);
     }
 
@@ -63,7 +66,11 @@ public class EvolutionEggUI : MonoBehaviour
 
         pokemon.NewEvolution(newEvolution);
 
-        //Learn new moves from evolution
+        newMovesLearned.Clear();
+        newMovesLearned.AddRange(pokemon.GetLearnableMoveUponEvolution());
+        newMovesLearned.AddRange(pokemon.GetLearnableMoveAtCurrentLevel());
+
+        yield return learnNewMoveUI.PokemonWantsToLearnNewMoves(pokemon, newMovesLearned);
 
         gameObject.SetActive(false);
     }

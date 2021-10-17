@@ -331,6 +331,17 @@ PrefabInstance:
         type: 2}
     - target: {fileID: 5937812492033838737, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
         type: 3}
+      propertyPath: trainerName
+      value: Manny
+      objectReference: {fileID: 0}
+    - target: {fileID: 5937812492033838737, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: characterArt
+      value: 
+      objectReference: {fileID: 11400000, guid: 8a8b2116ed7cdbe458bbeabc32721b87,
+        type: 2}
+    - target: {fileID: 5937812492033838737, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
       propertyPath: lineOfSightSize
       value: 3
       objectReference: {fileID: 0}
@@ -348,6 +359,16 @@ PrefabInstance:
         type: 3}
       propertyPath: aiDecisionList.Array.size
       value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 5937812492033838737, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: preBattleDialog.lines.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5937812492033838737, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: preBattleDialog.lines.Array.data[0]
+      value: Hey, want to battle. I need a little break
       objectReference: {fileID: 0}
     - target: {fileID: 5937812492033838737, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
         type: 3}
@@ -388,6 +409,36 @@ PrefabInstance:
         type: 3}
       propertyPath: aiDecisionList.Array.data[4].movement.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5937812492033838737, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: inBattleDialogOnDefeat.lines.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5937812492033838737, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: inBattleDialogOnVictory.lines.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5937812492033838737, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: inBattleDialogOnDefeat.lines.Array.data[0]
+      value: oh damn! That was fun though!
+      objectReference: {fileID: 0}
+    - target: {fileID: 5937812492033838737, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: postDefeatOverworldDialog.lines.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5937812492033838737, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: inBattleDialogOnVictory.lines.Array.data[0]
+      value: Hey I still got it
+      objectReference: {fileID: 0}
+    - target: {fileID: 5937812492033838737, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: postDefeatOverworldDialog.lines.Array.data[0]
+      value: Looks like im better at exercising then battling
       objectReference: {fileID: 0}
     - target: {fileID: 5937812492033838737, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
         type: 3}
@@ -599,6 +650,62 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: 5803d4898543c2f43b7ae7ee028f1945,
         type: 2}
+    - target: {fileID: 5937812492033838737, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: trainerName
+      value: Paulina
+      objectReference: {fileID: 0}
+    - target: {fileID: 5937812492033838737, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: characterArt
+      value: 
+      objectReference: {fileID: 11400000, guid: e687e2eb05cd1894aaee910632243e1b,
+        type: 2}
+    - target: {fileID: 5937812492033838737, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: preBattleDialog.lines.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5937812492033838737, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: preBattleDialog.lines.Array.data[0]
+      value: Lets battle while im relaxing
+      objectReference: {fileID: 0}
+    - target: {fileID: 5937812492033838737, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: inBattleDialogOnDefeat.lines.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5937812492033838737, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: inBattleDialogOnVictory.lines.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5937812492033838737, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: inBattleDialogOnDefeat.lines.Array.data[0]
+      value: Oh, that wasnt much of fight from me was it
+      objectReference: {fileID: 0}
+    - target: {fileID: 5937812492033838737, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: postDefeatOverworldDialog.lines.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5937812492033838737, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: inBattleDialogOnVictory.lines.Array.data[0]
+      value: That was fun, lets do it again!
+      objectReference: {fileID: 0}
+    - target: {fileID: 5937812492033838737, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: postDefeatOverworldDialog.lines.Array.data[0]
+      value: Im going to exercise again
+      objectReference: {fileID: 0}
+    - target: {fileID: 5937812492033838737, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: postDefeatOverworldDialog.lines.Array.data[1]
+      value: Then I'll focus on training my Pokemon to beat you
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9c885606b53f3e4469b2ac5a06cd95e1, type: 3}
 --- !u!1001 &822526227
@@ -909,8 +1016,64 @@ PrefabInstance:
         type: 2}
     - target: {fileID: 5937812492033838737, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
         type: 3}
+      propertyPath: trainerName
+      value: Joanna
+      objectReference: {fileID: 0}
+    - target: {fileID: 5937812492033838737, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: characterArt
+      value: 
+      objectReference: {fileID: 11400000, guid: c9e0fa276f9681743b73a686384c6f35,
+        type: 2}
+    - target: {fileID: 5937812492033838737, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
       propertyPath: lineOfSightSize
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5937812492033838737, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: preBattleDialog.lines.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5937812492033838737, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: preBattleDialog.lines.Array.data[0]
+      value: Let's see what you got!
+      objectReference: {fileID: 0}
+    - target: {fileID: 5937812492033838737, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: inBattleDialogOnDefeat.lines.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5937812492033838737, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: inBattleDialogOnVictory.lines.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5937812492033838737, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: inBattleDialogOnDefeat.lines.Array.data[0]
+      value: More then i could handle
+      objectReference: {fileID: 0}
+    - target: {fileID: 5937812492033838737, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: postDefeatOverworldDialog.lines.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5937812492033838737, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: inBattleDialogOnVictory.lines.Array.data[0]
+      value: Ha! Couldnt handle this!
+      objectReference: {fileID: 0}
+    - target: {fileID: 5937812492033838737, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: postDefeatOverworldDialog.lines.Array.data[0]
+      value: Im going to go train more
+      objectReference: {fileID: 0}
+    - target: {fileID: 5937812492033838737, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: postDefeatOverworldDialog.lines.Array.data[1]
+      value: We're going to battle again, dont worry
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9c885606b53f3e4469b2ac5a06cd95e1, type: 3}
@@ -60975,13 +61138,69 @@ PrefabInstance:
         type: 2}
     - target: {fileID: 5937812492033838737, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
         type: 3}
+      propertyPath: trainerName
+      value: Emma
+      objectReference: {fileID: 0}
+    - target: {fileID: 5937812492033838737, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
       propertyPath: canLookRight
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5937812492033838737, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
         type: 3}
+      propertyPath: characterArt
+      value: 
+      objectReference: {fileID: 11400000, guid: 8b0b4b91a8c01724f9672a3981e7a2ef,
+        type: 2}
+    - target: {fileID: 5937812492033838737, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
       propertyPath: lineOfSightSize
       value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 5937812492033838737, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: preBattleDialog.lines.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5937812492033838737, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: preBattleDialog.lines.Array.data[0]
+      value: Is'nt it beautiful out here
+      objectReference: {fileID: 0}
+    - target: {fileID: 5937812492033838737, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: preBattleDialog.lines.Array.data[1]
+      value: Lets see our pokemon in this beautiful environment
+      objectReference: {fileID: 0}
+    - target: {fileID: 5937812492033838737, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: inBattleDialogOnDefeat.lines.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5937812492033838737, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: inBattleDialogOnVictory.lines.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5937812492033838737, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: inBattleDialogOnDefeat.lines.Array.data[0]
+      value: That was fun, lets do it again sometime
+      objectReference: {fileID: 0}
+    - target: {fileID: 5937812492033838737, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: postDefeatOverworldDialog.lines.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5937812492033838737, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: inBattleDialogOnVictory.lines.Array.data[0]
+      value: Oh my, you have to try harder
+      objectReference: {fileID: 0}
+    - target: {fileID: 5937812492033838737, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: postDefeatOverworldDialog.lines.Array.data[0]
+      value: I could just sit here and take in the environment all day
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9c885606b53f3e4469b2ac5a06cd95e1, type: 3}

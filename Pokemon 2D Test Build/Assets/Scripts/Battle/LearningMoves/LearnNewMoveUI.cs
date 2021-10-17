@@ -5,8 +5,10 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class LearnNewMoveUI : MonoBehaviour
+public class LearnNewMoveUI : CoreSystem
 {
+    DialogManager dialogSystem;
+    InventorySystem inventorySystem;
     [SerializeField] Image pokemonSprite;
     [SerializeField] Text pokemonName;
     [SerializeField] Image gender;
@@ -19,9 +21,14 @@ public class LearnNewMoveUI : MonoBehaviour
     bool playerDoesNotWantToLearnMove = false;
     Move previousMove;
 
-    Action OnFinished;
+    public override void Initialization()
+    {
+        dialogSystem = GameManager.instance.GetDialogSystem;
+        inventorySystem = GameManager.instance.GetInventorySystem;
+        gameObject.SetActive(false);
+    }
 
-    void Update()
+    public override void HandleUpdate()
     {
         if (Input.GetButtonDown("Fire2"))
         {
@@ -29,7 +36,114 @@ public class LearnNewMoveUI : MonoBehaviour
         }
     }
 
-    public IEnumerator OpenToLearnNewMove(Pokemon pokemon ,MoveBase newMove)
+    public IEnumerator PokemonWantsToLearnNewMoves(Pokemon pokemon, List<LearnableMove> movesToBeLearned)
+    {
+        foreach (LearnableMove learnableMove in movesToBeLearned)
+        {
+            if (pokemon.moves.Count < PokemonBase.MAX_NUMBER_OF_MOVES)
+            {
+                pokemon.LearnMove(learnableMove.moveBase);
+                yield return dialogSystem.TypeDialog($"{pokemon.currentName} learned {learnableMove.moveBase.MoveName}!", true);
+            }
+            else
+            {
+
+                bool playerSelection = true;
+
+                while (playerSelection == true)
+                {
+                    yield return dialogSystem.TypeDialog($"{pokemon.currentName} is trying to learn {learnableMove.moveBase.MoveName}.", true);
+                    yield return dialogSystem.TypeDialog($"But {pokemon.currentName} can't learn more than four moves.", true);
+                    yield return dialogSystem.TypeDialog($"Delete a move to make room for {learnableMove.moveBase.MoveName}?");
+
+                    yield return dialogSystem.SetChoiceBox(() =>
+                    {
+                        playerSelection = true;
+                    }
+                    , () =>
+                    {
+                        playerSelection = false;
+                    });
+
+                    if (playerSelection == true)
+                    {
+                        yield return OpenToLearnNewMove(pokemon, learnableMove.moveBase);
+
+                        if (playerDoesNotWantToLearnMove == false)
+                        {
+                            yield return dialogSystem.TypeDialog($"{pokemon.currentName} forgot how to use {previousMoveName}", true);
+                            yield return dialogSystem.TypeDialog($"{pokemon.currentName} learned {learnableMove.moveBase.MoveName}!", true);
+                            playerSelection = false;
+                            continue;
+                        }
+                        else
+                        {
+                            playerSelection = false;
+                        }
+                    }
+
+                    if (playerSelection == false)
+                    {
+                        yield return dialogSystem.TypeDialog($"Stop Learning {learnableMove.moveBase.MoveName}?");
+                        yield return dialogSystem.SetChoiceBox(() =>
+                        {
+                            playerSelection = false;
+                        }
+                        , () =>
+                        {
+                            playerSelection = true;
+                        });
+
+                        if (playerSelection == false)
+                        {
+                            yield return dialogSystem.TypeDialog($"{pokemon.currentName} did not learn {learnableMove.moveBase.MoveName}");
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    public IEnumerator PokemonWantsToLearnNewMoves(Pokemon pokemon, TMHMItem newTMMove)
+    {
+        yield return dialogSystem.TypeDialog($"{pokemon.currentName} is trying to learn {newTMMove.GetMove.MoveName}.", true);
+        yield return dialogSystem.TypeDialog($"But {pokemon.currentName} can't learn more than four moves.", true);
+        yield return dialogSystem.TypeDialog($"Delete a move to make room for {newTMMove.GetMove.MoveName}?");
+
+        bool playerSelection = false;
+
+        yield return dialogSystem.SetChoiceBox(() =>
+        {
+            playerSelection = true;
+        }
+        , () =>
+        {
+            playerSelection = false;
+        });
+        
+        if (playerSelection == true)
+        {
+            yield return OpenToLearnNewMove(pokemon, newTMMove.GetMove);
+
+            playerSelection = playerDoesNotWantToLearnMove;
+            if (playerSelection == false)
+            {
+                yield return dialogSystem.TypeDialog($"{pokemon.currentName} forgot how to use {previousMoveName}", true);
+                yield return dialogSystem.TypeDialog($"{pokemon.currentName} learned {newTMMove.GetMove.MoveName}!", true);
+                inventorySystem.RemoveItem(newTMMove);
+            }
+            else
+            {
+                yield return dialogSystem.TypeDialog($"{pokemon.currentName} did not learn {newTMMove.GetMove.MoveName}", true);
+            }
+        }
+        else
+        {
+            yield return dialogSystem.TypeDialog($"{pokemon.currentName} did not learn {newTMMove.GetMove.MoveName}", true);
+        }
+    }
+
+    IEnumerator OpenToLearnNewMove(Pokemon pokemon ,MoveBase newMove)
     {
         Setup(pokemon, newMove);
         gameObject.SetActive(true);
@@ -93,11 +207,6 @@ public class LearnNewMoveUI : MonoBehaviour
     {
         EventSystem.current.SetSelectedGameObject(null);
         EventSystem.current.SetSelectedGameObject(moveButton[0]);
-    }
-
-    public bool PlayerDoesNotWantToLearnMove
-    {
-        get { return playerDoesNotWantToLearnMove; }
     }
 
     void RefuseToLearnMove()

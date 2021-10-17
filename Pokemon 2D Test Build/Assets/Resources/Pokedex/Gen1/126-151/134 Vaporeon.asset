@@ -39,8 +39,13 @@ MonoBehaviour:
   firstAbility: 79
   secondAbility: 0
   hiddenAbility: 0
-  _learnableMoves: []
-  learnableTMHMMoves: []
+  _learnableMoves:
+  - _moveBase: {fileID: 11400000, guid: a780c895cca532b4db375bf87ec37638, type: 2}
+    _levelLeanred: -1
+  - _moveBase: {fileID: 11400000, guid: 25ced48a08587044d803fdfe6e980c37, type: 2}
+    _levelLeanred: 5
+  learnableTMHMMoves:
+  - {fileID: 11400000, guid: 88ebf4bead5cc4a4fa81828f041330f6, type: 2}
   evolveLevelBased: []
   evolutionsByStone: []
   wildPokemonHoldItems: []

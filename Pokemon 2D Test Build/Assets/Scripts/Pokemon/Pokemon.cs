@@ -925,6 +925,22 @@ public class Pokemon {
         return learnableMoves;
     }
 
+    public List<LearnableMove> GetLearnableMoveUponEvolution()
+    {
+        List<LearnableMove> learnableMoves = new List<LearnableMove>();
+
+        foreach (LearnableMove move in _pokemonBase.LearnableMoves.FindAll(x => x.levelLearned < 0))
+        {
+            if (moves.Exists(x => x.moveBase == move.moveBase) || learnableMoves.Exists(x => x.moveBase == move.moveBase))
+            {
+                continue;
+            }
+            learnableMoves.Add(move);
+        }
+
+        return learnableMoves;
+    }
+
     public void LearnMove(MoveBase moveLearned)
     {
         if(moves.Count > PokemonBase.MAX_NUMBER_OF_MOVES)

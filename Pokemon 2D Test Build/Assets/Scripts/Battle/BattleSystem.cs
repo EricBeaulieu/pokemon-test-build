@@ -46,7 +46,7 @@ public class BattleSystem : CoreSystem
     int _escapeAttempts;
     public int battleDuration { get; private set; }
 
-    [SerializeField] LearnNewMoveUI learnNewMoveUI;
+    LearnNewMoveUI learnNewMoveUI;
     [SerializeField] LevelUpUI levelUpUI;
 
     [Header("Special Move with Conditions")]
@@ -70,6 +70,11 @@ public class BattleSystem : CoreSystem
     [SerializeField] MoveBase avalanche;
     [SerializeField] MoveBase brickBreak;
     [SerializeField] MoveBase crushGrip;
+    [SerializeField] MoveBase facade;
+    [SerializeField] MoveBase fakeOut;
+    [SerializeField] MoveBase fellStinger;
+    [SerializeField] MoveBase firstImpression;
+    [SerializeField] MoveBase flail;
 
     //pooling all the conditions on the pokemon prior to checking them
     List<ConditionBase> allConditionsOnPokemon = new List<ConditionBase>();
@@ -157,6 +162,7 @@ public class BattleSystem : CoreSystem
         partySystem = GameManager.instance.GetPartySystem;
         inventorySystem = GameManager.instance.GetInventorySystem;
         dialogSystem = GameManager.instance.GetDialogSystem;
+        learnNewMoveUI = GameManager.instance.GetLearnNewMoveSystem;
         inGameItemoffScreenPos = inGameItem.transform.localPosition;
         levelUpUI.HandleStart();
         actionSelectionEventSelector.Initialization(PlayerActionFight, PlayerActionBag, PlayerActionPokemon, PlayerActionRun);
@@ -1285,6 +1291,11 @@ public class BattleSystem : CoreSystem
 
         if (targetUnit.pokemon.currentHitPoints <= 0)
         {
+            if (sourceUnit.pokemon.currentHitPoints > 0 && move.moveBase == fellStinger)
+            {
+                StatBoost statBoost = new StatBoost(StatAttribute.Attack, 3);
+                yield return ApplyStatChanges(new List<StatBoost>() { statBoost }, sourceUnit, MoveTarget.Foe);
+            }
             yield return PokemonHasFainted(targetUnit);
         }
         else
@@ -1482,6 +1493,7 @@ public class BattleSystem : CoreSystem
         }
 
         sourceUnit.damagedThisTurn = false;
+        sourceUnit.turnsOnField++;
         int currentHP = sourceUnit.pokemon.currentHitPoints;
 
         if(sourceUnit.pokemon.ability.CuresStatusAtTurnEnd(sourceUnit.pokemon,GetCurrentWeather))
@@ -2554,7 +2566,7 @@ public class BattleSystem : CoreSystem
 
             if (newMove.Count > 0)
             {
-                yield return LearnNewMove(targetUnit.pokemon,newMove);
+                yield return learnNewMoveUI.PokemonWantsToLearnNewMoves(targetUnit.pokemon, newMove);
                 attackSelectionEventSelector.SetMovesList(targetUnit, targetUnit.pokemon.moves);
             }
 
@@ -2588,7 +2600,7 @@ public class BattleSystem : CoreSystem
 
             if (newMove.Count > 0)
             {
-                yield return LearnNewMove(pokemon, newMove);
+                yield return learnNewMoveUI.PokemonWantsToLearnNewMoves(pokemon, newMove);
             }
 
             if (pokemon.currentLevel >= 100)
@@ -2596,72 +2608,6 @@ public class BattleSystem : CoreSystem
                 break;
             }
             StatsBeforeLevel = pokemon.GetStandardStats();
-        }
-    }
-
-    IEnumerator LearnNewMove(Pokemon currentPokemon,List<LearnableMove> newMoves)
-    {
-        foreach (LearnableMove learnableMove in newMoves)
-        {
-            if (currentPokemon.moves.Count < PokemonBase.MAX_NUMBER_OF_MOVES)
-            {
-                currentPokemon.LearnMove(learnableMove.moveBase);
-                yield return dialogSystem.TypeDialog($"{currentPokemon.currentName} learned {learnableMove.moveBase.MoveName}!", true);
-            }
-            else
-            {
-
-                bool playerSelection = true;
-
-                while (playerSelection == true)
-                {
-                    yield return dialogSystem.TypeDialog($"{currentPokemon.currentName} is trying to learn {learnableMove.moveBase.MoveName}.", true);
-                    yield return dialogSystem.TypeDialog($"But {currentPokemon.currentName} can't learn more than four moves.", true);
-                    yield return dialogSystem.TypeDialog($"Delete a move to make room for {learnableMove.moveBase.MoveName}?");
-
-                    yield return dialogSystem.SetChoiceBox(() =>
-                    {
-                        playerSelection = true;
-                    }
-                    , () =>
-                    {
-                        playerSelection = false;
-                    });
-
-                    if(playerSelection == true)
-                    {
-                        yield return learnNewMoveUI.OpenToLearnNewMove(currentPokemon, learnableMove.moveBase);
-
-                        if(learnNewMoveUI.PlayerDoesNotWantToLearnMove == false)
-                        {
-                            yield return dialogSystem.TypeDialog($"{currentPokemon.currentName} forgot how to use {learnNewMoveUI.previousMoveName}", true);
-                            yield return dialogSystem.TypeDialog($"{currentPokemon.currentName} learned {learnableMove.moveBase.MoveName}!", true);
-                            playerSelection = false;
-                            continue;
-                        }
-                    }
-
-                    playerSelection = !learnNewMoveUI.PlayerDoesNotWantToLearnMove;
-
-                    if (playerSelection == false)
-                    {
-                        yield return dialogSystem.TypeDialog($"Stop Learning {learnableMove.moveBase.MoveName}?");
-                        yield return dialogSystem.SetChoiceBox(() =>
-                        {
-                            playerSelection = false;
-                        }
-                        , () =>
-                        {
-                            playerSelection = true;
-                        });
-
-                        if (playerSelection == false)
-                        {
-                            yield return dialogSystem.TypeDialog($"{currentPokemon.currentName} did not learn {learnableMove.moveBase.MoveName}");
-                        }
-                    }
-                }
-            }
         }
     }
 
@@ -2732,6 +2678,10 @@ public class BattleSystem : CoreSystem
         else if (moveBase == reflect || moveBase == lightScreen || moveBase == auroraVeil)
         {
             return (ShieldSucessful(sourceUnit,targetUnit, moveBase));
+        }
+        else if (moveBase == fakeOut|| moveBase == firstImpression)
+        {
+            return (FirstTurnOnlyMoveSucessful(sourceUnit));
         }
 
         return true;
@@ -2929,6 +2879,11 @@ public class BattleSystem : CoreSystem
         return true;
     }
 
+    bool FirstTurnOnlyMoveSucessful(BattleUnit attackingUnit)
+    {
+        return (attackingUnit.turnsOnField < 1);
+    }
+
     MoveBase SpecifiedMovesWithConditions(BattleUnit attackingUnit,BattleUnit defendingUnit,MoveBase originalMove,MoveBase alteredMove)
     {
         if(originalMove == acrobatics)
@@ -2949,6 +2904,40 @@ public class BattleSystem : CoreSystem
             alteredMove = alteredMove.Clone();
             float adjustment = 1 - ((float)defendingUnit.pokemon.currentHitPoints / (float)defendingUnit.pokemon.maxHitPoints);
             alteredMove.AdjustedMovePower(adjustment,true);
+        }
+        else if(originalMove == facade)
+        {
+            if(attackingUnit.pokemon.status != null)
+            {
+                alteredMove = alteredMove.Clone();
+                alteredMove.AdjustedMovePower(2);
+            }
+        }
+        else if (originalMove == flail)
+        {
+            alteredMove = alteredMove.Clone();
+            float pokemonHealthPercentage = (float)attackingUnit.pokemon.currentHitPoints / (float)attackingUnit.pokemon.maxHitPoints;
+            switch (pokemonHealthPercentage)
+            {
+                case float n when (n >= 0.6875):
+                    alteredMove.AdjustedMovePower(20);
+                    break;
+                case float n when (n < 0.6875 && n >= 0.3542):
+                    alteredMove.AdjustedMovePower(40);
+                    break;
+                case float n when (n < 0.3542 && n >= 0.2083):
+                    alteredMove.AdjustedMovePower(80);
+                    break;
+                case float n when (n < 0.2083 && n >= 0.1042):
+                    alteredMove.AdjustedMovePower(100);
+                    break;
+                case float n when (n < 0.1042 && n >= 0.0417):
+                    alteredMove.AdjustedMovePower(150);
+                    break;
+                default:// <4.17
+                    alteredMove.AdjustedMovePower(20);
+                    break;
+            }
         }
 
         return alteredMove;

@@ -4069,6 +4069,7 @@ MonoBehaviour:
   standardPokeball: {fileID: 11400000, guid: 3395b9ef550dcc645829bf2659fe0166, type: 2}
   inventorySystem: {fileID: 171339173}
   evolutionSystem: {fileID: 707601406}
+  learnNewMoveUI: {fileID: 1307975986}
 --- !u!4 &291317940
 Transform:
   m_ObjectHideFlags: 0
@@ -11181,7 +11182,7 @@ RectTransform:
   - {fileID: 1242708875}
   - {fileID: 1204950112}
   m_Father: {fileID: 1498078715}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -14406,7 +14407,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dialogBox: {fileID: 67242741}
   summarySystem: {fileID: 763564132}
-  learnNewMoveUI: {fileID: 1307975986}
   cancelButton: {fileID: 314426144}
   overworldSelections: {fileID: 2111840384}
   overworldSelectionsSummaryButton: {fileID: 2034391917}
@@ -15663,7 +15663,6 @@ MonoBehaviour:
   actionSelectionEventSelector: {fileID: 2117401741}
   attackSelectionEventSelector: {fileID: 353521179}
   inGameItem: {fileID: 185559767}
-  learnNewMoveUI: {fileID: 1307975986}
   levelUpUI: {fileID: 1369025940}
   struggle: {fileID: 11400000, guid: 227ba699d8a08c64a96e0fb3be7b2ebe, type: 2}
   noRetreat: {fileID: 11400000, guid: a0ad4a9bc79a4d146a6beca4b2876a0c, type: 2}
@@ -15685,6 +15684,11 @@ MonoBehaviour:
   avalanche: {fileID: 11400000, guid: f51aa1de5cae2a7448cf948e5fcd9704, type: 2}
   brickBreak: {fileID: 11400000, guid: 424ea0e331657c04fb527f29a554acef, type: 2}
   crushGrip: {fileID: 11400000, guid: 76c3d3404776f7b4d8a63f3d36d72999, type: 2}
+  facade: {fileID: 11400000, guid: 00123a3c9aa8f77418b1830be24361eb, type: 2}
+  fakeOut: {fileID: 11400000, guid: d711b590ce6e0cc4ab354f662fef2ad9, type: 2}
+  fellStinger: {fileID: 11400000, guid: 6e91b7cece72a394abef156615367026, type: 2}
+  firstImpression: {fileID: 0}
+  flail: {fileID: 0}
 --- !u!1 &1064018310
 GameObject:
   m_ObjectHideFlags: 0
@@ -18732,7 +18736,7 @@ RectTransform:
   - {fileID: 1470558316}
   - {fileID: 1711964000}
   m_Father: {fileID: 1498078715}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -18751,6 +18755,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50c2fff3bf7db6a49842f5aa83a7e210, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dialogBox: {fileID: 0}
   pokemonSprite: {fileID: 565553968}
   pokemonName: {fileID: 1015919237}
   gender: {fileID: 1840411090}
@@ -22116,8 +22121,8 @@ RectTransform:
   - {fileID: 171339172}
   - {fileID: 1705877131}
   - {fileID: 1861657190}
-  - {fileID: 1307975985}
   - {fileID: 707601405}
+  - {fileID: 1307975985}
   - {fileID: 337672511}
   m_Father: {fileID: 0}
   m_RootOrder: 2

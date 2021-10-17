@@ -7,7 +7,7 @@ using UnityEngine.UI;
 public class PartySystem : CoreSystem
 {
     [SerializeField] SummarySystem summarySystem;
-    [SerializeField] LearnNewMoveUI learnNewMoveUI;
+    LearnNewMoveUI learnNewMoveUI;
 
     PartyMemberUI[] _partyMemberSlots;
     [SerializeField] Button cancelButton;
@@ -48,6 +48,7 @@ public class PartySystem : CoreSystem
         battleSystem = GameManager.instance.GetBattleSystem;
         inventorySystem = GameManager.instance.GetInventorySystem;
         dialogSystem = GameManager.instance.GetDialogSystem;
+        learnNewMoveUI = GameManager.instance.GetLearnNewMoveSystem;
         SetupPartyMemberFunctionality();
         summarySystem.Initialization();
         selectableBox = new SelectableBoxUI(_partyMemberSlots[0].gameObject);
@@ -706,42 +707,7 @@ public class PartySystem : CoreSystem
         }
         else
         {
-            yield return dialogSystem.TypeDialog($"{currentPokemon.currentName} is trying to learn {newMove.GetMove.MoveName}.", true);
-            yield return dialogSystem.TypeDialog($"But {currentPokemon.currentName} can't learn more than four moves.", true);
-            yield return dialogSystem.TypeDialog($"Delete a move to make room for {newMove.GetMove.MoveName}?");
-
-            bool playerSelection = false;
-
-            yield return dialogSystem.SetChoiceBox(() =>
-            {
-                playerSelection = true;
-            }
-            , () =>
-            {
-                playerSelection = false;
-            });
-
-
-            if(playerSelection == true)
-            {
-                yield return learnNewMoveUI.OpenToLearnNewMove(currentPokemon, newMove.GetMove);
-
-                playerSelection = learnNewMoveUI.PlayerDoesNotWantToLearnMove;
-                if(playerSelection == false)
-                {
-                    yield return dialogSystem.TypeDialog($"{currentPokemon.currentName} forgot how to use {learnNewMoveUI.previousMoveName}", true);
-                    yield return dialogSystem.TypeDialog($"{currentPokemon.currentName} learned {newMove.GetMove.MoveName}!",true);
-                    inventorySystem.RemoveItem(newMove);
-                }
-                else
-                {
-                    yield return dialogSystem.TypeDialog($"{currentPokemon.currentName} did not learn {newMove.GetMove.MoveName}",true);
-                }
-            }
-            else
-            {
-                yield return dialogSystem.TypeDialog($"{currentPokemon.currentName} did not learn {newMove.GetMove.MoveName}",true);
-            }
+            yield return learnNewMoveUI.PokemonWantsToLearnNewMoves(currentPokemon, newMove);
 
             CloseSystem();
             inventorySystem.ReturnFromPartySystemAfterItemUsage(true);

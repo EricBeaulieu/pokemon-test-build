@@ -25,6 +25,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] PokeballItem standardPokeball;
     [SerializeField] InventorySystem inventorySystem;
     [SerializeField] EvolutionEggUI evolutionSystem;
+    [SerializeField] LearnNewMoveUI learnNewMoveUI;
     List<Pokemon> pokemonEvolving = new List<Pokemon>();
 
     static GameState state = GameState.Overworld;
@@ -59,6 +60,7 @@ public class GameManager : MonoBehaviour
         startMenu.Initialization();
         inventorySystem.Initialization();
         evolutionSystem.Initialization();
+        learnNewMoveUI.Initialization();
         SceneSystem.Initialization();
 
         if(startNewSaveEveryStart == false)
@@ -308,6 +310,11 @@ public class GameManager : MonoBehaviour
     public EvolutionEggUI GetEvolutionSystem
     {
         get { return evolutionSystem; }
+    }
+
+    public LearnNewMoveUI GetLearnNewMoveSystem
+    {
+        get { return learnNewMoveUI; }
     }
 
     public static void SetGameState(GameState newState)

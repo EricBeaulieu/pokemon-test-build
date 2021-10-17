@@ -12,7 +12,7 @@ public class SpriteSheetSwap : MonoBehaviour
 
     void Start()
     {
-        Sprite newSpriteSheet = GetComponentInParent<Entity>().characterArt.GetOverworldSpriteSheet;
+        Sprite newSpriteSheet = GetComponentInParent<Entity>().CharacterArt.GetOverworldSpriteSheet;
 
         if (newSpriteSheet == null)
         {

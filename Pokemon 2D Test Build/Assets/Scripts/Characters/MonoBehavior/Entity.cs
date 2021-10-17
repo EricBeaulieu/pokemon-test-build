@@ -6,7 +6,7 @@ public enum FacingDirections { Up,Down,Left,Right}
 
 public abstract class Entity : MonoBehaviour
 {
-    public CharacterArtSO characterArt { get; set; }
+    [SerializeField] CharacterArtSO characterArt;
     [SerializeField] protected float movementSpeed = STANDARD_WALKING_SPEED;
     protected LayerMask solidObjectLayermask;
     protected LayerMask interactableLayermask;
@@ -58,16 +58,12 @@ public abstract class Entity : MonoBehaviour
         }
     }
 
+    public CharacterArtSO CharacterArt { get { return characterArt; } set { characterArt = value; } }
+
     #endregion
 
-    protected virtual void Initialization(EntityBaseSO entityBaseSO)
+    protected virtual void Initialization()
     {
-        if (entityBaseSO == null)
-        {
-            Debug.LogWarning("This trainer has no Data Entered", gameObject);
-            return;
-        }
-
         _anim = GetComponentInChildren<Animator>();
 
         solidObjectLayermask = LayerMask.GetMask("SolidObjects");
@@ -81,12 +77,6 @@ public abstract class Entity : MonoBehaviour
         if(positionMovingTo == null)
         {
             Debug.Log("positionMovingTo is missing its reference", gameObject);
-        }
-
-        entityBaseSO.Initialization();
-        if(characterArt == null)
-        {
-            characterArt = entityBaseSO.GetCharacterArt;
         }
     }
 

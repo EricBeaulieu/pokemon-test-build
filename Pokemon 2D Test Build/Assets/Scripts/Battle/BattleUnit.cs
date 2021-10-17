@@ -46,6 +46,7 @@ public class BattleUnit : MonoBehaviour
     public List<ShieldBase> shields { get; set; } = new List<ShieldBase>();
     public bool removeItem { get; set; }
     public bool damagedThisTurn { get; set; }
+    public int turnsOnField { get; set; }
 
     void Awake()
     {
@@ -145,6 +146,7 @@ public class BattleUnit : MonoBehaviour
         disabledDuration = 0;
         removeItem = false;
         damagedThisTurn = false;
+        turnsOnField = 0;
 
         pokemonBattledAgainst.Clear();
     }

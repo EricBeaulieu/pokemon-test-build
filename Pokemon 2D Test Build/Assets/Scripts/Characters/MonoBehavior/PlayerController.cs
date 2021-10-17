@@ -9,8 +9,7 @@ using Random = UnityEngine.Random;
 public class PlayerController : Entity
 {
     [Header("Player Controller")]
-    [SerializeField] TrainerBaseSO trainerBase;
-    string trainerName;
+    [SerializeField] string trainerName;
     int trainerIDNumber;
     public PokemonParty pokemonParty { get; private set; }
     
@@ -27,21 +26,26 @@ public class PlayerController : Entity
 
     void Awake()
     {
-        base.Initialization(trainerBase);
+        base.Initialization();
 
         pokemonParty = GetComponent<PokemonParty>();
         //Debug
 
-        if(trainerBase.TrainerName == "")
+        if (string.IsNullOrEmpty(trainerName) == true)
         {
-            Debug.Log("Players Name is missing");
+            Debug.LogWarning("This trainer has no name", gameObject);
         }
-        if(trainerBase.GetCharacterArt.GetBackBattleSprite.Length <=0)
+
+        if (CharacterArt.GetFrontBattleSprite.Length <= 0)
+        {
+            Debug.LogWarning("This trainer has no front Sprite", CharacterArt);
+        }
+
+        if (CharacterArt.GetBackBattleSprite.Length <=0)
         {
             Debug.LogWarning("Current Player is missing their battle back sprite Sheet");
         }
-
-        trainerName = trainerBase.TrainerName;
+        
         trainerIDNumber = UnityEngine.Random.Range(0, 99999);
 
         _ignorePlayerInput = false;
@@ -203,7 +207,7 @@ public class PlayerController : Entity
 
     public Sprite[] BackBattleSprite
     {
-        get { return trainerBase.GetCharacterArt.GetBackBattleSprite; }
+        get { return CharacterArt.GetBackBattleSprite; }
     }
 
     public string TrainerName
