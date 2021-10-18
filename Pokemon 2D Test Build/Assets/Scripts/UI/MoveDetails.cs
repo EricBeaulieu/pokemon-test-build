@@ -20,7 +20,7 @@ public class MoveDetails : MonoBehaviour
         }
 
         moveCategorySprite.sprite = StatusConditionArt.instance.ReturnMoveCategoryArt(move.MoveType);
-        movePower.text = (move.MovePower > 0) ? move.MovePower.ToString() : "--";
+        movePower.text = (move.MovePower > 1) ? move.MovePower.ToString() : "--";
 
         if(movePp != null)
         {

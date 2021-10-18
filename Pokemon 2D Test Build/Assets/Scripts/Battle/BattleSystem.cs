@@ -75,6 +75,12 @@ public class BattleSystem : CoreSystem
     [SerializeField] MoveBase fellStinger;
     [SerializeField] MoveBase firstImpression;
     [SerializeField] MoveBase flail;
+    [SerializeField] MoveBase focusPunch;
+    [SerializeField] MoveBase furyCutter;
+    const int MAX_MULTIPLIER_FOR_FURY_CUTTER = 3;
+    [SerializeField] MoveBase gyroBall;
+    [SerializeField] MoveBase highJumpKick;
+    [SerializeField] MoveBase jumpKick;
 
     //pooling all the conditions on the pokemon prior to checking them
     List<ConditionBase> allConditionsOnPokemon = new List<ConditionBase>();
@@ -651,6 +657,17 @@ public class BattleSystem : CoreSystem
     {
         yield return RearrangeAttackOrder();
 
+        if(attacksChosen.Count > 0)
+        {
+            for (int i = 0; i < attacksChosen.Count; i++)
+            {
+                if(attacksChosen[i].currentMove.moveBase == focusPunch)
+                {
+                    yield return dialogSystem.TypeDialog($"{attacksChosen[i].attackingPokemon.pokemon.currentName}'s is tightening its focus!");
+                }
+            }
+        }
+
         while(attacksChosen.Count > 0)
         {
             currentAttack = attacksChosen[0];
@@ -778,6 +795,11 @@ public class BattleSystem : CoreSystem
 
         if (CheckIfMoveHasSpecializedConditionAndSuccessful(sourceUnit, targetUnit, move.moveBase) == false)
         {
+            if(move.moveBase == focusPunch)
+            {
+                yield return dialogSystem.TypeDialog($"{sourceUnit.pokemon.currentName} lost its focus and couldn't move!");
+                yield break;
+            }
             yield return sourceUnit.PlayAttackAnimation();
             yield return dialogSystem.TypeDialog($"{BUT_IT_FAILED}");
             yield break;
@@ -949,6 +971,12 @@ public class BattleSystem : CoreSystem
                 }
                 
                 yield return ShowDamageDetails(damageDetails, targetUnit);
+
+                if(damageDetails.typeEffectiveness == 0)
+                {
+                    yield return JumpKickMissed(sourceUnit, move.moveBase);
+                }
+
                 if(damageDetails.damageNullified == true)
                 {
                     yield return ApplyStatChanges(damageDetails.defendersStatBoostByAbility, targetUnit, MoveTarget.Foe);
@@ -1251,6 +1279,7 @@ public class BattleSystem : CoreSystem
         }
         else
         {
+            sourceUnit.lastMoveUsedConsecutively = 0;
             if(sourceUnit.removeItem == true)
             {
                 if (sourceUnit.pokemon.GetHoldItemEffects.PlayAnimationWhenUsed() == true)
@@ -1274,6 +1303,8 @@ public class BattleSystem : CoreSystem
             {
                 sourceUnit.RemoveCurrentItemFromPokemon();
             }
+
+            yield return JumpKickMissed(sourceUnit, move.moveBase);
         }
 
         //explosive moves incase they miss
@@ -2507,6 +2538,7 @@ public class BattleSystem : CoreSystem
     public void PlayerUsedItemWhileInBattle()
     {
         dialogSystem.SetCurrentDialogBox(dialogBox);
+        playerBattleUnit.lastMoveUsedConsecutively = 0;
         playerBattleUnit.HUD.UpdateHud();
         StartCoroutine(EnemyMove());
         EnableActionSelector(false);
@@ -2682,6 +2714,10 @@ public class BattleSystem : CoreSystem
         else if (moveBase == fakeOut|| moveBase == firstImpression)
         {
             return (FirstTurnOnlyMoveSucessful(sourceUnit));
+        }
+        else if (moveBase == focusPunch)
+        {
+            return (FailsIfHurtSucessful(sourceUnit));
         }
 
         return true;
@@ -2884,6 +2920,11 @@ public class BattleSystem : CoreSystem
         return (attackingUnit.turnsOnField < 1);
     }
 
+    bool FailsIfHurtSucessful(BattleUnit attackingUnit)
+    {
+        return !attackingUnit.damagedThisTurn;
+    }
+
     MoveBase SpecifiedMovesWithConditions(BattleUnit attackingUnit,BattleUnit defendingUnit,MoveBase originalMove,MoveBase alteredMove)
     {
         if(originalMove == acrobatics)
@@ -2902,8 +2943,8 @@ public class BattleSystem : CoreSystem
         else if(originalMove == crushGrip)
         {
             alteredMove = alteredMove.Clone();
-            float adjustment = 1 - ((float)defendingUnit.pokemon.currentHitPoints / (float)defendingUnit.pokemon.maxHitPoints);
-            alteredMove.AdjustedMovePower(adjustment,true);
+            float adjustment =  110 * (1 - ((float)defendingUnit.pokemon.currentHitPoints / (float)defendingUnit.pokemon.maxHitPoints));
+            alteredMove.AdjustedMovePower(adjustment);
         }
         else if(originalMove == facade)
         {
@@ -2939,8 +2980,44 @@ public class BattleSystem : CoreSystem
                     break;
             }
         }
+        else if(originalMove == furyCutter)
+        {
+            alteredMove = alteredMove.Clone();
+            if(attackingUnit.lastMoveUsedConsecutively < MAX_MULTIPLIER_FOR_FURY_CUTTER)
+            {
+                alteredMove.AdjustedMovePower(attackingUnit.lastMoveUsedConsecutively);
+            }
+            else
+            {
+                alteredMove.AdjustedMovePower(MAX_MULTIPLIER_FOR_FURY_CUTTER);
+            }
+        }
+        else if(originalMove == gyroBall)
+        {
+            alteredMove = alteredMove.Clone();
+            float adjustment = 25 * (defendingUnit.pokemon.speed / attackingUnit.pokemon.speed);
+            adjustment = Mathf.Clamp(adjustment, 1, 150);
+            alteredMove.AdjustedMovePower(adjustment);
+        }
 
         return alteredMove;
+    }
+
+    IEnumerator JumpKickMissed(BattleUnit attackingPokemon,MoveBase originalMove)
+    {
+        if (originalMove == highJumpKick || originalMove == jumpKick)
+        {
+            yield return dialogSystem.TypeDialog($"{attackingPokemon.pokemon.currentName}'s kept going and crashed!");
+            int previousHP = attackingPokemon.pokemon.currentHitPoints;
+            int recoilDamage = Mathf.FloorToInt((float)attackingPokemon.pokemon.maxHitPoints / 2f);
+            attackingPokemon.pokemon.UpdateHPDamage(recoilDamage);
+            yield return attackingPokemon.HUD.UpdateHP(previousHP);
+
+            if (attackingPokemon.pokemon.currentHitPoints <= 0)
+            {
+                yield return PokemonHasFainted(attackingPokemon);
+            }
+        }
     }
 
     #endregion

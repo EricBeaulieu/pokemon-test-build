@@ -7,8 +7,6 @@ public class Notes
     //To do list
 
     //gifting pokemon from trainers/finding them in a ball gifted to the overworld
-    //attacks not implimented beak blast, beat up, bide,Bounce,Bug Bite, Chip Away,Circle Throw,Counter, Covet,dig,dive,dragon tail,Endeavor
-    //Feint,Fissure,fling,fly,flying press
     //power points stuff not implimented for when item is used on pokemon
     //in regards to specialized messages, they can be thrown into stat boost and displayed when given into effect
     //Safeguard and substitute, when made add in infiltrator
@@ -64,7 +62,6 @@ public class Notes
     //place trainer in path off start, let them stand and hit them and recreate this bug
 
     //Others
-    //if reflect/light screen are added in then make sure that crits cut through it
     //set/Shift option, if set just keep pokemon out
 
     /* Items
@@ -72,4 +69,10 @@ public class Notes
      * list of enum items that are added but not implimented
      * CleanseTag,DestinyKnot,EjectButton, EjectPack,PowerHerb,RedCard,Ring Target,RoomService,SootheBell,UtilityUmbrella,ZoomLens,'
      */
+
+    /*attacks not implimented 
+    beak blast, beat up, bide,Bounce,Bug Bite, Chip Away,Circle Throw,Counter, Covet,dig,dive,dragon tail,Endeavor
+    Feint,Fissure,fling,fly,flying press,foul play, freeze shock,Fusion Bolt,Giga Impact,Guillotine, Heat Crash,Heavy Slam,Horn Drill,
+    Hyperspace Fury,Ice Ball
+    */
 }
