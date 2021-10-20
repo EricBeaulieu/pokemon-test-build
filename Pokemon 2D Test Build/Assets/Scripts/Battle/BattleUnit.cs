@@ -47,6 +47,7 @@ public class BattleUnit : MonoBehaviour
     public bool removeItem { get; set; }
     public bool damagedThisTurn { get; set; }
     public int turnsOnField { get; set; }
+    public bool enraged { get; set; }
 
     void Awake()
     {
@@ -147,6 +148,7 @@ public class BattleUnit : MonoBehaviour
         removeItem = false;
         damagedThisTurn = false;
         turnsOnField = 0;
+        enraged = false;
 
         pokemonBattledAgainst.Clear();
     }
@@ -776,7 +778,7 @@ public class BattleUnit : MonoBehaviour
         removeItem = false;
     }
 
-    public bool BrickBreakRemovedShields(ElementType attackType)
+    public bool CurrentAttackRemovedShields(ElementType attackType)
     {
         if(shields.Count <= 0)
         {

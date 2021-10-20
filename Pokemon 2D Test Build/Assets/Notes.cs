@@ -6,6 +6,11 @@ public class Notes
 {
     //To do list
 
+    //for certain attacks, such as natural gift/z moves, it will replace the move base to something from a static table. 
+    //these moves will be pre created somewhere else
+
+    //money on trainer defeat as well as pay day
+    //knock off extra details need to be implimented
     //gifting pokemon from trainers/finding them in a ball gifted to the overworld
     //power points stuff not implimented for when item is used on pokemon
     //in regards to specialized messages, they can be thrown into stat boost and displayed when given into effect
@@ -73,6 +78,7 @@ public class Notes
     /*attacks not implimented 
     beak blast, beat up, bide,Bounce,Bug Bite, Chip Away,Circle Throw,Counter, Covet,dig,dive,dragon tail,Endeavor
     Feint,Fissure,fling,fly,flying press,foul play, freeze shock,Fusion Bolt,Giga Impact,Guillotine, Heat Crash,Heavy Slam,Horn Drill,
-    Hyperspace Fury,Ice Ball
+    Hyperspace Fury,Ice Ball,Low Kick,Metal Burst,Multi-Attack,Natural Gift,Outrage,Pay Day,Phantom Force,Pluck,Present,Pursuit,Rapid Spin,
+    Retaliate,
     */
 }

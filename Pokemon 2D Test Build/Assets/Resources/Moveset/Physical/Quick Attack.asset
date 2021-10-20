@@ -23,6 +23,7 @@ MonoBehaviour:
     volatileStatus: 0
     weatherEffect: 0
     entryHazard: 0
+    specialStartMessage: 
   secondaryEffects: []
   target: 0
   power: 40
@@ -41,7 +42,9 @@ MonoBehaviour:
   affectedByGravity: 0
   defrostsWhenUsed: 0
   reflectedByMagicCoatMagicBounce: 0
-  blockedByProtectDetect: 0
-  copyableByMirrorMove: 0
+  blockedByProtectDetect: 1
+  copyableByMirrorMove: 1
   recoilType: 0
   recoilPercentage: 0
+  hpRecovered: 0
+  leavesTargetWith1HP: 0

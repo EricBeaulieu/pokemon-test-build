@@ -26,5 +26,4 @@ public class SpriteAtlas : MonoBehaviour
     {
         return pokemonSprites.Find(x => x.name == spriteName);
     }
-
 }

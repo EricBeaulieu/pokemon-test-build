@@ -81,6 +81,16 @@ public class BattleSystem : CoreSystem
     [SerializeField] MoveBase gyroBall;
     [SerializeField] MoveBase highJumpKick;
     [SerializeField] MoveBase jumpKick;
+    [SerializeField] MoveBase knockOff;
+    [SerializeField] MoveBase lastResort;
+    [SerializeField] MoveBase magnitude;
+    int magnitudeNumber;
+    [SerializeField] MoveBase payback;
+    [SerializeField] MoveBase powerTrip;
+    [SerializeField] MoveBase psychicFangs;
+    [SerializeField] MoveBase punishment;
+    [SerializeField] MoveBase rage;
+    [SerializeField] MoveBase revenge;
 
     //pooling all the conditions on the pokemon prior to checking them
     List<ConditionBase> allConditionsOnPokemon = new List<ConditionBase>();
@@ -747,6 +757,7 @@ public class BattleSystem : CoreSystem
         {
             sourceUnit.lastMoveUsed = move;
             sourceUnit.lastMoveUsedConsecutively = 0;
+            sourceUnit.enraged = false;
         }
         //This is here incase the pokemon hits itself in confusion for the smooth animation
         int previousHP = sourceUnit.pokemon.currentHitPoints;
@@ -811,6 +822,11 @@ public class BattleSystem : CoreSystem
         alteredMove = sourceUnit.pokemon.ability.BoostsMovePowerWhenLast(currentTurnDetails.Count <= 1, alteredMove);
         alteredMove = SpecifiedMovesWithConditions(sourceUnit,targetUnit,move.moveBase, alteredMove);
 
+        if(move.moveBase == magnitude)
+        {
+            yield return dialogSystem.TypeDialog($"Magnitude {magnitudeNumber}!");
+        }
+
         if (CheckIfMoveHits(alteredMove, sourceUnit.pokemon, targetUnit.pokemon) == true)
         {
             if (alteredMove.MoveType == MoveType.Status)
@@ -831,9 +847,9 @@ public class BattleSystem : CoreSystem
                     sourceUnit.pokemon.AlterPokemonTyping(elementType);
                 }
 
-                if(move.moveBase == brickBreak)
+                if(move.moveBase == brickBreak || move.moveBase == psychicFangs)
                 {
-                    if(targetUnit.BrickBreakRemovedShields(alteredMove.Type) == true)
+                    if(targetUnit.CurrentAttackRemovedShields(alteredMove.Type) == true)
                     {
                         yield return dialogSystem.TypeDialog("It shattered the Barrier");
                     }
@@ -948,6 +964,13 @@ public class BattleSystem : CoreSystem
                             previousHP = sourceUnit.pokemon.currentHitPoints;
                         }
 
+                        if(targetUnit.enraged == true && targetUnit.pokemon.currentHitPoints > 0 && targetUnit.pokemon.statBoosts[StatAttribute.Attack] < 6)
+                        {
+                            StatBoost rageboost = new StatBoost(StatAttribute.Attack, 1);
+                            yield return dialogSystem.TypeDialog($"{targetUnit.pokemon.currentName} rage is building");
+                            yield return ApplyStatChanges(new List<StatBoost>() { rageboost }, targetUnit, MoveTarget.Foe);
+                        }
+
                         yield return new WaitForSeconds(1f);
                     }
                 }
@@ -968,6 +991,14 @@ public class BattleSystem : CoreSystem
                     {
                         yield return targetUnit.HUD.UpdateHP(hpPriorToAttack);
                     }
+
+                    if (targetUnit.enraged == true && targetUnit.pokemon.currentHitPoints > 0 && targetUnit.pokemon.statBoosts[StatAttribute.Attack] < 6)
+                    {
+                        StatBoost rageboost = new StatBoost(StatAttribute.Attack, 1);
+                        yield return dialogSystem.TypeDialog($"{targetUnit.pokemon.currentName} rage is building");
+                        yield return ApplyStatChanges(new List<StatBoost>() { rageboost }, targetUnit, MoveTarget.Foe);
+                    }
+
                 }
                 
                 yield return ShowDamageDetails(damageDetails, targetUnit);
@@ -2539,6 +2570,7 @@ public class BattleSystem : CoreSystem
     {
         dialogSystem.SetCurrentDialogBox(dialogBox);
         playerBattleUnit.lastMoveUsedConsecutively = 0;
+        playerBattleUnit.enraged = false;
         playerBattleUnit.HUD.UpdateHud();
         StartCoroutine(EnemyMove());
         EnableActionSelector(false);
@@ -2707,7 +2739,7 @@ public class BattleSystem : CoreSystem
         {
             return (DisableSucessful(targetUnit));
         }
-        else if (moveBase == reflect || moveBase == lightScreen || moveBase == auroraVeil)
+        else if (moveBase == reflect || moveBase == lightScreen || moveBase == auroraVeil|| moveBase == mist)
         {
             return (ShieldSucessful(sourceUnit,targetUnit, moveBase));
         }
@@ -2718,6 +2750,10 @@ public class BattleSystem : CoreSystem
         else if (moveBase == focusPunch)
         {
             return (FailsIfHurtSucessful(sourceUnit));
+        }
+        else if(moveBase == lastResort)
+        {
+            return (LastResortSucessful(sourceUnit));
         }
 
         return true;
@@ -2746,10 +2782,6 @@ public class BattleSystem : CoreSystem
         {
             return false;
         }
-        else if(targetUnit.lastMoveUsed.pP > 0)
-        {
-            return true;
-        }
         else if(targetUnit.lastMoveUsed.moveBase == struggle)
         {
             return false;
@@ -2757,6 +2789,10 @@ public class BattleSystem : CoreSystem
         else if (targetUnit.lastMoveUsed.moveBase == encore)
         {
             return false;
+        }
+        else if (targetUnit.lastMoveUsed.pP > 0)
+        {
+            return true;
         }
         return false;
     }
@@ -2925,19 +2961,39 @@ public class BattleSystem : CoreSystem
         return !attackingUnit.damagedThisTurn;
     }
 
+    bool LastResortSucessful(BattleUnit attackingUnit)
+    {
+        foreach (Move move in attackingUnit.pokemon.moves)
+        {
+            if(move.moveBase == lastResort)
+            {
+                continue;
+            }
+
+            if(move.pP > 0)
+            {
+                return false;
+            }
+        }
+        return true;
+    }
+
     MoveBase SpecifiedMovesWithConditions(BattleUnit attackingUnit,BattleUnit defendingUnit,MoveBase originalMove,MoveBase alteredMove)
     {
         if(originalMove == acrobatics)
         {
-            alteredMove = alteredMove.Clone();
-            alteredMove.AdjustedMovePower(2);
+            if(attackingUnit.pokemon.GetHoldItemEffects == null)
+            {
+                alteredMove = alteredMove.Clone();
+                alteredMove.AdjustedMovePower(1);
+            }
         }
-        else if(originalMove == assurance|| originalMove == avalanche)
+        else if(originalMove == assurance|| originalMove == avalanche || originalMove == revenge)
         {
             if(attackingUnit.damagedThisTurn == true)
             {
                 alteredMove = alteredMove.Clone();
-                alteredMove.AdjustedMovePower(2);
+                alteredMove.AdjustedMovePower(1);
             }
         }
         else if(originalMove == crushGrip)
@@ -2951,7 +3007,7 @@ public class BattleSystem : CoreSystem
             if(attackingUnit.pokemon.status != null)
             {
                 alteredMove = alteredMove.Clone();
-                alteredMove.AdjustedMovePower(2);
+                alteredMove.AdjustedMovePower(1);
             }
         }
         else if (originalMove == flail)
@@ -2976,7 +3032,7 @@ public class BattleSystem : CoreSystem
                     alteredMove.AdjustedMovePower(150);
                     break;
                 default:// <4.17
-                    alteredMove.AdjustedMovePower(20);
+                    alteredMove.AdjustedMovePower(200);
                     break;
             }
         }
@@ -2998,6 +3054,92 @@ public class BattleSystem : CoreSystem
             float adjustment = 25 * (defendingUnit.pokemon.speed / attackingUnit.pokemon.speed);
             adjustment = Mathf.Clamp(adjustment, 1, 150);
             alteredMove.AdjustedMovePower(adjustment);
+        }
+        else if(originalMove == knockOff)
+        {
+            if(defendingUnit.pokemon.GetCurrentItem != null)
+            {
+                alteredMove = alteredMove.Clone();
+                alteredMove.AdjustedMovePower(.5f);
+            }
+        }
+        else if(originalMove == magnitude)
+        {
+            alteredMove = alteredMove.Clone();
+            magnitudeNumber = Random.Range(0, 101);
+            switch (magnitudeNumber)
+            {
+                case int n when (n <= 5):
+                    alteredMove.AdjustedMovePower(10);
+                    magnitudeNumber = 4;
+                    break;
+                case int n when (n <= 15 && n > 5):
+                    alteredMove.AdjustedMovePower(30);
+                    magnitudeNumber = 5;
+                    break;
+                case int n when (n <= 35 && n > 15):
+                    alteredMove.AdjustedMovePower(50);
+                    magnitudeNumber = 6;
+                    break;
+                case int n when (n <= 65 && n > 35):
+                    alteredMove.AdjustedMovePower(70);
+                    magnitudeNumber = 7;
+                    break;
+                case int n when (n <= 85 && n > 65):
+                    alteredMove.AdjustedMovePower(90);
+                    magnitudeNumber = 8;
+                    break;
+                case int n when (n <= 95 && n > 85):
+                    alteredMove.AdjustedMovePower(110);
+                    magnitudeNumber = 9;
+                    break;
+                default:// > 95
+                    alteredMove.AdjustedMovePower(150);
+                    magnitudeNumber = 10;
+                    break;
+            }
+        }
+        else if(originalMove == payback)
+        {
+            if(defendingUnit.turnsOnField > 0 && currentTurnDetails.Count <= 1)
+            {
+                alteredMove = alteredMove.Clone();
+                alteredMove.AdjustedMovePower(1);
+            }
+        }
+        else if(originalMove == powerTrip)
+        {
+            int bonusMultiplier = 0;
+            for (int i = (int)StatAttribute.Attack; i < (int)StatAttribute.Accuracy; i++)
+            {
+                StatAttribute statAttribute = (StatAttribute)i;
+                if (defendingUnit.pokemon.statBoosts[statAttribute] > 0)
+                {
+                    bonusMultiplier += defendingUnit.pokemon.statBoosts[statAttribute];
+                }
+            }
+            alteredMove = alteredMove.Clone();
+            alteredMove.AdjustedMovePower(bonusMultiplier);
+        }
+        else if (originalMove == punishment)
+        {
+            int bonusMultiplier = 0;
+            for (int i = (int)StatAttribute.Attack; i < (int)StatAttribute.Speed; i++)
+            {
+                StatAttribute statAttribute = (StatAttribute)i;
+                if (defendingUnit.pokemon.statBoosts[statAttribute] > 0)
+                {
+                    bonusMultiplier += defendingUnit.pokemon.statBoosts[statAttribute];
+                }
+            }
+            alteredMove = alteredMove.Clone();
+            bonusMultiplier = Mathf.Clamp((60 + (bonusMultiplier * 20)),60,200);
+            
+            alteredMove.AdjustedMovePower(bonusMultiplier);
+        }
+        else if(originalMove == rage)
+        {
+            attackingUnit.enraged = true;
         }
 
         return alteredMove;
