@@ -79,6 +79,9 @@ public class Notes
     beak blast, beat up, bide,Bounce,Bug Bite, Chip Away,Circle Throw,Counter, Covet,dig,dive,dragon tail,Endeavor
     Feint,Fissure,fling,fly,flying press,foul play, freeze shock,Fusion Bolt,Giga Impact,Guillotine, Heat Crash,Heavy Slam,Horn Drill,
     Hyperspace Fury,Ice Ball,Low Kick,Metal Burst,Multi-Attack,Natural Gift,Outrage,Pay Day,Phantom Force,Pluck,Present,Pursuit,Rapid Spin,
-    Retaliate,
+    Retaliate,Rock Wrecker,Rollout,Sacred Sword,Secret Power,Seismic Toss,Shadow Force,Skull Bash,Sky Attack,Sky Drop,Smack Down,Solar Blade
+    Spectral Thief,Sunsteel Strike,Super Fang,Thief,Thousand Arrows,Thrash,U-turn
+
+    Belch,Blast Burn, blizzard accuracy during hail,Burn Up
     */
 }

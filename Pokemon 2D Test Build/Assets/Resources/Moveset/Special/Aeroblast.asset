@@ -1,0 +1,50 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 60a83619553a27641bfeb93370b0ce89, type: 3}
+  m_Name: Aeroblast
+  m_EditorClassIdentifier: 
+  moveName: Aeroblast
+  moveDescription: A vortex of air is shot at the target to inflict damage. Critical
+    hits land more easily.
+  elementType: 7
+  moveType: 1
+  moveEffects:
+    boosts: []
+    status: 0
+    volatileStatus: 0
+    weatherEffect: 0
+    entryHazard: 0
+    specialStartMessage: 
+  secondaryEffects: []
+  target: 0
+  power: 100
+  accuracy: 95
+  alwaysHits: 0
+  priority: 0
+  powerPoints: 5
+  baseCriticalHitRate: 1
+  multiStrikeMove: 0
+  fixedNumberOfStrikes: 0
+  physicalContact: 0
+  soundType: 0
+  punchMove: 0
+  bitingMove: 0
+  snatchable: 0
+  affectedByGravity: 0
+  defrostsWhenUsed: 0
+  reflectedByMagicCoatMagicBounce: 0
+  blockedByProtectDetect: 1
+  copyableByMirrorMove: 1
+  recoilType: 0
+  recoilPercentage: 0
+  hpRecovered: 0
+  leavesTargetWith1HP: 0

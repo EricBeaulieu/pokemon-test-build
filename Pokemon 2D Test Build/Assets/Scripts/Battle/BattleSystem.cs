@@ -91,6 +91,14 @@ public class BattleSystem : CoreSystem
     [SerializeField] MoveBase punishment;
     [SerializeField] MoveBase rage;
     [SerializeField] MoveBase revenge;
+    [SerializeField] MoveBase reversal;
+    [SerializeField] MoveBase smellingSalts;
+    [SerializeField] MoveBase stompingTantrum;
+    [SerializeField] MoveBase suckerPunch;
+    [SerializeField] MoveBase throatChop;
+    [SerializeField] MoveBase tripleKick;
+    [SerializeField] MoveBase wakeUpSlap;
+    [SerializeField] MoveBase brine;
 
     //pooling all the conditions on the pokemon prior to checking them
     List<ConditionBase> allConditionsOnPokemon = new List<ConditionBase>();
@@ -813,6 +821,7 @@ public class BattleSystem : CoreSystem
             }
             yield return sourceUnit.PlayAttackAnimation();
             yield return dialogSystem.TypeDialog($"{BUT_IT_FAILED}");
+            sourceUnit.previousMoveFailed = true;
             yield break;
         }
 
@@ -913,6 +922,19 @@ public class BattleSystem : CoreSystem
 
                     for (int i = 0; i < attackLoop; i++)
                     {
+                        if(move.moveBase == tripleKick)
+                        {
+                            alteredMove = alteredMove.Clone();
+                            if(i == 1)
+                            {
+                                alteredMove.AdjustedMovePower(1);
+                            }
+                            if (i == 2)
+                            {
+                                alteredMove.AdjustedMovePower(0.5f);
+                            }
+                            
+                        }
                         if (i > 0)
                         {
                             targetUnit.pokemon.TakeDamage(damageDetails,alteredMove, sourceUnit,targetUnit);
@@ -945,6 +967,7 @@ public class BattleSystem : CoreSystem
 
                         if (damageDetails.typeEffectiveness == 0)
                         {
+                            sourceUnit.previousMoveFailed = true;
                             break;
                         }
 
@@ -1010,6 +1033,7 @@ public class BattleSystem : CoreSystem
 
                 if(damageDetails.damageNullified == true)
                 {
+                    sourceUnit.previousMoveFailed = true;
                     yield return ApplyStatChanges(damageDetails.defendersStatBoostByAbility, targetUnit, MoveTarget.Foe);
                     yield return ApplyStatChanges(damageDetails.attackersStatBoostByDefendersAbility, sourceUnit, MoveTarget.Self, sourceUnit);
 
@@ -1018,6 +1042,28 @@ public class BattleSystem : CoreSystem
 
                 if(targetUnit.pokemon.currentHitPoints > 0)
                 {
+                    if(move.moveBase == smellingSalts)
+                    {
+                        if(targetUnit.pokemon.status?.Id == ConditionID.Paralyzed)
+                        {
+                            targetUnit.pokemon.CureStatus();
+                            yield return dialogSystem.TypeDialog($"{targetUnit.pokemon.currentName} was cured of paralysis");
+                        }
+                    }
+                    else if(move.moveBase == throatChop)
+                    {
+                        targetUnit.cantUseSoundMoves = 2;
+                        yield return dialogSystem.TypeDialog($"The effects of {move.moveBase.MoveName} prevent {targetUnit.pokemon.currentName} from using certain moves");
+                    }
+                    else if(move.moveBase == wakeUpSlap)
+                    {
+                        if (targetUnit.pokemon.status?.Id == ConditionID.Sleep)
+                        {
+                            targetUnit.pokemon.CureStatus();
+                            yield return dialogSystem.TypeDialog($"{targetUnit.pokemon.currentName} was woken up");
+                        }
+                    }
+
                     yield return ApplyStatChanges(damageDetails.defendersStatBoostByAbility, targetUnit, MoveTarget.Foe);
                     yield return ApplyStatChanges(damageDetails.alterStatAfterTakingDamage, targetUnit, MoveTarget.Foe);
                 }
@@ -1307,6 +1353,7 @@ public class BattleSystem : CoreSystem
             {
                 sourceUnit.RemoveCurrentItemFromPokemon();
             }
+            sourceUnit.previousMoveFailed = false;
         }
         else
         {
@@ -1556,6 +1603,14 @@ public class BattleSystem : CoreSystem
 
         sourceUnit.damagedThisTurn = false;
         sourceUnit.turnsOnField++;
+        if(sourceUnit.cantUseSoundMoves > 0)
+        {
+            sourceUnit.cantUseSoundMoves--;
+            if(sourceUnit.cantUseSoundMoves == 0)
+            {
+                yield return dialogSystem.TypeDialog($"{sourceUnit.pokemon.currentName} can use sound moves again");
+            }
+        }
         int currentHP = sourceUnit.pokemon.currentHitPoints;
 
         if(sourceUnit.pokemon.ability.CuresStatusAtTurnEnd(sourceUnit.pokemon,GetCurrentWeather))
@@ -2713,47 +2768,55 @@ public class BattleSystem : CoreSystem
         }
     }
 
-    bool CheckIfMoveHasSpecializedConditionAndSuccessful(BattleUnit sourceUnit, BattleUnit targetUnit, MoveBase moveBase)
+    bool CheckIfMoveHasSpecializedConditionAndSuccessful(BattleUnit sourceUnit, BattleUnit targetUnit, MoveBase originalMove)
     {
-        if(moveBase == noRetreat)
+        if(originalMove == noRetreat)
         {
             return (NoRetreatSuccessful(sourceUnit));
         }
-        else if (moveBase == encore)
+        else if (originalMove == encore)
         {
             return EncoreSuccessful(targetUnit);
         }
-        else if(moveBase == dreamEater)
+        else if(originalMove == dreamEater)
         {
             return (DreamEaterSuccessful(targetUnit));
         }
-        else if(moveBase == purify)
+        else if(originalMove == purify)
         {
             return (PurifySuccessful(sourceUnit));
         }
-        else if(moveBase == rest)
+        else if(originalMove == rest)
         {
             return (RestSuccessful(sourceUnit));
         }
-        else if(moveBase == disabled)
+        else if(originalMove == disabled)
         {
             return (DisableSucessful(targetUnit));
         }
-        else if (moveBase == reflect || moveBase == lightScreen || moveBase == auroraVeil|| moveBase == mist)
+        else if (originalMove == reflect || originalMove == lightScreen || originalMove == auroraVeil|| originalMove == mist)
         {
-            return (ShieldSucessful(sourceUnit,targetUnit, moveBase));
+            return (ShieldSucessful(sourceUnit,targetUnit, originalMove));
         }
-        else if (moveBase == fakeOut|| moveBase == firstImpression)
+        else if (originalMove == fakeOut|| originalMove == firstImpression)
         {
             return (FirstTurnOnlyMoveSucessful(sourceUnit));
         }
-        else if (moveBase == focusPunch)
+        else if (originalMove == focusPunch)
         {
             return (FailsIfHurtSucessful(sourceUnit));
         }
-        else if(moveBase == lastResort)
+        else if(originalMove == lastResort)
         {
             return (LastResortSucessful(sourceUnit));
+        }
+        else if(originalMove == suckerPunch)
+        {
+            return (SuckerPunchSucessful(targetUnit));
+        }
+        else if(originalMove.SoundType == true)
+        {
+            return (SoundMoveSucessful(sourceUnit));
         }
 
         return true;
@@ -2977,6 +3040,23 @@ public class BattleSystem : CoreSystem
         }
         return true;
     }
+    
+    bool SuckerPunchSucessful(BattleUnit defendingUnit)
+    {
+        for (int i = 0; i < currentTurnDetails.Count; i++)
+        {
+            if(defendingUnit == currentTurnDetails[i].attackingPokemon)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    bool SoundMoveSucessful(BattleUnit attackingUnit)
+    {
+        return !(attackingUnit.cantUseSoundMoves > 0);
+    }
 
     MoveBase SpecifiedMovesWithConditions(BattleUnit attackingUnit,BattleUnit defendingUnit,MoveBase originalMove,MoveBase alteredMove)
     {
@@ -3010,7 +3090,7 @@ public class BattleSystem : CoreSystem
                 alteredMove.AdjustedMovePower(1);
             }
         }
-        else if (originalMove == flail)
+        else if (originalMove == flail|| originalMove == reversal)
         {
             alteredMove = alteredMove.Clone();
             float pokemonHealthPercentage = (float)attackingUnit.pokemon.currentHitPoints / (float)attackingUnit.pokemon.maxHitPoints;
@@ -3140,6 +3220,38 @@ public class BattleSystem : CoreSystem
         else if(originalMove == rage)
         {
             attackingUnit.enraged = true;
+        }
+        else if(originalMove == smellingSalts)
+        {
+            if (attackingUnit.pokemon.status?.Id == ConditionID.Paralyzed)
+            {
+                alteredMove = alteredMove.Clone();
+                alteredMove.AdjustedMovePower(1);
+            }
+        }
+        else if(originalMove == stompingTantrum)
+        {
+            if(attackingUnit.previousMoveFailed == true)
+            {
+                alteredMove = alteredMove.Clone();
+                alteredMove.AdjustedMovePower(1);
+            }
+        }
+        else if(originalMove == wakeUpSlap)
+        {
+            if (attackingUnit.pokemon.status?.Id == ConditionID.Sleep)
+            {
+                alteredMove = alteredMove.Clone();
+                alteredMove.AdjustedMovePower(1);
+            }
+        }
+        else if(originalMove == brine)
+        {
+            if (defendingUnit.pokemon.currentHitPoints < (defendingUnit.pokemon.maxHitPoints /2))
+            {
+                alteredMove = alteredMove.Clone();
+                alteredMove.AdjustedMovePower(1);
+            }
         }
 
         return alteredMove;

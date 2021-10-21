@@ -48,6 +48,8 @@ public class BattleUnit : MonoBehaviour
     public bool damagedThisTurn { get; set; }
     public int turnsOnField { get; set; }
     public bool enraged { get; set; }
+    public bool previousMoveFailed { get; set; }
+    public int cantUseSoundMoves { get; set; }
 
     void Awake()
     {
@@ -149,6 +151,8 @@ public class BattleUnit : MonoBehaviour
         damagedThisTurn = false;
         turnsOnField = 0;
         enraged = false;
+        previousMoveFailed = false;
+        cantUseSoundMoves = 0;
 
         pokemonBattledAgainst.Clear();
     }

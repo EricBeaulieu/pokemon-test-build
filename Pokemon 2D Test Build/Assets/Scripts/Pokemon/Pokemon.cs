@@ -1139,6 +1139,7 @@ public class Pokemon {
         PokemonSaveData pokemonSaveData = new PokemonSaveData();
 
         pokemonSaveData.currentBase = SavingSystem.GetAssetPath(_pokemonBase);
+        Debug.Log(pokemonSaveData.currentBase);
         pokemonSaveData.currentLevel = currentLevel;
         pokemonSaveData.currentExp = currentExp;
         pokemonSaveData.currentHitPoints = currentHitPoints;
