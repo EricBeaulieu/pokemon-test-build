@@ -27,4 +27,7 @@ public abstract class ConditionBase
     public virtual bool PreventsHealing() { return false; }
     public virtual ElementType IdentifiedAndRemovesImmunityFromType(Pokemon pokemon) { return ElementType.NA; }
     public virtual bool RequiredConditionToWork(ConditionID iD) { return true; }
+    public virtual bool LeavesTargetWithOneHP() { return false; }
+    public virtual bool ReflectsMove() { return false; }
+    public virtual bool CanAttackThisTurn(MoveBase originalMove, BattleUnit attackingPokemon) { return true; }
 }

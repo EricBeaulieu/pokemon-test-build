@@ -72,6 +72,7 @@
     <Compile Include="Assets\Scripts\UI\MoveDetails.cs" />
     <Compile Include="Assets\Scripts\Data\HoldItems\Berries\Jaboca.cs" />
     <Compile Include="Assets\Scripts\Data\Conditions\Status\ToxicPoison.cs" />
+    <Compile Include="Assets\Scripts\Data\Conditions\VolatileBattleStatus\Bracing.cs" />
     <Compile Include="Assets\Scripts\Data\HoldItems\Standard\ScopeLens.cs" />
     <Compile Include="Assets\Scripts\Data\Abilitys\List\Transistor.cs" />
     <Compile Include="Assets\Scripts\Data\HoldItems\Standard\ThickClub.cs" />
@@ -239,6 +240,7 @@
     <Compile Include="Assets\Scripts\Data\HoldItems\HoldItemsNull.cs" />
     <Compile Include="Assets\Scripts\Data\Abilitys\List\BigPecks.cs" />
     <Compile Include="Assets\Scripts\ExtensionMethods\ColorExtensions.cs" />
+    <Compile Include="Assets\Scripts\Battle\SpecializedMovesHelper.cs" />
     <Compile Include="Assets\Scripts\Data\HoldItems\Standard\RockyHelmet.cs" />
     <Compile Include="Assets\Scripts\Data\HoldItems\Berries\Tamato.cs" />
     <Compile Include="Assets\Scripts\Items\UI\TrashArrowButtons.cs" />
@@ -330,6 +332,7 @@
     <Compile Include="Assets\Scripts\Dialog\Dialog.cs" />
     <Compile Include="Assets\Scripts\Data\Abilitys\List\Hydration.cs" />
     <Compile Include="Assets\Scripts\Data\EntryHazards\EntryHazardsDB.cs" />
+    <Compile Include="Assets\Scripts\Data\Conditions\VolatileBattleStatus\ChargingTurn.cs" />
     <Compile Include="Assets\Scripts\Data\HoldItems\Berries\Rawst.cs" />
     <Compile Include="Assets\Scripts\Data\Abilitys\List\HugePower.cs" />
     <Compile Include="Assets\Scripts\Data\Weather\WeatherEffectBase.cs" />
@@ -406,6 +409,7 @@
     <Compile Include="Assets\Scripts\Data\HoldItems\Standard\SoftSand.cs" />
     <Compile Include="Assets\Scripts\Data\Abilitys\List\SlushRush.cs" />
     <Compile Include="Assets\Scripts\Data\Abilitys\List\TintedLens.cs" />
+    <Compile Include="Assets\Scripts\Data\Conditions\VolatileBattleStatus\AquaRing.cs" />
     <Compile Include="Assets\Scripts\Saving\PlayerSaveData.cs" />
     <Compile Include="Assets\Scripts\Data\Abilitys\List\SwiftSwim.cs" />
     <Compile Include="Assets\Scripts\Data\Conditions\VolatileStatus\PerishSong.cs" />
@@ -466,6 +470,7 @@
     <Compile Include="Assets\Scripts\Data\Abilitys\List\StrongJaw.cs" />
     <Compile Include="Assets\Scripts\Saving\ItemSaveData.cs" />
     <Compile Include="Assets\Scripts\Data\HoldItems\Berries\Apicot.cs" />
+    <Compile Include="Assets\Scripts\Static Tables\SpecializedMoves.cs" />
     <Compile Include="Assets\Scripts\Pokemon\LearnableMove.cs" />
     <Compile Include="Assets\Scripts\Data\HoldItems\Berries\Persim.cs" />
     <Compile Include="Assets\Scripts\Battle\BattleUnit.cs" />
@@ -475,6 +480,7 @@
     <Compile Include="Assets\Scripts\Data\HoldItems\Standard\BlackSludge.cs" />
     <Compile Include="Assets\Scripts\Data\HoldItems\Standard\PoisonGem.cs" />
     <Compile Include="Assets\Scripts\Static Tables\PokemonNameList.cs" />
+    <Compile Include="Assets\Scripts\Data\Conditions\VolatileBattleStatus\MagicCoat.cs" />
     <Compile Include="Assets\Scripts\Data\HoldItems\Berries\Pecha.cs" />
     <Compile Include="Assets\Scripts\Battle\InBattleItem.cs" />
     <Compile Include="Assets\Scripts\Items\UI\ItemOptionButtonUI.cs" />
@@ -517,6 +523,8 @@
     <Compile Include="Assets\Scripts\Data\Abilitys\List\RainDish.cs" />
     <Compile Include="Assets\Scripts\Data\Abilitys\List\Justified.cs" />
     <Compile Include="Assets\Scripts\Data\Abilitys\List\Soundproof.cs" />
+    <Compile Include="Assets\Scripts\Data\Conditions\VolatileBattleStatus\Recharging.cs" />
+    <Compile Include="Assets\Scripts\Data\Conditions\VolatileBattleStatus\TakingAim.cs" />
   </ItemGroup>
   <ItemGroup>
      <None Include="Assets\ScriptTemplates\82-EricBeaulieu__BerryBase-NewBerryBase.cs.txt" />

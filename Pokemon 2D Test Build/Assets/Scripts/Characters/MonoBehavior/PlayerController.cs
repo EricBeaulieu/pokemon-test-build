@@ -252,6 +252,7 @@ public class PlayerController : Entity
 
     public object CaptureState()
     {
+        isRunning = false;
         return new PlayerSaveData
         {
             playerPosX = Mathf.FloorToInt(transform.position.x),

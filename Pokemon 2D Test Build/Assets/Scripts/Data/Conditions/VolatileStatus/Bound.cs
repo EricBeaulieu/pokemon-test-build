@@ -14,7 +14,7 @@ public class Bound : ConditionBase
         {
             StatusTime = 7;
         }
-        return $"{pokemon.currentName} {GlobalTools.ReplaceUserWithPokemonName(boundMove.SecondaryEffects[0].SpecialStartMessage, attackingPokemon)}";
+        return $"{pokemon.currentName} {GlobalTools.ReplaceUserWithPokemonName(boundMove.GetSpecializedMoveMessage(ConditionID.Bound), attackingPokemon)}";
     }
     public override bool OnEndTurn(Pokemon pokemon)
     {

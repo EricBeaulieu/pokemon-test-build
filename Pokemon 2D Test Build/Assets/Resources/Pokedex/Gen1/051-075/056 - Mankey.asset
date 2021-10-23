@@ -39,10 +39,17 @@ MonoBehaviour:
   firstAbility: 96
   secondAbility: 4
   hiddenAbility: 15
-  _learnableMoves: []
+  _learnableMoves:
+  - _moveBase: {fileID: 11400000, guid: 6762c4fb074e981428a1b61a8f670a39, type: 2}
+    _levelLeanred: 0
+  - _moveBase: {fileID: 11400000, guid: 994197cb6dda3834781468b37aa53959, type: 2}
+    _levelLeanred: 0
+  - _moveBase: {fileID: 11400000, guid: 515758d3330571647a335169e68358ff, type: 2}
+    _levelLeanred: 5
   learnableTMHMMoves: []
   evolveLevelBased:
   - evolvedPokemon: {fileID: 11400000, guid: cde3623ab44cce943a5250cf1e3fb9ee, type: 2}
     levelRequirement: 28
     maxFriendShipRequired: 0
   evolutionsByStone: []
+  wildPokemonHoldItems: []

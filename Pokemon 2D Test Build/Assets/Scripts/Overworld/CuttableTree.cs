@@ -35,7 +35,7 @@ public class CuttableTree : MonoBehaviour,IInteractable, ISaveable
 
     public IEnumerator OnInteract(Vector2 vector2)
     {
-        Pokemon pokemon = GameManager.instance.GetPlayerController.pokemonParty.ContainsCut();
+        Pokemon pokemon = GameManager.instance.GetPlayerController.pokemonParty.ContainsMove(SpecializedMoves.cut);
         DialogManager dialogManager = GameManager.instance.GetDialogSystem;
 
         if(pokemon == null)

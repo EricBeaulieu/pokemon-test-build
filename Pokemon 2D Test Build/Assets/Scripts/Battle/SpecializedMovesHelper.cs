@@ -1,0 +1,87 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class SpecializedMovesHelper : MonoBehaviour
+{
+    void Start()
+    {
+        SpecializedMoves.Initialization(this);
+        Destroy(this);
+    }
+
+    [Header("SpecializedMoves")]
+    public MoveBase struggle;
+
+    [Header("Physical")]
+    public MoveBase acrobatics;
+    public MoveBase assurance;
+    public MoveBase avalanche;
+    public MoveBase bounce;
+    public MoveBase brickBreak;
+    public MoveBase crushGrip;
+    public MoveBase cut;
+    public MoveBase dig;
+    public MoveBase dive;
+    public MoveBase earthquake;
+    public MoveBase facade;
+    public MoveBase fakeOut;
+    public MoveBase fellStinger;
+    public MoveBase firstImpression;
+    public MoveBase fissure;
+    public MoveBase flail;
+    public MoveBase fly;
+    public MoveBase focusPunch;
+    public MoveBase freezeShock;
+    public MoveBase furyCutter;
+    public MoveBase gyroBall;
+    public MoveBase highJumpKick;
+    public MoveBase jumpKick;
+    public MoveBase knockOff;
+    public MoveBase lastResort;
+    public MoveBase magnitude;
+    public MoveBase payback;
+    public MoveBase phantomForce;
+    public MoveBase powerTrip;
+    public MoveBase psychicFangs;
+    public MoveBase punishment;
+    public MoveBase rage;
+    public MoveBase revenge;
+    public MoveBase reversal;
+    public MoveBase shadowForce;
+    public MoveBase smackDown;
+    public MoveBase smellingSalts;
+    public MoveBase stompingTantrum;
+    public MoveBase suckerPunch;
+    public MoveBase thousandArrows;
+    public MoveBase throatChop;
+    public MoveBase tripleKick;
+    public MoveBase wakeUpSlap;
+
+    [Header("Special")]
+    public MoveBase brine;
+    public MoveBase clearSmog;
+    public MoveBase dreamEater;
+    public MoveBase gust;
+    public MoveBase hurricane;
+    public MoveBase solarBeam;
+    public MoveBase solarBlade;
+    public MoveBase surf;
+    public MoveBase twister;
+    public MoveBase whirlpool;
+
+    [Header("Status")]
+    public MoveBase noRetreat;
+    public MoveBase encore;
+    public MoveBase synthesis;
+    public MoveBase moonlight;
+    public MoveBase morningSun;
+    public MoveBase shoreUp;
+    public MoveBase purify;
+    public MoveBase rest;
+    public MoveBase disable;
+    public MoveBase reflect;
+    public MoveBase lightScreen;
+    public MoveBase auroraVeil;
+    public MoveBase mist;
+}

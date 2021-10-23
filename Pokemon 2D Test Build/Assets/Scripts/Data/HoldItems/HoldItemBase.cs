@@ -69,6 +69,7 @@ public abstract class HoldItemBase
     public virtual StatBoost RaisesStatUponMissing(BattleUnit holder) { return null; }
     public virtual bool TransferToPokemon(MoveBase move) { return false; }
     public virtual float HpDrainModifier() { return 0; }
+    public virtual bool ExecuteMoveWithChargingTurn() { return false; }
 
     //Berries effects
     public virtual BerryID BerryId { get; }

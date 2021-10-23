@@ -21,7 +21,7 @@ public class BattleSystem : CoreSystem
     [SerializeField] ActionSelectionEventSelector actionSelectionEventSelector;
     [SerializeField] AttackSelectionEventSelector attackSelectionEventSelector;
 
-    List<TurnAttackDetails> currentTurnDetails = new List<TurnAttackDetails>();
+    public static List<TurnAttackDetails> currentTurnDetails { get; private set; } = new List<TurnAttackDetails>();
     TurnAttackDetails currentAttack;
     MoveBase alteredMove;
 
@@ -48,57 +48,6 @@ public class BattleSystem : CoreSystem
 
     LearnNewMoveUI learnNewMoveUI;
     [SerializeField] LevelUpUI levelUpUI;
-
-    [Header("Special Move with Conditions")]
-    [SerializeField] MoveBase struggle;
-    [SerializeField] MoveBase noRetreat;
-    [SerializeField] MoveBase encore;
-    [SerializeField] MoveBase dreamEater;
-    [SerializeField] MoveBase synthesis;
-    [SerializeField] MoveBase moonlight;
-    [SerializeField] MoveBase morningSun;
-    [SerializeField] MoveBase shoreUp;
-    [SerializeField] MoveBase purify;
-    [SerializeField] MoveBase rest;
-    [SerializeField] MoveBase disabled;
-    [SerializeField] MoveBase reflect;
-    [SerializeField] MoveBase lightScreen;
-    [SerializeField] MoveBase auroraVeil;
-    [SerializeField] MoveBase mist;
-    [SerializeField] MoveBase acrobatics;
-    [SerializeField] MoveBase assurance;
-    [SerializeField] MoveBase avalanche;
-    [SerializeField] MoveBase brickBreak;
-    [SerializeField] MoveBase crushGrip;
-    [SerializeField] MoveBase facade;
-    [SerializeField] MoveBase fakeOut;
-    [SerializeField] MoveBase fellStinger;
-    [SerializeField] MoveBase firstImpression;
-    [SerializeField] MoveBase flail;
-    [SerializeField] MoveBase focusPunch;
-    [SerializeField] MoveBase furyCutter;
-    const int MAX_MULTIPLIER_FOR_FURY_CUTTER = 3;
-    [SerializeField] MoveBase gyroBall;
-    [SerializeField] MoveBase highJumpKick;
-    [SerializeField] MoveBase jumpKick;
-    [SerializeField] MoveBase knockOff;
-    [SerializeField] MoveBase lastResort;
-    [SerializeField] MoveBase magnitude;
-    int magnitudeNumber;
-    [SerializeField] MoveBase payback;
-    [SerializeField] MoveBase powerTrip;
-    [SerializeField] MoveBase psychicFangs;
-    [SerializeField] MoveBase punishment;
-    [SerializeField] MoveBase rage;
-    [SerializeField] MoveBase revenge;
-    [SerializeField] MoveBase reversal;
-    [SerializeField] MoveBase smellingSalts;
-    [SerializeField] MoveBase stompingTantrum;
-    [SerializeField] MoveBase suckerPunch;
-    [SerializeField] MoveBase throatChop;
-    [SerializeField] MoveBase tripleKick;
-    [SerializeField] MoveBase wakeUpSlap;
-    [SerializeField] MoveBase brine;
 
     //pooling all the conditions on the pokemon prior to checking them
     List<ConditionBase> allConditionsOnPokemon = new List<ConditionBase>();
@@ -362,6 +311,18 @@ public class BattleSystem : CoreSystem
     /// </summary>
     void PlayerActions()
     {
+        if(playerBattleUnit.pokemon.HasCurrentVolatileStatus(ConditionID.ChargingTurn) == true)
+        {
+            MoveBase chargedMove = ((ChargingTurn)playerBattleUnit.pokemon.volatileStatus.Find(x => x.Id == ConditionID.ChargingTurn)).chargingMove;
+            AttackSelected(playerBattleUnit, playerBattleUnit.pokemon.moves.FirstOrDefault(x => x.moveBase == chargedMove));
+            return;
+        }
+        else if(playerBattleUnit.pokemon.HasCurrentVolatileStatus(ConditionID.Recharging) == true)
+        {
+            AttackSelected(playerBattleUnit, playerBattleUnit.lastMoveUsed);
+            return;
+        }
+
         dialogSystem.SetDialogText($"What will {playerBattleUnit.pokemon.currentName} do?");
         EnableActionSelector(true);
     }
@@ -503,7 +464,7 @@ public class BattleSystem : CoreSystem
         EnableAttackMoveSelector(false);
         yield return dialogSystem.TypeDialog($"{playerBattleUnit.pokemon.currentName} has no available moves left");
         yield return new WaitForSeconds(1);
-        AttackSelected(playerBattleUnit, new Move(struggle));
+        AttackSelected(playerBattleUnit, new Move(SpecializedMoves.struggle));
     }
 
     public void PlayerPokemonItemPreventsMoveFromBeingUsed(HoldItemBase holdItem)
@@ -613,9 +574,15 @@ public class BattleSystem : CoreSystem
     {
         Move currentAttack = enemyBattleUnit.ReturnRandomMove();
 
+        if (enemyBattleUnit.pokemon.HasCurrentVolatileStatus(ConditionID.ChargingTurn) == true)
+        {
+            MoveBase chargedMove = ((ChargingTurn)enemyBattleUnit.pokemon.volatileStatus.Find(x => x.Id == ConditionID.ChargingTurn)).chargingMove;
+            currentAttack =  enemyBattleUnit.pokemon.moves.FirstOrDefault(x => x.moveBase == chargedMove);
+        }
+        
         if(currentAttack == null)
         {
-            currentAttack = new Move(struggle);
+            currentAttack = new Move(SpecializedMoves.struggle);
         }
 
         enemyTurnAttackDetails.SetAttackDetails(currentAttack, enemyBattleUnit, playerBattleUnit);
@@ -679,7 +646,7 @@ public class BattleSystem : CoreSystem
         {
             for (int i = 0; i < attacksChosen.Count; i++)
             {
-                if(attacksChosen[i].currentMove.moveBase == focusPunch)
+                if(attacksChosen[i].currentMove.moveBase == SpecializedMoves.focusPunch)
                 {
                     yield return dialogSystem.TypeDialog($"{attacksChosen[i].attackingPokemon.pokemon.currentName}'s is tightening its focus!");
                 }
@@ -757,16 +724,6 @@ public class BattleSystem : CoreSystem
             yield break;
         }
 
-        if(sourceUnit.lastMoveUsed == move)
-        {
-            sourceUnit.lastMoveUsedConsecutively++;
-        }
-        else
-        {
-            sourceUnit.lastMoveUsed = move;
-            sourceUnit.lastMoveUsedConsecutively = 0;
-            sourceUnit.enraged = false;
-        }
         //This is here incase the pokemon hits itself in confusion for the smooth animation
         int previousHP = sourceUnit.pokemon.currentHitPoints;
 
@@ -788,11 +745,55 @@ public class BattleSystem : CoreSystem
         }
         //This is here incase the pokemon has a status effect that ended such as being frozen/Sleep
         yield return ShowStatusChanges(sourceUnit.pokemon);
+        
+        alteredMove = SpecializedMoves.SpecifiedMovesWithConditions(sourceUnit, targetUnit, move.moveBase, alteredMove);
+
+        if (move.moveBase.SecondaryEffects.Exists(x => x.Volatiletatus == ConditionID.ChargingTurn) == true)
+        {
+            if(sourceUnit.pokemon.HasCurrentVolatileStatus(ConditionID.ChargingTurn) == false)
+            {
+                ChargingTurn charging = ConditionsDB.GetConditionBase(ConditionID.ChargingTurn) as ChargingTurn;
+                if (charging.CanAttackThisTurn(move.moveBase, sourceUnit) == false)
+                {
+                    List<MoveEffects> effects = SpecializedMoves.EffectsBeforeCharge(alteredMove);
+
+                    for (int i = 0; i < effects.Count; i++)
+                    {
+                        yield return RunMoveEffects(effects[i], sourceUnit, targetUnit, alteredMove, MoveTarget.Self);
+                    }
+                    yield return ShowStatusChanges(sourceUnit.pokemon);
+                    yield break;
+                }
+                else
+                {
+                    alteredMove = SpecializedMoves.RemoveCharging(alteredMove);
+                    if (sourceUnit.removeItem == true)
+                    {
+                        if (sourceUnit.pokemon.GetHoldItemEffects.PlayAnimationWhenUsed() == true)
+                        {
+                            yield return sourceUnit.PlayItemUsedAnimation();
+                            yield return dialogSystem.TypeDialog(sourceUnit.pokemon.GetHoldItemEffects.SpecializedMessage(sourceUnit, targetUnit.pokemon));
+                        }
+                        sourceUnit.RemoveCurrentItemFromPokemon();
+                    }
+                }
+            }
+        }
 
         yield return dialogSystem.TypeDialog($"{sourceUnit.pokemon.currentName} used {move.moveBase.MoveName}");
         move.pP--;
-
-        if(targetUnit.pokemon.ability.ReducesPowerPointsBy2() == true)
+        
+        if (sourceUnit.lastMoveUsed == move)
+        {
+            sourceUnit.lastMoveUsedConsecutively++;
+        }
+        else
+        {
+            sourceUnit.lastMoveUsed = move;
+            sourceUnit.lastMoveUsedConsecutively = 0;
+            sourceUnit.enraged = false;
+        }
+        if (targetUnit.pokemon.ability.ReducesPowerPointsBy2() == true)
         {
             move.pP--;
         }
@@ -812,9 +813,9 @@ public class BattleSystem : CoreSystem
 
         int hpPriorToAttack = targetUnit.pokemon.currentHitPoints;//for the animator in UpdateHP and recoil
 
-        if (CheckIfMoveHasSpecializedConditionAndSuccessful(sourceUnit, targetUnit, move.moveBase) == false)
+        if (SpecializedMoves.CheckIfMoveHasSpecializedConditionAndSuccessful(sourceUnit, targetUnit, move.moveBase) == false)
         {
-            if(move.moveBase == focusPunch)
+            if(move.moveBase == SpecializedMoves.focusPunch)
             {
                 yield return dialogSystem.TypeDialog($"{sourceUnit.pokemon.currentName} lost its focus and couldn't move!");
                 yield break;
@@ -824,19 +825,18 @@ public class BattleSystem : CoreSystem
             sourceUnit.previousMoveFailed = true;
             yield break;
         }
-
-        alteredMove = sourceUnit.pokemon.ability.AlterMoveDetails(move.moveBase);
+        
+        alteredMove = sourceUnit.pokemon.ability.AlterMoveDetails(alteredMove);
         alteredMove = sourceUnit.pokemon.GetHoldItemEffects.AlterUserMoveDetails(sourceUnit,alteredMove);
         alteredMove = targetUnit.pokemon.GetHoldItemEffects.AlterOpposingMoveDetails(alteredMove);
         alteredMove = sourceUnit.pokemon.ability.BoostsMovePowerWhenLast(currentTurnDetails.Count <= 1, alteredMove);
-        alteredMove = SpecifiedMovesWithConditions(sourceUnit,targetUnit,move.moveBase, alteredMove);
 
-        if(move.moveBase == magnitude)
+        if(move.moveBase == SpecializedMoves.magnitude)
         {
-            yield return dialogSystem.TypeDialog($"Magnitude {magnitudeNumber}!");
+            yield return dialogSystem.TypeDialog($"Magnitude {SpecializedMoves.magnitudeNumber}!");
         }
 
-        if (CheckIfMoveHits(alteredMove, sourceUnit.pokemon, targetUnit.pokemon) == true)
+        if (CheckIfMoveHits(move.moveBase,alteredMove, sourceUnit.pokemon, targetUnit.pokemon) == true)
         {
             if (alteredMove.MoveType == MoveType.Status)
             {
@@ -856,7 +856,7 @@ public class BattleSystem : CoreSystem
                     sourceUnit.pokemon.AlterPokemonTyping(elementType);
                 }
 
-                if(move.moveBase == brickBreak || move.moveBase == psychicFangs)
+                if(move.moveBase == SpecializedMoves.brickBreak || move.moveBase == SpecializedMoves.psychicFangs)
                 {
                     if(targetUnit.CurrentAttackRemovedShields(alteredMove.Type) == true)
                     {
@@ -922,7 +922,7 @@ public class BattleSystem : CoreSystem
 
                     for (int i = 0; i < attackLoop; i++)
                     {
-                        if(move.moveBase == tripleKick)
+                        if(move.moveBase == SpecializedMoves.tripleKick)
                         {
                             alteredMove = alteredMove.Clone();
                             if(i == 1)
@@ -1042,7 +1042,7 @@ public class BattleSystem : CoreSystem
 
                 if(targetUnit.pokemon.currentHitPoints > 0)
                 {
-                    if(move.moveBase == smellingSalts)
+                    if(move.moveBase == SpecializedMoves.smellingSalts)
                     {
                         if(targetUnit.pokemon.status?.Id == ConditionID.Paralyzed)
                         {
@@ -1050,12 +1050,12 @@ public class BattleSystem : CoreSystem
                             yield return dialogSystem.TypeDialog($"{targetUnit.pokemon.currentName} was cured of paralysis");
                         }
                     }
-                    else if(move.moveBase == throatChop)
+                    else if(move.moveBase == SpecializedMoves.throatChop)
                     {
                         targetUnit.cantUseSoundMoves = 2;
                         yield return dialogSystem.TypeDialog($"The effects of {move.moveBase.MoveName} prevent {targetUnit.pokemon.currentName} from using certain moves");
                     }
-                    else if(move.moveBase == wakeUpSlap)
+                    else if(move.moveBase == SpecializedMoves.wakeUpSlap)
                     {
                         if (targetUnit.pokemon.status?.Id == ConditionID.Sleep)
                         {
@@ -1400,7 +1400,7 @@ public class BattleSystem : CoreSystem
 
         if (targetUnit.pokemon.currentHitPoints <= 0)
         {
-            if (sourceUnit.pokemon.currentHitPoints > 0 && move.moveBase == fellStinger)
+            if (sourceUnit.pokemon.currentHitPoints > 0 && move.moveBase == SpecializedMoves.fellStinger)
             {
                 StatBoost statBoost = new StatBoost(StatAttribute.Attack, 3);
                 yield return ApplyStatChanges(new List<StatBoost>() { statBoost }, sourceUnit, MoveTarget.Foe);
@@ -1538,7 +1538,6 @@ public class BattleSystem : CoreSystem
                 int hpPriorToHealing = source.pokemon.currentHitPoints;
                 int hpHealed = Mathf.CeilToInt(source.pokemon.maxHitPoints * (currentMove.HpRecovered * source.pokemon.ability.PowerUpCertainMoves(source.pokemon, target.pokemon, currentMove,GetCurrentWeather)));
                 WeatherEffectID weatherEffectID = (_currentWeather == null) ? WeatherEffectID.NA : _currentWeather.Id;
-                hpHealed = Mathf.CeilToInt(hpHealed * HealthRecoveryModifiers(currentMove, weatherEffectID));
                 hpHealed = Mathf.Clamp(hpHealed, 1, source.pokemon.maxHitPoints - source.pokemon.currentHitPoints);
                 source.pokemon.UpdateHPRestored(hpHealed);
                 yield return source.HUD.UpdateHP(hpPriorToHealing);
@@ -1546,7 +1545,7 @@ public class BattleSystem : CoreSystem
             }
             else
             {
-                if(currentMove != rest)
+                if(currentMove != SpecializedMoves.rest)
                 {
                     yield return dialogSystem.TypeDialog($"{BUT_IT_FAILED}");
                 }
@@ -1557,11 +1556,31 @@ public class BattleSystem : CoreSystem
         yield return ShowStatusChanges(target.pokemon);
     }
 
-    bool CheckIfMoveHits(MoveBase move, Pokemon source, Pokemon target)
+    bool CheckIfMoveHits(MoveBase originalMove,MoveBase move, Pokemon source, Pokemon target)
     {
         if(target.currentHitPoints <= 0)
         {
             return false;
+        }
+
+        if(target.HasCurrentVolatileStatus(ConditionID.TakingAim) == true)
+        {
+            if (target.HasCurrentVolatileStatus(ConditionID.ChargingTurn) == true)
+            {
+                ChargingTurn chargingTurn = (ChargingTurn)target.volatileStatus.FirstOrDefault(x => x.Id == ConditionID.ChargingTurn);
+                chargingTurn.HitDueToTakingAim();
+            }
+            target.CureVolatileStatus(ConditionID.TakingAim);
+            return true;
+        }
+
+        if(target.HasCurrentVolatileStatus(ConditionID.ChargingTurn) == true)
+        {
+            ChargingTurn chargingTurn = (ChargingTurn)target.volatileStatus.FirstOrDefault(x => x.Id == ConditionID.ChargingTurn);
+            if(chargingTurn.CanBeHitWhileSemiInvulnerable(originalMove) == false)
+            {
+                return false;
+            }
         }
 
         if (move.AlwaysHits == true)
@@ -1786,7 +1805,7 @@ public class BattleSystem : CoreSystem
         while (pokemon.statusChanges.Count > 0)
         {
             string message = pokemon.statusChanges.Dequeue();
-            if(message != "")
+            if(string.IsNullOrEmpty(message) == false)
             {
                 yield return dialogSystem.TypeDialog(message);
             }
@@ -2768,498 +2787,9 @@ public class BattleSystem : CoreSystem
         }
     }
 
-    bool CheckIfMoveHasSpecializedConditionAndSuccessful(BattleUnit sourceUnit, BattleUnit targetUnit, MoveBase originalMove)
-    {
-        if(originalMove == noRetreat)
-        {
-            return (NoRetreatSuccessful(sourceUnit));
-        }
-        else if (originalMove == encore)
-        {
-            return EncoreSuccessful(targetUnit);
-        }
-        else if(originalMove == dreamEater)
-        {
-            return (DreamEaterSuccessful(targetUnit));
-        }
-        else if(originalMove == purify)
-        {
-            return (PurifySuccessful(sourceUnit));
-        }
-        else if(originalMove == rest)
-        {
-            return (RestSuccessful(sourceUnit));
-        }
-        else if(originalMove == disabled)
-        {
-            return (DisableSucessful(targetUnit));
-        }
-        else if (originalMove == reflect || originalMove == lightScreen || originalMove == auroraVeil|| originalMove == mist)
-        {
-            return (ShieldSucessful(sourceUnit,targetUnit, originalMove));
-        }
-        else if (originalMove == fakeOut|| originalMove == firstImpression)
-        {
-            return (FirstTurnOnlyMoveSucessful(sourceUnit));
-        }
-        else if (originalMove == focusPunch)
-        {
-            return (FailsIfHurtSucessful(sourceUnit));
-        }
-        else if(originalMove == lastResort)
-        {
-            return (LastResortSucessful(sourceUnit));
-        }
-        else if(originalMove == suckerPunch)
-        {
-            return (SuckerPunchSucessful(targetUnit));
-        }
-        else if(originalMove.SoundType == true)
-        {
-            return (SoundMoveSucessful(sourceUnit));
-        }
-
-        return true;
-    }
-
-    bool NoRetreatSuccessful(BattleUnit sourceUnit)
-    {
-        if(sourceUnit.cantEscapeGivenToSelf == true)
-        {
-            return false;
-        }
-        else
-        {
-            if(sourceUnit.pokemon.volatileStatus.Exists(x => x.Id == ConditionID.CantEscape))
-            {
-                return true;
-            }
-        }
-        sourceUnit.cantEscapeGivenToSelf = true;
-        return true;
-    }
-
-    bool EncoreSuccessful(BattleUnit targetUnit)
-    {
-        if(targetUnit.lastMoveUsed == null)
-        {
-            return false;
-        }
-        else if(targetUnit.lastMoveUsed.moveBase == struggle)
-        {
-            return false;
-        }
-        else if (targetUnit.lastMoveUsed.moveBase == encore)
-        {
-            return false;
-        }
-        else if (targetUnit.lastMoveUsed.pP > 0)
-        {
-            return true;
-        }
-        return false;
-    }
-
-    bool DreamEaterSuccessful(BattleUnit targetUnit)
-    {
-        if (targetUnit.pokemon.status?.Id == ConditionID.Sleep)
-        {
-            return true;
-        }
-        return false;
-    }
-
-    bool PurifySuccessful(BattleUnit sourceUnit)
-    {
-        if (sourceUnit.pokemon.status != null)
-        {
-            if(sourceUnit.pokemon.status.Id != ConditionID.NA)
-            {
-                sourceUnit.pokemon.CureStatus();
-                sourceUnit.pokemon.statusChanges.Enqueue($"{sourceUnit.pokemon.currentName} cured its status condition");
-
-                return true;
-            }
-        }
-        return false;
-    }
-
-    bool RestSuccessful(BattleUnit sourceUnit)
-    {
-        if(sourceUnit.pokemon.maxHitPoints - sourceUnit.pokemon.currentHitPoints > 0 || sourceUnit.pokemon.status != null)
-        {
-            if(sourceUnit.pokemon.HasCurrentVolatileStatus(ConditionID.HealBlock) == false)
-            {
-                sourceUnit.pokemon.CureStatus();
-                sourceUnit.pokemon.SetStatus(ConditionID.Sleep,false);
-                sourceUnit.pokemon.statusChanges.Clear();
-                sourceUnit.pokemon.statusChanges.Enqueue($"{sourceUnit.pokemon.currentName} went to sleep to become healthy");
-                sourceUnit.pokemon.status.StatusTime = 2;
-                return true;
-            }
-        }
-        return false;
-    }
-
-    bool DisableSucessful(BattleUnit targetUnit)
-    {
-        if(targetUnit.lastMoveUsed == null)
-        {
-            return false;
-        }
-
-        if(targetUnit.NoMovesAvailable() == true)
-        {
-            return false;
-        }
-
-        foreach (Move move in targetUnit.pokemon.moves)
-        {
-            if (move.disabled == true)
-            {
-                return false;
-            }
-        }
-
-        targetUnit.lastMoveUsed.disabled = true;
-        targetUnit.disabledDuration = 5;
-        targetUnit.pokemon.statusChanges.Enqueue($"{targetUnit.pokemon.currentName}'s {targetUnit.lastMoveUsed.moveBase.MoveName} was disabled!");
-        return true;
-    }
-
-    float HealthRecoveryModifiers(MoveBase moveBase,WeatherEffectID iD)
-    {
-        if(moveBase == moonlight||moveBase == synthesis|| moveBase == morningSun)
-        {
-            if(iD == WeatherEffectID.Sunshine)
-            {
-                return 1.33f;
-            }
-            else if(iD == WeatherEffectID.Rain|| iD == WeatherEffectID.Sandstorm||iD == WeatherEffectID.Hail)
-            {
-                return 0.5f;
-            }
-        }
-
-        if (moveBase == shoreUp)
-        {
-            if (iD == WeatherEffectID.Sandstorm)
-            {
-                return 1.33f;
-            }
-        }
-
-        return 1f;
-    }
-
-    bool ShieldSucessful(BattleUnit sourceUnit,BattleUnit targetUnit,MoveBase shieldType)
-    {
-        ShieldType shield;
-
-        switch (shieldType)
-        {
-            case MoveBase n when (n == lightScreen):
-                shield = ShieldType.LightScreen;
-                break;
-            case MoveBase n when (n == reflect):
-                shield = ShieldType.Reflect;
-                break;
-            case MoveBase n when (n == auroraVeil):
-                shield = ShieldType.AuroraVeil;
-                break;
-            default:
-                shield = ShieldType.Mist;
-                break;
-        }
-
-        if (sourceUnit.shields.Exists(x => x.GetShieldType == shield) == true)
-        {
-            return false;
-        }
-
-        if(shield == ShieldType.AuroraVeil)
-        {
-            if(GetCurrentWeather != WeatherEffectID.Hail)
-            {
-                return false;
-            }
-
-            if(sourceUnit.pokemon.ability.NegatesWeatherEffects() == true || targetUnit.pokemon.ability.NegatesWeatherEffects() == true)
-            {
-                return false;
-            }
-        }
-
-        ShieldBase shieldBase;
-
-        switch (shield)
-        {
-            case ShieldType.LightScreen:
-                shieldBase = new LightScreen(sourceUnit.pokemon.GetCurrentItem);
-                break;
-            case ShieldType.Reflect:
-                shieldBase = new Reflect(sourceUnit.pokemon.GetCurrentItem);
-                break;
-            case ShieldType.AuroraVeil:
-                shieldBase = new AuroraVeil(sourceUnit.pokemon.GetCurrentItem);
-                break;
-            default:
-                shieldBase = new Mist(sourceUnit.pokemon.GetCurrentItem);
-                break;
-        }
-
-        sourceUnit.shields.Add(shieldBase);
-        sourceUnit.pokemon.statusChanges.Clear();
-        sourceUnit.pokemon.statusChanges.Enqueue(shieldBase.StartMessage(sourceUnit.isPlayerPokemon));
-        return true;
-    }
-
-    bool FirstTurnOnlyMoveSucessful(BattleUnit attackingUnit)
-    {
-        return (attackingUnit.turnsOnField < 1);
-    }
-
-    bool FailsIfHurtSucessful(BattleUnit attackingUnit)
-    {
-        return !attackingUnit.damagedThisTurn;
-    }
-
-    bool LastResortSucessful(BattleUnit attackingUnit)
-    {
-        foreach (Move move in attackingUnit.pokemon.moves)
-        {
-            if(move.moveBase == lastResort)
-            {
-                continue;
-            }
-
-            if(move.pP > 0)
-            {
-                return false;
-            }
-        }
-        return true;
-    }
-    
-    bool SuckerPunchSucessful(BattleUnit defendingUnit)
-    {
-        for (int i = 0; i < currentTurnDetails.Count; i++)
-        {
-            if(defendingUnit == currentTurnDetails[i].attackingPokemon)
-            {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    bool SoundMoveSucessful(BattleUnit attackingUnit)
-    {
-        return !(attackingUnit.cantUseSoundMoves > 0);
-    }
-
-    MoveBase SpecifiedMovesWithConditions(BattleUnit attackingUnit,BattleUnit defendingUnit,MoveBase originalMove,MoveBase alteredMove)
-    {
-        if(originalMove == acrobatics)
-        {
-            if(attackingUnit.pokemon.GetHoldItemEffects == null)
-            {
-                alteredMove = alteredMove.Clone();
-                alteredMove.AdjustedMovePower(1);
-            }
-        }
-        else if(originalMove == assurance|| originalMove == avalanche || originalMove == revenge)
-        {
-            if(attackingUnit.damagedThisTurn == true)
-            {
-                alteredMove = alteredMove.Clone();
-                alteredMove.AdjustedMovePower(1);
-            }
-        }
-        else if(originalMove == crushGrip)
-        {
-            alteredMove = alteredMove.Clone();
-            float adjustment =  110 * (1 - ((float)defendingUnit.pokemon.currentHitPoints / (float)defendingUnit.pokemon.maxHitPoints));
-            alteredMove.AdjustedMovePower(adjustment);
-        }
-        else if(originalMove == facade)
-        {
-            if(attackingUnit.pokemon.status != null)
-            {
-                alteredMove = alteredMove.Clone();
-                alteredMove.AdjustedMovePower(1);
-            }
-        }
-        else if (originalMove == flail|| originalMove == reversal)
-        {
-            alteredMove = alteredMove.Clone();
-            float pokemonHealthPercentage = (float)attackingUnit.pokemon.currentHitPoints / (float)attackingUnit.pokemon.maxHitPoints;
-            switch (pokemonHealthPercentage)
-            {
-                case float n when (n >= 0.6875):
-                    alteredMove.AdjustedMovePower(20);
-                    break;
-                case float n when (n < 0.6875 && n >= 0.3542):
-                    alteredMove.AdjustedMovePower(40);
-                    break;
-                case float n when (n < 0.3542 && n >= 0.2083):
-                    alteredMove.AdjustedMovePower(80);
-                    break;
-                case float n when (n < 0.2083 && n >= 0.1042):
-                    alteredMove.AdjustedMovePower(100);
-                    break;
-                case float n when (n < 0.1042 && n >= 0.0417):
-                    alteredMove.AdjustedMovePower(150);
-                    break;
-                default:// <4.17
-                    alteredMove.AdjustedMovePower(200);
-                    break;
-            }
-        }
-        else if(originalMove == furyCutter)
-        {
-            alteredMove = alteredMove.Clone();
-            if(attackingUnit.lastMoveUsedConsecutively < MAX_MULTIPLIER_FOR_FURY_CUTTER)
-            {
-                alteredMove.AdjustedMovePower(attackingUnit.lastMoveUsedConsecutively);
-            }
-            else
-            {
-                alteredMove.AdjustedMovePower(MAX_MULTIPLIER_FOR_FURY_CUTTER);
-            }
-        }
-        else if(originalMove == gyroBall)
-        {
-            alteredMove = alteredMove.Clone();
-            float adjustment = 25 * (defendingUnit.pokemon.speed / attackingUnit.pokemon.speed);
-            adjustment = Mathf.Clamp(adjustment, 1, 150);
-            alteredMove.AdjustedMovePower(adjustment);
-        }
-        else if(originalMove == knockOff)
-        {
-            if(defendingUnit.pokemon.GetCurrentItem != null)
-            {
-                alteredMove = alteredMove.Clone();
-                alteredMove.AdjustedMovePower(.5f);
-            }
-        }
-        else if(originalMove == magnitude)
-        {
-            alteredMove = alteredMove.Clone();
-            magnitudeNumber = Random.Range(0, 101);
-            switch (magnitudeNumber)
-            {
-                case int n when (n <= 5):
-                    alteredMove.AdjustedMovePower(10);
-                    magnitudeNumber = 4;
-                    break;
-                case int n when (n <= 15 && n > 5):
-                    alteredMove.AdjustedMovePower(30);
-                    magnitudeNumber = 5;
-                    break;
-                case int n when (n <= 35 && n > 15):
-                    alteredMove.AdjustedMovePower(50);
-                    magnitudeNumber = 6;
-                    break;
-                case int n when (n <= 65 && n > 35):
-                    alteredMove.AdjustedMovePower(70);
-                    magnitudeNumber = 7;
-                    break;
-                case int n when (n <= 85 && n > 65):
-                    alteredMove.AdjustedMovePower(90);
-                    magnitudeNumber = 8;
-                    break;
-                case int n when (n <= 95 && n > 85):
-                    alteredMove.AdjustedMovePower(110);
-                    magnitudeNumber = 9;
-                    break;
-                default:// > 95
-                    alteredMove.AdjustedMovePower(150);
-                    magnitudeNumber = 10;
-                    break;
-            }
-        }
-        else if(originalMove == payback)
-        {
-            if(defendingUnit.turnsOnField > 0 && currentTurnDetails.Count <= 1)
-            {
-                alteredMove = alteredMove.Clone();
-                alteredMove.AdjustedMovePower(1);
-            }
-        }
-        else if(originalMove == powerTrip)
-        {
-            int bonusMultiplier = 0;
-            for (int i = (int)StatAttribute.Attack; i < (int)StatAttribute.Accuracy; i++)
-            {
-                StatAttribute statAttribute = (StatAttribute)i;
-                if (defendingUnit.pokemon.statBoosts[statAttribute] > 0)
-                {
-                    bonusMultiplier += defendingUnit.pokemon.statBoosts[statAttribute];
-                }
-            }
-            alteredMove = alteredMove.Clone();
-            alteredMove.AdjustedMovePower(bonusMultiplier);
-        }
-        else if (originalMove == punishment)
-        {
-            int bonusMultiplier = 0;
-            for (int i = (int)StatAttribute.Attack; i < (int)StatAttribute.Speed; i++)
-            {
-                StatAttribute statAttribute = (StatAttribute)i;
-                if (defendingUnit.pokemon.statBoosts[statAttribute] > 0)
-                {
-                    bonusMultiplier += defendingUnit.pokemon.statBoosts[statAttribute];
-                }
-            }
-            alteredMove = alteredMove.Clone();
-            bonusMultiplier = Mathf.Clamp((60 + (bonusMultiplier * 20)),60,200);
-            
-            alteredMove.AdjustedMovePower(bonusMultiplier);
-        }
-        else if(originalMove == rage)
-        {
-            attackingUnit.enraged = true;
-        }
-        else if(originalMove == smellingSalts)
-        {
-            if (attackingUnit.pokemon.status?.Id == ConditionID.Paralyzed)
-            {
-                alteredMove = alteredMove.Clone();
-                alteredMove.AdjustedMovePower(1);
-            }
-        }
-        else if(originalMove == stompingTantrum)
-        {
-            if(attackingUnit.previousMoveFailed == true)
-            {
-                alteredMove = alteredMove.Clone();
-                alteredMove.AdjustedMovePower(1);
-            }
-        }
-        else if(originalMove == wakeUpSlap)
-        {
-            if (attackingUnit.pokemon.status?.Id == ConditionID.Sleep)
-            {
-                alteredMove = alteredMove.Clone();
-                alteredMove.AdjustedMovePower(1);
-            }
-        }
-        else if(originalMove == brine)
-        {
-            if (defendingUnit.pokemon.currentHitPoints < (defendingUnit.pokemon.maxHitPoints /2))
-            {
-                alteredMove = alteredMove.Clone();
-                alteredMove.AdjustedMovePower(1);
-            }
-        }
-
-        return alteredMove;
-    }
-
     IEnumerator JumpKickMissed(BattleUnit attackingPokemon,MoveBase originalMove)
     {
-        if (originalMove == highJumpKick || originalMove == jumpKick)
+        if (originalMove == SpecializedMoves.highJumpKick || originalMove == SpecializedMoves.jumpKick)
         {
             yield return dialogSystem.TypeDialog($"{attackingPokemon.pokemon.currentName}'s kept going and crashed!");
             int previousHP = attackingPokemon.pokemon.currentHitPoints;

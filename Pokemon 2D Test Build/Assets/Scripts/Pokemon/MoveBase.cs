@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public enum MoveType { Physical, Special, Status}
@@ -80,6 +81,11 @@ public class MoveBase : ScriptableObject {
         hpRecovered += hpRecoveredIncrease;
     }
 
+    public void SetHPRecoveredByMultiplier(float hpRecoveredmultiplier)
+    {
+        hpRecovered *= hpRecoveredmultiplier;
+    }
+
     public void RemoveMoveSecondaryEffects()
     {
         secondaryEffects.Clear();
@@ -157,6 +163,7 @@ public class MoveBase : ScriptableObject {
     public List<MoveSecondaryEffects> SecondaryEffects
     {
         get { return secondaryEffects; }
+        set { secondaryEffects = value; }
     }
     public MoveTarget Target
     {
@@ -251,6 +258,15 @@ public class MoveBase : ScriptableObject {
     public bool LeavesTargetWith1HP
     {
         get { return leavesTargetWith1HP; }
+    }
+
+    public string GetSpecializedMoveMessage(ConditionID iD)
+    {
+        if(secondaryEffects.FirstOrDefault(x => x.Volatiletatus == iD) != null)
+        {
+            return secondaryEffects.FirstOrDefault(x => x.Volatiletatus == iD).SpecialStartMessage;
+        }
+        return "";
     }
 
     #endregion

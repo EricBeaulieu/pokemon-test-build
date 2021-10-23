@@ -6,6 +6,9 @@ public class Notes
 {
     //To do list
 
+    //finished at electro ball
+
+    //fix stealth rock to not miss when target is semi invernerable
     //for certain attacks, such as natural gift/z moves, it will replace the move base to something from a static table. 
     //these moves will be pre created somewhere else
 
@@ -22,15 +25,12 @@ public class Notes
     //if the pokemon is the last one and the player knocks out the pokemon, then skip over the boost stat or lowering for the attacker.
     //fix the save for the player. currently after every save the player seems to be stuck running
     //when a player looses a battle, reset everything, the pokemon trainers were still standing in the positions that they last were
-    //if pokemon kills itself due to recoil, as well as curse it will show the pokemon animation has fainted twice
     //Battle unit, remove the event from pokemon and put it over to battle unit and have it update the HUD upon so, change in battlesystem the set status
     //alter xp modifier if they can evolve
 
-    //complete trainer controller, as of right now the ai decisions are not implimented
     //add in specific moves
     //hidden power
     //transform
-    //barrier moves, reflect, brick break etc
     //variations of arena trap
     //inner focus and oblivious prevents intimidation from working
     //oblivious taunts
@@ -38,7 +38,6 @@ public class Notes
     //Encore specialized move failures need to be implimented
     //anticipation for one hit ko moves
     //one hit ko moves
-    //AromaVeil finish all the differnt style of preventions
 
     //punk rock sounds reduction based
     //normalize to change the type of status moves as well
@@ -63,8 +62,6 @@ public class Notes
 
     //if the player backs out of the bag menu via "X" it will not select any button when back in battle
     //on turn end for bound moves the pokemon doesnt play flash of hit animation
-    //trainer when walking for some reason got into a half positionand stuck while walking. no idea how i created the bug
-    //place trainer in path off start, let them stand and hit them and recreate this bug
 
     //Others
     //set/Shift option, if set just keep pokemon out
@@ -76,12 +73,12 @@ public class Notes
      */
 
     /*attacks not implimented 
-    beak blast, beat up, bide,Bounce,Bug Bite, Chip Away,Circle Throw,Counter, Covet,dig,dive,dragon tail,Endeavor
-    Feint,Fissure,fling,fly,flying press,foul play, freeze shock,Fusion Bolt,Giga Impact,Guillotine, Heat Crash,Heavy Slam,Horn Drill,
-    Hyperspace Fury,Ice Ball,Low Kick,Metal Burst,Multi-Attack,Natural Gift,Outrage,Pay Day,Phantom Force,Pluck,Present,Pursuit,Rapid Spin,
-    Retaliate,Rock Wrecker,Rollout,Sacred Sword,Secret Power,Seismic Toss,Shadow Force,Skull Bash,Sky Attack,Sky Drop,Smack Down,Solar Blade
+    beak blast, beat up, bide,Bug Bite, Chip Away,Circle Throw,Counter, Covet,dragon tail,Endeavor
+    Feint,Fissure,fling,flying press,foul play,Fusion Bolt,Guillotine, Heat Crash,Heavy Slam,Horn Drill,
+    Hyperspace Fury,Ice Ball,Low Kick,Metal Burst,Multi-Attack,Natural Gift,Outrage,Pay Day,Pluck,Present,Pursuit,Rapid Spin,
+    Retaliate,Rollout,Sacred Sword,Secret Power,Seismic Toss,Sky Drop,Smack Down,
     Spectral Thief,Sunsteel Strike,Super Fang,Thief,Thousand Arrows,Thrash,U-turn
 
-    Belch,Blast Burn, blizzard accuracy during hail,Burn Up
+    Belch, blizzard accuracy during hail,Burn Up,Core Enforcer,Doom Desire,Dragon Rage
     */
 }

@@ -51,7 +51,10 @@ public static class DamageModifiers
     {
         float damageMultiplier = 1f;
 
-        damageMultiplier *= _typeChart[(int)defendingPokemon.pokemonType1, (int)attackType];
+        if (defendingPokemon.pokemonType1 != ElementType.NA)//burn up could remove cyndaquil line typing
+        {
+            damageMultiplier *= _typeChart[(int)defendingPokemon.pokemonType1, (int)attackType];
+        }
         
         if(defendingPokemon.pokemonType2 != ElementType.NA)
         {

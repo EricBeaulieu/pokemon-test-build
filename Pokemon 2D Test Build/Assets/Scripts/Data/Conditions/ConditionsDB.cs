@@ -9,7 +9,12 @@ public enum ConditionID
     //Volatile Status
     Confused, Bound, Cursed, CursedUser, Flinch,
     Infatuation,CantEscape, Embargo, Encore, HealBlock,
-    Identified, LeechSeed, Nightmare,PerishSong
+    Identified, LeechSeed, Nightmare,PerishSong,Taunt,
+    Torment,
+    //Volatile Battle Status
+    AquaRing, Bracing, ChargingTurn, CenterOfAttention, Rooting,
+    MagicCoat, MagneticLevitation, Minimize, Protection, Recharging,//name must recharge!
+    SemiInvulnerableTurn, Substitute, TakingAim, Thrashing, Transformed
 }
 
 public class ConditionsDB

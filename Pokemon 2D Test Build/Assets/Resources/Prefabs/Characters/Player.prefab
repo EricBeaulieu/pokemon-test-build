@@ -228,7 +228,11 @@ MonoBehaviour:
   pokemonParty:
   - _pokemonBase: {fileID: 11400000, guid: ef4528d540cd1984eb7883d61b9a9a9c, type: 2}
     _level: 5
-    _presetMoves: []
+    _presetMoves:
+    - {fileID: 11400000, guid: 42625ca38bfc84b4ba61ecc7ad3cf27f, type: 2}
+    - {fileID: 11400000, guid: c6fdeacc25d2a394c93e5cf45c617d09, type: 2}
+    - {fileID: 11400000, guid: 86ebef67410af774b8c793d9abf348c9, type: 2}
+    - {fileID: 11400000, guid: ae0f9cb735ad2844ba8e4fee9eab0180, type: 2}
     _isShiny: 0
     _gender: 0
     _nature: {fileID: 0}
@@ -251,7 +255,11 @@ MonoBehaviour:
     currentHeldItem: {fileID: 11400000, guid: 4f7d5769dc2f38e4d9d07a9e9caa6ea0, type: 2}
   - _pokemonBase: {fileID: 11400000, guid: a8626c7192bf21240bc0904861af2800, type: 2}
     _level: 15
-    _presetMoves: []
+    _presetMoves:
+    - {fileID: 11400000, guid: 9331b65f07dfb354b97d336d0f97bfd1, type: 2}
+    - {fileID: 11400000, guid: f33a63dc98586594ebc317b781e788a3, type: 2}
+    - {fileID: 11400000, guid: 2c04dc22cbdc3394da0103370e13f9aa, type: 2}
+    - {fileID: 11400000, guid: 48394cfe3fc462a488a6bd084150246d, type: 2}
     _isShiny: 0
     _gender: 0
     _nature: {fileID: 0}
@@ -274,7 +282,11 @@ MonoBehaviour:
     currentHeldItem: {fileID: 0}
   - _pokemonBase: {fileID: 11400000, guid: 6145097cc7c3b3a4aa4f851c86bb191f, type: 2}
     _level: 7
-    _presetMoves: []
+    _presetMoves:
+    - {fileID: 11400000, guid: 4d83a21fcec2e0849bb80ee6b0f0f6a9, type: 2}
+    - {fileID: 11400000, guid: a0b742648b42d8d49aa984be0fbddaad, type: 2}
+    - {fileID: 11400000, guid: b8c88c5e502085149bfbed176e3d3f46, type: 2}
+    - {fileID: 11400000, guid: 99d7d852aa1f8aa41af524db8afc9388, type: 2}
     _isShiny: 1
     _gender: 0
     _nature: {fileID: 0}
@@ -297,7 +309,10 @@ MonoBehaviour:
     currentHeldItem: {fileID: 11400000, guid: c6737df4cf197444aa0084db8ba52173, type: 2}
   - _pokemonBase: {fileID: 11400000, guid: d2d598222a9f08f41bf9b00c66f94a61, type: 2}
     _level: 15
-    _presetMoves: []
+    _presetMoves:
+    - {fileID: 11400000, guid: ee081c0707020424c8a58e44ee6fceed, type: 2}
+    - {fileID: 11400000, guid: bb2c194a02e90a44eb07dffa70e21e86, type: 2}
+    - {fileID: 11400000, guid: b3be810c3c919564e9b34b0bc95e3a1a, type: 2}
     _isShiny: 0
     _gender: 0
     _nature: {fileID: 0}
@@ -318,56 +333,6 @@ MonoBehaviour:
     _currentName: 
     abilityID: 0
     currentHeldItem: {fileID: 0}
-  - _pokemonBase: {fileID: 11400000, guid: 6145097cc7c3b3a4aa4f851c86bb191f, type: 2}
-    _level: 15
-    _presetMoves:
-    - {fileID: 11400000, guid: 25ced48a08587044d803fdfe6e980c37, type: 2}
-    - {fileID: 11400000, guid: 5474c4670e883354e817c33a207c3c12, type: 2}
-    _isShiny: 0
-    _gender: 0
-    _nature: {fileID: 11400000, guid: 44ab6eaa34011774a94ade5bcb2a6422, type: 2}
-    _individualValues:
-      _hitPoints: 0
-      _attack: 0
-      _defense: 0
-      _specialAttack: 0
-      _specialDefense: 0
-      _speed: 0
-    _effortValues:
-      _hitPoints: 0
-      _attack: 0
-      _defense: 0
-      _specialAttack: 0
-      _specialDefense: 0
-      _speed: 0
-    _currentName: 
-    abilityID: 0
-    currentHeldItem: {fileID: 11400000, guid: e23552926e6b36a4e822580d7a36a04e, type: 2}
-  - _pokemonBase: {fileID: 11400000, guid: 6145097cc7c3b3a4aa4f851c86bb191f, type: 2}
-    _level: 14
-    _presetMoves:
-    - {fileID: 11400000, guid: 25ced48a08587044d803fdfe6e980c37, type: 2}
-    - {fileID: 11400000, guid: 5474c4670e883354e817c33a207c3c12, type: 2}
-    _isShiny: 0
-    _gender: 0
-    _nature: {fileID: 11400000, guid: 44ab6eaa34011774a94ade5bcb2a6422, type: 2}
-    _individualValues:
-      _hitPoints: 0
-      _attack: 0
-      _defense: 0
-      _specialAttack: 0
-      _specialDefense: 0
-      _speed: 0
-    _effortValues:
-      _hitPoints: 0
-      _attack: 0
-      _defense: 0
-      _specialAttack: 0
-      _specialDefense: 0
-      _speed: 0
-    _currentName: 
-    abilityID: 0
-    currentHeldItem: {fileID: 11400000, guid: e23552926e6b36a4e822580d7a36a04e, type: 2}
 --- !u!50 &5712684506751752015
 Rigidbody2D:
   serializedVersion: 4

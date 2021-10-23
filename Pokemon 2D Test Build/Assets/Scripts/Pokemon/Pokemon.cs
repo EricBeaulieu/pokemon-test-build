@@ -239,7 +239,7 @@ public class Pokemon {
     }
     
 
-    void ResetStatBoosts()
+    public void ResetStatBoosts()//clear smog/haze calls this
     {
         statBoosts[StatAttribute.Attack] = 0;
         statBoosts[StatAttribute.Defense] = 0;
@@ -803,6 +803,12 @@ public class Pokemon {
         {
             ((Bound)newVolatileStatus).SetBoundMove = currentMove;
         }
+        else if(newVolatileStatus.Id == ConditionID.ChargingTurn)
+        {
+            ((ChargingTurn)newVolatileStatus).chargingMove = currentMove;
+            ((ChargingTurn)newVolatileStatus).SetInvulnerableType(SpecializedMoves.ReturnSemiInvulnerableType(currentMove));
+            Debug.Log($"{sourceBattleUnit.pokemon.currentName} is currently {SpecializedMoves.ReturnSemiInvulnerableType(currentMove)}");
+        }
 
         statusChanges.Enqueue(newVolatileStatus.StartMessage(this,sourceBattleUnit.pokemon));
     }
@@ -858,7 +864,7 @@ public class Pokemon {
     }
 
     /// <summary>
-    /// Applies any Effects on the pokemons turn end that it may have through Status Effects or Volatile Status
+    /// Applies any Effects on the pokemons turn end that it may have through Status Effects/ Volatile Status/ Volatile Battle Status
     /// </summary>
     public bool OnEndTurn(ConditionBase condition)
     {
