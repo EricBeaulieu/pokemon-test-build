@@ -58,8 +58,12 @@ public static class SpecializedMoves
         brine = helper.brine;
         clearSmog = helper.clearSmog;
         dreamEater = helper.dreamEater;
+        echoedVoice = helper.echoedVoice;
+        electroBall = helper.electroBall;
         gust = helper.gust;
+        hex = helper.hex;
         hurricane = helper.hurricane;
+        psywave = helper.psywave;
         solarBeam = helper.solarBeam;
         solarBlade = helper.solarBlade;
         surf = helper.surf;
@@ -137,8 +141,11 @@ public static class SpecializedMoves
     public static MoveBase dreamEater { get; private set; }
     public static MoveBase echoedVoice { get; private set; }
     public const int MAX_MULTIPLIER_FOR_ECHOED_VOICE = 3;
+    public static MoveBase electroBall { get; private set; }
     public static MoveBase gust { get; private set; }
+    public static MoveBase hex { get; private set; }
     public static MoveBase hurricane { get; private set; }
+    public static MoveBase psywave { get; private set; }
     public static MoveBase solarBeam { get; private set; }
     public static MoveBase solarBlade { get; private set; }
     public static MoveBase surf { get; private set; }
@@ -670,9 +677,9 @@ public static class SpecializedMoves
         {
             if (attackingUnit.lastMoveUsedConsecutively < MAX_MULTIPLIER_FOR_ECHOED_VOICE)
             {
-                if(attackingUnit.lastMoveUsedConsecutively == 2)
+                if (attackingUnit.lastMoveUsedConsecutively == 2)
                 {
-                    alteredMove.AdjustedMovePower(attackingUnit.lastMoveUsedConsecutively+1);
+                    alteredMove.AdjustedMovePower(attackingUnit.lastMoveUsedConsecutively + 1);
                 }
                 else
                 {
@@ -681,8 +688,42 @@ public static class SpecializedMoves
             }
             else
             {
-                alteredMove.AdjustedMovePower(MAX_MULTIPLIER_FOR_ECHOED_VOICE+1);
+                alteredMove.AdjustedMovePower(MAX_MULTIPLIER_FOR_ECHOED_VOICE + 1);
             }
+        }
+        else if (originalMove == electroBall)
+        {
+            float adjustment = (defendingUnit.pokemon.speed / attackingUnit.pokemon.speed);
+            if (adjustment > 0.5f)
+            {
+                adjustment = 60;
+            }
+            else if (adjustment <= 0.5f && adjustment > 0.33f)
+            {
+                adjustment = 80;
+            }
+            else if (adjustment <= 0.33f && adjustment > 0.25f)
+            {
+                adjustment = 120;
+            }
+            else
+            {
+                adjustment = 150;
+            }
+
+            alteredMove.AdjustedMovePower(adjustment);
+        }
+        else if(originalMove == hex)
+        {
+            if(defendingUnit.pokemon.status != null)
+            {
+                alteredMove.AdjustedMovePower(1);
+            }
+        }
+        else if (originalMove == psywave)
+        {//Inflicts damage equal to 0.5 to 1.5 x user's level.
+            float adjustment = Random.Range(0.5f,1.5f) * attackingUnit.pokemon.currentLevel;
+            alteredMove.AdjustedMovePower(adjustment);
         }//Healing Moves
         else if(originalMove == moonlight || originalMove == synthesis || originalMove == morningSun || originalMove == shoreUp)
         {

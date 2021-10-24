@@ -6,8 +6,6 @@ public class Notes
 {
     //To do list
 
-    //finished at electro ball
-
     //fix stealth rock to not miss when target is semi invernerable
     //for certain attacks, such as natural gift/z moves, it will replace the move base to something from a static table. 
     //these moves will be pre created somewhere else
@@ -57,11 +55,14 @@ public class Notes
 
     //Wishes
     //Overworld effects with abilitities
+    //Flame Burst when double battles entered in, This move does damage to the Pokémon to the side of the target equal to 1/16th of their maximum Hit Points
+    //pollen puff to heal ally
 
     //Bugs
 
     //if the player backs out of the bag menu via "X" it will not select any button when back in battle
     //on turn end for bound moves the pokemon doesnt play flash of hit animation
+    //after gyrados fainted from struggle, it showed itself fainting again
 
     //Others
     //set/Shift option, if set just keep pokemon out
@@ -79,6 +80,14 @@ public class Notes
     Retaliate,Rollout,Sacred Sword,Secret Power,Seismic Toss,Sky Drop,Smack Down,
     Spectral Thief,Sunsteel Strike,Super Fang,Thief,Thousand Arrows,Thrash,U-turn
 
-    Belch, blizzard accuracy during hail,Burn Up,Core Enforcer,Doom Desire,Dragon Rage
+    Belch, Burn Up,Core Enforcer,Doom Desire,Dragon Rage,Final Gambit,Fire/Grass/Water Pledge,
+    Fusion Flare,Future Sight,Grass Knot,Hidden Power,Judgment,Mirror Coat,Moongeist Beam,Nature's Madness,Night Shade,Petal Dance,
+    Photon Geyser,Psyshock,Psystrike
     */
+
+    //blizzard/hurricane accuracy depending on weather conditions
+    //Incinerate berry removal
+    //eruption implimented but its features are not set
+    //gust/twister double damage against flying unit
+    //Freeze-Dry and flying press have their own specialzed type manor
 }

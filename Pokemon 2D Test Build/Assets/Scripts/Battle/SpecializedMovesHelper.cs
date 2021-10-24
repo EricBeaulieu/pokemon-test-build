@@ -62,8 +62,12 @@ public class SpecializedMovesHelper : MonoBehaviour
     public MoveBase brine;
     public MoveBase clearSmog;
     public MoveBase dreamEater;
+    public MoveBase echoedVoice;
+    public MoveBase electroBall;
     public MoveBase gust;
+    public MoveBase hex;
     public MoveBase hurricane;
+    public MoveBase psywave;
     public MoveBase solarBeam;
     public MoveBase solarBlade;
     public MoveBase surf;
