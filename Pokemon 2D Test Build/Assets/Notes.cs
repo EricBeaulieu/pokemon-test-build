@@ -74,20 +74,20 @@ public class Notes
      */
 
     /*attacks not implimented 
-    beak blast, beat up, bide,Bug Bite, Chip Away,Circle Throw,Counter, Covet,dragon tail,Endeavor
-    Feint,Fissure,fling,flying press,foul play,Fusion Bolt,Guillotine, Heat Crash,Heavy Slam,Horn Drill,
+    beak blast, beat up, bide,Bug Bite,Circle Throw,dragon tail, fling,flying press,Fusion Bolt,Guillotine, Heat Crash,Heavy Slam,Horn Drill,
     Hyperspace Fury,Ice Ball,Low Kick,Metal Burst,Multi-Attack,Natural Gift,Outrage,Pay Day,Pluck,Present,Pursuit,Rapid Spin,
     Retaliate,Rollout,Sacred Sword,Secret Power,Seismic Toss,Sky Drop,Smack Down,
-    Spectral Thief,Sunsteel Strike,Super Fang,Thief,Thousand Arrows,Thrash,U-turn
+    Spectral Thief,Sunsteel Strike,Super Fang,Thousand Arrows,Thrash,U-turn
 
     Belch, Burn Up,Core Enforcer,Doom Desire,Dragon Rage,Final Gambit,Fire/Grass/Water Pledge,
     Fusion Flare,Future Sight,Grass Knot,Hidden Power,Judgment,Mirror Coat,Moongeist Beam,Nature's Madness,Night Shade,Petal Dance,
-    Photon Geyser,Psyshock,Psystrike
+    Photon Geyser,Psyshock,Psystrike,Relic Song,Revelation Dance,Secret Sword,Sheer Cold,Sonic Boom,Spit Ups,Techno Blast,Volt Switch
+
+    After You, Ally Switch
     */
 
-    //blizzard/hurricane accuracy depending on weather conditions
     //Incinerate berry removal
-    //eruption implimented but its features are not set
     //gust/twister double damage against flying unit
     //Freeze-Dry and flying press have their own specialzed type manor
+    //Uproar pokemon cant fall asleep during these turns
 }

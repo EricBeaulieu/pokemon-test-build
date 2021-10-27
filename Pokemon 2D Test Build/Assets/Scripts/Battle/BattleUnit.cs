@@ -46,6 +46,7 @@ public class BattleUnit : MonoBehaviour
     public List<ShieldBase> shields { get; set; } = new List<ShieldBase>();
     public bool removeItem { get; set; }
     public bool damagedThisTurn { get; set; }
+    public int damagedReceived { get; set; }
     public int turnsOnField { get; set; }
     public bool enraged { get; set; }
     public bool previousMoveFailed { get; set; }
@@ -149,6 +150,7 @@ public class BattleUnit : MonoBehaviour
         disabledDuration = 0;
         removeItem = false;
         damagedThisTurn = false;
+        damagedReceived = 0;
         turnsOnField = 0;
         enraged = false;
         previousMoveFailed = false;

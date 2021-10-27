@@ -478,9 +478,15 @@ public class Pokemon {
 
     #endregion
 
-    public void TakeDamage(DamageDetails damageDetails,MoveBase move,BattleUnit attackingUnit,BattleUnit selfRef)
+    public void TakeDamage(DamageDetails damageDetails,MoveBase move,BattleUnit attackingUnit,BattleUnit selfRef, int presetDamage = 0)
     {
         damageDetails.Clear();
+
+        if(presetDamage > 0)
+        {
+            UpdateHPDamage(presetDamage);
+            return;
+        }
 
         damageDetails.typeEffectiveness = DamageModifiers.TypeChartEffectiveness(this, move.Type);
 
@@ -557,9 +563,23 @@ public class Pokemon {
 
         modifier *= abilityBonus;
         modifier *= itemBonus;
-
+        
         float attackPower = (move.MoveType == MoveType.Physical) ? attackingUnit.pokemon.attack : attackingUnit.pokemon.specialAttack;
-        float defendersDefense = (move.MoveType == MoveType.Physical) ? defense : specialDefense;
+        float defendersDefense;
+
+        if (move.originalMove == SpecializedMoves.foulPlay)
+        {
+            attackPower = (move.MoveType == MoveType.Physical) ? attack : specialAttack;
+        }
+
+        if (move.BypassesTargetsStatBoosts == false)
+        {
+            defendersDefense = (move.MoveType == MoveType.Physical) ? defense : specialDefense;
+        }
+        else
+        {
+            defendersDefense = (move.MoveType == MoveType.Physical) ? baseStats[StatAttribute.Defense] : baseStats[StatAttribute.SpecialDefense];
+        }
 
         defendersDefense *= DamageModifiers.SandStormSpecialDefenseBonus(BattleSystem.GetCurrentWeather, this, move);
 
@@ -572,10 +592,13 @@ public class Pokemon {
                 attackPower = attackingUnit.pokemon.baseStats[currentStat];
             }
 
-            currentStat = (move.MoveType == MoveType.Physical) ? StatAttribute.Defense : StatAttribute.SpecialDefense;
-            if (statBoosts[currentStat] > 0)
+            if(move.BypassesTargetsStatBoosts == false)
             {
-                defendersDefense = baseStats[currentStat];
+                currentStat = (move.MoveType == MoveType.Physical) ? StatAttribute.Defense : StatAttribute.SpecialDefense;
+                if (statBoosts[currentStat] > 0)
+                {
+                    defendersDefense = baseStats[currentStat];
+                }
             }
         }
         else
@@ -619,8 +642,9 @@ public class Pokemon {
 
         UpdateHPDamage(damage);
         selfRef.damagedThisTurn = true;
+        selfRef.damagedReceived += damage;
 
-        if(GetHoldItemEffects.TransferToPokemon(move) && attackingUnit.pokemon.GetCurrentItem == null)
+        if (GetHoldItemEffects.TransferToPokemon(move) && attackingUnit.pokemon.GetCurrentItem == null)
         {
             attackingUnit.pokemon.GivePokemonItemToHold(GetCurrentItem);
             ItemUsed();

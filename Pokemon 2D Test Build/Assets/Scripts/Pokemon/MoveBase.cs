@@ -48,6 +48,26 @@ public class MoveBase : ScriptableObject {
     
     [SerializeField] float hpRecovered;
     [SerializeField] bool leavesTargetWith1HP;
+    [SerializeField] bool stealsTargetsItem;
+    [SerializeField] bool bypassesTargetsStatBoosts;
+    [SerializeField] bool oneHitKO;
+
+    MoveBase _originalMove = null;
+    public MoveBase originalMove
+    {
+        get
+        {
+            if (_originalMove == null)
+            {
+                return this;
+            }
+            return _originalMove;
+        }
+        private set
+        {
+            _originalMove = value;
+        }
+    }
 
     public void AdjustedMovePower(float powerIncrease,bool decrease = false)
     {
@@ -110,7 +130,12 @@ public class MoveBase : ScriptableObject {
 
     public MoveBase Clone()
     {
-        return Instantiate(this);
+        MoveBase clone = Instantiate(this);
+        if(originalMove == null)
+        {
+            clone.originalMove = this;
+        }
+        return clone;
     }
 
     #region Return Methods
@@ -146,6 +171,7 @@ public class MoveBase : ScriptableObject {
     public bool AlwaysHits
     {
         get { return alwaysHits; }
+        set { alwaysHits = value; }
     }
     public int Priority
     {
@@ -159,6 +185,7 @@ public class MoveBase : ScriptableObject {
     public MoveEffects MoveEffects
     {
         get { return moveEffects; }
+        set { moveEffects = value; }
     }
     public List<MoveSecondaryEffects> SecondaryEffects
     {
@@ -258,6 +285,21 @@ public class MoveBase : ScriptableObject {
     public bool LeavesTargetWith1HP
     {
         get { return leavesTargetWith1HP; }
+    }
+
+    public bool StealsTargetItem
+    {
+        get { return stealsTargetsItem; }
+    }
+
+    public bool BypassesTargetsStatBoosts
+    {
+        get { return bypassesTargetsStatBoosts; }
+    }
+
+    public bool OneHitKO
+    {
+        get { return oneHitKO; }
     }
 
     public string GetSpecializedMoveMessage(ConditionID iD)

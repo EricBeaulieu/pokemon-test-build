@@ -12,7 +12,7 @@ public class Protean : AbilityBase
     }
     public override ElementType ChangePokemonToCurrentAttackType(BattleUnit sourceUnit, MoveBase currentAttack)
     {
-        if (currentAttack.MoveName == "Struggle")
+        if (currentAttack.originalMove == SpecializedMoves.struggle)
         {
             return ElementType.NA;
         }

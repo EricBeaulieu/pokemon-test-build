@@ -47,7 +47,7 @@ public class ChargingTurn : ConditionBase
         else if (invulnerableType == SemiInvulnerableType.Air)
         {
             if (originalMove == SpecializedMoves.gust || originalMove == SpecializedMoves.hurricane || originalMove == SpecializedMoves.twister
-                || originalMove == SpecializedMoves.smackDown || originalMove == SpecializedMoves.thousandArrows)
+                || originalMove == SpecializedMoves.smackDown || originalMove == SpecializedMoves.thousandArrows || originalMove == SpecializedMoves.thunder)
             {
                 hitCancelsAttack = true;
                 return true;

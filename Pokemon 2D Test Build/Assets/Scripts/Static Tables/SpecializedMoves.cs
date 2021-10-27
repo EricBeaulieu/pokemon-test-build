@@ -15,11 +15,13 @@ public static class SpecializedMoves
         avalanche = helper.avalanche;
         bounce = helper.bounce;
         brickBreak = helper.brickBreak;
+        counter = helper.counter;
         crushGrip = helper.crushGrip;
         cut = helper.cut;
         dig = helper.dig;
         dive = helper.dive;
         earthquake = helper.earthquake;
+        endeavor = helper.endeavor;
         facade = helper.facade;
         fakeOut = helper.fakeOut;
         fellStinger = helper.fellStinger;
@@ -28,6 +30,7 @@ public static class SpecializedMoves
         flail = helper.flail;
         fly = helper.fly;
         focusPunch = helper.focusPunch;
+        foulPlay = helper.foulPlay;
         freezeShock = helper.freezeShock;
         furyCutter = helper.furyCutter;
         gyroBall = helper.gyroBall;
@@ -47,6 +50,7 @@ public static class SpecializedMoves
         shadowForce = helper.shadowForce;
         smackDown = helper.smackDown;
         smellingSalts = helper.smellingSalts;
+        solarBlade = helper.solarBlade;
         stompingTantrum = helper.stompingTantrum;
         suckerPunch = helper.suckerPunch;
         thousandArrows = helper.thousandArrows;
@@ -55,22 +59,35 @@ public static class SpecializedMoves
         wakeUpSlap = helper.wakeUpSlap;
 
         //Special
+        blizzard = helper.blizzard;
         brine = helper.brine;
         clearSmog = helper.clearSmog;
         dreamEater = helper.dreamEater;
         echoedVoice = helper.echoedVoice;
         electroBall = helper.electroBall;
+        eruption = helper.eruption;
         gust = helper.gust;
         hex = helper.hex;
         hurricane = helper.hurricane;
         psywave = helper.psywave;
+        round = helper.round;
+        shellTrap = helper.shellTrap;
+        snore = helper.snore;
         solarBeam = helper.solarBeam;
-        solarBlade = helper.solarBlade;
+        storedPower = helper.storedPower;
         surf = helper.surf;
+        synchronoise = helper.synchronoise;
+        thunder = helper.thunder;
+        trumpCard = helper.trumpCard;
         twister = helper.twister;
+        venoshock = helper.venoshock;
+        waterSpout = helper.waterSpout;
+        weatherBall = helper.weatherBall;
         whirlpool = helper.whirlpool;
+        wringOut = helper.wringOut;
 
         //Status
+        acupressure = helper.acupressure;
         noRetreat = helper.noRetreat;
         encore = helper.encore;
         synthesis = helper.synthesis;
@@ -94,11 +111,13 @@ public static class SpecializedMoves
     public static MoveBase avalanche { get; private set; }
     public static MoveBase bounce { get; private set; }
     public static MoveBase brickBreak { get; private set; }
+    public static MoveBase counter { get; private set; }
     public static MoveBase crushGrip { get; private set; }
     public static MoveBase cut { get; private set; }
     public static MoveBase dig { get; private set; }
     public static MoveBase dive { get; private set; }
     public static MoveBase earthquake { get; private set; }
+    public static MoveBase endeavor { get; private set; }
     public static MoveBase facade { get; private set; }
     public static MoveBase fakeOut { get; private set; }
     public static MoveBase fellStinger { get; private set; }
@@ -107,9 +126,9 @@ public static class SpecializedMoves
     public static MoveBase flail { get; private set; }
     public static MoveBase fly { get; private set; }
     public static MoveBase focusPunch { get; private set; }
+    public static MoveBase foulPlay { get; private set; }
     public static MoveBase freezeShock { get; private set; }
     public static MoveBase furyCutter { get; private set; }
-    public const int MAX_MULTIPLIER_FOR_FURY_CUTTER = 3;
     public static MoveBase gyroBall { get; private set; }
     public static MoveBase highJumpKick { get; private set; }
     public static MoveBase jumpKick { get; private set; }
@@ -128,6 +147,7 @@ public static class SpecializedMoves
     public static MoveBase shadowForce { get; private set; }
     public static MoveBase smackDown { get; private set; }
     public static MoveBase smellingSalts { get; private set; }
+    public static MoveBase solarBlade { get; private set; }
     public static MoveBase stompingTantrum { get; private set; }
     public static MoveBase suckerPunch { get; private set; }
     public static MoveBase thousandArrows { get; private set; }
@@ -136,23 +156,35 @@ public static class SpecializedMoves
     public static MoveBase wakeUpSlap { get; private set; }
 
     //Special
+    public static MoveBase blizzard { get; private set; }
     public static MoveBase brine { get; private set; }
     public static MoveBase clearSmog { get; private set; }
     public static MoveBase dreamEater { get; private set; }
     public static MoveBase echoedVoice { get; private set; }
-    public const int MAX_MULTIPLIER_FOR_ECHOED_VOICE = 3;
     public static MoveBase electroBall { get; private set; }
+    public static MoveBase eruption { get; private set; }
     public static MoveBase gust { get; private set; }
     public static MoveBase hex { get; private set; }
     public static MoveBase hurricane { get; private set; }
     public static MoveBase psywave { get; private set; }
+    public static MoveBase round { get; private set; }
+    public static MoveBase shellTrap { get; private set; }
+    public static MoveBase snore { get; private set; }
     public static MoveBase solarBeam { get; private set; }
-    public static MoveBase solarBlade { get; private set; }
+    public static MoveBase storedPower { get; private set; }
     public static MoveBase surf { get; private set; }
+    public static MoveBase synchronoise { get; private set; }
+    public static MoveBase thunder { get; private set; }
+    public static MoveBase trumpCard { get; private set; }
     public static MoveBase twister { get; private set; }
+    public static MoveBase venoshock { get; private set; }
+    public static MoveBase waterSpout { get; private set; }
+    public static MoveBase weatherBall { get; private set; }
     public static MoveBase whirlpool { get; private set; }
+    public static MoveBase wringOut { get; private set; }
 
     //Status
+    public static MoveBase acupressure { get; private set; }
     public static MoveBase noRetreat { get; private set; }
     public static MoveBase encore { get; private set; }
     public static MoveBase synthesis { get; private set; }
@@ -166,6 +198,8 @@ public static class SpecializedMoves
     public static MoveBase lightScreen { get; private set; }
     public static MoveBase auroraVeil { get; private set; }
     public static MoveBase mist { get; private set; }
+
+    public const int MAX_MULTIPLIER_STACKABLE_MOVES = 3;
 
     public static bool CheckIfMoveHasSpecializedConditionAndSuccessful(BattleUnit sourceUnit, BattleUnit targetUnit, MoveBase originalMove)
     {
@@ -191,35 +225,55 @@ public static class SpecializedMoves
         }
         else if (originalMove == disable)
         {
-            return (DisableSucessful(targetUnit));
+            return (DisableSuccessful(targetUnit));
         }
         else if (originalMove == reflect || originalMove == lightScreen || originalMove == auroraVeil || originalMove == mist)
         {
-            return (ShieldSucessful(sourceUnit, targetUnit, originalMove));
+            return (ShieldSuccessful(sourceUnit, targetUnit, originalMove));
         }
         else if (originalMove == fakeOut || originalMove == firstImpression)
         {
-            return (FirstTurnOnlyMoveSucessful(sourceUnit));
+            return (FirstTurnOnlyMoveSuccessful(sourceUnit));
         }
         else if (originalMove == focusPunch)
         {
-            return (FailsIfHurtSucessful(sourceUnit));
+            return (FailsIfHurtSuccessful(sourceUnit));
         }
         else if (originalMove == lastResort)
         {
-            return (LastResortSucessful(sourceUnit));
+            return (LastResortSuccessful(sourceUnit));
         }
         else if (originalMove == suckerPunch)
         {
-            return (SuckerPunchSucessful(targetUnit));
+            return (SuckerPunchSuccessful(targetUnit));
         }
         else if (originalMove.SoundType == true)
         {
-            return (SoundMoveSucessful(sourceUnit));
+            return (SoundMoveSuccessful(sourceUnit));
         }
         else if(sourceUnit.pokemon.HasCurrentVolatileStatus(ConditionID.ChargingTurn) == true)
         {
-            return (ChargedMoveSucessful(sourceUnit));
+            return (ChargedMoveSuccessful(sourceUnit));
+        }
+        else if(originalMove == shellTrap)
+        {
+            return (ShellTrapSuccessful(sourceUnit, targetUnit));
+        }
+        else if(originalMove == snore)
+        {
+            return (sourceUnit.pokemon.status?.Id == ConditionID.Sleep);
+        }
+        else if(originalMove == synchronoise)
+        {
+            return (SynchronoiseSuccessfull(sourceUnit, targetUnit));
+        }
+        else if(originalMove == counter)
+        {
+            return (sourceUnit.damagedThisTurn == true && sourceUnit.damagedReceived > 0 && targetUnit.lastMoveUsed?.moveBase.MoveType == MoveType.Physical);
+        }
+        else if(originalMove == endeavor)
+        {
+            return (sourceUnit.pokemon.currentHitPoints > targetUnit.pokemon.currentHitPoints);
         }
 
         return true;
@@ -304,7 +358,7 @@ public static class SpecializedMoves
         return false;
     }
 
-    static bool DisableSucessful(BattleUnit targetUnit)
+    static bool DisableSuccessful(BattleUnit targetUnit)
     {
         if (targetUnit.lastMoveUsed == null)
         {
@@ -355,7 +409,7 @@ public static class SpecializedMoves
         return 1f;
     }
 
-    static bool ShieldSucessful(BattleUnit sourceUnit, BattleUnit targetUnit, MoveBase shieldType)
+    static bool ShieldSuccessful(BattleUnit sourceUnit, BattleUnit targetUnit, MoveBase shieldType)
     {
         ShieldType shield;
 
@@ -417,17 +471,17 @@ public static class SpecializedMoves
         return true;
     }
 
-    static bool FirstTurnOnlyMoveSucessful(BattleUnit attackingUnit)
+    static bool FirstTurnOnlyMoveSuccessful(BattleUnit attackingUnit)
     {
         return (attackingUnit.turnsOnField < 1);
     }
 
-    static bool FailsIfHurtSucessful(BattleUnit attackingUnit)
+    static bool FailsIfHurtSuccessful(BattleUnit attackingUnit)
     {
         return !attackingUnit.damagedThisTurn;
     }
 
-    static bool LastResortSucessful(BattleUnit attackingUnit)
+    static bool LastResortSuccessful(BattleUnit attackingUnit)
     {
         foreach (Move move in attackingUnit.pokemon.moves)
         {
@@ -444,7 +498,7 @@ public static class SpecializedMoves
         return true;
     }
 
-    static bool SuckerPunchSucessful(BattleUnit defendingUnit)
+    static bool SuckerPunchSuccessful(BattleUnit defendingUnit)
     {
         for (int i = 0; i < BattleSystem.currentTurnDetails.Count; i++)
         {
@@ -456,19 +510,47 @@ public static class SpecializedMoves
         return false;
     }
 
-    static bool SoundMoveSucessful(BattleUnit attackingUnit)
+    static bool SoundMoveSuccessful(BattleUnit attackingUnit)
     {
         return !(attackingUnit.cantUseSoundMoves > 0);
     }
 
-    static bool ChargedMoveSucessful(BattleUnit attackingUnit)
+    static bool ChargedMoveSuccessful(BattleUnit attackingUnit)
     {
         bool attackSucessful = !(((ChargingTurn)attackingUnit.pokemon.volatileStatus.Find(x => x.Id == ConditionID.ChargingTurn)).hitCancelsAttack == true);
         attackingUnit.pokemon.CureVolatileStatus(ConditionID.ChargingTurn);
         return attackSucessful;
     }
 
-    public static MoveBase SpecifiedMovesWithConditions(BattleUnit attackingUnit, BattleUnit defendingUnit, MoveBase originalMove, MoveBase alteredMove)
+    static bool ShellTrapSuccessful(BattleUnit attackingUnit,BattleUnit defendingUnit)
+    {
+        if(attackingUnit.damagedThisTurn == true)
+        {
+            if(defendingUnit.lastMoveUsed.moveBase.MoveType == MoveType.Physical)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    static bool SynchronoiseSuccessfull(BattleUnit attackingUnit,BattleUnit defendingUnit)
+    {
+        if(attackingUnit.pokemon.pokemonType1 == defendingUnit.pokemon.pokemonType1)
+        {
+            return true;
+        }
+        else if(attackingUnit.pokemon.pokemonType2 != ElementType.NA)
+        {
+            if (attackingUnit.pokemon.pokemonType2 == defendingUnit.pokemon.pokemonType2)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public static MoveBase SpecifiedMovesWithConditions(BattleUnit attackingUnit, BattleUnit defendingUnit, MoveBase originalMove,MoveBase alteredMove,int currentMovePP)
     {
         alteredMove = originalMove.Clone();
 
@@ -492,7 +574,6 @@ public static class SpecializedMoves
         {
             if (attackingUnit.pokemon.GetHoldItemEffects == null)
             {
-                alteredMove = alteredMove.Clone();
                 alteredMove.AdjustedMovePower(1);
             }
         }
@@ -500,13 +581,11 @@ public static class SpecializedMoves
         {
             if (attackingUnit.damagedThisTurn == true)
             {
-                alteredMove = alteredMove.Clone();
                 alteredMove.AdjustedMovePower(1);
             }
         }
-        else if (originalMove == crushGrip)
+        else if (originalMove == crushGrip|| originalMove == wringOut)
         {
-            alteredMove = alteredMove.Clone();
             float adjustment = 110 * (1 - ((float)defendingUnit.pokemon.currentHitPoints / (float)defendingUnit.pokemon.maxHitPoints));
             alteredMove.AdjustedMovePower(adjustment);
         }
@@ -514,7 +593,6 @@ public static class SpecializedMoves
         {
             if (attackingUnit.pokemon.status != null)
             {
-                alteredMove = alteredMove.Clone();
                 alteredMove.AdjustedMovePower(1);
             }
         }
@@ -543,15 +621,15 @@ public static class SpecializedMoves
                     break;
             }
         }
-        else if (originalMove == furyCutter)
+        else if (originalMove == furyCutter || originalMove == round)
         {
-            if (attackingUnit.lastMoveUsedConsecutively < MAX_MULTIPLIER_FOR_FURY_CUTTER)
+            if (attackingUnit.lastMoveUsedConsecutively < MAX_MULTIPLIER_STACKABLE_MOVES)
             {
                 alteredMove.AdjustedMovePower(attackingUnit.lastMoveUsedConsecutively);
             }
             else
             {
-                alteredMove.AdjustedMovePower(MAX_MULTIPLIER_FOR_FURY_CUTTER);
+                alteredMove.AdjustedMovePower(MAX_MULTIPLIER_STACKABLE_MOVES);
             }
         }
         else if (originalMove == gyroBall)
@@ -661,6 +739,13 @@ public static class SpecializedMoves
             {
                 alteredMove.AdjustedMovePower(1);
             }
+        }//Special Moves
+        else if(originalMove == blizzard)
+        {
+            if(BattleSystem.GetCurrentWeather == WeatherEffectID.Hail)
+            {
+                alteredMove.AlwaysHits = true;
+            }
         }
         else if (originalMove == brine)
         {
@@ -675,7 +760,7 @@ public static class SpecializedMoves
         }
         else if (originalMove == echoedVoice)
         {
-            if (attackingUnit.lastMoveUsedConsecutively < MAX_MULTIPLIER_FOR_ECHOED_VOICE)
+            if (attackingUnit.lastMoveUsedConsecutively < MAX_MULTIPLIER_STACKABLE_MOVES)
             {
                 if (attackingUnit.lastMoveUsedConsecutively == 2)
                 {
@@ -688,7 +773,7 @@ public static class SpecializedMoves
             }
             else
             {
-                alteredMove.AdjustedMovePower(MAX_MULTIPLIER_FOR_ECHOED_VOICE + 1);
+                alteredMove.AdjustedMovePower(MAX_MULTIPLIER_STACKABLE_MOVES + 1);
             }
         }
         else if (originalMove == electroBall)
@@ -713,6 +798,11 @@ public static class SpecializedMoves
 
             alteredMove.AdjustedMovePower(adjustment);
         }
+        else if (originalMove == eruption|| originalMove == waterSpout)
+        {
+            float adjustment = (1 - ((float)defendingUnit.pokemon.currentHitPoints / (float)defendingUnit.pokemon.maxHitPoints));
+            alteredMove.AdjustedMovePower(adjustment, true);
+        }
         else if(originalMove == hex)
         {
             if(defendingUnit.pokemon.status != null)
@@ -720,23 +810,126 @@ public static class SpecializedMoves
                 alteredMove.AdjustedMovePower(1);
             }
         }
+        else if(originalMove == hurricane || originalMove == thunder)
+        {
+            if(BattleSystem.GetCurrentWeather == WeatherEffectID.Rain)
+            {
+                alteredMove.AdjustedMoveAccuracy(100);
+            }
+            else if(BattleSystem.GetCurrentWeather == WeatherEffectID.Sunshine)
+            {
+                alteredMove.AdjustedMoveAccuracy(50);
+            }
+        }
         else if (originalMove == psywave)
         {//Inflicts damage equal to 0.5 to 1.5 x user's level.
             float adjustment = Random.Range(0.5f,1.5f) * attackingUnit.pokemon.currentLevel;
             alteredMove.AdjustedMovePower(adjustment);
-        }//Healing Moves
-        else if(originalMove == moonlight || originalMove == synthesis || originalMove == morningSun || originalMove == shoreUp)
+        }
+        else if (originalMove == storedPower)
+        {
+            int bonusMultiplier = 0;
+            for (int i = (int)StatAttribute.Attack; i < (int)StatAttribute.Accuracy; i++)
+            {
+                StatAttribute statAttribute = (StatAttribute)i;
+                if (attackingUnit.pokemon.statBoosts[statAttribute] > 0)
+                {
+                    bonusMultiplier += attackingUnit.pokemon.statBoosts[statAttribute];
+                }
+            }
+            alteredMove.AdjustedMovePower(bonusMultiplier);
+        }
+        else if(originalMove == trumpCard)
+        {
+            switch (currentMovePP)
+            {
+                case int n when (n >= 5):
+                    alteredMove.AdjustedMovePower(40);
+                    break;
+                case int n when (n == 4):
+                    alteredMove.AdjustedMovePower(50);
+                    break;
+                case int n when (n == 3):
+                    alteredMove.AdjustedMovePower(60);
+                    break;
+                case int n when (n == 2):
+                    alteredMove.AdjustedMovePower(75);
+                    break;
+                default:// 1
+                    alteredMove.AdjustedMovePower(200);
+                    break;
+            }
+        }
+        else if(originalMove == venoshock)
+        {
+            if (attackingUnit.pokemon.status?.Id == ConditionID.Poison|| attackingUnit.pokemon.status?.Id == ConditionID.ToxicPoison)
+            {
+                alteredMove.AdjustedMovePower(1);
+            }
+        }
+        else if(originalMove == weatherBall)
+        {
+            if(BattleSystem.GetCurrentWeather == WeatherEffectID.Sunshine)
+            {
+                alteredMove.AdjustedMoveType(ElementType.Fire);
+                alteredMove.AdjustedMovePower(1);
+            }
+            else if(BattleSystem.GetCurrentWeather == WeatherEffectID.Rain)
+            {
+                alteredMove.AdjustedMoveType(ElementType.Water);
+                alteredMove.AdjustedMovePower(1);
+            }
+            else if (BattleSystem.GetCurrentWeather == WeatherEffectID.Hail)
+            {
+                alteredMove.AdjustedMoveType(ElementType.Ice);
+                alteredMove.AdjustedMovePower(1);
+            }
+            else if (BattleSystem.GetCurrentWeather == WeatherEffectID.Sandstorm)
+            {
+                alteredMove.AdjustedMoveType(ElementType.Rock);
+                alteredMove.AdjustedMovePower(1);
+            }
+        }//Status Moves
+        else if(originalMove == acupressure)
+        {
+            StatBoost statBoost = null;
+            bool statsAllBoosted = true;
+            for (int i = (int)StatAttribute.Attack; i < (int)StatAttribute.Accuracy; i++)
+            {
+                StatAttribute statAttribute = (StatAttribute)i;
+                if (attackingUnit.pokemon.statBoosts[statAttribute] == 6)
+                {
+                    continue;
+                }
+                statsAllBoosted = false;
+                break;
+            }
+
+            if(statsAllBoosted == false)
+            {
+                while(statBoost == null)
+                {
+                    StatAttribute statAttribute = (StatAttribute)Random.Range((int)StatAttribute.Attack, (int)StatAttribute.Accuracy);
+                    if (attackingUnit.pokemon.statBoosts[statAttribute] < 6)
+                    {
+                        statBoost = new StatBoost(statAttribute, 2);
+                    }
+                }
+                alteredMove.MoveEffects.Boosts.Add(statBoost);
+            }
+        }
+        else if (originalMove == moonlight || originalMove == synthesis || originalMove == morningSun || originalMove == shoreUp)
         {
             float hpModifer = HealthRecoveryModifiers(originalMove, BattleSystem.GetCurrentWeather);
             alteredMove.SetHPRecoveredByMultiplier(hpModifer);
         }
         
-
         return alteredMove;
     }
 
-    public static SemiInvulnerableType ReturnSemiInvulnerableType(MoveBase originalMove)
+    public static SemiInvulnerableType ReturnSemiInvulnerableType(MoveBase move)
     {
+        MoveBase originalMove = move.originalMove;
         if (originalMove == bounce ||originalMove == fly)
         {
             return SemiInvulnerableType.Air;
@@ -787,5 +980,28 @@ public static class SpecializedMoves
             }
         }
         return effects;
+    }
+
+    public static int DealsPresetAmountOfDamage(BattleUnit attackingUnit,BattleUnit defendingUnit,MoveBase originalMove)
+    {
+        if(originalMove == counter)
+        {
+            return (attackingUnit.damagedReceived * 2);
+        }
+        else if(originalMove == endeavor)
+        {
+            return (defendingUnit.pokemon.currentHitPoints - attackingUnit.pokemon.currentHitPoints);
+        }
+
+        return 0;
+    }
+
+    public static bool BreaksOpponentsShield(MoveBase originalMove)
+    {
+        if (originalMove == SpecializedMoves.brickBreak || originalMove == SpecializedMoves.psychicFangs)
+        {
+            return true;
+        }
+        return false;
     }
 }

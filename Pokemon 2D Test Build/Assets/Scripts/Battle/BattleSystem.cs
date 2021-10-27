@@ -650,6 +650,10 @@ public class BattleSystem : CoreSystem
                 {
                     yield return dialogSystem.TypeDialog($"{attacksChosen[i].attackingPokemon.pokemon.currentName}'s is tightening its focus!");
                 }
+                else if (attacksChosen[i].currentMove.moveBase == SpecializedMoves.shellTrap)
+                {
+                    yield return dialogSystem.TypeDialog($"{attacksChosen[i].attackingPokemon.pokemon.currentName}'s set a shell trap!");
+                }
             }
         }
 
@@ -746,14 +750,14 @@ public class BattleSystem : CoreSystem
         //This is here incase the pokemon has a status effect that ended such as being frozen/Sleep
         yield return ShowStatusChanges(sourceUnit.pokemon);
         
-        alteredMove = SpecializedMoves.SpecifiedMovesWithConditions(sourceUnit, targetUnit, move.moveBase, alteredMove);
+        alteredMove = SpecializedMoves.SpecifiedMovesWithConditions(sourceUnit, targetUnit, move.moveBase,alteredMove,move.pP);
 
-        if (move.moveBase.SecondaryEffects.Exists(x => x.Volatiletatus == ConditionID.ChargingTurn) == true)
+        if (alteredMove.SecondaryEffects.Exists(x => x.Volatiletatus == ConditionID.ChargingTurn) == true)
         {
             if(sourceUnit.pokemon.HasCurrentVolatileStatus(ConditionID.ChargingTurn) == false)
             {
                 ChargingTurn charging = ConditionsDB.GetConditionBase(ConditionID.ChargingTurn) as ChargingTurn;
-                if (charging.CanAttackThisTurn(move.moveBase, sourceUnit) == false)
+                if (charging.CanAttackThisTurn(alteredMove.originalMove, sourceUnit) == false)
                 {
                     List<MoveEffects> effects = SpecializedMoves.EffectsBeforeCharge(alteredMove);
 
@@ -793,6 +797,7 @@ public class BattleSystem : CoreSystem
             sourceUnit.lastMoveUsedConsecutively = 0;
             sourceUnit.enraged = false;
         }
+
         if (targetUnit.pokemon.ability.ReducesPowerPointsBy2() == true)
         {
             move.pP--;
@@ -804,7 +809,7 @@ public class BattleSystem : CoreSystem
             yield break;
         }
 
-        if (targetUnit.pokemon.ability.PreventsTheUseOfSpecificMoves(sourceUnit.pokemon, move.moveBase) == true && targetUnit.pokemon.currentHitPoints > 0)
+        if (targetUnit.pokemon.ability.PreventsTheUseOfSpecificMoves(sourceUnit.pokemon, alteredMove.originalMove) == true && targetUnit.pokemon.currentHitPoints > 0)
         {
             targetUnit.OnAbilityActivation();
             yield return ShowStatusChanges(sourceUnit.pokemon);
@@ -815,7 +820,7 @@ public class BattleSystem : CoreSystem
 
         if (SpecializedMoves.CheckIfMoveHasSpecializedConditionAndSuccessful(sourceUnit, targetUnit, move.moveBase) == false)
         {
-            if(move.moveBase == SpecializedMoves.focusPunch)
+            if(alteredMove.originalMove == SpecializedMoves.focusPunch)
             {
                 yield return dialogSystem.TypeDialog($"{sourceUnit.pokemon.currentName} lost its focus and couldn't move!");
                 yield break;
@@ -831,12 +836,14 @@ public class BattleSystem : CoreSystem
         alteredMove = targetUnit.pokemon.GetHoldItemEffects.AlterOpposingMoveDetails(alteredMove);
         alteredMove = sourceUnit.pokemon.ability.BoostsMovePowerWhenLast(currentTurnDetails.Count <= 1, alteredMove);
 
-        if(move.moveBase == SpecializedMoves.magnitude)
+        if(alteredMove.originalMove == SpecializedMoves.magnitude)
         {
             yield return dialogSystem.TypeDialog($"Magnitude {SpecializedMoves.magnitudeNumber}!");
         }
 
-        if (CheckIfMoveHits(move.moveBase,alteredMove, sourceUnit.pokemon, targetUnit.pokemon) == true)
+        int specifiedAmountOfDamage = SpecializedMoves.DealsPresetAmountOfDamage(sourceUnit,targetUnit, move.moveBase);
+
+        if (CheckIfMoveHits(alteredMove, sourceUnit.pokemon, targetUnit.pokemon) == true)
         {
             if (alteredMove.MoveType == MoveType.Status)
             {
@@ -847,7 +854,7 @@ public class BattleSystem : CoreSystem
             {
                 int attackLoop = 1;
 
-                ElementType elementType = sourceUnit.pokemon.ability.ChangePokemonToCurrentAttackType(sourceUnit, move.moveBase);
+                ElementType elementType = sourceUnit.pokemon.ability.ChangePokemonToCurrentAttackType(sourceUnit, alteredMove);
 
                 if (elementType != ElementType.NA)
                 {
@@ -856,7 +863,7 @@ public class BattleSystem : CoreSystem
                     sourceUnit.pokemon.AlterPokemonTyping(elementType);
                 }
 
-                if(move.moveBase == SpecializedMoves.brickBreak || move.moveBase == SpecializedMoves.psychicFangs)
+                if(SpecializedMoves.BreaksOpponentsShield(alteredMove.originalMove) == true)
                 {
                     if(targetUnit.CurrentAttackRemovedShields(alteredMove.Type) == true)
                     {
@@ -883,7 +890,7 @@ public class BattleSystem : CoreSystem
                     }
                 }
 
-                targetUnit.pokemon.TakeDamage(damageDetails, alteredMove, sourceUnit,targetUnit);
+                targetUnit.pokemon.TakeDamage(damageDetails, alteredMove, sourceUnit,targetUnit, specifiedAmountOfDamage);
 
                 if (sourceUnit.removeItem == true)
                 {
@@ -922,7 +929,7 @@ public class BattleSystem : CoreSystem
 
                     for (int i = 0; i < attackLoop; i++)
                     {
-                        if(move.moveBase == SpecializedMoves.tripleKick)
+                        if(alteredMove.originalMove == SpecializedMoves.tripleKick)
                         {
                             alteredMove = alteredMove.Clone();
                             if(i == 1)
@@ -1028,7 +1035,7 @@ public class BattleSystem : CoreSystem
 
                 if(damageDetails.typeEffectiveness == 0)
                 {
-                    yield return JumpKickMissed(sourceUnit, move.moveBase);
+                    yield return JumpKickMissed(sourceUnit, alteredMove);
                 }
 
                 if(damageDetails.damageNullified == true)
@@ -1042,7 +1049,7 @@ public class BattleSystem : CoreSystem
 
                 if(targetUnit.pokemon.currentHitPoints > 0)
                 {
-                    if(move.moveBase == SpecializedMoves.smellingSalts)
+                    if(alteredMove.originalMove == SpecializedMoves.smellingSalts)
                     {
                         if(targetUnit.pokemon.status?.Id == ConditionID.Paralyzed)
                         {
@@ -1050,12 +1057,12 @@ public class BattleSystem : CoreSystem
                             yield return dialogSystem.TypeDialog($"{targetUnit.pokemon.currentName} was cured of paralysis");
                         }
                     }
-                    else if(move.moveBase == SpecializedMoves.throatChop)
+                    else if(alteredMove.originalMove == SpecializedMoves.throatChop)
                     {
                         targetUnit.cantUseSoundMoves = 2;
                         yield return dialogSystem.TypeDialog($"The effects of {move.moveBase.MoveName} prevent {targetUnit.pokemon.currentName} from using certain moves");
                     }
-                    else if(move.moveBase == SpecializedMoves.wakeUpSlap)
+                    else if(alteredMove.originalMove == SpecializedMoves.wakeUpSlap)
                     {
                         if (targetUnit.pokemon.status?.Id == ConditionID.Sleep)
                         {
@@ -1072,6 +1079,17 @@ public class BattleSystem : CoreSystem
                 {
                     //TO DO
                     //check if the pokemon was the last one, if it is then dont go through this code
+
+                    if(alteredMove.StealsTargetItem == true)
+                    {
+                        if(sourceUnit.pokemon.GetCurrentItem == null && targetUnit.pokemon.GetCurrentItem != null)
+                        {
+                            sourceUnit.pokemon.GivePokemonItemToHold(targetUnit.pokemon.GetCurrentItem);
+                            targetUnit.pokemon.ItemUsed();
+
+                            yield return dialogSystem.TypeDialog($"{sourceUnit.pokemon.currentName} stole {sourceUnit.pokemon.GetCurrentItem.ItemName} from {targetUnit.pokemon.currentName}!");
+                        }
+                    }
 
                     if (damageDetails.attackersAbilityActivation == true)
                     {
@@ -1342,7 +1360,7 @@ public class BattleSystem : CoreSystem
                 }
             }
 
-            StatBoost statBoost = sourceUnit.pokemon.GetHoldItemEffects.AlterStatAfterUsingSpecificMove(sourceUnit,move.moveBase);
+            StatBoost statBoost = sourceUnit.pokemon.GetHoldItemEffects.AlterStatAfterUsingSpecificMove(sourceUnit,alteredMove);
             if (statBoost != null)
             {
                 yield return sourceUnit.PlayItemUsedAnimation();
@@ -1556,7 +1574,7 @@ public class BattleSystem : CoreSystem
         yield return ShowStatusChanges(target.pokemon);
     }
 
-    bool CheckIfMoveHits(MoveBase originalMove,MoveBase move, Pokemon source, Pokemon target)
+    bool CheckIfMoveHits(MoveBase move, Pokemon source, Pokemon target)
     {
         if(target.currentHitPoints <= 0)
         {
@@ -1577,7 +1595,7 @@ public class BattleSystem : CoreSystem
         if(target.HasCurrentVolatileStatus(ConditionID.ChargingTurn) == true)
         {
             ChargingTurn chargingTurn = (ChargingTurn)target.volatileStatus.FirstOrDefault(x => x.Id == ConditionID.ChargingTurn);
-            if(chargingTurn.CanBeHitWhileSemiInvulnerable(originalMove) == false)
+            if(chargingTurn.CanBeHitWhileSemiInvulnerable(move.originalMove) == false)
             {
                 return false;
             }
@@ -1608,6 +1626,11 @@ public class BattleSystem : CoreSystem
         {
             targetEvasion = 1;
         }
+        else if(move.BypassesTargetsStatBoosts == true)
+        {
+            targetEvasion = 1;
+        }
+        
         moveAccuracy /= targetEvasion;
 
         return Random.Range(1, 101) <= moveAccuracy;
@@ -1621,6 +1644,7 @@ public class BattleSystem : CoreSystem
         }
 
         sourceUnit.damagedThisTurn = false;
+        sourceUnit.damagedReceived = 0;
         sourceUnit.turnsOnField++;
         if(sourceUnit.cantUseSoundMoves > 0)
         {
@@ -2787,9 +2811,9 @@ public class BattleSystem : CoreSystem
         }
     }
 
-    IEnumerator JumpKickMissed(BattleUnit attackingPokemon,MoveBase originalMove)
+    IEnumerator JumpKickMissed(BattleUnit attackingPokemon,MoveBase move)
     {
-        if (originalMove == SpecializedMoves.highJumpKick || originalMove == SpecializedMoves.jumpKick)
+        if (move.originalMove == SpecializedMoves.highJumpKick || move.originalMove == SpecializedMoves.jumpKick)
         {
             yield return dialogSystem.TypeDialog($"{attackingPokemon.pokemon.currentName}'s kept going and crashed!");
             int previousHP = attackingPokemon.pokemon.currentHitPoints;
