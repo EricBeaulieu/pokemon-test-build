@@ -791,7 +791,7 @@ public class BattleUnit : MonoBehaviour
             return false;
         }
 
-        if(DamageModifiers.TypeChartEffectiveness(pokemon, attackType) <= 0)
+        if(DamageModifiers.TypeChartEffectiveness(this, attackType) <= 0)
         {
             return false;
         }
@@ -806,5 +806,40 @@ public class BattleUnit : MonoBehaviour
             }
         }
         return shieldremoved;
+    }
+
+    public bool IsGrounded()
+    {
+        if(pokemon.HasCurrentVolatileStatus(ConditionID.Grounded) == true || pokemon.HasCurrentVolatileStatus(ConditionID.Ingrained) == true)
+        {
+            return true;
+        }
+        else if(BattleSystem.gravity == true)
+        {
+            return true;
+        }
+        
+        if(pokemon.IsType(ElementType.Flying) == true)
+        {
+            return false;
+        }
+        else if(pokemon.ability.Levitates() == true)
+        {
+            return false;
+        }
+        else if(pokemon.GetHoldItemEffects.Levitates() == true)
+        {
+            return false;
+        }
+        else if(pokemon.HasCurrentVolatileStatus(ConditionID.MagneticLevitation) == true)
+        {
+            return true;
+        }
+        else if(pokemon.HasCurrentVolatileStatus(ConditionID.Telekinesis) == true)
+        {
+            return true;
+        }
+
+        return true;
     }
 }

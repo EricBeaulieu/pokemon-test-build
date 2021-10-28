@@ -6,12 +6,13 @@ public class Notes
 {
     //To do list
 
+    //mega launcher Pulse/aura moves
+    //iron ball for grounded
     //fix stealth rock to not miss when target is semi invernerable
     //for certain attacks, such as natural gift/z moves, it will replace the move base to something from a static table. 
     //these moves will be pre created somewhere else
 
     //money on trainer defeat as well as pay day
-    //knock off extra details need to be implimented
     //gifting pokemon from trainers/finding them in a ball gifted to the overworld
     //power points stuff not implimented for when item is used on pokemon
     //in regards to specialized messages, they can be thrown into stat boost and displayed when given into effect
@@ -74,10 +75,9 @@ public class Notes
      */
 
     /*attacks not implimented 
-    beak blast, beat up, bide,Bug Bite,Circle Throw,dragon tail, fling,flying press,Fusion Bolt,Guillotine, Heat Crash,Heavy Slam,Horn Drill,
+    beak blast, beat up, bide,Bug Bite,Circle Throw,dragon tail, fling,flying press,Fusion Bolt, Heat Crash,Heavy Slam,
     Hyperspace Fury,Ice Ball,Low Kick,Metal Burst,Multi-Attack,Natural Gift,Outrage,Pay Day,Pluck,Present,Pursuit,Rapid Spin,
-    Retaliate,Rollout,Sacred Sword,Secret Power,Seismic Toss,Sky Drop,Smack Down,
-    Spectral Thief,Sunsteel Strike,Super Fang,Thousand Arrows,Thrash,U-turn
+    Retaliate,Rollout,Secret Power,Sky Drop,Smack Down,Spectral Thief,Sunsteel Strike,Thousand Arrows,Thrash,U-turn
 
     Belch, Burn Up,Core Enforcer,Doom Desire,Dragon Rage,Final Gambit,Fire/Grass/Water Pledge,
     Fusion Flare,Future Sight,Grass Knot,Hidden Power,Judgment,Mirror Coat,Moongeist Beam,Nature's Madness,Night Shade,Petal Dance,

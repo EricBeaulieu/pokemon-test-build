@@ -14,7 +14,8 @@ public enum ConditionID
     //Volatile Battle Status
     AquaRing, Bracing, ChargingTurn, CenterOfAttention, Rooting,
     MagicCoat, MagneticLevitation, Minimize, Protection, Recharging,//name must recharge!
-    SemiInvulnerableTurn, Substitute, TakingAim, Thrashing, Transformed
+    SemiInvulnerableTurn, Substitute, TakingAim, Thrashing, Transformed,
+    Grounded,Ingrained, Telekinesis
 }
 
 public class ConditionsDB

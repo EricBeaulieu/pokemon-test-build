@@ -10,7 +10,7 @@ public class TintedLens : AbilityBase
     {
         return "The Pokémon can use \"not very effective\" moves to deal regular damage.";
     }
-    public override float PowerUpCertainMoves(Pokemon attackingPokemon, Pokemon defendingPokemon, MoveBase currentMove, WeatherEffectID weather)
+    public override float PowerUpCertainMoves(Pokemon attackingPokemon, BattleUnit defendingPokemon, MoveBase currentMove, WeatherEffectID weather)
     {
         if (DamageModifiers.TypeChartEffectiveness(defendingPokemon, currentMove.Type) < 1)
         {

@@ -18,7 +18,7 @@ public class Heatproof : AbilityBase
         }
         return base.PreventCertainStatusCondition(iD,weather);
     }
-    public override float AlterDamageTaken(Pokemon defendingPokemon, MoveBase move, WeatherEffectID weather)
+    public override float AlterDamageTaken(BattleUnit defendingPokemon, MoveBase move, WeatherEffectID weather)
     {
         if(move.Type == ElementType.Fire)
         {

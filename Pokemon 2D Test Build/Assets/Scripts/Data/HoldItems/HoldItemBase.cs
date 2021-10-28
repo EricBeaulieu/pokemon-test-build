@@ -70,6 +70,7 @@ public abstract class HoldItemBase
     public virtual bool TransferToPokemon(MoveBase move) { return false; }
     public virtual float HpDrainModifier() { return 0; }
     public virtual bool ExecuteMoveWithChargingTurn() { return false; }
+    public virtual bool Levitates() { return false; }
 
     //Berries effects
     public virtual BerryID BerryId { get; }

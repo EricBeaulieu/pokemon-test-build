@@ -10,7 +10,7 @@ public class SandForce : AbilityBase
     {
         return "Boosts the power of Rock-, Ground-, and Steel-type moves in a sandstorm.";
     }
-    public override float PowerUpCertainMoves(Pokemon attackingPokemon, Pokemon defendingPokemon, MoveBase currentMove,WeatherEffectID weather)
+    public override float PowerUpCertainMoves(Pokemon attackingPokemon, BattleUnit defendingPokemon, MoveBase currentMove,WeatherEffectID weather)
     {
         if(weather == WeatherEffectID.Sandstorm)
         {

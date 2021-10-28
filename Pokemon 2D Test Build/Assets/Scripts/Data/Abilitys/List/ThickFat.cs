@@ -10,7 +10,7 @@ public class ThickFat : AbilityBase
     {
         return "The Pokémon is protected by a layer of thick fat, which halves the damage taken from Fire- and Ice-type moves.";
     }
-    public override float AlterDamageTaken(Pokemon defendingPokemon, MoveBase move, WeatherEffectID weather)
+    public override float AlterDamageTaken(BattleUnit defendingPokemon, MoveBase move, WeatherEffectID weather)
     {
         if (move.Type == ElementType.Fire || move.Type == ElementType.Ice)
         {

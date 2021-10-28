@@ -488,7 +488,7 @@ public class Pokemon {
             return;
         }
 
-        damageDetails.typeEffectiveness = DamageModifiers.TypeChartEffectiveness(this, move.Type);
+        damageDetails.typeEffectiveness = DamageModifiers.TypeChartEffectiveness(selfRef, move.Type);
 
         if(damageDetails.typeEffectiveness == 0)//If it doesnt effect the pokemon then just end it right here
         {
@@ -520,8 +520,8 @@ public class Pokemon {
 
         //Ability
         float abilityBonus = attackingUnit.pokemon.ability.BoostACertainTypeInAPinch(attackingUnit.pokemon, move.Type);
-        abilityBonus *= attackingUnit.pokemon.ability.PowerUpCertainMoves(attackingUnit.pokemon, this, move,BattleSystem.GetCurrentWeather);
-        abilityBonus *= ability.AlterDamageTaken(this, move,BattleSystem.GetCurrentWeather);
+        abilityBonus *= attackingUnit.pokemon.ability.PowerUpCertainMoves(attackingUnit.pokemon, selfRef, move,BattleSystem.GetCurrentWeather);
+        abilityBonus *= ability.AlterDamageTaken(selfRef, move,BattleSystem.GetCurrentWeather);
         abilityBonus *= ability.LowersDamageTakeSuperEffectiveMoves(damageDetails.typeEffectiveness);
 
         StatBoost defenderAbilityStatBoost = ability.AlterStatAfterTakingDamageFromCertainType(move.Type);

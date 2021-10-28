@@ -10,7 +10,7 @@ public class StormDrain : AbilityBase
     {
         return "Draws in all Water-type moves. Instead of being hit by Water-type moves, it boosts its Sp. Atk.";
     }
-    public override float AlterDamageTaken(Pokemon defendingPokemon, MoveBase move, WeatherEffectID weather)
+    public override float AlterDamageTaken(BattleUnit defendingPokemon, MoveBase move, WeatherEffectID weather)
     {
         if (move.Type == ElementType.Water)
         {

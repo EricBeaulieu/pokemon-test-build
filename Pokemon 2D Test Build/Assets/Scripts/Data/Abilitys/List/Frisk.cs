@@ -11,14 +11,14 @@ public class Frisk : AbilityBase
         return "When it enters a battle, the Pokémon can check an opposing Pokémon's held item.";
     }
     string abilityMessage;
-    public override bool ActivateAbilityUponEntry(Pokemon defendingPokemon, BattleUnit opposingTarget)
+    public override bool ActivateAbilityUponEntry(BattleUnit defendingPokemon, BattleUnit opposingTarget)
     {
         if (opposingTarget.pokemon.GetCurrentItem == null)
         {
             return false;
         }
 
-        abilityMessage = $"The {defendingPokemon.currentName} frisked {opposingTarget.pokemon.currentName} and found it's {opposingTarget.pokemon.GetCurrentItem.ItemName}!";
+        abilityMessage = $"The {defendingPokemon.pokemon.currentName} frisked {opposingTarget.pokemon.currentName} and found it's {opposingTarget.pokemon.GetCurrentItem.ItemName}!";
         return true;
     }
     public override string OnAbilitityActivation(Pokemon pokemon)

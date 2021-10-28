@@ -35,6 +35,8 @@ public class BattleSystem : CoreSystem
 
     static WeatherEffectBase _currentWeather;
     public static bool inBattle { get; private set; } = false;
+    public static bool gravity { get; private set; } = false;
+    const float GRAVITY_ACCURACY_BONUS = 5f / 3f;
 
     List<EntryHazardBase> _playerSideEntryHazards = new List<EntryHazardBase>();
     List<EntryHazardBase> _enemySideEntryHazards = new List<EntryHazardBase>();
@@ -233,8 +235,9 @@ public class BattleSystem : CoreSystem
         currentTurnDetails.Clear();
         dialogSystem.SetCurrentDialogBox(dialogBox);
         inBattle = true;
-        _playerSideEntryHazards = new List<EntryHazardBase>();
-        _enemySideEntryHazards = new List<EntryHazardBase>();
+        gravity = false;
+        _playerSideEntryHazards.Clear();
+        _enemySideEntryHazards.Clear();
         Pokemon playerPokemon = _playerController.pokemonParty.GetFirstHealthyPokemon();
 
         if (_isTrainerBattle == true)
@@ -1070,6 +1073,14 @@ public class BattleSystem : CoreSystem
                             yield return dialogSystem.TypeDialog($"{targetUnit.pokemon.currentName} was woken up");
                         }
                     }
+                    else if (alteredMove.originalMove == SpecializedMoves.knockOff)
+                    {
+                        if (targetUnit.pokemon.GetCurrentItem != null)
+                        {
+                            yield return dialogSystem.TypeDialog($"{sourceUnit.pokemon.currentName} knocked off {targetUnit.pokemon.GetCurrentItem.ItemName} from {targetUnit.pokemon.currentName}!");
+                            targetUnit.pokemon.ItemUsed();
+                        }
+                    }
 
                     yield return ApplyStatChanges(damageDetails.defendersStatBoostByAbility, targetUnit, MoveTarget.Foe);
                     yield return ApplyStatChanges(damageDetails.alterStatAfterTakingDamage, targetUnit, MoveTarget.Foe);
@@ -1077,8 +1088,6 @@ public class BattleSystem : CoreSystem
 
                 if (sourceUnit.pokemon.currentHitPoints > 0)
                 {
-                    //TO DO
-                    //check if the pokemon was the last one, if it is then dont go through this code
 
                     if(alteredMove.StealsTargetItem == true)
                     {
@@ -1091,11 +1100,27 @@ public class BattleSystem : CoreSystem
                         }
                     }
 
-                    if (damageDetails.attackersAbilityActivation == true)
+                    int remainingHealthyPokemon = 0;
+                    if(targetUnit.isPlayerPokemon == true)
                     {
-                        sourceUnit.OnAbilityActivation();
+                        remainingHealthyPokemon = _playerController.pokemonParty.HealthyPokemonCount();
                     }
-                    yield return ApplyStatChanges(damageDetails.attackersStatBoostByDefendersAbility, targetUnit, MoveTarget.Self,sourceUnit);
+                    else
+                    {
+                        if(_trainerController != null)
+                        {
+                            remainingHealthyPokemon = _trainerController.pokemonParty.HealthyPokemonCount();
+                        }
+                    }
+
+                    if(remainingHealthyPokemon > 0)
+                    {
+                        if (damageDetails.attackersAbilityActivation == true)
+                        {
+                            sourceUnit.OnAbilityActivation();
+                        }
+                        yield return ApplyStatChanges(damageDetails.attackersStatBoostByDefendersAbility, targetUnit, MoveTarget.Self, sourceUnit);
+                    }
                 }
 
                 if (alteredMove.MultiStrikeMove == true && damageDetails.typeEffectiveness != 0)
@@ -1554,7 +1579,7 @@ public class BattleSystem : CoreSystem
             if (source.pokemon.maxHitPoints - source.pokemon.currentHitPoints > 0 && source.pokemon.HasCurrentVolatileStatus(ConditionID.HealBlock) == false)
             {
                 int hpPriorToHealing = source.pokemon.currentHitPoints;
-                int hpHealed = Mathf.CeilToInt(source.pokemon.maxHitPoints * (currentMove.HpRecovered * source.pokemon.ability.PowerUpCertainMoves(source.pokemon, target.pokemon, currentMove,GetCurrentWeather)));
+                int hpHealed = Mathf.CeilToInt(source.pokemon.maxHitPoints * (currentMove.HpRecovered * source.pokemon.ability.PowerUpCertainMoves(source.pokemon, target, currentMove,GetCurrentWeather)));
                 WeatherEffectID weatherEffectID = (_currentWeather == null) ? WeatherEffectID.NA : _currentWeather.Id;
                 hpHealed = Mathf.Clamp(hpHealed, 1, source.pokemon.maxHitPoints - source.pokemon.currentHitPoints);
                 source.pokemon.UpdateHPRestored(hpHealed);
@@ -1606,6 +1631,11 @@ public class BattleSystem : CoreSystem
             return true;
         }
 
+        if(target.HasCurrentVolatileStatus(ConditionID.Telekinesis) == true)
+        {
+            return true;
+        }
+
         if(source.ability.IncomingAndOutgoingAttacksAlwaysLand() == true|| target.ability.IncomingAndOutgoingAttacksAlwaysLand() == true)
         {
             return true;
@@ -1618,6 +1648,11 @@ public class BattleSystem : CoreSystem
         if(source.GetHoldItemEffects.AdjustAccuracyTo100(source) == true)
         {
             moveAccuracy = 100;
+        }
+
+        if(gravity == true)
+        {
+            moveAccuracy *= GRAVITY_ACCURACY_BONUS;
         }
 
         float targetEvasion = target.evasion;
@@ -2080,7 +2115,7 @@ public class BattleSystem : CoreSystem
                 }
             }
 
-            if(sourceUnit.pokemon.ability.ActivateAbilityUponEntry(sourceUnit.pokemon,targetUnit) == true)
+            if(sourceUnit.pokemon.ability.ActivateAbilityUponEntry(sourceUnit,targetUnit) == true)
             {
                 sourceUnit.OnAbilityActivation();
                 yield return dialogSystem.TypeDialog($"{sourceUnit.pokemon.ability.OnAbilitityActivation(sourceUnit.pokemon)}");
@@ -2440,9 +2475,9 @@ public class BattleSystem : CoreSystem
         {
             int currentHP = target.pokemon.currentHitPoints;
 
-            List<StatBoost> entryHazardStatBoosts = new List<StatBoost>() { entryHazard.OnEntryLowerStat(target.pokemon) };
+            List<StatBoost> entryHazardStatBoosts = new List<StatBoost>() { entryHazard.OnEntryLowerStat(target) };
             yield return ApplyStatChanges(entryHazardStatBoosts, target, MoveTarget.Foe);
-            entryHazard.OnEntry(target.pokemon);
+            entryHazard.OnEntry(target);
 
             yield return ShowStatusChanges(target.pokemon);
 

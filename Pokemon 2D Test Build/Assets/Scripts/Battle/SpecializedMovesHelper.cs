@@ -51,12 +51,14 @@ public class SpecializedMovesHelper : MonoBehaviour
     public MoveBase rage;
     public MoveBase revenge;
     public MoveBase reversal;
+    public MoveBase seismicToss;
     public MoveBase shadowForce;
     public MoveBase smackDown;
     public MoveBase smellingSalts;
     public MoveBase solarBlade;
     public MoveBase stompingTantrum;
     public MoveBase suckerPunch;
+    public MoveBase superFang;
     public MoveBase thousandArrows;
     public MoveBase throatChop;
     public MoveBase tripleKick;

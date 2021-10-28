@@ -10,7 +10,7 @@ public class ToughClaws : AbilityBase
     {
         return "Powers up moves that make direct contact.";
     }
-    public override float PowerUpCertainMoves(Pokemon attackingPokemon, Pokemon defendingPokemon, MoveBase currentMove, WeatherEffectID weather)
+    public override float PowerUpCertainMoves(Pokemon attackingPokemon, BattleUnit defendingPokemon, MoveBase currentMove, WeatherEffectID weather)
     {
         if (currentMove.PhysicalContact == true)
         {

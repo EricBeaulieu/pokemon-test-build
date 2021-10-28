@@ -10,12 +10,8 @@ public class Levitate : AbilityBase
     {
         return "By floating in the air, the Pokémon receives full immunity to all Ground-type moves.";
     }
-    public override float AlterDamageTaken(Pokemon defendingPokemon, MoveBase move, WeatherEffectID weather)
+    public override bool Levitates()
     {
-        if (move.Type == ElementType.Ground)
-        {
-            return 0;
-        }
-        return base.AlterDamageTaken(defendingPokemon, move, weather);
+        return true;
     }
 }

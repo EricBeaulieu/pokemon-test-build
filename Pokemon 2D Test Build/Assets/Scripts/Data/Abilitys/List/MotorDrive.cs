@@ -10,7 +10,7 @@ public class MotorDrive : AbilityBase
     {
         return "Boosts its Speed stat if hit by an Electric-type move instead of taking damage.";
     }
-    public override float AlterDamageTaken(Pokemon defendingPokemon, MoveBase move, WeatherEffectID weather)
+    public override float AlterDamageTaken(BattleUnit defendingPokemon, MoveBase move, WeatherEffectID weather)
     {
         if (move.Type == ElementType.Electric)
         {

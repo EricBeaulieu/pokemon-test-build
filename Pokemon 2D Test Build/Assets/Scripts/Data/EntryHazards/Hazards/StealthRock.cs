@@ -21,18 +21,18 @@ public class StealthRock : EntryHazardBase
         layers++;
         return message;
     }
-    public override void OnEntry(Pokemon pokemon)
+    public override void OnEntry(BattleUnit defendingUnit)
     {
-        float damageEffectiveness = DamageModifiers.TypeChartEffectiveness(pokemon, ElementType.Rock);
+        float damageEffectiveness = DamageModifiers.TypeChartEffectiveness(defendingUnit, ElementType.Rock);
 
-        int damage = Mathf.FloorToInt(pokemon.maxHitPoints / (8 / damageEffectiveness));
+        int damage = Mathf.FloorToInt(defendingUnit.pokemon.maxHitPoints / (8 / damageEffectiveness));
 
         if (damage <= 0)
         {
             damage = 1;
         }
 
-        pokemon.UpdateHPDamage(damage);
-        pokemon.statusChanges.Enqueue($"Pointed Stones Dug into {pokemon.currentName}");
+        defendingUnit.pokemon.UpdateHPDamage(damage);
+        defendingUnit.pokemon.statusChanges.Enqueue($"Pointed Stones Dug into {defendingUnit.pokemon.currentName}");
     }
 }

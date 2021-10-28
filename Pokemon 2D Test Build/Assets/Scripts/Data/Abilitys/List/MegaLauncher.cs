@@ -10,7 +10,7 @@ public class MegaLauncher : AbilityBase
     {
         return "Powers up aura and pulse moves.";
     }
-    public override float PowerUpCertainMoves(Pokemon attackingPokemon, Pokemon defendingPokemon, MoveBase currentMove, WeatherEffectID weather)
+    public override float PowerUpCertainMoves(Pokemon attackingPokemon, BattleUnit defendingPokemon, MoveBase currentMove, WeatherEffectID weather)
     {
         if (currentMove.MoveName.Contains("Pulse") || currentMove.MoveName.Contains("Aura"))
         {

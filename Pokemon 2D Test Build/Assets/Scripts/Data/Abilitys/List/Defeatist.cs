@@ -10,7 +10,7 @@ public class Defeatist : AbilityBase
     {
         return "Halves the Pokémon's Attack and Sp. Atk stats when its HP becomes half or less.";
     }
-    public override float PowerUpCertainMoves(Pokemon attackingPokemon, Pokemon defendingPokemon, MoveBase currentMove, WeatherEffectID weather)
+    public override float PowerUpCertainMoves(Pokemon attackingPokemon, BattleUnit defendingPokemon, MoveBase currentMove, WeatherEffectID weather)
     {
         if (attackingPokemon.currentHitPoints <= (attackingPokemon.maxHitPoints/2))
         {

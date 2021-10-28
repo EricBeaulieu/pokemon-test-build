@@ -10,7 +10,7 @@ public class Bulletproof : AbilityBase
     {
         return "Protects the Pokémon from some ball and bomb moves.";
     }
-    public override float AlterDamageTaken(Pokemon defendingPokemon, MoveBase move, WeatherEffectID weather)
+    public override float AlterDamageTaken(BattleUnit defendingPokemon, MoveBase move, WeatherEffectID weather)
     {
         //List will be implimented
         return base.AlterDamageTaken(defendingPokemon, move, weather);

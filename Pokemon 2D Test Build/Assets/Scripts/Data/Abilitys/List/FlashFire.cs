@@ -11,7 +11,7 @@ public class FlashFire : AbilityBase
         return "Powers up the Pokémon's Fire-type moves if it's hit by one.";
     }
     bool charged = false;
-    public override float PowerUpCertainMoves(Pokemon attackingPokemon, Pokemon defendingPokemon, MoveBase currentMove, WeatherEffectID weather)
+    public override float PowerUpCertainMoves(Pokemon attackingPokemon, BattleUnit defendingPokemon, MoveBase currentMove, WeatherEffectID weather)
     {
         if(charged == false)
         {
@@ -26,12 +26,12 @@ public class FlashFire : AbilityBase
         charged = false;
         return 1.5f;
     }
-    public override float AlterDamageTaken(Pokemon defendingPokemon, MoveBase move, WeatherEffectID weather)
+    public override float AlterDamageTaken(BattleUnit defendingPokemon, MoveBase move, WeatherEffectID weather)
     {
         if(move.Type == ElementType.Fire)
         {
             charged = true;
-            defendingPokemon.statusChanges.Enqueue($"{defendingPokemon.currentName}'s {Name} prevents damage");
+            defendingPokemon.pokemon.statusChanges.Enqueue($"{defendingPokemon.pokemon.currentName}'s {Name} prevents damage");
             return 0f;
         }
         return base.AlterDamageTaken(defendingPokemon, move, weather);

@@ -47,18 +47,32 @@ public static class DamageModifiers
         return 1f;
     }
 
-    public static float TypeChartEffectiveness(Pokemon defendingPokemon,ElementType attackType)
+    public static float TypeChartEffectiveness(BattleUnit defendingPokemon,ElementType attackType)
     {
         float damageMultiplier = 1f;
 
-        if (defendingPokemon.pokemonType1 != ElementType.NA)//burn up could remove cyndaquil line typing
+        if (defendingPokemon.pokemon.pokemonType1 != ElementType.NA)//burn up could remove cyndaquil line typing
         {
-            damageMultiplier *= _typeChart[(int)defendingPokemon.pokemonType1, (int)attackType];
+            if(defendingPokemon.pokemon.pokemonType1 == ElementType.Flying && defendingPokemon.IsGrounded() == true)
+            {
+                damageMultiplier *= 1;
+            }
+            else
+            {
+                damageMultiplier *= _typeChart[(int)defendingPokemon.pokemon.pokemonType1, (int)attackType];
+            }
         }
         
-        if(defendingPokemon.pokemonType2 != ElementType.NA)
+        if(defendingPokemon.pokemon.pokemonType2 != ElementType.NA)
         {
-            damageMultiplier *= _typeChart[(int)defendingPokemon.pokemonType2, (int)attackType];
+            if (defendingPokemon.pokemon.pokemonType2 == ElementType.Flying && defendingPokemon.IsGrounded() == true)
+            {
+                damageMultiplier *= 1;
+            }
+            else
+            {
+                damageMultiplier *= _typeChart[(int)defendingPokemon.pokemon.pokemonType1, (int)attackType];
+            }
         }
 
         return damageMultiplier;

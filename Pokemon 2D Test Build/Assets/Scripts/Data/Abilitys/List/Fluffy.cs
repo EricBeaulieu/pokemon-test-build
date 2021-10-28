@@ -10,7 +10,7 @@ public class Fluffy : AbilityBase
     {
         return "Halves the damage taken from moves that make direct contact, but doubles that of Fire-type moves.";
     }
-    public override float AlterDamageTaken(Pokemon defendingPokemon, MoveBase move, WeatherEffectID weather)
+    public override float AlterDamageTaken(BattleUnit defendingPokemon, MoveBase move, WeatherEffectID weather)
     {
         if (move.Type == ElementType.Fire)
         {

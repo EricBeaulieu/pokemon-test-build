@@ -12,8 +12,8 @@ public abstract class EntryHazardBase
     protected int layers { get { return currentLayers; } set { currentLayers = Mathf.Clamp(currentLayers, 0, maxLayers()); } }
     int currentLayers;
     abstract protected int maxLayers();
-    public virtual void OnEntry(Pokemon pokemon) { }
-    public virtual StatBoost OnEntryLowerStat(Pokemon pokemon) { return null; }
+    public virtual void OnEntry(BattleUnit pokemon) { }
+    public virtual StatBoost OnEntryLowerStat(BattleUnit defendingUnit) { return null; }
     public bool CanBeUsed()
     {
         if((layers >= maxLayers()))

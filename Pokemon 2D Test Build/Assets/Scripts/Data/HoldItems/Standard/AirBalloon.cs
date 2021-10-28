@@ -6,17 +6,9 @@ public class AirBalloon : HoldItemBase
 {
     public override HoldItemID HoldItemId { get { return HoldItemID.AirBalloon; } }
     public override bool PlayAnimationWhenUsed() { return false; }
-    public override float AlterDamageTaken(BattleUnit holder,MoveBase move, bool superEffective)
+    public override bool Levitates()
     {
-        if(move.Type == ElementType.Ground)
-        {
-            return 0;
-        }
-        else
-        {
-            holder.removeItem = true;
-            return 1;
-        }
+        return true;
     }
     public override string EntryMessage(Pokemon holder)
     {

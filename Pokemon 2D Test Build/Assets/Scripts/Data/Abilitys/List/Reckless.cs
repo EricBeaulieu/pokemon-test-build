@@ -10,7 +10,7 @@ public class Reckless : AbilityBase
     {
         return "Powers up moves that have recoil damage.";
     }
-    public override float PowerUpCertainMoves(Pokemon attackingPokemon, Pokemon defendingPokemon, MoveBase currentMove, WeatherEffectID weather)
+    public override float PowerUpCertainMoves(Pokemon attackingPokemon, BattleUnit defendingPokemon, MoveBase currentMove, WeatherEffectID weather)
     {
         if (currentMove.RecoilType != Recoil.NA)
         {

@@ -10,7 +10,7 @@ public class Soundproof : AbilityBase
     {
         return "Soundproofing gives the Pokémon full immunity to all sound-based moves.";
     }
-    public override float AlterDamageTaken(Pokemon defendingPokemon, MoveBase move, WeatherEffectID weather)
+    public override float AlterDamageTaken(BattleUnit defendingPokemon, MoveBase move, WeatherEffectID weather)
     {
         if (move.SoundType == true)
         {

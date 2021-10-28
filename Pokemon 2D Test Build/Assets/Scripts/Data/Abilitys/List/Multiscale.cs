@@ -10,9 +10,9 @@ public class Multiscale : AbilityBase
     {
         return "Reduces the amount of damage the Pokémon takes while its HP is full.";
     }
-    public override float AlterDamageTaken(Pokemon defendingPokemon, MoveBase move, WeatherEffectID weather)
+    public override float AlterDamageTaken(BattleUnit defendingPokemon, MoveBase move, WeatherEffectID weather)
     {
-        if (defendingPokemon.currentHitPoints == defendingPokemon.maxHitPoints)
+        if (defendingPokemon.pokemon.currentHitPoints == defendingPokemon.pokemon.maxHitPoints)
         {
             return 0.5f;
         }

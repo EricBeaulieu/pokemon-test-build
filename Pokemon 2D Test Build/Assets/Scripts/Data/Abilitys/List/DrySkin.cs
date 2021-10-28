@@ -45,7 +45,7 @@ public class DrySkin : AbilityBase
         }
         return true;
     }
-    public override float AlterDamageTaken(Pokemon defendingPokemon, MoveBase move, WeatherEffectID weather)
+    public override float AlterDamageTaken(BattleUnit defendingPokemon, MoveBase move, WeatherEffectID weather)
     {
         if(move.Type == ElementType.Fire)
         {
@@ -60,15 +60,15 @@ public class DrySkin : AbilityBase
         }
         else if(move.Type == ElementType.Water)
         {
-            int hpHealed = Mathf.FloorToInt(defendingPokemon.maxHitPoints * 0.25f);
-            hpHealed = Mathf.Clamp(hpHealed, 0, defendingPokemon.maxHitPoints - defendingPokemon.currentHitPoints);
+            int hpHealed = Mathf.FloorToInt(defendingPokemon.pokemon.maxHitPoints * 0.25f);
+            hpHealed = Mathf.Clamp(hpHealed, 0, defendingPokemon.pokemon.maxHitPoints - defendingPokemon.pokemon.currentHitPoints);
             if(hpHealed == 0)
             {
-                defendingPokemon.statusChanges.Enqueue($"It Doesn't Affect {defendingPokemon.currentName}");
+                defendingPokemon.pokemon.statusChanges.Enqueue($"It Doesn't Affect {defendingPokemon.pokemon.currentName}");
                 return 0;
             }
-            defendingPokemon.UpdateHPRestored(hpHealed);
-            defendingPokemon.statusChanges.Enqueue($"{defendingPokemon.currentName} restored HP using its {Name}!");
+            defendingPokemon.pokemon.UpdateHPRestored(hpHealed);
+            defendingPokemon.pokemon.statusChanges.Enqueue($"{defendingPokemon.pokemon.currentName} restored HP using its {Name}!");
             return 0;
         }
 

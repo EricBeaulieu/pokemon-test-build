@@ -24,28 +24,18 @@ public class StickyWeb : EntryHazardBase
         layers++;
         return message;
     }
-    public override void OnEntry(Pokemon pokemon)
+    public override void OnEntry(BattleUnit defendingUnit)
     {
-        if (pokemon.pokemonBase.IsType(ElementType.Flying))
+        if (defendingUnit.IsGrounded() == true)
         {
             return;
         }
 
-        if (pokemon.ability.Id == AbilityID.Levitate)
-        {
-            return;
-        }
-
-        pokemon.statusChanges.Enqueue($"{pokemon.currentName} was caught in the sticky web");
+        defendingUnit.pokemon.statusChanges.Enqueue($"{defendingUnit.pokemon.currentName} was caught in the sticky web");
     }
-    public override StatBoost OnEntryLowerStat(Pokemon pokemon)
+    public override StatBoost OnEntryLowerStat(BattleUnit defendingUnit)
     {
-        if (pokemon.pokemonBase.IsType(ElementType.Flying))
-        {
-            return null;
-        }
-
-        if (pokemon.ability.Id == AbilityID.Levitate)
+        if (defendingUnit.IsGrounded() == true)
         {
             return null;
         }

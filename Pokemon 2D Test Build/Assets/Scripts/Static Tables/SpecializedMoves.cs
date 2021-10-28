@@ -47,12 +47,14 @@ public static class SpecializedMoves
         rage = helper.rage;
         revenge = helper.revenge;
         reversal = helper.reversal;
+        seismicToss = helper.seismicToss;
         shadowForce = helper.shadowForce;
         smackDown = helper.smackDown;
         smellingSalts = helper.smellingSalts;
         solarBlade = helper.solarBlade;
         stompingTantrum = helper.stompingTantrum;
         suckerPunch = helper.suckerPunch;
+        superFang = helper.superFang;
         thousandArrows = helper.thousandArrows;
         throatChop = helper.throatChop;
         tripleKick = helper.tripleKick;
@@ -144,12 +146,14 @@ public static class SpecializedMoves
     public static MoveBase rage { get; private set; }
     public static MoveBase revenge { get; private set; }
     public static MoveBase reversal { get; private set; }
+    public static MoveBase seismicToss { get; private set; }
     public static MoveBase shadowForce { get; private set; }
     public static MoveBase smackDown { get; private set; }
     public static MoveBase smellingSalts { get; private set; }
     public static MoveBase solarBlade { get; private set; }
     public static MoveBase stompingTantrum { get; private set; }
     public static MoveBase suckerPunch { get; private set; }
+    public static MoveBase superFang { get; private set; }
     public static MoveBase thousandArrows { get; private set; }
     public static MoveBase throatChop { get; private set; }
     public static MoveBase tripleKick { get; private set; }
@@ -991,6 +995,14 @@ public static class SpecializedMoves
         else if(originalMove == endeavor)
         {
             return (defendingUnit.pokemon.currentHitPoints - attackingUnit.pokemon.currentHitPoints);
+        }
+        else if(originalMove == seismicToss)
+        {
+            return attackingUnit.pokemon.currentLevel;
+        }
+        else if(originalMove == superFang)
+        {
+            return Mathf.FloorToInt(defendingUnit.pokemon.currentHitPoints/2);
         }
 
         return 0;

@@ -32,7 +32,7 @@ public abstract class AbilityBase
     public virtual StatBoost BoostStatSharplyIfAnyStatLowered() { return null; }
     public virtual bool NegatesWeatherEffects() { return false; }
     public virtual ConditionID ContactMoveMayCauseStatusEffect(Pokemon defendingPokemon, Pokemon attackingPokemon, MoveBase currentAttack) { return ConditionID.NA; }
-    public virtual float PowerUpCertainMoves(Pokemon attackingPokemon, Pokemon defendingPokemon, MoveBase currentMove,WeatherEffectID weather) { return 1f; }
+    public virtual float PowerUpCertainMoves(Pokemon attackingPokemon, BattleUnit defendingPokemon, MoveBase currentMove,WeatherEffectID weather) { return 1f; }
     public virtual bool MaximizeMultistrikeMovesHit() { return false; }
     public virtual MoveBase AlterMoveDetails(MoveBase move) { return move; }
     public virtual bool PreventCertainStatusCondition(ConditionID iD, WeatherEffectID weather) { return false; }
@@ -40,7 +40,7 @@ public abstract class AbilityBase
     public virtual bool AffectsHpByXEachTurnWithWeather(Pokemon pokemon,WeatherEffectID weather) { return false; }
     protected const float HpAmountDeductedByWeather = 1f / 8f;
     protected const float HpAmountHealedByWeather = 1f / 16f;
-    public virtual float AlterDamageTaken(Pokemon defendingPokemon,MoveBase move,WeatherEffectID weather) { return 1f; }
+    public virtual float AlterDamageTaken(BattleUnit defendingPokemon,MoveBase move,WeatherEffectID weather) { return 1f; }
     public virtual float LowersDamageTakeSuperEffectiveMoves(float typeEffectiveness) { return 1f; }
     protected const float DamageLoweredPercentage = 2f / 3f;
     public virtual StatBoost AlterStatAfterTakingDamageFromCertainType(ElementType attackType) { return null; }
@@ -56,7 +56,7 @@ public abstract class AbilityBase
     public virtual bool ReducesPowerPointsBy2() { return false; }
     public virtual MoveBase BoostsMovePowerWhenLast(bool isLast, MoveBase move) { return move; }
     public virtual bool DamagesAttackerUponHit(Pokemon defendingPokemon, Pokemon attackingPokemon, MoveBase currentAttack) { return false; }
-    public virtual bool ActivateAbilityUponEntry(Pokemon defendingPokemon, BattleUnit opposingTarget) { return false; }
+    public virtual bool ActivateAbilityUponEntry(BattleUnit defendingPokemon, BattleUnit opposingTarget) { return false; }
     public virtual bool ApplyEffectsToOpposingPokemonOnTurnEnd(BattleUnit opposingTarget) { return false; }
     public virtual void FetchPokeBallFirstFailedThrow(PokeballItem pokeballItem, Pokemon defendingPokemon) { }
     public virtual StatBoost BoostStatUponKO(Pokemon attackingPokemon) { return null; }
@@ -73,4 +73,5 @@ public abstract class AbilityBase
     public virtual bool CantUseAnyHeldItems(HoldItemBase holdItem) { return false; }
     public virtual bool DamagesOpponentUponAbsorbingHP() { return false; }
     public virtual bool UseBerryEarly() { return false; }
+    public virtual bool Levitates() { return false; }
 }

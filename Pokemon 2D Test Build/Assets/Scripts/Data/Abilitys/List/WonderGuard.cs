@@ -10,11 +10,11 @@ public class WonderGuard : AbilityBase
     {
         return "Its mysterious power only lets supereffective moves hit the Pokémon.";
     }
-    public override float AlterDamageTaken(Pokemon defendingPokemon, MoveBase move, WeatherEffectID weather)
+    public override float AlterDamageTaken(BattleUnit defendingPokemon, MoveBase move, WeatherEffectID weather)
     {
         if (DamageModifiers.TypeChartEffectiveness(defendingPokemon,move.Type) < 2)
         {
-            defendingPokemon.statusChanges.Enqueue($"{Name} prevents damage");
+            defendingPokemon.pokemon.statusChanges.Enqueue($"{Name} prevents damage");
             return 0;
         }
         return base.AlterDamageTaken(defendingPokemon, move, weather);

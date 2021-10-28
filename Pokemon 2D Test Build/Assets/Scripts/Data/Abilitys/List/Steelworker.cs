@@ -10,7 +10,7 @@ public class Steelworker : AbilityBase
     {
         return "Powers up Steel-type moves.";
     }
-    public override float PowerUpCertainMoves(Pokemon attackingPokemon, Pokemon defendingPokemon, MoveBase currentMove, WeatherEffectID weather)
+    public override float PowerUpCertainMoves(Pokemon attackingPokemon, BattleUnit defendingPokemon, MoveBase currentMove, WeatherEffectID weather)
     {
         if (currentMove.Type == ElementType.Steel)
         {

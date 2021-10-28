@@ -10,7 +10,7 @@ public class SapSipper : AbilityBase
     {
         return "Boosts the Attack stat if hit by a Grass-type move instead of taking damage.";
     }
-    public override float AlterDamageTaken(Pokemon defendingPokemon, MoveBase move, WeatherEffectID weather)
+    public override float AlterDamageTaken(BattleUnit defendingPokemon, MoveBase move, WeatherEffectID weather)
     {
         if (move.Type == ElementType.Grass)
         {

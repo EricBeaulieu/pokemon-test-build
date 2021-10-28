@@ -24,26 +24,21 @@ public class Spikes : EntryHazardBase
         layers++;
         return message;
     }
-    public override void OnEntry(Pokemon pokemon)
+    public override void OnEntry(BattleUnit defendingUnit)
     {
-        if (pokemon.pokemonBase.IsType(ElementType.Flying))
+        if (defendingUnit.IsGrounded() == true)
         {
             return;
         }
 
-        if (pokemon.ability.Id == AbilityID.Levitate)
-        {
-            return;
-        }
-
-        int damage = pokemon.maxHitPoints / (10 - (layers * 2));
+        int damage = defendingUnit.pokemon.maxHitPoints / (10 - (layers * 2));
 
         if (damage <= 0)
         {
             damage = 1;
         }
 
-        pokemon.UpdateHPDamage(damage);
-        pokemon.statusChanges.Enqueue($"{pokemon.currentName} is hurt Spikes");
+        defendingUnit.pokemon.UpdateHPDamage(damage);
+        defendingUnit.pokemon.statusChanges.Enqueue($"{defendingUnit.pokemon.currentName} is hurt Spikes");
     }
 }

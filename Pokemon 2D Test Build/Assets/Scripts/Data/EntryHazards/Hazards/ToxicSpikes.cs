@@ -24,21 +24,16 @@ public class ToxicSpikes : EntryHazardBase
         layers++;
         return message;
     }
-    public override void OnEntry(Pokemon pokemon)
+    public override void OnEntry(BattleUnit defendingUnit)
     {
-        if (pokemon.pokemonBase.IsType(ElementType.Flying) || pokemon.status != null)
+        if (defendingUnit.IsGrounded() == true || defendingUnit.pokemon.status != null)
         {
             return;
         }
 
-        if (pokemon.pokemonBase.IsType(ElementType.Poison) || pokemon.pokemonBase.IsType(ElementType.Steel))
+        if (defendingUnit.pokemon.pokemonBase.IsType(ElementType.Poison) || defendingUnit.pokemon.pokemonBase.IsType(ElementType.Steel))
         {
-            pokemon.statusChanges.Enqueue($"{pokemon.currentName} is uneffected by the toxic spikes");
-            return;
-        }
-
-        if(pokemon.ability.Id == AbilityID.Levitate)
-        {
+            defendingUnit.pokemon.statusChanges.Enqueue($"{defendingUnit.pokemon.currentName} is uneffected by the toxic spikes");
             return;
         }
 
@@ -48,11 +43,11 @@ public class ToxicSpikes : EntryHazardBase
         }
         else if (layers == 1)
         {
-            pokemon.SetStatus(ConditionID.Poison, false);
+            defendingUnit.pokemon.SetStatus(ConditionID.Poison, false);
         }
         else
         {
-            pokemon.SetStatus(ConditionID.ToxicPoison, false);
+            defendingUnit.pokemon.SetStatus(ConditionID.ToxicPoison, false);
         }
     }
 }

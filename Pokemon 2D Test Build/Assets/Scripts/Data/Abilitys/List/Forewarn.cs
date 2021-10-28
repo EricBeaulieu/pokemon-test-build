@@ -13,7 +13,7 @@ public class Forewarn : AbilityBase
     }
     List<Move> tempMoveList = new List<Move>();
     string abilityMessage;
-    public override bool ActivateAbilityUponEntry(Pokemon defendingPokemon, BattleUnit opposingTarget)
+    public override bool ActivateAbilityUponEntry(BattleUnit defendingPokemon, BattleUnit opposingTarget)
     {
         if(opposingTarget.pokemon.moves.Count <= 0)
         {

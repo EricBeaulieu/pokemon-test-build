@@ -10,7 +10,7 @@ public class Anticipation : AbilityBase
     {
         return "The Pokémon can sense an opposing Pokémon's dangerous moves.";
     }
-    public override bool ActivateAbilityUponEntry(Pokemon defendingPokemon, BattleUnit opposingTarget)
+    public override bool ActivateAbilityUponEntry(BattleUnit defendingPokemon, BattleUnit opposingTarget)
     {
         for (int i = 0; i < opposingTarget.pokemon.moves.Count; i++)
         {
