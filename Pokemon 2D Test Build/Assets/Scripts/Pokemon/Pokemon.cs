@@ -8,7 +8,8 @@ public class Pokemon {
 
     //variables
     [SerializeField] PokemonBase _pokemonBase;
-    [SerializeField] int _level;
+    [Range(1,100)]
+    [SerializeField] int _level = 1;
     [SerializeField] List<MoveBase> _presetMoves;
     [SerializeField] bool _isShiny;
     [SerializeField] Gender _gender;

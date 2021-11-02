@@ -172,7 +172,7 @@ public class GameManager : MonoBehaviour
         //Ask if the you would like to name the new pokemon
 
         //Add the new pokemon to either the party or PC
-        bool addedToParty = playerController.GetComponent<PokemonParty>().AddCapturedPokemon(capturedPokemon,pokeball);
+        bool addedToParty = playerController.pokemonParty.AddCapturedPokemon(capturedPokemon,pokeball);
         if (addedToParty == true)
         {
             //return dialog stating that it was added to your party

@@ -306,14 +306,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4200d31043e085144be783934744a7b1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  characterArt: {fileID: 0}
   movementSpeed: 5
   positionMovingTo: {fileID: 483150110}
-  trainerBase: {fileID: 11400000, guid: c1e6b74e042f0ee418f01008f16ec6c0, type: 2}
+  standAroundAndLook: 1
+  canLookUp: 1
+  canLookDown: 1
+  canLookLeft: 1
+  canLookRight: 1
+  aiDecisionList: []
+  timeUntilMoveMin: 5
+  timeUntilMoveMax: 0
+  trainerName: 
+  preBattleDialog:
+    lines: []
+  inBattleDialogOnDefeat:
+    lines: []
+  inBattleDialogOnVictory:
+    lines: []
+  postDefeatOverworldDialog:
+    lines: []
   saveableEntity: {fileID: -5716534250426172903}
   lineOfSightSize: 7
   lineofSight: {fileID: 4292511139321701667}
-  timeUntilMoveMin: 5
-  timeUntilMoveMax: 0
   exclamationMark: {fileID: 227969050}
 --- !u!114 &2072594005822930160
 MonoBehaviour:
@@ -349,6 +364,7 @@ MonoBehaviour:
       _specialDefense: 0
       _speed: 0
     _currentName: 
+    abilityID: 0
     currentHeldItem: {fileID: 0}
   - _pokemonBase: {fileID: 11400000, guid: c4dd55ad047f5cb4d9c167f439657170, type: 2}
     _level: 5
@@ -371,6 +387,7 @@ MonoBehaviour:
       _specialDefense: 0
       _speed: 0
     _currentName: 
+    abilityID: 0
     currentHeldItem: {fileID: 0}
   - _pokemonBase: {fileID: 11400000, guid: a5077a98ad912594f8e38408d3ce9f02, type: 2}
     _level: 12
@@ -393,6 +410,7 @@ MonoBehaviour:
       _specialDefense: 0
       _speed: 0
     _currentName: 
+    abilityID: 0
     currentHeldItem: {fileID: 0}
 --- !u!50 &5864479954145141597
 Rigidbody2D:

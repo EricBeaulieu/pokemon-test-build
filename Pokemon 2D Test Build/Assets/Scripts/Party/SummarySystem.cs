@@ -9,6 +9,7 @@ public class SummarySystem : MonoBehaviour
     [SerializeField] SummaryInfo info;
     [SerializeField] SummarySkills skills;
     [SerializeField] SummaryMoves moves;
+    [SerializeField] SummaryMoveDetails moveDetails;
 
     PartySystem partySystem;
 
@@ -18,9 +19,15 @@ public class SummarySystem : MonoBehaviour
     bool _animating;
     Vector2 _currentInput;
 
+    SelectableBoxUI selectableBox;
+    [SerializeField] SummaryAttackButton firstMove;
+
+    bool selectingMove = false;
+
     public void Initialization()
     {
         partySystem = GameManager.instance.GetPartySystem;
+        selectableBox = new SelectableBoxUI(firstMove.gameObject);
     }
 
     void Update()
@@ -30,37 +37,48 @@ public class SummarySystem : MonoBehaviour
 
         if(_animating == false)
         {
-            if (_currentInput.x != 0)
-            {
-                _currentInput.x = _currentInput.x > 0 ? 1 : -1;
-            }
-
-            if (_currentInput.y != 0)
-            {
-                _currentInput.y = _currentInput.y > 0 ? 1 : -1;
-            }
-
-            if (_currentInput.x != 0) _currentInput.y = 0;
-
-            if (_currentInput != Vector2.zero)
+            if(selectingMove == false)
             {
                 if (_currentInput.x != 0)
                 {
-                    StartCoroutine(SwitchPage(Mathf.RoundToInt(_currentInput.x)));
+                    _currentInput.x = _currentInput.x > 0 ? 1 : -1;
                 }
-                else//_currentInput.y != 0
+
+                if (_currentInput.y != 0)
                 {
-                    StartCoroutine(SwitchPokemon(Mathf.RoundToInt(-_currentInput.y)));
+                    _currentInput.y = _currentInput.y > 0 ? 1 : -1;
                 }
-                    
+
+                if (_currentInput.x != 0) _currentInput.y = 0;
+
+                if (_currentInput != Vector2.zero)
+                {
+                    if (_currentInput.x != 0)
+                    {
+                        StartCoroutine(SwitchPage(Mathf.RoundToInt(_currentInput.x)));
+                    }
+                    else//_currentInput.y != 0
+                    {
+                        StartCoroutine(SwitchPokemon(Mathf.RoundToInt(-_currentInput.y)));
+                    }
+                }
+            }
+
+            if (Input.GetButtonDown("Fire2") && selectingMove == true)
+            {
+                StartCoroutine(RemoveMoveDetails());
+            }
+
+            if (_currentPage == 2 && selectingMove == false && Input.GetKeyDown(KeyCode.Z))
+            {
+                StartCoroutine(ShowMoveDetails());
             }
         }
 
-        if (Input.GetButtonDown("Fire2"))
+        if (Input.GetButtonDown("Fire2") && selectingMove == false)
         {
             CloseSummarySystem();
         }
-
     }
 
     public void OnSummaryMenuOpened(List<Pokemon> allAvailablePokemon,int index)
@@ -76,6 +94,7 @@ public class SummarySystem : MonoBehaviour
         info.SetPosition(true);
         skills.SetPosition(false);
         moves.SetPosition(false);
+        moveDetails.SetPosition(false);
     }
 
     public void CloseSummarySystem()
@@ -90,6 +109,7 @@ public class SummarySystem : MonoBehaviour
         info.SetupData(pokemon);
         skills.SetupData(pokemon);
         moves.SetupData(pokemon);
+        moveDetails.SetupData(pokemon);
     }
 
     IEnumerator SwitchPage(int direction)
@@ -139,5 +159,32 @@ public class SummarySystem : MonoBehaviour
         }
         yield return new WaitForSeconds(0.25f);
         _animating = false;
+    }
+
+    IEnumerator ShowMoveDetails()
+    {
+        if (_animating == true)
+        {
+            yield break;
+        }
+        if (_availablePokemon[_pokemonIndex].moves.Count > 0)
+        {
+            _animating = true;
+            yield return moveDetails.Animate(true);
+            selectingMove = true;
+            selectableBox.SelectBox(firstMove.gameObject);
+            _animating = false;
+        }
+    }
+
+    public IEnumerator RemoveMoveDetails()
+    {
+        if(_animating == true)
+        {
+            yield break;
+        }
+        yield return moveDetails.Animate(false);
+        selectingMove = false;
+        selectableBox.Deselect();
     }
 }

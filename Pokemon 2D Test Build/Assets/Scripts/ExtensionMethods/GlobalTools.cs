@@ -91,4 +91,22 @@ public static class GlobalTools
                 return FacingDirections.Down;//Make down the default
         }
     }
+
+    public static string ReplacePokemonWithPokemonName(string original, PokemonBase pokemon)
+    {
+        if (original.Contains("<pokemon>") == true)
+        {
+            return original.Replace("<pokemon>", pokemon.GetPokedexName());
+        }
+        return original;
+    }
+
+    public static string ReplacePlayerWithTrainerName(string original, PlayerController player)
+    {
+        if (original.Contains("<player>") == true)
+        {
+            return original.Replace("<player>", player.TrainerName);
+        }
+        return original;
+    }
 }

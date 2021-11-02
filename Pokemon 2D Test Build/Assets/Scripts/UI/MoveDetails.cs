@@ -19,19 +19,40 @@ public class MoveDetails : MonoBehaviour
             elementTypeSprite.sprite = StatusConditionArt.instance.ReturnElementArt(move.Type);
         }
 
-        moveCategorySprite.sprite = StatusConditionArt.instance.ReturnMoveCategoryArt(move.MoveType);
-        movePower.text = (move.MovePower > 1) ? move.MovePower.ToString() : "--";
-
-        if(movePp != null)
+        if(move != null)
         {
-            movePp.text = move.PowerPoints.ToString();
+            moveCategorySprite.sprite = StatusConditionArt.instance.ReturnMoveCategoryArt(move.MoveType);
+            movePower.text = (move.MovePower > 1) ? move.MovePower.ToString() : "--";
+            if (movePp != null)
+            {
+                movePp.text = move.PowerPoints.ToString();
+            }
+        }
+        else
+        {
+            moveCategorySprite.sprite = StatusConditionArt.instance.Nothing;
+            movePower.text = "--";
         }
 
-        moveAccuracy.text = (move.AlwaysHits == false) ? move.MoveAccuracy.ToString() : "--";
+        if(move != null)
+        {
+            moveAccuracy.text = (move.AlwaysHits == false) ? move.MoveAccuracy.ToString() : "--";
+        }
+        else
+        {
+            moveAccuracy.text = "--";
+        }
 
         if(moveDetails != null)
         {
-            moveDetails.text = move.MoveDescription;
+            if(move != null)
+            {
+                moveDetails.text = move.MoveDescription;
+            }
+            else
+            {
+                moveDetails.text = "";
+            }
         }
     }
 }

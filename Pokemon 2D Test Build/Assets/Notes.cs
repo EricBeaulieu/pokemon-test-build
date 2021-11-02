@@ -13,6 +13,7 @@ public class Notes
     //these moves will be pre created somewhere else
 
     //money on trainer defeat as well as pay day
+    //pc pokemon
     //gifting pokemon from trainers/finding them in a ball gifted to the overworld
     //power points stuff not implimented for when item is used on pokemon
     //in regards to specialized messages, they can be thrown into stat boost and displayed when given into effect
@@ -21,7 +22,6 @@ public class Notes
     //Cheek pouch ability,Gluttony,Harvest for when berries are implimented
     //Comatose, Corrosion,dancer , majority of complicated abilities for later
     //bullet proof fix the list to contain moves that it shall adjust
-    //if the pokemon is the last one and the player knocks out the pokemon, then skip over the boost stat or lowering for the attacker.
     //fix the save for the player. currently after every save the player seems to be stuck running
     //when a player looses a battle, reset everything, the pokemon trainers were still standing in the positions that they last were
     //Battle unit, remove the event from pokemon and put it over to battle unit and have it update the HUD upon so, change in battlesystem the set status

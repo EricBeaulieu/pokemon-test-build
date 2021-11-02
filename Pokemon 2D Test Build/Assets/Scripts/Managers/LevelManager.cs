@@ -121,6 +121,10 @@ public class LevelManager : MonoBehaviour
 
         for (int i = 0; i < gameObjects.Length; i++)
         {
+            if(gameObjects[i].activeInHierarchy == false)
+            {
+                continue;
+            }
             entity.AddRange(gameObjects[i].GetComponentsInChildren<NpcController>());
             entity.AddRange(gameObjects[i].GetComponentsInChildren<TrainerController>());
         }

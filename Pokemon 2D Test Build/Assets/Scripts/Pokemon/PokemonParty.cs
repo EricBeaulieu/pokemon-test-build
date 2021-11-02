@@ -56,7 +56,7 @@ public class PokemonParty : MonoBehaviour
     public bool AddCapturedPokemon(Pokemon capturedPokemon,PokeballItem currentPokeball)
     {
         capturedPokemon.Obtained(GetComponent<PlayerController>(),currentPokeball);
-        if(pokemonParty.Count < MAX_PARTY_POKEMON_SIZE)
+        if(PartyIsFull() == false)
         {
             _originalPos.Add(capturedPokemon);
             return true;
@@ -66,6 +66,17 @@ public class PokemonParty : MonoBehaviour
             //Send to PC
             return false;
         }
+    }
+
+    public void AddGiftPokemon(Pokemon giftPokemon, PokeballItem pokeball = null)
+    {
+        if (pokeball == null)
+        {
+            pokeball = Resources.Load<PokeballItem>("Items/Pokeballs/Poke Ball");
+        }
+
+        giftPokemon.Obtained(GetComponent<PlayerController>(), pokeball);
+        pokemonParty.Add(giftPokemon);
     }
 
     public void SwitchPokemonPositions(Pokemon currentPokemon, Pokemon newPokemon)
@@ -143,5 +154,10 @@ public class PokemonParty : MonoBehaviour
         }
 
         return null;
+    }
+
+    public bool PartyIsFull()
+    {
+        return (pokemonParty.Count >= MAX_PARTY_POKEMON_SIZE);
     }
 }
