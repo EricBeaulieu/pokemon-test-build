@@ -7,6 +7,7 @@ public class OverworldPokeballContainingPokemon : MonoBehaviour,IInteractable, I
 {
     [SerializeField] SaveableEntity saveableEntity;
     [SerializeField] Pokemon giftPokemon;
+    [SerializeField] PokeballItem specifiedPokeball;
 
     [Tooltip("<player> converts to the players name and <pokemon> converts to the pokemons original name")]
     [SerializeField] string specializedMessage;
@@ -53,7 +54,7 @@ public class OverworldPokeballContainingPokemon : MonoBehaviour,IInteractable, I
             message = GlobalTools.ReplacePlayerWithTrainerName(message, player);
         }
 
-        player.pokemonParty.AddGiftPokemon(giftPokemon);
+        player.pokemonParty.AddGiftPokemon(giftPokemon,specifiedPokeball);
 
         giftReceived = true;
         gameObject.SetActive(false);

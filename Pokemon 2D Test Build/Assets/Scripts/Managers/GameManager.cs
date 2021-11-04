@@ -27,6 +27,10 @@ public class GameManager : MonoBehaviour
     [SerializeField] EvolutionEggUI evolutionSystem;
     [SerializeField] LearnNewMoveUI learnNewMoveUI;
     List<Pokemon> pokemonEvolving = new List<Pokemon>();
+    [SerializeField] PCSystem pCSystem;
+
+    [SerializeField] Pokemon TestPokemonForBox;
+    bool testpokemonMade = false;
 
     static GameState state = GameState.Overworld;
 
@@ -62,8 +66,9 @@ public class GameManager : MonoBehaviour
         evolutionSystem.Initialization();
         learnNewMoveUI.Initialization();
         SceneSystem.Initialization();
+        pCSystem.Initialization();
 
-        if(startNewSaveEveryStart == false)
+        if (startNewSaveEveryStart == false)
         {
             LoadGame();
         }
@@ -317,6 +322,11 @@ public class GameManager : MonoBehaviour
         get { return learnNewMoveUI; }
     }
 
+    public PCSystem GetPCSystem
+    {
+        get { return pCSystem; }
+    }
+
     public static void SetGameState(GameState newState)
     {
         state = newState;
@@ -333,5 +343,18 @@ public class GameManager : MonoBehaviour
         }
         pokemonEvolving.Clear();
         SetGameState(GameState.Overworld);
+    }
+
+    public Pokemon GetTestPokemon()
+    {
+        //if(testpokemonMade == false)
+        //{
+            TestPokemonForBox = new Pokemon(TestPokemonForBox.pokemonBase, TestPokemonForBox.currentLevel, TestPokemonForBox.individualValues,
+    TestPokemonForBox.effortValues, TestPokemonForBox.gender, TestPokemonForBox.isShiny, TestPokemonForBox.nature,
+    TestPokemonForBox.currentName, TestPokemonForBox.presetMoves, TestPokemonForBox.startingAbilityID, TestPokemonForBox.GetCurrentItem);
+        //    testpokemonMade = true;
+        //}
+
+        return TestPokemonForBox;
     }
 }

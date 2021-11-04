@@ -6,7 +6,7 @@ public class Notes
 {
     //To do list
 
-    //mega launcher Pulse/aura moves
+    //Fix banner, put a black background on text or surrounding text so its easier to read
     //iron ball for grounded
     //fix stealth rock to not miss when target is semi invernerable
     //for certain attacks, such as natural gift/z moves, it will replace the move base to something from a static table. 

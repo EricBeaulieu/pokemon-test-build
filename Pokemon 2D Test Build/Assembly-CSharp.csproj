@@ -88,8 +88,10 @@
     <Compile Include="Assets\Scripts\Data\Abilitys\List\Reckless.cs" />
     <Compile Include="Assets\Scripts\Data\Abilitys\List\Scrappy.cs" />
     <Compile Include="Assets\Scripts\Data\HoldItems\Standard\FocusBand.cs" />
+    <Compile Include="Assets\Scripts\Overworld\OverworldPokeballContainingPokemon.cs" />
     <Compile Include="Assets\Scripts\Data\HoldItems\Standard\ProtectivePads.cs" />
     <Compile Include="Assets\Scripts\Data\Abilitys\List\Download.cs" />
+    <Compile Include="Assets\Scripts\Party\SummaryMoveDetails.cs" />
     <Compile Include="Assets\Scripts\Data\Conditions\VolatileBattleStatus\Recharging.cs" />
     <Compile Include="Assets\Scripts\Pokemon\PokemonBase.cs" />
     <Compile Include="Assets\Scripts\Data\HoldItems\Standard\BrightPowder.cs" />
@@ -528,8 +530,12 @@
     <Compile Include="Assets\Scripts\Data\Abilitys\List\RainDish.cs" />
     <Compile Include="Assets\Scripts\Data\Abilitys\List\Justified.cs" />
     <Compile Include="Assets\Scripts\Data\Abilitys\List\Soundproof.cs" />
-    <Compile Include="Assets\Scripts\Overworld\OverworldPokeballContainingPokemon.cs" />
-    <Compile Include="Assets\Scripts\Party\SummaryMoveDetails.cs" />
+    <Compile Include="Assets\Scripts\UI\PC\PCPokemonData.cs" />
+    <Compile Include="Assets\Scripts\UI\PC\PCBoxData.cs" />
+    <Compile Include="Assets\Scripts\UI\PC\PCPokemon.cs" />
+    <Compile Include="Assets\Scripts\UI\PC\PCSystem.cs" />
+    <Compile Include="Assets\Scripts\UI\PC\PCCurrentBoxInfo.cs" />
+    <Compile Include="Assets\Scripts\Overworld\OverworldPC.cs" />
   </ItemGroup>
   <ItemGroup>
      <None Include="Assets\ScriptTemplates\82-EricBeaulieu__BerryBase-NewBerryBase.cs.txt" />
