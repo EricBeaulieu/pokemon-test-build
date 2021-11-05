@@ -67,6 +67,11 @@ public class Pokemon {
         AbilityID presetAbilityID = AbilityID.NA,ItemBase item = null)
     {
         _pokemonBase = pokemonBase;
+
+        if(level <= 0 || level > 100)
+        {
+            level = 5;
+        }
         currentLevel = level;
         currentExp = pokemonBase.GetExpForLevel(level);
 

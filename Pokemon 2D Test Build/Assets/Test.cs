@@ -13,6 +13,8 @@ public class Test : MonoBehaviour {
     public ElementType defenderType = ElementType.Dark;
     public ElementType defenderType2 = ElementType.NA;
 
+    public Pokemon[] pcPokemonTest;
+
     // Use this for initialization
     void Start () {
 
@@ -47,6 +49,21 @@ public class Test : MonoBehaviour {
         for (int i = 1; i < 101; i++)
         {
             Debug.Log($"Level {i} EXP to level {ExperienceTable.ReturnExperienceRequiredForLevel(i, testExperienceGroup)}");
+        }
+    }
+
+    public void SetAllTestPokemon()
+    {
+        for (int i = 0; i < pcPokemonTest.Length; i++)
+        {
+            if(pcPokemonTest[i].pokemonBase == null)
+            {
+                pcPokemonTest[i] = null;
+                continue;
+            }
+            pcPokemonTest[i] = new Pokemon(pcPokemonTest[i].pokemonBase, pcPokemonTest[i].currentLevel, pcPokemonTest[i].individualValues,
+                pcPokemonTest[i].effortValues, pcPokemonTest[i].gender, pcPokemonTest[i].isShiny, pcPokemonTest[i].nature,
+                pcPokemonTest[i].currentName, pcPokemonTest[i].presetMoves, pcPokemonTest[i].startingAbilityID, pcPokemonTest[i].GetCurrentItem);
         }
     }
 }

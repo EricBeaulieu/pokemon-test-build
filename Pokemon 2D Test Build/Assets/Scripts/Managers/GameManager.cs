@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public enum GameState { Overworld, Battle, Party,Inventory, Dialog, Fade}
+public enum GameState { Overworld, Battle, Party,Inventory, Dialog, Fade,PC}
 
 public class GameManager : MonoBehaviour
 {
     static GameManager _instance = null;
 
     public bool startNewSaveEveryStart;
+    public bool startWithPresetBoxes;
 
     [SerializeField] PlayerController playerPrefab;
     static PlayerController playerController;
@@ -29,8 +30,8 @@ public class GameManager : MonoBehaviour
     List<Pokemon> pokemonEvolving = new List<Pokemon>();
     [SerializeField] PCSystem pCSystem;
 
-    [SerializeField] Pokemon TestPokemonForBox;
-    bool testpokemonMade = false;
+    [SerializeField] Test tester;
+    bool testPokemonBeenSet = false;
 
     static GameState state = GameState.Overworld;
 
@@ -98,6 +99,8 @@ public class GameManager : MonoBehaviour
                 dialogManager.HandleUpdate();
                 break;
             case GameState.Fade:
+                break;
+            case GameState.PC:
                 break;
             default:
                 Debug.LogError("Broken");
@@ -345,16 +348,13 @@ public class GameManager : MonoBehaviour
         SetGameState(GameState.Overworld);
     }
 
-    public Pokemon GetTestPokemon()
+    public Pokemon[] GetTestPokemon()
     {
-        //if(testpokemonMade == false)
-        //{
-            TestPokemonForBox = new Pokemon(TestPokemonForBox.pokemonBase, TestPokemonForBox.currentLevel, TestPokemonForBox.individualValues,
-    TestPokemonForBox.effortValues, TestPokemonForBox.gender, TestPokemonForBox.isShiny, TestPokemonForBox.nature,
-    TestPokemonForBox.currentName, TestPokemonForBox.presetMoves, TestPokemonForBox.startingAbilityID, TestPokemonForBox.GetCurrentItem);
-        //    testpokemonMade = true;
-        //}
-
-        return TestPokemonForBox;
+        if(testPokemonBeenSet == false)
+        {
+            tester.SetAllTestPokemon();
+            testPokemonBeenSet = true;
+        }
+        return tester.pcPokemonTest;
     }
 }

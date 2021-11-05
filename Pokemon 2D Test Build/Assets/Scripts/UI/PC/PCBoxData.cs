@@ -12,9 +12,20 @@ public class PCBoxData
     public PCBoxData()
     {
         pokemonInsideBox = new Pokemon[PC_MAX_BOX_SIZE];
-        for (int i = 0; i < pokemonInsideBox.Length; i++)
+        if (GameManager.instance.startWithPresetBoxes == true)
         {
-            pokemonInsideBox[i] = GameManager.instance.GetTestPokemon();
+            for (int i = 0; i < GameManager.instance.GetTestPokemon().Length; i++)
+            {
+                if(GameManager.instance.GetTestPokemon()[i] == null)
+                {
+                    pokemonInsideBox[i] = null;
+                }
+                else
+                {
+                    pokemonInsideBox[i] = GameManager.instance.GetTestPokemon()[i];
+                }
+            }
+            
         }
     }
     //load all pokemon into boxes upon start of game, if pokemon is null just leave empty space

@@ -5,10 +5,7 @@ using UnityEngine.UI;
 
 public class PCCurrentBoxInfo : MonoBehaviour
 {
-    [SerializeField] Image bannerArt;
-    [SerializeField] Text bannerBoxName;
-
-
+    [SerializeField] PCBanner banner;
     [SerializeField] Image backgroundArt;
 
     [SerializeField] PCPokemon[] pCPokemon;
@@ -21,7 +18,7 @@ public class PCCurrentBoxInfo : MonoBehaviour
     //    SetupPCPokemonNavigation();
     //}
 
-    public PCPokemon GetPokemonAtIndex(int index)
+    public PCPokemon GetPCPokemonAtIndex(int index)
     {
         return pCPokemon[index];
     }
@@ -32,58 +29,6 @@ public class PCCurrentBoxInfo : MonoBehaviour
         {
             pCPokemon[i].DepositPokemon(currentBox.PokemonInsideBox[i]);
         }
+        banner.SetupBanner(currentBox);
     }
-
-    //void SetupPCPokemonNavigation()
-    //{
-    //    for (int i = 0; i < pCPokemon.Length; i++)
-    //    {
-    //        var navigation = pCPokemon[i].GetComponent<Button>().navigation;
-
-    //        //Up
-    //        if (((i+1) / row) <= 0)
-    //        {
-    //            //navigation.selectOnUp == Banner
-    //        }
-    //        else
-    //        {
-    //            navigation.selectOnUp = pCPokemon[i - row].GetComponent<Button>();
-    //        }
-
-    //        //Down
-    //        if(((i + 1) / row) > column)
-    //        {
-    //            int k = i % ((i/row) * column);
-
-    //            navigation.selectOnDown = pCPokemon[k].GetComponent<Button>();
-    //        }
-    //        else
-    //        {
-    //            //navigation.selectOnDown == Banner
-    //        }
-
-    //        //Left
-    //        if(i%column == 0)
-    //        {
-    //            navigation.selectOnLeft = pCPokemon[i+(column-1)].GetComponent<Button>();
-    //        }
-    //        else
-    //        {
-    //            navigation.selectOnLeft = pCPokemon[i -1].GetComponent<Button>();
-    //        }
-
-    //        //Right
-    //        if (i % column == (column - 1))
-    //        {
-    //            navigation.selectOnLeft = pCPokemon[i - (column - 1)].GetComponent<Button>();
-    //        }
-    //        else
-    //        {
-    //            navigation.selectOnLeft = pCPokemon[i + 1].GetComponent<Button>();
-    //        }
-
-    //        pCPokemon[i].GetComponent<Button>().navigation = navigation;
-    //    }
-    //}
-
 }

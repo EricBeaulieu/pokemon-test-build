@@ -4,38 +4,41 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class PCPokemon : MonoBehaviour,ISelectHandler
+public class PCPokemon : MonoBehaviour,ISelectHandler,IDeselectHandler
 {
     [SerializeField] Image pokemonSprite;
-    Pokemon currentPokemon;
-    [SerializeField] PCPokemonData pCPokemonData;
+    public Pokemon currentPokemon { get; private set; }
     [SerializeField] GameObject holditemGameobject;
+    [SerializeField] Button button;
 
-    public bool DepositPokemon(Pokemon newPokemon)//Should return pokemon if there is one there
+    public void DepositPokemon(Pokemon newPokemon)//Should return pokemon if there is one there
     {
         if (currentPokemon != null)
         {
-            return false;
+            Debug.LogWarning($"tried to deposit pokemon in a position with pokemon included", gameObject);
+            return;
         }
 
         if(newPokemon == null)
         {
-            currentPokemon = null;
-            pokemonSprite.sprite = StatusConditionArt.instance.Nothing;
-            holditemGameobject.SetActive(false);
-            return false;
+            currentPokemon = null;//for the starting setter
+            UpdateData();
+            return;
         }
         currentPokemon = newPokemon;
-        pokemonSprite.sprite = newPokemon.pokemonBase.GetAnimatedSprites()[0];
-        holditemGameobject.SetActive(currentPokemon.GetCurrentItem != null);
-        return true;
+        UpdateData();
     }
 
     public Pokemon WithdrawPokemon()
     {
+        if(currentPokemon == null)
+        {
+            return null;
+        }
         Pokemon withdrawnPokemon = currentPokemon;
         currentPokemon = null;
-        pokemonSprite.sprite = StatusConditionArt.instance.Nothing;
+        UpdateData();
+
         return withdrawnPokemon;
     }
 
@@ -49,11 +52,19 @@ public class PCPokemon : MonoBehaviour,ISelectHandler
         else
         {
             pokemonSprite.sprite = StatusConditionArt.instance.Nothing;
+            holditemGameobject.SetActive(false);
         }
     }
 
     public void OnSelect(BaseEventData eventData)
     {
-        pCPokemonData.SetupData(currentPokemon);
+        PCSystem.pointer.MoveToPosition(this.transform.position);
+        button.onClick.AddListener(() => { StartCoroutine(PCSystem.pointer.SelectPokemon(this)); });
+        PCSystem.pCPokemonDataDisplay.SetupData(currentPokemon);
+    }
+
+    public void OnDeselect(BaseEventData eventData)
+    {
+        button.onClick.RemoveAllListeners();
     }
 }

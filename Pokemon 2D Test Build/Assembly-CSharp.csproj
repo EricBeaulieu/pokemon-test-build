@@ -206,6 +206,7 @@
     <Compile Include="Assets\Test.cs" />
     <Compile Include="Assets\Scripts\Data\HoldItems\Standard\LightClay.cs" />
     <Compile Include="Assets\Scripts\UI\CutoutMaskUI.cs" />
+    <Compile Include="Assets\Scripts\UI\PC\PCBoxData.cs" />
     <Compile Include="Assets\Scripts\Data\Abilitys\List\Normalize.cs" />
     <Compile Include="Assets\Scripts\Pokemon\Shield\Mist.cs" />
     <Compile Include="Assets\Scripts\Data\Abilitys\List\StormDrain.cs" />
@@ -227,6 +228,7 @@
     <Compile Include="Assets\Scripts\Pokemon\Pokemon.cs" />
     <Compile Include="Assets\Scripts\Battle\AttackButton.cs" />
     <Compile Include="Assets\Scripts\Data\Abilitys\List\LongReach.cs" />
+    <Compile Include="Assets\Scripts\UI\PC\PCSystem.cs" />
     <Compile Include="Assets\Scripts\Data\Abilitys\List\Swarm.cs" />
     <Compile Include="Assets\Scripts\Data\HoldItems\Standard\HeavyDutyBoots.cs" />
     <Compile Include="Assets\Scripts\Data\HoldItems\Berries\Oran.cs" />
@@ -285,6 +287,7 @@
     <Compile Include="Assets\Scripts\Characters\MonoBehavior\EntityAI.cs" />
     <Compile Include="Assets\Scripts\Data\HoldItems\Berries\Qualot.cs" />
     <Compile Include="Assets\Scripts\Data\Conditions\VolatileBattleStatus\TakingAim.cs" />
+    <Compile Include="Assets\Scripts\Overworld\OverworldPC.cs" />
     <Compile Include="Assets\Scripts\Data\Weather\WeatherEffectDB.cs" />
     <Compile Include="Assets\Scripts\Data\HoldItems\Standard\Snowball.cs" />
     <Compile Include="Assets\Scripts\Data\Abilitys\List\ArenaTrap.cs" />
@@ -390,6 +393,7 @@
     <Compile Include="Assets\Scripts\Data\HoldItems\Standard\DampRock.cs" />
     <Compile Include="Assets\Scripts\Data\HoldItems\Standard\MiracleSeed.cs" />
     <Compile Include="Assets\Scripts\Data\Abilitys\List\SolarPower.cs" />
+    <Compile Include="Assets\Scripts\UI\PC\PCPokemon.cs" />
     <Compile Include="Assets\Scripts\Data\Abilitys\List\PurePower.cs" />
     <Compile Include="Assets\Scripts\Data\Abilitys\List\VitalSpirit.cs" />
     <Compile Include="Assets\Notes.cs" />
@@ -518,6 +522,7 @@
     <Compile Include="Assets\Scripts\Data\Abilitys\List\Aerilate.cs" />
     <Compile Include="Assets\Scripts\Data\Conditions\VolatileStatus\Nightmare.cs" />
     <Compile Include="Assets\Scripts\Data\HoldItems\Standard\QuickPowder.cs" />
+    <Compile Include="Assets\Scripts\UI\PC\PCCurrentBoxInfo.cs" />
     <Compile Include="Assets\Scripts\Data\HoldItems\Standard\Everstone.cs" />
     <Compile Include="Assets\Scripts\Items\ScriptableObjects\BattleEffectItem.cs" />
     <Compile Include="Assets\Scripts\Data\HoldItems\Standard\SilkScarf.cs" />
@@ -530,12 +535,11 @@
     <Compile Include="Assets\Scripts\Data\Abilitys\List\RainDish.cs" />
     <Compile Include="Assets\Scripts\Data\Abilitys\List\Justified.cs" />
     <Compile Include="Assets\Scripts\Data\Abilitys\List\Soundproof.cs" />
-    <Compile Include="Assets\Scripts\UI\PC\PCPokemonData.cs" />
-    <Compile Include="Assets\Scripts\UI\PC\PCBoxData.cs" />
-    <Compile Include="Assets\Scripts\UI\PC\PCPokemon.cs" />
-    <Compile Include="Assets\Scripts\UI\PC\PCSystem.cs" />
-    <Compile Include="Assets\Scripts\UI\PC\PCCurrentBoxInfo.cs" />
-    <Compile Include="Assets\Scripts\Overworld\OverworldPC.cs" />
+    <Compile Include="Assets\Scripts\UI\PC\PCPokemonDataDisplay.cs" />
+    <Compile Include="Assets\Scripts\UI\PC\PCPointer.cs" />
+    <Compile Include="Assets\Scripts\UI\PC\PCBanner.cs" />
+    <Compile Include="Assets\Scripts\UI\PC\PCCloseButton.cs" />
+    <Compile Include="Assets\Scripts\UI\PC\PCTopButton.cs" />
   </ItemGroup>
   <ItemGroup>
      <None Include="Assets\ScriptTemplates\82-EricBeaulieu__BerryBase-NewBerryBase.cs.txt" />

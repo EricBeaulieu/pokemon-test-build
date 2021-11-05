@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class PCPokemonData : MonoBehaviour
+public class PCPokemonDataDisplay : MonoBehaviour
 {
     [SerializeField] Image pokemonSprite;
     [SerializeField] Text pokemonNameText;
@@ -13,12 +13,16 @@ public class PCPokemonData : MonoBehaviour
 
     public void SetupData(Pokemon currentPokemon)
     {
-        if(currentPokemon == null)
+        if(PCSystem.pointer.currentPokemon != null)
+        {
+            return;
+        }
+
+        if (currentPokemon == null)
         {
             pokemonSprite.sprite = StatusConditionArt.instance.Nothing;
             pokemonNameText.text = "";
             pokemonLevelText.text = "";
-
             pokemonGenderSprite.sprite = StatusConditionArt.instance.Nothing;
             pokemonItemText.text = "";
         }
@@ -27,7 +31,6 @@ public class PCPokemonData : MonoBehaviour
             pokemonSprite.sprite = currentPokemon.pokemonBase.GetFrontSprite(currentPokemon.isShiny, currentPokemon.gender)[0];
             pokemonNameText.text = $"{currentPokemon.currentName} \n /{currentPokemon.pokemonBase.GetPokedexName()}";
             pokemonLevelText.text = $"Lv {currentPokemon.currentLevel.ToString()}";
-
             pokemonGenderSprite.sprite = StatusConditionArt.instance.ReturnGenderArt(currentPokemon.gender);
             pokemonItemText.text = (currentPokemon.GetCurrentItem == null) ? "" : currentPokemon.GetCurrentItem.ItemName;
         }

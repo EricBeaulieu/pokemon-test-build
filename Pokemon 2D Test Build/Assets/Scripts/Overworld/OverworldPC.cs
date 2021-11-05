@@ -7,7 +7,6 @@ public class OverworldPC : MonoBehaviour, IInteractable
     public IEnumerator OnInteract(Vector2 vector2)
     {
         GameManager.instance.GetPCSystem.OpenSystem();
-        Debug.Log("Called");
         yield return null;
     }
 
