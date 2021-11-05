@@ -34,4 +34,12 @@ public class PCBoxData
     {
         get { return pokemonInsideBox; }
     }
+
+    public void SavePokemonInsideBox(PCCurrentBoxInfo currentBox)
+    {
+        for (int i = 0; i < PC_MAX_BOX_SIZE; i++)
+        {
+            pokemonInsideBox[i] = currentBox.GetPCPokemonAtIndex(i).currentPokemon;
+        }
+    }
 }

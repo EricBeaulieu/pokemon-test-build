@@ -38,10 +38,10 @@ public class PCSystem : CoreSystem
 
     public override void OpenSystem(bool specifiedBool = false)
     {
-        GameManager.SetGameState(GameState.PC);
         gameObject.SetActive(true);
         dialogSystem.SetCurrentDialogBox(dialogBox);
         dialogSystem.ActivateDialog(false);
+        GameManager.SetGameState(GameState.PC);
         currentBox.SetupData(boxData[boxIndex]);
         selectableBox.SetLastSelected(null);
         selectableBox.SelectBox();
@@ -60,8 +60,8 @@ public class PCSystem : CoreSystem
         }
         GameManager.SetGameState(GameState.Overworld);
         dialogSystem.SetCurrentDialogBox();
+        boxData[boxIndex].SavePokemonInsideBox(currentBox);
         gameObject.SetActive(false);
-        Debug.Log("closed PC");
         //player active
     }
 
@@ -89,7 +89,6 @@ public class PCSystem : CoreSystem
         pCPokemonDataDisplay = GetComponentInChildren<PCPokemonDataDisplay>();
         selectableBox = new SelectableBoxUI(currentBox.GetPCPokemonAtIndex(0).gameObject);
         pointer.Initialization(selectableBox);
-        Debug.Log("pointer", pointer.gameObject);
         //Set party button here
         closeButton.GetButton().onClick.AddListener(() => { CloseSystem(); });
     }
