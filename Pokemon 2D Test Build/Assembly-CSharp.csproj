@@ -133,6 +133,7 @@
     <Compile Include="Assets\Scripts\Data\HoldItems\Standard\QuickClaw.cs" />
     <Compile Include="Assets\Scripts\Items\InventorySystem.cs" />
     <Compile Include="Assets\Scripts\Data\Abilitys\List\Rattled.cs" />
+    <Compile Include="Assets\Scripts\UI\PC\PCPointer.cs" />
     <Compile Include="Assets\Scripts\Data\Abilitys\List\AirLock.cs" />
     <Compile Include="Assets\Scripts\Data\Abilitys\List\CompoundEyes.cs" />
     <Compile Include="Assets\Scripts\Data\HoldItems\Standard\Leftovers.cs" />
@@ -244,6 +245,7 @@
     <Compile Include="Assets\Scripts\Data\Conditions\VolatileBattleStatus\Grounded.cs" />
     <Compile Include="Assets\Scripts\Data\HoldItems\Standard\Leek.cs" />
     <Compile Include="Assets\Scripts\Data\HoldItems\HoldItemsNull.cs" />
+    <Compile Include="Assets\Scripts\UI\PC\PCBanner.cs" />
     <Compile Include="Assets\Scripts\Data\Abilitys\List\BigPecks.cs" />
     <Compile Include="Assets\Scripts\ExtensionMethods\ColorExtensions.cs" />
     <Compile Include="Assets\Scripts\Battle\SpecializedMovesHelper.cs" />
@@ -266,10 +268,12 @@
     <Compile Include="Assets\Scripts\Data\Conditions\Status\Sleep.cs" />
     <Compile Include="Assets\Scripts\Data\HoldItems\Berries\Tanga.cs" />
     <Compile Include="Assets\Scripts\Data\Abilitys\List\Libero.cs" />
+    <Compile Include="Assets\Scripts\UI\PC\PCTopButton.cs" />
     <Compile Include="Assets\Scripts\Data\Abilitys\List\IceBody.cs" />
     <Compile Include="Assets\Scripts\Items\UI\ItemMenuButtonUI.cs" />
     <Compile Include="Assets\Scripts\Party\PartyMemberUI.cs" />
     <Compile Include="Assets\Scripts\Pokemon\SpecifiedValues.cs" />
+    <Compile Include="Assets\Scripts\UI\PC\PCPokemonDataDisplay.cs" />
     <Compile Include="Assets\Scripts\Data\HoldItems\Berries\Custap.cs" />
     <Compile Include="Assets\Scripts\Data\HoldItems\Berries\Colbur.cs" />
     <Compile Include="Assets\Scripts\Items\ScriptableObjects\PokeballItem.cs" />
@@ -535,11 +539,8 @@
     <Compile Include="Assets\Scripts\Data\Abilitys\List\RainDish.cs" />
     <Compile Include="Assets\Scripts\Data\Abilitys\List\Justified.cs" />
     <Compile Include="Assets\Scripts\Data\Abilitys\List\Soundproof.cs" />
-    <Compile Include="Assets\Scripts\UI\PC\PCPokemonDataDisplay.cs" />
-    <Compile Include="Assets\Scripts\UI\PC\PCPointer.cs" />
-    <Compile Include="Assets\Scripts\UI\PC\PCBanner.cs" />
-    <Compile Include="Assets\Scripts\UI\PC\PCCloseButton.cs" />
-    <Compile Include="Assets\Scripts\UI\PC\PCTopButton.cs" />
+    <Compile Include="Assets\Scripts\UI\PC\PCArrowButton.cs" />
+    <Compile Include="Assets\Scripts\UI\PC\PCParty.cs" />
   </ItemGroup>
   <ItemGroup>
      <None Include="Assets\ScriptTemplates\82-EricBeaulieu__BerryBase-NewBerryBase.cs.txt" />

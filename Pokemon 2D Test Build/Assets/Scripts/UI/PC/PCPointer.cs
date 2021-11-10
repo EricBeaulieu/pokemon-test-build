@@ -42,21 +42,6 @@ public class PCPointer : MonoBehaviour
         transform.position = endPosition;
     }
 
-    static IEnumerator SmoothTransitionToPosition(Transform curTransform, Vector3 endPos, float duration)
-    {
-        Vector3 startingPos = curTransform.position;
-        float elapsedTime = 0;
-
-        while (elapsedTime < duration)
-        {
-            curTransform.position = Vector3.Lerp(startingPos, endPos, (elapsedTime / duration));
-            elapsedTime += Time.deltaTime;
-            yield return null;
-        }
-
-        curTransform.position = endPos;
-    }
-
     public IEnumerator SelectPokemon(PCPokemon pCPokemon)
     {
         if(currentPokemon == null)
@@ -68,10 +53,10 @@ public class PCPointer : MonoBehaviour
             else
             {
                 selectableBox.Deselect();
-                yield return SmoothTransitionToPosition(graphics, pCPokemon.gameObject.transform.position, SPEED_TO_NEW_SELECTION);
+                yield return GlobalTools.SmoothTransitionToPosition(graphics, pCPokemon.gameObject.transform.position, SPEED_TO_NEW_SELECTION);
                 currentPokemon = pCPokemon.WithdrawPokemon();
                 UpdateData();
-                yield return SmoothTransitionToPosition(graphics, this.transform.position, SPEED_TO_NEW_SELECTION);
+                yield return GlobalTools.SmoothTransitionToPosition(graphics, transform.position, SPEED_TO_NEW_SELECTION);
                 selectableBox.SelectBox(pCPokemon.gameObject);
             }
         }
@@ -81,20 +66,20 @@ public class PCPointer : MonoBehaviour
             selectableBox.Deselect();
             if (pCPokemon.currentPokemon == null)
             {
-                yield return SmoothTransitionToPosition(graphics, pCPokemon.gameObject.transform.position, SPEED_TO_NEW_SELECTION);
+                yield return GlobalTools.SmoothTransitionToPosition(graphics, pCPokemon.gameObject.transform.position, SPEED_TO_NEW_SELECTION);
                 pCPokemon.DepositPokemon(currentPokemon);
                 currentPokemon = null;
                 UpdateData();
-                yield return SmoothTransitionToPosition(graphics, this.transform.position, SPEED_TO_NEW_SELECTION);
+                yield return GlobalTools.SmoothTransitionToPosition(graphics, transform.position, SPEED_TO_NEW_SELECTION);
             }
             else
             {
-                yield return SmoothTransitionToPosition(graphics, pCPokemon.gameObject.transform.position, SPEED_TO_NEW_SELECTION);
+                yield return GlobalTools.SmoothTransitionToPosition(graphics, pCPokemon.gameObject.transform.position, SPEED_TO_NEW_SELECTION);
                 Pokemon temp = currentPokemon;
                 currentPokemon = pCPokemon.WithdrawPokemon();
                 pCPokemon.DepositPokemon(temp);
                 UpdateData();
-                yield return SmoothTransitionToPosition(graphics, this.transform.position, SPEED_TO_NEW_SELECTION);
+                yield return GlobalTools.SmoothTransitionToPosition(graphics, transform.position, SPEED_TO_NEW_SELECTION);
             }
             selectableBox.SelectBox(pCPokemon.gameObject);
         }

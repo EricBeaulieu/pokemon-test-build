@@ -34,11 +34,11 @@ public abstract class SummaryUIBase : MonoBehaviour
     {
         if (on == true)
         {
-            yield return GlobalTools.SmoothTransitionToPosition(transform, originalPosition, _animationTime);
+            yield return GlobalTools.SmoothTransitionToPositionUsingLocalPosition(transform, originalPosition, _animationTime);
         }
         else
         {
-            yield return GlobalTools.SmoothTransitionToPosition(transform, offsetPosition, _animationTime);
+            yield return GlobalTools.SmoothTransitionToPositionUsingLocalPosition(transform, offsetPosition, _animationTime);
         }
     }
 }

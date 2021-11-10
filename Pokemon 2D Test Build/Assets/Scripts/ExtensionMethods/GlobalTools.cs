@@ -6,6 +6,21 @@ public static class GlobalTools
 {
     public static IEnumerator SmoothTransitionToPosition(Transform curTransform, Vector3 endPos, float duration)
     {
+        Vector3 startingPos = curTransform.position;
+        float elapsedTime = 0;
+
+        while (elapsedTime < duration)
+        {
+            curTransform.position = Vector3.Lerp(startingPos, endPos, (elapsedTime / duration));
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+
+        curTransform.position = endPos;
+    }
+
+    public static IEnumerator SmoothTransitionToPositionUsingLocalPosition(Transform curTransform, Vector3 endPos, float duration)
+    {
         Vector3 startingPos = curTransform.localPosition;
         float elapsedTime = 0;
 

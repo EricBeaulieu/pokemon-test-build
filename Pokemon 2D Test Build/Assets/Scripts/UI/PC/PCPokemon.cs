@@ -4,27 +4,16 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class PCPokemon : MonoBehaviour,ISelectHandler,IDeselectHandler
+public class PCPokemon : MonoBehaviour, ISelectHandler, IDeselectHandler
 {
     [SerializeField] Image pokemonSprite;
     public Pokemon currentPokemon { get; private set; }
     [SerializeField] GameObject holditemGameobject;
     [SerializeField] Button button;
+    public Button GetButton { get {return button;}}
 
-    public void DepositPokemon(Pokemon newPokemon)//Should return pokemon if there is one there
+    public void DepositPokemon(Pokemon newPokemon)
     {
-        if (currentPokemon != null)
-        {
-            Debug.LogWarning($"tried to deposit pokemon in a position with pokemon included", gameObject);
-            return;
-        }
-
-        if(newPokemon == null)
-        {
-            currentPokemon = null;//for the starting setter
-            UpdateData();
-            return;
-        }
         currentPokemon = newPokemon;
         UpdateData();
     }
@@ -58,7 +47,8 @@ public class PCPokemon : MonoBehaviour,ISelectHandler,IDeselectHandler
 
     public void OnSelect(BaseEventData eventData)
     {
-        PCSystem.pointer.MoveToPosition(this.transform.position);
+        PCSystem.pointer.MoveToPosition(transform.position);
+        //Debug.Log($"selected box {transform.position}", gameObject);
         button.onClick.AddListener(() => { StartCoroutine(PCSystem.pointer.SelectPokemon(this)); });
         PCSystem.pCPokemonDataDisplay.SetupData(currentPokemon);
     }
