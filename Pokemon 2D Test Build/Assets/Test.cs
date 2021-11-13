@@ -7,6 +7,7 @@ public class Test : MonoBehaviour {
     public ExperienceGroup testExperienceGroup;
     public NatureBase testNature;
     public Sprite sprite;
+    [SerializeField] PokeballItem pokeball;
 
 
     public ElementType attacktype = ElementType.Bug;
@@ -54,6 +55,8 @@ public class Test : MonoBehaviour {
 
     public void SetAllTestPokemon()
     {
+        PlayerController player = GameManager.instance.GetPlayerController;
+
         for (int i = 0; i < pcPokemonTest.Length; i++)
         {
             if(pcPokemonTest[i].pokemonBase == null)
@@ -64,6 +67,7 @@ public class Test : MonoBehaviour {
             pcPokemonTest[i] = new Pokemon(pcPokemonTest[i].pokemonBase, pcPokemonTest[i].currentLevel, pcPokemonTest[i].individualValues,
                 pcPokemonTest[i].effortValues, pcPokemonTest[i].gender, pcPokemonTest[i].isShiny, pcPokemonTest[i].nature,
                 pcPokemonTest[i].currentName, pcPokemonTest[i].presetMoves, pcPokemonTest[i].startingAbilityID, pcPokemonTest[i].GetCurrentItem);
+            pcPokemonTest[i].Obtained(player, pokeball);
         }
     }
 }

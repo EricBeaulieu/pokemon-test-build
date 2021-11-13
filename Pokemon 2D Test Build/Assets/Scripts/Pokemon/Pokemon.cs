@@ -508,6 +508,20 @@ public class Pokemon {
             }
         }
 
+        if(move.OneHitKO == true)
+        {
+            int setDamage = maxHitPoints;
+            if (ability.PreventsOneHitKO(this, setDamage) == true)
+            {
+                damageDetails.defendersAbilityActivation = true;
+                damageDetails.damageNullified = true;
+                return;
+            }
+            damageDetails.oneHitKOMove = true;
+            UpdateHPDamage(setDamage);
+            return;
+        }
+
         //Critical Hit Chance
         if (Random.value * 100 <= DamageModifiers.CriticalHitPercentage(move,attackingUnit.pokemon))
         {
@@ -835,8 +849,8 @@ public class Pokemon {
         }
         else if(newVolatileStatus.Id == ConditionID.ChargingTurn)
         {
-            ((ChargingTurn)newVolatileStatus).chargingMove = currentMove;
-            ((ChargingTurn)newVolatileStatus).SetInvulnerableType(SpecializedMoves.ReturnSemiInvulnerableType(currentMove));
+            ((ChargingTurn)newVolatileStatus).chargingMove = currentMove.originalMove;
+            ((ChargingTurn)newVolatileStatus).SetInvulnerableType(SpecializedMoves.ReturnSemiInvulnerableType(currentMove.originalMove));
             Debug.Log($"{sourceBattleUnit.pokemon.currentName} is currently {SpecializedMoves.ReturnSemiInvulnerableType(currentMove)}");
         }
 

@@ -6,19 +6,19 @@ using UnityEngine.UI;
 
 public class PCPokemon : MonoBehaviour, ISelectHandler, IDeselectHandler
 {
-    [SerializeField] Image pokemonSprite;
+    [SerializeField] protected Image pokemonSprite;
     public Pokemon currentPokemon { get; private set; }
-    [SerializeField] GameObject holditemGameobject;
+    [SerializeField] protected GameObject holditemGameobject;
     [SerializeField] Button button;
     public Button GetButton { get {return button;}}
 
-    public void DepositPokemon(Pokemon newPokemon)
+    public virtual void DepositPokemon(Pokemon newPokemon)
     {
         currentPokemon = newPokemon;
         UpdateData();
     }
 
-    public Pokemon WithdrawPokemon()
+    public virtual Pokemon WithdrawPokemon()
     {
         if(currentPokemon == null)
         {
@@ -48,7 +48,6 @@ public class PCPokemon : MonoBehaviour, ISelectHandler, IDeselectHandler
     public void OnSelect(BaseEventData eventData)
     {
         PCSystem.pointer.MoveToPosition(transform.position);
-        //Debug.Log($"selected box {transform.position}", gameObject);
         button.onClick.AddListener(() => { StartCoroutine(PCSystem.pointer.SelectPokemon(this)); });
         PCSystem.pCPokemonDataDisplay.SetupData(currentPokemon);
     }

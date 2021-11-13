@@ -48,6 +48,11 @@ public class BattleSystem : CoreSystem
     int _escapeAttempts;
     public int battleDuration { get; private set; }
 
+    bool doublePrizeMoney;
+    public int extraMoney { get; private set; }
+    const string PAY_DAY_MESSAGE = "Coins were scattered everywhere!";
+    const int PAY_DAY_MULTIPLIER = 5;
+
     LearnNewMoveUI learnNewMoveUI;
     [SerializeField] LevelUpUI levelUpUI;
 
@@ -236,6 +241,8 @@ public class BattleSystem : CoreSystem
         dialogSystem.SetCurrentDialogBox(dialogBox);
         inBattle = true;
         gravity = false;
+        doublePrizeMoney = false;
+        extraMoney = 0;
         _playerSideEntryHazards.Clear();
         _enemySideEntryHazards.Clear();
         Pokemon playerPokemon = _playerController.pokemonParty.GetFirstHealthyPokemon();
@@ -630,10 +637,28 @@ public class BattleSystem : CoreSystem
         {
             yield return dialogSystem.TypeDialog($"{trainerLines[i]}", true);
         }
-
+        
         if (playerHasWon == true)
         {
-            //Show dialog of player recieving money
+            int amountWon = _trainerController.PayoutUponDefeat;
+            if(doublePrizeMoney == true)
+            {
+                amountWon *= 2;
+            }
+
+            yield return dialogSystem.TypeDialog($"{_playerController.TrainerName} got ${amountWon.ToString()} for winning!");
+            _playerController.money += amountWon;
+
+            if (extraMoney > 0)
+            {
+                if (doublePrizeMoney == true)
+                {
+                    extraMoney *= 2;
+                }
+                yield return dialogSystem.TypeDialog($"{_playerController.TrainerName} picked up ${extraMoney.ToString()}!");
+            }
+
+            _playerController.money += extraMoney;
         }
     }
 
@@ -1086,6 +1111,12 @@ public class BattleSystem : CoreSystem
                     yield return ApplyStatChanges(damageDetails.alterStatAfterTakingDamage, targetUnit, MoveTarget.Foe);
                 }
 
+                if(alteredMove.originalMove == SpecializedMoves.payDay)
+                {
+                    yield return dialogSystem.TypeDialog(PAY_DAY_MESSAGE);
+                    extraMoney += (sourceUnit.pokemon.currentLevel * PAY_DAY_MULTIPLIER);
+                }
+
                 if (sourceUnit.pokemon.currentHitPoints > 0)
                 {
 
@@ -1170,7 +1201,7 @@ public class BattleSystem : CoreSystem
                 }
             }
 
-            if (alteredMove.SecondaryEffects != null && alteredMove.SecondaryEffects.Count > 0 && targetUnit.pokemon.currentHitPoints > 0)
+            if (alteredMove.SecondaryEffects != null && alteredMove.SecondaryEffects.Count > 0)
             {
                 foreach (var secondaryEffect in alteredMove.SecondaryEffects)
                 {
@@ -1490,14 +1521,17 @@ public class BattleSystem : CoreSystem
             }
             else
             {
-                target.pokemon.SetStatus(effects.Status, wasSecondaryEffect);
+                if (target.pokemon.currentHitPoints > 0)
+                {
+                    target.pokemon.SetStatus(effects.Status, wasSecondaryEffect);
+                }
             }
         }
 
         //Volatile Status Condition
         if (effects.Volatiletatus != ConditionID.NA)
         {
-            if (moveTarget == MoveTarget.Foe)
+            if (moveTarget == MoveTarget.Foe && target.pokemon.currentHitPoints > 0)
             {
                 if (effects.Volatiletatus == ConditionID.Infatuation)
                 {
@@ -1515,7 +1549,10 @@ public class BattleSystem : CoreSystem
                 {
                     if(target.pokemon.volatileStatus.Exists(x => x.Id == effects.Volatiletatus) == true && wasSecondaryEffect == false)
                     {
-                        yield return dialogSystem.TypeDialog($"{BUT_IT_FAILED}");
+                        if(effects.Volatiletatus != ConditionID.Bound)
+                        {
+                            yield return dialogSystem.TypeDialog($"{BUT_IT_FAILED}");
+                        }
                         yield break;
                     }
                     target.pokemon.SetVolatileStatus(effects.Volatiletatus, currentMove,source);
@@ -1532,7 +1569,10 @@ public class BattleSystem : CoreSystem
                     yield return dialogSystem.TypeDialog("All Pokemon that heard the song will faint in 3 turns");
                 }
 
-                target.pokemon.SetVolatileStatus(effects.Volatiletatus, currentMove,source);
+                if(target.pokemon.currentHitPoints > 0)
+                {
+                    target.pokemon.SetVolatileStatus(effects.Volatiletatus, currentMove,source);
+                }
                 source.pokemon.SetVolatileStatus(effects.Volatiletatus, currentMove,target);
             }
         }
@@ -1901,6 +1941,11 @@ public class BattleSystem : CoreSystem
             yield return dialogSystem.TypeDialog($"It's super effective!");
         }
 
+        if(damageDetails.oneHitKOMove == true)
+        {
+            yield return dialogSystem.TypeDialog($"It's a ONE-HIT KO");
+        }
+
         if(damageDetails.defendersAbilityActivation == true && battleUnit.pokemon.currentHitPoints > 0)
         {
             battleUnit.OnAbilityActivation();
@@ -2120,6 +2165,11 @@ public class BattleSystem : CoreSystem
                 sourceUnit.OnAbilityActivation();
                 yield return dialogSystem.TypeDialog($"{sourceUnit.pokemon.ability.OnAbilitityActivation(sourceUnit.pokemon)}");
             }
+        }
+
+        if(sourceUnit.pokemon.GetHoldItemEffects.DoublesPrizeMoneyRecieved())
+        {
+            doublePrizeMoney = true;
         }
 
         yield return dialogSystem.TypeDialog(sourceUnit.pokemon.GetHoldItemEffects.EntryMessage(sourceUnit.pokemon));
@@ -2362,6 +2412,16 @@ public class BattleSystem : CoreSystem
             }
             else
             {
+                if (extraMoney > 0)
+                {
+                    if (doublePrizeMoney == true)
+                    {
+                        extraMoney *= 2;
+                    }
+                    yield return dialogSystem.TypeDialog($"{_playerController.TrainerName} picked up {extraMoney.ToString()}!",true);
+                }
+
+                _playerController.money += extraMoney;
                 OnBattleOver(true);
             }
         }

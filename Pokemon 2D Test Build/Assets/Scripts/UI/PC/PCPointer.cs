@@ -16,9 +16,12 @@ public class PCPointer : MonoBehaviour
     [SerializeField] GameObject holditemGameobject;
     [SerializeField] Transform graphics;
     [SerializeField] RectTransform pointerImage;
+    [SerializeField] PCParty party;
+    PCSystem pcSystem;
 
     public void Initialization(SelectableBoxUI selectableBoxUI)
     {
+        pcSystem = GameManager.instance.GetPCSystem;
         selectableBox = selectableBoxUI;
         currentPokemon = null;
     }
@@ -52,6 +55,15 @@ public class PCPointer : MonoBehaviour
             }
             else
             {
+                if(pCPokemon is PCPartyPokemon)
+                {
+                    if(party.CurrentPartyCount() <= 1)
+                    {
+                        yield return pcSystem.CannotTakeLastPartyPokemonPokemon();
+                        yield break;
+                    }
+                }
+
                 selectableBox.Deselect();
                 yield return GlobalTools.SmoothTransitionToPosition(graphics, pCPokemon.gameObject.transform.position, SPEED_TO_NEW_SELECTION);
                 currentPokemon = pCPokemon.WithdrawPokemon();

@@ -10,6 +10,7 @@ public class DamageDetails
     public bool defendersAbilityActivation { get; set; }
     public bool attackersAbilityActivation { get; set; }
     public bool damageNullified { get; set; }
+    public bool oneHitKOMove { get; set; }
     public List<StatBoost> defendersStatBoostByAbility { get; set; }
     public List<StatBoost> attackersStatBoostByDefendersAbility { get; set; }
     public List<StatBoost> alterStatAfterTakingDamage { get; set; }
@@ -22,6 +23,7 @@ public class DamageDetails
         defendersAbilityActivation = false;
         attackersAbilityActivation = false;
         damageNullified = false;
+        oneHitKOMove = false;
         defendersStatBoostByAbility = new List<StatBoost>();
         attackersStatBoostByDefendersAbility = new List<StatBoost>();
         alterStatAfterTakingDamage = new List<StatBoost>();

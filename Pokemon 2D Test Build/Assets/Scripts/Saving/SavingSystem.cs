@@ -19,6 +19,7 @@ public static class SavingSystem
     public const string PlayerID = "Player";
     const string PlayerInventory = "PlayerInventory";
     const string PlayerLevelSaved = "CurrentLevel";
+    const string PCInfo = "PCInfo";
 
     public const string split = "*";
 
@@ -27,10 +28,10 @@ public static class SavingSystem
         return File.Exists(savePath);
     }
 
-    public static void SavePlayer(PlayerController player,GameSceneBaseSO currentScene, List<Item> currentInventory)
+    public static void SavePlayer(PlayerController player,GameSceneBaseSO currentScene, List<Item> currentInventory,PCBoxData[] currentPCBoxes)
     {
         saveInfo = LoadFile();
-        OverrideSave(saveInfo, player, currentScene,currentInventory);
+        OverrideSave(saveInfo, player, currentScene,currentInventory, currentPCBoxes);
         SaveFile(saveInfo);
     }
 
@@ -59,6 +60,13 @@ public static class SavingSystem
         return ((List<ItemSaveData>)previousInventorySaved).Select(x => new Item(x)).ToList();
     }
 
+    public static List<PCBoxData> LoadPCInfo()
+    {
+        object previousInventorySaved = SavingSystem.ReturnSpecificSave(PCInfo);
+
+        return ((List<PCBoxSaveData>)previousInventorySaved).Select(x => new PCBoxData(x)).ToList();
+    }
+
     public static void SaveFile(object state)
     {
         using (var stream = File.Open(savePath, FileMode.Create))
@@ -82,7 +90,7 @@ public static class SavingSystem
         }
     }
 
-    static void OverrideSave(Dictionary<string,object> state,PlayerController player, GameSceneBaseSO playerSavedScene, List<Item> playerInventory)
+    static void OverrideSave(Dictionary<string,object> state,PlayerController player, GameSceneBaseSO playerSavedScene, List<Item> playerInventory, PCBoxData[] currentPCBoxes)
     {
         state = infoTobeSaved.Concat(state.Where(kvp => !infoTobeSaved.ContainsKey(kvp.Key))).ToDictionary(kvp => kvp.Key, kvp => kvp.Value);
 
@@ -119,6 +127,16 @@ public static class SavingSystem
         else
         {
             state.Add(PlayerInventory, playerInventory.Select(x => x.GetSaveData()).ToList());
+        }
+
+        //PCInfo
+        if (state.ContainsKey(PCInfo))
+        {
+            state[PCInfo] = currentPCBoxes.Select(x => x.GetSaveData()).ToList();
+        }
+        else
+        {
+            state.Add(PCInfo, currentPCBoxes.Select(x => x.GetSaveData()).ToList());
         }
 
         saveInfo = state;

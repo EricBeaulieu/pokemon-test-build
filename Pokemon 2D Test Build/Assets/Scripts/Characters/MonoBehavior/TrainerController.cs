@@ -13,6 +13,8 @@ public class TrainerController : EntityAI,IInteractable,ISaveable
     [SerializeField] Dialog inBattleDialogOnDefeat;
     [SerializeField] Dialog inBattleDialogOnVictory;
     [SerializeField] Dialog postDefeatOverworldDialog;
+    [SerializeField] int payoutUponDefeat;
+    public int PayoutUponDefeat { get { return payoutUponDefeat; } }
     
     [SerializeField] SaveableEntity saveableEntity;
     bool hasLostToPlayer = false;

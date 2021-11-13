@@ -19,7 +19,7 @@ public class PCTopButton : MonoBehaviour, ISelectHandler
         }
         else
         {
-            ClosePartyScreen.Invoke();
+            ClosePartyScreen?.Invoke();
         }
     }
 

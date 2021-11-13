@@ -162,8 +162,8 @@ GameObject:
   - component: {fileID: 5819869409517417956}
   - component: {fileID: 4050306640770664882}
   - component: {fileID: 1265444318120333851}
-  - component: {fileID: 2957081315771242861}
   - component: {fileID: 3817844338525982714}
+  - component: {fileID: 3620656031369676901}
   m_Layer: 5
   m_Name: Sprite
   m_TagString: Untagged
@@ -230,21 +230,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &2957081315771242861
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3441265717617545213}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2aaa770e9f3d3f54c8e1261bf82d0f3c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  pokemonSprite: {fileID: 1265444318120333851}
-  holditemGameobject: {fileID: 2218014708144672949}
-  button: {fileID: 3817844338525982714}
 --- !u!114 &3817844338525982714
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -289,6 +274,22 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &3620656031369676901
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3441265717617545213}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 12d345ba0cea7464184e8923d36946b0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pokemonSprite: {fileID: 1265444318120333851}
+  holditemGameobject: {fileID: 2218014708144672949}
+  button: {fileID: 3817844338525982714}
+  partyUI: {fileID: 0}
 --- !u!1 &6508924769343255961
 GameObject:
   m_ObjectHideFlags: 0

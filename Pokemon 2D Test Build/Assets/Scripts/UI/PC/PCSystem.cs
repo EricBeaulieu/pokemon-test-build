@@ -19,6 +19,7 @@ public class PCSystem : CoreSystem
     [SerializeField] PCTopButton partyButton;
     [SerializeField] PCTopButton closeButton;
     const string CANT_CLOSE_PC_MESSAGE = "You're holding a Pokemon!";
+    const string CANT_TAKE_LAST_POKEMON_PC_MESSAGE = "This is you last Pokemon!";
     const float BOX_SPEED_ANIMATION = .5f;
 
     int _boxIndex = 0;
@@ -46,13 +47,9 @@ public class PCSystem : CoreSystem
         dialogSystem.ActivateDialog(false);
         GameManager.SetGameState(GameState.PC);
         currentBox.SetupData(boxData[boxIndex]);
-        selectableBox.SetLastSelected(null);
         selectableBox.SelectBox();
-        //pointer.MoveToPosition(currentBox.GetPCPokemonAtIndex(0).transform.position);
-        //Debug.Log($"first box {currentBox.GetPCPokemonAtIndex(0).transform.position}", currentBox.GetPCPokemonAtIndex(0).gameObject);
         pointer.UpdateData();
         partyPokemon.SetupData();
-        //pCPokemonDataDisplay.SetupData(currentBox.GetPCPokemonAtIndex(0).currentPokemon);
     }
 
     protected override void CloseSystem()
@@ -65,6 +62,7 @@ public class PCSystem : CoreSystem
         GameManager.SetGameState(GameState.Overworld);
         dialogSystem.SetCurrentDialogBox();
         boxData[boxIndex].SavePokemonInsideBox(currentBox);
+        GameManager.instance.GetPlayerController.pokemonParty.LoadPlayerParty(partyPokemon.PartyPokemon());
         gameObject.SetActive(false);
     }
 
@@ -103,6 +101,19 @@ public class PCSystem : CoreSystem
         dialogSystem.SetCurrentDialogBox(dialogBox);
         dialogSystem.ActivateDialog(true);
         yield return dialogSystem.TypeDialog(CANT_CLOSE_PC_MESSAGE, true);
+        dialogSystem.ActivateDialog(false);
+
+        selectableBox.SelectBox();
+    }
+
+    public IEnumerator CannotTakeLastPartyPokemonPokemon()
+    {
+        selectableBox.SetLastSelected(EventSystem.current.currentSelectedGameObject);
+        selectableBox.Deselect();
+
+        dialogSystem.SetCurrentDialogBox(dialogBox);
+        dialogSystem.ActivateDialog(true);
+        yield return dialogSystem.TypeDialog(CANT_TAKE_LAST_POKEMON_PC_MESSAGE, true);
         dialogSystem.ActivateDialog(false);
 
         selectableBox.SelectBox();
@@ -156,11 +167,12 @@ public class PCSystem : CoreSystem
         navigation.selectOnRight = partyButton.GetButton();//breaks when adjusting
         navigation.selectOnUp = newBox.GetPCPokemonAtIndex(28).GetButton;
 
-        partyButton.GetButton().navigation = navigation;
+        closeButton.GetButton().navigation = navigation;
     }
 
     IEnumerator SelectPlayerParty()
     {
+        yield return new WaitForSeconds(0.01f);
         selectableBox.Deselect();
         yield return partyPokemon.EnableParty();
         if(PCParty.isOn == true)
@@ -170,6 +182,24 @@ public class PCSystem : CoreSystem
         else
         {
             selectableBox.SelectBox(partyButton.gameObject);
+        }
+    }
+
+    public PCBoxData[] SaveBoxData()
+    {
+        return boxData;
+    }
+
+    public void LoadBoxData(PCBoxData[] pCBoxData)
+    {
+        boxData = pCBoxData;
+    }
+
+    public void PresetBoxesWithPresetPokemon()
+    {
+        for (int i = 0; i < boxData.Length; i++)
+        {
+            boxData[i].SetBoxesWithPresetPokemon();
         }
     }
 }

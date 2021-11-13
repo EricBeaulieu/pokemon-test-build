@@ -40,6 +40,7 @@ public static class SpecializedMoves
         lastResort = helper.lastResort;
         magnitude = helper.magnitude;
         payback = helper.payback;
+        payDay = helper.payDay;
         phantomForce = helper.phantomForce;
         powerTrip = helper.powerTrip;
         psychicFangs = helper.psychicFangs;
@@ -139,6 +140,7 @@ public static class SpecializedMoves
     public static MoveBase magnitude { get; private set; }
     public static int magnitudeNumber { get; private set; }
     public static MoveBase payback { get; private set; }
+    public static MoveBase payDay { get; private set; }
     public static MoveBase phantomForce { get; private set; }
     public static MoveBase powerTrip { get; private set; }
     public static MoveBase psychicFangs { get; private set; }

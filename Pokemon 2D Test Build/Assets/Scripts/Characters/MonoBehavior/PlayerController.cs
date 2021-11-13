@@ -24,6 +24,8 @@ public class PlayerController : Entity
     bool _ignorePlayerInput;
     bool _ignoreMenuOpen;
 
+    public int money { get; set; } = 0;
+
     void Awake()
     {
         base.Initialization();

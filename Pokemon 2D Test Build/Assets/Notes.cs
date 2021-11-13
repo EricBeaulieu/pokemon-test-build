@@ -5,19 +5,18 @@ using UnityEngine;
 public class Notes
 {
     //To do list
-
-    //Fix banner, put a black background on text or surrounding text so its easier to read
+    
+    //Shop
     //iron ball for grounded
     //fix stealth rock to not miss when target is semi invernerable
     //for certain attacks, such as natural gift/z moves, it will replace the move base to something from a static table. 
     //these moves will be pre created somewhere else
-
-    //money on trainer defeat as well as pay day
-    //pc pokemon
-    //gifting pokemon from trainers/finding them in a ball gifted to the overworld
+    //if player loads game and goes to the pc, the player will still be able to move around
+    
+    //gifting pokemon from trainers
     //power points stuff not implimented for when item is used on pokemon
     //in regards to specialized messages, they can be thrown into stat boost and displayed when given into effect
-    //Safeguard and substitute, when made add in infiltrator
+    //substitute, when made add in infiltrator
     //Change the way the pokemon gets its nature
     //Cheek pouch ability,Gluttony,Harvest for when berries are implimented
     //Comatose, Corrosion,dancer , majority of complicated abilities for later
@@ -31,7 +30,6 @@ public class Notes
     //hidden power
     //transform
     //variations of arena trap
-    //inner focus and oblivious prevents intimidation from working
     //oblivious taunts
     //Embargo implimented but needs to be put into battle system
     //Encore specialized move failures need to be implimented
@@ -43,7 +41,6 @@ public class Notes
 
     //roost creating it so the pokemon can get hit by ground moves
     //finish all different types of animations with conditions
-    //money set for trainer
     //camera effects when entering battle either with trainers,wild pokemon or specialized pokemon
     //When level manager has overowlrd weather effects to pass them into the battles
 

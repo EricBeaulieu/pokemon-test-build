@@ -44,6 +44,7 @@ public class SpecializedMovesHelper : MonoBehaviour
     public MoveBase lastResort;
     public MoveBase magnitude;
     public MoveBase payback;
+    public MoveBase payDay;
     public MoveBase phantomForce;
     public MoveBase powerTrip;
     public MoveBase psychicFangs;

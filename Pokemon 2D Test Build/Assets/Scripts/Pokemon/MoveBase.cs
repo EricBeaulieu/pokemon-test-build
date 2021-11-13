@@ -57,11 +57,11 @@ public class MoveBase : ScriptableObject {
     {
         get
         {
-            if (_originalMove == null)
+            if (_originalMove != null)
             {
-                return this;
+                return _originalMove;
             }
-            return _originalMove;
+            return this;
         }
         private set
         {
@@ -131,7 +131,7 @@ public class MoveBase : ScriptableObject {
     public MoveBase Clone()
     {
         MoveBase clone = Instantiate(this);
-        if(originalMove == null)
+        if(clone._originalMove == null)
         {
             clone.originalMove = this;
         }

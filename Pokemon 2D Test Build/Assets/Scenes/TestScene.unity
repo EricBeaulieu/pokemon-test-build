@@ -830,9 +830,11 @@ MonoBehaviour:
   testExperienceGroup: 2
   testNature: {fileID: 11400000, guid: f91abf718bd77a947b2b68471ca12d5d, type: 2}
   sprite: {fileID: 0}
+  pokeball: {fileID: 0}
   attacktype: 16
   defenderType: 0
   defenderType2: -1
+  pcPokemonTest: []
 --- !u!4 &383871176
 Transform:
   m_ObjectHideFlags: 0
@@ -964,7 +966,7 @@ PrefabInstance:
     - target: {fileID: 2072594005822930160, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
         type: 3}
       propertyPath: pokemonParty.Array.data[0]._presetMoves.Array.size
-      value: 4
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2072594005822930160, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
         type: 3}
@@ -992,7 +994,7 @@ PrefabInstance:
         type: 3}
       propertyPath: pokemonParty.Array.data[0]._presetMoves.Array.data[0]
       value: 
-      objectReference: {fileID: 11400000, guid: 96400c70b73e59f489a1df32578a5979,
+      objectReference: {fileID: 11400000, guid: c6f458e6ebd96d34794269e67e6d0795,
         type: 2}
     - target: {fileID: 2072594005822930160, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
         type: 3}
@@ -1035,6 +1037,12 @@ PrefabInstance:
       propertyPath: m_Offset.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5864479953946560453, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 7523459690097348596, guid: b8e4d4606a80f514482829afe74488a7,
+        type: 3}
     - target: {fileID: 5864479954145141585, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
         type: 3}
       propertyPath: m_Name
@@ -1043,7 +1051,7 @@ PrefabInstance:
     - target: {fileID: 5864479954145141585, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5864479954145141587, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
         type: 3}
@@ -1102,6 +1110,16 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5937812492033838737, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
         type: 3}
+      propertyPath: canLookUp
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5937812492033838737, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: canLookLeft
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5937812492033838737, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
       propertyPath: trainerName
       value: Tester
       objectReference: {fileID: 0}
@@ -1111,6 +1129,11 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: 984a7f06f187f3e46ae2eb23b061baa9,
         type: 2}
+    - target: {fileID: 5937812492033838737, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: payoutUponDefeat
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 5937812492033838737, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
         type: 3}
       propertyPath: preBattleDialog.lines.Array.size
@@ -1124,7 +1147,7 @@ PrefabInstance:
     - target: {fileID: 5937812492033838737, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
         type: 3}
       propertyPath: preBattleDialog.lines.Array.data[0]
-      value: NotAgain
+      value: Not Again
       objectReference: {fileID: 0}
     - target: {fileID: 5937812492033838737, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
         type: 3}
@@ -1134,7 +1157,7 @@ PrefabInstance:
     - target: {fileID: 5937812492033838737, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
         type: 3}
       propertyPath: inBattleDialogOnDefeat.lines.Array.size
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5937812492033838737, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
         type: 3}
@@ -1144,7 +1167,7 @@ PrefabInstance:
     - target: {fileID: 5937812492033838737, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
         type: 3}
       propertyPath: inBattleDialogOnDefeat.lines.Array.data[0]
-      value: Oh that was exciting
+      value: Maybe I should stop clowning around
       objectReference: {fileID: 0}
     - target: {fileID: 5937812492033838737, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
         type: 3}
@@ -1998,75 +2021,6 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
---- !u!1001 &907497439
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 4456188585027347353, guid: eff9a66dfb680cf438afc3afdc4b044b,
-        type: 3}
-      propertyPath: m_Name
-      value: PC
-      objectReference: {fileID: 0}
-    - target: {fileID: 4456188585027347354, guid: eff9a66dfb680cf438afc3afdc4b044b,
-        type: 3}
-      propertyPath: m_RootOrder
-      value: 12
-      objectReference: {fileID: 0}
-    - target: {fileID: 4456188585027347354, guid: eff9a66dfb680cf438afc3afdc4b044b,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 3.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 4456188585027347354, guid: eff9a66dfb680cf438afc3afdc4b044b,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 4456188585027347354, guid: eff9a66dfb680cf438afc3afdc4b044b,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4456188585027347354, guid: eff9a66dfb680cf438afc3afdc4b044b,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4456188585027347354, guid: eff9a66dfb680cf438afc3afdc4b044b,
-        type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4456188585027347354, guid: eff9a66dfb680cf438afc3afdc4b044b,
-        type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4456188585027347354, guid: eff9a66dfb680cf438afc3afdc4b044b,
-        type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4456188585027347354, guid: eff9a66dfb680cf438afc3afdc4b044b,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4456188585027347354, guid: eff9a66dfb680cf438afc3afdc4b044b,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4456188585027347354, guid: eff9a66dfb680cf438afc3afdc4b044b,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: eff9a66dfb680cf438afc3afdc4b044b, type: 3}
 --- !u!1 &970179947
 GameObject:
   m_ObjectHideFlags: 0
@@ -16552,6 +16506,11 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: f72661efcc37d99439ad6861f39e6297,
         type: 2}
+    - target: {fileID: 5937812492033838737, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: payoutUponDefeat
+      value: 50
+      objectReference: {fileID: 0}
     - target: {fileID: 5937812492033838737, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
         type: 3}
       propertyPath: preBattleDialog.lines.Array.size

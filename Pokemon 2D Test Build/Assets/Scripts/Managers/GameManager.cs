@@ -78,6 +78,11 @@ public class GameManager : MonoBehaviour
             StartCoroutine(SceneSystem.LoadScenethatPlayerSavedIn(startingScene));
             SpawnInPlayer();
         }
+
+        if(startWithPresetBoxes == true)
+        {
+            pCSystem.PresetBoxesWithPresetPokemon();
+        }
     }
 
     void Update()
@@ -245,7 +250,7 @@ public class GameManager : MonoBehaviour
 
     public void SaveGame()
     {
-        SavingSystem.SavePlayer(playerController, SceneSystem.currentLevelManager.GameSceneBase, inventorySystem.SaveInventory());
+        SavingSystem.SavePlayer(playerController, SceneSystem.currentLevelManager.GameSceneBase, inventorySystem.SaveInventory(),pCSystem.SaveBoxData());
         dialogManager.ShowMessage("The Game Has Been Saved");
     }
 
@@ -268,6 +273,7 @@ public class GameManager : MonoBehaviour
 
         SpawnInPlayer();
         inventorySystem.LoadInventory(SavingSystem.LoadPlayerInventory());
+        pCSystem.LoadBoxData(SavingSystem.LoadPCInfo().ToArray());
         yield return Fade(FadeStyle.FullFade, false);
     }
 
@@ -332,7 +338,6 @@ public class GameManager : MonoBehaviour
 
     public static void SetGameState(GameState newState)
     {
-        Debug.Log($"new state :{newState}");
         state = newState;
     }
 

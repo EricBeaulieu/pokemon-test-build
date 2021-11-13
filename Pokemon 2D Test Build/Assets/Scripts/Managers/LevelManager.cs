@@ -200,7 +200,10 @@ public class LevelManager : MonoBehaviour
 
         for (int i = 0; i < temp.Length; i++)
         {
-            saveableEntities.AddRange(temp[i].GetComponentsInChildren<SaveableEntity>());
+            if(temp[i].activeInHierarchy == true)
+            {
+                saveableEntities.AddRange(temp[i].GetComponentsInChildren<SaveableEntity>());
+            }
         }
 
         return saveableEntities;
