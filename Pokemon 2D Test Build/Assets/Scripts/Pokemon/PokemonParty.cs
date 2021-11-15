@@ -53,19 +53,9 @@ public class PokemonParty : MonoBehaviour
         return pokemonParty;
     }
 
-    public bool AddCapturedPokemon(Pokemon capturedPokemon,PokeballItem currentPokeball)
+    public void AddCapturedPokemon(Pokemon capturedPokemon,PokeballItem currentPokeball)
     {
-        capturedPokemon.Obtained(GetComponent<PlayerController>(),currentPokeball);
-        if(PartyIsFull() == false)
-        {
-            _originalPos.Add(capturedPokemon);
-            return true;
-        }
-        else
-        {
-            //Send to PC
-            return false;
-        }
+        _originalPos.Add(capturedPokemon);
     }
 
     public void AddGiftPokemon(Pokemon giftPokemon, PokeballItem pokeball = null)

@@ -177,23 +177,35 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void CapturedNewPokemon(Pokemon capturedPokemon,PokeballItem pokeball)
+    public string CapturedNewPokemon(Pokemon capturedPokemon,PokeballItem pokeball)
     {
+        string dialog;
         //If pokemon was new then show it in the pokedex being added
         //show the pokemon info pop up and light up the sprite animating through the pokedex
         //animate the talking
         //Ask if the you would like to name the new pokemon
 
         //Add the new pokemon to either the party or PC
-        bool addedToParty = playerController.pokemonParty.AddCapturedPokemon(capturedPokemon,pokeball);
-        if (addedToParty == true)
+        if (playerController.pokemonParty.PartyIsFull() == false)
         {
-            //return dialog stating that it was added to your party
+            capturedPokemon.Obtained(playerController, pokeball);
+            playerController.pokemonParty.AddCapturedPokemon(capturedPokemon, pokeball);
+            dialog = $"{capturedPokemon.currentName} has been added to your party";
         }
         else
         {
-            // add to PC
+            if(pCSystem.IsPCFull() == false)
+            {
+                capturedPokemon.Obtained(playerController, pokeball);
+                pCSystem.DepositPokemonInFirstAvailablePosition(capturedPokemon);
+                dialog = $"{capturedPokemon.currentName} has been sent to a Box";
+            }
+            else
+            {
+                dialog = $"you caught the {capturedPokemon.currentName} but your pc box is full so you release it.";
+            }
         }
+        return dialog;
     }
 
     void SpawnInPlayer()

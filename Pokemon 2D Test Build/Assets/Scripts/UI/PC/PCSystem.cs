@@ -202,4 +202,36 @@ public class PCSystem : CoreSystem
             boxData[i].SetBoxesWithPresetPokemon();
         }
     }
+
+    public bool IsPCFull()
+    {
+        for (int i = 0; i < boxData.Length; i++)
+        {
+            PCBoxData currentBox = boxData[i];
+            for (int k = 0; k < currentBox.PokemonInsideBox.Length; k++)
+            {
+                if (currentBox.PokemonInsideBox[k] == null)
+                {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
+    public void DepositPokemonInFirstAvailablePosition(Pokemon newCapturedPokemon)
+    {
+        for (int i = 0; i < boxData.Length; i++)
+        {
+            PCBoxData currentBox = boxData[i];
+            for (int k = 0; k < currentBox.PokemonInsideBox.Length; k++)
+            {
+                if (currentBox.PokemonInsideBox[k] == null)
+                {
+                    currentBox.DepositPokemonAtIndex(newCapturedPokemon, k);
+                    return;
+                }
+            }
+        }
+    }
 }

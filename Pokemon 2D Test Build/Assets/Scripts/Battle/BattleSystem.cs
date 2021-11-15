@@ -2726,7 +2726,7 @@ public class BattleSystem : CoreSystem
             //pokemon is caught
             yield return dialogSystem.TypeDialog($"{targetUnit.pokemon.currentName} was Caught!",true);
             yield return currentBall.FadeItem(false);
-            GameManager.instance.CapturedNewPokemon(enemyBattleUnit.pokemon, currentBall.CurrentPokeball);
+            yield return dialogSystem.TypeDialog(GameManager.instance.CapturedNewPokemon(enemyBattleUnit.pokemon, currentBall.CurrentPokeball));
             OnBattleOver(true);
         }
         else

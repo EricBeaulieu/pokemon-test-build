@@ -74,4 +74,9 @@ public class PCBoxData
             }
         }
     }
+
+    public void DepositPokemonAtIndex(Pokemon pokemon,int index)
+    {
+        pokemonInsideBox[index] = pokemon;
+    }
 }
