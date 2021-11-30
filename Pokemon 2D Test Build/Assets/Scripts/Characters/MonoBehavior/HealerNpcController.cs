@@ -34,12 +34,7 @@ public class HealerNpcController : EntityAI, IInteractable
     }
 
     public IEnumerator OnInteract(Vector2 initiator)
-    {
-        if(Vector2.Distance(transform.position,initiator) > OVER_THE_COUNTER_MAX_DISTANCE)
-        {
-            yield break;
-        }
-        
+    {        
         GameManager.SetGameState(GameState.Dialog);
         FaceTowardsDirection(initiator);
         dialogManager.ActivateDialog(true);

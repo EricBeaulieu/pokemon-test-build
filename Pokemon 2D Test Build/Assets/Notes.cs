@@ -7,6 +7,7 @@ public class Notes
     //To do list
     
     //Shop
+    //repel/super/max repel and pokedoll for shop
     //iron ball for grounded
     //fix stealth rock to not miss when target is semi invernerable
     //for certain attacks, such as natural gift/z moves, it will replace the move base to something from a static table. 

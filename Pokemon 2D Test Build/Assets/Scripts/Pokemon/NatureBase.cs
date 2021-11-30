@@ -99,7 +99,7 @@ public class NatureBase : ScriptableObject {
         {
             return 0;
         }
-        if(flavor == FavoriteFlavor)
+        else if(flavor == FavoriteFlavor)
         {
             return 1;
         }

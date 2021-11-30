@@ -26,7 +26,6 @@ public class PCBoxData
             }
         }
     }
-    //load all pokemon into boxes upon start of game, if pokemon is null just leave empty space
 
     public Pokemon[] PokemonInsideBox
     {
@@ -57,7 +56,7 @@ public class PCBoxData
         return pcSaveData;
     }
 
-    public void SetBoxesWithPresetPokemon()
+    public void SetBoxesWithPresetPokemon()//testing purposes
     {
         if (GameManager.instance.startWithPresetBoxes == true && GameManager.instance.startNewSaveEveryStart == true)
         {

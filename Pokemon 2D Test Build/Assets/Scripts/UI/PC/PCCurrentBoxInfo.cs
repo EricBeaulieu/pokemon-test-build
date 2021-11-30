@@ -14,8 +14,6 @@ public class PCCurrentBoxInfo : MonoBehaviour
 
     public Vector3 startingPosition { get; private set; }
     public const int OTHER_BOX_OFFSET = 550;
-    const int row = 6;
-    const int column = 5;
 
     void Awake()
     {
@@ -38,7 +36,7 @@ public class PCCurrentBoxInfo : MonoBehaviour
 
     public void AlternateSetPosition(bool right)
     {
-        Vector2 endPosition = transform.position;
+        Vector2 endPosition = transform.localPosition;
         if(right)
         {
             endPosition.x += OTHER_BOX_OFFSET;
@@ -47,7 +45,7 @@ public class PCCurrentBoxInfo : MonoBehaviour
         {
             endPosition.x -= OTHER_BOX_OFFSET;
         }
-        transform.position = endPosition;
+        transform.localPosition = endPosition;
     }
 
     public GameObject GetBannerGameObject()

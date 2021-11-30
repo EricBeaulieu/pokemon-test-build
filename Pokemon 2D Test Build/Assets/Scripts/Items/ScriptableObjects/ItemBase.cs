@@ -12,6 +12,8 @@ public abstract class ItemBase : ScriptableObject
     [TextArea]
     [SerializeField] string itemDescription;
     [SerializeField] Sprite itemSprite;
+    [SerializeField] int itemValue;
+    public int GetItemValue { get { return itemValue; } }
 
     /// <summary>
     /// Checks to see if the item is compatable with the pokemon

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public enum GameState { Overworld, Battle, Party,Inventory, Dialog, Fade,PC}
+public enum GameState { Overworld, Battle, Party,Inventory, Dialog, Fade,PC,Shop}
 
 public class GameManager : MonoBehaviour
 {
@@ -29,6 +29,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] LearnNewMoveUI learnNewMoveUI;
     List<Pokemon> pokemonEvolving = new List<Pokemon>();
     [SerializeField] PCSystem pCSystem;
+    [SerializeField] ShopSystem shopSystem;
 
     [SerializeField] Test tester;
     bool testPokemonBeenSet = false;
@@ -68,6 +69,7 @@ public class GameManager : MonoBehaviour
         learnNewMoveUI.Initialization();
         SceneSystem.Initialization();
         pCSystem.Initialization();
+        shopSystem.Initialization();
 
         if (startNewSaveEveryStart == false)
         {
@@ -106,6 +108,9 @@ public class GameManager : MonoBehaviour
             case GameState.Fade:
                 break;
             case GameState.PC:
+                break;
+            case GameState.Shop:
+                shopSystem.HandleUpdate();
                 break;
             default:
                 Debug.LogError("Broken");
@@ -262,7 +267,7 @@ public class GameManager : MonoBehaviour
 
     public void SaveGame()
     {
-        SavingSystem.SavePlayer(playerController, SceneSystem.currentLevelManager.GameSceneBase, inventorySystem.SaveInventory(),pCSystem.SaveBoxData());
+        SavingSystem.SavePlayer(playerController, SceneSystem.currentLevelManager.GameSceneBase, inventorySystem.CurrentInventory(),pCSystem.SaveBoxData());
         dialogManager.ShowMessage("The Game Has Been Saved");
     }
 
@@ -348,8 +353,14 @@ public class GameManager : MonoBehaviour
         get { return pCSystem; }
     }
 
+    public ShopSystem GetShopSystem
+    {
+        get { return shopSystem; }
+    }
+
     public static void SetGameState(GameState newState)
     {
+        Debug.Log(newState);
         state = newState;
     }
 

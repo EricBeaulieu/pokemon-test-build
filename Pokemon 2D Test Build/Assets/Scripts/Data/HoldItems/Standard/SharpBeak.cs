@@ -9,7 +9,6 @@ public class SharpBeak : HoldItemBase
     {
         if (move.Type == ElementType.Flying)
         {
-            move = move.Clone();
             move.AdjustedMovePower(0.2f);
         }
         return base.AlterUserMoveDetails(holder, move);

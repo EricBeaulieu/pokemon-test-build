@@ -27,7 +27,7 @@ public abstract class HoldItemBase
     public virtual List<StatBoost> AlterStatAfterTakingDamageFromCertainType(BattleUnit holder,MoveBase move,bool superEffective) { return null; }
     public virtual MoveBase AlterUserMoveDetails(BattleUnit holder,MoveBase move) { return move; }
     public virtual MoveBase AlterOpposingMoveDetails(MoveBase move) { return move; }
-    public virtual bool DoublesPrizeMoneyRecieved() { return false; }//not implimented
+    public virtual bool DoublesPrizeMoneyRecieved() { return false; }
     public virtual bool PreventTheUseOfCertainMoves(BattleUnit battleUnit,MoveBase move) { return false; }
     public virtual string EntryMessage(Pokemon holder) { return ""; }
     public virtual string SpecializedMessage(BattleUnit holder,Pokemon opposingPokemon) { return ""; }

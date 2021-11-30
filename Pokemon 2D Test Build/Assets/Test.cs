@@ -65,7 +65,7 @@ public class Test : MonoBehaviour {
                 continue;
             }
             pcPokemonTest[i] = new Pokemon(pcPokemonTest[i].pokemonBase, pcPokemonTest[i].currentLevel, pcPokemonTest[i].individualValues,
-                pcPokemonTest[i].effortValues, pcPokemonTest[i].gender, pcPokemonTest[i].isShiny, pcPokemonTest[i].nature,
+                pcPokemonTest[i].effortValues, pcPokemonTest[i].gender, pcPokemonTest[i].isShiny, pcPokemonTest[i].Nature,
                 pcPokemonTest[i].currentName, pcPokemonTest[i].presetMoves, pcPokemonTest[i].startingAbilityID, pcPokemonTest[i].GetCurrentItem);
             pcPokemonTest[i].Obtained(player, pokeball);
         }

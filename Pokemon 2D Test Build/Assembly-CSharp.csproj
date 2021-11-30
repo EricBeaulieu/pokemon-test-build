@@ -53,6 +53,9 @@
     <UnityVersion>2020.2.5f1</UnityVersion>
   </PropertyGroup>
   <ItemGroup>
+    <Analyzer Include="C:\Program Files (x86)\Microsoft Visual Studio Tools for Unity\16.0\Analyzers\Microsoft.Unity.Analyzers.dll" />
+  </ItemGroup>
+  <ItemGroup>
     <Compile Include="Assets\Scripts\Characters\ScriptableObjects\CharacterArtSO.cs" />
     <Compile Include="Assets\Scripts\Data\HoldItems\Berries\Yache.cs" />
     <Compile Include="Assets\Scripts\Data\HoldItems\Standard\RazorFang.cs" />
@@ -95,6 +98,7 @@
     <Compile Include="Assets\Scripts\Data\Conditions\VolatileBattleStatus\Recharging.cs" />
     <Compile Include="Assets\Scripts\Pokemon\PokemonBase.cs" />
     <Compile Include="Assets\Scripts\Data\HoldItems\Standard\BrightPowder.cs" />
+    <Compile Include="Assets\Scripts\UI\Shop\PurchaseArrows.cs" />
     <Compile Include="Assets\Scripts\Data\Abilitys\List\ColorChange.cs" />
     <Compile Include="Assets\Scripts\Data\Abilitys\List\HyperCutter.cs" />
     <Compile Include="Assets\Scripts\Data\Abilitys\List\Static.cs" />
@@ -334,7 +338,6 @@
     <Compile Include="Assets\Scripts\Party\SummaryDisplay.cs" />
     <Compile Include="Assets\Scripts\Party\SummaryInfo.cs" />
     <Compile Include="Assets\Scripts\Data\HoldItems\Berries\Hondew.cs" />
-    <Compile Include="Assets\Scripts\Overworld\Ledge.cs" />
     <Compile Include="Assets\Scripts\Battle\BattleAbilityUI.cs" />
     <Compile Include="Assets\Scripts\Battle\LevelUpUI.cs" />
     <Compile Include="Assets\Scripts\Party\SummaryUIBase.cs" />
@@ -352,6 +355,7 @@
     <Compile Include="Assets\Scripts\Data\Weather\WeatherEffectBase.cs" />
     <Compile Include="Assets\Scripts\UI\ExpBar.cs" />
     <Compile Include="Assets\Scripts\Data\Conditions\Status\Paralyzed.cs" />
+    <Compile Include="Assets\Scripts\UI\Shop\ShopItemDetails.cs" />
     <Compile Include="Assets\Scripts\Data\HoldItems\Standard\AirBalloon.cs" />
     <Compile Include="Assets\Scripts\Data\HoldItems\Standard\Blunder Policy.cs" />
     <Compile Include="Assets\Scripts\Data\HoldItems\Berries\Shuca.cs" />
@@ -383,6 +387,7 @@
     <Compile Include="Assets\Scripts\Data\Abilitys\List\SandVeil.cs" />
     <Compile Include="Assets\Scripts\Characters\MonoBehavior\Entity.cs" />
     <Compile Include="Assets\Scripts\Data\HoldItems\Standard\AbsorbBulb.cs" />
+    <Compile Include="Assets\Scripts\UI\Shop\ShopSystem.cs" />
     <Compile Include="Assets\Scripts\Data\Abilitys\List\Defeatist.cs" />
     <Compile Include="Assets\Scripts\Data\HoldItems\Standard\GroundGem.cs" />
     <Compile Include="Assets\Scripts\Data\HoldItems\Berries\Iapapa.cs" />
@@ -451,6 +456,7 @@
     <Compile Include="Assets\Scripts\ExtensionMethods\GlobalTools.cs" />
     <Compile Include="Assets\Scripts\Data\Abilitys\List\CuteCharm.cs" />
     <Compile Include="Assets\Scripts\Items\ScriptableObjects\TMHMItem.cs" />
+    <Compile Include="Assets\Scripts\Items\ConditionedSellableItem.cs" />
     <Compile Include="Assets\Scripts\Data\Abilitys\List\DrySkin.cs" />
     <Compile Include="Assets\Scripts\Data\Abilitys\List\SnowCloak.cs" />
     <Compile Include="Assets\Scripts\Pokemon\Move.cs" />
@@ -469,11 +475,13 @@
     <Compile Include="Assets\Scripts\Data\Abilitys\List\SandStream.cs" />
     <Compile Include="Assets\Scripts\Characters\MonoBehavior\TrainerController.cs" />
     <Compile Include="Assets\Scripts\Data\HoldItems\Standard\SteelGem.cs" />
+    <Compile Include="Assets\Scripts\UI\Shop\ShopItem.cs" />
     <Compile Include="Assets\Scripts\Data\HoldItems\Berries\Rowap.cs" />
     <Compile Include="Assets\Scripts\Data\HoldItems\Standard\FightingGem.cs" />
     <Compile Include="Assets\Scripts\Characters\MonoBehavior\SpriteSheetSwap.cs" />
     <Compile Include="Assets\Scripts\Scene\FadeSystem.cs" />
     <Compile Include="Assets\Scripts\Pokemon\MoveBase.cs" />
+    <Compile Include="Assets\Scripts\Saving\PCBoxSaveData.cs" />
     <Compile Include="Assets\Scripts\Data\HoldItems\Berries\Wiki.cs" />
     <Compile Include="Assets\Scripts\Data\HoldItems\Standard\IceGem.cs" />
     <Compile Include="Assets\Scripts\Data\HoldItems\Standard\FocusSash.cs" />
@@ -528,6 +536,7 @@
     <Compile Include="Assets\Scripts\Battle\TurnAttackDetails.cs" />
     <Compile Include="Assets\Scripts\Data\Abilitys\List\Aerilate.cs" />
     <Compile Include="Assets\Scripts\Data\Conditions\VolatileStatus\Nightmare.cs" />
+    <Compile Include="Assets\Scripts\Characters\MonoBehavior\VendorController.cs" />
     <Compile Include="Assets\Scripts\Data\HoldItems\Standard\QuickPowder.cs" />
     <Compile Include="Assets\Scripts\UI\PC\PCCurrentBoxInfo.cs" />
     <Compile Include="Assets\Scripts\Data\HoldItems\Standard\Everstone.cs" />
@@ -542,7 +551,6 @@
     <Compile Include="Assets\Scripts\Data\Abilitys\List\RainDish.cs" />
     <Compile Include="Assets\Scripts\Data\Abilitys\List\Justified.cs" />
     <Compile Include="Assets\Scripts\Data\Abilitys\List\Soundproof.cs" />
-    <Compile Include="Assets\Scripts\Saving\PCBoxSaveData.cs" />
   </ItemGroup>
   <ItemGroup>
      <None Include="Assets\ScriptTemplates\82-EricBeaulieu__BerryBase-NewBerryBase.cs.txt" />

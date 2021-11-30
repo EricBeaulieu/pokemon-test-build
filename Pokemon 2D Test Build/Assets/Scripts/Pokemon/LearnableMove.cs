@@ -5,10 +5,8 @@ using UnityEngine;
 [System.Serializable]
 public class LearnableMove
 {
-    [SerializeField]
-    MoveBase _moveBase;
-    [SerializeField]
-    int _levelLeanred;
+    [SerializeField] MoveBase _moveBase;
+    [SerializeField] int _levelLeanred;
 
     public MoveBase moveBase
     {
@@ -19,5 +17,4 @@ public class LearnableMove
     {
         get { return _levelLeanred; }
     }
-
 }

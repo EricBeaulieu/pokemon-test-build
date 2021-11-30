@@ -6,28 +6,36 @@ public enum FacingDirections { Up,Down,Left,Right}
 
 public abstract class Entity : MonoBehaviour
 {
+    [SerializeField] Transform graphics;
     [SerializeField] CharacterArtSO characterArt;
     [SerializeField] protected float movementSpeed = STANDARD_WALKING_SPEED;
-    protected LayerMask solidObjectLayermask;
-    protected LayerMask interactableLayermask;
-    protected LayerMask grassLayermask;
-    protected LayerMask playerLayerMask;
-    protected LayerMask portalLayerMask;
+    internal LayerMask solidObjectLayermask;
+    internal LayerMask interactableLayermask;
+    internal LayerMask grassLayermask;
+    internal LayerMask playerLayerMask;
+    internal LayerMask portalLayerMask;
+    internal LayerMask southLedgeLayerMask;
+    internal LayerMask eastLedgeLayerMask;
+    internal LayerMask westLedgeLayerMask;
 
     bool _isMoving;
     bool _isRunning;
+    bool _isJumping;
 
     protected Animator _anim;
     /// <summary>
     /// this is here to prevent some entities walking through eachother stating that someone is currently moving to this position
     /// </summary>
-    [SerializeField] protected GameObject positionMovingTo;
+    [SerializeField] protected Transform positionMovingTo;
 
     public const float TILE_CENTER_OFFSET = 0.5f;
     protected const float STANDARD_WALKING_SPEED = 5f;
+    internal const float STANDARD_JUMPING_SPEED = 3.5f;
     protected const float STANDARD_RUNNING_SPEED = 12.5f;
-    protected const int OVER_THE_COUNTER_MAX_DISTANCE = 2;
-    const float ENTITY_Y_OFFSET = -0.3f;
+    const float ENTITY_Y_OFFSET = 0.3f;
+    const float ENTITY_JUMP_HEIGHT = 0.8f;
+
+    internal Vector3 standardGraphicsSetting = new Vector3(0, ENTITY_Y_OFFSET, 0);
 
     #region Getters/Setters
 
@@ -71,6 +79,9 @@ public abstract class Entity : MonoBehaviour
         grassLayermask = LayerMask.GetMask("Grass");
         playerLayerMask = LayerMask.GetMask("Player");
         portalLayerMask = LayerMask.GetMask("Portal");
+        southLedgeLayerMask = LayerMask.GetMask("SouthLedge");
+        eastLedgeLayerMask = LayerMask.GetMask("EastLedge");
+        westLedgeLayerMask = LayerMask.GetMask("WestLedge");
 
         SnapToGrid();
 
@@ -89,42 +100,95 @@ public abstract class Entity : MonoBehaviour
             yield break;
         }
 
-        Vector3 targetPos = transform.position;
-
-        targetPos.x += Mathf.RoundToInt(moveVector.x);
-        targetPos.y += Mathf.RoundToInt(moveVector.y);
-
         _anim.SetFloat("moveX", Mathf.Clamp(moveVector.x, -1f, 1f));
         _anim.SetFloat("moveY", Mathf.Clamp(moveVector.y, -1f, 1f));
 
-        if (CheckIfWalkable(targetPos) == false)
+        if (CheckIfWalkable(moveVector) == false)
         {
             yield break;
         }
 
         IsMoving = true;
+        Vector3 targetPos = positionMovingTo.position;
 
-        while ((targetPos - transform.position).sqrMagnitude > Mathf.Epsilon)
+        if(_isJumping == true)
         {
-            transform.position = Vector3.MoveTowards(transform.position, targetPos, movementSpeed * Time.deltaTime);
-            positionMovingTo.transform.position = targetPos;
-            yield return null;
+            Vector3 graphicsRef = standardGraphicsSetting;
+
+            while ((targetPos - transform.position).sqrMagnitude > Mathf.Epsilon)
+            {
+                float height = Mathf.Abs((Vector3.Distance(targetPos, transform.position) - 1));
+                height = (1 - height) * ENTITY_JUMP_HEIGHT;
+                graphicsRef.y = height + ENTITY_Y_OFFSET;
+                graphics.localPosition = graphicsRef;
+
+                transform.position = Vector3.MoveTowards(transform.position, targetPos, STANDARD_JUMPING_SPEED * Time.deltaTime);
+                positionMovingTo.position = targetPos;
+                yield return null;
+            }
+
+            graphics.localPosition = standardGraphicsSetting;
+            _isJumping = false;
+        }
+        else
+        {
+            while ((targetPos - transform.position).sqrMagnitude > Mathf.Epsilon)
+            {
+                transform.position = Vector3.MoveTowards(transform.position, targetPos, movementSpeed * Time.deltaTime);
+                positionMovingTo.position = targetPos;
+                yield return null;
+            }
         }
 
         transform.position = targetPos;
         IsMoving = false;
     }
 
-    protected bool CheckIfWalkable(Vector3 targetPos)
+    protected bool CheckIfWalkable(Vector2 moveVector)
     {
-        Vector2 targetPositionFixed = new Vector2(Mathf.FloorToInt(targetPos.x) + TILE_CENTER_OFFSET, Mathf.FloorToInt(targetPos.y) + TILE_CENTER_OFFSET);
+        Vector2 targetPositionFixed = new Vector2(Mathf.FloorToInt(moveVector.x + transform.position.x) + TILE_CENTER_OFFSET, Mathf.FloorToInt(moveVector.y + transform.position.y) + TILE_CENTER_OFFSET);
 
-        if (Physics2D.OverlapCircle(targetPositionFixed, 0.25f, solidObjectLayermask | interactableLayermask | playerLayerMask) != null)
+        Collider2D collider = Physics2D.OverlapCircle(targetPositionFixed, 0.25f, solidObjectLayermask | interactableLayermask | 
+            playerLayerMask | southLedgeLayerMask | eastLedgeLayerMask | westLedgeLayerMask);
+
+        if(collider != null)
         {
-            return false;
+            if ((southLedgeLayerMask & 1 << collider.gameObject.layer) == 1 << collider.gameObject.layer)
+            {
+                if (moveVector != Vector2.down)
+                {
+                    return false;
+                }
+                targetPositionFixed += moveVector;
+                collider = Physics2D.OverlapCircle(targetPositionFixed, 0.25f, solidObjectLayermask | interactableLayermask | playerLayerMask);
+            }
+            else if ((eastLedgeLayerMask & 1 << collider.gameObject.layer) == 1 << collider.gameObject.layer)
+            {
+                if(moveVector != Vector2.right)
+                {
+                    return false;
+                }
+                targetPositionFixed += moveVector;
+                collider = Physics2D.OverlapCircle(targetPositionFixed, 0.25f, solidObjectLayermask | interactableLayermask | playerLayerMask);
+            }
+            else if((westLedgeLayerMask & 1 << collider.gameObject.layer) == 1 << collider.gameObject.layer)
+            {
+                if (moveVector != Vector2.left)
+                {
+                    return false;
+                }
+                targetPositionFixed += moveVector;
+                collider = Physics2D.OverlapCircle(targetPositionFixed, 0.25f, solidObjectLayermask | interactableLayermask | playerLayerMask);
+            }
+            
+            if (collider != null)
+            {
+                return false;
+            }
+            _isJumping = true;
         }
 
-        positionMovingTo.transform.position = targetPositionFixed;
+        positionMovingTo.position = targetPositionFixed;
         return true;
     }
 
@@ -165,12 +229,12 @@ public abstract class Entity : MonoBehaviour
     public void SnapToGrid()
     {
         transform.position = GlobalTools.SnapToGrid(transform.position);
-        positionMovingTo.transform.localPosition = Vector3.zero;
+        positionMovingTo.localPosition = Vector3.zero;
     }
 
     public Vector2 CurrentWalkingToPos()
     {
-        Vector2 newPos = positionMovingTo.transform.position;
+        Vector2 newPos = positionMovingTo.position;
 
         newPos.x = Mathf.FloorToInt(newPos.x) + TILE_CENTER_OFFSET;
         newPos.y = Mathf.FloorToInt(newPos.y) + TILE_CENTER_OFFSET;

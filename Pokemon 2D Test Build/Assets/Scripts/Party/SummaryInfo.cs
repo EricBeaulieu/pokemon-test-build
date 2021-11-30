@@ -43,6 +43,6 @@ public class SummaryInfo : SummaryUIBase
         {
             currentHeldItem.text = "NONE";
         }
-        trainerMemo.text = $"{pokemon.nature.natureName} Nature";
+        trainerMemo.text = $"{pokemon.Nature.natureName} Nature";
     }
 }

@@ -24,7 +24,7 @@ public class PlayerController : Entity
     bool _ignorePlayerInput;
     bool _ignoreMenuOpen;
 
-    public int money { get; set; } = 0;
+    public int money { get; set; } = 100000;
 
     void Awake()
     {
@@ -161,13 +161,23 @@ public class PlayerController : Entity
 
         Debug.DrawLine(transform.position, interactablePOS,Color.red,1f);
 
-        var collider = Physics2D.OverlapCircle(interactablePOS, 0.25f, interactableLayermask);
+        var collider = Physics2D.OverlapCircleAll(interactablePOS, 0.25f, interactableLayermask);
+        Collider2D interactor = null;
 
-        if (collider != null)
+        for (int i = 0; i < collider.Length; i++)
         {
-            if(collider.transform.root.GetComponent<Entity>() == true)
+            if (Vector2Extensions.IsOnTheSameXOrYGrid(transform.position,collider[i].transform.position) == true)
             {
-                Entity currentInteractable = collider.transform.root.GetComponent<Entity>();
+                interactor = collider[i];
+                break;
+            }
+        }
+
+        if (interactor != null)
+        {
+            if(interactor.transform.root.GetComponent<Entity>() == true)
+            {
+                Entity currentInteractable = interactor.transform.root.GetComponent<Entity>();
                 if (currentInteractable.IsMoving == true)
                 {
                     if(interactablePOS == currentInteractable.CurrentWalkingToPos())
@@ -183,7 +193,7 @@ public class PlayerController : Entity
             }
             else
             {
-                yield return collider.GetComponent<IInteractable>()?.OnInteract((Vector2)transform.position);
+                yield return interactor.GetComponent<IInteractable>()?.OnInteract((Vector2)transform.position);
             }
         }
     }

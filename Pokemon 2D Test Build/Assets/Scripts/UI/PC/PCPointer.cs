@@ -72,9 +72,8 @@ public class PCPointer : MonoBehaviour
                 selectableBox.SelectBox(pCPokemon.gameObject);
             }
         }
-        else
+        else//switch pokemon
         {
-            //switch pokemon
             selectableBox.Deselect();
             if (pCPokemon.currentPokemon == null)
             {

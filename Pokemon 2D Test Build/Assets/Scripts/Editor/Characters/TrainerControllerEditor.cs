@@ -6,7 +6,7 @@ using UnityEditor;
 using Object = UnityEngine.Object;
 
 [CustomEditor(typeof(TrainerController))]
-public class TrainerControllerEditor : Editor
+public class TrainerControllerEditor : EntityEditor
 {
     public string trainerName;
 

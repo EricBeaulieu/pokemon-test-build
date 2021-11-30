@@ -448,7 +448,7 @@ public class BattleSystem : CoreSystem
 
         _escapeAttempts = 0;
         currentTurnDetails.Add(playerTurnAttackDetails);
-        StartCoroutine(EnemyMove());
+        EnemyMove();
     }
 
     public void AttackHasRunOutOfPP()
@@ -571,7 +571,7 @@ public class BattleSystem : CoreSystem
             else
             {
                 yield return dialogSystem.TypeDialog($"You were unable to escape!", true);
-                StartCoroutine(EnemyMove());
+                EnemyMove();
             }
         }
     }
@@ -580,7 +580,7 @@ public class BattleSystem : CoreSystem
 
     #region Enemy Actions
 
-    public IEnumerator EnemyMove()
+    public void EnemyMove()
     {
         Move currentAttack = enemyBattleUnit.ReturnRandomMove();
 
@@ -598,7 +598,7 @@ public class BattleSystem : CoreSystem
         enemyTurnAttackDetails.SetAttackDetails(currentAttack, enemyBattleUnit, playerBattleUnit);
         currentTurnDetails.Add(enemyTurnAttackDetails);
 
-        yield return RunThroughTurns(currentTurnDetails);
+        StartCoroutine(RunThroughTurns(currentTurnDetails));
     }
 
     IEnumerator TrainerAboutToUsePokemonFeature(Pokemon nextPokemon)
@@ -2509,7 +2509,7 @@ public class BattleSystem : CoreSystem
             }
             else
             {
-                StartCoroutine(EnemyMove());
+                EnemyMove();
             }
         }
         else
@@ -2755,7 +2755,7 @@ public class BattleSystem : CoreSystem
 
             playerBattleUnit.pokemon.ability.FetchPokeBallFirstFailedThrow(currentPokeball, playerBattleUnit.pokemon);
 
-            yield return EnemyMove();
+            EnemyMove();
         }
     }
 
@@ -2765,7 +2765,7 @@ public class BattleSystem : CoreSystem
         playerBattleUnit.lastMoveUsedConsecutively = 0;
         playerBattleUnit.enraged = false;
         playerBattleUnit.HUD.UpdateHud();
-        StartCoroutine(EnemyMove());
+        EnemyMove();
         EnableActionSelector(false);
     }
 
@@ -2790,7 +2790,7 @@ public class BattleSystem : CoreSystem
             List<StatBoost> abilityStatBoosts = new List<StatBoost>() { new StatBoost(battleitem.GetStatAttribute, 1) };
             yield return ApplyStatChanges(abilityStatBoosts, enemyBattleUnit, MoveTarget.Self,playerBattleUnit);
         }
-        yield return EnemyMove();
+        EnemyMove();
     }
 
     #endregion

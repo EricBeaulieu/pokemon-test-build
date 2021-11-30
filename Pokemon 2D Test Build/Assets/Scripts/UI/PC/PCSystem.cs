@@ -89,7 +89,7 @@ public class PCSystem : CoreSystem
         selectableBox = new SelectableBoxUI(currentBox.GetPCPokemonAtIndex(0).gameObject);
         pointer.Initialization(selectableBox);
         partyButton.GetButton().onClick.AddListener(() => { StartCoroutine(SelectPlayerParty()); });
-        partyButton.ClosePartyScreen += () => { StartCoroutine(SelectPlayerParty()); Debug.Log("Closed"); };
+        partyButton.ClosePartyScreen += () => { StartCoroutine(SelectPlayerParty()); };
         closeButton.GetButton().onClick.AddListener(() => { CloseSystem(); });
     }
 
@@ -102,6 +102,7 @@ public class PCSystem : CoreSystem
         dialogSystem.ActivateDialog(true);
         yield return dialogSystem.TypeDialog(CANT_CLOSE_PC_MESSAGE, true);
         dialogSystem.ActivateDialog(false);
+        GameManager.SetGameState(GameState.PC);
 
         selectableBox.SelectBox();
     }
@@ -115,6 +116,7 @@ public class PCSystem : CoreSystem
         dialogSystem.ActivateDialog(true);
         yield return dialogSystem.TypeDialog(CANT_TAKE_LAST_POKEMON_PC_MESSAGE, true);
         dialogSystem.ActivateDialog(false);
+        GameManager.SetGameState(GameState.PC);
 
         selectableBox.SelectBox();
     }
@@ -124,7 +126,7 @@ public class PCSystem : CoreSystem
         selectableBox.Deselect();
         boxData[boxIndex].SavePokemonInsideBox(currentBox);
         nextBox.AlternateSetPosition(right);
-        Vector3 endPosition = currentBox.transform.localPosition;
+        Vector3 endPosition = currentBox.startingPosition;
         if (right)
         {
             boxIndex++;
@@ -144,35 +146,13 @@ public class PCSystem : CoreSystem
         currentBox.SetupData(boxData[boxIndex]);
         currentBox.transform.localPosition = currentBox.startingPosition;
         nextBox.gameObject.SetActive(false);
-        SetButtonsNaviagtionToNewBox(currentBox);
         
         selectableBox.SelectBox(currentBox.GetBannerGameObject());
     }
 
-    void SetButtonsNaviagtionToNewBox(PCCurrentBoxInfo newBox)
-    {
-        var navigation = partyButton.GetButton().navigation;
-
-        navigation.selectOnDown = newBox.GetBanner.GetButton;
-        navigation.selectOnLeft = closeButton.GetButton();//breaks when adjusting
-        navigation.selectOnRight = closeButton.GetButton();//breaks when adjusting
-        navigation.selectOnUp = newBox.GetPCPokemonAtIndex(25).GetButton;
-
-        partyButton.GetButton().navigation = navigation;
-
-        navigation = closeButton.GetButton().navigation;
-
-        navigation.selectOnDown = newBox.GetBanner.GetButton;
-        navigation.selectOnLeft = partyButton.GetButton();//breaks when adjusting
-        navigation.selectOnRight = partyButton.GetButton();//breaks when adjusting
-        navigation.selectOnUp = newBox.GetPCPokemonAtIndex(28).GetButton;
-
-        closeButton.GetButton().navigation = navigation;
-    }
-
     IEnumerator SelectPlayerParty()
     {
-        yield return new WaitForSeconds(0.01f);
+        yield return new WaitForSeconds(0.01f);//prevents error of deselcting the newly selected item
         selectableBox.Deselect();
         yield return partyPokemon.EnableParty();
         if(PCParty.isOn == true)
@@ -185,17 +165,17 @@ public class PCSystem : CoreSystem
         }
     }
 
-    public PCBoxData[] SaveBoxData()
+    public PCBoxData[] SaveBoxData()//Saving
     {
         return boxData;
     }
 
-    public void LoadBoxData(PCBoxData[] pCBoxData)
+    public void LoadBoxData(PCBoxData[] pCBoxData)//Loading 
     {
         boxData = pCBoxData;
     }
 
-    public void PresetBoxesWithPresetPokemon()
+    public void PresetBoxesWithPresetPokemon()//Testing purposes only
     {
         for (int i = 0; i < boxData.Length; i++)
         {
@@ -203,6 +183,10 @@ public class PCSystem : CoreSystem
         }
     }
 
+
+    /// <summary>
+    /// Checks to see if the PC is full
+    /// </summary>
     public bool IsPCFull()
     {
         for (int i = 0; i < boxData.Length; i++)
@@ -219,6 +203,10 @@ public class PCSystem : CoreSystem
         return true;
     }
 
+    /// <summary>
+    /// finds the first available spot and deposits the caught pokemon into position
+    /// </summary>
+    /// <param name="newCapturedPokemon">newly captured pokemon</param>
     public void DepositPokemonInFirstAvailablePosition(Pokemon newCapturedPokemon)
     {
         for (int i = 0; i < boxData.Length; i++)

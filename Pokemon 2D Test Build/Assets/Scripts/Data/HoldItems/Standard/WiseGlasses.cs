@@ -9,7 +9,6 @@ public class WiseGlasses : HoldItemBase
     {
         if (move.MoveType == MoveType.Special)
         {
-            move = move.Clone();
             move.AdjustedMovePower(0.2f);
         }
         return base.AlterUserMoveDetails(holder, move);

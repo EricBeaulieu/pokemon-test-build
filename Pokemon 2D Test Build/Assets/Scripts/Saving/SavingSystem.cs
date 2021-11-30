@@ -21,8 +21,6 @@ public static class SavingSystem
     const string PlayerLevelSaved = "CurrentLevel";
     const string PCInfo = "PCInfo";
 
-    public const string split = "*";
-
     public static bool SaveFileAvailable()
     {
         return File.Exists(savePath);

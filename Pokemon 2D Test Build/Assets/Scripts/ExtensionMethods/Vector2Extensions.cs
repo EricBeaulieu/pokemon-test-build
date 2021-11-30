@@ -16,4 +16,13 @@ public static class Vector2Extensions
                 return Vector2.right;
         }
     }
+
+    public static bool IsOnTheSameXOrYGrid(this Vector2 original,Vector2 target)
+    {
+        if(Mathf.FloorToInt(original.x) == Mathf.FloorToInt(target.x) || Mathf.FloorToInt(original.y) == Mathf.FloorToInt(target.y))
+        {
+            return true;
+        }
+        return false;
+    }
 }

@@ -4,11 +4,8 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class PCBanner : MonoBehaviour, ISelectHandler, IDeselectHandler
+public class PCBanner : MonoBehaviour, ISelectHandler
 {
-    [SerializeField] Button button;
-    public Button GetButton { get { return button; } }
-
     [SerializeField] Image bannerBackground;
     [SerializeField] Text bannerName;
 
@@ -18,15 +15,9 @@ public class PCBanner : MonoBehaviour, ISelectHandler, IDeselectHandler
         PCSystem.pCPokemonDataDisplay.SetupData(null);
     }
 
-    public void OnDeselect(BaseEventData eventData)
-    {
-        button.onClick.RemoveAllListeners();
-    }
-
     public void SetupBanner(PCBoxData box)
     {
         bannerName.text = $"{box.boxName}";
         //bannerBackground.sprite = sprite;
     }
-    
 }

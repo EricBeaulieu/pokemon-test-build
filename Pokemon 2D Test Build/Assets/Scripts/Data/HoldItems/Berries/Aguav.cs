@@ -23,7 +23,7 @@ public class Aguav : HoldItemBase
             holder.pokemon.UpdateHPRestored(hpHealed);
             holder.pokemon.statusChanges.Enqueue($"{holder.pokemon.currentName} restored HP using the {GlobalTools.SplitCamelCase(BerryId.ToString())} berry!");
 
-            if(holder.pokemon.nature.GetFlavourRating(hatedFlavor) < 0)
+            if(holder.pokemon.Nature.GetFlavourRating(hatedFlavor) < 0)
             {
                 condition = ConditionID.Confused;
             }

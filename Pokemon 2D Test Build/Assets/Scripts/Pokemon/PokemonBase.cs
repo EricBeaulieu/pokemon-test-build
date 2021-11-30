@@ -258,5 +258,4 @@ public class PokemonBase : ScriptableObject {
     {
         get { return wildPokemonHoldItems; }
     }
-
 }

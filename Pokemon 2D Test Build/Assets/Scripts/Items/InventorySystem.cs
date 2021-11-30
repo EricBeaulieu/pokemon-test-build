@@ -616,7 +616,7 @@ public class InventorySystem : CoreSystem
         SetUpCancelButtonFuntionality(true);
     }
 
-    public List<Item> SaveInventory()
+    public List<Item> CurrentInventory()
     {
         return currentInventory;
     }
