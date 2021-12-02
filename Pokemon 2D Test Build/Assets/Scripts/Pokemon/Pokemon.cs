@@ -721,7 +721,7 @@ public class Pokemon {
             }
             return _currentName;
         }
-        set
+        private set
         {
             _currentName = value;
         }
