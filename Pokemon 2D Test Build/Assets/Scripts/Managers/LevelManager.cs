@@ -49,7 +49,7 @@ public class LevelManager : MonoBehaviour
             return;
         }
 
-        GameObject[] temp = SceneManager.GetSceneByName(sceneReference.GetSceneName).GetRootGameObjects();
+        GameObject[] temp = SceneManager.GetSceneByName(sceneReference.name).GetRootGameObjects();
 
         ReloadSavedSettings();
         allEntitiesInScene = ReturnAllEntities(temp);
@@ -196,7 +196,7 @@ public class LevelManager : MonoBehaviour
     public List<SaveableEntity> SaveableEntities()
     {
         List<SaveableEntity> saveableEntities = new List<SaveableEntity>();
-        GameObject[] temp = SceneManager.GetSceneByName(sceneReference.GetSceneName).GetRootGameObjects();
+        GameObject[] temp = SceneManager.GetSceneByName(sceneReference.name).GetRootGameObjects();
 
         for (int i = 0; i < temp.Length; i++)
         {

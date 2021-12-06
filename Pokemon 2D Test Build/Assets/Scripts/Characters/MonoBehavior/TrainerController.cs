@@ -272,7 +272,7 @@ public class TrainerController : EntityAI,IInteractable,ISaveable
 
     public object CaptureState(bool PlayerSave = false)
     {
-        if(PlayerSave == true && gameObject.scene.name == SceneSystem.currentLevelManager.GameSceneBase.GetSceneName)
+        if(PlayerSave == true && gameObject.scene.name == SceneSystem.currentLevelManager.GameSceneBase.name)
         {
             return new StartingLevelTrainerSaveData
             {

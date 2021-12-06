@@ -43,7 +43,7 @@ public static class SceneSystem
             {
                 continue;
             }
-            AsyncOperation sceneToLoad = SceneManager.LoadSceneAsync(newScene.GetSceneName, LoadSceneMode.Additive);
+            AsyncOperation sceneToLoad = SceneManager.LoadSceneAsync(newScene.name, LoadSceneMode.Additive);
             currentScenesLoaded.Add(newScene);
             yield return OnLevelLoaded(sceneToLoad, newScene);
         }
@@ -64,7 +64,7 @@ public static class SceneSystem
 
         for (int i = 0; i < loadedScenes.Length; i++)
         {
-            GameSceneBaseSO matching = allGameSceneBaseSO.FirstOrDefault(x => x.GetSceneName == loadedScenes[i].name);
+            GameSceneBaseSO matching = allGameSceneBaseSO.FirstOrDefault(x => x.name == loadedScenes[i].name);
             if (matching != null)
             {
                 if (current.Contains(matching) == false)
@@ -87,7 +87,7 @@ public static class SceneSystem
         }
 
         GameSceneBaseSO gameSceneBase = Resources.FindObjectsOfTypeAll<GameSceneBaseSO>().FirstOrDefault(x => x == scene);
-        AsyncOperation sceneToLoad = SceneManager.LoadSceneAsync(gameSceneBase.GetSceneName, LoadSceneMode.Additive);
+        AsyncOperation sceneToLoad = SceneManager.LoadSceneAsync(gameSceneBase.name, LoadSceneMode.Additive);
         currentScenesLoaded.Add(gameSceneBase);
         yield return OnLevelLoaded(sceneToLoad, gameSceneBase);
     }

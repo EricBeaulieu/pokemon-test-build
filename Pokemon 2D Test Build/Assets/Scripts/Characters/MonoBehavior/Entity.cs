@@ -17,6 +17,7 @@ public abstract class Entity : MonoBehaviour
     internal LayerMask southLedgeLayerMask;
     internal LayerMask eastLedgeLayerMask;
     internal LayerMask westLedgeLayerMask;
+    internal LayerMask waterLayerMask;
 
     bool _isMoving;
     bool _isRunning;
@@ -82,6 +83,7 @@ public abstract class Entity : MonoBehaviour
         southLedgeLayerMask = LayerMask.GetMask("SouthLedge");
         eastLedgeLayerMask = LayerMask.GetMask("EastLedge");
         westLedgeLayerMask = LayerMask.GetMask("WestLedge");
+        waterLayerMask = LayerMask.GetMask("Water");
 
         SnapToGrid();
 
@@ -149,7 +151,7 @@ public abstract class Entity : MonoBehaviour
         Vector2 targetPositionFixed = new Vector2(Mathf.FloorToInt(moveVector.x + transform.position.x) + TILE_CENTER_OFFSET, Mathf.FloorToInt(moveVector.y + transform.position.y) + TILE_CENTER_OFFSET);
 
         Collider2D collider = Physics2D.OverlapCircle(targetPositionFixed, 0.25f, solidObjectLayermask | interactableLayermask | 
-            playerLayerMask | southLedgeLayerMask | eastLedgeLayerMask | westLedgeLayerMask);
+            playerLayerMask | southLedgeLayerMask | eastLedgeLayerMask | westLedgeLayerMask| waterLayerMask);
 
         if(collider != null)
         {
@@ -160,7 +162,7 @@ public abstract class Entity : MonoBehaviour
                     return false;
                 }
                 targetPositionFixed += moveVector;
-                collider = Physics2D.OverlapCircle(targetPositionFixed, 0.25f, solidObjectLayermask | interactableLayermask | playerLayerMask);
+                collider = Physics2D.OverlapCircle(targetPositionFixed, 0.25f, solidObjectLayermask | interactableLayermask | playerLayerMask | waterLayerMask);
             }
             else if ((eastLedgeLayerMask & 1 << collider.gameObject.layer) == 1 << collider.gameObject.layer)
             {
@@ -169,7 +171,7 @@ public abstract class Entity : MonoBehaviour
                     return false;
                 }
                 targetPositionFixed += moveVector;
-                collider = Physics2D.OverlapCircle(targetPositionFixed, 0.25f, solidObjectLayermask | interactableLayermask | playerLayerMask);
+                collider = Physics2D.OverlapCircle(targetPositionFixed, 0.25f, solidObjectLayermask | interactableLayermask | playerLayerMask | waterLayerMask);
             }
             else if((westLedgeLayerMask & 1 << collider.gameObject.layer) == 1 << collider.gameObject.layer)
             {
@@ -178,7 +180,7 @@ public abstract class Entity : MonoBehaviour
                     return false;
                 }
                 targetPositionFixed += moveVector;
-                collider = Physics2D.OverlapCircle(targetPositionFixed, 0.25f, solidObjectLayermask | interactableLayermask | playerLayerMask);
+                collider = Physics2D.OverlapCircle(targetPositionFixed, 0.25f, solidObjectLayermask | interactableLayermask | playerLayerMask | waterLayerMask);
             }
             
             if (collider != null)

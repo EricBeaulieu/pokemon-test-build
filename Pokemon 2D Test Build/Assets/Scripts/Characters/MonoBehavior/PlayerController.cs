@@ -254,6 +254,7 @@ public class PlayerController : Entity
 
     void PlayerHasWildEncounter()
     {
+        return;
         if(Random.Range(1,101) <= 11)
         {
             _anim.SetBool("isMoving", false);

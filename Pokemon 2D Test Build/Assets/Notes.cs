@@ -6,6 +6,8 @@ public class Notes
 {
     //To do list
     
+    //prevent trainers from seeing through solid objects
+
     //Shop
     //repel/super/max repel and pokedoll for shop
     //iron ball for grounded

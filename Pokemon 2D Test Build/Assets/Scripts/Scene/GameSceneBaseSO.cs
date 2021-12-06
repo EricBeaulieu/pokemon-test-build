@@ -25,7 +25,7 @@ public class GameSceneBaseSO : ScriptableObject
 
     public string GetScenePath
     {
-        get { return $"Assets/Scenes/{sceneName}"; }
+        get { return $"Assets/Scenes/{name}"; }
     }
 
     public AudioClip GetLevelMusic
