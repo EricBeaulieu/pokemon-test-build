@@ -208,4 +208,14 @@ public class LevelManager : MonoBehaviour
 
         return saveableEntities;
     }
+
+    public int GetStandardWalkingCount()
+    {
+        int count = 0;
+        for (int i = 0; i < standardWalking.Count; i++)
+        {
+            count += standardWalking[i].WildEncounterChance;
+        }
+        return count;
+    }
 }

@@ -12,6 +12,7 @@ public class EntityEditor : Editor
 
     void OnEnable()
     {
+        if(characterArt != null)
         characterArt = CurrentSpriteInfo();
     }
 

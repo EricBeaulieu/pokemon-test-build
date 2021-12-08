@@ -197,6 +197,16 @@ public class TrainerController : EntityAI,IInteractable,ISaveable
                 return;
             }
 
+            int distance = Mathf.RoundToInt(Vector2.Distance(transform.position, player.transform.position)) - 1;
+            Vector2 directionFacing = GetDirection();
+            for (int i = 0; i < distance; i++)
+            {
+                if (CheckIfWalkable(directionFacing * i) == false)
+                {
+                    return;
+                }
+            }
+            
             _playerSpotted = true;
             currentlyExecutingDecision = false;
             StartCoroutine(TriggerTrainerBattle(player));

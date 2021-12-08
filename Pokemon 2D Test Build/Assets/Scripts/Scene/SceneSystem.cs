@@ -32,7 +32,7 @@ public static class SceneSystem
                 continue;
             }
             allActiveEntities.RemoveAll(x => currentScenesLoaded[i].GetLevelManager.GetAllEntities().Contains(x) == true);
-            SceneManager.UnloadSceneAsync(currentScenesLoaded[i].GetScenePath);
+            SceneManager.UnloadSceneAsync(currentScenesLoaded[i].name);
             currentScenesLoaded.RemoveAt(i);
         }
 
@@ -69,7 +69,7 @@ public static class SceneSystem
             {
                 if (current.Contains(matching) == false)
                 {
-                    SceneManager.UnloadSceneAsync(matching.GetScenePath);
+                    SceneManager.UnloadSceneAsync(matching.name);
                 }
             }
         }

@@ -244,5 +244,9 @@ public abstract class Entity : MonoBehaviour
     }
 
     public virtual void PlayerInteractingWithWhenDoneMoving() { }
-    
+
+    protected Vector2 GetDirection()
+    {
+        return new Vector2(Mathf.RoundToInt(_anim.GetFloat("moveX")), Mathf.RoundToInt(_anim.GetFloat("moveY")));
+    }
 }

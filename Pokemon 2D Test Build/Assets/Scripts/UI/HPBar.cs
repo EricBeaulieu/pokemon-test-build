@@ -23,6 +23,7 @@ public class HPBar : MonoBehaviour
         while(curHP - healthAfterDamage > Mathf.Epsilon)
         {
             curHP -= changeAmount * Time.deltaTime;
+            curHP = Mathf.Clamp(curHP, healthAfterDamage, maxHP);
             SetHP((float)curHP/maxHP);
             if(currentHpText != null)
             {
