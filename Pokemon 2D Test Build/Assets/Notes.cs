@@ -6,6 +6,7 @@ public class Notes
 {
     //To do list
     
+    //old lady/little girl/little boy does not have a front sprite for in battle
     //prevent trainers from seeing through solid objects
 
     //Shop

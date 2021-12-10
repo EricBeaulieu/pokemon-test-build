@@ -27,12 +27,12 @@ public class EarnableEV
 }
 
 [System.Serializable]
-public class EffortValues : SpecifiedValues
+public class EffortValues : SpecifiedValues<EffortValues>
 {
     const int MAXIMUM_EV_Value = 255;
     const int MAXIMUM_EV_Total = 510;
 
-    public void SetValues(SpecifiedValues effortValues = null)
+    public override void SetValues(EffortValues effortValues = null)
     {
         if(effortValues == null)
         {

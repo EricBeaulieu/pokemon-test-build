@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
-public class IndividualValues : SpecifiedValues
+public class IndividualValues : SpecifiedValues<IndividualValues>
 {
     const int MINIMUM_IV_VALUE = 1;
     const int MAXIMUM_IV_VALUE = 31;
 
-    public void SetValues(IndividualValues individualValues = null)
+    public override void SetValues(IndividualValues individualValues = null)
     {
         if (individualValues == null)
         {

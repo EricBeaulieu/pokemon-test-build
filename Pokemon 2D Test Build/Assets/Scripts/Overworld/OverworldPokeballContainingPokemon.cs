@@ -40,9 +40,7 @@ public class OverworldPokeballContainingPokemon : MonoBehaviour,IInteractable, I
             yield break;
         }
 
-        giftPokemon = new Pokemon(giftPokemon.pokemonBase, giftPokemon.currentLevel, giftPokemon.individualValues, giftPokemon.effortValues,
-                    giftPokemon.gender, giftPokemon.isShiny, giftPokemon.Nature, giftPokemon.currentName, giftPokemon.presetMoves,
-                    giftPokemon.startingAbilityID, giftPokemon.GetCurrentItem);
+        giftPokemon.SetUpData();
 
         if (string.IsNullOrEmpty(specializedMessage) == true)
         {

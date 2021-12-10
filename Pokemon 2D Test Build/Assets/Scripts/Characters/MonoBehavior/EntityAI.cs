@@ -11,6 +11,9 @@ public abstract class EntityAI : Entity
     [SerializeField] protected bool canLookLeft = true;
     [SerializeField] protected bool canLookRight = true;
 
+    [SerializeField] protected bool lookDirectionAfterInteraction = false;
+    [SerializeField] protected FacingDirections directionAfterInteraction;
+
     [SerializeField] protected List<AIDecision> aiDecisionList;
     protected bool currentlyExecutingDecision = false;
     protected int currentMovementPattern = 0;

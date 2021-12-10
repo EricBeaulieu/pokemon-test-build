@@ -3,14 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
-public abstract class SpecifiedValues
+public abstract class SpecifiedValues<T>
 {
-    [SerializeField] int _hitPoints = 0;
-    [SerializeField] int _attack = 0;
-    [SerializeField] int _defense = 0;
-    [SerializeField] int _specialAttack = 0;
-    [SerializeField] int _specialDefense = 0;
-    [SerializeField] int _speed = 0;
+    [SerializeField] internal int _hitPoints = 0;
+    [SerializeField] internal int _attack = 0;
+    [SerializeField] internal int _defense = 0;
+    [SerializeField] internal int _specialAttack = 0;
+    [SerializeField] internal int _specialDefense = 0;
+    [SerializeField] internal int _speed = 0;
+
+    public abstract void SetValues(T passedValue);
 
     public void LoadValues(int hp,int att,int def, int spAtt,int spDef,int spd)
     {

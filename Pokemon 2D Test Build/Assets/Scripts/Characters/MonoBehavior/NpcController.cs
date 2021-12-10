@@ -91,6 +91,11 @@ public class NpcController : EntityAI, IInteractable
                 yield return GameManager.instance.GetDialogSystem.ShowDialogBox(dialog);
             }
             idleTimer = 0;
+
+            if(lookDirectionAfterInteraction == true)
+            {
+                FaceTowardsDirection(directionAfterInteraction);
+            }
         }
     }
 }
