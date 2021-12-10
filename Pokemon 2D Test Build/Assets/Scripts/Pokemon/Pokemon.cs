@@ -8,37 +8,50 @@ public class Pokemon {
 
     //variables
     [SerializeField] PokemonBase _pokemonBase;
+    public PokemonBase pokemonBase { get { return _pokemonBase; } private set { _pokemonBase = value; } }
     [Range(1,100)]
     [SerializeField] int _level = 1;
-    [SerializeField] List<MoveBase> _presetMoves;
+    public int currentLevel { get { return _level; } private set { _level = Mathf.Clamp(value,1,100); } }
+    [SerializeField] List<MoveBase> presetMoves;
     [SerializeField] bool _isShiny;
+    public bool isShiny { get { return _isShiny; } private set { _isShiny = value; } }
     [SerializeField] Gender _gender;
+    public Gender gender { get { return _gender; } private set { _gender = value; } }
     [SerializeField] NatureBase nature;
+    public NatureBase Nature { get { return nature; } private set { nature = value; } }
     [SerializeField] IndividualValues _individualValues = new IndividualValues();
+    public IndividualValues individualValues { get { return _individualValues; } private set { _individualValues = value; } }
     [SerializeField] EffortValues _effortValues = new EffortValues();
+    public EffortValues effortValues { get { return _effortValues; } private set { _effortValues = value; } }
     [SerializeField] string _currentName;
+    public string currentName
+    {
+        get
+        {
+            if (string.IsNullOrEmpty(_currentName))
+            {
+                return pokemonBase.GetPokedexName();
+            }
+            return _currentName;
+        }
+        private set
+        {
+            _currentName = value;
+        }
+    }
     [SerializeField] AbilityID abilityID = AbilityID.NA;
     [SerializeField] ItemBase currentHeldItem;
-    int hitPoints;
-    AbilityBase _ability;
+    public ItemBase GetCurrentItem { get { return currentHeldItem; } }
+    internal int hitPoints;
+    public int currentHitPoints { get { return hitPoints; } set { if (value <= 0) status = null; hitPoints = value; } }
     public System.Action OnStatusChanged;
 
-    //properties
-    public PokemonBase pokemonBase { get { return _pokemonBase; } private set { _pokemonBase = value; } }
-    public int currentLevel { get { return _level; } private set { _level = value; } }
-    public int currentHitPoints { get { return hitPoints; } set { if (value <= 0) status = null; hitPoints = value; } }
+
     public int currentExp { get; set; }
-    public NatureBase Nature { get { return nature; } private set { nature = value; } }
     public string originalTrainer { get; private set; }
     public string originalTrainerID { get; private set; }
     public PokeballItem pokeballCapturedIn { get; private set; }
-    public AbilityBase ability { get { return _ability; } private set { _ability = value; } }
-    public AbilityID startingAbilityID { get { return abilityID; } private set { abilityID = value; } }
-    public Gender gender { get { return _gender; } private set { _gender = value; } }
-    public bool isShiny { get { return _isShiny; } private set { _isShiny = value; } }
-    public IndividualValues individualValues { get { return _individualValues; } private set { _individualValues = value; } }
-    public EffortValues effortValues { get { return _effortValues; } private set { _effortValues = value; } }
-    public ItemBase GetCurrentItem { get { return currentHeldItem; } }
+    public AbilityBase ability { get; private set; }
     public bool evolvePokemonAfterBattle { get; private set; } = false;
     public ElementType pokemonType1 { get; private set; }
     public ElementType pokemonType2 { get; private set; }
@@ -52,52 +65,45 @@ public class Pokemon {
     }
 
     public List<Move> moves { get; set; }
-    public List<MoveBase> presetMoves { get { return _presetMoves; } }
     public Dictionary<StatAttribute, int> baseStats { get; private set; }
     public Dictionary<StatAttribute, int> statBoosts { get; private set; }
     public Queue<string> statusChanges { get; private set; } = new Queue<string>();
-
     public ConditionBase status { get; private set; }
     public List<ConditionBase> volatileStatus { get; private set; } = new List<ConditionBase>();
 
     #region Constructors
 
-    public Pokemon(PokemonBase pokemonBase,int level,IndividualValues iV = null,EffortValues eV = null, Gender specifiedgender = Gender.NA, 
-        bool? shiny = null,NatureBase specifiedNature = null,string nickname = null, List<MoveBase> presetMoveList = null, 
-        AbilityID presetAbilityID = AbilityID.NA,ItemBase item = null)
+    public void SetUpData()
     {
+        if (pokemonBase == null)
+        {
+            Debug.LogError("Pokemon Base is null");
+        }
         _pokemonBase = pokemonBase;
 
-        if(level <= 0 || level > 100)
-        {
-            level = 5;
-        }
-        currentLevel = level;
-        currentExp = pokemonBase.GetExpForLevel(level);
+        currentExp = pokemonBase.GetExpForLevel(currentLevel);
 
-        _individualValues.SetValues(iV);
-        _effortValues.SetValues(eV);
-        gender = SetGender(specifiedgender);
+        individualValues.SetValues();
+        effortValues.SetValues();
+        gender = SetGender(gender);
 
-        Nature = specifiedNature == null ? SetNature() : specifiedNature;
-        isShiny = shiny.HasValue ? shiny.Value: (Random.value > 0.5f);
-        currentName = nickname;
+        Nature = Nature == null ? SetNature() : Nature;
 
         SetDataStats();
         currentHitPoints = maxHitPoints;
 
-        if(presetAbilityID != AbilityID.NA)
+        if (abilityID != AbilityID.NA)
         {
-            ability = SetAbility(AbilityDB.GetAbilityBase(presetAbilityID));
+            ability = SetAbility(AbilityDB.GetAbilityBase(abilityID));
         }
         else
         {
             ability = SetAbility();
         }
-        
-        GivePokemonItemToHold(item);
 
-        SetMoves(presetMoveList);
+        SetMoves(presetMoves);
+        statusChanges = new Queue<string>();
+        volatileStatus = new List<ConditionBase>();
     }
 
     public Pokemon(PokemonSaveData saveData)
@@ -711,22 +717,6 @@ public class Pokemon {
         currentHitPoints = Mathf.Clamp(currentHitPoints + hpRestored, 0, maxHitPoints);
     }
 
-    public string currentName
-    {
-        get
-        {
-            if(string.IsNullOrEmpty(_currentName))
-            {
-                return pokemonBase.GetPokedexName();
-            }
-            return _currentName;
-        }
-        private set
-        {
-            _currentName = value;
-        }
-    }
-
     public void SetStatus(ConditionID conditionID,bool secondaryEffect)
     {
         if(conditionID == ConditionID.NA) { return; }
@@ -895,12 +885,11 @@ public class Pokemon {
 
         //This copy is here because if it is iterating through it and removes an element while searching it shall break the for each loop
         List<ConditionBase> copyVolatileStatus = new List<ConditionBase>(volatileStatus);
-
-        foreach (ConditionBase currentVolatileStatus in copyVolatileStatus)
+        for (int i = volatileStatus.Count -1; i >= 0; i--)
         {
-            if (currentVolatileStatus.OnBeforeMove(this, targetPokemon) == false)
+            if (volatileStatus[i].OnBeforeMove(this, targetPokemon) == false)
             {
-                return currentVolatileStatus.Id;
+                return volatileStatus[i].Id;
             }
         }
 

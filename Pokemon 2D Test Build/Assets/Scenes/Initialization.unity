@@ -5449,8 +5449,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0850c643d73b144ab68723be05d660b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startNewSaveEveryStart: 1
+  startNewSaveEveryStart: 0
   startWithPresetBoxes: 1
+  turnOffWildPokemon: 0
   playerPrefab: {fileID: 5712684506751752012, guid: df0ad118f1b16b94188f1a819d172b55,
     type: 3}
   startingScene: {fileID: 11400000, guid: aee631e6f45ac094497717b533f7ef05, type: 2}
@@ -30074,6 +30075,7 @@ GameObject:
   - component: {fileID: 1609063947}
   - component: {fileID: 1609063949}
   - component: {fileID: 1609063948}
+  - component: {fileID: 1609063950}
   m_Layer: 5
   m_Name: StatusEffect
   m_TagString: Untagged
@@ -30138,6 +30140,36 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1609063946}
   m_CullTransparentMesh: 1
+--- !u!114 &1609063950
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1609063946}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1aa08ab6e0800fa44ae55d278d1423e3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Content: {fileID: 1609063947}
+  m_Horizontal: 0
+  m_Vertical: 1
+  m_MovementType: 0
+  m_Elasticity: 0.1
+  m_Inertia: 1
+  m_DecelerationRate: 0.135
+  m_ScrollSensitivity: 1
+  m_Viewport: {fileID: 0}
+  m_HorizontalScrollbar: {fileID: 0}
+  m_VerticalScrollbar: {fileID: 0}
+  m_HorizontalScrollbarVisibility: 0
+  m_VerticalScrollbarVisibility: 0
+  m_HorizontalScrollbarSpacing: 0
+  m_VerticalScrollbarSpacing: 0
+  m_OnValueChanged:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &1613676042
 GameObject:
   m_ObjectHideFlags: 0
@@ -33677,7 +33709,7 @@ MonoBehaviour:
   pcPokemonTest:
   - _pokemonBase: {fileID: 11400000, guid: 699cdb8144bb5e546bd7c06c113ccb97, type: 2}
     _level: 23
-    _presetMoves: []
+    presetMoves: []
     _isShiny: 0
     _gender: 0
     nature: {fileID: 0}
@@ -33700,7 +33732,7 @@ MonoBehaviour:
     currentHeldItem: {fileID: 0}
   - _pokemonBase: {fileID: 11400000, guid: d2d598222a9f08f41bf9b00c66f94a61, type: 2}
     _level: 16
-    _presetMoves: []
+    presetMoves: []
     _isShiny: 0
     _gender: 0
     nature: {fileID: 0}
@@ -33723,7 +33755,7 @@ MonoBehaviour:
     currentHeldItem: {fileID: 11400000, guid: 65b970ecaf02d294abf4772377eee7f2, type: 2}
   - _pokemonBase: {fileID: 0}
     _level: 0
-    _presetMoves: []
+    presetMoves: []
     _isShiny: 0
     _gender: 0
     nature: {fileID: 0}
@@ -33746,7 +33778,7 @@ MonoBehaviour:
     currentHeldItem: {fileID: 0}
   - _pokemonBase: {fileID: 0}
     _level: 0
-    _presetMoves: []
+    presetMoves: []
     _isShiny: 0
     _gender: 0
     nature: {fileID: 0}
@@ -33769,30 +33801,7 @@ MonoBehaviour:
     currentHeldItem: {fileID: 0}
   - _pokemonBase: {fileID: 11400000, guid: 2644f0f0225129649abafceda30c462a, type: 2}
     _level: 10
-    _presetMoves: []
-    _isShiny: 1
-    _gender: 0
-    nature: {fileID: 0}
-    _individualValues:
-      _hitPoints: 0
-      _attack: 0
-      _defense: 0
-      _specialAttack: 0
-      _specialDefense: 0
-      _speed: 0
-    _effortValues:
-      _hitPoints: 0
-      _attack: 0
-      _defense: 0
-      _specialAttack: 0
-      _specialDefense: 0
-      _speed: 0
-    _currentName: 
-    abilityID: 0
-    currentHeldItem: {fileID: 0}
-  - _pokemonBase: {fileID: 0}
-    _level: 0
-    _presetMoves: []
+    presetMoves: []
     _isShiny: 0
     _gender: 0
     nature: {fileID: 0}
@@ -33815,7 +33824,7 @@ MonoBehaviour:
     currentHeldItem: {fileID: 0}
   - _pokemonBase: {fileID: 0}
     _level: 0
-    _presetMoves: []
+    presetMoves: []
     _isShiny: 0
     _gender: 0
     nature: {fileID: 0}
@@ -33838,7 +33847,7 @@ MonoBehaviour:
     currentHeldItem: {fileID: 0}
   - _pokemonBase: {fileID: 0}
     _level: 0
-    _presetMoves: []
+    presetMoves: []
     _isShiny: 0
     _gender: 0
     nature: {fileID: 0}
@@ -33861,7 +33870,30 @@ MonoBehaviour:
     currentHeldItem: {fileID: 0}
   - _pokemonBase: {fileID: 0}
     _level: 0
-    _presetMoves: []
+    presetMoves: []
+    _isShiny: 0
+    _gender: 0
+    nature: {fileID: 0}
+    _individualValues:
+      _hitPoints: 0
+      _attack: 0
+      _defense: 0
+      _specialAttack: 0
+      _specialDefense: 0
+      _speed: 0
+    _effortValues:
+      _hitPoints: 0
+      _attack: 0
+      _defense: 0
+      _specialAttack: 0
+      _specialDefense: 0
+      _speed: 0
+    _currentName: 
+    abilityID: 0
+    currentHeldItem: {fileID: 0}
+  - _pokemonBase: {fileID: 0}
+    _level: 0
+    presetMoves: []
     _isShiny: 0
     _gender: 0
     nature: {fileID: 0}
@@ -33884,7 +33916,7 @@ MonoBehaviour:
     currentHeldItem: {fileID: 0}
   - _pokemonBase: {fileID: 11400000, guid: 9dce8017dd2bf2d42819e96434f2b806, type: 2}
     _level: 5
-    _presetMoves: []
+    presetMoves: []
     _isShiny: 0
     _gender: 0
     nature: {fileID: 0}
@@ -33907,7 +33939,7 @@ MonoBehaviour:
     currentHeldItem: {fileID: 11400000, guid: d7999e6893505db4886f3a33be636415, type: 2}
   - _pokemonBase: {fileID: 0}
     _level: 0
-    _presetMoves: []
+    presetMoves: []
     _isShiny: 0
     _gender: 0
     nature: {fileID: 0}
@@ -33930,7 +33962,7 @@ MonoBehaviour:
     currentHeldItem: {fileID: 0}
   - _pokemonBase: {fileID: 11400000, guid: 3db7aa0125f3f8c4ba4f09f4bf799bc2, type: 2}
     _level: 71
-    _presetMoves: []
+    presetMoves: []
     _isShiny: 0
     _gender: 0
     nature: {fileID: 0}
@@ -33953,8 +33985,8 @@ MonoBehaviour:
     currentHeldItem: {fileID: 0}
   - _pokemonBase: {fileID: 11400000, guid: f638338f4fe81a04f92e962a21a0d788, type: 2}
     _level: 99
-    _presetMoves: []
-    _isShiny: 1
+    presetMoves: []
+    _isShiny: 0
     _gender: 0
     nature: {fileID: 0}
     _individualValues:
@@ -33976,7 +34008,7 @@ MonoBehaviour:
     currentHeldItem: {fileID: 0}
   - _pokemonBase: {fileID: 0}
     _level: 0
-    _presetMoves: []
+    presetMoves: []
     _isShiny: 0
     _gender: 0
     nature: {fileID: 0}
@@ -33999,7 +34031,7 @@ MonoBehaviour:
     currentHeldItem: {fileID: 0}
   - _pokemonBase: {fileID: 11400000, guid: f10fd28aae0bf6f4194c52ec75a493fc, type: 2}
     _level: 0
-    _presetMoves: []
+    presetMoves: []
     _isShiny: 0
     _gender: 0
     nature: {fileID: 0}
@@ -34022,7 +34054,7 @@ MonoBehaviour:
     currentHeldItem: {fileID: 0}
   - _pokemonBase: {fileID: 0}
     _level: 0
-    _presetMoves: []
+    presetMoves: []
     _isShiny: 0
     _gender: 0
     nature: {fileID: 0}
@@ -34045,7 +34077,7 @@ MonoBehaviour:
     currentHeldItem: {fileID: 0}
   - _pokemonBase: {fileID: 0}
     _level: 0
-    _presetMoves: []
+    presetMoves: []
     _isShiny: 0
     _gender: 0
     nature: {fileID: 0}
@@ -34068,7 +34100,7 @@ MonoBehaviour:
     currentHeldItem: {fileID: 0}
   - _pokemonBase: {fileID: 11400000, guid: bd6a8be22068ca044bb8f65d3b00184a, type: 2}
     _level: 0
-    _presetMoves: []
+    presetMoves: []
     _isShiny: 0
     _gender: 0
     nature: {fileID: 0}
@@ -34091,7 +34123,7 @@ MonoBehaviour:
     currentHeldItem: {fileID: 0}
   - _pokemonBase: {fileID: 0}
     _level: 0
-    _presetMoves: []
+    presetMoves: []
     _isShiny: 0
     _gender: 0
     nature: {fileID: 0}
@@ -34114,7 +34146,7 @@ MonoBehaviour:
     currentHeldItem: {fileID: 0}
   - _pokemonBase: {fileID: 0}
     _level: 0
-    _presetMoves: []
+    presetMoves: []
     _isShiny: 0
     _gender: 0
     nature: {fileID: 0}
@@ -34137,7 +34169,7 @@ MonoBehaviour:
     currentHeldItem: {fileID: 0}
   - _pokemonBase: {fileID: 11400000, guid: 2644f0f0225129649abafceda30c462a, type: 2}
     _level: 0
-    _presetMoves: []
+    presetMoves: []
     _isShiny: 0
     _gender: 0
     nature: {fileID: 0}
@@ -34160,7 +34192,7 @@ MonoBehaviour:
     currentHeldItem: {fileID: 0}
   - _pokemonBase: {fileID: 0}
     _level: 0
-    _presetMoves: []
+    presetMoves: []
     _isShiny: 0
     _gender: 0
     nature: {fileID: 0}
@@ -34183,7 +34215,7 @@ MonoBehaviour:
     currentHeldItem: {fileID: 0}
   - _pokemonBase: {fileID: 11400000, guid: c8d2809f8e3f471408973c0a92bc34f6, type: 2}
     _level: 22
-    _presetMoves: []
+    presetMoves: []
     _isShiny: 0
     _gender: 0
     nature: {fileID: 0}
@@ -34206,7 +34238,7 @@ MonoBehaviour:
     currentHeldItem: {fileID: 0}
   - _pokemonBase: {fileID: 11400000, guid: 5c0c9c30591486942a4a12ef8d684598, type: 2}
     _level: 30
-    _presetMoves: []
+    presetMoves: []
     _isShiny: 0
     _gender: 0
     nature: {fileID: 0}
@@ -34229,7 +34261,7 @@ MonoBehaviour:
     currentHeldItem: {fileID: 0}
   - _pokemonBase: {fileID: 0}
     _level: 0
-    _presetMoves: []
+    presetMoves: []
     _isShiny: 0
     _gender: 0
     nature: {fileID: 0}
@@ -34252,7 +34284,7 @@ MonoBehaviour:
     currentHeldItem: {fileID: 0}
   - _pokemonBase: {fileID: 0}
     _level: 0
-    _presetMoves: []
+    presetMoves: []
     _isShiny: 0
     _gender: 0
     nature: {fileID: 0}
@@ -34275,7 +34307,7 @@ MonoBehaviour:
     currentHeldItem: {fileID: 0}
   - _pokemonBase: {fileID: 0}
     _level: 0
-    _presetMoves: []
+    presetMoves: []
     _isShiny: 0
     _gender: 0
     nature: {fileID: 0}
@@ -34298,7 +34330,7 @@ MonoBehaviour:
     currentHeldItem: {fileID: 0}
   - _pokemonBase: {fileID: 11400000, guid: 035955532a56c544eba76cdb240c24e3, type: 2}
     _level: 72
-    _presetMoves: []
+    presetMoves: []
     _isShiny: 0
     _gender: 0
     nature: {fileID: 0}
@@ -34321,8 +34353,8 @@ MonoBehaviour:
     currentHeldItem: {fileID: 0}
   - _pokemonBase: {fileID: 11400000, guid: c4dd55ad047f5cb4d9c167f439657170, type: 2}
     _level: 73
-    _presetMoves: []
-    _isShiny: 1
+    presetMoves: []
+    _isShiny: 0
     _gender: 0
     nature: {fileID: 0}
     _individualValues:
@@ -34344,7 +34376,7 @@ MonoBehaviour:
     currentHeldItem: {fileID: 0}
   - _pokemonBase: {fileID: 11400000, guid: a5077a98ad912594f8e38408d3ce9f02, type: 2}
     _level: 93
-    _presetMoves: []
+    presetMoves: []
     _isShiny: 0
     _gender: 0
     nature: {fileID: 0}

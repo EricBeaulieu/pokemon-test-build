@@ -11,6 +11,7 @@ public class GameManager : MonoBehaviour
 
     public bool startNewSaveEveryStart;
     public bool startWithPresetBoxes;
+    public bool turnOffWildPokemon;
 
     [SerializeField] PlayerController playerPrefab;
     static PlayerController playerController;

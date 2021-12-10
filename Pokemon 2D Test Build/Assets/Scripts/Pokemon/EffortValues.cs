@@ -32,22 +32,18 @@ public class EffortValues : SpecifiedValues
     const int MAXIMUM_EV_Value = 255;
     const int MAXIMUM_EV_Total = 510;
 
-    public override void SetValues(SpecifiedValues effortValues = null)
+    public void SetValues(SpecifiedValues effortValues = null)
     {
-        if (effortValues == null) { return; }
-        if (IsCorrectClass(effortValues) == false) { return; }
-
+        if(effortValues == null)
+        {
+            return;
+        }
         hitPoints = effortValues.hitPoints;
         attack = effortValues.attack;
         defense = effortValues.defense;
         specialAttack = effortValues.specialAttack;
         specialDefense = effortValues.specialDefense;
         speed = effortValues.speed;
-    }
-
-    protected override bool IsCorrectClass(SpecifiedValues passedValue)
-    {
-        return (passedValue is EffortValues);
     }
 
     public void AddEffortValue(EarnableEV earnedEV)

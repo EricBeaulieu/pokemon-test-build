@@ -98,7 +98,7 @@ public class InventorySystem : CoreSystem
 
     protected override void CloseSystem()
     {
-        if (BattleSystem.inBattle == true)
+        if (BattleSystem.InBattle == true)
         {
             GameManager.SetGameState(GameState.Battle);
         }
@@ -472,7 +472,7 @@ public class InventorySystem : CoreSystem
             navigation.selectOnRight = null;
             cancelButton.navigation = navigation;
 
-            if(BattleSystem.inBattle == true)
+            if(BattleSystem.InBattle == true)
             {
                 cancelButton.onClick.AddListener(() => 
                 {

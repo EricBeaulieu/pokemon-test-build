@@ -20,7 +20,7 @@ public class BattleEffectItem : ItemBase
 
     public override bool UseItemOption()
     {
-        return BattleSystem.inBattle;
+        return BattleSystem.InBattle;
     }
 
     public StatAttribute GetStatAttribute { get { return stat; } }

@@ -10,8 +10,8 @@ public class BattleSystem : CoreSystem
     [SerializeField] Image backgroundArt;
     [SerializeField] BattleUnit playerBattleUnit;
     [SerializeField] BattleUnit enemyBattleUnit;
-    TurnAttackDetails playerTurnAttackDetails = new TurnAttackDetails();
-    TurnAttackDetails enemyTurnAttackDetails = new TurnAttackDetails();
+    readonly TurnAttackDetails playerTurnAttackDetails = new TurnAttackDetails();
+    readonly TurnAttackDetails enemyTurnAttackDetails = new TurnAttackDetails();
     DamageDetails damageDetails = new DamageDetails();
 
     PartySystem partySystem;
@@ -25,27 +25,25 @@ public class BattleSystem : CoreSystem
     TurnAttackDetails currentAttack;
     MoveBase alteredMove;
 
-    PlayerController _playerController;
-    TrainerController _trainerController;
-    Pokemon _wildPokemon;
-    bool _isTrainerBattle;
-    bool _playerPokemonShift;
+    PlayerController playerController;
+    TrainerController trainerController;
+    bool playerPokemonShift;
 
     bool waitUntilUserFinished = false;
 
     static WeatherEffectBase _currentWeather;
-    public static bool inBattle { get; private set; } = false;
-    public static bool gravity { get; private set; } = false;
+    public static bool InBattle { get; private set; } = false;
+    public static bool Gravity { get; private set; } = false;
     const float GRAVITY_ACCURACY_BONUS = 5f / 3f;
 
-    List<EntryHazardBase> _playerSideEntryHazards = new List<EntryHazardBase>();
-    List<EntryHazardBase> _enemySideEntryHazards = new List<EntryHazardBase>();
+    readonly List<EntryHazardBase> playerSideEntryHazards = new List<EntryHazardBase>();
+    readonly List<EntryHazardBase> enemySideEntryHazards = new List<EntryHazardBase>();
 
     [SerializeField] GameObject inGameItem;
     Vector2 inGameItemoffScreenPos;
 
     const string BUT_IT_FAILED = "But it failed";
-    int _escapeAttempts;
+    int escapeAttempts;
     public int battleDuration { get; private set; }
 
     bool doublePrizeMoney;
@@ -210,23 +208,16 @@ public class BattleSystem : CoreSystem
 
     public void StartBattle(PlayerController player, Pokemon wildPokemon)
     {
-        _playerController = player;
+        playerController = player;
+        trainerController = null;
 
-        Pokemon newWildPokemon = new Pokemon(wildPokemon.pokemonBase,wildPokemon.currentLevel);
-
-        _trainerController = null;
-        _wildPokemon = newWildPokemon;
-        _isTrainerBattle = false;
-
-        StartCoroutine(SetupBattle());
+        StartCoroutine(SetupBattle(wildPokemon));
     }
 
     public void StartBattle(PlayerController player, TrainerController trainer)
     {
-        _playerController = player;
-        
-        _trainerController = trainer;
-        _isTrainerBattle = true;
+        playerController = player;
+        trainerController = trainer;
 
         StartCoroutine(SetupBattle());
     }
@@ -235,32 +226,32 @@ public class BattleSystem : CoreSystem
     /// Goes through animations and sets up both the current pokemon and the enemy pokemon, 
     /// all available attacks along with their PP and names
     /// </summary>
-    IEnumerator SetupBattle()
+    IEnumerator SetupBattle(Pokemon wildPokemon = null)
     {
         currentTurnDetails.Clear();
         dialogSystem.SetCurrentDialogBox(dialogBox);
-        inBattle = true;
-        gravity = false;
+        InBattle = true;
+        Gravity = false;
         doublePrizeMoney = false;
         extraMoney = 0;
-        _playerSideEntryHazards.Clear();
-        _enemySideEntryHazards.Clear();
-        Pokemon playerPokemon = _playerController.pokemonParty.GetFirstHealthyPokemon();
+        playerSideEntryHazards.Clear();
+        enemySideEntryHazards.Clear();
+        Pokemon playerPokemon = playerController.pokemonParty.GetFirstHealthyPokemon();
 
-        if (_isTrainerBattle == true)
+        if (trainerController != null)
         {
-            Pokemon enemyPokemon = _trainerController.pokemonParty.GetFirstHealthyPokemon();
-            playerBattleUnit.SetDataBattleStart(playerPokemon, _playerController.BackBattleSprite[0]);
-            enemyBattleUnit.SetDataBattleStart(enemyPokemon, _trainerController.FrontBattleSprite[0]);
+            Pokemon enemyPokemon = trainerController.pokemonParty.GetFirstHealthyPokemon();
+            playerBattleUnit.SetDataBattleStart(playerPokemon, playerController.BackBattleSprite[0]);
+            enemyBattleUnit.SetDataBattleStart(enemyPokemon, trainerController.FrontBattleSprite[0]);
 
-            yield return dialogSystem.TypeDialog($"{_trainerController.TrainerName} wants to battle!");
+            yield return dialogSystem.TypeDialog($"{trainerController.TrainerName} wants to battle!");
             yield return new WaitUntil(() => playerBattleUnit.startingAnimationsActive == false && enemyBattleUnit.startingAnimationsActive == false);
             yield return new WaitForSeconds(0.5f);
             yield return dialogSystem.AfterDialogWait();
 
             yield return enemyBattleUnit.PlayTrainerExitAnimation(true);
 
-            yield return dialogSystem.TypeDialog($"{_trainerController.TrainerName} sent out {enemyPokemon.currentName}");
+            yield return dialogSystem.TypeDialog($"{trainerController.TrainerName} sent out {enemyPokemon.currentName}");
 
             enemyBattleUnit.SendOut();
 
@@ -275,8 +266,8 @@ public class BattleSystem : CoreSystem
         }
         else //WildPokemon
         {
-            playerBattleUnit.SetDataBattleStart(playerPokemon, _playerController.BackBattleSprite[0]);
-            enemyBattleUnit.SetDataBattleStart(_wildPokemon,null);
+            playerBattleUnit.SetDataBattleStart(playerPokemon, playerController.BackBattleSprite[0]);
+            enemyBattleUnit.SetDataBattleStart(wildPokemon,null);
 
             yield return dialogSystem.TypeDialog($"A wild {enemyBattleUnit.pokemon.currentName} has appeared!");
             yield return enemyBattleUnit.PlayTrainerExitAnimation(false);
@@ -288,9 +279,9 @@ public class BattleSystem : CoreSystem
             yield return new WaitForSeconds(1f);
         }
 
-        _playerController.pokemonParty.SetOriginalPositions();
-        _playerController.pokemonParty.CleanUpPartyOrderOnStart(playerBattleUnit.pokemon);
-        _escapeAttempts = 0;
+        playerController.pokemonParty.SetOriginalPositions();
+        playerController.pokemonParty.CleanUpPartyOrderOnStart(playerBattleUnit.pokemon);
+        escapeAttempts = 0;
         battleDuration = 0;
         enemyBattleUnit.AddPokemonToBattleList(playerBattleUnit.pokemon);
         BattleStartSetup();
@@ -446,7 +437,7 @@ public class BattleSystem : CoreSystem
         EnableAttackMoveSelector(false);
         playerTurnAttackDetails.SetAttackDetails(move, currentPokemon, enemyBattleUnit);
 
-        _escapeAttempts = 0;
+        escapeAttempts = 0;
         currentTurnDetails.Add(playerTurnAttackDetails);
         EnemyMove();
     }
@@ -525,7 +516,7 @@ public class BattleSystem : CoreSystem
 
     IEnumerator RunFromBattle()
     {
-        if (_isTrainerBattle == true)
+        if (trainerController == true)
         {
             yield return dialogSystem.TypeDialog($"You cant run from a trainer battle", true);
             PlayerActions();
@@ -546,7 +537,7 @@ public class BattleSystem : CoreSystem
             yield break;
         }
 
-        _escapeAttempts++;
+        escapeAttempts++;
         int playerSpeed = playerBattleUnit.pokemon.speed;
         int enemySpeed = enemyBattleUnit.pokemon.speed;
 
@@ -558,7 +549,7 @@ public class BattleSystem : CoreSystem
         }
         else
         {
-            float f = ((playerSpeed * 128) / enemySpeed) + (30 * _escapeAttempts);
+            float f = ((playerSpeed * 128) / enemySpeed) + (30 * escapeAttempts);
             f = f % 256;
 
             int rnd = Random.Range(0, 256);
@@ -603,9 +594,9 @@ public class BattleSystem : CoreSystem
 
     IEnumerator TrainerAboutToUsePokemonFeature(Pokemon nextPokemon)
     {
-        yield return dialogSystem.TypeDialog($"{_trainerController.TrainerName} is about to use {nextPokemon.pokemonBase.GetPokedexName()}", true);
+        yield return dialogSystem.TypeDialog($"{trainerController.TrainerName} is about to use {nextPokemon.pokemonBase.GetPokedexName()}", true);
 
-        yield return dialogSystem.TypeDialog($"Will {_playerController.TrainerName} change Pokemon?");
+        yield return dialogSystem.TypeDialog($"Will {playerController.TrainerName} change Pokemon?");
 
         yield return dialogSystem.SetChoiceBox(() =>
         {
@@ -615,7 +606,7 @@ public class BattleSystem : CoreSystem
         , () =>
         {
             waitUntilUserFinished = true;
-            _playerPokemonShift = false;
+            playerPokemonShift = false;
         });
 
         yield return new WaitUntil(() => waitUntilUserFinished == true);
@@ -631,7 +622,7 @@ public class BattleSystem : CoreSystem
         }
 
         yield return enemyBattleUnit.TrainerToField();
-        List<string> trainerLines = _trainerController.OnBattleOverDialog(playerHasWon);
+        List<string> trainerLines = trainerController.OnBattleOverDialog(playerHasWon);
 
         for (int i = 0; i < trainerLines.Count; i++)
         {
@@ -640,14 +631,14 @@ public class BattleSystem : CoreSystem
         
         if (playerHasWon == true)
         {
-            int amountWon = _trainerController.PayoutUponDefeat;
+            int amountWon = trainerController.PayoutUponDefeat;
             if(doublePrizeMoney == true)
             {
                 amountWon *= 2;
             }
 
-            yield return dialogSystem.TypeDialog($"{_playerController.TrainerName} got ${amountWon.ToString()} for winning!");
-            _playerController.money += amountWon;
+            yield return dialogSystem.TypeDialog($"{playerController.TrainerName} got {amountWon:C0} for winning!");
+            playerController.money += amountWon;
 
             if (extraMoney > 0)
             {
@@ -655,10 +646,10 @@ public class BattleSystem : CoreSystem
                 {
                     extraMoney *= 2;
                 }
-                yield return dialogSystem.TypeDialog($"{_playerController.TrainerName} picked up ${extraMoney.ToString()}!");
+                yield return dialogSystem.TypeDialog($"{playerController.TrainerName} picked up {extraMoney:C0}!");
             }
 
-            _playerController.money += extraMoney;
+            playerController.money += extraMoney;
         }
     }
 
@@ -722,11 +713,11 @@ public class BattleSystem : CoreSystem
             if(enemyBattleUnit.SendOutPokemonOnTurnEnd == true)
             {
                 //This will be updated with a better AI later
-                Pokemon nextEnemyPokemon = _trainerController.pokemonParty.GetFirstHealthyPokemon();
+                Pokemon nextEnemyPokemon = trainerController.pokemonParty.GetFirstHealthyPokemon();
 
-                if(_playerController.pokemonParty.HealthyPokemonCount() > 1)
+                if(playerController.pokemonParty.HealthyPokemonCount() > 1)
                 {
-                    _playerPokemonShift = true;
+                    playerPokemonShift = true;
                     yield return TrainerAboutToUsePokemonFeature(nextEnemyPokemon);
                 }
                 else
@@ -1134,13 +1125,13 @@ public class BattleSystem : CoreSystem
                     int remainingHealthyPokemon = 0;
                     if(targetUnit.isPlayerPokemon == true)
                     {
-                        remainingHealthyPokemon = _playerController.pokemonParty.HealthyPokemonCount();
+                        remainingHealthyPokemon = playerController.pokemonParty.HealthyPokemonCount();
                     }
                     else
                     {
-                        if(_trainerController != null)
+                        if(trainerController != null)
                         {
-                            remainingHealthyPokemon = _trainerController.pokemonParty.HealthyPokemonCount();
+                            remainingHealthyPokemon = trainerController.pokemonParty.HealthyPokemonCount();
                         }
                     }
 
@@ -1586,7 +1577,7 @@ public class BattleSystem : CoreSystem
         {
             if (moveTarget == MoveTarget.Foe)
             {
-                List<EntryHazardBase> currentEntrySide = (target.isPlayerPokemon) ? _playerSideEntryHazards : _enemySideEntryHazards;
+                List<EntryHazardBase> currentEntrySide = (target.isPlayerPokemon) ? playerSideEntryHazards : enemySideEntryHazards;
                 EntryHazardBase currentHazard = EntryHazardsDB.GetEntryHazardBase(effects.EntryHazard);
 
                 if (currentEntrySide.Exists(x => x.Id == currentHazard.Id) == true)
@@ -1690,7 +1681,7 @@ public class BattleSystem : CoreSystem
             moveAccuracy = 100;
         }
 
-        if(gravity == true)
+        if(Gravity == true)
         {
             moveAccuracy *= GRAVITY_ACCURACY_BONUS;
         }
@@ -2177,7 +2168,7 @@ public class BattleSystem : CoreSystem
 
     void OnBattleOver(bool hasWon)
     {
-        inBattle = false;
+        InBattle = false;
         dialogSystem.SetCurrentDialogBox();
         GameManager.instance.EndBattle(hasWon);
     }
@@ -2312,13 +2303,11 @@ public class BattleSystem : CoreSystem
             {
                 int expYield = targetBattleUnit.pokemon.pokemonBase.RewardedExperienceYield;
                 int level = targetBattleUnit.pokemon.currentLevel;
-                float trainerBonus = (_isTrainerBattle == true) ? 1.5f : 1;
-                int pokemonSharingExp = 1;
-
-                pokemonSharingExp = 0;
+                float trainerBonus = (trainerController != null) ? 1.5f : 1;
+                int pokemonSharingExp = 0;
 
                 //Pokemon in party holding EXP share
-                List<Pokemon> playerParty = _playerController.pokemonParty.CurrentPokemonList();
+                List<Pokemon> playerParty = playerController.pokemonParty.CurrentPokemonList();
                 for (int i = 0; i < playerParty.Count; i++)
                 {
                     if (playerParty[i].GetHoldItemEffects.ExperienceShared() == true && playerParty[i].currentHitPoints > 0)
@@ -2370,7 +2359,7 @@ public class BattleSystem : CoreSystem
     {
         if (faintedUnit.isPlayerPokemon)
         {
-            Pokemon nextPokemon = _playerController.pokemonParty.GetFirstHealthyPokemon();
+            Pokemon nextPokemon = playerController.pokemonParty.GetFirstHealthyPokemon();
             if (nextPokemon != null)
             {
                 faintedUnit.SendOutPokemonOnTurnEnd = true;
@@ -2383,7 +2372,7 @@ public class BattleSystem : CoreSystem
                     enemyBattleUnit.PlayFaintAnimation();
                 }
 
-                if(_isTrainerBattle == true)
+                if(trainerController != null)
                 {
                     yield return TrainerBattleOver(false);
                 }
@@ -2392,9 +2381,9 @@ public class BattleSystem : CoreSystem
         }
         else
         {
-            if(_isTrainerBattle == true)
+            if(trainerController != null)
             {
-                Pokemon nextPokemon = _trainerController.pokemonParty.GetFirstHealthyPokemon();
+                Pokemon nextPokemon = trainerController.pokemonParty.GetFirstHealthyPokemon();
                 if (nextPokemon != null)
                 {
                     faintedUnit.SendOutPokemonOnTurnEnd = true;
@@ -2418,10 +2407,10 @@ public class BattleSystem : CoreSystem
                     {
                         extraMoney *= 2;
                     }
-                    yield return dialogSystem.TypeDialog($"{_playerController.TrainerName} picked up {extraMoney.ToString()}!",true);
+                    yield return dialogSystem.TypeDialog($"{playerController.TrainerName} picked up {extraMoney.ToString()}!",true);
                 }
 
-                _playerController.money += extraMoney;
+                playerController.money += extraMoney;
                 OnBattleOver(true);
             }
         }
@@ -2441,7 +2430,7 @@ public class BattleSystem : CoreSystem
     {
         dialogSystem.SetCurrentDialogBox(dialogBox);
         waitUntilUserFinished = true;
-        _playerPokemonShift = false;
+        playerPokemonShift = false;
     }
 
     public void PlayerSwitchPokemon(Pokemon newPokemon)
@@ -2464,7 +2453,7 @@ public class BattleSystem : CoreSystem
 
         if (battleUnit.isPlayerPokemon)
         {
-            _playerController.pokemonParty.SwitchPokemonPositions(battleUnit.pokemon, newPokemon);
+            playerController.pokemonParty.SwitchPokemonPositions(battleUnit.pokemon, newPokemon);
             enemyBattleUnit.AddPokemonToBattleList(newPokemon);
             enemyBattleUnit.pokemon.CureVolatileStatus(ConditionID.Infatuation);
         }
@@ -2481,13 +2470,13 @@ public class BattleSystem : CoreSystem
         }
         else
         {
-            yield return dialogSystem.TypeDialog($"{_trainerController.TrainerName} sent out {battleUnit.pokemon.currentName}");
+            yield return dialogSystem.TypeDialog($"{trainerController.TrainerName} sent out {battleUnit.pokemon.currentName}");
             battleUnit.AddPokemonToBattleList(playerBattleUnit.pokemon);
         }
 
         yield return ApplyEntryHazardOnSentOut(battleUnit);
 
-        if(_playerPokemonShift == true)
+        if(playerPokemonShift == true)
         {
             yield return new WaitForSeconds(0.5f);
             PlayerContinueAfterPartyShiftSelection();
@@ -2500,7 +2489,7 @@ public class BattleSystem : CoreSystem
 
             if (enemyBattleUnit.pokemon.currentHitPoints <= 0)
             {
-                yield return SwitchPokemonIEnumerator(enemyBattleUnit, _trainerController.pokemonParty.GetFirstHealthyPokemon());
+                yield return SwitchPokemonIEnumerator(enemyBattleUnit, trainerController.pokemonParty.GetFirstHealthyPokemon());
             }
 
             if (currentPokemonFainted == true)
@@ -2529,7 +2518,7 @@ public class BattleSystem : CoreSystem
             yield break;
         }
 
-        List<EntryHazardBase> currentEntrySide = (target.isPlayerPokemon) ? _playerSideEntryHazards : _enemySideEntryHazards;
+        List<EntryHazardBase> currentEntrySide = (target.isPlayerPokemon) ? playerSideEntryHazards : enemySideEntryHazards;
 
         foreach (EntryHazardBase entryHazard in currentEntrySide)
         {
@@ -2674,7 +2663,7 @@ public class BattleSystem : CoreSystem
 
     IEnumerator PlayerThrewPokeball(BattleUnit targetUnit,PokeballItem currentPokeball)
     {
-        if(_isTrainerBattle == true)
+        if(trainerController != null)
         {
             EnableActionSelector(false);
             yield return dialogSystem.TypeDialog($"You cant capture Trainers Pokemon", true);
@@ -2687,7 +2676,7 @@ public class BattleSystem : CoreSystem
         currentBall.SetInBattleItem(currentPokeball);
         Vector3 ballHeightJump = new Vector3(0, 75, 0);
 
-        yield return dialogSystem.TypeDialog($"{_playerController.TrainerName} used {currentBall.GetItemName}");
+        yield return dialogSystem.TypeDialog($"{playerController.TrainerName} used {currentBall.GetItemName}");
         //SetPokeball to its closed art
         currentBall.SetItemArt();
 
@@ -2778,7 +2767,7 @@ public class BattleSystem : CoreSystem
 
     IEnumerator PlayerUsedBattleEffectItem(BattleEffectItem battleitem)
     {
-        yield return dialogSystem.TypeDialog($"{_playerController.TrainerName} used {battleitem.ItemName}");
+        yield return dialogSystem.TypeDialog($"{playerController.TrainerName} used {battleitem.ItemName}");
         if(battleitem.GetStatAttribute == StatAttribute.HitPoints)//Guard Spec
         {
             ShieldBase shieldBase = new Mist(playerBattleUnit.pokemon.GetCurrentItem);

@@ -110,7 +110,7 @@ public class PartySystem : CoreSystem
 
     protected override void CloseSystem()
     {
-        if (BattleSystem.inBattle == true)
+        if (BattleSystem.InBattle == true)
         {
             GameManager.SetGameState(GameState.Battle);
         }
@@ -125,7 +125,7 @@ public class PartySystem : CoreSystem
     void SetUpPartySystemCancelButton(bool wasShiftSwap)
     {
         cancelButton.onClick.RemoveAllListeners();
-        if (BattleSystem.inBattle == true)
+        if (BattleSystem.InBattle == true)
         {
             if(battleSystem.GetCurrentPokemonInBattle.currentHitPoints > 0 || battleSystem.GetCurrentPokemonInBattle == null)
             {
@@ -179,7 +179,7 @@ public class PartySystem : CoreSystem
 
                 int k = i;
                 _partyMemberSlots[k].GetButton.onClick.RemoveAllListeners();
-                if (BattleSystem.inBattle == true)
+                if (BattleSystem.InBattle == true)
                 {
                     _partyMemberSlots[k].GetButton.onClick.AddListener(() => OpenBattleSelections(_partyMemberSlots[k]));
                 }
@@ -432,7 +432,7 @@ public class PartySystem : CoreSystem
         }
 
         CloseSystem();
-        if (BattleSystem.inBattle == true && itemWasUsed == true)
+        if (BattleSystem.InBattle == true && itemWasUsed == true)
         {
             battleSystem.PlayerUsedItemWhileInBattle();
             yield break;

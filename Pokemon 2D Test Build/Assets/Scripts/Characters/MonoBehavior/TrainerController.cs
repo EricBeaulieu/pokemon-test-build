@@ -197,9 +197,9 @@ public class TrainerController : EntityAI,IInteractable,ISaveable
                 return;
             }
 
-            int distance = Mathf.RoundToInt(Vector2.Distance(transform.position, player.transform.position)) - 1;
+            int distance = Mathf.RoundToInt(Vector2.Distance(transform.position, player.transform.position));
             Vector2 directionFacing = GetDirection();
-            for (int i = 0; i < distance; i++)
+            for (int i = 1; i < distance; i++)
             {
                 if (CheckIfWalkable(directionFacing * i) == false)
                 {

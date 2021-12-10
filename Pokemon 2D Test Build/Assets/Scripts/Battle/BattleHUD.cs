@@ -155,27 +155,27 @@ public class BattleHUD : MonoBehaviour
 
     void SetAllHudAlphas(float tempAlpha,bool isPlayers)
     {
-        hudBackground.color = hudBackground.color.SetAlpha(tempAlpha);
-        nameText.color = nameText.color.SetAlpha(tempAlpha);
-        levelText.color = levelText.color.SetAlpha(tempAlpha);
-        levelImageText.color = levelImageText.color.SetAlpha(tempAlpha);
-        statusCondition.color = statusCondition.color.SetAlpha(tempAlpha);
-        gender.color = gender.color.SetAlpha(tempAlpha);
-        healthBarBackground.color = healthBarBackground.color.SetAlpha(tempAlpha);
-        healthBarFrame.color = healthBarFrame.color.SetAlpha(tempAlpha);
-        healthBarImageText.color = healthBarImageText.color.SetAlpha(tempAlpha);
-        healthBarInsideBackground.color = healthBarInsideBackground.color.SetAlpha(tempAlpha);
-        hPBar.healthBarImage.color = hPBar.healthBarImage.color.SetAlpha(tempAlpha);
+        hudBackground.SetAlpha(tempAlpha);
+        nameText.SetAlpha(tempAlpha);
+        levelText.SetAlpha(tempAlpha);
+        levelImageText.SetAlpha(tempAlpha);
+        statusCondition.SetAlpha(tempAlpha);
+        gender.SetAlpha(tempAlpha);
+        healthBarBackground.SetAlpha(tempAlpha);
+        healthBarFrame.SetAlpha(tempAlpha);
+        healthBarImageText.SetAlpha(tempAlpha);
+        healthBarInsideBackground.SetAlpha(tempAlpha);
+        hPBar.healthBarImage.SetAlpha(tempAlpha);
 
         if (isPlayers == true)
         {
-            currentHP.color = currentHP.color.SetAlpha(tempAlpha);
-            experienceBarBackground.color = experienceBarBackground.color.SetAlpha(tempAlpha);
-            expBar.expBarImage.color = expBar.expBarImage.color.SetAlpha(tempAlpha);
+            currentHP.SetAlpha(tempAlpha);
+            experienceBarBackground.SetAlpha(tempAlpha);
+            expBar.expBarImage.SetAlpha(tempAlpha);
         }
 
-        pointerBody.color = pointerBody.color.SetAlpha(tempAlpha);
-        pointerHead.color = pointerHead.color.SetAlpha(tempAlpha);
+        pointerBody.SetAlpha(tempAlpha);
+        pointerHead.SetAlpha(tempAlpha);
     }
 
     /// <summary>

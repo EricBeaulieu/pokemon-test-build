@@ -19,7 +19,7 @@ public class TMHMItem : ItemBase
 
     public override bool UseItemOption()
     {
-        return !BattleSystem.inBattle;
+        return !BattleSystem.InBattle;
     }
 
     public MoveBase GetMove

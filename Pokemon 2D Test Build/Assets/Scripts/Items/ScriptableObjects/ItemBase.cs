@@ -29,11 +29,11 @@ public abstract class ItemBase : ScriptableObject
     public abstract bool UseItemOption();
     public virtual bool GiveItemOption()
     {
-        return !BattleSystem.inBattle;
+        return !BattleSystem.InBattle;
     }
     public virtual bool TrashItemOption()//Key item will always be false when implimented
     {
-        return !BattleSystem.inBattle;
+        return !BattleSystem.InBattle;
     }
 
     public itemType GetItemType

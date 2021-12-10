@@ -8,14 +8,13 @@ public class IndividualValues : SpecifiedValues
     const int MINIMUM_IV_VALUE = 1;
     const int MAXIMUM_IV_VALUE = 31;
 
-    public override void SetValues(SpecifiedValues individualValues = null)
+    public void SetValues(IndividualValues individualValues = null)
     {
         if (individualValues == null)
         {
             GenerateIVs();
             return;
         }
-        if (IsCorrectClass(individualValues) == false) { return; }
 
         hitPoints = individualValues.hitPoints == 0 ? Random.Range(MINIMUM_IV_VALUE, MAXIMUM_IV_VALUE) : individualValues.hitPoints;
         attack = individualValues.attack == 0 ? Random.Range(MINIMUM_IV_VALUE, MAXIMUM_IV_VALUE) : individualValues.attack;
@@ -25,10 +24,6 @@ public class IndividualValues : SpecifiedValues
         speed = individualValues.speed == 0 ? Random.Range(MINIMUM_IV_VALUE, MAXIMUM_IV_VALUE) : individualValues.speed;
     }
 
-    protected override bool IsCorrectClass(SpecifiedValues passedValue)
-    {
-        return (passedValue is IndividualValues);
-    }
 
     void GenerateIVs()
     {

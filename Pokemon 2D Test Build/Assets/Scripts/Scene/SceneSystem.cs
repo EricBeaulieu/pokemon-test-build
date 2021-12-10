@@ -19,7 +19,7 @@ public static class SceneSystem
         if (currentLevelManager == null)
         {
             newLevel.Initilization();
-            allActiveEntities.AddRange(newLevel.GetAllEntities());
+            AllActiveEntities.AddRange(newLevel.GetAllEntities());
         }
         currentLevelManager = newLevel;
         playerController.SetWildEncounter(newLevel.GetWildEncountersGrassSpecific);
@@ -31,7 +31,7 @@ public static class SceneSystem
             {
                 continue;
             }
-            allActiveEntities.RemoveAll(x => currentScenesLoaded[i].GetLevelManager.GetAllEntities().Contains(x) == true);
+            AllActiveEntities.RemoveAll(x => currentScenesLoaded[i].GetLevelManager.GetAllEntities().Contains(x) == true);
             SceneManager.UnloadSceneAsync(currentScenesLoaded[i].name);
             currentScenesLoaded.RemoveAt(i);
         }
@@ -81,7 +81,7 @@ public static class SceneSystem
     {
         for (int i = currentScenesLoaded.Count - 1; i >= 0; i--)
         {
-            allActiveEntities.RemoveAll(x => currentScenesLoaded[i].GetLevelManager.GetAllEntities().Contains(x) == true);
+            AllActiveEntities.RemoveAll(x => currentScenesLoaded[i].GetLevelManager.GetAllEntities().Contains(x) == true);
             SceneManager.UnloadSceneAsync(currentScenesLoaded[i].GetScenePath);
             currentScenesLoaded.RemoveAt(i);
         }
@@ -99,7 +99,7 @@ public static class SceneSystem
             yield return null;
         }
         gameScene.GetLevelManager.Initilization();
-        allActiveEntities.AddRange(gameScene.GetLevelManager.GetAllEntities());
+        AllActiveEntities.AddRange(gameScene.GetLevelManager.GetAllEntities());
     }
 
     public static BattleFieldLayoutBaseSO GetBattleEnvironmentArt
@@ -112,7 +112,7 @@ public static class SceneSystem
         get { return GameManager.instance.GetPlayerController; }
     }
 
-    static List<Entity> allActiveEntities
+    static List<Entity> AllActiveEntities
     {
         get { return GameManager.allActiveEntities; }
     }

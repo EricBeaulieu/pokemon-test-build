@@ -5,18 +5,12 @@ using UnityEngine;
 [System.Serializable]
 public abstract class SpecifiedValues
 {
-    public static int VALUES_SAVED_LENGTH = 6;
-
     [SerializeField] int _hitPoints = 0;
     [SerializeField] int _attack = 0;
     [SerializeField] int _defense = 0;
     [SerializeField] int _specialAttack = 0;
     [SerializeField] int _specialDefense = 0;
     [SerializeField] int _speed = 0;
-
-    public abstract void SetValues(SpecifiedValues passedValue);
-
-    protected abstract bool IsCorrectClass(SpecifiedValues passedValue);
 
     public void LoadValues(int hp,int att,int def, int spAtt,int spDef,int spd)
     {

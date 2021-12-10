@@ -166,7 +166,7 @@ public class PlayerController : Entity
 
         for (int i = 0; i < collider.Length; i++)
         {
-            if (Vector2Extensions.IsOnTheSameXOrYGrid(transform.position,collider[i].transform.position) == true)
+            if (GlobalTools.IsOnTheSameXOrYGrid(transform.position,collider[i].transform.position) == true)
             {
                 interactor = collider[i];
                 break;
@@ -254,7 +254,11 @@ public class PlayerController : Entity
 
     void PlayerHasWildEncounter()
     {
-        return;
+        if(GameManager.instance.turnOffWildPokemon == true)
+        {
+            return;
+        }
+
         if(Random.Range(1,101) <= 11)
         {
             _anim.SetBool("isMoving", false);

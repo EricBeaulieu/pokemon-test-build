@@ -69,7 +69,7 @@ public class FadeSystem : MonoBehaviour
     {
         if(currentStyle != FadeStyle.FullFade)
         {
-            fullFade.color = fullFade.color.SetAlpha(0);
+            fullFade.SetAlpha(0);
         }
 
         if(currentStyle != FadeStyle.Clockwise)
@@ -100,10 +100,10 @@ public class FadeSystem : MonoBehaviour
         {
             tempAlpha += (0.01f * animationTime);
 
-            fullFade.color = fullFade.color.SetAlpha(tempAlpha);
+            fullFade.SetAlpha(tempAlpha);
             yield return new WaitForSeconds(0.01f);
         }
-        fullFade.color = fullFade.color.SetAlpha(1);
+        fullFade.SetAlpha(1);
     }
 
     IEnumerator FullFadeOut()
@@ -115,11 +115,11 @@ public class FadeSystem : MonoBehaviour
         {
             tempAlpha -= (0.01f * animationTime);
 
-            fullFade.color = fullFade.color.SetAlpha(tempAlpha);
+            fullFade.SetAlpha(tempAlpha);
             yield return new WaitForSeconds(0.01f);
         }
 
-        fullFade.color = fullFade.color.SetAlpha(0);
+        fullFade.SetAlpha(0);
     }
 
     #endregion

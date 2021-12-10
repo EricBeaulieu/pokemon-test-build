@@ -28,7 +28,7 @@ public class EvolutionStoneBase : ItemBase
 
     public override bool UseItemOption()
     {
-        return !BattleSystem.inBattle; ;
+        return !BattleSystem.InBattle; ;
     }
 
     public override bool ShowStandardUI()

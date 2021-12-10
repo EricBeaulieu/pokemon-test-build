@@ -140,10 +140,10 @@ public class InBattleItem : MonoBehaviour
             while (tempAlpha < 1)
             {
                 tempAlpha += (0.01f * animationTime);
-                image.color = image.color.SetAlpha(tempAlpha);
+                image.SetAlpha(tempAlpha);
                 yield return new WaitForSeconds(0.01f);
             }
-            image.color = image.color.SetAlpha(1);
+            image.SetAlpha(1);
         }
         else
         {
@@ -151,10 +151,10 @@ public class InBattleItem : MonoBehaviour
             while (tempAlpha > 0)
             {
                 tempAlpha -= (0.01f * animationTime);
-                image.color = image.color.SetAlpha(tempAlpha);
+                image.SetAlpha(tempAlpha);
                 yield return new WaitForSeconds(0.01f);
             }
-            image.color = image.color.SetAlpha(0);
+            image.SetAlpha(0);
         }
     }
 
@@ -166,7 +166,7 @@ public class InBattleItem : MonoBehaviour
                 PokeballItem pokeball = (PokeballItem)_itemBase;
                 Sprite[] pokeballAnimations = pokeball.CaptureSprites();
                 image.sprite = pokeballAnimations[0];
-                image.color = image.color.SetAlpha(1);
+                image.SetAlpha(1);
                 break;
             default:
                 break;

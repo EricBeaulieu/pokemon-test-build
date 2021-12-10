@@ -34,7 +34,7 @@ public class EvolutionEggUI : MonoBehaviour
         gameObject.SetActive(true);
         dialogSystem.SetCurrentDialogBox(dialogBox);
         backgroundImage.sprite = evolutionBackground;
-        overlay.color = overlay.color.SetAlpha(0);
+        overlay.SetAlpha(0);
         pokemonSpriteAnimations = pokemon.pokemonBase.GetFrontSprite(pokemon.isShiny, pokemon.gender).ToList();
         pokemonSpriteAnimations.AddRange(newEvolution.GetFrontSprite(pokemon.isShiny, pokemon.gender));
 
@@ -95,7 +95,7 @@ public class EvolutionEggUI : MonoBehaviour
         {
             tempAlpha -= (0.01f * animationTime);
 
-            overlay.color = overlay.color.SetAlpha(tempAlpha);
+            overlay.SetAlpha(tempAlpha);
             yield return new WaitForSeconds(0.01f);
         }
     }
@@ -108,7 +108,7 @@ public class EvolutionEggUI : MonoBehaviour
         {
             tempAlpha += (0.01f * animationTime);
 
-            overlay.color = overlay.color.SetAlpha(tempAlpha);
+            overlay.SetAlpha(tempAlpha);
             yield return new WaitForSeconds(0.01f);
         }
     }

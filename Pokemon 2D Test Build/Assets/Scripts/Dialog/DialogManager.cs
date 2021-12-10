@@ -109,7 +109,7 @@ public class DialogManager : CoreSystem
 
     void OnCloseDialog()
     {
-        if (BattleSystem.inBattle == true)
+        if (BattleSystem.InBattle == true)
         {
             GameManager.SetGameState(GameState.Battle);
         }

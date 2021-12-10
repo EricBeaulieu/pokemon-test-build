@@ -79,8 +79,8 @@ public class BattleUnit : MonoBehaviour
 
         statusEffectA.transform.localPosition = Vector3.zero;
         statusEffectB.transform.localPosition = Vector3.zero;
-        statusEffectA.color = statusEffectA.color.SetAlpha(0);
-        statusEffectB.color = statusEffectA.color.SetAlpha(0);
+        statusEffectA.SetAlpha(0);
+        statusEffectB.SetAlpha(0);
 
         trainerImageOriginalPosition = trainerImage.rectTransform.localPosition;
         battleFloorOriginalPosition = battleFloor.rectTransform.localPosition;
@@ -183,7 +183,7 @@ public class BattleUnit : MonoBehaviour
             else
             {
                 EnablePokemon(true);
-                pokemonSprite.color = pokemonSprite.color.SetAlpha(1);
+                pokemonSprite.SetAlpha(1);
                 pokemonSprite.transform.localPosition = new Vector3(pokemonSpriteOriginalPosition.x - 800f, pokemonSpriteOriginalPosition.y);
                 battleFloor.transform.localPosition = new Vector3(battleFloorOriginalPosition.x - 800f, battleFloorOriginalPosition.y);
                 temp = pokemonSprite.gameObject;
@@ -223,7 +223,7 @@ public class BattleUnit : MonoBehaviour
 
     IEnumerator PlayEnterAnimation()
     {
-        pokemonSprite.color = pokemonSprite.color.SetAlpha(1);
+        pokemonSprite.SetAlpha(1);
 
         if (isPlayersPokemon)
         {
@@ -359,7 +359,7 @@ public class BattleUnit : MonoBehaviour
         while (tempAlpha > 0)
         {
             tempAlpha -= (0.01f * animationTime);
-            pokemonSprite.color = pokemonSprite.color.SetAlpha(tempAlpha);
+            pokemonSprite.SetAlpha(tempAlpha);
 
             pokemonSprite.rectTransform.localPosition = pokemonSpriteOriginalPosition + (difference * (-tempAlpha +1));
             float currentSize = (imageSize * tempAlpha) + (minimumSizeDuringCapture * (-tempAlpha + 1));
@@ -380,7 +380,7 @@ public class BattleUnit : MonoBehaviour
         while (tempAlpha < 1)
         {
             tempAlpha += (0.01f * animationTime);
-            pokemonSprite.color = pokemonSprite.color.SetAlpha(tempAlpha);
+            pokemonSprite.SetAlpha(tempAlpha);
 
             pokemonSprite.rectTransform.localPosition = ballposition + (difference * (tempAlpha));
             float currentSize = (minimumSizeDuringCapture * (-tempAlpha + 1)) + (imageSize * tempAlpha);
@@ -438,8 +438,10 @@ public class BattleUnit : MonoBehaviour
         float size = statusEffectA.rectTransform.sizeDelta.y;
         statusEffectB.rectTransform.localPosition += new Vector3(0, (direction * size), 0);
 
-        statusEffectA.color = StatusConditionArt.instance.PlainWhite.SetAlpha(0);
-        statusEffectB.color = StatusConditionArt.instance.PlainWhite.SetAlpha(0);
+        statusEffectA.color = StatusConditionArt.instance.PlainWhite;
+        statusEffectB.color = StatusConditionArt.instance.PlainWhite;
+        statusEffectA.SetAlpha(0);
+        statusEffectB.SetAlpha(0);
 
         Vector3 startingPos = pokemonSprite.transform.localPosition;
         float elapsedTime = 0;
@@ -450,8 +452,8 @@ public class BattleUnit : MonoBehaviour
             statusEffectA.rectTransform.localPosition += new Vector3(0, ((direction * size) * Time.deltaTime), 0);
             statusEffectB.rectTransform.localPosition += new Vector3(0, ((direction * size)* Time.deltaTime), 0);
 
-            statusEffectA.color = statusEffectA.color.SetAlpha(elapsedTime / duration);
-            statusEffectB.color = statusEffectA.color.SetAlpha(elapsedTime / duration);
+            statusEffectA.SetAlpha(elapsedTime / duration);
+            statusEffectB.SetAlpha(elapsedTime / duration);
 
             if(increased == true)
             {
@@ -487,8 +489,8 @@ public class BattleUnit : MonoBehaviour
             statusEffectA.rectTransform.localPosition += new Vector3(0, ((direction * size) * Time.deltaTime), 0);
             statusEffectB.rectTransform.localPosition += new Vector3(0, ((direction * size) * Time.deltaTime), 0);
 
-            statusEffectA.color = statusEffectA.color.SetAlpha(1 - (elapsedTime / duration));
-            statusEffectB.color = statusEffectA.color.SetAlpha(1 - (elapsedTime / duration));
+            statusEffectA.SetAlpha(1 - (elapsedTime / duration));
+            statusEffectB.SetAlpha(1 - (elapsedTime / duration));
 
             if (increased == true)
             {
@@ -517,8 +519,8 @@ public class BattleUnit : MonoBehaviour
             yield return null;
         }
 
-        statusEffectA.color = statusEffectA.color.SetAlpha(0);
-        statusEffectB.color = statusEffectA.color.SetAlpha(0);
+        statusEffectA.SetAlpha(0);
+        statusEffectB.SetAlpha(0);
 
         statusEffectA.transform.localPosition = Vector3.zero;
         statusEffectB.transform.localPosition = Vector3.zero;
@@ -601,6 +603,7 @@ public class BattleUnit : MonoBehaviour
 
     IEnumerator ShowStatusAnimationConditionColor(Color currentColour)
     {
+        statusEffectA.SetAlpha(0);
         statusEffectA.sprite = StatusConditionArt.instance.BlankWhite;
 
         float elapsedTime = 0;
@@ -608,7 +611,7 @@ public class BattleUnit : MonoBehaviour
 
         while (elapsedTime < duration)
         {
-            statusEffectA.color = currentColour.SetAlpha(elapsedTime / duration);
+            statusEffectA.SetAlpha(elapsedTime / duration);
             elapsedTime += Time.deltaTime;
             yield return null;
         }
@@ -617,17 +620,18 @@ public class BattleUnit : MonoBehaviour
 
         while (elapsedTime < duration)
         {
-            statusEffectA.color = currentColour.SetAlpha(1 - (elapsedTime / duration));
+            statusEffectA.SetAlpha(1 - (elapsedTime / duration));
             elapsedTime += Time.deltaTime;
             yield return null;
         }
 
-        statusEffectA.color = StatusConditionArt.instance.PlainWhite.SetAlpha(0);
+        statusEffectA.color = StatusConditionArt.instance.PlainWhite;
+        statusEffectA.SetAlpha(0);
     }
 
     IEnumerator PlayPoisonAnimation()
     {
-        yield return ShowStatusAnimationConditionColor(StatusConditionArt.instance.GetStatusConditionAnimationColour(ConditionID.Poison).SetAlpha(0));
+        yield return ShowStatusAnimationConditionColor(StatusConditionArt.instance.GetStatusConditionAnimationColour(ConditionID.Poison));
         yield return null;
     }
 
@@ -814,7 +818,7 @@ public class BattleUnit : MonoBehaviour
         {
             return true;
         }
-        else if(BattleSystem.gravity == true)
+        else if(BattleSystem.Gravity == true)
         {
             return true;
         }
