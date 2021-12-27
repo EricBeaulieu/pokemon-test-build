@@ -6,7 +6,6 @@ using UnityEngine;
 [System.Serializable]
 public class Pokemon {
 
-    //variables
     [SerializeField] PokemonBase _pokemonBase;
     public PokemonBase pokemonBase { get { return _pokemonBase; } private set { _pokemonBase = value; } }
     [Range(1,100)]

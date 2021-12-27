@@ -11,6 +11,8 @@ public class LevelManager : MonoBehaviour
     [SerializeField] List<WildPokemon> standardWalking;
     [SerializeField] List<WildPokemon> standardSurfing;
     [SerializeField] GameSceneBaseSO sceneReference;
+    [SerializeField] GridManager currentGrid;
+    public GridManager GetGrid { get { return currentGrid; } }
     List<Portal> allInLevelPortals = new List<Portal>();
     List<Entity> allEntitiesInScene = new List<Entity>();
     List<CuttableTree> allTreesInScene = new List<CuttableTree>();

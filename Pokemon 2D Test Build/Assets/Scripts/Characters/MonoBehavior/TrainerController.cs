@@ -203,17 +203,18 @@ public class TrainerController : EntityAI,IInteractable,ISaveable
             {
                 if (CheckIfWalkable(directionFacing * i) == false)
                 {
+                    positionMovingTo.localPosition = Vector2.zero;
                     return;
                 }
             }
             
             _playerSpotted = true;
             currentlyExecutingDecision = false;
-            StartCoroutine(TriggerTrainerBattle(player));
+            StartCoroutine(TriggerTrainerBattle(player,distance));
         }
     }
 
-    public IEnumerator TriggerTrainerBattle(PlayerController player)
+    public IEnumerator TriggerTrainerBattle(PlayerController player,int distance)
     {
         if(player.IsMoving == true)
         {
@@ -236,7 +237,10 @@ public class TrainerController : EntityAI,IInteractable,ISaveable
         targetPos -= targetPos.normalized;
         targetPos = new Vector2(Mathf.Round(targetPos.x), Mathf.Round(targetPos.y));
 
-        yield return MoveToPosition(targetPos);
+        for (int i = 0; i < distance; i++)
+        {
+            yield return MoveToPosition(targetPos.normalized);
+        }
 
         _anim.SetBool("isMoving", IsMoving);
         _anim.SetBool("isRunning", isRunning);

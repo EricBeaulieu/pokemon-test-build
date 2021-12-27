@@ -391,7 +391,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   graphics: {fileID: 5864479953946560452}
-  characterArt: {fileID: 0}
+  characterArt: {fileID: 11400000, guid: f72661efcc37d99439ad6861f39e6297, type: 2}
   movementSpeed: 5
   positionMovingTo: {fileID: 483150112}
   standAroundAndLook: 1
@@ -399,6 +399,8 @@ MonoBehaviour:
   canLookDown: 1
   canLookLeft: 1
   canLookRight: 1
+  lookDirectionAfterInteraction: 0
+  directionAfterInteraction: 0
   aiDecisionList: []
   timeUntilMoveMin: 5
   timeUntilMoveMax: 0
@@ -431,7 +433,7 @@ MonoBehaviour:
   pokemonParty:
   - _pokemonBase: {fileID: 11400000, guid: 035955532a56c544eba76cdb240c24e3, type: 2}
     _level: 5
-    _presetMoves: []
+    presetMoves: []
     _isShiny: 0
     _gender: 0
     nature: {fileID: 0}
@@ -454,7 +456,7 @@ MonoBehaviour:
     currentHeldItem: {fileID: 0}
   - _pokemonBase: {fileID: 11400000, guid: c4dd55ad047f5cb4d9c167f439657170, type: 2}
     _level: 5
-    _presetMoves: []
+    presetMoves: []
     _isShiny: 0
     _gender: 0
     nature: {fileID: 0}
@@ -477,7 +479,7 @@ MonoBehaviour:
     currentHeldItem: {fileID: 0}
   - _pokemonBase: {fileID: 11400000, guid: a5077a98ad912594f8e38408d3ce9f02, type: 2}
     _level: 12
-    _presetMoves: []
+    presetMoves: []
     _isShiny: 0
     _gender: 0
     nature: {fileID: 0}

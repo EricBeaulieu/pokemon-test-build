@@ -13,8 +13,11 @@ public class GameManager : MonoBehaviour
     public bool startWithPresetBoxes;
     public bool turnOffWildPokemon;
 
+    public bool debugGrid = false;
+
     [SerializeField] PlayerController playerPrefab;
     static PlayerController playerController;
+    [SerializeField] GridPositionDisplayerHelper gridPrefab;
     [SerializeField] GameSceneBaseSO startingScene;
     [SerializeField] Transform defaultSpawnLocation;
     TrainerController trainerController = null;
@@ -38,6 +41,7 @@ public class GameManager : MonoBehaviour
     static GameState state = GameState.Overworld;
 
     public static List<Entity> allActiveEntities = new List<Entity>();
+    List<GridPositionDisplayerHelper> aliveGrids = new List<GridPositionDisplayerHelper>();
 
     public static GameManager instance
     {
@@ -386,5 +390,45 @@ public class GameManager : MonoBehaviour
             testPokemonBeenSet = true;
         }
         return tester.pcPokemonTest;
+    }
+
+    public void CreateGridCell(int x, int y, Vector2 worldPos, bool walkable)
+    {
+        GridPositionDisplayerHelper gridPositionDisplayerHelper = ReturnFirstInactiveGameobject();
+        if (gridPositionDisplayerHelper == null)
+        {
+            gridPositionDisplayerHelper = Instantiate(gridPrefab, new Vector3(worldPos.x + 0.5f, worldPos.y + 0.5f, 0), Quaternion.identity);
+            aliveGrids.Add(gridPositionDisplayerHelper);
+        }
+        else
+        {
+            gridPositionDisplayerHelper.transform.position = new Vector3(worldPos.x + 0.5f, worldPos.y + 0.5f, 0);
+            gridPositionDisplayerHelper.gameObject.SetActive(true);
+        }
+        gridPositionDisplayerHelper.gameObject.name = $"{x},{y}";
+        Debug.Log($"{x},{y}", gridPositionDisplayerHelper.gameObject);
+        gridPositionDisplayerHelper.XPos = x;
+        gridPositionDisplayerHelper.YPos = y;
+        gridPositionDisplayerHelper.IsWalkable = walkable;
+    }
+
+    public void ClearGrid()
+    {
+        for (int i = 0; i < aliveGrids.Count; i++)
+        {
+            aliveGrids[i].gameObject.SetActive(false);
+        }
+    }
+
+    GridPositionDisplayerHelper ReturnFirstInactiveGameobject()
+    {
+        for (int i = 0; i < aliveGrids.Count; i++)
+        {
+            if (aliveGrids[i].gameObject.activeInHierarchy == false)
+            {
+                return aliveGrids[i];
+            }
+        }
+        return null;
     }
 }

@@ -15,6 +15,7 @@ public abstract class EntityAI : Entity
     [SerializeField] protected FacingDirections directionAfterInteraction;
 
     [SerializeField] protected List<AIDecision> aiDecisionList;
+    [SerializeField] protected Vector2Int pathLocation;
     protected bool currentlyExecutingDecision = false;
     protected int currentMovementPattern = 0;
     protected float idleTimer = 0f;
@@ -46,6 +47,20 @@ public abstract class EntityAI : Entity
         }
         currentlyExecutingDecision = false;
         currentMovementPattern = (currentMovementPattern + 1) % aiDecisionList.Count;
+
+        _anim.SetBool("isMoving", IsMoving);
+        _anim.SetBool("isRunning", isRunning);
+    }
+
+    protected IEnumerator Walk(List<Vector2> path)
+    {
+        currentlyExecutingDecision = true;
+
+        for (int i = 0; i < path.Count; i++)
+        {
+            yield return MoveToPosition(path[i]);
+        }
+        currentlyExecutingDecision = false;
 
         _anim.SetBool("isMoving", IsMoving);
         _anim.SetBool("isRunning", isRunning);
@@ -202,5 +217,22 @@ public abstract class EntityAI : Entity
     public override void PlayerInteractingWithWhenDoneMoving()
     {
         interactWhenPossible = true;
+    }
+
+    public void GeneratePathToPosition(Vector2 target = new Vector2())
+    {
+        if (target == Vector2.zero)
+        {
+            target = new Vector2(pathLocation.x + TILE_CENTER_OFFSET, pathLocation.y + TILE_CENTER_OFFSET);
+        }
+        List<Vector2> path = ArtificialGrid.Pathfinding.FindPath((Vector2)transform.position, target);
+        if (path != null)
+        {
+            StartCoroutine(Walk(path));
+        }
+        else
+        {
+            Debug.Log("Path is null");
+        }
     }
 }

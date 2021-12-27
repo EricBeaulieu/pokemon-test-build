@@ -169,8 +169,8 @@
     <Compile Include="Assets\Scripts\Data\HoldItems\Berries\Coba.cs" />
     <Compile Include="Assets\Scripts\Data\HoldItems\Standard\SharpBeak.cs" />
     <Compile Include="Assets\Scripts\Data\HoldItems\Standard\LifeOrb.cs" />
-    <Compile Include="Assets\Scripts\Pokemon\NatureBase.cs" />
     <Compile Include="Assets\Scripts\Data\Abilitys\List\KeenEye.cs" />
+    <Compile Include="Assets\Scripts\Pokemon\NatureBase.cs" />
     <Compile Include="Assets\Scripts\Data\HoldItems\Berries\Kasib.cs" />
     <Compile Include="Assets\Scripts\Data\Abilitys\List\Intimidate.cs" />
     <Compile Include="Assets\Scripts\Data\HoldItems\Berries\Lansat.cs" />
@@ -250,8 +250,8 @@
     <Compile Include="Assets\Scripts\UI\PC\PCBanner.cs" />
     <Compile Include="Assets\Scripts\Data\HoldItems\HoldItemsNull.cs" />
     <Compile Include="Assets\Scripts\Data\Abilitys\List\BigPecks.cs" />
-    <Compile Include="Assets\Scripts\Data\HoldItems\Standard\RockyHelmet.cs" />
     <Compile Include="Assets\Scripts\Battle\SpecializedMovesHelper.cs" />
+    <Compile Include="Assets\Scripts\Data\HoldItems\Standard\RockyHelmet.cs" />
     <Compile Include="Assets\Scripts\Data\HoldItems\Berries\Tamato.cs" />
     <Compile Include="Assets\Scripts\Items\UI\TrashArrowButtons.cs" />
     <Compile Include="Assets\Scripts\Data\Abilitys\List\MegaLauncher.cs" />
@@ -402,6 +402,7 @@
     <Compile Include="Assets\Scripts\Data\HoldItems\Standard\MiracleSeed.cs" />
     <Compile Include="Assets\Scripts\Data\Abilitys\List\SolarPower.cs" />
     <Compile Include="Assets\Scripts\UI\PC\PCPokemon.cs" />
+    <Compile Include="Assets\Scripts\ExtensionMethods\Extension.cs" />
     <Compile Include="Assets\Scripts\Data\Abilitys\List\PurePower.cs" />
     <Compile Include="Assets\Scripts\Data\Abilitys\List\VitalSpirit.cs" />
     <Compile Include="Assets\Notes.cs" />
@@ -547,7 +548,11 @@
     <Compile Include="Assets\Scripts\Data\Abilitys\List\RainDish.cs" />
     <Compile Include="Assets\Scripts\Data\Abilitys\List\Justified.cs" />
     <Compile Include="Assets\Scripts\Data\Abilitys\List\Soundproof.cs" />
-    <Compile Include="Assets\Scripts\ExtensionMethods\Extension.cs" />
+    <Compile Include="Assets\Scripts\Pathfinding\GridPositionDisplayerHelper.cs" />
+    <Compile Include="Assets\Scripts\Managers\GridManager.cs" />
+    <Compile Include="Assets\Scripts\Pathfinding\ArtificialGrid.cs" />
+    <Compile Include="Assets\Scripts\Pathfinding\Pathfinding.cs" />
+    <Compile Include="Assets\Scripts\Pathfinding\PathNode.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\ScriptTemplates\82-EricBeaulieu__BerryBase-NewBerryBase.cs.txt" />

@@ -16,6 +16,11 @@ public static class SceneSystem
 
     public static IEnumerator NewAreaEntered(LevelManager newLevel)
     {
+        if(currentLevelManager == newLevel)
+        {
+            yield break;
+        }
+
         if (currentLevelManager == null)
         {
             newLevel.Initilization();
@@ -47,6 +52,8 @@ public static class SceneSystem
             currentScenesLoaded.Add(newScene);
             yield return OnLevelLoaded(sceneToLoad, newScene);
         }
+
+        ArtificialGrid.SetupGrid();
     }
 
     static List<GameSceneBaseSO> GetAllOpenScenes(List<GameSceneBaseSO> current)

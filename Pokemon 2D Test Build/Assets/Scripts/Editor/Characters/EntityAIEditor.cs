@@ -5,8 +5,8 @@ using UnityEngine;
 using UnityEditor;
 using Object = UnityEngine.Object;
 
-[CustomEditor(typeof(EntityAI))]
-public class EntityAIEditor : Editor
+[CustomEditor(typeof(EntityAI), true)]
+public class EntityAIEditor : EntityEditor
 {
     //EntityAI formBase = null;
     //protected void OnEnable()
@@ -16,10 +16,16 @@ public class EntityAIEditor : Editor
 
     public override void OnInspectorGUI()
     {
-        
-
-
         base.OnInspectorGUI();
+
+        GUILayout.BeginHorizontal();
+
+        if (GUILayout.Button("Generate Path"))
+        {
+            ((EntityAI)target).GeneratePathToPosition();
+        }
+
+        GUILayout.EndHorizontal();
     }
 }
 
