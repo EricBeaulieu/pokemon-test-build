@@ -185,6 +185,11 @@ public class TrainerController : EntityAI,IInteractable,ISaveable
 
     void OnTriggerEnter2D(Collider2D col)
     {
+        if(GameManager.instance.turnOffTrainerBattles == true)
+        {
+            return;
+        }
+
         if(col.CompareTag("Player")&& _playerSpotted == false && hasLostToPlayer == false && _changingSight == false)
         {
             PlayerController player = col.GetComponent<PlayerController>();

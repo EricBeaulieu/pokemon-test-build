@@ -12,6 +12,7 @@ public class GameManager : MonoBehaviour
     public bool startNewSaveEveryStart;
     public bool startWithPresetBoxes;
     public bool turnOffWildPokemon;
+    public bool turnOffTrainerBattles;
 
     public bool debugGrid = false;
 
