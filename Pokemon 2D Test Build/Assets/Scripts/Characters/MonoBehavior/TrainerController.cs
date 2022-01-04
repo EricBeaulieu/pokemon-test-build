@@ -67,7 +67,7 @@ public class TrainerController : EntityAI,IInteractable,ISaveable
 
         if (inBattleDialogOnDefeat.Lines.Count <= 0)
         {
-            Debug.LogError("This traine is missing its inBattleDialogOnDefeat", this);
+            Debug.LogError("This trainer is missing its inBattleDialogOnDefeat", this);
         }
 
         if (inBattleDialogOnVictory.Lines.Count <= 0)

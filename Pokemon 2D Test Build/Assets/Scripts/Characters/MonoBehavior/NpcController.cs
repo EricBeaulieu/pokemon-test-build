@@ -79,7 +79,8 @@ public class NpcController : EntityAI, IInteractable
     {
         if(IsMoving == false)
         {
-            currentlyExecutingDecision = false;
+            //currentlyExecutingDecision = false;
+            //currentMovementPattern--;
             FaceTowardsDirection(initiator);
 
             if(itemGiver != null && itemGiver.ItemCanBeGiven() == true)

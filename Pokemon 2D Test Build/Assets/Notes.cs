@@ -5,9 +5,8 @@ using UnityEngine;
 public class Notes
 {
     //To do list
-    
-    //old lady/little girl/little boy does not have a front sprite for in battle
-    //prevent trainers from seeing through solid objects
+
+    //test out belly drum
 
     //Shop
     //repel/super/max repel and pokedoll for shop
@@ -15,9 +14,7 @@ public class Notes
     //fix stealth rock to not miss when target is semi invernerable
     //for certain attacks, such as natural gift/z moves, it will replace the move base to something from a static table. 
     //these moves will be pre created somewhere else
-    //if player loads game and goes to the pc, the player will still be able to move around
-    
-    //gifting pokemon from trainers
+
     //power points stuff not implimented for when item is used on pokemon
     //in regards to specialized messages, they can be thrown into stat boost and displayed when given into effect
     //substitute, when made add in infiltrator
@@ -62,9 +59,8 @@ public class Notes
 
     //Bugs
 
-    //if the player backs out of the bag menu via "X" it will not select any button when back in battle
+    //when the player drops a pokemon in a position that is occupied it will switch the pokemon BUT it will delete the pokemon after
     //on turn end for bound moves the pokemon doesnt play flash of hit animation
-    //after gyrados fainted from struggle, it showed itself fainting again
 
     //Others
     //set/Shift option, if set just keep pokemon out
@@ -84,7 +80,7 @@ public class Notes
     Fusion Flare,Future Sight,Grass Knot,Hidden Power,Judgment,Mirror Coat,Moongeist Beam,Nature's Madness,Night Shade,Petal Dance,
     Photon Geyser,Psyshock,Psystrike,Relic Song,Revelation Dance,Secret Sword,Sheer Cold,Sonic Boom,Spit Ups,Techno Blast,Volt Switch
 
-    After You, Ally Switch
+    After You, Ally Switch,Aromatherapy,Aromatic Mist,Assist,Baneful Bunker,Baton Pass,Bestow,Camouflage,Captivate
     */
 
     //Incinerate berry removal

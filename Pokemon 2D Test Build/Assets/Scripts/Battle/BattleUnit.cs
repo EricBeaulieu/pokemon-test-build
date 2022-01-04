@@ -605,6 +605,7 @@ public class BattleUnit : MonoBehaviour
     {
         statusEffectA.SetAlpha(0);
         statusEffectA.sprite = StatusConditionArt.instance.BlankWhite;
+        statusEffectA.color = currentColour;
 
         float elapsedTime = 0;
         float duration = STATUS_EFFECT_ANIMATION_SPEED;

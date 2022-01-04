@@ -30,6 +30,11 @@ public abstract class EntityAI : Entity
     protected IEnumerator Walk()
     {
         Vector2 desiredPosition = aiDecisionList[currentMovementPattern].movement - (Vector2)transform.position;
+
+        //while(CheckIfWalkable(desiredPosition.normalized) == false)
+        //{
+        //    yield return null;
+        //}
         currentlyExecutingDecision = true;
 
         while ((Vector2)transform.position != aiDecisionList[currentMovementPattern].movement)
