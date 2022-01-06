@@ -14,10 +14,19 @@ public class LevelManagerEditor : Editor
 
         GUILayout.BeginHorizontal();
 
-        if (GUILayout.Button("Standard Walking Encounter Total"))
-        {
-            Debug.Log($"Current Level Manager Standard Walking Encounter Total: {levelManager.GetStandardWalkingCount()}");
-        }
+            if (GUILayout.Button("Standard Walking Encounter Total"))
+            {
+                Debug.Log($"Current Level Manager Standard Walking Encounter Total: {levelManager.GetStandardWalkingCount()}");
+            }
+
+        GUILayout.EndHorizontal();
+
+        GUILayout.BeginHorizontal();
+
+            if (GUILayout.Button("Standard Surfing Encounter Total"))
+            {
+                Debug.Log($"Current Level Manager Standard Surfing Encounter Total: {levelManager.GetStandardWalkingCount()}");
+            }
 
         GUILayout.EndHorizontal();
     }

@@ -41,8 +41,12 @@ MonoBehaviour:
   hiddenAbility: 65
   _learnableMoves: []
   learnableTMHMMoves: []
-  evolveLevelBased:
+  evolutions:
   - evolvedPokemon: {fileID: 11400000, guid: ab180f3b64b50cf4984d283162fda62e, type: 2}
     levelRequirement: 30
     maxFriendShipRequired: 0
-  evolutionsByStone: []
+    evolutionStone: {fileID: 0}
+    specifiedHoldItem: {fileID: 0}
+    timeSpecific: 0
+    specifiedMove: {fileID: 0}
+  wildPokemonHoldItems: []

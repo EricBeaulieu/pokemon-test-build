@@ -60,8 +60,7 @@ public class PokemonBase : ScriptableObject {
     public static int MAX_NUMBER_OF_MOVES { get; } = 4;
 
     [Header("Evolving")]
-    [SerializeField] List<EvolveLevelBased> evolveLevelBased;
-    [SerializeField] List<EvolutionStone> evolutionsByStone;
+    [SerializeField] List<EvolutionBase> evolutions;
 
     [Header("Wild")]
     [SerializeField] List<WildPokemonHoldItems> wildPokemonHoldItems;
@@ -244,15 +243,11 @@ public class PokemonBase : ScriptableObject {
     }
 
 
-    public List<EvolveLevelBased> EvolveLevelBased
+    public List<EvolutionBase> Evolutions
     {
-        get { return evolveLevelBased; }
+        get { return evolutions; }
     }
 
-    public List<EvolutionStone> EvolutionsByStone
-    {
-        get { return evolutionsByStone; }
-    }
 
     public List<WildPokemonHoldItems> WildPokemonHoldItems
     {

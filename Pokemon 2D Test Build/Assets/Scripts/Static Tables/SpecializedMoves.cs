@@ -91,6 +91,7 @@ public static class SpecializedMoves
 
         //Status
         acupressure = helper.acupressure;
+        captivate = helper.captivate;
         noRetreat = helper.noRetreat;
         encore = helper.encore;
         synthesis = helper.synthesis;
@@ -191,6 +192,7 @@ public static class SpecializedMoves
 
     //Status
     public static MoveBase acupressure { get; private set; }
+    public static MoveBase captivate { get; private set; }
     public static MoveBase noRetreat { get; private set; }
     public static MoveBase encore { get; private set; }
     public static MoveBase synthesis { get; private set; }
@@ -280,6 +282,10 @@ public static class SpecializedMoves
         else if(originalMove == endeavor)
         {
             return (sourceUnit.pokemon.currentHitPoints > targetUnit.pokemon.currentHitPoints);
+        }
+        else if(originalMove == captivate)
+        {
+            return WorksOnlyWithOppositeGender(sourceUnit, targetUnit);
         }
 
         return true;
@@ -552,6 +558,20 @@ public static class SpecializedMoves
             {
                 return true;
             }
+        }
+        return false;
+    }
+
+    static bool WorksOnlyWithOppositeGender(BattleUnit sourceUnit,BattleUnit targetUnit)
+    {
+        if(sourceUnit.pokemon.gender == Gender.NA || targetUnit.pokemon.gender == Gender.NA)
+        {
+            return false;
+        }
+
+        if(sourceUnit.pokemon.gender != targetUnit.pokemon.gender)
+        {
+            return true;
         }
         return false;
     }

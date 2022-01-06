@@ -95,6 +95,7 @@ public class SpecializedMovesHelper : MonoBehaviour
 
     [Header("Status")]
     public MoveBase acupressure;
+    public MoveBase captivate;
     public MoveBase noRetreat;
     public MoveBase encore;
     public MoveBase synthesis;

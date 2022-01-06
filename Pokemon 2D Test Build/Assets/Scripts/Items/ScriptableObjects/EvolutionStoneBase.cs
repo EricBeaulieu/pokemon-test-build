@@ -12,9 +12,9 @@ public class EvolutionStoneBase : ItemBase
 
     public override bool UseItem(Pokemon pokemon)
     {
-        if(pokemon.pokemonBase.EvolutionsByStone != null)
+        if(pokemon.pokemonBase.Evolutions != null)
         {
-            foreach (EvolutionStone evolution in pokemon.pokemonBase.EvolutionsByStone)
+            foreach (EvolutionBase evolution in pokemon.pokemonBase.Evolutions)
             {
                 if (evolution.CanEvolve(pokemon, this) == true)
                 {

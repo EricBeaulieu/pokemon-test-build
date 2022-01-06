@@ -7,7 +7,7 @@ public class Eviolite : HoldItemBase
     public override HoldItemID HoldItemId { get { return HoldItemID.Eviolite; } }
     public override float AlterStat(Pokemon holder, StatAttribute statAffected)
     {
-        if(holder.pokemonBase.EvolutionsByStone.Count > 0|| holder.pokemonBase.EvolveLevelBased.Count>0)
+        if(holder.pokemonBase.Evolutions.Count > 0)
         {
             if (statAffected == StatAttribute.Defense || statAffected == StatAttribute.SpecialDefense)
             {

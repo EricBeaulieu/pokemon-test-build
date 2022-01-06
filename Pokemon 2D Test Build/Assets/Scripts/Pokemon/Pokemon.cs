@@ -931,11 +931,11 @@ public class Pokemon {
             currentLevel++;
             UpdateStats();
 
-            if (_pokemonBase.EvolveLevelBased != null)
+            if (_pokemonBase.Evolutions != null)
             {
-                foreach (EvolveLevelBased evolution in _pokemonBase.EvolveLevelBased)
+                foreach (EvolutionBase evolution in _pokemonBase.Evolutions)
                 {
-                    if (evolution.CanEvolve(this, GetCurrentItem) == true && currentHitPoints > 0)
+                    if (evolution.CanEvolve(this) == true && currentHitPoints > 0)
                     {
                         evolvePokemonAfterBattle = true;
                     }
@@ -1177,7 +1177,6 @@ public class Pokemon {
         PokemonSaveData pokemonSaveData = new PokemonSaveData();
 
         pokemonSaveData.currentBase = SavingSystem.GetAssetPath(_pokemonBase);
-        Debug.Log(pokemonSaveData.currentBase);
         pokemonSaveData.currentLevel = currentLevel;
         pokemonSaveData.currentExp = currentExp;
         pokemonSaveData.currentHitPoints = currentHitPoints;

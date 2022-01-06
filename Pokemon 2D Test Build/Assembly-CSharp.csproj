@@ -201,6 +201,7 @@
     <Compile Include="Assets\Scripts\Data\HoldItems\Standard\GripClaw.cs" />
     <Compile Include="Assets\Scripts\Data\HoldItems\Standard\NeverMeltIce.cs" />
     <Compile Include="Assets\Scripts\Data\Abilitys\List\PoisonPoint.cs" />
+    <Compile Include="Assets\Scripts\Pathfinding\ArtificialGrid.cs" />
     <Compile Include="Assets\Scripts\Data\HoldItems\Standard\BindingBand.cs" />
     <Compile Include="Assets\Scripts\Data\Abilitys\List\SkillLink.cs" />
     <Compile Include="Assets\Scripts\Party\PartySystem.cs" />
@@ -255,7 +256,7 @@
     <Compile Include="Assets\Scripts\Data\HoldItems\Berries\Tamato.cs" />
     <Compile Include="Assets\Scripts\Items\UI\TrashArrowButtons.cs" />
     <Compile Include="Assets\Scripts\Data\Abilitys\List\MegaLauncher.cs" />
-    <Compile Include="Assets\Scripts\Pokemon\Evolution\EvolutionBase.cs" />
+    <Compile Include="Assets\Scripts\Pokemon\EvolutionBase.cs" />
     <Compile Include="Assets\Scripts\Data\Abilitys\List\ToughClaws.cs" />
     <Compile Include="Assets\Scripts\Items\ScriptableObjects\EvolutionStoneBase.cs" />
     <Compile Include="Assets\Scripts\Data\Abilitys\List\CloudNine.cs" />
@@ -281,6 +282,7 @@
     <Compile Include="Assets\Scripts\Data\HoldItems\Berries\Colbur.cs" />
     <Compile Include="Assets\Scripts\Items\ScriptableObjects\PokeballItem.cs" />
     <Compile Include="Assets\Scripts\Data\Abilitys\List\Levitate.cs" />
+    <Compile Include="Assets\Scripts\Pathfinding\Pathfinding.cs" />
     <Compile Include="Assets\Scripts\Data\HoldItems\Berries\Figy.cs" />
     <Compile Include="Assets\Scripts\Data\Abilitys\List\Limber.cs" />
     <Compile Include="Assets\Scripts\Data\HoldItems\HoldItemDB.cs" />
@@ -290,7 +292,6 @@
     <Compile Include="Assets\Scripts\Saving\MoveSaveData.cs" />
     <Compile Include="Assets\Scripts\Data\HoldItems\Berries\Leppa.cs" />
     <Compile Include="Assets\Scripts\Data\Abilitys\List\Infiltrator.cs" />
-    <Compile Include="Assets\Scripts\Pokemon\Evolution\EvolveLevelBased.cs" />
     <Compile Include="Assets\Scripts\Characters\MonoBehavior\EntityAI.cs" />
     <Compile Include="Assets\Scripts\Data\HoldItems\Berries\Qualot.cs" />
     <Compile Include="Assets\Scripts\Data\Conditions\VolatileBattleStatus\TakingAim.cs" />
@@ -323,7 +324,6 @@
     <Compile Include="Assets\Scripts\Data\HoldItems\Standard\WaterGem.cs" />
     <Compile Include="Assets\Scripts\Battle\CaptureBallRoute.cs" />
     <Compile Include="Assets\Scripts\Data\HoldItems\Berries\Salac.cs" />
-    <Compile Include="Assets\Scripts\Pokemon\Evolution\EvolveMoveSpecified.cs" />
     <Compile Include="Assets\Scripts\Data\HoldItems\Berries\Petaya.cs" />
     <Compile Include="Assets\Scripts\Items\Item.cs" />
     <Compile Include="Assets\Scripts\Data\HoldItems\Standard\Charcoal.cs" />
@@ -361,7 +361,6 @@
     <Compile Include="Assets\Scripts\Dialog\DialogManager.cs" />
     <Compile Include="Assets\Scripts\Pokemon\Shield\Reflect.cs" />
     <Compile Include="Assets\Scripts\UI\SelectableBoxUI.cs" />
-    <Compile Include="Assets\Scripts\Pokemon\Evolution\EvolutionStone.cs" />
     <Compile Include="Assets\Scripts\Data\HoldItems\Standard\Magnet.cs" />
     <Compile Include="Assets\Scripts\Characters\MonoBehavior\AIDecision.cs" />
     <Compile Include="Assets\Scripts\Data\Abilitys\List\SandForce.cs" />
@@ -391,6 +390,7 @@
     <Compile Include="Assets\Scripts\Characters\MonoBehavior\ItemGiver.cs" />
     <Compile Include="Assets\Scripts\Data\HoldItems\Standard\SmoothRock.cs" />
     <Compile Include="Assets\Scripts\Data\HoldItems\Standard\WhiteHerb.cs" />
+    <Compile Include="Assets\Scripts\Pathfinding\GridPositionDisplayerHelper.cs" />
     <Compile Include="Assets\Scripts\Data\Abilitys\List\Chlorophyll.cs" />
     <Compile Include="Assets\Scripts\Data\Conditions\Status\Frozen.cs" />
     <Compile Include="Assets\Scripts\Data\Abilitys\List\Filter.cs" />
@@ -444,7 +444,6 @@
     <Compile Include="Assets\Scripts\Static Tables\DamageModifiers.cs" />
     <Compile Include="Assets\Scripts\Items\ScriptableObjects\BerryItem.cs" />
     <Compile Include="Assets\Scripts\UI\PC\PCParty.cs" />
-    <Compile Include="Assets\Scripts\Pokemon\Evolution\EvolveFriendshipBased.cs" />
     <Compile Include="Assets\Scripts\Data\Abilitys\List\Protean.cs" />
     <Compile Include="Assets\Scripts\Data\HoldItems\Standard\Eviolite.cs" />
     <Compile Include="Assets\Scripts\Data\Abilitys\List\SnowWarning.cs" />
@@ -542,17 +541,14 @@
     <Compile Include="Assets\Scripts\Data\Weather\Weather Effects\Rain.cs" />
     <Compile Include="Assets\Scripts\Data\HoldItems\Standard\KingsRock.cs" />
     <Compile Include="Assets\Scripts\Data\HoldItems\HoldItemBase.cs" />
+    <Compile Include="Assets\Scripts\Managers\GridManager.cs" />
     <Compile Include="Assets\Scripts\Data\HoldItems\Berries\Cheri.cs" />
     <Compile Include="Assets\Scripts\Data\HoldItems\Standard\LightBall.cs" />
     <Compile Include="Assets\Scripts\Data\HoldItems\Berries\Sitrus.cs" />
+    <Compile Include="Assets\Scripts\Pathfinding\PathNode.cs" />
     <Compile Include="Assets\Scripts\Data\Abilitys\List\RainDish.cs" />
     <Compile Include="Assets\Scripts\Data\Abilitys\List\Justified.cs" />
     <Compile Include="Assets\Scripts\Data\Abilitys\List\Soundproof.cs" />
-    <Compile Include="Assets\Scripts\Pathfinding\GridPositionDisplayerHelper.cs" />
-    <Compile Include="Assets\Scripts\Managers\GridManager.cs" />
-    <Compile Include="Assets\Scripts\Pathfinding\ArtificialGrid.cs" />
-    <Compile Include="Assets\Scripts\Pathfinding\Pathfinding.cs" />
-    <Compile Include="Assets\Scripts\Pathfinding\PathNode.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\ScriptTemplates\82-EricBeaulieu__BerryBase-NewBerryBase.cs.txt" />

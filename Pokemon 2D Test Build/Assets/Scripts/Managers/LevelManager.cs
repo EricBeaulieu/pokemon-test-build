@@ -220,4 +220,14 @@ public class LevelManager : MonoBehaviour
         }
         return count;
     }
+
+    public int GetStandardSurfingCount()
+    {
+        int count = 0;
+        for (int i = 0; i < standardSurfing.Count; i++)
+        {
+            count += standardSurfing[i].WildEncounterChance;
+        }
+        return count;
+    }
 }

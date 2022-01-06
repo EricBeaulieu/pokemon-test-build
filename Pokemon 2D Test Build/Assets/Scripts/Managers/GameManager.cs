@@ -376,7 +376,7 @@ public class GameManager : MonoBehaviour
         for (int i = 0; i < pokemonEvolving.Count(); i++)
         {
             pokemon = pokemonEvolving[i];
-            PokemonBase newEvolution = pokemonEvolving[i].pokemonBase.EvolveLevelBased.Find(x => x.CanEvolve(pokemon, pokemon.GetCurrentItem) == true).NewPokemonEvolution();
+            PokemonBase newEvolution = pokemonEvolving[i].pokemonBase.Evolutions.Find(x => x.CanEvolve(pokemon) == true).NewPokemonEvolution();
             yield return evolutionSystem.PokemonEvolving(pokemon, newEvolution);
         }
         pokemonEvolving.Clear();

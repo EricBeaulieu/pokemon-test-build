@@ -716,7 +716,7 @@ public class PartySystem : CoreSystem
 
     IEnumerator PlayerEvolvedFromPartyScene(Pokemon pokemon,EvolutionStoneBase evolutionStone)
     {
-        PokemonBase newEvolution = pokemon.pokemonBase.EvolutionsByStone.Find(x => x.RequiredStone == evolutionStone).NewPokemonEvolution();
+        PokemonBase newEvolution = pokemon.pokemonBase.Evolutions.Find(x => x.RequiredStone == evolutionStone).NewPokemonEvolution();
         yield return GameManager.instance.GetEvolutionSystem.PokemonEvolving(pokemon, newEvolution);
 
         CloseSystem();
