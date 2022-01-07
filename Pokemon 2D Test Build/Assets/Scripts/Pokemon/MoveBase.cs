@@ -116,6 +116,11 @@ public class MoveBase : ScriptableObject {
         PhysicalContact = false;
     }
 
+    public void RemoveRecoil()
+    {
+        recoilType = Recoil.NA;
+    }
+
     public void AddSecondaryEffects(MoveSecondaryEffects newEffect)
     {
         if(secondaryEffects.Exists(x => x.Status == newEffect.Status || x.Status == newEffect.Volatiletatus))

@@ -91,20 +91,21 @@ public static class SpecializedMoves
 
         //Status
         acupressure = helper.acupressure;
+        auroraVeil = helper.auroraVeil;
+        bellyDrum = helper.bellyDrum;
         captivate = helper.captivate;
-        noRetreat = helper.noRetreat;
+        disable = helper.disable;
         encore = helper.encore;
-        synthesis = helper.synthesis;
+        lightScreen = helper.lightScreen;
+        mist = helper.mist;
         moonlight = helper.moonlight;
         morningSun = helper.morningSun;
-        shoreUp = helper.shoreUp;
+        noRetreat = helper.noRetreat;
         purify = helper.purify;
-        rest = helper.rest;
-        disable = helper.disable;
         reflect = helper.reflect;
-        lightScreen = helper.lightScreen;
-        auroraVeil = helper.auroraVeil;
-        mist = helper.mist;
+        rest = helper.rest;
+        shoreUp = helper.shoreUp;
+        synthesis = helper.synthesis;
 }
     //Specialized Moves
     public static MoveBase struggle { get; private set; }
@@ -192,9 +193,11 @@ public static class SpecializedMoves
 
     //Status
     public static MoveBase acupressure { get; private set; }
+    public static MoveBase auroraVeil { get; private set; }
+    public static MoveBase bellyDrum { get; private set; }
     public static MoveBase captivate { get; private set; }
-    public static MoveBase noRetreat { get; private set; }
     public static MoveBase encore { get; private set; }
+    public static MoveBase noRetreat { get; private set; }
     public static MoveBase synthesis { get; private set; }
     public static MoveBase moonlight { get; private set; }
     public static MoveBase morningSun { get; private set; }
@@ -204,40 +207,32 @@ public static class SpecializedMoves
     public static MoveBase disable { get; private set; }
     public static MoveBase reflect { get; private set; }
     public static MoveBase lightScreen { get; private set; }
-    public static MoveBase auroraVeil { get; private set; }
     public static MoveBase mist { get; private set; }
 
     public const int MAX_MULTIPLIER_STACKABLE_MOVES = 3;
 
     public static bool CheckIfMoveHasSpecializedConditionAndSuccessful(BattleUnit sourceUnit, BattleUnit targetUnit, MoveBase originalMove)
     {
-        if (originalMove == noRetreat)
+        //Specialized conditions
+        if (originalMove.SoundType == true)
         {
-            return (NoRetreatSuccessful(sourceUnit));
+            return (SoundMoveSuccessful(sourceUnit));
         }
-        else if (originalMove == encore)
+        else if (sourceUnit.pokemon.HasCurrentVolatileStatus(ConditionID.ChargingTurn) == true)
         {
-            return EncoreSuccessful(targetUnit);
+            return (ChargedMoveSuccessful(sourceUnit));
+        }//Physical Attack
+        else if (originalMove == counter)
+        {
+            return (sourceUnit.damagedThisTurn == true && sourceUnit.damagedReceived > 0 && targetUnit.lastMoveUsed?.moveBase.MoveType == MoveType.Physical);
         }
         else if (originalMove == dreamEater)
         {
             return (DreamEaterSuccessful(targetUnit));
         }
-        else if (originalMove == purify)
+        else if (originalMove == endeavor)
         {
-            return (PurifySuccessful(sourceUnit));
-        }
-        else if (originalMove == rest)
-        {
-            return (RestSuccessful(sourceUnit));
-        }
-        else if (originalMove == disable)
-        {
-            return (DisableSuccessful(targetUnit));
-        }
-        else if (originalMove == reflect || originalMove == lightScreen || originalMove == auroraVeil || originalMove == mist)
-        {
-            return (ShieldSuccessful(sourceUnit, targetUnit, originalMove));
+            return (sourceUnit.pokemon.currentHitPoints > targetUnit.pokemon.currentHitPoints);
         }
         else if (originalMove == fakeOut || originalMove == firstImpression)
         {
@@ -254,43 +249,55 @@ public static class SpecializedMoves
         else if (originalMove == suckerPunch)
         {
             return (SuckerPunchSuccessful(targetUnit));
-        }
-        else if (originalMove.SoundType == true)
-        {
-            return (SoundMoveSuccessful(sourceUnit));
-        }
-        else if(sourceUnit.pokemon.HasCurrentVolatileStatus(ConditionID.ChargingTurn) == true)
-        {
-            return (ChargedMoveSuccessful(sourceUnit));
-        }
-        else if(originalMove == shellTrap)
+        }//Special
+        else if (originalMove == shellTrap)
         {
             return (ShellTrapSuccessful(sourceUnit, targetUnit));
         }
-        else if(originalMove == snore)
+        else if (originalMove == snore)
         {
             return (sourceUnit.pokemon.status?.Id == ConditionID.Sleep);
         }
-        else if(originalMove == synchronoise)
+        else if (originalMove == synchronoise)
         {
             return (SynchronoiseSuccessfull(sourceUnit, targetUnit));
-        }
-        else if(originalMove == counter)
+        }//Status
+        else if (originalMove == auroraVeil || originalMove == lightScreen || originalMove == mist || originalMove == reflect)
         {
-            return (sourceUnit.damagedThisTurn == true && sourceUnit.damagedReceived > 0 && targetUnit.lastMoveUsed?.moveBase.MoveType == MoveType.Physical);
+            return (ShieldSuccessful(sourceUnit, targetUnit, originalMove));
         }
-        else if(originalMove == endeavor)
+        else if (originalMove == bellyDrum)
         {
-            return (sourceUnit.pokemon.currentHitPoints > targetUnit.pokemon.currentHitPoints);
+            return BellyDrumSuccessfull(sourceUnit);
         }
-        else if(originalMove == captivate)
+        else if (originalMove == captivate)
         {
             return WorksOnlyWithOppositeGender(sourceUnit, targetUnit);
         }
-
+        else if (originalMove == disable)
+        {
+            return (DisableSuccessful(targetUnit));
+        }
+        else if (originalMove == encore)
+        {
+            return EncoreSuccessful(targetUnit);
+        }
+        else if (originalMove == noRetreat)
+        {
+            return (NoRetreatSuccessful(sourceUnit));
+        }
+        else if (originalMove == purify)
+        {
+            return (PurifySuccessful(sourceUnit));
+        }
+        else if (originalMove == rest)
+        {
+            return (RestSuccessful(sourceUnit));
+        }
         return true;
     }
 
+    #region Specialized Move Functions
     static bool NoRetreatSuccessful(BattleUnit sourceUnit)
     {
         if (sourceUnit.cantEscapeGivenToSelf == true)
@@ -575,6 +582,18 @@ public static class SpecializedMoves
         }
         return false;
     }
+
+    static bool BellyDrumSuccessfull(BattleUnit sourceUnit)
+    {
+        if(sourceUnit.pokemon.statBoosts[StatAttribute.Attack] >= PokemonBase.MAX_STAT_BOOST_MULTIPLIER)
+        {
+            return false;
+        }
+        int currentHP = Mathf.CeilToInt((float)sourceUnit.pokemon.maxHitPoints * 0.5f);
+        return (sourceUnit.pokemon.currentHitPoints > currentHP);
+    }
+
+    #endregion
 
     public static MoveBase SpecifiedMovesWithConditions(BattleUnit attackingUnit, BattleUnit defendingUnit, MoveBase originalMove,MoveBase alteredMove,int currentMovePP)
     {

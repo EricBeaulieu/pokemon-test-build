@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
-    <LangVersion>8.0</LangVersion>
+    <LangVersion>latest</LangVersion>
   </PropertyGroup>
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -53,30 +53,27 @@
     <UnityVersion>2020.3.22f1</UnityVersion>
   </PropertyGroup>
   <ItemGroup>
-    <Analyzer Include="D:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\Extensions\Microsoft\Visual Studio Tools for Unity\Analyzers\Microsoft.Unity.Analyzers.dll" />
-  </ItemGroup>
-  <ItemGroup>
     <Compile Include="D:\Downloads\2d-extras-1.6.0-preview.1\2d-extras-1.6.0-preview.1\Editor\Brushes\CoordinateBrush\CoordinateBrush.cs" />
-    <Compile Include="D:\Downloads\2d-extras-1.6.0-preview.1\2d-extras-1.6.0-preview.1\Editor\Tiles\Menu\PipelineTileMenu.cs" />
-    <Compile Include="D:\Downloads\2d-extras-1.6.0-preview.1\2d-extras-1.6.0-preview.1\Editor\Menu\CustomRuleTileMenu.cs" />
-    <Compile Include="D:\Downloads\2d-extras-1.6.0-preview.1\2d-extras-1.6.0-preview.1\Editor\Tiles\RuleTile\RuleTileEditor.cs" />
-    <Compile Include="D:\Downloads\2d-extras-1.6.0-preview.1\2d-extras-1.6.0-preview.1\Editor\Brushes\PrefabBrushes\PrefabRandomBrush\PrefabRandomBrush.cs" />
-    <Compile Include="D:\Downloads\2d-extras-1.6.0-preview.1\2d-extras-1.6.0-preview.1\Editor\Brushes\GameObjectBrush\GameObjectBrush.cs" />
-    <Compile Include="D:\Downloads\2d-extras-1.6.0-preview.1\2d-extras-1.6.0-preview.1\Editor\Brushes\PrefabBrushes\PrefabBrush\PrefabBrush.cs" />
-    <Compile Include="D:\Downloads\2d-extras-1.6.0-preview.1\2d-extras-1.6.0-preview.1\Editor\Brushes\RandomBrush\RandomBrush.cs" />
     <Compile Include="D:\Downloads\2d-extras-1.6.0-preview.1\2d-extras-1.6.0-preview.1\Editor\Tiles\RuleOverrideTile\PopulateRuleOverrideTileWizard.cs" />
-    <Compile Include="D:\Downloads\2d-extras-1.6.0-preview.1\2d-extras-1.6.0-preview.1\Editor\Tiles\RuleOverrideTile\RuleOverrideTileEditor.cs" />
-    <Compile Include="D:\Downloads\2d-extras-1.6.0-preview.1\2d-extras-1.6.0-preview.1\Editor\Brushes\PrefabBrushes\BrushMenuItem.cs" />
-    <Compile Include="D:\Downloads\2d-extras-1.6.0-preview.1\2d-extras-1.6.0-preview.1\Editor\Tiles\Menu\TerrainTileMenu.cs" />
-    <Compile Include="D:\Downloads\2d-extras-1.6.0-preview.1\2d-extras-1.6.0-preview.1\Editor\Brushes\TintBrushSmooth\TintBrushSmooth.cs" />
-    <Compile Include="D:\Downloads\2d-extras-1.6.0-preview.1\2d-extras-1.6.0-preview.1\Editor\Brushes\GroupBrush\GroupBrush.cs" />
+    <Compile Include="D:\Downloads\2d-extras-1.6.0-preview.1\2d-extras-1.6.0-preview.1\Editor\Brushes\PrefabBrushes\PrefabRandomBrush\PrefabRandomBrush.cs" />
     <Compile Include="D:\Downloads\2d-extras-1.6.0-preview.1\2d-extras-1.6.0-preview.1\Editor\Brushes\PrefabBrushes\BasePrefabBrush.cs" />
-    <Compile Include="D:\Downloads\2d-extras-1.6.0-preview.1\2d-extras-1.6.0-preview.1\Editor\Menu\MenuItemOrder.cs" />
-    <Compile Include="D:\Downloads\2d-extras-1.6.0-preview.1\2d-extras-1.6.0-preview.1\Editor\Brushes\TintBrush\TintBrush.cs" />
+    <Compile Include="D:\Downloads\2d-extras-1.6.0-preview.1\2d-extras-1.6.0-preview.1\Editor\Brushes\RandomBrush\RandomBrush.cs" />
+    <Compile Include="D:\Downloads\2d-extras-1.6.0-preview.1\2d-extras-1.6.0-preview.1\Editor\Brushes\GameObjectBrush\GameObjectBrush.cs" />
+    <Compile Include="D:\Downloads\2d-extras-1.6.0-preview.1\2d-extras-1.6.0-preview.1\Editor\Brushes\GroupBrush\GroupBrush.cs" />
+    <Compile Include="D:\Downloads\2d-extras-1.6.0-preview.1\2d-extras-1.6.0-preview.1\Editor\Menu\CustomRuleTileMenu.cs" />
+    <Compile Include="D:\Downloads\2d-extras-1.6.0-preview.1\2d-extras-1.6.0-preview.1\Editor\Brushes\TintBrushSmooth\TintBrushSmooth.cs" />
+    <Compile Include="D:\Downloads\2d-extras-1.6.0-preview.1\2d-extras-1.6.0-preview.1\Editor\Tiles\RuleTile\RuleTileEditor.cs" />
     <Compile Include="D:\Downloads\2d-extras-1.6.0-preview.1\2d-extras-1.6.0-preview.1\Editor\Tiles\HexagonalRuleTile\HexagonalRuleTileEditor.cs" />
+    <Compile Include="D:\Downloads\2d-extras-1.6.0-preview.1\2d-extras-1.6.0-preview.1\Editor\Brushes\PrefabBrushes\PrefabBrush\PrefabBrush.cs" />
+    <Compile Include="D:\Downloads\2d-extras-1.6.0-preview.1\2d-extras-1.6.0-preview.1\Editor\Tiles\RuleOverrideTile\RuleOverrideTileEditor.cs" />
+    <Compile Include="D:\Downloads\2d-extras-1.6.0-preview.1\2d-extras-1.6.0-preview.1\Editor\Menu\MenuItemOrder.cs" />
+    <Compile Include="D:\Downloads\2d-extras-1.6.0-preview.1\2d-extras-1.6.0-preview.1\Editor\Brushes\PrefabBrushes\BrushMenuItem.cs" />
+    <Compile Include="D:\Downloads\2d-extras-1.6.0-preview.1\2d-extras-1.6.0-preview.1\Editor\Brushes\TintBrush\TintBrush.cs" />
     <Compile Include="D:\Downloads\2d-extras-1.6.0-preview.1\2d-extras-1.6.0-preview.1\Editor\Tiles\RuleOverrideTile\AdvancedRuleOverrideTileEditor.cs" />
-    <Compile Include="D:\Downloads\2d-extras-1.6.0-preview.1\2d-extras-1.6.0-preview.1\Editor\Tiles\Menu\RandomTileMenu.cs" />
+    <Compile Include="D:\Downloads\2d-extras-1.6.0-preview.1\2d-extras-1.6.0-preview.1\Editor\Tiles\Menu\TerrainTileMenu.cs" />
     <Compile Include="D:\Downloads\2d-extras-1.6.0-preview.1\2d-extras-1.6.0-preview.1\Editor\Brushes\LineBrush\LineBrush.cs" />
+    <Compile Include="D:\Downloads\2d-extras-1.6.0-preview.1\2d-extras-1.6.0-preview.1\Editor\Tiles\Menu\RandomTileMenu.cs" />
+    <Compile Include="D:\Downloads\2d-extras-1.6.0-preview.1\2d-extras-1.6.0-preview.1\Editor\Tiles\Menu\PipelineTileMenu.cs" />
     <Compile Include="D:\Downloads\2d-extras-1.6.0-preview.1\2d-extras-1.6.0-preview.1\Editor\Tiles\IsometricRuleTile\IsometricRuleTileEditor.cs" />
     <Compile Include="D:\Downloads\2d-extras-1.6.0-preview.1\2d-extras-1.6.0-preview.1\Editor\Tiles\Menu\WeightedRandomTileMenu.cs" />
   </ItemGroup>

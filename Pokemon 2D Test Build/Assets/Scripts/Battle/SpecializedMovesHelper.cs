@@ -95,18 +95,19 @@ public class SpecializedMovesHelper : MonoBehaviour
 
     [Header("Status")]
     public MoveBase acupressure;
+    public MoveBase auroraVeil;
+    public MoveBase bellyDrum;
     public MoveBase captivate;
-    public MoveBase noRetreat;
+    public MoveBase disable;
     public MoveBase encore;
-    public MoveBase synthesis;
+    public MoveBase lightScreen;
+    public MoveBase mist;
     public MoveBase moonlight;
     public MoveBase morningSun;
-    public MoveBase shoreUp;
+    public MoveBase noRetreat;
     public MoveBase purify;
     public MoveBase rest;
-    public MoveBase disable;
     public MoveBase reflect;
-    public MoveBase lightScreen;
-    public MoveBase auroraVeil;
-    public MoveBase mist;
+    public MoveBase synthesis;
+    public MoveBase shoreUp;
 }

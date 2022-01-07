@@ -1499,6 +1499,17 @@ public class BattleSystem : CoreSystem
             yield return ApplyStatChanges(effects.Boosts, target, moveTarget, wasSecondaryEffect, source);
         }
 
+        if (alteredMove.originalMove == SpecializedMoves.bellyDrum)
+        {
+            int cutHP = source.pokemon.maxHitPoints;
+            cutHP = Mathf.CeilToInt(cutHP * alteredMove.RecoilPercentage);
+            int previousHP = source.pokemon.currentHitPoints;
+            source.pokemon.UpdateHPDamage(cutHP);
+            yield return source.HUD.UpdateHP(previousHP);
+            yield return dialogSystem.TypeDialog($"{source.pokemon.currentName} cut its own HP and maximized his Attack");
+            alteredMove.RemoveRecoil();
+        }
+
         //Status Condition
         if (effects.Status != ConditionID.NA)
         {
@@ -1514,7 +1525,26 @@ public class BattleSystem : CoreSystem
             {
                 if (target.pokemon.currentHitPoints > 0)
                 {
+
+                    ConditionID previousStatus = ConditionID.NA;
                     target.pokemon.SetStatus(effects.Status, wasSecondaryEffect);
+
+                    if (effects.Status > ConditionID.ToxicPoison)
+                    {
+                        if(target.pokemon.HasCurrentVolatileStatus(effects.Status) == true)
+                        {
+                            previousStatus = effects.Status;
+                        }
+                    }
+                    else
+                    {
+                        previousStatus = target.pokemon.GetCurrentStatus();
+                    }
+                    
+                    if(previousStatus == ConditionID.NA)
+                    {
+                        yield return target.OnRecievedStatusCondition(previousStatus);
+                    }
                 }
             }
         }

@@ -30,6 +30,8 @@ public class BattleUnit : MonoBehaviour
     [SerializeField] Image statusEffectA;
     [SerializeField] Image statusEffectB;
     [SerializeField] Image overtopImage;
+    [SerializeField] Animator statusAnimator;
+    bool animationActive = false;
 
     const float STATUS_EFFECT_ANIMATION_SPEED = 1f;
     public const float ENTRY_SPRITE_ANIMATION_SPEED = 0.8f;
@@ -571,6 +573,33 @@ public class BattleUnit : MonoBehaviour
         abilityUI.OnAbilityActivation(pokemon, pokemon.ability.Name,isPlayersPokemon);
     }
 
+    public IEnumerator OnRecievedStatusCondition(ConditionID condition)
+    {
+        switch (condition)
+        {
+            case ConditionID.Poison:
+                yield return PlayPoisonAnimation();
+                break;
+            case ConditionID.Burn:
+                break;
+            case ConditionID.Sleep:
+                break;
+            case ConditionID.Frozen:
+                yield return PlayFrozenAnimation();
+                break;
+            case ConditionID.ToxicPoison:
+                yield return PlayPoisonAnimation();
+                break;
+            case ConditionID.Confused:
+                break;
+            case ConditionID.Cursed:
+                break;
+            default:
+                break;
+        }
+        yield return null;
+    }
+
     public IEnumerator StatusConditionAnimation(ConditionID condition)
     {
         switch (condition)
@@ -586,6 +615,7 @@ public class BattleUnit : MonoBehaviour
                 yield return PlayParalyzedAnimation();
                 break;
             case ConditionID.Frozen:
+                yield return PlayFrozenAnimation();
                 break;
             case ConditionID.ToxicPoison:
                 yield return PlayPoisonAnimation();
@@ -632,7 +662,24 @@ public class BattleUnit : MonoBehaviour
 
     IEnumerator PlayPoisonAnimation()
     {
-        yield return ShowStatusAnimationConditionColor(StatusConditionArt.instance.GetStatusConditionAnimationColour(ConditionID.Poison));
+        StartCoroutine(ShowStatusAnimationConditionColor(StatusConditionArt.instance.GetStatusConditionAnimationColour(ConditionID.Poison)));
+
+        float duration = STATUS_EFFECT_ANIMATION_SPEED * 2;
+        int movements = 6;
+        for (int i = 0; i < movements ; i++)
+        {
+            yield return SmoothTransitionToPosition(pokemonSprite.gameObject, GenerateOffestPosition((i % 2 == 0)), duration / movements);
+        }
+        yield return SmoothTransitionToPosition(pokemonSprite.gameObject, pokemonSpriteOriginalPosition, duration / movements);
+    }
+
+    IEnumerator PlayBurnAnimation()
+    {
+        yield return null;
+    }
+
+    IEnumerator PlaySleepAnimation()
+    {
         yield return null;
     }
 
@@ -651,9 +698,35 @@ public class BattleUnit : MonoBehaviour
         overtopImage.sprite = StatusConditionArt.instance.Nothing;
     }
 
+    IEnumerator PlayFrozenAnimation()
+    {
+        animationActive = true;
+        statusAnimator.SetTrigger("Frozen");
+
+        while (animationActive == true)
+        {
+            yield return null;
+        }
+    }
+
+    public void AnimationComplete()
+    {
+        animationActive = false;
+    }
+
     Vector3 GenerateOffestPosition(Vector3 offsetSpot)
     {
         return new Vector3(offsetSpot.x + Random.Range(-5,6), offsetSpot.y + Random.Range(-5, 6));
+    }
+
+    Vector3 GenerateOffestPosition(bool right)
+    {
+        int offset =(isPlayerPokemon) ? 15:5;
+        if(right == false)
+        {
+            offset = -offset;
+        }
+        return new Vector3(pokemonSpriteOriginalPosition.x + offset, pokemonSpriteOriginalPosition.y);
     }
 
     public bool NoMovesAvailable()

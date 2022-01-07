@@ -334,7 +334,7 @@ public class Pokemon {
                     continue;
                 }
             }
-            statBoosts[statModified] = Mathf.Clamp(statBoosts[statModified] + boost, -6, 6);
+            statBoosts[statModified] = Mathf.Clamp(statBoosts[statModified] + boost, -PokemonBase.MAX_STAT_BOOST_MULTIPLIER, PokemonBase.MAX_STAT_BOOST_MULTIPLIER);
 
             statusChanges.Enqueue(StatChangesMessage(currentName, statModified,boost));
 

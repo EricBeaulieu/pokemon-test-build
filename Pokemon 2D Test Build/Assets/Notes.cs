@@ -6,8 +6,6 @@ public class Notes
 {
     //To do list
 
-    //test out belly drum
-
     //Shop
     //repel/super/max repel and pokedoll for shop
     //iron ball for grounded

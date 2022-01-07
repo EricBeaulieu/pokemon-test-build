@@ -58,6 +58,7 @@ public class PokemonBase : ScriptableObject {
     [SerializeField] List<LearnableMove> _learnableMoves;
     [SerializeField] List<MoveBase> learnableTMHMMoves;
     public static int MAX_NUMBER_OF_MOVES { get; } = 4;
+    public static int MAX_STAT_BOOST_MULTIPLIER { get; } = 6;
 
     [Header("Evolving")]
     [SerializeField] List<EvolutionBase> evolutions;
