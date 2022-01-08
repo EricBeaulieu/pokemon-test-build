@@ -45,7 +45,6 @@ public class Notes
 
     //Add in
 
-    //On receiving a status play animation, nothing set yet possibly same as the enqueue string thing but with condition ID's as an addition and on show changes have it play the animation
     //Roar
 
     //aura break when fairy aura and dark aura are added in, all these abilities share the info together
@@ -57,7 +56,6 @@ public class Notes
 
     //Bugs
 
-    //when the player drops a pokemon in a position that is occupied it will switch the pokemon BUT it will delete the pokemon after
     //on turn end for bound moves the pokemon doesnt play flash of hit animation
 
     //Others

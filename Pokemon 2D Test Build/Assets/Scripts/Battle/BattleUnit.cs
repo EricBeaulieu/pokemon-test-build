@@ -580,21 +580,15 @@ public class BattleUnit : MonoBehaviour
             case ConditionID.Poison:
                 yield return PlayPoisonAnimation();
                 break;
-            case ConditionID.Burn:
-                break;
-            case ConditionID.Sleep:
-                break;
-            case ConditionID.Frozen:
-                yield return PlayFrozenAnimation();
+            case ConditionID.Paralyzed:// no starting animation
                 break;
             case ConditionID.ToxicPoison:
                 yield return PlayPoisonAnimation();
                 break;
-            case ConditionID.Confused:
-                break;
             case ConditionID.Cursed:
                 break;
             default:
+                yield return PlayAnimatorAnimation(condition.ToString());
                 break;
         }
         yield return null;
@@ -607,25 +601,16 @@ public class BattleUnit : MonoBehaviour
             case ConditionID.Poison:
                 yield return PlayPoisonAnimation();
                 break;
-            case ConditionID.Burn:
-                break;
-            case ConditionID.Sleep:
-                break;
             case ConditionID.Paralyzed:
                 yield return PlayParalyzedAnimation();
-                break;
-            case ConditionID.Frozen:
-                yield return PlayFrozenAnimation();
                 break;
             case ConditionID.ToxicPoison:
                 yield return PlayPoisonAnimation();
                 break;
-            case ConditionID.Confused:
-                PlayHitAnimation();
-                break;
             case ConditionID.Cursed:
                 break;
             default:
+                yield return PlayAnimatorAnimation(condition.ToString());
                 break;
         }
         yield return null;
@@ -673,16 +658,6 @@ public class BattleUnit : MonoBehaviour
         yield return SmoothTransitionToPosition(pokemonSprite.gameObject, pokemonSpriteOriginalPosition, duration / movements);
     }
 
-    IEnumerator PlayBurnAnimation()
-    {
-        yield return null;
-    }
-
-    IEnumerator PlaySleepAnimation()
-    {
-        yield return null;
-    }
-
     IEnumerator PlayParalyzedAnimation()
     {
         float duration = 0.2f;
@@ -698,10 +673,15 @@ public class BattleUnit : MonoBehaviour
         overtopImage.sprite = StatusConditionArt.instance.Nothing;
     }
 
-    IEnumerator PlayFrozenAnimation()
+    IEnumerator PlayAnimatorAnimation(string TriggerName = null)
     {
+        if(string.IsNullOrEmpty(TriggerName) == true)
+        {
+            yield break;
+        }
+
         animationActive = true;
-        statusAnimator.SetTrigger("Frozen");
+        statusAnimator.SetTrigger(TriggerName);
 
         while (animationActive == true)
         {

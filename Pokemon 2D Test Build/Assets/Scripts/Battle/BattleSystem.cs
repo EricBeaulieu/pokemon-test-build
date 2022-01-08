@@ -759,7 +759,11 @@ public class BattleSystem : CoreSystem
             yield return ShowStatusChanges(sourceUnit.pokemon);
             yield return sourceUnit.StatusConditionAnimation(canUseMove);
             //If it hit itself in its confusion update the HUD
-            yield return sourceUnit.HUD.UpdateHP(previousHP);
+            if(previousHP != sourceUnit.pokemon.currentHitPoints)
+            {
+                sourceUnit.PlayHitAnimation();
+                yield return sourceUnit.HUD.UpdateHP(previousHP);
+            }
             if (sourceUnit.pokemon.currentHitPoints <= 0)
             {
                 yield return PokemonHasFainted(sourceUnit);
@@ -1541,7 +1545,7 @@ public class BattleSystem : CoreSystem
                         previousStatus = target.pokemon.GetCurrentStatus();
                     }
                     
-                    if(previousStatus == ConditionID.NA)
+                    if(previousStatus == effects.Status)
                     {
                         yield return target.OnRecievedStatusCondition(previousStatus);
                     }
