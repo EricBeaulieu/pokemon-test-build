@@ -122,9 +122,9 @@
     <Compile Include="Assets\Scripts\Data\HoldItems\Berries\Wacan.cs" />
     <Compile Include="Assets\Scripts\Attribute\ReadOnly.cs" />
     <Compile Include="Assets\Scripts\Data\HoldItems\Standard\SafetyGoggles.cs" />
-    <Compile Include="Assets\Scripts\Battle\DamageDetails.cs" />
     <Compile Include="Assets\Scripts\Data\HoldItems\Standard\WeaknessPolicy.cs" />
     <Compile Include="Assets\Scripts\Data\Abilitys\List\TanglingHair.cs" />
+    <Compile Include="Assets\Scripts\Battle\DamageDetails.cs" />
     <Compile Include="Assets\Scripts\Managers\SpriteAtlas.cs" />
     <Compile Include="Assets\Scripts\Data\HoldItems\Standard\LuminousMoss.cs" />
     <Compile Include="Assets\Scripts\Data\HoldItems\Standard\LaggingTail.cs" />
@@ -308,10 +308,10 @@
     <Compile Include="Assets\Scripts\Data\Abilitys\List\RockHead.cs" />
     <Compile Include="Assets\Scripts\Saving\SaveableEntity.cs" />
     <Compile Include="Assets\Scripts\Data\HoldItems\Standard\MysticWater.cs" />
-    <Compile Include="Assets\Scripts\Data\Abilitys\List\Fluffy.cs" />
     <Compile Include="Assets\Scripts\Data\HoldItems\Berries\Ganlon.cs" />
     <Compile Include="Assets\Scripts\Data\HoldItems\Standard\Metronome.cs" />
     <Compile Include="Assets\Scripts\Data\HoldItems\Standard\ElectricGem.cs" />
+    <Compile Include="Assets\Scripts\Data\Abilitys\List\Fluffy.cs" />
     <Compile Include="Assets\Scripts\Data\HoldItems\Standard\SpellTag.cs" />
     <Compile Include="Assets\Scripts\Battle\LearningMoves\SummaryAttackButton.cs" />
     <Compile Include="Assets\Scripts\Data\Abilitys\List\Berserk.cs" />
@@ -550,6 +550,7 @@
     <Compile Include="Assets\Scripts\Data\Abilitys\List\RainDish.cs" />
     <Compile Include="Assets\Scripts\Data\Abilitys\List\Justified.cs" />
     <Compile Include="Assets\Scripts\Data\Abilitys\List\Soundproof.cs" />
+    <Compile Include="Assets\Scripts\Managers\AudioManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\ScriptTemplates\82-EricBeaulieu__BerryBase-NewBerryBase.cs.txt" />
@@ -1227,6 +1228,14 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="Unity.2D.Tilemap.Extras.csproj">
+      <Project>{D37CE31D-F648-79AA-9BF3-D5B4399AD505}</Project>
+      <Name>Unity.2D.Tilemap.Extras</Name>
+    </ProjectReference>
+    <ProjectReference Include="Unity.2D.Tilemap.Extras.Editor.csproj">
+      <Project>{0D87CB35-79B8-2C2A-A76E-7EE70C86E52B}</Project>
+      <Name>Unity.2D.Tilemap.Extras.Editor</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="GenerateTargetFrameworkMonikerAttribute" />

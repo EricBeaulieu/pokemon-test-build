@@ -32,4 +32,8 @@ public class Sleep : ConditionBase
         source.statusChanges.Enqueue($"{source.currentName} is sleeping");
         return false;
     }
+    public override bool MoveFailedAnimation()
+    {
+        return true;
+    }
 }

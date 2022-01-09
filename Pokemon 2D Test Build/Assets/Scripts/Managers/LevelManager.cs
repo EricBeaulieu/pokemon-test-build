@@ -93,6 +93,11 @@ public class LevelManager : MonoBehaviour
         {
             Debug.Log($"entered", gameObject);
             StartCoroutine(SceneSystem.NewAreaEntered(this));
+            if(sceneReference.GetLevelMusic != null)
+            {
+                Debug.Log("Playing music");
+                AudioManager.PlayMusic(sceneReference.GetLevelMusic);
+            }
         }
     }
 

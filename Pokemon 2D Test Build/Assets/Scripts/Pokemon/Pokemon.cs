@@ -69,6 +69,8 @@ public class Pokemon {
     public Queue<string> statusChanges { get; private set; } = new Queue<string>();
     public ConditionBase status { get; private set; }
     public List<ConditionBase> volatileStatus { get; private set; } = new List<ConditionBase>();
+    public ConditionID PreAttackStatusAnimation { get; set; } = ConditionID.NA;
+    public ConditionID MoveFailedAnimation { get; set; } = ConditionID.NA;
 
     #region Constructors
 
@@ -879,6 +881,10 @@ public class Pokemon {
     {
         if (status?.OnBeforeMove(this, targetPokemon) == false)
         {
+            if (status.MoveFailedAnimation() == true)
+            {
+                MoveFailedAnimation = status.Id;
+            }
             return status.Id;
         }
 
@@ -888,6 +894,10 @@ public class Pokemon {
         {
             if (volatileStatus[i].OnBeforeMove(this, targetPokemon) == false)
             {
+                if (volatileStatus[i].MoveFailedAnimation() == true)
+                {
+                    MoveFailedAnimation = volatileStatus[i].Id;
+                }
                 return volatileStatus[i].Id;
             }
         }

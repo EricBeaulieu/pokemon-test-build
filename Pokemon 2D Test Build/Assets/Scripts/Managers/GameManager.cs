@@ -35,6 +35,10 @@ public class GameManager : MonoBehaviour
     List<Pokemon> pokemonEvolving = new List<Pokemon>();
     [SerializeField] PCSystem pCSystem;
     [SerializeField] ShopSystem shopSystem;
+    [SerializeField] AudioSource audioMusic;
+    [SerializeField] AudioSource audioSFX;
+    [SerializeField] List<AudioClip> trainerBattleMusic;
+    [SerializeField] List<AudioClip> wildBattleMusic;
 
     [SerializeField] Test tester;
     bool testPokemonBeenSet = false;
@@ -76,6 +80,7 @@ public class GameManager : MonoBehaviour
         SceneSystem.Initialization();
         pCSystem.Initialization();
         shopSystem.Initialization();
+        AudioManager.Initialization(audioMusic,audioSFX,trainerBattleMusic,wildBattleMusic);
 
         if (startNewSaveEveryStart == false)
         {

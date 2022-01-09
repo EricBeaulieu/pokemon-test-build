@@ -22,4 +22,8 @@ public class Infatuation : ConditionBase
         source.statusChanges.Enqueue($"{source.currentName} is immobilized by love");
         return false;
     }
+    public override bool MoveFailedAnimation()
+    {
+        return true;
+    }
 }

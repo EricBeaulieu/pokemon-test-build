@@ -23,7 +23,9 @@ public class TrainerController : EntityAI,IInteractable,ISaveable
 
     [Range(1,7)]
     [SerializeField] int lineOfSightSize = 1;
-    [SerializeField]BoxCollider2D lineofSight;
+    [SerializeField] BoxCollider2D lineofSight;
+    [SerializeField] AudioClip specializedBattleMusic;
+    public AudioClip getBattleMusic { get { return specializedBattleMusic; } }
     bool _changingSight;
     const float BOX_STANDARD_SIZE = 0.25f;
     bool _playerSpotted = false;
@@ -62,22 +64,22 @@ public class TrainerController : EntityAI,IInteractable,ISaveable
 
         if (preBattleDialog.Lines.Count <= 0)
         {
-            Debug.LogError("This trainer is missing its preBattleDialog", this);
+            Debug.LogError("This trainer is missing its preBattleDialog", gameObject);
         }
 
         if (inBattleDialogOnDefeat.Lines.Count <= 0)
         {
-            Debug.LogError("This trainer is missing its inBattleDialogOnDefeat", this);
+            Debug.LogError("This trainer is missing its inBattleDialogOnDefeat", gameObject);
         }
 
         if (inBattleDialogOnVictory.Lines.Count <= 0)
         {
-            Debug.LogError("This trainer is missing its inBattleDialogOnVictory", this);
+            Debug.LogError("This trainer is missing its inBattleDialogOnVictory", gameObject);
         }
 
         if (postDefeatOverworldDialog.Lines.Count <= 0)
         {
-            Debug.LogError("This trainer is missing its postDefeatOverworldDialog", this);
+            Debug.LogError("This trainer is missing its postDefeatOverworldDialog", gameObject);
         }
     }
 

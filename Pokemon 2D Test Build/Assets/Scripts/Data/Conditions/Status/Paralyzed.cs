@@ -31,4 +31,12 @@ public class Paralyzed : ConditionBase
         }
         return true;
     }
+    public override bool MoveFailedAnimation()
+    {
+        return true;
+    }
+    public override bool PlayAnimationUponReceiving()
+    {
+        return false;
+    }
 }

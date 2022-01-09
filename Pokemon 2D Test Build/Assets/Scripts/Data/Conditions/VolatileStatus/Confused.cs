@@ -43,4 +43,8 @@ public class Confused : ConditionBase
         source.statusChanges.Enqueue($"{source.currentName} hurt itself in its confusion");
         return false;
     }
+    public override bool PreAttackAnimation()
+    {
+        return true;
+    }
 }

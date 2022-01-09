@@ -211,6 +211,8 @@ public class BattleSystem : CoreSystem
         playerController = player;
         trainerController = null;
 
+        AudioManager.PlayRandomBattleMusic(false);
+
         StartCoroutine(SetupBattle(wildPokemon));
     }
 
@@ -218,6 +220,15 @@ public class BattleSystem : CoreSystem
     {
         playerController = player;
         trainerController = trainer;
+
+        if(trainer.getBattleMusic != null)
+        {
+            AudioManager.PlayMusic(trainer.getBattleMusic);
+        }
+        else
+        {
+            AudioManager.PlayRandomBattleMusic(true);
+        }
 
         StartCoroutine(SetupBattle());
     }
@@ -753,13 +764,23 @@ public class BattleSystem : CoreSystem
         //due to animations instead of it returning a bool it will return the animation
         ConditionID canUseMove = sourceUnit.pokemon.OnBeforeMove(targetUnit.pokemon);
         //If confused play pre animation
+        if (sourceUnit.pokemon.PreAttackStatusAnimation != ConditionID.NA)
+        {
+            yield return sourceUnit.StatusConditionAnimation(sourceUnit.pokemon.PreAttackStatusAnimation);
+            sourceUnit.pokemon.PreAttackStatusAnimation = ConditionID.NA;
+        }
 
         if (canUseMove != ConditionID.NA)
         {
             yield return ShowStatusChanges(sourceUnit.pokemon);
-            yield return sourceUnit.StatusConditionAnimation(canUseMove);
+            if (sourceUnit.pokemon.MoveFailedAnimation != ConditionID.NA)
+            {
+                yield return sourceUnit.StatusConditionAnimation(sourceUnit.pokemon.MoveFailedAnimation);
+                sourceUnit.pokemon.PreAttackStatusAnimation = ConditionID.NA;
+            }
+
             //If it hit itself in its confusion update the HUD
-            if(previousHP != sourceUnit.pokemon.currentHitPoints)
+            if (previousHP != sourceUnit.pokemon.currentHitPoints)
             {
                 sourceUnit.PlayHitAnimation();
                 yield return sourceUnit.HUD.UpdateHP(previousHP);
@@ -1547,7 +1568,10 @@ public class BattleSystem : CoreSystem
                     
                     if(previousStatus == effects.Status)
                     {
-                        yield return target.OnRecievedStatusCondition(previousStatus);
+                        if(ConditionsDB.GetConditionBase(previousStatus).PlayAnimationUponReceiving() == true)
+                        {
+                            yield return target.OnRecievedStatusCondition(previousStatus);
+                        }
                     }
                 }
             }
@@ -1579,6 +1603,10 @@ public class BattleSystem : CoreSystem
                             yield return dialogSystem.TypeDialog($"{BUT_IT_FAILED}");
                         }
                         yield break;
+                    }
+                    if (ConditionsDB.GetConditionBase(effects.Volatiletatus).PlayAnimationUponReceiving() == true)
+                    {
+                        yield return target.OnRecievedStatusCondition(effects.Volatiletatus);
                     }
                     target.pokemon.SetVolatileStatus(effects.Volatiletatus, currentMove,source);
                 }

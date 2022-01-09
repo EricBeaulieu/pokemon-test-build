@@ -30,4 +30,7 @@ public abstract class ConditionBase
     public virtual bool LeavesTargetWithOneHP() { return false; }
     public virtual bool ReflectsMove() { return false; }
     public virtual bool CanAttackThisTurn(MoveBase originalMove, BattleUnit attackingPokemon) { return true; }
+    public virtual bool PlayAnimationUponReceiving() { return true; }
+    public virtual bool PreAttackAnimation() { return false; }
+    public virtual bool MoveFailedAnimation() { return false; }
 }

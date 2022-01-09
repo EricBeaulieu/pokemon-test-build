@@ -6,6 +6,8 @@ public class Notes
 {
     //To do list
 
+    //fix the preanimtion for confused
+
     //Shop
     //repel/super/max repel and pokedoll for shop
     //iron ball for grounded

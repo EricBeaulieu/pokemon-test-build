@@ -25,4 +25,8 @@ public class Frozen : ConditionBase
         source.statusChanges.Enqueue($"{source.currentName} is frozen and cannot move");
         return false;
     }
+    public override bool MoveFailedAnimation()
+    {
+        return true;
+    }
 }
