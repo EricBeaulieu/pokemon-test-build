@@ -8,7 +8,9 @@ public class OverworldItem : MonoBehaviour,IInteractable,ISaveable
 {
     [SerializeField] SaveableEntity saveableEntity;
     [SerializeField] ItemBase itemBase;
+    public ItemBase CurrentItem { get { return itemBase; } }
     [SerializeField] int count = 1;
+    public int CurrentCount { get { return count; } }
 
     bool itemPickedUp;
 
