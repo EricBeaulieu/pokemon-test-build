@@ -9,6 +9,7 @@ public class Notes
     //fix the preanimtion for confused
 
     //Shop
+    //Noticed when you changed the amount to buy, the item selection flashed and caught my eye.
     //repel/super/max repel and pokedoll for shop
     //iron ball for grounded
     //fix stealth rock to not miss when target is semi invernerable

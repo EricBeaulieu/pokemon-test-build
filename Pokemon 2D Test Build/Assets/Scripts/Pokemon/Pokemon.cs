@@ -45,7 +45,6 @@ public class Pokemon {
     public int currentHitPoints { get { return hitPoints; } set { if (value <= 0) status = null; hitPoints = value; } }
     public System.Action OnStatusChanged;
 
-
     public int currentExp { get; set; }
     public string originalTrainer { get; private set; }
     public string originalTrainerID { get; private set; }

@@ -5,6 +5,8 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "Item/Create New Evolution Stone")]
 public class EvolutionStoneBase : ItemBase
 {
+    //added in to change trade type items over to evolutionary items
+    [SerializeField] HoldItemID holdItemID = HoldItemID.NA;
     public EvolutionStoneBase()
     {
         itemType = itemType.Basic;
@@ -26,9 +28,14 @@ public class EvolutionStoneBase : ItemBase
         return false;
     }
 
+    public override HoldItemBase HoldItemAffects()
+    {
+        return HoldItemDB.GetHoldItem(holdItemID);
+    }
+
     public override bool UseItemOption()
     {
-        return !BattleSystem.InBattle; ;
+        return !BattleSystem.InBattle;
     }
 
     public override bool ShowStandardUI()
