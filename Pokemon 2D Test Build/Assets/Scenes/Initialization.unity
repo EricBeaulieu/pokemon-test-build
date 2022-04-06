@@ -4802,7 +4802,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startNewSaveEveryStart: 1
   startWithPresetBoxes: 1
-  turnOffWildPokemon: 0
+  turnOffWildPokemon: 1
   turnOffTrainerBattles: 1
   debugGrid: 0
   playerPrefab: {fileID: 5712684506751752012, guid: df0ad118f1b16b94188f1a819d172b55,
@@ -5097,6 +5097,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gen1: {fileID: 2800000, guid: 8d6d91a8c389b6d4296a3b1e53aace78, type: 3}
   gen2: {fileID: 2800000, guid: eef32591f2eb46e4ab5e4545fa4efda8, type: 3}
+  specializedSprites:
+  - {fileID: 2800000, guid: c1ef671a6c999954f9c977367b27163a, type: 3}
+  - {fileID: 2800000, guid: c09cd95866672be449a88cf3881724cc, type: 3}
+  - {fileID: 2800000, guid: 51b0d91f9a0ec6f40b77fc247b3313e0, type: 3}
+  - {fileID: 2800000, guid: b830534a8cff35847a2b163534f54f61, type: 3}
 --- !u!82 &291317945
 AudioSource:
   m_ObjectHideFlags: 0
@@ -5112,7 +5117,7 @@ AudioSource:
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
-  Mute: 0
+  Mute: 1
   Spatialize: 0
   SpatializePostEffects: 0
   Priority: 128
@@ -5208,7 +5213,7 @@ AudioSource:
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
-  Mute: 0
+  Mute: 1
   Spatialize: 0
   SpatializePostEffects: 0
   Priority: 128

@@ -19664,16 +19664,6 @@ PrefabInstance:
       value: 
       objectReference: {fileID: -8668363204394342372, guid: 5fa294d839389004ba21c8c06d4d157b,
         type: 3}
-    - target: {fileID: 4849625054818985119, guid: 86f95cf027de4564db51120c5a9aa18e,
-        type: 3}
-      propertyPath: m_CellGap.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4849625054818985119, guid: 86f95cf027de4564db51120c5a9aa18e,
-        type: 3}
-      propertyPath: m_CellGap.y
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 5028359610990823962, guid: 86f95cf027de4564db51120c5a9aa18e,
         type: 3}
       propertyPath: m_Tiles.Array.size
@@ -45076,7 +45066,7 @@ PrefabInstance:
     - target: {fileID: 2072594005822930160, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
         type: 3}
       propertyPath: pokemonParty.Array.size
-      value: 1
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 2072594005822930160, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
         type: 3}
@@ -45086,13 +45076,41 @@ PrefabInstance:
     - target: {fileID: 2072594005822930160, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
         type: 3}
       propertyPath: pokemonParty.Array.data[1]._level
-      value: 12
+      value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 2072594005822930160, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: pokemonParty.Array.data[2]._level
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2072594005822930160, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: pokemonParty.Array.data[3]._level
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2072594005822930160, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: pokemonParty.Array.data[0]._pokemonBase
+      value: 
+      objectReference: {fileID: 11400000, guid: ac2069da38ccc4543bccebf722317e55,
+        type: 2}
     - target: {fileID: 2072594005822930160, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
         type: 3}
       propertyPath: pokemonParty.Array.data[1]._pokemonBase
       value: 
-      objectReference: {fileID: 11400000, guid: a5077a98ad912594f8e38408d3ce9f02,
+      objectReference: {fileID: 11400000, guid: 0ceea32e8a4ee2a42815cd32748e8347,
+        type: 2}
+    - target: {fileID: 2072594005822930160, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: pokemonParty.Array.data[2]._pokemonBase
+      value: 
+      objectReference: {fileID: 11400000, guid: 29df2542f07391547aaa8f1838d32c09,
+        type: 2}
+    - target: {fileID: 2072594005822930160, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: pokemonParty.Array.data[3]._pokemonBase
+      value: 
+      objectReference: {fileID: 11400000, guid: 214a4430b72feb74b9bfd0ade7b20ec2,
         type: 2}
     - target: {fileID: 2072594005822930160, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
         type: 3}
@@ -45104,17 +45122,38 @@ PrefabInstance:
         type: 3}
       propertyPath: pokemonParty.Array.data[1].currentHeldItem
       value: 
-      objectReference: {fileID: 11400000, guid: 77dcc98bed0a8854f813552858151751,
+      objectReference: {fileID: 11400000, guid: f2fb327a4441c5a4dad79476b1e47987,
         type: 2}
     - target: {fileID: 2072594005822930160, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
         type: 3}
       propertyPath: pokemonParty.Array.data[2].currentHeldItem
       value: 
-      objectReference: {fileID: 11400000, guid: 77dcc98bed0a8854f813552858151751,
+      objectReference: {fileID: 11400000, guid: f2fb327a4441c5a4dad79476b1e47987,
+        type: 2}
+    - target: {fileID: 2072594005822930160, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: pokemonParty.Array.data[3].currentHeldItem
+      value: 
+      objectReference: {fileID: 11400000, guid: f2fb327a4441c5a4dad79476b1e47987,
         type: 2}
     - target: {fileID: 2072594005822930160, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
         type: 3}
       propertyPath: pokemonParty.Array.data[0].presetMoves.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2072594005822930160, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: pokemonParty.Array.data[1].presetMoves.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2072594005822930160, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: pokemonParty.Array.data[2].presetMoves.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2072594005822930160, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: pokemonParty.Array.data[3].presetMoves.Array.size
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2072594005822930160, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
@@ -45141,6 +45180,42 @@ PrefabInstance:
     - target: {fileID: 2072594005822930160, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
         type: 3}
       propertyPath: pokemonParty.Array.data[0].presetMoves.Array.data[1]
+      value: 
+      objectReference: {fileID: 11400000, guid: c732dca0bb2721040a00bf46a22ef5b2,
+        type: 2}
+    - target: {fileID: 2072594005822930160, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: pokemonParty.Array.data[1].presetMoves.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: aac9d65aa42c3824785c530358efdb94,
+        type: 2}
+    - target: {fileID: 2072594005822930160, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: pokemonParty.Array.data[1].presetMoves.Array.data[1]
+      value: 
+      objectReference: {fileID: 11400000, guid: c732dca0bb2721040a00bf46a22ef5b2,
+        type: 2}
+    - target: {fileID: 2072594005822930160, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: pokemonParty.Array.data[2].presetMoves.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: aac9d65aa42c3824785c530358efdb94,
+        type: 2}
+    - target: {fileID: 2072594005822930160, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: pokemonParty.Array.data[2].presetMoves.Array.data[1]
+      value: 
+      objectReference: {fileID: 11400000, guid: c732dca0bb2721040a00bf46a22ef5b2,
+        type: 2}
+    - target: {fileID: 2072594005822930160, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: pokemonParty.Array.data[3].presetMoves.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: aac9d65aa42c3824785c530358efdb94,
+        type: 2}
+    - target: {fileID: 2072594005822930160, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: pokemonParty.Array.data[3].presetMoves.Array.data[1]
       value: 
       objectReference: {fileID: 11400000, guid: c732dca0bb2721040a00bf46a22ef5b2,
         type: 2}

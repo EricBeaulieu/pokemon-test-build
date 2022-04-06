@@ -256,6 +256,7 @@ GameObject:
   - component: {fileID: 5712684506751751984}
   - component: {fileID: 5712684506751752015}
   - component: {fileID: 5712684506751752013}
+  - component: {fileID: 4736758548770269490}
   m_Layer: 9
   m_Name: Player
   m_TagString: Player
@@ -297,6 +298,10 @@ MonoBehaviour:
   movementSpeed: 5
   positionMovingTo: {fileID: 5712684506455966291}
   trainerName: Eric
+  audioSFX: {fileID: 4736758548770269490}
+  bumpSFX: {fileID: 0}
+  ledgeJumpSFX: {fileID: 0}
+  itemObtainedSFX: {fileID: 0}
   spottedByTrainer: 0
 --- !u!114 &5712684506751751984
 MonoBehaviour:
@@ -311,13 +316,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pokemonParty:
-  - _pokemonBase: {fileID: 11400000, guid: 334017a5f346591409c000c2f1eb2145, type: 2}
+  - _pokemonBase: {fileID: 11400000, guid: 214a4430b72feb74b9bfd0ade7b20ec2, type: 2}
     _level: 25
     presetMoves:
-    - {fileID: 11400000, guid: acd35f870c434834f86495870ab986ec, type: 2}
-    - {fileID: 11400000, guid: 3f07eae17bf919648ac2316f2ef3a7bd, type: 2}
+    - {fileID: 11400000, guid: ddd4c2ade2c5e164280bcc728cf06d9f, type: 2}
+    - {fileID: 11400000, guid: 76d374e9999eb2c459492d09bf19d067, type: 2}
     - {fileID: 11400000, guid: 88ebf4bead5cc4a4fa81828f041330f6, type: 2}
-    - {fileID: 11400000, guid: 58c5dd5ed90ae1f4486013d603a89694, type: 2}
+    - {fileID: 11400000, guid: 74776a55aab78af45a268d0b4777c811, type: 2}
     _isShiny: 0
     _gender: 0
     nature: {fileID: 0}
@@ -454,3 +459,99 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!82 &4736758548770269490
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5712684506751752011}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4

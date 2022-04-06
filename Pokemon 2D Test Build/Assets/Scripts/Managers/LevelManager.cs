@@ -96,7 +96,7 @@ public class LevelManager : MonoBehaviour
             if(sceneReference.GetLevelMusic != null)
             {
                 Debug.Log("Playing music");
-                AudioManager.PlayMusic(sceneReference.GetLevelMusic);
+                AudioManager.PlayMusic(sceneReference.GetLevelMusic,sceneReference.GetLevelMusicVolume);
             }
         }
     }

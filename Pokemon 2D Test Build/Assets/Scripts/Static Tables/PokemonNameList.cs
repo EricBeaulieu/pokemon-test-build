@@ -282,6 +282,21 @@ public static class PokemonNameList
         214,215,217,221,224,
         229,232
     };
+
+    //public static string[] PokemonNameSpecialized1000Up =
+    
+    private enum PokemonNameSpecialized1000Up
+    {
+        Alakarate = 1065,
+        Machost = 1068,
+        Gololium = 1076,
+        Haucker = 1094
+    }
+    static PokemonNameSpecialized1000Up specializedName;
+    public static int[] PokemonSpecializedDifferentGenderSprites =
+    {
+        1065
+    };
     /// <summary>
     /// Enter in the pokedex number to return the name
     /// </summary>
@@ -297,6 +312,8 @@ public static class PokemonNameList
             case int n when (n >= PokemonNameKanto1to151.Length && n < PokemonNameKanto1to151.Length + PokemonNameJohto152to251.Length):
                 pokedexNumber -= PokemonNameKanto1to151.Length;
                 return PokemonNameJohto152to251[pokedexNumber];
+            case int n when System.Enum.TryParse<PokemonNameSpecialized1000Up>((n+1).ToString(),out specializedName):
+                return specializedName.ToString();
             default:
                 return "MissingNo";
         }
@@ -310,6 +327,8 @@ public static class PokemonNameList
                 return PokemonKantoDifferentGenderSprites.Contains(pokedexNumber);
             case int n when (n >= PokemonNameKanto1to151.Length && n < PokemonNameKanto1to151.Length + PokemonNameJohto152to251.Length):
                 return PokemonJohtoDifferentGenderSprites.Contains(pokedexNumber);
+            case int n when (n >= 1000):
+                return PokemonSpecializedDifferentGenderSprites.Contains(pokedexNumber);
             default:
                 return false;
         }

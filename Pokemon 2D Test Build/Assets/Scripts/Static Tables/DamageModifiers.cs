@@ -71,7 +71,7 @@ public static class DamageModifiers
             }
             else
             {
-                damageMultiplier *= _typeChart[(int)defendingPokemon.pokemon.pokemonType1, (int)attackType];
+                damageMultiplier *= _typeChart[(int)defendingPokemon.pokemon.pokemonType2, (int)attackType];
             }
         }
 

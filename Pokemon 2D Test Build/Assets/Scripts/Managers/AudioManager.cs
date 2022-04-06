@@ -20,6 +20,8 @@ public static class AudioManager
 
     public static void PlayMusic(AudioClip clip, float volume = 1, bool loop = true)
     {
+        if (clip == music.clip)
+            return;
         music.clip = clip;
         music.volume = volume;
         music.loop = loop;

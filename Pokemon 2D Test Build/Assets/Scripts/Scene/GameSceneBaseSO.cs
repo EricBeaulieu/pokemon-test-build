@@ -33,6 +33,11 @@ public class GameSceneBaseSO : ScriptableObject
         get { return music; }
     }
 
+    public float GetLevelMusicVolume
+    {
+        get { return musicVolume; }
+    }
+
     public bool SceneLoaded
     {
         get { return isLoaded; }

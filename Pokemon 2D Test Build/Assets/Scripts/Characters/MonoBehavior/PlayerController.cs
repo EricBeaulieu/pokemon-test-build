@@ -19,6 +19,12 @@ public class PlayerController : Entity
 
     Vector2 _currentInput;
 
+    [Header("Player Audio")]
+    [SerializeField] AudioSource audioSFX;
+    [SerializeField] AudioClip bumpSFX;
+    [SerializeField] AudioClip ledgeJumpSFX;
+    [SerializeField] AudioClip itemObtainedSFX;
+
     [HideInInspector]
     public bool spottedByTrainer;
     bool _ignorePlayerInput;
@@ -288,5 +294,12 @@ public class PlayerController : Entity
         pokemonParty.LoadPlayerParty(saveData.savedParty.Select(x => new Pokemon(x)).ToList());
         FaceTowardsDirection(saveData.savedDirection);
     }
-   
+
+    public void PlaySFX(AudioClip clip, float volume = 1)
+    {
+        audioSFX.clip = clip;
+        audioSFX.volume = volume;
+        audioSFX.Play();
+    }
+
 }
