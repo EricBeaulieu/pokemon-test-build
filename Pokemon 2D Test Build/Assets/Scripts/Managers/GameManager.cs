@@ -140,6 +140,15 @@ public class GameManager : MonoBehaviour
         battleSystem.StartBattle(playerController, currentWildPokemon);
     }
 
+    public void StartWildPokemonBattle(WildPokemonController wildPokemon)
+    {
+        SetGameState(GameState.Battle);
+        battleSystem.gameObject.SetActive(true);
+
+        battleSystem.SetupBattleArt(SceneSystem.GetBattleEnvironmentArt);
+        battleSystem.StartBattle(playerController, wildPokemon);
+    }
+
     public void StartTrainerBattle(TrainerController currentTrainer)
     {
         SetGameState(GameState.Battle);
@@ -164,7 +173,7 @@ public class GameManager : MonoBehaviour
         battleSystem.gameObject.SetActive(false);
         playerController.pokemonParty.SetPositionstoBeforeBattle();
 
-        if(wasWon == true)
+        if (wasWon == true)
         {
             for (int i = 0; i < playerController.pokemonParty.CurrentPokemonList().Count; i++)
             {

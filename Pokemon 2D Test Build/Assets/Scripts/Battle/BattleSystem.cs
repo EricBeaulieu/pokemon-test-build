@@ -27,6 +27,7 @@ public class BattleSystem : CoreSystem
 
     PlayerController playerController;
     TrainerController trainerController;
+    WildPokemonController wildPokemonController;
     bool playerPokemonShift;
 
     bool waitUntilUserFinished = false;
@@ -210,18 +211,31 @@ public class BattleSystem : CoreSystem
     {
         playerController = player;
         trainerController = null;
+        wildPokemonController = null;
 
         AudioManager.PlayRandomBattleMusic(false);
 
         StartCoroutine(SetupBattle(wildPokemon));
     }
 
+    public void StartBattle(PlayerController player, WildPokemonController wildPokemon)
+    {
+        playerController = player;
+        trainerController = null;
+        wildPokemonController = wildPokemon;
+
+        AudioManager.PlayRandomBattleMusic(false);
+
+        StartCoroutine(SetupBattle(new Pokemon(wildPokemon.pokemon)));
+    }
+
     public void StartBattle(PlayerController player, TrainerController trainer)
     {
         playerController = player;
         trainerController = trainer;
+        wildPokemonController = null;
 
-        if(trainer.getBattleMusic != null)
+        if (trainer.getBattleMusic != null)
         {
             AudioManager.PlayMusic(trainer.getBattleMusic);
         }
@@ -2230,6 +2244,11 @@ public class BattleSystem : CoreSystem
 
     void OnBattleOver(bool hasWon)
     {
+        if(wildPokemonController != null)
+        {
+            wildPokemonController.gameObject.SetActive(!hasWon);
+        }
+
         InBattle = false;
         dialogSystem.SetCurrentDialogBox();
         GameManager.instance.EndBattle(hasWon);

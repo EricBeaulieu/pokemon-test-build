@@ -6,6 +6,8 @@ public class Notes
 {
     //To do list
 
+    //Fix pc bug where i put pokemon in the 6th slot and didnt move
+
     //fix the preanimtion for confused
 
     //Shop

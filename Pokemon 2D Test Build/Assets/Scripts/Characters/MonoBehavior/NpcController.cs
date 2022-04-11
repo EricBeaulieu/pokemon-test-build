@@ -77,26 +77,28 @@ public class NpcController : EntityAI, IInteractable
 
     public IEnumerator OnInteract(Vector2 initiator)
     {
-        if(IsMoving == false)
+        if(IsMoving == true)
         {
             //currentlyExecutingDecision = false;
             //currentMovementPattern--;
-            FaceTowardsDirection(initiator);
+            yield break;
+        }
 
-            if(itemGiver != null && itemGiver.ItemCanBeGiven() == true)
-            {
-                yield return itemGiver.GiveItem(GameManager.instance.GetPlayerController);
-            }
-            else
-            {
-                yield return GameManager.instance.GetDialogSystem.ShowDialogBox(dialog);
-            }
-            idleTimer = 0;
+        FaceTowardsDirection(initiator);
 
-            if(lookDirectionAfterInteraction == true)
-            {
-                FaceTowardsDirection(directionAfterInteraction);
-            }
+        if (itemGiver != null && itemGiver.ItemCanBeGiven() == true)
+        {
+            yield return itemGiver.GiveItem(GameManager.instance.GetPlayerController);
+        }
+        else
+        {
+            yield return GameManager.instance.GetDialogSystem.ShowDialogBox(dialog);
+        }
+        idleTimer = 0;
+
+        if (lookDirectionAfterInteraction == true)
+        {
+            FaceTowardsDirection(directionAfterInteraction);
         }
     }
 }

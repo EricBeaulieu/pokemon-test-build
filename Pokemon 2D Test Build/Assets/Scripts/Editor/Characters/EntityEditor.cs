@@ -20,6 +20,10 @@ public class EntityEditor : Editor
     {
         base.OnInspectorGUI();
 
+        if(target is WildPokemonController)
+        {
+            return;
+        }
         Entity entity = (Entity)target;
         string previousValue = characterArt;
 
