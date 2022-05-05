@@ -19,6 +19,15 @@ public static class Extension
         text.color = color;
     }
 
+    public static void SetDarkness(this Color original, float value)
+    {
+        Color color = original;
+        color.r = value;
+        color.g = value;
+        color.b = value;
+        original = color;
+    }
+
     public static Vector2 GetDirection(this Vector2 original, FacingDirections facingDir)
     {
         switch (facingDir)

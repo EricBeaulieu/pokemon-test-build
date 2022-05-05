@@ -727,7 +727,7 @@ public static class SpecializedMoves
         }
         else if (originalMove == payback)
         {
-            if (defendingUnit.turnsOnField > 0 && BattleSystem.currentTurnDetails.Count <= 1)
+            if (BattleSystem.currentTurnDetails.Count <= 1)
             {
                 alteredMove.AdjustedMovePower(1);
             }

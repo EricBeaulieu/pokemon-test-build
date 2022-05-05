@@ -8,12 +8,15 @@ public class GridManager : MonoBehaviour
     Tilemap background;
     Tilemap water;
     Tilemap solidObjects;
+    Transform grass;
+
 
     void Start()
     {
         background = transform.Find("Background").GetComponent<Tilemap>();
         water = transform.Find("Water").GetComponent<Tilemap>();
         solidObjects = transform.Find("SolidObjects").GetComponent<Tilemap>();
+        grass = transform.Find("Grass");
     }
 
     List<Vector2Int> GetPosition(Tilemap currentTilemap)
@@ -74,5 +77,11 @@ public class GridManager : MonoBehaviour
             walkablePositions.Add((Mathf.FloorToInt(position.x - worldPosOffset.x) * width) + Mathf.FloorToInt(position.y - worldPosOffset.y));
         }
         return walkablePositions.ToArray();
+    }
+
+    public Vector2 SpawnLocation()
+    {
+        int index = Random.Range(0, grass.childCount);
+        return grass.GetChild(index).transform.position;
     }
 }

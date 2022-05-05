@@ -17,6 +17,7 @@ public class LevelManager : MonoBehaviour
     List<Entity> allEntitiesInScene = new List<Entity>();
     List<CuttableTree> allTreesInScene = new List<CuttableTree>();
     bool loaded;
+    [SerializeField] Transform wildPokemonSpawnParent;
 
     void Awake()
     {
@@ -63,18 +64,23 @@ public class LevelManager : MonoBehaviour
 
     public Pokemon WildPokemon()
     {
+        return new Pokemon(getWildPokemon());
+    }
+
+    WildPokemon getWildPokemon()
+    {
         int olderValuesChecked = 0;
         int pokemonFound = Random.Range(0, 100);
         for (int i = 0; i < standardWalking.Count; i++)
         {
-            if(pokemonFound <= (olderValuesChecked + standardWalking[i].WildEncounterChance))
+            if (pokemonFound <= (olderValuesChecked + standardWalking[i].WildEncounterChance))
             {
-                return new Pokemon(standardWalking[i]);
+                return standardWalking[i];
             }
             olderValuesChecked += standardWalking[i].WildEncounterChance;
         }
 
-        return new Pokemon(standardWalking[standardWalking.Count]);
+        return standardWalking[standardWalking.Count];
     }
 
     public List<Entity> GetAllEntities()
@@ -234,5 +240,27 @@ public class LevelManager : MonoBehaviour
             count += standardSurfing[i].WildEncounterChance;
         }
         return count;
+    }
+
+    public void SpawnInPokemon()
+    {
+        if(wildPokemonSpawnParent == null)
+        {
+            return;
+        }
+
+        Vector2 spawnLocation = currentGrid.SpawnLocation();
+        Collider2D collider = Physics2D.OverlapCircle(spawnLocation, 0.25f, GameManager.solidObjectLayermask | 
+            GameManager.interactableLayermask | GameManager.playerLayerMask | GameManager.southLedgeLayerMask | 
+            GameManager.eastLedgeLayerMask | GameManager.westLedgeLayerMask | GameManager.waterLayerMask);
+
+        if(collider != null)
+        {
+            Debug.Log("Cannot go into location " + collider.gameObject.transform.position);
+            return;
+        }
+
+        WildPokemonController temp = GameManager.instance.GetWildPokemonPrefab(getWildPokemon());
+        Instantiate(temp, spawnLocation, Quaternion.identity,wildPokemonSpawnParent);
     }
 }

@@ -205,11 +205,12 @@ MonoBehaviour:
   timeUntilMoveMin: 1
   timeUntilMoveMax: 3
   _pokemon:
-    pokemonBase: {fileID: 11400000, guid: 9dce8017dd2bf2d42819e96434f2b806, type: 2}
-    levelRange: {x: 25, y: 0}
-    wildEncounterChance: 0
+    pokemonBase: {fileID: 11400000, guid: a8626c7192bf21240bc0904861af2800, type: 2}
+    levelRange: {x: 3, y: 5}
+    wildEncounterChance: 20
   alwaysInOverworld: 1
   legendary: 0
+  interactionWillNeverFight: 0
   dialog:
     lines: []
 --- !u!50 &8702414446051476561
@@ -281,7 +282,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8702414446392926408}
-  - component: {fileID: 8702414446392926411}
+  - component: {fileID: 3048526275576991427}
   - component: {fileID: 8702414446392926409}
   - component: {fileID: 8702414446392926410}
   m_Layer: 8
@@ -299,24 +300,25 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8702414446392926519}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.3, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0, y: 0.5, z: 0}
+  m_LocalScale: {x: 0.9255876, y: 0.9255876, z: 0}
   m_Children: []
   m_Father: {fileID: 8702414446051476575}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8702414446392926411
+--- !u!114 &3048526275576991427
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8702414446392926519}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 209b21fe55bf8bc4e8029d96cfc79661, type: 3}
+  m_Script: {fileID: 11500000, guid: ad11dc5608e50a84aa95947c7b07a16e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  test: []
 --- !u!212 &8702414446392926409
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -357,7 +359,8 @@ SpriteRenderer:
   m_SortingLayerID: -1225198101
   m_SortingLayer: 3
   m_SortingOrder: 0
-  m_Sprite: {fileID: 430107389570691427, guid: c4dc23fc34da56c4a8e8fda87e41a1a8, type: 3}
+  m_Sprite: {fileID: -7355779897602106981, guid: b40f0cc89cfdb0d479f104f252ec3cdf,
+    type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

@@ -39,6 +39,17 @@ public class GameManager : MonoBehaviour
     [SerializeField] AudioSource audioSFX;
     [SerializeField] List<AudioClip> trainerBattleMusic;
     [SerializeField] List<AudioClip> wildBattleMusic;
+    [SerializeField] WildPokemonController wildPokemonPrefab;
+
+    public static LayerMask solidObjectLayermask { get; private set; }
+    public static LayerMask interactableLayermask { get; private set; }
+    public static LayerMask grassLayermask { get; private set; }
+    public static LayerMask playerLayerMask { get; private set; }
+    public static LayerMask portalLayerMask { get; private set; }
+    public static LayerMask southLedgeLayerMask { get; private set; }
+    public static LayerMask eastLedgeLayerMask { get; private set; }
+    public static LayerMask westLedgeLayerMask { get; private set; }
+    public static LayerMask waterLayerMask { get; private set; }
 
     [SerializeField] Test tester;
     bool testPokemonBeenSet = false;
@@ -81,6 +92,16 @@ public class GameManager : MonoBehaviour
         pCSystem.Initialization();
         shopSystem.Initialization();
         AudioManager.Initialization(audioMusic,audioSFX,trainerBattleMusic,wildBattleMusic);
+
+        solidObjectLayermask = LayerMask.GetMask("SolidObjects");
+        interactableLayermask = LayerMask.GetMask("Interactable");
+        grassLayermask = LayerMask.GetMask("Grass");
+        playerLayerMask = LayerMask.GetMask("Player");
+        portalLayerMask = LayerMask.GetMask("Portal");
+        southLedgeLayerMask = LayerMask.GetMask("SouthLedge");
+        eastLedgeLayerMask = LayerMask.GetMask("EastLedge");
+        westLedgeLayerMask = LayerMask.GetMask("WestLedge");
+        waterLayerMask = LayerMask.GetMask("Water");
 
         if (startNewSaveEveryStart == false)
         {
@@ -445,5 +466,11 @@ public class GameManager : MonoBehaviour
             }
         }
         return null;
+    }
+
+    public WildPokemonController GetWildPokemonPrefab(WildPokemon wildPokemon)
+    {
+        wildPokemonPrefab.SetWildPokemon(wildPokemon);
+        return wildPokemonPrefab;
     }
 }

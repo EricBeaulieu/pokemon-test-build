@@ -54,8 +54,8 @@ public class OrganizePokemonArt : EditorWindow
 
         ScriptableObject target = this;
         SerializedObject sO = new SerializedObject(target);
-        pokemonNames = PokemonNameList.PokemonNameJohto152to251;
-        differentGenderArt = PokemonNameList.PokemonJohtoDifferentGenderSprites;
+        pokemonNames = PokemonNameList.PokemonName;
+        differentGenderArt = PokemonNameList.PokemonDifferentGenderSprites;
         SerializedProperty stringsProperty = sO.FindProperty("pokemonNames");
         SerializedProperty intProperty = sO.FindProperty("differentGenderArt");
         EditorGUILayout.PropertyField(stringsProperty, true);

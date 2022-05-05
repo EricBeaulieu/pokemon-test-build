@@ -6,7 +6,7 @@ public enum FacingDirections { Up,Down,Left,Right}
 
 public abstract class Entity : MonoBehaviour
 {
-    [SerializeField] Transform graphics;
+    [SerializeField] protected Transform graphics;
     [SerializeField] CharacterArtSO characterArt;
     [SerializeField] protected float movementSpeed = STANDARD_WALKING_SPEED;
     internal LayerMask solidObjectLayermask;
@@ -75,15 +75,15 @@ public abstract class Entity : MonoBehaviour
     {
         _anim = GetComponentInChildren<Animator>();
 
-        solidObjectLayermask = LayerMask.GetMask("SolidObjects");
-        interactableLayermask = LayerMask.GetMask("Interactable");
-        grassLayermask = LayerMask.GetMask("Grass");
-        playerLayerMask = LayerMask.GetMask("Player");
-        portalLayerMask = LayerMask.GetMask("Portal");
-        southLedgeLayerMask = LayerMask.GetMask("SouthLedge");
-        eastLedgeLayerMask = LayerMask.GetMask("EastLedge");
-        westLedgeLayerMask = LayerMask.GetMask("WestLedge");
-        waterLayerMask = LayerMask.GetMask("Water");
+        solidObjectLayermask = GameManager.solidObjectLayermask;
+        interactableLayermask = GameManager.interactableLayermask;
+        grassLayermask = GameManager.grassLayermask;
+        playerLayerMask = GameManager.playerLayerMask;
+        portalLayerMask = GameManager.portalLayerMask;
+        southLedgeLayerMask = GameManager.southLedgeLayerMask;
+        eastLedgeLayerMask = GameManager.eastLedgeLayerMask;
+        westLedgeLayerMask = GameManager.westLedgeLayerMask;
+        waterLayerMask = GameManager.waterLayerMask;
 
         SnapToGrid();
 

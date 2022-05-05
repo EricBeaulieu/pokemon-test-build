@@ -8,6 +8,7 @@ public class Test : MonoBehaviour {
     public NatureBase testNature;
     public Sprite sprite;
     [SerializeField] PokeballItem pokeball;
+    [SerializeField] List<Sprite> pokemonSprites = new List<Sprite>();
 
 
     public ElementType attacktype = ElementType.Bug;
@@ -32,6 +33,7 @@ public class Test : MonoBehaviour {
         //{
         //    Debug.Log(PokemonNameList.GetPokeDexName(i));
         //}
+        pokemonSprites = SpriteAtlas.pokemonSprites;
 	}
 
     void TestNatureName(NatureBase currentNature)

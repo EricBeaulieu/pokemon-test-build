@@ -253,7 +253,7 @@ public class BattleSystem : CoreSystem
     /// </summary>
     IEnumerator SetupBattle(Pokemon wildPokemon = null)
     {
-        currentTurnDetails.Clear();
+         currentTurnDetails.Clear();
         dialogSystem.SetCurrentDialogBox(dialogBox);
         InBattle = true;
         Gravity = false;
@@ -1788,7 +1788,7 @@ public class BattleSystem : CoreSystem
         sourceUnit.damagedThisTurn = false;
         sourceUnit.damagedReceived = 0;
         sourceUnit.turnsOnField++;
-        if(sourceUnit.cantUseSoundMoves > 0)
+        if(sourceUnit.cantUseSoundMoves <= 0)
         {
             sourceUnit.cantUseSoundMoves--;
             if(sourceUnit.cantUseSoundMoves == 0)

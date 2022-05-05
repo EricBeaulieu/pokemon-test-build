@@ -6,32 +6,38 @@ using UnityEngine;
 
 public class SpriteAtlas : MonoBehaviour
 {
+    [Header("Standard Battle Sprites")]
     [SerializeField] Texture2D gen1;
     [SerializeField] Texture2D gen2;
+    [Header("Standard Battle Sprites")]
+    [SerializeField] Texture2D gen1Overworld;
+    [SerializeField] Texture2D gen2Overworld;
 
     [SerializeField] List<Texture2D> specializedSprites;
-    static List<Sprite> pokemonSprites = new List<Sprite>();
+    public static List<Sprite> pokemonSprites = new List<Sprite>();
 
-    void Start()
+    void Awake()
     {
-        string spriteSheet = AssetDatabase.GetAssetPath(gen1);
-        List<Sprite> kantoSprites = AssetDatabase.LoadAllAssetsAtPath(spriteSheet).OfType<Sprite>().ToList();
-        kantoSprites.ForEach(x => pokemonSprites.Add(x));
-
-        spriteSheet = AssetDatabase.GetAssetPath(gen2);
-        List<Sprite> johtoSprites = AssetDatabase.LoadAllAssetsAtPath(spriteSheet).OfType<Sprite>().ToList();
-        johtoSprites.ForEach(x => pokemonSprites.Add(x));
+        AddTextureSpritesToList(gen1);
+        AddTextureSpritesToList(gen2);
+        AddTextureSpritesToList(gen1Overworld);
+        AddTextureSpritesToList(gen2Overworld);
 
         foreach (Texture2D texture in specializedSprites)
         {
-            spriteSheet = AssetDatabase.GetAssetPath(texture);
-            List<Sprite> newSheet = AssetDatabase.LoadAllAssetsAtPath(spriteSheet).OfType<Sprite>().ToList();
-            newSheet.ForEach(x => pokemonSprites.Add(x));
+            AddTextureSpritesToList(texture);
         }
     }
 
     public static Sprite GetSprite(string spriteName)
     {
         return pokemonSprites.Find(x => x.name == spriteName);
+    }
+
+    static void AddTextureSpritesToList(Texture2D texture)
+    {
+        string spriteSheet = AssetDatabase.GetAssetPath(texture);
+        List<Sprite> currentSprites = AssetDatabase.LoadAllAssetsAtPath(spriteSheet).OfType<Sprite>().ToList();
+        currentSprites.ForEach(x => pokemonSprites.Add(x));
     }
 }
