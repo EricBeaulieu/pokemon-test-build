@@ -7,7 +7,8 @@ public static class SpecializedMoves
     public static void Initialization(SpecializedMovesHelper helper)
     {
         //Specialized Moves
-        struggle = helper.struggle;
+        struggle = Resources.Load<MoveBase>("Moveset/Physical/Struggle");
+        Debug.Log(struggle);
 
         //Physical
         acrobatics = helper.acrobatics;
