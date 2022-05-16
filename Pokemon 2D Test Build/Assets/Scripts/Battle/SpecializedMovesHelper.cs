@@ -7,7 +7,60 @@ public class SpecializedMovesHelper : MonoBehaviour
     void Start()
     {
         SpecializedMoves.Initialization(this);
-        Destroy(this);
+        struggle = Resources.Load<MoveBase>("Moveset/Physical/Struggle");
+
+        //Physical
+        acrobatics = Resources.Load<MoveBase>("Moveset/Physical/Acrobatics");
+        assurance = Resources.Load<MoveBase>("Moveset/Physical/Assurance");
+        avalanche = Resources.Load<MoveBase>("Moveset/Physical/Avalanche");
+        bounce = Resources.Load<MoveBase>("Moveset/Physical/Bounce");
+        brickBreak = Resources.Load<MoveBase>("Moveset/Physical/BrickBreak");
+        counter = Resources.Load<MoveBase>("Moveset/Physical/Counter");
+        crushGrip = Resources.Load<MoveBase>("Moveset/Physical/Acrobatics");
+        cut = Resources.Load<MoveBase>("Moveset/Physical/Acrobatics");
+        dig = Resources.Load<MoveBase>("Moveset/Physical/Acrobatics");
+        dive = Resources.Load<MoveBase>("Moveset/Physical/Acrobatics");
+        earthquake = Resources.Load<MoveBase>("Moveset/Physical/Acrobatics");
+        endeavor = Resources.Load<MoveBase>("Moveset/Physical/Acrobatics");
+        facade = Resources.Load<MoveBase>("Moveset/Physical/Acrobatics");
+        fakeOut = Resources.Load<MoveBase>("Moveset/Physical/Acrobatics");
+        fellStinger = Resources.Load<MoveBase>("Moveset/Physical/Acrobatics");
+        firstImpression = Resources.Load<MoveBase>("Moveset/Physical/Acrobatics");
+        fissure = Resources.Load<MoveBase>("Moveset/Physical/Acrobatics");
+        flail = Resources.Load<MoveBase>("Moveset/Physical/Acrobatics");
+        fly = Resources.Load<MoveBase>("Moveset/Physical/Acrobatics");
+        focusPunch = Resources.Load<MoveBase>("Moveset/Physical/Acrobatics");
+        foulPlay = Resources.Load<MoveBase>("Moveset/Physical/Acrobatics");
+        freezeShock = Resources.Load<MoveBase>("Moveset/Physical/Acrobatics");
+        furyCutter = Resources.Load<MoveBase>("Moveset/Physical/Acrobatics");
+        gyroBall = Resources.Load<MoveBase>("Moveset/Physical/Acrobatics");
+        highJumpKick = Resources.Load<MoveBase>("Moveset/Physical/Acrobatics");
+        jumpKick = Resources.Load<MoveBase>("Moveset/Physical/Acrobatics");
+        knockOff = Resources.Load<MoveBase>("Moveset/Physical/Acrobatics");
+        lastResort = Resources.Load<MoveBase>("Moveset/Physical/Acrobatics");
+        magnitude = Resources.Load<MoveBase>("Moveset/Physical/Acrobatics");
+        payback = Resources.Load<MoveBase>("Moveset/Physical/Acrobatics");
+        payDay = Resources.Load<MoveBase>("Moveset/Physical/Acrobatics");
+        phantomForce = Resources.Load<MoveBase>("Moveset/Physical/Acrobatics");
+        powerTrip = Resources.Load<MoveBase>("Moveset/Physical/Acrobatics");
+        psychicFangs = Resources.Load<MoveBase>("Moveset/Physical/Acrobatics");
+        punishment = Resources.Load<MoveBase>("Moveset/Physical/Acrobatics");
+        rage = Resources.Load<MoveBase>("Moveset/Physical/Acrobatics");
+        revenge = Resources.Load<MoveBase>("Moveset/Physical/Acrobatics");
+        reversal = Resources.Load<MoveBase>("Moveset/Physical/Acrobatics");
+        seismicToss = Resources.Load<MoveBase>("Moveset/Physical/Acrobatics");
+        shadowForce = Resources.Load<MoveBase>("Moveset/Physical/Acrobatics");
+        smackDown = Resources.Load<MoveBase>("Moveset/Physical/Acrobatics");
+        smellingSalts = Resources.Load<MoveBase>("Moveset/Physical/Acrobatics");
+        solarBlade = Resources.Load<MoveBase>("Moveset/Physical/Acrobatics");
+        stompingTantrum = Resources.Load<MoveBase>("Moveset/Physical/Acrobatics");
+        suckerPunch = Resources.Load<MoveBase>("Moveset/Physical/Acrobatics");
+        superFang = Resources.Load<MoveBase>("Moveset/Physical/Acrobatics");
+        thousandArrows = Resources.Load<MoveBase>("Moveset/Physical/Acrobatics");
+        throatChop = Resources.Load<MoveBase>("Moveset/Physical/Acrobatics");
+        tripleKick = Resources.Load<MoveBase>("Moveset/Physical/Acrobatics");
+        wakeUpSlap = Resources.Load<MoveBase>("Moveset/Physical/Acrobatics");
+        //Destroy(this);
     }
 
     [Header("SpecializedMoves")]

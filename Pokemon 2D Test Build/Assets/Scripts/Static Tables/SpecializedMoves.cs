@@ -8,7 +8,6 @@ public static class SpecializedMoves
     {
         //Specialized Moves
         struggle = Resources.Load<MoveBase>("Moveset/Physical/Struggle");
-        Debug.Log(struggle);
 
         //Physical
         acrobatics = helper.acrobatics;
