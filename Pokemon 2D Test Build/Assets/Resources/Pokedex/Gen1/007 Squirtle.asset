@@ -1,0 +1,59 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1bad4d665bd6f7f438fdb0d0edd2ee35, type: 3}
+  m_Name: 007 Squirtle
+  m_EditorClassIdentifier: 
+  _pokedexNumber: 7
+  _pokedexDescription: When it retracts its long neck into its shell, it squirts
+    out water with vigorous force.
+  _classification: 
+  _heightInMeters: 0
+  _weightInPounds: 0
+  _captureRate: 45
+  rewardedEffortValue:
+  - _statAttribute: 3
+    _statValue: 1
+  _hasGender: 1
+  _maleFemaleRatio: 87.5
+  _baseGroup: 3
+  rewardedBaseExp: 63
+  _type1: 17
+  _type2: -1
+  _eggGroup1: 11
+  _eggGroup2: 12
+  _maxHitPoints: 44
+  _attack: 48
+  _defense: 65
+  _specialAttack: 50
+  _specialDefense: 64
+  _speed: 43
+  firstAbility: 3
+  secondAbility: 0
+  hiddenAbility: 0
+  _learnableMoves:
+  - _moveBase: {fileID: 11400000, guid: 74776a55aab78af45a268d0b4777c811, type: 2}
+    _levelLeanred: 0
+  - _moveBase: {fileID: 11400000, guid: 2159c5df54cc71f489b7ca1fdf333cd6, type: 2}
+    _levelLeanred: 0
+  - _moveBase: {fileID: 11400000, guid: 12cb40ea7baae404d993c36a1986da00, type: 2}
+    _levelLeanred: 7
+  learnableTMHMMoves:
+  - {fileID: 11400000, guid: 88ebf4bead5cc4a4fa81828f041330f6, type: 2}
+  evolutions:
+  - evolvedPokemon: {fileID: 11400000, guid: e96d7890106cb5d4b9e0c84b09228acd, type: 2}
+    levelRequirement: 16
+    maxFriendShipRequired: 0
+    evolutionStone: {fileID: 0}
+    specifiedHoldItem: {fileID: 0}
+    timeSpecific: 0
+    specifiedMove: {fileID: 0}
+  wildPokemonHoldItems: []

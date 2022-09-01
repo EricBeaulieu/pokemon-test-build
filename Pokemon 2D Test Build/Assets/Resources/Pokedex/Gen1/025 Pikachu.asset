@@ -1,0 +1,54 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1bad4d665bd6f7f438fdb0d0edd2ee35, type: 3}
+  m_Name: 025 Pikachu
+  m_EditorClassIdentifier: 
+  _pokedexNumber: 25
+  _pokedexDescription: Its nature is to store up electricity. Forests where nests
+    of Pikachu live are dangerous, since the trees are so often struck by lightning.
+  _classification: 
+  _heightInMeters: 0
+  _weightInPounds: 0
+  _captureRate: 190
+  rewardedEffortValue:
+  - _statAttribute: 6
+    _statValue: 2
+  _hasGender: 1
+  _maleFemaleRatio: 50
+  _baseGroup: 2
+  rewardedBaseExp: 112
+  _type1: 3
+  _type2: -1
+  _eggGroup1: 5
+  _eggGroup2: 4
+  _maxHitPoints: 35
+  _attack: 55
+  _defense: 40
+  _specialAttack: 50
+  _specialDefense: 50
+  _speed: 90
+  firstAbility: 41
+  secondAbility: 0
+  hiddenAbility: 0
+  _learnableMoves:
+  - _moveBase: {fileID: 11400000, guid: eaacb93f3a58b714aaa416b436af1927, type: 2}
+    _levelLeanred: 0
+  learnableTMHMMoves: []
+  evolutions:
+  - evolvedPokemon: {fileID: 11400000, guid: cbb853d24a164014f9d23627ba842ecd, type: 2}
+    levelRequirement: 0
+    maxFriendShipRequired: 0
+    evolutionStone: {fileID: 11400000, guid: 493310ab6c125f944b59d7fffc0d970c, type: 2}
+    specifiedHoldItem: {fileID: 0}
+    timeSpecific: 0
+    specifiedMove: {fileID: 0}
+  wildPokemonHoldItems: []

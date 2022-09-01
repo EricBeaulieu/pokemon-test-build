@@ -15,9 +15,6 @@ public class AssetProcessorPokemonArt : AssetPostprocessor {
     {
         Debug.Log("Texture2D: (" + texture.width + "x" + texture.height + ")");
     }
-
-    
-
 }
 
 public class SpritePostprocessor : AssetPostprocessor

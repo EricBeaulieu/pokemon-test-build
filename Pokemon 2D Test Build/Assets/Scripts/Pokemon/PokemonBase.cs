@@ -6,7 +6,10 @@ using UnityEngine;
 public enum ElementType { NA = -1, Bug, Dark, Dragon, Electric, Fairy, Fighting, Fire, Flying, Ghost,
                           Grass, Ground, Ice, Normal, Poison, Psychic, Rock, Steel, Water}
 
-public enum StatAttribute { NA, HitPoints, Attack, Defense, SpecialAttack, SpecialDefense, Speed, Evasion, Accuracy, CriticalHitRatio }
+public enum StatAttribute { NA = -1, HitPoints, Attack, Defense, SpecialAttack, SpecialDefense, Speed, Evasion, Accuracy, CriticalHitRatio}
+
+public enum EggGroup { NA = -1, Bug, Ditto, Dragon, Fairy, Field, Flying, Grass, HumanLike, Amorphous, 
+    Mineral, Monster, Water1, Water2, Water3, CannotBreed}
 
 public enum Gender { NA,Male,Female}
 
@@ -18,15 +21,20 @@ public class PokemonBase : ScriptableObject {
     [TextArea]
     [SerializeField] string _pokedexDescription;
     [SerializeField] string _classification;
-    [SerializeField] float _heightInMeters;
-    [SerializeField] float _weightInPounds;
+    [SerializeField] int _baseHappiness;
+    [SerializeField] bool _isBaby;
+    [SerializeField] bool _isLegendary;
+    [SerializeField] bool _isMythical;
+    [Tooltip("This will be divided by 10")]
+    [SerializeField] int _heightInMeters;
+    [Tooltip("This will be divided by 10")]
+    [SerializeField] int _weightInKg;
     [SerializeField] int _captureRate;
     [SerializeField] List<EarnableEV> rewardedEffortValue;
 
     [Header("Gender")]
     [SerializeField] bool _hasGender = true;
-    [Range(0, 100)]
-    [SerializeField] float _maleFemaleRatio = 50f;
+    [SerializeField] int _maleFemaleRatio = 4;
 
     [Header("Experience Group")]
     [SerializeField] ExperienceGroup _baseGroup;
@@ -39,6 +47,7 @@ public class PokemonBase : ScriptableObject {
     [Header("Egg Information")]
     [SerializeField] EggGroup _eggGroup1;
     [SerializeField] EggGroup _eggGroup2;
+    [SerializeField] int _hatchCounter;
 
     [Header("Base Stats")]
     [SerializeField] int _maxHitPoints;
@@ -65,6 +74,173 @@ public class PokemonBase : ScriptableObject {
 
     [Header("Wild")]
     [SerializeField] List<WildPokemonHoldItems> wildPokemonHoldItems;
+
+    #region Initialization 
+
+    public void Initialization(PokeApi.PokemonData pokemonData)
+    {
+        if (pokemonData == null)
+        {
+            Debug.LogError("No Pokemon Data Found");
+            return;
+        }
+
+        //PokeDex Information
+        _pokedexNumber = pokemonData.id;
+        //_pokedexDescription;
+        //_classification;
+        _baseHappiness = pokemonData.species.base_happiness;
+        _isBaby = pokemonData.species.is_baby;
+        _isLegendary = pokemonData.species.is_legendary;
+        _isMythical = pokemonData.species.is_mythical;
+        _heightInMeters = pokemonData.height;
+        _weightInKg = pokemonData.weight;
+        _captureRate = pokemonData.species.capture_rate;
+        rewardedEffortValue = new List<EarnableEV>();
+
+        for (int i = (int)StatAttribute.HitPoints; i < (int)StatAttribute.Evasion; i++)
+        {
+            if (pokemonData.stats[i].effort > 0)
+            {
+                rewardedEffortValue.Add(new EarnableEV((StatAttribute)i, pokemonData.stats[i].effort));
+            }
+        }
+
+        //Gender
+        _maleFemaleRatio = pokemonData.species.gender_rate;
+
+        if(_maleFemaleRatio == 5)
+        {
+            Debug.Log("Double Check this pokemon gender ration");
+        }
+
+        //Experience Group
+        _baseGroup = DecipherEXPGroup(pokemonData.species.growth_rate.name);
+        rewardedBaseExp = pokemonData.base_experience;
+
+        //Types
+        _type1 = (ElementType)System.Enum.Parse(typeof(ElementType), pokemonData.types[0].type.name, true);
+        if(pokemonData.types.Length>1)
+        {
+            _type2 = (ElementType)System.Enum.Parse(typeof(ElementType), pokemonData.types[1].type.name, true);
+        }
+        else
+        {
+            _type2 = ElementType.NA;
+        }
+
+        //Egg Information
+        _eggGroup1 = DecipherEggGroup(pokemonData.species.egg_groups[0].name);
+        if (pokemonData.species.egg_groups.Length > 1)
+        {
+            _eggGroup2 = DecipherEggGroup(pokemonData.species.egg_groups[1].name);
+        }
+        else
+        {
+            _eggGroup2 = EggGroup.NA;
+        }
+        _hatchCounter =  256 * pokemonData.species.hatch_counter;
+
+        //Base Stats
+        _maxHitPoints = pokemonData.stats[0].base_stat;
+        _attack = pokemonData.stats[1].base_stat;
+        _defense = pokemonData.stats[2].base_stat;
+        _specialAttack = pokemonData.stats[3].base_stat;
+        _specialDefense = pokemonData.stats[4].base_stat;
+        _speed = pokemonData.stats[5].base_stat;
+
+        //Abilities
+        firstAbility = AbilityID.NA;
+        secondAbility = AbilityID.NA;
+        hiddenAbility = AbilityID.NA;
+        for (int i = 0; i < pokemonData.abilities.Length; i++)
+        {
+            switch (pokemonData.abilities[i].slot)
+            {
+                case 1:
+                    firstAbility = DecipherAbility(pokemonData.abilities[i].ability.name);
+                    break;
+                case 2:
+                    secondAbility = DecipherAbility(pokemonData.abilities[i].ability.name);
+                    break;
+                default:
+                    hiddenAbility = DecipherAbility(pokemonData.abilities[i].ability.name);
+                    break;
+            }
+        }
+        
+    }
+
+    ExperienceGroup DecipherEXPGroup(string s)
+    {
+        switch (s)
+        {
+            case "slow-then-very-fast":
+                return ExperienceGroup.Erratic;
+            case "fast":
+                return ExperienceGroup.Fast;
+            case "medium":
+                return ExperienceGroup.MediumFast;
+            case "medium-slow":
+                return ExperienceGroup.MediumSlow;
+            case "slow":
+                return ExperienceGroup.Slow;
+            default://fast-then-very-slow
+                return ExperienceGroup.VerySlow;
+        }
+    }
+
+    EggGroup DecipherEggGroup(string s)
+    {
+        switch (s)
+        {
+            case "plant":
+                return EggGroup.Grass;
+            case "ground":
+                return EggGroup.Field;
+            case "humanshape":
+                return EggGroup.HumanLike;
+            case "indeterminate":
+                return EggGroup.Amorphous;
+            case "no-eggs":
+                return EggGroup.CannotBreed;
+            default:
+                return (EggGroup)System.Enum.Parse(typeof(EggGroup), s, true);
+        }
+    }
+
+    AbilityID DecipherAbility(string s)
+    {
+        s = CleanUpString(s);
+        switch (s)
+        {
+            case "overgrow":
+                s = "Overgrown";
+                break;
+            default://fast-then-very-slow
+                break;
+        }
+        //return (AbilityID)System.Enum.Parse(typeof(AbilityID), s, true);
+        bool isEnumParsed = System.Enum.TryParse(s, true, out AbilityID parsedEnumValue);
+        if(isEnumParsed == true)
+        {
+            return parsedEnumValue;
+        }
+        else
+        {
+            Debug.Log($"{s} doesnt exist");
+            return AbilityID.NA;
+        }
+    }
+
+    string CleanUpString(string s)
+    {
+        s = s.Replace(" ", string.Empty);
+        s = s.Replace("-", string.Empty);
+        return s;
+    }
+
+    #endregion
 
     #region Getters/Setters
 

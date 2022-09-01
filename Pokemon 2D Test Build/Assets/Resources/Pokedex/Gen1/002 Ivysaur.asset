@@ -1,0 +1,65 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1bad4d665bd6f7f438fdb0d0edd2ee35, type: 3}
+  m_Name: 002 Ivysaur
+  m_EditorClassIdentifier: 
+  _pokedexNumber: 2
+  _pokedexDescription: When the bulb on its back grows large, it appears to lose
+    the ability to stand on its hind legs.
+  _classification: 
+  _heightInMeters: 0
+  _weightInPounds: 0
+  _captureRate: 45
+  rewardedEffortValue:
+  - _statAttribute: 4
+    _statValue: 1
+  - _statAttribute: 5
+    _statValue: 1
+  _hasGender: 1
+  _maleFemaleRatio: 87.5
+  _baseGroup: 3
+  rewardedBaseExp: 142
+  _type1: 9
+  _type2: 13
+  _eggGroup1: 11
+  _eggGroup2: 7
+  _maxHitPoints: 60
+  _attack: 62
+  _defense: 63
+  _specialAttack: 80
+  _specialDefense: 80
+  _speed: 60
+  firstAbility: 29
+  secondAbility: 0
+  hiddenAbility: 0
+  _learnableMoves:
+  - _moveBase: {fileID: 11400000, guid: 9d581eae887163b44b5a58876017460a, type: 2}
+    _levelLeanred: 0
+  - _moveBase: {fileID: 11400000, guid: ba50f71abd3d62b448537792dbbded86, type: 2}
+    _levelLeanred: 0
+  - _moveBase: {fileID: 11400000, guid: f1ba31bada5652040942d192b0b700d3, type: 2}
+    _levelLeanred: 0
+  - _moveBase: {fileID: 11400000, guid: 7ca8af40dd9b513478b6a025505fdb9b, type: 2}
+    _levelLeanred: 0
+  - _moveBase: {fileID: 11400000, guid: 9d581eae887163b44b5a58876017460a, type: 2}
+    _levelLeanred: 9
+  learnableTMHMMoves:
+  - {fileID: 11400000, guid: 88ebf4bead5cc4a4fa81828f041330f6, type: 2}
+  evolutions:
+  - evolvedPokemon: {fileID: 11400000, guid: 035955532a56c544eba76cdb240c24e3, type: 2}
+    levelRequirement: 32
+    maxFriendShipRequired: 0
+    evolutionStone: {fileID: 0}
+    specifiedHoldItem: {fileID: 0}
+    timeSpecific: 0
+    specifiedMove: {fileID: 0}
+  wildPokemonHoldItems: []

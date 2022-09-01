@@ -133,4 +133,35 @@ public static class GlobalTools
         }
         return false;
     }
+
+    public static float CalculateGenderRatio(int genderRatio)
+    {
+        switch (genderRatio)
+        {
+            case 1:
+                return 100;
+            case 2:
+                return 88.14f;
+            case 3:
+                return 75.49f;
+            case 4:
+                return 50.2f;
+            case 6:
+                return 24.9f;
+            case 7:
+                return 11.2f;
+            default:
+                return 0;
+        }
+    }
+
+    public static string UpperFirstChar(this string s)
+    {
+        if (string.IsNullOrEmpty(s))
+        {
+            return null;
+        }
+
+        return char.ToUpper(s[0]) + s.Substring(1);
+    }
 }

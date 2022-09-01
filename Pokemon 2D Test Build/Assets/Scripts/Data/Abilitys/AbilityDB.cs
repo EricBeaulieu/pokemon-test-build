@@ -4,7 +4,7 @@ using UnityEngine;
 
 public enum AbilityID
 {
-    NA,
+    NA = -1,
     //A
     Adaptability, Aerilate, Aftermath, AirLock, Analytic, AngerPoint, Anticipation, ArenaTrap, AromaVeil,
     //B

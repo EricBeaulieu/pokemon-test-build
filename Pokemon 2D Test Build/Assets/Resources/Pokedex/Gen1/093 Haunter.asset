@@ -1,0 +1,57 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1bad4d665bd6f7f438fdb0d0edd2ee35, type: 3}
+  m_Name: 093 Haunter
+  m_EditorClassIdentifier: 
+  _pokedexNumber: 93
+  _pokedexDescription: It strikes at humans from total darkness. Those licked by
+    its cold tongue grow weaker with each passing day until they die.
+  _classification: 
+  _heightInMeters: 0
+  _weightInPounds: 0
+  _captureRate: 90
+  rewardedEffortValue:
+  - _statAttribute: 4
+    _statValue: 2
+  _hasGender: 1
+  _maleFemaleRatio: 50
+  _baseGroup: 3
+  rewardedBaseExp: 142
+  _type1: 8
+  _type2: 13
+  _eggGroup1: 9
+  _eggGroup2: 0
+  _maxHitPoints: 45
+  _attack: 50
+  _defense: 45
+  _specialAttack: 115
+  _specialDefense: 55
+  _speed: 95
+  firstAbility: 46
+  secondAbility: 0
+  hiddenAbility: 0
+  _learnableMoves:
+  - _moveBase: {fileID: 11400000, guid: 7438c3ef5c2e41c47bd85d69ce855a0b, type: 2}
+    _levelLeanred: 0
+  - _moveBase: {fileID: 11400000, guid: 3f07eae17bf919648ac2316f2ef3a7bd, type: 2}
+    _levelLeanred: 0
+  learnableTMHMMoves:
+  - {fileID: 11400000, guid: 88ebf4bead5cc4a4fa81828f041330f6, type: 2}
+  evolutions:
+  - evolvedPokemon: {fileID: 11400000, guid: e08da9c1fde2e2d42a85405c1ea2a7b2, type: 2}
+    levelRequirement: 0
+    maxFriendShipRequired: 0
+    evolutionStone: {fileID: 11400000, guid: a075a88fc497a504692198eebd64ba36, type: 2}
+    specifiedHoldItem: {fileID: 0}
+    timeSpecific: 0
+    specifiedMove: {fileID: 0}
+  wildPokemonHoldItems: []

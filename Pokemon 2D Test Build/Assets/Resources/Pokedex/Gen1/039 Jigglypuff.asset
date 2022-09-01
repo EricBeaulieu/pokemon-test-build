@@ -1,0 +1,54 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1bad4d665bd6f7f438fdb0d0edd2ee35, type: 3}
+  m_Name: 039 Jigglypuff
+  m_EditorClassIdentifier: 
+  _pokedexNumber: 39
+  _pokedexDescription: "It hugely inflates its stomach and sings a mysterious melody.
+    If you hear this melody, you\u2019ll become sleepy right away."
+  _classification: 
+  _heightInMeters: 0
+  _weightInPounds: 0
+  _captureRate: 170
+  rewardedEffortValue:
+  - _statAttribute: 1
+    _statValue: 2
+  _hasGender: 1
+  _maleFemaleRatio: 24.6
+  _baseGroup: 1
+  rewardedBaseExp: 95
+  _type1: 12
+  _type2: 4
+  _eggGroup1: 4
+  _eggGroup2: 0
+  _maxHitPoints: 115
+  _attack: 45
+  _defense: 20
+  _specialAttack: 45
+  _specialDefense: 25
+  _speed: 20
+  firstAbility: 11
+  secondAbility: 10
+  hiddenAbility: 0
+  _learnableMoves:
+  - _moveBase: {fileID: 11400000, guid: 3cee35cefcca6c94ab2fb4099742c7e2, type: 2}
+    _levelLeanred: 0
+  learnableTMHMMoves: []
+  evolutions:
+  - evolvedPokemon: {fileID: 11400000, guid: e7d9931fba39b2442b1e422f7a7bec54, type: 2}
+    levelRequirement: 0
+    maxFriendShipRequired: 0
+    evolutionStone: {fileID: 11400000, guid: 39f747eb120365142850ce10723021b4, type: 2}
+    specifiedHoldItem: {fileID: 0}
+    timeSpecific: 0
+    specifiedMove: {fileID: 0}
+  wildPokemonHoldItems: []

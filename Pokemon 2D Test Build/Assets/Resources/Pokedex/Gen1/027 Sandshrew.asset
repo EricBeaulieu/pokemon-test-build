@@ -1,0 +1,54 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1bad4d665bd6f7f438fdb0d0edd2ee35, type: 3}
+  m_Name: 027 Sandshrew
+  m_EditorClassIdentifier: 
+  _pokedexNumber: 27
+  _pokedexDescription: It can roll its body into a ball. It moves through the desert
+    by rolling at high speeds.
+  _classification: 
+  _heightInMeters: 0
+  _weightInPounds: 0
+  _captureRate: 255
+  rewardedEffortValue:
+  - _statAttribute: 3
+    _statValue: 1
+  _hasGender: 1
+  _maleFemaleRatio: 50
+  _baseGroup: 2
+  rewardedBaseExp: 60
+  _type1: 10
+  _type2: -1
+  _eggGroup1: 5
+  _eggGroup2: 0
+  _maxHitPoints: 50
+  _attack: 75
+  _defense: 85
+  _specialAttack: 20
+  _specialDefense: 30
+  _speed: 40
+  firstAbility: 22
+  secondAbility: 0
+  hiddenAbility: 0
+  _learnableMoves: []
+  learnableTMHMMoves: []
+  evolutions:
+  - evolvedPokemon: {fileID: 11400000, guid: b2cbdc29d3a35d94bb3848b0817423e8, type: 2}
+    levelRequirement: 22
+    maxFriendShipRequired: 0
+    evolutionStone: {fileID: 0}
+    specifiedHoldItem: {fileID: 0}
+    timeSpecific: 0
+    specifiedMove: {fileID: 0}
+  wildPokemonHoldItems:
+  - holdItem: {fileID: 11400000, guid: c752c06a356eb234f97a577c8d419e2b, type: 2}
+    itemPercentChance: 5
