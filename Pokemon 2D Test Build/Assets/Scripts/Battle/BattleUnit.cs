@@ -89,7 +89,7 @@ public class BattleUnit : MonoBehaviour
         pokemonSpriteOriginalPosition = pokemonSprite.rectTransform.localPosition;
         abilityUI.OnStart(isPlayersPokemon);
         imageSize = pokemonSprite.rectTransform.sizeDelta.x;
-        overtopImage.sprite = StatusConditionArt.instance.Nothing;
+        overtopImage.sprite = GlobalArt.nothing;
     }
 
     public void SetupAndSendOut(Pokemon pokemon)
@@ -426,13 +426,13 @@ public class BattleUnit : MonoBehaviour
 
         if(isMixed == true)
         {
-            statusEffectA.sprite = StatusConditionArt.instance.ReturnStatusChangesArt(StatAttribute.NA);
-            statusEffectB.sprite = StatusConditionArt.instance.ReturnStatusChangesArt(StatAttribute.NA);
+            statusEffectA.sprite = GlobalArt.ReturnStatusChangesArt(StatAttribute.NA);
+            statusEffectB.sprite = GlobalArt.ReturnStatusChangesArt(StatAttribute.NA);
         }
         else
         {
-            statusEffectA.sprite = StatusConditionArt.instance.ReturnStatusChangesArt(statChanges.First().Stat);
-            statusEffectB.sprite = StatusConditionArt.instance.ReturnStatusChangesArt(statChanges.First().Stat);
+            statusEffectA.sprite = GlobalArt.ReturnStatusChangesArt(statChanges.First().Stat);
+            statusEffectB.sprite = GlobalArt.ReturnStatusChangesArt(statChanges.First().Stat);
         }
 
         int direction = (increased == true) ? 1 : -1;
@@ -440,8 +440,8 @@ public class BattleUnit : MonoBehaviour
         float size = statusEffectA.rectTransform.sizeDelta.y;
         statusEffectB.rectTransform.localPosition += new Vector3(0, (direction * size), 0);
 
-        statusEffectA.color = StatusConditionArt.instance.PlainWhite;
-        statusEffectB.color = StatusConditionArt.instance.PlainWhite;
+        statusEffectA.color = Color.white;
+        statusEffectB.color = Color.white;
         statusEffectA.SetAlpha(0);
         statusEffectB.SetAlpha(0);
 
@@ -619,7 +619,7 @@ public class BattleUnit : MonoBehaviour
     IEnumerator ShowStatusAnimationConditionColor(Color currentColour)
     {
         statusEffectA.SetAlpha(0);
-        statusEffectA.sprite = StatusConditionArt.instance.BlankWhite;
+        statusEffectA.sprite = GlobalArt.blankWhite;
         statusEffectA.color = currentColour;
 
         float elapsedTime = 0;
@@ -641,13 +641,13 @@ public class BattleUnit : MonoBehaviour
             yield return null;
         }
 
-        statusEffectA.color = StatusConditionArt.instance.PlainWhite;
+        statusEffectA.color = Color.white;
         statusEffectA.SetAlpha(0);
     }
 
     IEnumerator PlayPoisonAnimation()
     {
-        StartCoroutine(ShowStatusAnimationConditionColor(StatusConditionArt.instance.GetStatusConditionAnimationColour(ConditionID.Poison)));
+        StartCoroutine(ShowStatusAnimationConditionColor(GlobalArt.GetStatusConditionAnimationColour(ConditionID.Poison)));
 
         float duration = STATUS_EFFECT_ANIMATION_SPEED * 2;
         int movements = 6;
@@ -665,12 +665,12 @@ public class BattleUnit : MonoBehaviour
         for (int i = 0; i < 5; i++)
         {
             yield return SmoothTransitionToPosition(pokemonSprite.gameObject, GenerateOffestPosition(pokemonSpriteOriginalPosition), duration);
-            overtopImage.sprite = StatusConditionArt.instance.GetRandomParalzedConditionAnimationArt();
+            overtopImage.sprite = GlobalArt.GetRandomParalzedConditionAnimationArt();
         }
 
         yield return new WaitForSeconds(duration);
         yield return SmoothTransitionToPosition(pokemonSprite.gameObject, pokemonSpriteOriginalPosition, duration);
-        overtopImage.sprite = StatusConditionArt.instance.Nothing;
+        overtopImage.sprite = GlobalArt.nothing;
     }
 
     IEnumerator PlayAnimatorAnimation(string TriggerName = null)

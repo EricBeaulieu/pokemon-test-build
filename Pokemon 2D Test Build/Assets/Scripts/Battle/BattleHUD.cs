@@ -50,7 +50,7 @@ public class BattleHUD : MonoBehaviour
         SetStatusSprite();
         pokemon.OnStatusChanged += SetStatusSprite;
 
-        gender.sprite = StatusConditionArt.instance.ReturnGenderArt(currentPokemon.gender);
+        gender.sprite = GlobalArt.ReturnGenderArt(currentPokemon.gender);
 
         SetHudOffScreen(isPlayersPokemon);
         ResetAlphaHUD(isPlayersPokemon);
@@ -60,11 +60,11 @@ public class BattleHUD : MonoBehaviour
     {
         if(pokemon.status == null)
         {
-            statusCondition.sprite = StatusConditionArt.instance.ReturnStatusConditionArt(ConditionID.NA);
+            statusCondition.sprite = GlobalArt.ReturnStatusConditionArt(ConditionID.NA);
         }
         else
         {
-            statusCondition.sprite = StatusConditionArt.instance.ReturnStatusConditionArt(pokemon.status.Id);
+            statusCondition.sprite = GlobalArt.ReturnStatusConditionArt(pokemon.status.Id);
         }
     }
 

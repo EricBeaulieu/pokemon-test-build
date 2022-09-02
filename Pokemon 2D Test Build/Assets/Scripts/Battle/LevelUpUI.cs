@@ -105,6 +105,6 @@ public class LevelUpUI : MonoBehaviour
         pokemonSprite.sprite = pokemon.pokemonBase.GetAnimatedSprites()[0];
         pokemonName.text = pokemon.currentName;
         pokemonLevel.text = pokemon.currentLevel.ToString();
-        pokemonGender.sprite = StatusConditionArt.instance.ReturnGenderArt(pokemon.gender);
+        pokemonGender.sprite = GlobalArt.ReturnGenderArt(pokemon.gender);
     }
 }

@@ -20,10 +20,10 @@ public class PCPokemonDataDisplay : MonoBehaviour
 
         if (currentPokemon == null)
         {
-            pokemonSprite.sprite = StatusConditionArt.instance.Nothing;
+            pokemonSprite.sprite = GlobalArt.nothing;
             pokemonNameText.text = "";
             pokemonLevelText.text = "";
-            pokemonGenderSprite.sprite = StatusConditionArt.instance.Nothing;
+            pokemonGenderSprite.sprite = GlobalArt.nothing;
             pokemonItemText.text = "";
         }
         else
@@ -31,7 +31,7 @@ public class PCPokemonDataDisplay : MonoBehaviour
             pokemonSprite.sprite = currentPokemon.pokemonBase.GetFrontSprite(currentPokemon.isShiny, currentPokemon.gender)[0];
             pokemonNameText.text = $"{currentPokemon.currentName} \n /{currentPokemon.pokemonBase.GetPokedexName()}";
             pokemonLevelText.text = $"Lv {currentPokemon.currentLevel.ToString()}";
-            pokemonGenderSprite.sprite = StatusConditionArt.instance.ReturnGenderArt(currentPokemon.gender);
+            pokemonGenderSprite.sprite = GlobalArt.ReturnGenderArt(currentPokemon.gender);
             pokemonItemText.text = (currentPokemon.GetCurrentItem == null) ? "" : currentPokemon.GetCurrentItem.ItemName;
         }
     }

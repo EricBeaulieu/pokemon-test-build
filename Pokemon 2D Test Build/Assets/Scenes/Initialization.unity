@@ -4775,7 +4775,6 @@ GameObject:
   m_Component:
   - component: {fileID: 291317940}
   - component: {fileID: 291317939}
-  - component: {fileID: 291317941}
   - component: {fileID: 291317942}
   - component: {fileID: 291317944}
   - component: {fileID: 291317943}
@@ -4801,7 +4800,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   startNewSaveEveryStart: 1
-  startWithPresetBoxes: 1
+  startWithPresetBoxes: 0
   turnOffWildPokemon: 0
   turnOffTrainerBattles: 0
   debugGrid: 0
@@ -4861,112 +4860,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &291317941
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 291317938}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6385de74ed555c74e925fbf7118e9a3c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  nothing: {fileID: -5460788302523036599, guid: abdf0e45e1a1c8147aca07e4e20a4aea,
-    type: 3}
-  blankWhite: {fileID: 21300000, guid: ebd250ac1fbe2db428bd49b83b66cb10, type: 3}
-  white: {r: 1, g: 1, b: 1, a: 1}
-  faintedStatus: {fileID: 21300000, guid: c842fc3d912cf014b900ef60070d5a36, type: 3}
-  shinyStar: {fileID: 21300000, guid: 9441a5288f756624cbcb3cff4e622139, type: 3}
-  conditionPoison: {fileID: -3249014827017175959, guid: abdf0e45e1a1c8147aca07e4e20a4aea,
-    type: 3}
-  conditionBurn: {fileID: -4197889149677769770, guid: abdf0e45e1a1c8147aca07e4e20a4aea,
-    type: 3}
-  conditionSleep: {fileID: 6723786191103165301, guid: abdf0e45e1a1c8147aca07e4e20a4aea,
-    type: 3}
-  conditionParalyzed: {fileID: 7131327713309342936, guid: abdf0e45e1a1c8147aca07e4e20a4aea,
-    type: 3}
-  conditionFrozen: {fileID: -8820797535756217992, guid: abdf0e45e1a1c8147aca07e4e20a4aea,
-    type: 3}
-  conditionPoisonColour: {r: 0.57623196, g: 0, b: 1, a: 1}
-  conditionPoisonBubbles: {fileID: 0}
-  conditionBurnColour: {r: 1, g: 0.4218157, b: 0, a: 1}
-  conditionBurnFlames: {fileID: 0}
-  conditionSleepZs: {fileID: 0}
-  conditionParalyzedColour: {r: 1, g: 0.8065821, b: 0, a: 1}
-  conditionParalyzedStatic:
-  - {fileID: 4353036584799927717, guid: 4e0611f505c0d4643ba1b9dc7e2ae0ef, type: 3}
-  - {fileID: -7053046841198245576, guid: 4e0611f505c0d4643ba1b9dc7e2ae0ef, type: 3}
-  - {fileID: -8955195852702365208, guid: 4e0611f505c0d4643ba1b9dc7e2ae0ef, type: 3}
-  conditionFrozenColour: {r: 0, g: 1, b: 1, a: 1}
-  male: {fileID: 7097639058443379529, guid: abdf0e45e1a1c8147aca07e4e20a4aea, type: 3}
-  female: {fileID: 275905749900780960, guid: abdf0e45e1a1c8147aca07e4e20a4aea, type: 3}
-  nA: {fileID: -1824744838453294235, guid: eba446c0c36df1e45975967dfa7595e9, type: 3}
-  bug: {fileID: -2849855965665627373, guid: eba446c0c36df1e45975967dfa7595e9, type: 3}
-  dark: {fileID: 2034654576780707489, guid: eba446c0c36df1e45975967dfa7595e9, type: 3}
-  dragon: {fileID: -1734225925238353097, guid: eba446c0c36df1e45975967dfa7595e9, type: 3}
-  electric: {fileID: -8725121901846334263, guid: eba446c0c36df1e45975967dfa7595e9,
-    type: 3}
-  fairy: {fileID: 21300000, guid: 96246ac1a293e2445913d61b25006114, type: 3}
-  fighting: {fileID: -56389684126255199, guid: eba446c0c36df1e45975967dfa7595e9, type: 3}
-  fire: {fileID: -7152996289774772548, guid: eba446c0c36df1e45975967dfa7595e9, type: 3}
-  flying: {fileID: 7980543043835355830, guid: eba446c0c36df1e45975967dfa7595e9, type: 3}
-  ghost: {fileID: -6089097470041444721, guid: eba446c0c36df1e45975967dfa7595e9, type: 3}
-  grass: {fileID: 4218381197889179219, guid: eba446c0c36df1e45975967dfa7595e9, type: 3}
-  ground: {fileID: -4587099157823602956, guid: eba446c0c36df1e45975967dfa7595e9, type: 3}
-  ice: {fileID: 5883078336702449260, guid: eba446c0c36df1e45975967dfa7595e9, type: 3}
-  normal: {fileID: -6519106895325619043, guid: eba446c0c36df1e45975967dfa7595e9, type: 3}
-  poison: {fileID: 6868460385936980070, guid: eba446c0c36df1e45975967dfa7595e9, type: 3}
-  psychic: {fileID: -2985959870812857811, guid: eba446c0c36df1e45975967dfa7595e9,
-    type: 3}
-  rock: {fileID: -1164242250183328453, guid: eba446c0c36df1e45975967dfa7595e9, type: 3}
-  steel: {fileID: -25362254402286421, guid: eba446c0c36df1e45975967dfa7595e9, type: 3}
-  water: {fileID: 2075673510754308750, guid: eba446c0c36df1e45975967dfa7595e9, type: 3}
-  physical: {fileID: 3898894558778031700, guid: 8c43e2ea824ffcb4996bde8a4a6caa76,
-    type: 3}
-  special: {fileID: 1918080329766753474, guid: 8c43e2ea824ffcb4996bde8a4a6caa76, type: 3}
-  status: {fileID: 376010803202944019, guid: 8c43e2ea824ffcb4996bde8a4a6caa76, type: 3}
-  attack: {fileID: 7669542005293102550, guid: 187c4a8fd6b1c414dae840b0e7723999, type: 3}
-  defense: {fileID: 3972818100055193529, guid: 187c4a8fd6b1c414dae840b0e7723999, type: 3}
-  specialAttack: {fileID: 244303233155334417, guid: 187c4a8fd6b1c414dae840b0e7723999,
-    type: 3}
-  specialDefense: {fileID: 6298281848752898321, guid: 187c4a8fd6b1c414dae840b0e7723999,
-    type: 3}
-  speed: {fileID: -6365321020055019873, guid: 187c4a8fd6b1c414dae840b0e7723999, type: 3}
-  mix: {fileID: -5632263542383722030, guid: 187c4a8fd6b1c414dae840b0e7723999, type: 3}
-  accuracy: {fileID: -6065266035993717179, guid: 187c4a8fd6b1c414dae840b0e7723999,
-    type: 3}
-  evasion: {fileID: 1754087268045766626, guid: 187c4a8fd6b1c414dae840b0e7723999, type: 3}
-  highHP: {r: 0, g: 0.7843138, b: 0, a: 1}
-  mediumHP: {r: 0.8962264, g: 0.7208233, b: 0, a: 1}
-  lowHP: {r: 1, g: 0, b: 0, a: 1}
-  tmBug: {fileID: -2676221609051207254, guid: 78d5e511eff5a7d4a862cdaaaacdb33e, type: 3}
-  tmDark: {fileID: -5289661518043000431, guid: 78d5e511eff5a7d4a862cdaaaacdb33e, type: 3}
-  tmDragon: {fileID: 2450126405168323203, guid: 78d5e511eff5a7d4a862cdaaaacdb33e,
-    type: 3}
-  tmElectric: {fileID: 2942660939896211074, guid: 78d5e511eff5a7d4a862cdaaaacdb33e,
-    type: 3}
-  tmFairy: {fileID: -863130678901187986, guid: 78d5e511eff5a7d4a862cdaaaacdb33e, type: 3}
-  tmFighting: {fileID: 2305110130193492201, guid: 78d5e511eff5a7d4a862cdaaaacdb33e,
-    type: 3}
-  tmFire: {fileID: -3423580002307153272, guid: 78d5e511eff5a7d4a862cdaaaacdb33e, type: 3}
-  tmFlying: {fileID: -6358526424574301165, guid: 78d5e511eff5a7d4a862cdaaaacdb33e,
-    type: 3}
-  tmGhost: {fileID: 6738229809870742341, guid: 78d5e511eff5a7d4a862cdaaaacdb33e, type: 3}
-  tmGrass: {fileID: 182397010993870772, guid: 78d5e511eff5a7d4a862cdaaaacdb33e, type: 3}
-  tmGround: {fileID: 7028666043289428281, guid: 78d5e511eff5a7d4a862cdaaaacdb33e,
-    type: 3}
-  tmIce: {fileID: 5835406601066551124, guid: 78d5e511eff5a7d4a862cdaaaacdb33e, type: 3}
-  tmNormal: {fileID: 6683048855851917477, guid: 78d5e511eff5a7d4a862cdaaaacdb33e,
-    type: 3}
-  tmPoison: {fileID: 5583695411947987505, guid: 78d5e511eff5a7d4a862cdaaaacdb33e,
-    type: 3}
-  tmPsychic: {fileID: 7404380289836965998, guid: 78d5e511eff5a7d4a862cdaaaacdb33e,
-    type: 3}
-  tmRock: {fileID: -4435624358830292224, guid: 78d5e511eff5a7d4a862cdaaaacdb33e, type: 3}
-  tmSteel: {fileID: 6646881599321174110, guid: 78d5e511eff5a7d4a862cdaaaacdb33e, type: 3}
-  tmWater: {fileID: 1999256161842146046, guid: 78d5e511eff5a7d4a862cdaaaacdb33e, type: 3}
 --- !u!114 &291317942
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15963,8 +15856,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -5460788302523036599, guid: abdf0e45e1a1c8147aca07e4e20a4aea,
-    type: 3}
+  m_Sprite: {fileID: 21300000, guid: 9441a5288f756624cbcb3cff4e622139, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -26895,7 +26787,7 @@ MonoBehaviour:
   pokemonSprite: {fileID: 1174418101}
   gender: {fileID: 98055363}
   status: {fileID: 1145475440}
-  shinyStar: {fileID: 937264816}
+  shinyStar: {fileID: 937264814}
   pokeballSprite: {fileID: 23110358}
 --- !u!114 &1578402958
 MonoBehaviour:

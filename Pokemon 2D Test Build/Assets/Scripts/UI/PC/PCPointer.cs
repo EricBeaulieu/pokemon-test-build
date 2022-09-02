@@ -105,7 +105,7 @@ public class PCPointer : MonoBehaviour
         }
         else
         {
-            pokemonSprite.sprite = StatusConditionArt.instance.Nothing;
+            pokemonSprite.sprite = GlobalArt.nothing;
             holditemGameobject.SetActive(false);
         }
     }

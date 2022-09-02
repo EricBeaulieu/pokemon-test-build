@@ -16,31 +16,35 @@ MonoBehaviour:
   _pokedexDescription: Should you feel yourself attacked by a sudden chill, it is
     evidence of an approaching Gengar. There is no escaping it. Give up.
   _classification: 
+  _baseHappiness: 0
+  _isBaby: 0
+  _isLegendary: 0
+  _isMythical: 0
   _heightInMeters: 0
-  _weightInPounds: 0
+  _weightInKg: 0
   _captureRate: 45
   rewardedEffortValue:
-  - _statAttribute: 2
+  - _statAttribute: 1
     _statValue: 1
-  - _statAttribute: 3
+  - _statAttribute: 2
     _statValue: 2
-  _hasGender: 1
-  _maleFemaleRatio: 50
+  _maleFemaleRatio: 4
   _baseGroup: 3
   rewardedBaseExp: 255
   _type1: 8
   _type2: 15
-  _eggGroup1: 9
-  _eggGroup2: 0
+  _eggGroup1: 10
+  _eggGroup2: -1
+  _hatchCounter: 0
   _maxHitPoints: 65
   _attack: 110
   _defense: 100
   _specialAttack: 55
   _specialDefense: 95
   _speed: 75
-  firstAbility: 73
-  secondAbility: 0
-  hiddenAbility: 0
+  firstAbility: 72
+  secondAbility: -1
+  hiddenAbility: -1
   _learnableMoves:
   - _moveBase: {fileID: 11400000, guid: 6dc5aac33c756434da59043e60b40ede, type: 2}
     _levelLeanred: -1

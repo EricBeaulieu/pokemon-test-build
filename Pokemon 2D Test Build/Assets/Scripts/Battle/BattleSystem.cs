@@ -2944,15 +2944,19 @@ public class BattleSystem : CoreSystem
 
     public static bool CheckIfTargetCanBeInflatuated(Pokemon sourcePokemon, Pokemon targetPokemon)
     {
-        if(sourcePokemon.gender == targetPokemon.gender)
+        if(sourcePokemon.gender.HasValue == false)
         {
             return false;
         }
-        else if(targetPokemon.gender == Gender.NA)
+        else if(targetPokemon.gender.HasValue == false)
         {
             return false;
         }
         else if(targetPokemon.HasCurrentVolatileStatus(ConditionID.Infatuation) == true)
+        {
+            return false;
+        }
+        else if(sourcePokemon.gender.Value == targetPokemon.gender.Value)
         {
             return false;
         }

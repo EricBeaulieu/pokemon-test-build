@@ -42,6 +42,16 @@ public class LevelManager : MonoBehaviour
                 }
             }
         }
+
+        if(sceneReference == null)
+        {
+            Debug.LogError("Current Scene Reference is missing", gameObject);
+        }
+
+        if(currentGrid == null)
+        {
+            Debug.LogWarning("Current Grid Reference is missing", gameObject);
+        }
         sceneReference.SetLevelManager(this);
     }
 

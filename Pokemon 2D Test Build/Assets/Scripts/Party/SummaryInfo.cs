@@ -23,14 +23,14 @@ public class SummaryInfo : SummaryUIBase
     {
         pokedexNumber.text = pokemon.pokemonBase.GetPokedexNumber().ToString("000");
         pokedexPokemonName.text = pokemon.pokemonBase.GetPokedexName();
-        pokemonType1.sprite = StatusConditionArt.instance.ReturnElementArt(pokemon.pokemonBase.pokemonType1);
+        pokemonType1.sprite = GlobalArt.ReturnElementArt(pokemon.pokemonBase.pokemonType1);
         if (pokemon.pokemonBase.pokemonType2 != ElementType.NA)
         {
-            pokemonType2.sprite = StatusConditionArt.instance.ReturnElementArt(pokemon.pokemonBase.pokemonType2);
+            pokemonType2.sprite = GlobalArt.ReturnElementArt(pokemon.pokemonBase.pokemonType2);
         }
         else
         {
-            pokemonType2.sprite = StatusConditionArt.instance.Nothing;
+            pokemonType2.sprite = GlobalArt.nothing;
         }
         originalTrainerName.text = pokemon.originalTrainer;
         originalTrainerIDNumber.text = pokemon.originalTrainerID;

@@ -39,7 +39,7 @@ public class TMHMItem : ItemBase
 
     public override Sprite ItemSprite
     {
-        get { return StatusConditionArt.instance.ReturnTMArt(moveBase.Type); }
+        get { return GlobalArt.ReturnTMArt(moveBase.Type); }
     }
 
     public override bool ShowStandardUI()

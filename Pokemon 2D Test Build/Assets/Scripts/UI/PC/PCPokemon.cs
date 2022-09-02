@@ -50,7 +50,7 @@ public class PCPokemon : MonoBehaviour, ISelectHandler
         }
         else
         {
-            pokemonSprite.sprite = StatusConditionArt.instance.Nothing;
+            pokemonSprite.sprite = GlobalArt.nothing;
             holditemGameobject.SetActive(false);
         }
     }

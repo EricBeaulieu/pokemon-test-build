@@ -42,7 +42,6 @@ public class AttackSelectionEventSelector : MonoBehaviour
     /// </summary>
     /// <param name="currentPokemon">The current Battle Unit Pokemon</param>
     /// <param name="moves">All available moves</param>
-    /// <param name="currentBattleSystem">A reference to the battle system that gets passed down</param>
     public void SetMovesList(BattleUnit currentPokemon, List<Move> moves)
     {
         for (int i = 0; i < moveButton.Length; i++)

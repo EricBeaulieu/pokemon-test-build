@@ -20,7 +20,7 @@ public class SummaryAttackButton : MonoBehaviour, ISelectHandler, IDeselectHandl
             _move = null;
             moveNameText.text = "--";
             pPText.text = $"PP--";
-            typeSprite.sprite = StatusConditionArt.instance.Nothing;
+            typeSprite.sprite = GlobalArt.nothing;
             EnableSelector(false);
         }
         else
@@ -28,7 +28,7 @@ public class SummaryAttackButton : MonoBehaviour, ISelectHandler, IDeselectHandl
             _move = move.moveBase;
             moveNameText.text = move.moveBase.MoveName;
             pPText.text = $"PP{move.pP.ToString()}/{move.moveBase.PowerPoints}";
-            typeSprite.sprite = StatusConditionArt.instance.ReturnElementArt(move.moveBase.Type);
+            typeSprite.sprite = GlobalArt.ReturnElementArt(move.moveBase.Type);
             EnableSelector(false);
         }
     }
@@ -38,7 +38,7 @@ public class SummaryAttackButton : MonoBehaviour, ISelectHandler, IDeselectHandl
         _move = newMove;
         moveNameText.text = newMove.MoveName;
         pPText.text = $"PP{newMove.PowerPoints}/{newMove.PowerPoints}";
-        typeSprite.sprite = StatusConditionArt.instance.ReturnElementArt(newMove.Type);
+        typeSprite.sprite = GlobalArt.ReturnElementArt(newMove.Type);
         EnableSelector(false);
     }
 

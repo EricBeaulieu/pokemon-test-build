@@ -70,19 +70,19 @@ public class PartyMemberUI : MonoBehaviour, ISelectHandler, IDeselectHandler
         hPBar.SetHPWithoutAnimation(currentPokemon.currentHitPoints,currentPokemon.maxHitPoints);
         currentHP.text = $"{currentPokemon.currentHitPoints.ToString()}/{currentPokemon.maxHitPoints.ToString()}";
         background.sprite = PartyBackgroundArt.instance.ReturnBackgroundArt(_pokemon.currentHitPoints, _isFirstSlot);
-        gender.sprite = StatusConditionArt.instance.ReturnGenderArt(currentPokemon.gender);
+        gender.sprite = GlobalArt.ReturnGenderArt(currentPokemon.gender);
 
         if(currentPokemon.currentHitPoints <= 0)
         {
-            status.sprite = StatusConditionArt.instance.FaintedStatus;
+            status.sprite = GlobalArt.faintedStatus;
         }
         else if(currentPokemon.status != null)
         {
-            status.sprite = StatusConditionArt.instance.ReturnStatusConditionArt(currentPokemon.status.Id);
+            status.sprite = GlobalArt.ReturnStatusConditionArt(currentPokemon.status.Id);
         }
         else
         {
-            status.sprite = StatusConditionArt.instance.Nothing;
+            status.sprite = GlobalArt.nothing;
         }
 
         _animatedSprite = currentPokemon.pokemonBase.GetAnimatedSprites();
@@ -142,15 +142,15 @@ public class PartyMemberUI : MonoBehaviour, ISelectHandler, IDeselectHandler
         background.sprite = PartyBackgroundArt.instance.ReturnBackgroundArt(_pokemon.currentHitPoints, _isFirstSlot,true);
         if (_pokemon.currentHitPoints <= 0)
         {
-            status.sprite = StatusConditionArt.instance.FaintedStatus;
+            status.sprite = GlobalArt.faintedStatus;
         }
         else if (_pokemon.status != null)
         {
-            status.sprite = StatusConditionArt.instance.ReturnStatusConditionArt(_pokemon.status.Id);
+            status.sprite = GlobalArt.ReturnStatusConditionArt(_pokemon.status.Id);
         }
         else
         {
-            status.sprite = StatusConditionArt.instance.Nothing;
+            status.sprite = GlobalArt.nothing;
         }
 
         yield return hPBar.SetHPRecoveredAnimation(_pokemon.currentHitPoints,hpRecovered, _pokemon.maxHitPoints, currentHP);
@@ -194,7 +194,7 @@ public class PartyMemberUI : MonoBehaviour, ISelectHandler, IDeselectHandler
 
     public void UpdateHoldItem()
     {
-        heldItem.sprite = (_pokemon.GetCurrentItem != null) ? PartyBackgroundArt.instance.HoldItemSprite() : StatusConditionArt.instance.Nothing;
+        heldItem.sprite = (_pokemon.GetCurrentItem != null) ? PartyBackgroundArt.instance.HoldItemSprite() : GlobalArt.nothing;
     }
 
     void ItemBeingUsed(Pokemon currentPokemon,ItemBase currentItem)

@@ -13,7 +13,7 @@ public class HPBar : MonoBehaviour
     void SetHP(float hpNormalized)
     {
         healthBar.fillAmount = hpNormalized;
-        healthBar.color = StatusConditionArt.instance.ReturnHitPointsColor(hpNormalized);
+        healthBar.color = GlobalArt.ReturnHitPointsColor(hpNormalized);
     }
 
     public IEnumerator SetHPDamageAnimation(int healthAfterDamage,int healthBeforeDamage,int maxHP,Text currentHpText = null)

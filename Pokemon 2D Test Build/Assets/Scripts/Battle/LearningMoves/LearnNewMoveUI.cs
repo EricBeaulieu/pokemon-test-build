@@ -157,10 +157,10 @@ public class LearnNewMoveUI : CoreSystem
     {
         pokemonSprite.sprite = pokemon.pokemonBase.GetAnimatedSprites()[0];
         pokemonName.text = pokemon.currentName;
-        gender.sprite = StatusConditionArt.instance.ReturnGenderArt(pokemon.gender);
-        type1.sprite = StatusConditionArt.instance.ReturnElementArt(pokemon.pokemonBase.pokemonType1);
+        gender.sprite = GlobalArt.ReturnGenderArt(pokemon.gender);
+        type1.sprite = GlobalArt.ReturnElementArt(pokemon.pokemonBase.pokemonType1);
         type2.sprite = (pokemon.pokemonBase.pokemonType2 != ElementType.NA) ? 
-            StatusConditionArt.instance.ReturnElementArt(pokemon.pokemonBase.pokemonType2) : StatusConditionArt.instance.Nothing;
+            GlobalArt.ReturnElementArt(pokemon.pokemonBase.pokemonType2) : GlobalArt.nothing;
 
         SetMoveReplacementList(pokemon,pokemon.moves,newMove);
 

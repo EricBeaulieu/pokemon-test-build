@@ -11,7 +11,7 @@ public class PokemonSaveData
     public int currentHitPoints;
     public List<MoveSaveData> currentMoves;
     public bool isShiny;
-    public Gender currentGender;
+    public bool? currentGender;
     public string currentNature;
     public IndividualValues currentIndividualValues;
     public EffortValues currentEffortValues;

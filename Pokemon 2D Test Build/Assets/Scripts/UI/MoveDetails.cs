@@ -16,12 +16,12 @@ public class MoveDetails : MonoBehaviour
     {
         if(elementTypeSprite != null)
         {
-            elementTypeSprite.sprite = StatusConditionArt.instance.ReturnElementArt(move.Type);
+            elementTypeSprite.sprite = GlobalArt.ReturnElementArt(move.Type);
         }
 
         if(move != null)
         {
-            moveCategorySprite.sprite = StatusConditionArt.instance.ReturnMoveCategoryArt(move.MoveType);
+            moveCategorySprite.sprite = GlobalArt.ReturnMoveCategoryArt(move.MoveType);
             movePower.text = (move.MovePower > 1) ? move.MovePower.ToString() : "--";
             if (movePp != null)
             {
@@ -30,7 +30,7 @@ public class MoveDetails : MonoBehaviour
         }
         else
         {
-            moveCategorySprite.sprite = StatusConditionArt.instance.Nothing;
+            moveCategorySprite.sprite = GlobalArt.nothing;
             movePower.text = "--";
         }
 

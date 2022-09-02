@@ -15,7 +15,7 @@ public class ShopItemDetails : MonoBehaviour
     {
         if(item == null)
         {
-            itemSprite.sprite = StatusConditionArt.instance.Nothing;
+            itemSprite.sprite = GlobalArt.nothing;
             itemDescription.text = "";
             inBagText.text = IN_BAG;
             return;

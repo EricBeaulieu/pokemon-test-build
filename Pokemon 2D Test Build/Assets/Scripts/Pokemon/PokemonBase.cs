@@ -33,7 +33,6 @@ public class PokemonBase : ScriptableObject {
     [SerializeField] List<EarnableEV> rewardedEffortValue;
 
     [Header("Gender")]
-    [SerializeField] bool _hasGender = true;
     [SerializeField] int _maleFemaleRatio = 4;
 
     [Header("Experience Group")]
@@ -242,7 +241,7 @@ public class PokemonBase : ScriptableObject {
 
     #endregion
 
-    #region Getters/Setters
+    #region Getters/Setters General Information
 
     public int GetPokedexNumber()
     {
@@ -259,14 +258,14 @@ public class PokemonBase : ScriptableObject {
         return _captureRate;
     }
 
-    public Sprite[] GetFrontSprite(bool isShiny,Gender gender)
+    public Sprite[] GetFrontSprite(bool isShiny,bool? gender)
     {
         string spriteName = GetStartingSpriteNameEntry(isShiny, gender);
 
         return new[] { SpriteAtlas.GetSprite(spriteName + "FrontA"), SpriteAtlas.GetSprite(spriteName + "FrontB") };
     }
 
-    public Sprite[] GetBackSprite(bool isShiny, Gender gender)
+    public Sprite[] GetBackSprite(bool isShiny, bool? gender)
     {
         string spriteName = GetStartingSpriteNameEntry(isShiny, gender);
 
@@ -288,12 +287,7 @@ public class PokemonBase : ScriptableObject {
 
     #region Gender
 
-    public bool HasGender
-    {
-        get { return _hasGender; }
-    }
-
-    public float MaleFemaleGenderRatio
+    public int MaleFemaleGenderRatio
     {
         get { return _maleFemaleRatio; }
     }
@@ -395,7 +389,7 @@ public class PokemonBase : ScriptableObject {
         get { return hiddenAbility; }
     }
 
-    string GetStartingSpriteNameEntry(bool isShiny,Gender gender = Gender.NA)
+    string GetStartingSpriteNameEntry(bool isShiny,bool? gender = null)
     {
         string spriteName = $"{GetPokedexNumber().ToString("000")}_{PokemonNameList.GetPokeDexName(_pokedexNumber)}_";
 
@@ -404,13 +398,13 @@ public class PokemonBase : ScriptableObject {
             spriteName += "Shiny_";
         }
 
-        if (PokemonNameList.GenderExclusive(GetPokedexNumber()) == true)
+        if (gender.HasValue && PokemonNameList.GenderExclusive(GetPokedexNumber()) == true)
         {
-            if (gender == Gender.Male)
+            if (gender.Value)
             {
                 spriteName += "Male_";
             }
-            else if(gender == Gender.Female)
+            else
             {
                 spriteName += "Female_";
             }
@@ -418,7 +412,6 @@ public class PokemonBase : ScriptableObject {
 
         return spriteName;
     }
-
 
     public List<EvolutionBase> Evolutions
     {

@@ -14,8 +14,9 @@ public class Pokemon {
     [SerializeField] List<MoveBase> presetMoves;
     [SerializeField] bool _isShiny;
     public bool isShiny { get { return _isShiny; } private set { _isShiny = value; } }
-    [SerializeField] Gender _gender;
-    public Gender gender { get { return _gender; } private set { _gender = value; } }
+    [SerializeField] bool _gender;
+    public bool? gender { get { if (pokemonBase.MaleFemaleGenderRatio < 0) { return null; } return _gender; }  
+        private set { if (value.HasValue) { _gender = value.Value;  }else _gender = false; } }
     [SerializeField] NatureBase nature;
     public NatureBase Nature { get { return nature; } private set { nature = value; } }
     [SerializeField] IndividualValues _individualValues = new IndividualValues();
@@ -464,24 +465,24 @@ public class Pokemon {
         return natureBases[Random.Range(0, natureBases.Length)];
     }
 
-    Gender SetGender(Gender serializedGender = Gender.NA)
+    bool? SetGender(bool? serializedGender = null)
     {
-        if (pokemonBase.HasGender == true)
+        if (pokemonBase.MaleFemaleGenderRatio >= 0)
         {
-            if(serializedGender != Gender.NA)
+            if(serializedGender.HasValue)
             {
                 return serializedGender;
             }
 
             float checker = Random.Range(1, 101);
 
-            if (checker <= pokemonBase.MaleFemaleGenderRatio)//If true then male
+            if (checker <= GlobalTools.CalculateGenderRatio(pokemonBase.MaleFemaleGenderRatio))//If true then male
             {
-                serializedGender = Gender.Male;
+                serializedGender = true;
             }
             else
             {
-                serializedGender = Gender.Female;
+                serializedGender = false;
             }
         }
 
