@@ -17,7 +17,7 @@ public class ChargingTurn : ConditionBase
     }
     public override bool CanAttackThisTurn(MoveBase originalMove,BattleUnit attackingPokemon)
     {
-        if (originalMove == SpecializedMoves.solarBeam || originalMove == SpecializedMoves.solarBlade)
+        if (originalMove.MoveName == "Solar Beam" || originalMove.MoveName == "Solar Blade")
         {
             if (BattleSystem.GetCurrentWeather == WeatherEffectID.Sunshine)
             {
@@ -46,8 +46,9 @@ public class ChargingTurn : ConditionBase
         }
         else if (invulnerableType == SemiInvulnerableType.Air)
         {
-            if (originalMove == SpecializedMoves.gust || originalMove == SpecializedMoves.hurricane || originalMove == SpecializedMoves.twister
-                || originalMove == SpecializedMoves.smackDown || originalMove == SpecializedMoves.thousandArrows || originalMove == SpecializedMoves.thunder)
+            if (originalMove.MoveName == "Gust" || originalMove.MoveName == "Hurricane" || originalMove.MoveName == "Twister" 
+                //|| originalMove == SpecializedMoves.smackDown || originalMove == SpecializedMoves.thousandArrows 
+                || originalMove.MoveName == "Thunder")
             {
                 hitCancelsAttack = true;
                 return true;
@@ -55,14 +56,21 @@ public class ChargingTurn : ConditionBase
         }
         else if (invulnerableType == SemiInvulnerableType.Underground)
         {
-            if (originalMove == SpecializedMoves.earthquake || originalMove == SpecializedMoves.magnitude || originalMove == SpecializedMoves.fissure)
+            if (originalMove.MoveName == "Earthquake" || originalMove.MoveName == "Earth Power" 
+                || originalMove.MoveName == "Magnitude" || originalMove.MoveName == "Fissure")
             {
+                originalMove.AdjustedMovePower(100);
+                if(originalMove.MoveName == "Fissure")
+                {
+                    originalMove.AdjustedMoveAccuracy(50);
+                }
+
                 return true;
             }
         }
         else if (invulnerableType == SemiInvulnerableType.Underwater)
         {
-            if (originalMove == SpecializedMoves.surf || originalMove == SpecializedMoves.whirlpool)
+            if (originalMove.MoveName == "Surf" || originalMove.MoveName == "Whirlpool")
             {
                 return true;
             }

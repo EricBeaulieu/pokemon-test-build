@@ -594,7 +594,7 @@ public class Pokemon {
         float attackPower = (move.MoveType == MoveType.Physical) ? attackingUnit.pokemon.attack : attackingUnit.pokemon.specialAttack;
         float defendersDefense;
 
-        if (move.originalMove == SpecializedMoves.foulPlay)
+        if (move.MoveName == "Foul Play")
         {
             attackPower = (move.MoveType == MoveType.Physical) ? attack : specialAttack;
         }

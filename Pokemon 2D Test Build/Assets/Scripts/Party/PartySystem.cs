@@ -52,6 +52,7 @@ public class PartySystem : CoreSystem
         SetupPartyMemberFunctionality();
         summarySystem.Initialization();
         selectableBox = new SelectableBoxUI(_partyMemberSlots[0].gameObject);
+        SetUpStaticArt();
     }
 
     public override void HandleUpdate()
@@ -191,9 +192,9 @@ public class PartySystem : CoreSystem
                 if(i+1 == currentParty.Count)
                 {
                     //have to pull the variable out, then change it and set it back in
-                    var navigation = _partyMemberSlots[i].GetComponent<Button>().navigation;
+                    var navigation = _partyMemberSlots[i].GetButton.navigation;
                     navigation.selectOnDown = cancelButton;
-                    _partyMemberSlots[i].GetComponent<Button>().navigation = navigation;
+                    _partyMemberSlots[i].GetButton.navigation = navigation;
 
                     //CancelButton Up
                     navigation = cancelButton.navigation;
@@ -202,8 +203,8 @@ public class PartySystem : CoreSystem
                 }
                 else
                 {
-                    var navigation = _partyMemberSlots[i].GetComponent<Button>().navigation;
-                    navigation.selectOnDown = _partyMemberSlots[i+1].GetComponent<Button>();
+                    var navigation = _partyMemberSlots[i].GetButton.navigation;
+                    navigation.selectOnDown = _partyMemberSlots[i+1].GetButton;
                     _partyMemberSlots[i].GetButton.navigation = navigation;
                 }
             }
@@ -721,5 +722,115 @@ public class PartySystem : CoreSystem
 
         CloseSystem();
         inventorySystem.ReturnFromPartySystemAfterItemUsage(true);
+    }
+
+    //Main
+    public static Sprite mainPartyMemberHealthySelectedBackground { get; private set; }
+    public static Sprite mainPartyMemberHealthyNonSelectedBackground { get; private set; }
+    public static Sprite mainPartyMemberFaintedSelectedBackground { get; private set; }
+    public static Sprite mainPartyMemberFaintedNonSelectedBackground { get; private set; }
+    public static Sprite mainPartyMemberSwitchSelectedBackground { get; private set; }
+    public static Sprite mainPartyMemberSwitchSourceBackground { get; private set; }
+    //Standard
+    public static Sprite partyMemberHealthySelectedBackground { get; private set; }
+    public static Sprite partyMemberHealthyNonSelectedBackground { get; private set; }
+    public static Sprite partyMemberFaintedSelectedBackground { get; private set; }
+    public static Sprite partyMemberFaintedNonSelectedBackground { get; private set; }
+    public static Sprite partyMemberSwitchSelectedBackground { get; private set; }
+    public static Sprite partyMemberSwitchSourceBackground { get; private set; }
+
+    void SetUpStaticArt()
+    {
+        mainPartyMemberHealthySelectedBackground = (Sprite)UnityEditor.AssetDatabase.LoadAssetAtPath("Assets/Art/Party/PokemonParty/MainSlotHealthySelected.png", typeof(Sprite));
+        mainPartyMemberHealthyNonSelectedBackground = (Sprite)UnityEditor.AssetDatabase.LoadAssetAtPath("Assets/Art/Party/PokemonParty/MainSlotHealthy.png", typeof(Sprite));
+        mainPartyMemberFaintedSelectedBackground = (Sprite)UnityEditor.AssetDatabase.LoadAssetAtPath("Assets/Art/Party/PokemonParty/MainSlotFaintedSelected.png", typeof(Sprite));
+        mainPartyMemberFaintedNonSelectedBackground = (Sprite)UnityEditor.AssetDatabase.LoadAssetAtPath("Assets/Art/Party/PokemonParty/MainSlotFainted.png", typeof(Sprite));
+        mainPartyMemberSwitchSelectedBackground = (Sprite)UnityEditor.AssetDatabase.LoadAssetAtPath("Assets/Art/Party/PokemonParty/MainSlotSwitchSelected.png", typeof(Sprite));
+        mainPartyMemberSwitchSourceBackground = (Sprite)UnityEditor.AssetDatabase.LoadAssetAtPath("Assets/Art/Party/PokemonParty/MainSlotSwitch.png", typeof(Sprite));
+
+        partyMemberHealthySelectedBackground = (Sprite)UnityEditor.AssetDatabase.LoadAssetAtPath("Assets/Art/Party/PokemonParty/StandardSlotHealthySelected.png", typeof(Sprite));
+        partyMemberHealthyNonSelectedBackground = (Sprite)UnityEditor.AssetDatabase.LoadAssetAtPath("Assets/Art/Party/PokemonParty/StandardSlotHealthy.png", typeof(Sprite));
+        partyMemberFaintedSelectedBackground = (Sprite)UnityEditor.AssetDatabase.LoadAssetAtPath("Assets/Art/Party/PokemonParty/StandardSlotFaintedSelected.png", typeof(Sprite));
+        partyMemberFaintedNonSelectedBackground = (Sprite)UnityEditor.AssetDatabase.LoadAssetAtPath("Assets/Art/Party/PokemonParty/StandardSlotFainted.png", typeof(Sprite));
+        partyMemberSwitchSelectedBackground = (Sprite)UnityEditor.AssetDatabase.LoadAssetAtPath("Assets/Art/Party/PokemonParty/StandardSlotSwitchSelected.png", typeof(Sprite));
+        partyMemberSwitchSourceBackground = (Sprite)UnityEditor.AssetDatabase.LoadAssetAtPath("Assets/Art/Party/PokemonParty/StandardSlotSwitch.png", typeof(Sprite));
+    }
+
+    public static Sprite ReturnBackgroundArt(int currentHealth, bool isFirstSlot = false, bool isSelected = false, bool switching = false)
+    {
+        if (isFirstSlot == true)
+        {
+            if (switching == true)
+            {
+                if (isSelected == true)
+                {
+                    return mainPartyMemberSwitchSelectedBackground;
+                }
+                else//isSelected == false
+                {
+                    return mainPartyMemberSwitchSourceBackground;
+                }
+            }
+
+            if (currentHealth > 0)
+            {
+                if (isSelected == true)
+                {
+                    return mainPartyMemberHealthySelectedBackground;
+                }
+                else//isSelected == false
+                {
+                    return mainPartyMemberHealthyNonSelectedBackground;
+                }
+            }
+            else
+            {
+                if (isSelected == true)
+                {
+                    return mainPartyMemberFaintedSelectedBackground;
+                }
+                else//isSelected == false
+                {
+                    return mainPartyMemberFaintedNonSelectedBackground;
+                }
+            }
+        }
+        else//Not First Slot
+        {
+            if (switching == true)
+            {
+                if (isSelected == true)
+                {
+                    return partyMemberSwitchSelectedBackground;
+                }
+                else//isSelected == false
+                {
+                    return partyMemberSwitchSourceBackground;
+                }
+            }
+
+            if (currentHealth > 0)
+            {
+                if (isSelected == true)
+                {
+                    return partyMemberHealthySelectedBackground;
+                }
+                else//isSelected == false
+                {
+                    return partyMemberHealthyNonSelectedBackground;
+                }
+            }
+            else
+            {
+                if (isSelected == true)
+                {
+                    return partyMemberFaintedSelectedBackground;
+                }
+                else//isSelected == false
+                {
+                    return partyMemberFaintedNonSelectedBackground;
+                }
+            }
+        }
     }
 }

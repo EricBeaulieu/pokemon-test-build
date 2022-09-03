@@ -6,7 +6,7 @@ public class Notes
 {
     //To do list
 
-    //PartyBackgroundArt needs to be fixed and then specialized moves
+    //specialized moves
     //Fix pc bug where i put pokemon in the 6th slot and didnt move
 
     //fix the preanimtion for confused
@@ -34,6 +34,7 @@ public class Notes
     //add in specific moves
     //hidden power
     //transform
+    //smack down + Thousand Arrows -- needs a special change in the charging turn class
     //variations of arena trap
     //oblivious taunts
     //Embargo implimented but needs to be put into battle system
@@ -89,4 +90,9 @@ public class Notes
     //gust/twister double damage against flying unit
     //Freeze-Dry and flying press have their own specialzed type manor
     //Uproar pokemon cant fall asleep during these turns
+
+
+
+    //earth power now hits pokemon while theyre semi invernerable while theyre dug underground
+    //magnitude and earth power doubles and fissure accuracy increases to 50% while theyre in dig state
 }

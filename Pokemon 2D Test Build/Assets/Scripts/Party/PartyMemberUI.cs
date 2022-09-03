@@ -24,7 +24,7 @@ public class PartyMemberUI : MonoBehaviour, ISelectHandler, IDeselectHandler
     float _timer;
     float _animationTimerSwitch = 0.3f;
     int _currentIndex;
-    [SerializeField] Image heldItem;
+    [SerializeField] GameObject heldItem;
 
     [SerializeField] Image background;
 
@@ -53,7 +53,7 @@ public class PartyMemberUI : MonoBehaviour, ISelectHandler, IDeselectHandler
     void Update()
     {
         _timer += Time.deltaTime;
-        if(_timer >= _animationTimerSwitch)
+        if (_timer >= _animationTimerSwitch)
         {
             _currentIndex = (_currentIndex + 1) % _animatedSprite.Length;
             pokemonSprite.sprite = _animatedSprite[_currentIndex];
@@ -69,7 +69,7 @@ public class PartyMemberUI : MonoBehaviour, ISelectHandler, IDeselectHandler
         levelText.text = currentPokemon.currentLevel.ToString();
         hPBar.SetHPWithoutAnimation(currentPokemon.currentHitPoints,currentPokemon.maxHitPoints);
         currentHP.text = $"{currentPokemon.currentHitPoints.ToString()}/{currentPokemon.maxHitPoints.ToString()}";
-        background.sprite = PartyBackgroundArt.instance.ReturnBackgroundArt(_pokemon.currentHitPoints, _isFirstSlot);
+        background.sprite = PartySystem.ReturnBackgroundArt(_pokemon.currentHitPoints, _isFirstSlot);
         gender.sprite = GlobalArt.ReturnGenderArt(currentPokemon.gender);
 
         if(currentPokemon.currentHitPoints <= 0)
@@ -98,11 +98,11 @@ public class PartyMemberUI : MonoBehaviour, ISelectHandler, IDeselectHandler
     {
         if(PartySystem.GetCurrentlySwitchingPokemon == true)
         {
-            background.sprite = PartyBackgroundArt.instance.ReturnBackgroundArt(_pokemon.currentHitPoints, _isFirstSlot, true, true);
+            background.sprite = PartySystem.ReturnBackgroundArt(_pokemon.currentHitPoints, _isFirstSlot, true, true);
         }
         else
         {
-            background.sprite = PartyBackgroundArt.instance.ReturnBackgroundArt(_pokemon.currentHitPoints, _isFirstSlot, true, switching);
+            background.sprite = PartySystem.ReturnBackgroundArt(_pokemon.currentHitPoints, _isFirstSlot, true, switching);
         }
         EnableSelector(true);
     }
@@ -122,7 +122,7 @@ public class PartyMemberUI : MonoBehaviour, ISelectHandler, IDeselectHandler
 
     void Deselected()
     {
-        background.sprite = PartyBackgroundArt.instance.ReturnBackgroundArt(_pokemon.currentHitPoints, _isFirstSlot, false, switching);
+        background.sprite = PartySystem.ReturnBackgroundArt(_pokemon.currentHitPoints, _isFirstSlot, false, switching);
         EnableSelector(false);
     }
 
@@ -139,7 +139,7 @@ public class PartyMemberUI : MonoBehaviour, ISelectHandler, IDeselectHandler
 
     public IEnumerator UpdateAfterItemUse(int hpRecovered = 0)
     {
-        background.sprite = PartyBackgroundArt.instance.ReturnBackgroundArt(_pokemon.currentHitPoints, _isFirstSlot,true);
+        background.sprite = PartySystem.ReturnBackgroundArt(_pokemon.currentHitPoints, _isFirstSlot,true);
         if (_pokemon.currentHitPoints <= 0)
         {
             status.sprite = GlobalArt.faintedStatus;
@@ -194,7 +194,7 @@ public class PartyMemberUI : MonoBehaviour, ISelectHandler, IDeselectHandler
 
     public void UpdateHoldItem()
     {
-        heldItem.sprite = (_pokemon.GetCurrentItem != null) ? PartyBackgroundArt.instance.HoldItemSprite() : GlobalArt.nothing;
+        heldItem.SetActive((_pokemon.GetCurrentItem != null));
     }
 
     void ItemBeingUsed(Pokemon currentPokemon,ItemBase currentItem)

@@ -92,6 +92,7 @@ public class GameManager : MonoBehaviour
         pCSystem.Initialization();
         shopSystem.Initialization();
         AudioManager.Initialization(audioMusic,audioSFX,trainerBattleMusic,wildBattleMusic);
+        SpecializedMoves.Initialization();
 
         solidObjectLayermask = LayerMask.GetMask("SolidObjects");
         interactableLayermask = LayerMask.GetMask("Interactable");

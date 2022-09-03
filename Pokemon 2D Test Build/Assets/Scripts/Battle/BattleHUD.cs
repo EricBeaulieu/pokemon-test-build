@@ -29,6 +29,8 @@ public class BattleHUD : MonoBehaviour
 
     Pokemon pokemon;
 
+    const int Offset_Position = 450;
+
     void Awake()
     {
         _originalPos = hudBackground.rectTransform.localPosition;
@@ -116,14 +118,7 @@ public class BattleHUD : MonoBehaviour
 
     void SetHudOffScreen(bool isPlayers)
     {
-        if (isPlayers == true)
-        {
-            transform.localPosition = new Vector3(_originalPos.x + 400f, _originalPos.y);
-        }
-        else
-        {
-            transform.localPosition = new Vector3(_originalPos.x - 400f, _originalPos.y);
-        }
+        transform.localPosition = new Vector3(_originalPos.x + ((isPlayers ? 1:-1) * Offset_Position), _originalPos.y);
     }
 
     void ResetAlphaHUD(bool isPlayers)

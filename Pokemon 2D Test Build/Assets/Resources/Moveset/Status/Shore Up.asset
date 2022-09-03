@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 60a83619553a27641bfeb93370b0ce89, type: 3}
   m_Name: Shore Up
   m_EditorClassIdentifier: 
-  moveName: Synthesis
+  moveName: Shore Up
   moveDescription: The user regains up to half of its max HP. It restores more HP
     in a sandstorm.
   elementType: 10
@@ -46,5 +46,8 @@ MonoBehaviour:
   copyableByMirrorMove: 0
   recoilType: 0
   recoilPercentage: 0
-  drainsHP: 0
   hpRecovered: 0.5
+  leavesTargetWith1HP: 0
+  stealsTargetsItem: 0
+  bypassesTargetsStatBoosts: 0
+  oneHitKO: 0
