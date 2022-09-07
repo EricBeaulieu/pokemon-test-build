@@ -75,6 +75,27 @@ public static class GlobalTools
         }
     }
 
+    public static Vector2 CurrentDirectionFacing(FacingDirections facing)
+    {
+        Vector2 dir = new Vector2();
+        switch (facing)
+        {
+            case FacingDirections.Up:
+                dir = Vector2.up;
+                break;
+            case FacingDirections.Down:
+                dir = Vector2.down;
+                break;
+            case FacingDirections.Left:
+                dir = Vector2.left;
+                break;
+            default://FacingDirections.Right
+                dir = Vector2.right;
+                break;
+        }
+        return dir;
+    }
+
     public static string FacingDirectionEditorHelper(FacingDirections direction)
     {
         switch (direction)

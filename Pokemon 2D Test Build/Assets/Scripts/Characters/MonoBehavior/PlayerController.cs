@@ -162,8 +162,7 @@ public class PlayerController : Entity
 
     IEnumerator Interact()
     {
-        Vector2 facingDirection = new Vector2(_anim.GetFloat("moveX"), _anim.GetFloat("moveY"));
-        Vector2 interactablePOS = (Vector2)transform.position + facingDirection;
+        Vector2 interactablePOS = (Vector2)transform.position + new Vector2(_anim.GetFloat("moveX"), _anim.GetFloat("moveY"));
 
         Debug.DrawLine(transform.position, interactablePOS,Color.red,1f);
 

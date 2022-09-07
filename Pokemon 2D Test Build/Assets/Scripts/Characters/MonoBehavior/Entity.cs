@@ -84,7 +84,7 @@ public abstract class Entity : MonoBehaviour
         eastLedgeLayerMask = GameManager.eastLedgeLayerMask;
         westLedgeLayerMask = GameManager.westLedgeLayerMask;
         waterLayerMask = GameManager.waterLayerMask;
-
+        
         SnapToGrid();
 
         if(positionMovingTo == null)
@@ -249,4 +249,5 @@ public abstract class Entity : MonoBehaviour
     {
         return new Vector2(Mathf.RoundToInt(_anim.GetFloat("moveX")), Mathf.RoundToInt(_anim.GetFloat("moveY")));
     }
+
 }

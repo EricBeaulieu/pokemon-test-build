@@ -7,11 +7,11 @@ using UnityEngine.SceneManagement;
 public static class SceneSystem
 {
     public static LevelManager currentLevelManager { get; private set; }
-    static List<GameSceneBaseSO> currentScenesLoaded = new List<GameSceneBaseSO>();
+    static List<GameSceneBaseSO> currentScenesLoaded;
 
     public static void Initialization()
     {
-        currentScenesLoaded = GetAllOpenScenes(currentScenesLoaded);
+        currentScenesLoaded = GetAllOpenScenes();
     }
 
     public static IEnumerator NewAreaEntered(LevelManager newLevel)
@@ -37,7 +37,7 @@ public static class SceneSystem
                 continue;
             }
             AllActiveEntities.RemoveAll(x => currentScenesLoaded[i].GetLevelManager.GetAllEntities().Contains(x) == true);
-            SceneManager.UnloadSceneAsync(currentScenesLoaded[i].name);
+            yield return SceneManager.UnloadSceneAsync(currentScenesLoaded[i].name);
             currentScenesLoaded.RemoveAt(i);
         }
 
@@ -56,8 +56,9 @@ public static class SceneSystem
         ArtificialGrid.SetupGrid();
     }
 
-    static List<GameSceneBaseSO> GetAllOpenScenes(List<GameSceneBaseSO> current)
+    static List<GameSceneBaseSO> GetAllOpenScenes()
     {
+        List<GameSceneBaseSO> current = new List<GameSceneBaseSO>();
         int countLoaded = SceneManager.sceneCount;
         Scene[] loadedScenes = new Scene[countLoaded];
 
@@ -74,10 +75,7 @@ public static class SceneSystem
             GameSceneBaseSO matching = allGameSceneBaseSO.FirstOrDefault(x => x.name == loadedScenes[i].name);
             if (matching != null)
             {
-                if (current.Contains(matching) == false)
-                {
-                    SceneManager.UnloadSceneAsync(matching.name);
-                }
+                current.Add(matching);
             }
         }
 
@@ -86,17 +84,27 @@ public static class SceneSystem
 
     public static IEnumerator LoadScenethatPlayerSavedIn(GameSceneBaseSO scene)
     {
+
         for (int i = currentScenesLoaded.Count - 1; i >= 0; i--)
         {
-            AllActiveEntities.RemoveAll(x => currentScenesLoaded[i].GetLevelManager.GetAllEntities().Contains(x) == true);
+            if (currentScenesLoaded.Contains(scene))
+            {
+                yield break;
+            }
+
+            if ((currentScenesLoaded.Any(x => scene.AdjacentGameScenes.Any(y => y == x))))
+            {
+                continue;
+            }
+
+            yield return AllActiveEntities.RemoveAll(x => currentScenesLoaded[i].GetLevelManager.GetAllEntities().Contains(x) == true);
             SceneManager.UnloadSceneAsync(currentScenesLoaded[i].GetScenePath);
             currentScenesLoaded.RemoveAt(i);
         }
 
-        GameSceneBaseSO gameSceneBase = Resources.FindObjectsOfTypeAll<GameSceneBaseSO>().FirstOrDefault(x => x == scene);
-        AsyncOperation sceneToLoad = SceneManager.LoadSceneAsync(gameSceneBase.name, LoadSceneMode.Additive);
-        currentScenesLoaded.Add(gameSceneBase);
-        yield return OnLevelLoaded(sceneToLoad, gameSceneBase);
+        AsyncOperation sceneToLoad = SceneManager.LoadSceneAsync(scene.name, LoadSceneMode.Additive);
+        currentScenesLoaded.Add(scene);
+        yield return OnLevelLoaded(sceneToLoad, scene);
     }
 
     static IEnumerator OnLevelLoaded(AsyncOperation asyncScene, GameSceneBaseSO gameScene)

@@ -12,6 +12,7 @@ public class EntityEditor : Editor
 
     void OnEnable()
     {
+        if (Application.isPlaying) return;
         if(characterArt != null)
         characterArt = CurrentSpriteInfo();
     }
@@ -20,7 +21,9 @@ public class EntityEditor : Editor
     {
         base.OnInspectorGUI();
 
-        if(target is WildPokemonController)
+        if (Application.isPlaying) return;
+
+        if (target is WildPokemonController)
         {
             return;
         }

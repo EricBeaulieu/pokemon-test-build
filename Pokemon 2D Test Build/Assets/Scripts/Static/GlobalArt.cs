@@ -25,6 +25,9 @@ public static class GlobalArt
     static Color mediumHP { get { return new Color(0.8962264f, 0.7208233f, 0); } }
     static Color lowHP { get { return new Color(1, 0, 0); } }
 
+    static Dictionary<string, Sprite> sprites = new Dictionary<string, Sprite>();
+    static Sprite overworldSpriteNullReference = (Sprite)AssetDatabase.LoadAssetAtPath("Assets/Art/OverworldNull.png", typeof(Sprite));
+
     public static Sprite ReturnStatusConditionArt(ConditionID currentCondition)
     {
         if(currentCondition >= ConditionID.Poison && currentCondition <= ConditionID.ToxicPoison)
@@ -116,4 +119,35 @@ public static class GlobalArt
         }
         return (Sprite)AssetDatabase.LoadAssetAtPath($"Assets/Art/Items/TMHM/{type}.png", typeof(Sprite));
     }
+
+    #region
+
+    public static Sprite GetSprite(string spriteName)
+    {
+        if (sprites.TryGetValue(spriteName, out Sprite spriteValue))
+        {
+            return spriteValue;
+        }
+        Debug.LogError($"Current Sprite is missing from Sprite Atlas {spriteName}");
+        return overworldSpriteNullReference;
+    }
+
+    public static void AddSpriteSheetToList(Sprite newSpriteSheet)
+    {
+        Debug.Log(newSpriteSheet.name);
+        if (sprites.ContainsKey(newSpriteSheet.name))
+        {
+            Debug.Log($"{newSpriteSheet.name} already exists");
+            return;
+        }
+
+        string spriteSheet = AssetDatabase.GetAssetPath(newSpriteSheet);
+        List<Sprite> currentSprites = AssetDatabase.LoadAllAssetsAtPath(spriteSheet).OfType<Sprite>().ToList();
+        foreach (Sprite newSprite in currentSprites)
+        {
+            sprites.Add(newSprite.name, newSprite);
+        }
+    }
+
+    #endregion
 }
