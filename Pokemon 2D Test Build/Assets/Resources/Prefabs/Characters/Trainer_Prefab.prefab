@@ -234,7 +234,7 @@ GameObject:
   - component: {fileID: 5864479953946560452}
   - component: {fileID: 5864479953946560453}
   - component: {fileID: 5864479953946560454}
-  - component: {fileID: 7765951192670875632}
+  - component: {fileID: 7378567162818185790}
   m_Layer: 8
   m_Name: Graphics
   m_TagString: Untagged
@@ -326,7 +326,7 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &7765951192670875632
+--- !u!114 &7378567162818185790
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -335,7 +335,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 5864479953946560059}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 74c614abc6068dd478e17e172b9e8ed6, type: 3}
+  m_Script: {fileID: 11500000, guid: 209b21fe55bf8bc4e8029d96cfc79661, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &5864479954145141585
@@ -393,9 +393,6 @@ MonoBehaviour:
   graphics: {fileID: 5864479953946560452}
   characterArt: {fileID: 11400000, guid: f72661efcc37d99439ad6861f39e6297, type: 2}
   movementSpeed: 5
-  _anim: {fileID: 5864479953946560454}
-  _animController: {fileID: 7765951192670875632}
-  _currentDirection: 1
   positionMovingTo: {fileID: 483150112}
   standAroundAndLook: 1
   canLookUp: 1

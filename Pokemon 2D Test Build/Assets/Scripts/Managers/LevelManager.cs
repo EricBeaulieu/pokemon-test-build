@@ -74,11 +74,16 @@ public class LevelManager : MonoBehaviour
 
     public Pokemon WildPokemon()
     {
+        if (standardWalking.Count == 0)
+            return null;
+
         return new Pokemon(getWildPokemon());
     }
 
     WildPokemon getWildPokemon()
     {
+        
+
         int olderValuesChecked = 0;
         int pokemonFound = Random.Range(0, 100);
         for (int i = 0; i < standardWalking.Count; i++)

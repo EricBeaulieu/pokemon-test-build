@@ -153,10 +153,17 @@ public class GameManager : MonoBehaviour
 
     public void StartWildPokemonBattle()
     {
+        Pokemon currentWildPokemon = SceneSystem.currentLevelManager.WildPokemon();
+
+        if(currentWildPokemon == null)
+        {
+            Debug.Log($"Current Level Manager does not have any pokemon set up to battle", SceneSystem.currentLevelManager.gameObject);
+            return;
+        }
+
         SetGameState(GameState.Battle);
         battleSystem.gameObject.SetActive(true);
 
-        Pokemon currentWildPokemon = SceneSystem.currentLevelManager.WildPokemon();
 
         battleSystem.SetupBattleArt(SceneSystem.GetBattleEnvironmentArt);
         battleSystem.StartBattle(playerController, currentWildPokemon);
