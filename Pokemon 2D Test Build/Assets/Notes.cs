@@ -5,6 +5,7 @@ using UnityEngine;
 public class Notes
 {
     //To do list
+    //Finished off the rule tiles, on trails currently on finished dirt
 
     //specialized moves
     //Fix pc bug where i put pokemon in the 6th slot and didnt move

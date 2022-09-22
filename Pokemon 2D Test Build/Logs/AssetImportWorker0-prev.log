@@ -15,11 +15,11 @@ D:/GitHub/pokemon-test-build/Pokemon 2D Test Build
 -logFile
 Logs/AssetImportWorker0.log
 -srvPort
-59152
+50270
 Successfully changed project path to: D:/GitHub/pokemon-test-build/Pokemon 2D Test Build
 D:/GitHub/pokemon-test-build/Pokemon 2D Test Build
 Using Asset Import Pipeline V2.
-Refreshing native plugins compatible for Editor in 141.57 ms, found 2 plugins.
+Refreshing native plugins compatible for Editor in 165.37 ms, found 2 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Initialize engine version: 2020.3.22f1 (e1a7f79fd887)
 [Subsystems] Discovering subsystems at path C:/Program Files/Unity/Hub/Editor/2020.3.22f1/Editor/Data/Resources/UnitySubsystems
@@ -35,42 +35,1298 @@ Initialize mono
 Mono path[0] = 'C:/Program Files/Unity/Hub/Editor/2020.3.22f1/Editor/Data/Managed'
 Mono path[1] = 'C:/Program Files/Unity/Hub/Editor/2020.3.22f1/Editor/Data/MonoBleedingEdge/lib/mono/unityjit'
 Mono config path = 'C:/Program Files/Unity/Hub/Editor/2020.3.22f1/Editor/Data/MonoBleedingEdge/etc'
-Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56052
+Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56128
 Begin MonoManager ReloadAssembly
 Registering precompiled unity dll's ...
 Register platform support module: C:/Program Files/Unity/Hub/Editor/2020.3.22f1/Editor/Data/PlaybackEngines/WindowsStandaloneSupport/UnityEditor.WindowsStandalone.Extensions.dll
-Registered in 0.001510 seconds.
+Registered in 0.001527 seconds.
 Native extension for WindowsStandalone target not found
-Refreshing native plugins compatible for Editor in 115.92 ms, found 2 plugins.
+Refreshing native plugins compatible for Editor in 135.75 ms, found 2 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Mono: successfully reloaded assembly
-- Completed reload, in  3.541 seconds
+- Completed reload, in  1.428 seconds
 Domain Reload Profiling:
-	ReloadAssembly (3541ms)
-		BeginReloadAssembly (57ms)
+	ReloadAssembly (1428ms)
+		BeginReloadAssembly (62ms)
 			ExecutionOrderSort (0ms)
 			DisableScriptedObjects (0ms)
 			BackupInstance (0ms)
 			ReleaseScriptingObjects (0ms)
 			CreateAndSetChildDomain (1ms)
-		EndReloadAssembly (576ms)
-			LoadAssemblies (54ms)
+		EndReloadAssembly (565ms)
+			LoadAssemblies (60ms)
 			RebuildTransferFunctionScriptingTraits (0ms)
-			SetupTypeCache (152ms)
+			SetupTypeCache (145ms)
 			ReleaseScriptCaches (0ms)
 			RebuildScriptCaches (37ms)
-			SetupLoadedEditorAssemblies (282ms)
+			SetupLoadedEditorAssemblies (269ms)
 				LogAssemblyErrors (0ms)
 				InitializePlatformSupportModulesInManaged (4ms)
 				SetLoadedEditorAssemblies (0ms)
-				RefreshPlugins (116ms)
+				RefreshPlugins (136ms)
 				BeforeProcessingInitializeOnLoad (17ms)
-				ProcessInitializeOnLoadAttributes (80ms)
-				ProcessInitializeOnLoadMethodAttributes (65ms)
+				ProcessInitializeOnLoadAttributes (83ms)
+				ProcessInitializeOnLoadMethodAttributes (29ms)
 				AfterProcessingInitializeOnLoad (0ms)
 				EditorAssembliesLoaded (0ms)
 			ExecutionOrderSort2 (0ms)
 			AwakeInstancesAfterBackupRestoration (0ms)
 Platform modules already initialized, skipping
 Registering precompiled user dll's ...
-Registered in 0.028357 seconds.
+Registered in 0.010886 seconds.
+Begin MonoManager ReloadAssembly
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 1.46 ms, found 2 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Mono: successfully reloaded assembly
+- Completed reload, in  1.259 seconds
+Domain Reload Profiling:
+	ReloadAssembly (1260ms)
+		BeginReloadAssembly (150ms)
+			ExecutionOrderSort (0ms)
+			DisableScriptedObjects (5ms)
+			BackupInstance (0ms)
+			ReleaseScriptingObjects (0ms)
+			CreateAndSetChildDomain (18ms)
+		EndReloadAssembly (1045ms)
+			LoadAssemblies (131ms)
+			RebuildTransferFunctionScriptingTraits (0ms)
+			SetupTypeCache (291ms)
+			ReleaseScriptCaches (1ms)
+			RebuildScriptCaches (60ms)
+			SetupLoadedEditorAssemblies (465ms)
+				LogAssemblyErrors (0ms)
+				InitializePlatformSupportModulesInManaged (5ms)
+				SetLoadedEditorAssemblies (0ms)
+				RefreshPlugins (2ms)
+				BeforeProcessingInitializeOnLoad (126ms)
+				ProcessInitializeOnLoadAttributes (278ms)
+				ProcessInitializeOnLoadMethodAttributes (48ms)
+				AfterProcessingInitializeOnLoad (6ms)
+				EditorAssembliesLoaded (0ms)
+			ExecutionOrderSort2 (0ms)
+			AwakeInstancesAfterBackupRestoration (8ms)
+Platform modules already initialized, skipping
+========================================================================
+Worker process is ready to serve import requests
+Launched and connected shader compiler UnityShaderCompiler.exe after 0.09 seconds
+Refreshing native plugins compatible for Editor in 1.44 ms, found 2 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 2672 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 106.1 MB.
+System memory in use after: 106.3 MB.
+
+Unloading 57 unused Assets to reduce memory usage. Loaded Objects now: 3078.
+Total: 8.133000 ms (FindLiveObjects: 0.244000 ms CreateObjectMapping: 0.108700 ms MarkObjects: 7.744800 ms  DeleteObjects: 0.034400 ms)
+
+AssetImportParameters requested are different than current active one (requested -> active):
+  custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
+  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
+  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
+  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
+  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
+  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
+  custom:video-codec-MediaFoundation-h265: 746d11721c4dcdbdad8f713fa42b33f4 -> 
+  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
+  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+========================================================================
+Received Import Request.
+  path: Assets/Art/TrainersBattle/Front/DPPtFemale.png
+  artifactKey: Guid(eb9b893596255a740ba3db1d43cc6e84) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Art/TrainersBattle/Front/DPPtFemale.png using Guid(eb9b893596255a740ba3db1d43cc6e84) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'cde0be1bf690c9fefee9b8b25cdd3d01') in 0.157182 seconds 
+  Import took 0.187668 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 39.566507 seconds.
+  path: Assets/Art/TrainersBattle/Front/Archer.png
+  artifactKey: Guid(904f5249c0f2b8c47b6814ffb2132ca2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Art/TrainersBattle/Front/Archer.png using Guid(904f5249c0f2b8c47b6814ffb2132ca2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '5f6e3c1376a1f3fb9923621e5b1703a5') in 0.018020 seconds 
+  Import took 0.031274 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 3.077492 seconds.
+  path: Assets/Art/TrainersBattle/Front/Ariana.png
+  artifactKey: Guid(390d84c46c7e9ae42a7925d15de0a8cf) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Art/TrainersBattle/Front/Ariana.png using Guid(390d84c46c7e9ae42a7925d15de0a8cf) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '519a7c499c5a14f919c194840ed76c73') in 0.067901 seconds 
+  Import took 0.087596 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 3.466434 seconds.
+  path: Assets/Art/TrainersBattle/Front/AromaLady.png
+  artifactKey: Guid(0ead1916ba68a5f4d8da929e508e0b00) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Art/TrainersBattle/Front/AromaLady.png using Guid(0ead1916ba68a5f4d8da929e508e0b00) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '77fd2dd7eb99acf2222ebf6ef651830b') in 0.013857 seconds 
+  Import took 0.037109 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.457938 seconds.
+  path: Assets/Art/TrainersBattle/Front/Artist.png
+  artifactKey: Guid(cc9a7f2c3fcceb443b3e30bef7d6de6a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Art/TrainersBattle/Front/Artist.png using Guid(cc9a7f2c3fcceb443b3e30bef7d6de6a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '0ac0b043bf85425cc7593e7c94b50fbc') in 0.050760 seconds 
+  Import took 0.077751 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 1.228195 seconds.
+  path: Assets/Art/TrainersBattle/Front/Birdkeeper.png
+  artifactKey: Guid(4b225120e9c16c8498b53c3d538cc9af) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Art/TrainersBattle/Front/Birdkeeper.png using Guid(4b225120e9c16c8498b53c3d538cc9af) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '2012c317e1731c0f4ec805954ed07b38') in 0.013923 seconds 
+  Import took 0.018307 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 106.793771 seconds.
+  path: Assets/Art/TrainersBattle/Front/HGSSMaleAce.png
+  artifactKey: Guid(f45de1c7775df44489f4f2e24000a5b6) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Art/TrainersBattle/Front/HGSSMaleAce.png using Guid(f45de1c7775df44489f4f2e24000a5b6) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '6dabafa6ccf24707f9aea5068af4e79b') in 0.080159 seconds 
+  Import took 0.113813 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 2.077922 seconds.
+  path: Assets/Art/TrainersBattle/Front/HGSSMaleRocketGrunt.png
+  artifactKey: Guid(6922c5e4065321e4698e24cd8c954d17) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Art/TrainersBattle/Front/HGSSMaleRocketGrunt.png using Guid(6922c5e4065321e4698e24cd8c954d17) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '98b752a5c0bfb0db19906e99d173ced3') in 0.028928 seconds 
+  Import took 0.044498 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 37.266871 seconds.
+  path: Assets/Art/TrainersBattle/Front/MalePlatinum.png
+  artifactKey: Guid(9af8366d66b37a447abc0afa0ca8d4d1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Art/TrainersBattle/Front/MalePlatinum.png using Guid(9af8366d66b37a447abc0afa0ca8d4d1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '01bef4a012bb08bf02d7b704546d63aa') in 0.014032 seconds 
+  Import took 0.040957 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 131.141058 seconds.
+  path: Assets/Art/TrainersBattle/Front/Birdkeeper.png
+  artifactKey: Guid(4b225120e9c16c8498b53c3d538cc9af) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Art/TrainersBattle/Front/Birdkeeper.png using Guid(4b225120e9c16c8498b53c3d538cc9af) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '09ec6ff7fa735a59fb9ec6487d85216f') in 0.012022 seconds 
+  Import took 0.043389 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 58.409740 seconds.
+  path: Assets/Art/TrainersBattle/Front/HGSSFireBreather 1.png
+  artifactKey: Guid(9fe5a12e28915824895d53847d869dcd) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Art/TrainersBattle/Front/HGSSFireBreather 1.png using Guid(9fe5a12e28915824895d53847d869dcd) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '4768ea4f1e665f5ddd3a1db964362ad9') in 0.015454 seconds 
+  Import took 0.033928 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 11.544652 seconds.
+  path: Assets/Art/TrainersBattle/Front/HGSSJuggler.png
+  artifactKey: Guid(83e41d729cba8b2429a5e71c43ade52a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Art/TrainersBattle/Front/HGSSJuggler.png using Guid(83e41d729cba8b2429a5e71c43ade52a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '518c75a59c76cadb828b8fb579a3d141') in 0.048054 seconds 
+  Import took 0.052581 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 1.147197 seconds.
+  path: Assets/Art/TrainersBattle/Front/HGSSJuggler 1.png
+  artifactKey: Guid(b2c3d868abf23624daf21014eb72de3f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Art/TrainersBattle/Front/HGSSJuggler 1.png using Guid(b2c3d868abf23624daf21014eb72de3f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '92169d13d5563c0d557ef8210cb6fd09') in 0.016816 seconds 
+  Import took 0.038058 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 8.626886 seconds.
+  path: Assets/Art/TrainersBattle/Front/MaleBreeder.png
+  artifactKey: Guid(f9673f9fe97112d40a6018ffe8bd2a49) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Art/TrainersBattle/Front/MaleBreeder.png using Guid(f9673f9fe97112d40a6018ffe8bd2a49) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '92e209f3143c9e779b909d1ba33e32dc') in 0.014659 seconds 
+  Import took 0.067185 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 12.076701 seconds.
+  path: Assets/Art/TrainersBattle/Front/PtFemale.png
+  artifactKey: Guid(7bf33772a6119354bb8cd737dfb64bd1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Art/TrainersBattle/Front/PtFemale.png using Guid(7bf33772a6119354bb8cd737dfb64bd1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'e87832366648469e273f00ba8afee8ab') in 0.034599 seconds 
+  Import took 0.039611 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 1.805916 seconds.
+  path: Assets/Art/TrainersBattle/Front/PtMale.png
+  artifactKey: Guid(223b0d9e74bf225419e6cccd64d4203e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Art/TrainersBattle/Front/PtMale.png using Guid(223b0d9e74bf225419e6cccd64d4203e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '31e903d23e87d5911792163c0bbf890f') in 0.019366 seconds 
+  Import took 0.025460 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 12.776874 seconds.
+  path: Assets/Art/TrainersBattle/Front/Clair.png
+  artifactKey: Guid(b67b36d1b2f18fd458dd7b0d2c6ec531) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Art/TrainersBattle/Front/Clair.png using Guid(b67b36d1b2f18fd458dd7b0d2c6ec531) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'b30d59d905f6b1341d373ea00a277abd') in 0.054078 seconds 
+  Import took 0.079541 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 4.503524 seconds.
+  path: Assets/Art/TrainersBattle/Front/Aaron.png
+  artifactKey: Guid(342f43067af95484fa4f27981e9ba383) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Art/TrainersBattle/Front/Aaron.png using Guid(342f43067af95484fa4f27981e9ba383) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'cd33d7da68b6f50d20f7014d5784400e') in 0.014659 seconds 
+  Import took 0.039077 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 6.774888 seconds.
+  path: Assets/Art/TrainersBattle/Front/DPClownTrainer.png
+  artifactKey: Guid(7793001907ae7834e8f559121b73cca3) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Art/TrainersBattle/Front/DPClownTrainer.png using Guid(7793001907ae7834e8f559121b73cca3) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '27d3315ea26e8cfe110ee32e4572b73e') in 0.060105 seconds 
+  Import took 0.072625 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 28.262001 seconds.
+  path: Assets/Art/TrainersBattle/Front/Aaron.png
+  artifactKey: Guid(342f43067af95484fa4f27981e9ba383) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Art/TrainersBattle/Front/Aaron.png using Guid(342f43067af95484fa4f27981e9ba383) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '5ee161d2973f8759d593caab06803010') in 0.030837 seconds 
+  Import took 0.043282 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 10.756435 seconds.
+  path: Assets/Art/TrainersBattle/Front/Aaron.png
+  artifactKey: Guid(342f43067af95484fa4f27981e9ba383) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Art/TrainersBattle/Front/Aaron.png using Guid(342f43067af95484fa4f27981e9ba383) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '0a29857080efd1ee94d9d6f73245292c') in 0.009851 seconds 
+  Import took 0.014264 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 13.355307 seconds.
+  path: Assets/Art/TrainersBattle/Front/Aaron.png
+  artifactKey: Guid(342f43067af95484fa4f27981e9ba383) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Art/TrainersBattle/Front/Aaron.png using Guid(342f43067af95484fa4f27981e9ba383) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '4455fbcad2edcc44cb1718d05cc47766') in 0.025951 seconds 
+  Import took 0.030835 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 3.257597 seconds.
+  path: Assets/Art/TrainersBattle/Front/Bertha.png
+  artifactKey: Guid(dea067888f7990147882ada839300673) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Art/TrainersBattle/Front/Bertha.png using Guid(dea067888f7990147882ada839300673) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '011fcde05ee41f4031a9f20b9ec07324') in 0.105227 seconds 
+  Import took 0.123519 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 5.397487 seconds.
+  path: Assets/Art/TrainersBattle/Front/Bertha.png
+  artifactKey: Guid(dea067888f7990147882ada839300673) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Art/TrainersBattle/Front/Bertha.png using Guid(dea067888f7990147882ada839300673) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '36698614426870fa5fbc4b4423cec40a') in 0.009187 seconds 
+  Import took 0.018284 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 4.077340 seconds.
+  path: Assets/Art/TrainersBattle/Front/Bertha.png
+  artifactKey: Guid(dea067888f7990147882ada839300673) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Art/TrainersBattle/Front/Bertha.png using Guid(dea067888f7990147882ada839300673) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '0e4ade2bcbaf45bc1a8d4d4445892873') in 0.030492 seconds 
+  Import took 0.035597 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 2.478436 seconds.
+  path: Assets/Art/TrainersBattle/Front/Blaine.png
+  artifactKey: Guid(d2d811932f3a33d4299242ba0255da15) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Art/TrainersBattle/Front/Blaine.png using Guid(d2d811932f3a33d4299242ba0255da15) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '7ff222bda6b7168aada2621517fc63a6') in 0.013113 seconds 
+  Import took 0.027258 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 6.281700 seconds.
+  path: Assets/Art/TrainersBattle/Front/Blaine.png
+  artifactKey: Guid(d2d811932f3a33d4299242ba0255da15) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Art/TrainersBattle/Front/Blaine.png using Guid(d2d811932f3a33d4299242ba0255da15) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '88c6b003f9b7d4db9fa1e549359c032f') in 0.008766 seconds 
+  Import took 0.039399 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 3.967677 seconds.
+  path: Assets/Art/TrainersBattle/Front/Blaine.png
+  artifactKey: Guid(d2d811932f3a33d4299242ba0255da15) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Art/TrainersBattle/Front/Blaine.png using Guid(d2d811932f3a33d4299242ba0255da15) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'ca0d6c0d6561cc3227320ed1fe661d96') in 0.045789 seconds 
+  Import took 0.071219 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 2.049671 seconds.
+  path: Assets/Art/TrainersBattle/Front/Blue.png
+  artifactKey: Guid(a954e528f2460834ca1439fad71da387) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Art/TrainersBattle/Front/Blue.png using Guid(a954e528f2460834ca1439fad71da387) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'e8b1bf1db17638001da40f7394cf533b') in 0.014194 seconds 
+  Import took 0.039871 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 8.109370 seconds.
+  path: Assets/Art/TrainersBattle/Front/Blue.png
+  artifactKey: Guid(a954e528f2460834ca1439fad71da387) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Art/TrainersBattle/Front/Blue.png using Guid(a954e528f2460834ca1439fad71da387) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '9f569f499cacfca46ef53121f99c7208') in 0.017118 seconds 
+  Import took 0.045597 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 3.643839 seconds.
+  path: Assets/Art/TrainersBattle/Front/Blue.png
+  artifactKey: Guid(a954e528f2460834ca1439fad71da387) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Art/TrainersBattle/Front/Blue.png using Guid(a954e528f2460834ca1439fad71da387) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '70ca0ec0140c6e1eef513d5eaa5b9cfa') in 0.019265 seconds 
+  Import took 0.040648 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 3.308589 seconds.
+  path: Assets/Art/TrainersBattle/Front/Brock.png
+  artifactKey: Guid(c58bd095ae5b6794f9228e723bf42353) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Art/TrainersBattle/Front/Brock.png using Guid(c58bd095ae5b6794f9228e723bf42353) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '65e9938dc7a9ce260edc06687a71b1bc') in 0.014152 seconds 
+  Import took 0.077001 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 4.570699 seconds.
+  path: Assets/Art/TrainersBattle/Front/Buglar.png
+  artifactKey: Guid(6396f8affc3b5f04fa82381aec592212) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Art/TrainersBattle/Front/Buglar.png using Guid(6396f8affc3b5f04fa82381aec592212) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'fb02dcadf31f42bbb58f0339a04ea31f') in 0.022252 seconds 
+  Import took 0.033247 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 4.267091 seconds.
+  path: Assets/Art/TrainersBattle/Front/Burglar.png
+  artifactKey: Guid(6396f8affc3b5f04fa82381aec592212) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Art/TrainersBattle/Front/Burglar.png using Guid(6396f8affc3b5f04fa82381aec592212) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '15d03d64046fbe5e1fdea47a16216cdf') in 0.013781 seconds 
+  Import took 0.018029 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 12.940525 seconds.
+  path: Assets/Art/TrainersBattle/Front/Chuck.png
+  artifactKey: Guid(0b871c3b84f25844bbfac03b44a6b657) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Art/TrainersBattle/Front/Chuck.png using Guid(0b871c3b84f25844bbfac03b44a6b657) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '3c9e8ce31d16c1f17bb366b13da5a2f8') in 0.013792 seconds 
+  Import took 0.018166 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 24.329454 seconds.
+  path: Assets/Art/TrainersBattle/Front/Falkner.png
+  artifactKey: Guid(267dca46174965148b62d8da13a8d56f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Art/TrainersBattle/Front/Falkner.png using Guid(267dca46174965148b62d8da13a8d56f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'ed44acfd06dd3486d35746de812c432e') in 0.057436 seconds 
+  Import took 0.086591 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 2.371842 seconds.
+  path: Assets/Art/TrainersBattle/Front/Fantina.png
+  artifactKey: Guid(8cb9cabe332403f498232283a5d19c07) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Art/TrainersBattle/Front/Fantina.png using Guid(8cb9cabe332403f498232283a5d19c07) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '9535ab399398aeae71867c19661c7313') in 0.013511 seconds 
+  Import took 0.037999 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 5.761025 seconds.
+  path: Assets/Art/TrainersBattle/Front/Flint.png
+  artifactKey: Guid(89d3c9652e51c0a4abfd7a8a68c73eec) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Art/TrainersBattle/Front/Flint.png using Guid(89d3c9652e51c0a4abfd7a8a68c73eec) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'd3cbe32af4b31be3a97160c904ea73a9') in 0.049673 seconds 
+  Import took 0.074446 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 1.020287 seconds.
+  path: Assets/Art/TrainersBattle/Front/Giovanni.png
+  artifactKey: Guid(3b0e2147c512bb748829566853a76e98) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Art/TrainersBattle/Front/Giovanni.png using Guid(3b0e2147c512bb748829566853a76e98) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '31bef94309907f66ba442bc714fe1b83') in 0.013053 seconds 
+  Import took 0.017581 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 15.046330 seconds.
+  path: Assets/Art/TrainersBattle/Front/Karen.png
+  artifactKey: Guid(1fe9dff8d649c8f40b20bf7b53c45312) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Art/TrainersBattle/Front/Karen.png using Guid(1fe9dff8d649c8f40b20bf7b53c45312) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '2972e15e576ed2991a88686a999dd1a0') in 0.055464 seconds 
+  Import took 0.080123 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 43.328635 seconds.
+  path: Assets/Art/TrainersBattle/Front/Giovanni.png
+  artifactKey: Guid(3b0e2147c512bb748829566853a76e98) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Art/TrainersBattle/Front/Giovanni.png using Guid(3b0e2147c512bb748829566853a76e98) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '57d56532119959d477ba23a163f164af') in 0.008838 seconds 
+  Import took 0.077395 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 7.186633 seconds.
+  path: Assets/Art/TrainersBattle/Front/HGSSKaren.png
+  artifactKey: Guid(2aa55979209dee64f9e3f5fb106be8e1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Art/TrainersBattle/Front/HGSSKaren.png using Guid(2aa55979209dee64f9e3f5fb106be8e1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '6fc822ba9bef1df0f5f3ff51322f13ae') in 0.014281 seconds 
+  Import took 0.042701 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 7.598158 seconds.
+  path: Assets/Art/TrainersBattle/Front/Cyrus.png
+  artifactKey: Guid(34b5feacaa02d404ca20e0769de43240) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Art/TrainersBattle/Front/Cyrus.png using Guid(34b5feacaa02d404ca20e0769de43240) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '4e50c58201084d9ca78dce7d4be24512') in 0.015535 seconds 
+  Import took 0.061557 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 2.432574 seconds.
+  path: Assets/Art/TrainersBattle/Front/Brock.png
+  artifactKey: Guid(c58bd095ae5b6794f9228e723bf42353) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Art/TrainersBattle/Front/Brock.png using Guid(c58bd095ae5b6794f9228e723bf42353) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '67adf2d810d97222d68caaad1a6da1b2') in 0.009942 seconds 
+  Import took 0.023509 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 10.155350 seconds.
+  path: Assets/Art/TrainersBattle/Front/Bruno.png
+  artifactKey: Guid(bb33adaac97c56b4fb8afc618ae84ca7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Art/TrainersBattle/Front/Bruno.png using Guid(bb33adaac97c56b4fb8afc618ae84ca7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '1ebef25bda7f3cf80f43939346958a5a') in 0.013490 seconds 
+  Import took 0.037830 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 3.865932 seconds.
+  path: Assets/Art/TrainersBattle/Front/Buck.png
+  artifactKey: Guid(d9638a928a929be418a5fa28d5d1d4f9) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Art/TrainersBattle/Front/Buck.png using Guid(d9638a928a929be418a5fa28d5d1d4f9) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '60a74bad454c1337598eaac5c60ca07e') in 0.021204 seconds 
+  Import took 0.049321 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 4.351185 seconds.
+  path: Assets/Art/TrainersBattle/Front/Bugsy.png
+  artifactKey: Guid(f34b40a9c3a4c174cad43e0e3ca3d2b3) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Art/TrainersBattle/Front/Bugsy.png using Guid(f34b40a9c3a4c174cad43e0e3ca3d2b3) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '3fe7f784e5c9548b67bd897e99d427c3') in 0.020596 seconds 
+  Import took 0.041207 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 4.497680 seconds.
+  path: Assets/Art/TrainersBattle/Front/Byron.png
+  artifactKey: Guid(f7d435fa829769b4f95437d7b0bf0ebd) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Art/TrainersBattle/Front/Byron.png using Guid(f7d435fa829769b4f95437d7b0bf0ebd) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '1492cb224292ea768acedb5726d25b83') in 0.022376 seconds 
+  Import took 0.037031 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 4.047099 seconds.
+  path: Assets/Art/TrainersBattle/Front/Cheryl.png
+  artifactKey: Guid(5b7b6d1bbf55ea547affb8794f4d3475) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Art/TrainersBattle/Front/Cheryl.png using Guid(5b7b6d1bbf55ea547affb8794f4d3475) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '79789b2de1b6bc9fb222979b9352f419') in 0.010121 seconds 
+  Import took 0.016104 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 3.838941 seconds.
+  path: Assets/Art/TrainersBattle/Front/Chuck.png
+  artifactKey: Guid(0b871c3b84f25844bbfac03b44a6b657) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Art/TrainersBattle/Front/Chuck.png using Guid(0b871c3b84f25844bbfac03b44a6b657) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'd3e6e3079054dcf7115b0b68777d68f2') in 0.010722 seconds 
+  Import took 0.027248 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 5.996147 seconds.
+  path: Assets/Art/TrainersBattle/Front/CrasherWake.png
+  artifactKey: Guid(b96738ccab35ecd428f8a1a87b27fe15) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Art/TrainersBattle/Front/CrasherWake.png using Guid(b96738ccab35ecd428f8a1a87b27fe15) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'decf4abe96d2c992cc7abc54e47d2bdd') in 0.025119 seconds 
+  Import took 0.043192 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 4.355530 seconds.
+  path: Assets/Art/TrainersBattle/Front/Cynthia.png
+  artifactKey: Guid(18ac5499a6daada458fd40e03c9c492f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Art/TrainersBattle/Front/Cynthia.png using Guid(18ac5499a6daada458fd40e03c9c492f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'acf94f0373c3aaa9a557844a5790ab0c') in 0.012145 seconds 
+  Import took 0.030953 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 14.748534 seconds.
+  path: Assets/Art/TrainersBattle/Front/Erika.png
+  artifactKey: Guid(9eac01259d5edd648b4be77be2512141) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Art/TrainersBattle/Front/Erika.png using Guid(9eac01259d5edd648b4be77be2512141) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '4e7cc2ec28fa5f845c86d5f638d7ad51') in 0.010912 seconds 
+  Import took 0.028530 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 3.712742 seconds.
+  path: Assets/Art/TrainersBattle/Front/Fantina.png
+  artifactKey: Guid(8cb9cabe332403f498232283a5d19c07) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Art/TrainersBattle/Front/Fantina.png using Guid(8cb9cabe332403f498232283a5d19c07) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'f4c4fba8aa6c57f42a56b2aa674014cb') in 0.010513 seconds 
+  Import took 0.014934 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 4.862990 seconds.
+  path: Assets/Art/TrainersBattle/Front/Flint.png
+  artifactKey: Guid(89d3c9652e51c0a4abfd7a8a68c73eec) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Art/TrainersBattle/Front/Flint.png using Guid(89d3c9652e51c0a4abfd7a8a68c73eec) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '55a8e905c136099bbd70880a18a97738') in 0.008897 seconds 
+  Import took 0.027017 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 3.721863 seconds.
+  path: Assets/Art/TrainersBattle/Front/Gardenia.png
+  artifactKey: Guid(55fa56c430406a44daa0fc28547b1326) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Art/TrainersBattle/Front/Gardenia.png using Guid(55fa56c430406a44daa0fc28547b1326) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '6f54317bff1dab0967b76456a2fd7d91') in 0.021772 seconds 
+  Import took 0.043597 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 9.467576 seconds.
+  path: Assets/Art/TrainersBattle/Front/Janine.png
+  artifactKey: Guid(4b4a080e5f1807b4fa978d7908656e2f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Art/TrainersBattle/Front/Janine.png using Guid(4b4a080e5f1807b4fa978d7908656e2f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'e7eb02b981b4b7b4e654bb0a5676436e') in 0.009957 seconds 
+  Import took 0.015099 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 3.842980 seconds.
+  path: Assets/Art/TrainersBattle/Front/Jasmine.png
+  artifactKey: Guid(e4e4a6f251a776447b57d47bb47b245c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Art/TrainersBattle/Front/Jasmine.png using Guid(e4e4a6f251a776447b57d47bb47b245c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '366192c4df15937324de15dee504b4f7') in 0.012494 seconds 
+  Import took 0.016977 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 3.693578 seconds.
+  path: Assets/Art/TrainersBattle/Front/LtSurge.png
+  artifactKey: Guid(1eebefa9c32390241b2f67602770f034) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Art/TrainersBattle/Front/LtSurge.png using Guid(1eebefa9c32390241b2f67602770f034) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '006859f626f1e39037eb6b9456f8ada2') in 0.025456 seconds 
+  Import took 0.037261 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 7.170067 seconds.
+  path: Assets/Art/TrainersBattle/Front/Lucian.png
+  artifactKey: Guid(9aeea9ecbfc2a6c4ca1a2d5ffaf7e0b3) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Art/TrainersBattle/Front/Lucian.png using Guid(9aeea9ecbfc2a6c4ca1a2d5ffaf7e0b3) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'a854dcb8929601ebbbfe88001e72a874') in 0.011711 seconds 
+  Import took 0.017142 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 6.092165 seconds.
+  path: Assets/Art/TrainersBattle/Front/Marley.png
+  artifactKey: Guid(092e7a69ccbb1444797b628afcd9b729) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Art/TrainersBattle/Front/Marley.png using Guid(092e7a69ccbb1444797b628afcd9b729) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'f2fa96a6c4624906ac4e2bcef26cafa2') in 0.012498 seconds 
+  Import took 0.036553 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 13.363447 seconds.
+  path: Assets/Art/TrainersBattle/Front/Maylene.png
+  artifactKey: Guid(c7a503ba69fcf824d8cf004475913279) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Art/TrainersBattle/Front/Maylene.png using Guid(c7a503ba69fcf824d8cf004475913279) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '38d8d540b70cfd4b4ce554997caefcfb') in 0.013601 seconds 
+  Import took 0.036749 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 4.444791 seconds.
+  path: Assets/Art/TrainersBattle/Front/Mira.png
+  artifactKey: Guid(7a0a4d9163f9ce7478c116ead52d60b0) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Art/TrainersBattle/Front/Mira.png using Guid(7a0a4d9163f9ce7478c116ead52d60b0) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '68c80705f22ba42c01495cf7a9e9d058') in 0.028093 seconds 
+  Import took 0.032458 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 7.842388 seconds.
+  path: Assets/Art/TrainersBattle/Front/Pryce.png
+  artifactKey: Guid(f13c56e9c85ce9245b13184432b91bae) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Art/TrainersBattle/Front/Pryce.png using Guid(f13c56e9c85ce9245b13184432b91bae) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '45258770d96173cee07ab6b67383ba3c') in 0.011198 seconds 
+  Import took 0.025715 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 3.932054 seconds.
+  path: Assets/Art/TrainersBattle/Front/Red.png
+  artifactKey: Guid(370e52117bb522a47bb32a66ca6a2200) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Art/TrainersBattle/Front/Red.png using Guid(370e52117bb522a47bb32a66ca6a2200) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '3d8fe98e286728850cf7146ae51ddbe2') in 0.011451 seconds 
+  Import took 0.026042 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 3.534235 seconds.
+  path: Assets/Art/TrainersBattle/Front/Riley.png
+  artifactKey: Guid(56e1b593e6c457942b068caa26aa4fb1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Art/TrainersBattle/Front/Riley.png using Guid(56e1b593e6c457942b068caa26aa4fb1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '4d84b00220b76449900b354810a5c1ef') in 0.012070 seconds 
+  Import took 0.016214 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 3.694432 seconds.
+  path: Assets/Art/TrainersBattle/Front/Roark.png
+  artifactKey: Guid(915994d609b16424f839a85668f855ff) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Art/TrainersBattle/Front/Roark.png using Guid(915994d609b16424f839a85668f855ff) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '8fea3849e55d65b1536a37d7dee45599') in 0.010158 seconds 
+  Import took 0.014865 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 4.376249 seconds.
+  path: Assets/Art/TrainersBattle/Front/Sabrina.png
+  artifactKey: Guid(4d7f8a48c2182024ea52970e51092e9e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Art/TrainersBattle/Front/Sabrina.png using Guid(4d7f8a48c2182024ea52970e51092e9e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '64d6c64d44e20979c824a81ec7344b12') in 0.025573 seconds 
+  Import took 0.040982 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 4.000598 seconds.
+  path: Assets/Art/TrainersBattle/Front/Silver.png
+  artifactKey: Guid(bd627ad7f1687354abaa0a01816132a9) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Art/TrainersBattle/Front/Silver.png using Guid(bd627ad7f1687354abaa0a01816132a9) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '8a54b43075ae0e198fc65062c9c089c2') in 0.011493 seconds 
+  Import took 0.016581 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 3.473769 seconds.
+  path: Assets/Art/TrainersBattle/Front/TowerTycoon.png
+  artifactKey: Guid(85a7df48b0a9c9c4aa6511b8bc2f4eec) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Art/TrainersBattle/Front/TowerTycoon.png using Guid(85a7df48b0a9c9c4aa6511b8bc2f4eec) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '987c6ae9bf26675f7668424e4b1302c1') in 0.012637 seconds 
+  Import took 0.023994 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 4.164985 seconds.
+  path: Assets/Art/TrainersBattle/Front/Volkner.png
+  artifactKey: Guid(dc1d63deba842e548bd8acc6633e3f18) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Art/TrainersBattle/Front/Volkner.png using Guid(dc1d63deba842e548bd8acc6633e3f18) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '2c5dd816e6f6aa6b3a6b1b7a3d1c3519') in 0.010076 seconds 
+  Import took 0.018794 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 5.584529 seconds.
+  path: Assets/Art/TrainersBattle/Front/Whitney.png
+  artifactKey: Guid(d2930c7754ab8384093ccc2ff2374228) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Art/TrainersBattle/Front/Whitney.png using Guid(d2930c7754ab8384093ccc2ff2374228) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'c07f9efb200ceb477d5f7286d9d8b9ca') in 0.015541 seconds 
+  Import took 0.019772 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 3.671815 seconds.
+  path: Assets/Art/TrainersBattle/Front/Will.png
+  artifactKey: Guid(7e5daf6ed65dc63479cb92ede82d406b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Art/TrainersBattle/Front/Will.png using Guid(7e5daf6ed65dc63479cb92ede82d406b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'f4f64f2b28511a265beb0aac18e9233b') in 0.012554 seconds 
+  Import took 0.017777 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 6.476594 seconds.
+  path: Assets/Art/TrainersBattle/Front/Will.png
+  artifactKey: Guid(7e5daf6ed65dc63479cb92ede82d406b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Art/TrainersBattle/Front/Will.png using Guid(7e5daf6ed65dc63479cb92ede82d406b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '39534679c507d320522a9210b5e51d00') in 0.027216 seconds 
+  Import took 0.039721 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 32.255148 seconds.
+  path: Assets/Resources/Art/TrianersOverworld/NPCs/HGSS_Beauty.png
+  artifactKey: Guid(8d1493bb156a60245976d67f3c0ef48d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Art/TrianersOverworld/NPCs/HGSS_Beauty.png using Guid(8d1493bb156a60245976d67f3c0ef48d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '11d791c5f4eb86e68b8a9895c0501b37') in 0.062654 seconds 
+  Import took 0.079236 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 19.679545 seconds.
+  path: Assets/Resources/Art/TrianersOverworld/NPCs/HGSS_BugCatcher.png
+  artifactKey: Guid(ce86d8a7293203c4eb90f1c49be77132) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Art/TrianersOverworld/NPCs/HGSS_BugCatcher.png using Guid(ce86d8a7293203c4eb90f1c49be77132) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '9f505ca26111debbeb9d165a0da8639c') in 0.083710 seconds 
+  Import took 0.088315 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 45.413663 seconds.
+  path: Assets/Resources/Art/TrianersOverworld/NPCs/DPPt_Aaron.png
+  artifactKey: Guid(0ff0b0b733c2ed44e8262da62e3d42b5) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Art/TrianersOverworld/NPCs/DPPt_Aaron.png using Guid(0ff0b0b733c2ed44e8262da62e3d42b5) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'a620b7856f33090013ef30dd79e7b36e') in 0.018657 seconds 
+  Import took 0.049233 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 5.152119 seconds.
+  path: Assets/Resources/Art/TrianersOverworld/NPCs/DPPt_Cheryl.png
+  artifactKey: Guid(552425125bda93549badd5c0cc40b436) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Art/TrianersOverworld/NPCs/DPPt_Cheryl.png using Guid(552425125bda93549badd5c0cc40b436) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'c45e9c4407d9a660b88939cf2ebc75bc') in 0.051692 seconds 
+  Import took 0.070840 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.516391 seconds.
+  path: Assets/Resources/Art/TrianersOverworld/NPCs/DPPt_Clown.png
+  artifactKey: Guid(0d443ab43af07614798814acb14e797e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Art/TrianersOverworld/NPCs/DPPt_Clown.png using Guid(0d443ab43af07614798814acb14e797e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'f983412d97c8a7473ed053b2c2ba5831') in 0.076615 seconds 
+  Import took 0.081459 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 5.278533 seconds.
+  path: Assets/Resources/Art/TrianersOverworld/NPCs/DPPt_BugCatcher.png
+  artifactKey: Guid(792fa6f0947564c47bf85b762fc7d10f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Art/TrianersOverworld/NPCs/DPPt_BugCatcher.png using Guid(792fa6f0947564c47bf85b762fc7d10f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'e65f67a768627dbb0eb38a29f93a12af') in 0.016732 seconds 
+  Import took 0.043172 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 24.961751 seconds.
+  path: Assets/Resources/Art/TrianersOverworld/NPCs/DPPt_Camper.png
+  artifactKey: Guid(44455a367b83f7b41b4abf48d8737991) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Art/TrianersOverworld/NPCs/DPPt_Camper.png using Guid(44455a367b83f7b41b4abf48d8737991) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'b8c9a904b1ae9acd655c463f0d6ecca3') in 0.015123 seconds 
+  Import took 0.080965 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 18.412974 seconds.
+  path: Assets/Resources/Art/TrianersOverworld/NPCs/DPPt_OldWoman0.png
+  artifactKey: Guid(937816d85e167144291129f3ed1595c2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Art/TrianersOverworld/NPCs/DPPt_OldWoman0.png using Guid(937816d85e167144291129f3ed1595c2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '8daf22ada6c0f478cb2a610653719723') in 0.014336 seconds 
+  Import took 0.083498 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.524629 seconds.
+  path: Assets/Resources/Art/TrianersOverworld/NPCs/DPPt_OldWoman.png
+  artifactKey: Guid(e29137872aa842040b9fb5b46b33758b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Art/TrianersOverworld/NPCs/DPPt_OldWoman.png using Guid(e29137872aa842040b9fb5b46b33758b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '8d461cf4fc42d844437003f82a649dd6') in 0.029546 seconds 
+  Import took 0.033998 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 1.795355 seconds.
+  path: Assets/Resources/Art/TrianersOverworld/NPCs/DPPt_ParasolLady.png
+  artifactKey: Guid(3568cc70af0a3b7479ab91934bfdb929) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Art/TrianersOverworld/NPCs/DPPt_ParasolLady.png using Guid(3568cc70af0a3b7479ab91934bfdb929) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '9b4cdbdbd6ee0aeadc470edeaf0aaf71') in 0.034643 seconds 
+  Import took 0.048006 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.755364 seconds.
+  path: Assets/Resources/Art/TrianersOverworld/NPCs/DPPt_Picnicker.png
+  artifactKey: Guid(d8861be84a29bfb4580c2773c9103b2a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Art/TrianersOverworld/NPCs/DPPt_Picnicker.png using Guid(d8861be84a29bfb4580c2773c9103b2a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '7b753eaffb8c2c1a9c37453c43ee6179') in 0.022985 seconds 
+  Import took 0.036248 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 8.897531 seconds.
+  path: Assets/Resources/Art/TrianersOverworld/NPCs/HGSS_Beauty 1.png
+  artifactKey: Guid(2d4f40c98a445eb4f9c7fe9b6547a460) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Art/TrianersOverworld/NPCs/HGSS_Beauty 1.png using Guid(2d4f40c98a445eb4f9c7fe9b6547a460) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'ca6e91598c49f5533a3ef551e40a21ea') in 0.014737 seconds 
+  Import took 0.057548 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 2.048753 seconds.
+  path: Assets/Resources/Art/TrianersOverworld/NPCs/HGSS_Biker 1.png
+  artifactKey: Guid(151efebfee62f684f8ff21ee9c65d665) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Art/TrianersOverworld/NPCs/HGSS_Biker 1.png using Guid(151efebfee62f684f8ff21ee9c65d665) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'f66f53cba939dc66efaf26fbd313b7f5') in 0.031015 seconds 
+  Import took 0.045170 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 2.175361 seconds.
+  path: Assets/Resources/Art/TrianersOverworld/NPCs/HGSS_Blaine 1.png
+  artifactKey: Guid(e872793f887488f43a31da52765cd5f1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Art/TrianersOverworld/NPCs/HGSS_Blaine 1.png using Guid(e872793f887488f43a31da52765cd5f1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '9dd408425db131710baa946d62c4facc') in 0.015769 seconds 
+  Import took 0.036666 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 1.331891 seconds.
+  path: Assets/Resources/Art/TrianersOverworld/NPCs/HGSS_Brock 1.png
+  artifactKey: Guid(b2be451a296792348935106cf37a13f6) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Art/TrianersOverworld/NPCs/HGSS_Brock 1.png using Guid(b2be451a296792348935106cf37a13f6) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '0756f9fed8f82a60df625b2eac2c2afd') in 0.056632 seconds 
+  Import took 0.061050 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 89.475773 seconds.
+  path: Assets/Resources/Art/TrianersOverworld/NPCs/HGSS_Youngster 1.png
+  artifactKey: Guid(51f8243f87a83f441acddaed0aa91d63) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Art/TrianersOverworld/NPCs/HGSS_Youngster 1.png using Guid(51f8243f87a83f441acddaed0aa91d63) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '3c20441950a869036635545ecea35cd2') in 0.015282 seconds 
+  Import took 0.019559 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 18.945487 seconds.
+  path: Assets/Resources/Art/TrianersOverworld/NPCs/HGSS_Unkown6.png
+  artifactKey: Guid(8baa86147d694fd46bd6cbb1823c07ea) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Art/TrianersOverworld/NPCs/HGSS_Unkown6.png using Guid(8baa86147d694fd46bd6cbb1823c07ea) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '74fb48747e108d2b57f06e4d65ebd8de') in 0.128640 seconds 
+  Import took 0.132728 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 7.476791 seconds.
+  path: Assets/Resources/Art/TrianersOverworld/NPCs/HGSSFemaleChild.png
+  artifactKey: Guid(a8e6540a53f66ee4697688aca539850b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Art/TrianersOverworld/NPCs/HGSSFemaleChild.png using Guid(a8e6540a53f66ee4697688aca539850b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'e1b60cd0b6e295d9b98e5cd3dfb80367') in 0.055531 seconds 
+  Import took 0.060659 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 6.938941 seconds.
+  path: Assets/Resources/Art/TrianersOverworld/NPCs/HGSS_FemaleChild.png
+  artifactKey: Guid(b31be4eaa4fd3344e82cd8780a1da996) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Art/TrianersOverworld/NPCs/HGSS_FemaleChild.png using Guid(b31be4eaa4fd3344e82cd8780a1da996) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'cccb0ece0057ac844e8e6d9102def062') in 0.055860 seconds 
+  Import took 0.072708 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 21.887442 seconds.
+  path: Assets/Resources/Art/TrianersOverworld/NPCs/HGSSLass.png
+  artifactKey: Guid(398122cffad40a245b6d50ee3b516f96) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Art/TrianersOverworld/NPCs/HGSSLass.png using Guid(398122cffad40a245b6d50ee3b516f96) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'c1e705f18b9254de25926f80051e58b1') in 0.096849 seconds 
+  Import took 0.113183 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 8.625320 seconds.
+  path: Assets/Resources/Art/TrianersOverworld/NPCs/HGSS_Lass.png
+  artifactKey: Guid(96b578c45b617e04f97e1dfdf8e5887d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Art/TrianersOverworld/NPCs/HGSS_Lass.png using Guid(96b578c45b617e04f97e1dfdf8e5887d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'ae572aaf93e11e80398a0d80ade9af5b') in 0.095446 seconds 
+  Import took 0.099644 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 1.945199 seconds.
+  path: Assets/Resources/Art/TrianersOverworld/NPCs/HGSSMaleChild.png
+  artifactKey: Guid(b9b2f85d5c3f4fd4c97d25ccf93657cd) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Art/TrianersOverworld/NPCs/HGSSMaleChild.png using Guid(b9b2f85d5c3f4fd4c97d25ccf93657cd) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '5eda8a5d0f66f99d5b8393cbcd56d093') in 0.057867 seconds 
+  Import took 0.062006 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 2.419882 seconds.
+  path: Assets/Resources/Art/TrianersOverworld/NPCs/HGSS_MaleChild.png
+  artifactKey: Guid(55e14f633b0bddb4e841c37b1f188570) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Art/TrianersOverworld/NPCs/HGSS_MaleChild.png using Guid(55e14f633b0bddb4e841c37b1f188570) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'a10e7d226915e1e9688419cf4061b016') in 0.082214 seconds 
+  Import took 0.086365 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 6.553354 seconds.
+  path: Assets/Resources/Art/TrianersOverworld/NPCs/HGSSYoungster.png
+  artifactKey: Guid(9d0f24dd57d1b92489679e89446623b2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Art/TrianersOverworld/NPCs/HGSSYoungster.png using Guid(9d0f24dd57d1b92489679e89446623b2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '3fbfd340218e69f68656bc82f4a0636c') in 0.116096 seconds 
+  Import took 0.139541 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 1.811504 seconds.
+  path: Assets/Resources/Art/TrianersOverworld/NPCs/HGSS_Youngster.png
+  artifactKey: Guid(bca9dbcec1517f249a39b01a469cedf1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Art/TrianersOverworld/NPCs/HGSS_Youngster.png using Guid(bca9dbcec1517f249a39b01a469cedf1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'fb74c80d61e621f54313feccfd81b9a2') in 0.093198 seconds 
+  Import took 0.110954 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 12.178666 seconds.
+  path: Assets/Resources/Art/TrianersOverworld/NPCs/DPPt_Unkown0.png
+  artifactKey: Guid(19c7cf9b6b265804b8a49af2e6d004b5) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Art/TrianersOverworld/NPCs/DPPt_Unkown0.png using Guid(19c7cf9b6b265804b8a49af2e6d004b5) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '4f6cf1a78cfef6d1b73c1088c8491ff8') in 0.014430 seconds 
+  Import took 0.018764 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.451798 seconds.
+  path: Assets/Resources/Art/TrianersOverworld/NPCs/DPPt_Unkown1.png
+  artifactKey: Guid(be81d2cf5bea1db49a0475e05ad1b5c0) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Art/TrianersOverworld/NPCs/DPPt_Unkown1.png using Guid(be81d2cf5bea1db49a0475e05ad1b5c0) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '82259807041c976251a7664c73d1055b') in 0.057244 seconds 
+  Import took 0.074207 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.464743 seconds.
+  path: Assets/Resources/Art/TrianersOverworld/NPCs/DPPt_Unkown2.png
+  artifactKey: Guid(1b5916a1bb04c274fa01f86c7d1774fc) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Art/TrianersOverworld/NPCs/DPPt_Unkown2.png using Guid(1b5916a1bb04c274fa01f86c7d1774fc) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '06314a4ee3b2c941aecbee6a37728bd9') in 0.015105 seconds 
+  Import took 0.019440 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 52.695510 seconds.
+  path: Assets/Resources/Art/TrianersOverworld/NPCs/HGSS_Will.png
+  artifactKey: Guid(c381b175c85ab6948a9ff3dbcdcec829) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Art/TrianersOverworld/NPCs/HGSS_Will.png using Guid(c381b175c85ab6948a9ff3dbcdcec829) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '4e246917b0e7c160ff7e70a7664747da') in 0.060283 seconds 
+  Import took 0.064627 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.642537 seconds.
+  path: Assets/Resources/Art/TrianersOverworld/NPCs/HGSS_Whitney.png
+  artifactKey: Guid(36edb588072944e43ba7e802a5046771) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Art/TrianersOverworld/NPCs/HGSS_Whitney.png using Guid(36edb588072944e43ba7e802a5046771) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '6b0c9824cc754b598c94e7dac705e39b') in 0.088248 seconds 
+  Import took 0.110589 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 3.393597 seconds.
+  path: Assets/Resources/Art/TrianersOverworld/NPCs/DPPt_MaleScientist.png
+  artifactKey: Guid(e178b13ed4bf60f418f26cc4f7f12ee7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Art/TrianersOverworld/NPCs/DPPt_MaleScientist.png using Guid(e178b13ed4bf60f418f26cc4f7f12ee7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'b254e26f96a139aeb3f6f70baae42a7e') in 0.058801 seconds 
+  Import took 0.106893 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.692417 seconds.
+  path: Assets/Resources/Art/TrianersOverworld/NPCs/DPPt_MaleSwimmer.png
+  artifactKey: Guid(1beeb29e101e62a418b9a6dff304b2dd) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Art/TrianersOverworld/NPCs/DPPt_MaleSwimmer.png using Guid(1beeb29e101e62a418b9a6dff304b2dd) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'd31c07785f94aac4b3e34bc9bed32bba') in 0.117818 seconds 
+  Import took 0.145878 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.362293 seconds.
+  path: Assets/Resources/Art/TrianersOverworld/NPCs/DPPt_Marley.png
+  artifactKey: Guid(cfcc5716fe64f7542bf5867fc5991a02) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Art/TrianersOverworld/NPCs/DPPt_Marley.png using Guid(cfcc5716fe64f7542bf5867fc5991a02) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '9e771b7cb5b7cfe2fe9303653000d348') in 0.053541 seconds 
+  Import took 0.071639 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 5.575289 seconds.
+  path: Assets/Resources/Art/TrianersOverworld/NPCs/DPPt_Aaron.png
+  artifactKey: Guid(0ff0b0b733c2ed44e8262da62e3d42b5) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Art/TrianersOverworld/NPCs/DPPt_Aaron.png using Guid(0ff0b0b733c2ed44e8262da62e3d42b5) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'f2e4075a92c32d540c0603362b221517') in 0.079289 seconds 
+  Import took 0.094263 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 13.761792 seconds.
+  path: Assets/Resources/Art/TrianersOverworld/NPCs/HGSS_Beauty.png
+  artifactKey: Guid(8d1493bb156a60245976d67f3c0ef48d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Art/TrianersOverworld/NPCs/HGSS_Beauty.png using Guid(8d1493bb156a60245976d67f3c0ef48d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '43bdb0c21e9710cd2f3eb62da17c091e') in 0.047354 seconds 
+  Import took 0.051849 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 65.368427 seconds.
+  path: Assets/Resources/Art/TrianersOverworld/PlayableCharacters/FemaleHGSS.png
+  artifactKey: Guid(7f4bc17ad8adab74fb85933efb71d648) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Art/TrianersOverworld/PlayableCharacters/FemaleHGSS.png using Guid(7f4bc17ad8adab74fb85933efb71d648) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'efbe58ce8f52c87fc08baebb89a66eee') in 0.153090 seconds 
+  Import took 0.157405 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.586785 seconds.
+  path: Assets/Resources/Art/TrianersOverworld/PlayableCharacters/MaleHGSS.png
+  artifactKey: Guid(ee9bcb579cb6dbe4fa10ef91b1c7c8bc) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Art/TrianersOverworld/PlayableCharacters/MaleHGSS.png using Guid(ee9bcb579cb6dbe4fa10ef91b1c7c8bc) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'b38385bad9a8497540adf8f0d81684df') in 0.178649 seconds 
+  Import took 0.197866 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 15.935512 seconds.
+  path: Assets/Resources/Art/EntityDataArt/Non Playable/Clair.asset
+  artifactKey: Guid(d27968dc82ba50e41af7625ceac34cb2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Art/EntityDataArt/Non Playable/Clair.asset using Guid(d27968dc82ba50e41af7625ceac34cb2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '879d7030c7e3ba075f4a1f793ea71d3d') in 0.021590 seconds 
+  Import took 0.025952 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 126.384441 seconds.
+  path: Assets/Resources/Art/TrianersOverworld/NPCs/DPPt_Picnicker.png
+  artifactKey: Guid(d8861be84a29bfb4580c2773c9103b2a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Art/TrianersOverworld/NPCs/DPPt_Picnicker.png using Guid(d8861be84a29bfb4580c2773c9103b2a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '9397b3d8d14e439d7b2c556e664409e9') in 0.062446 seconds 
+  Import took 0.067551 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 3.824672 seconds.
+  path: Assets/Resources/Art/TrianersOverworld/NPCs/DPPt_Picnicker.png
+  artifactKey: Guid(d8861be84a29bfb4580c2773c9103b2a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Art/TrianersOverworld/NPCs/DPPt_Picnicker.png using Guid(d8861be84a29bfb4580c2773c9103b2a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '1344a100b0e720f43314f1c392086a16') in 0.111535 seconds 
+  Import took 0.116075 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 17.023144 seconds.
+  path: Assets/Resources/Art/EntityDataArt/Non Playable/DPPicnicker.asset
+  artifactKey: Guid(0a30c8bd62fe3024aaa3af58b473901d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Art/EntityDataArt/Non Playable/DPPicnicker.asset using Guid(0a30c8bd62fe3024aaa3af58b473901d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '00ca2c1396a86176ec4a62f590d85383') in 0.006524 seconds 
+  Import took 0.051838 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 25.864524 seconds.
+  path: Assets/Resources/Art/EntityDataArt/Non Playable/DPCamper.asset
+  artifactKey: Guid(0c117acfc6bf15448b04d9eaf11363c5) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Art/EntityDataArt/Non Playable/DPCamper.asset using Guid(0c117acfc6bf15448b04d9eaf11363c5) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'dc435c2039f30648094dedc2696c7bad') in 0.007629 seconds 
+  Import took 0.088987 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 15.083073 seconds.
+  path: Assets/Resources/Art/TrianersOverworld/NPCs/DPPt_BugCatcher.png
+  artifactKey: Guid(792fa6f0947564c47bf85b762fc7d10f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Art/TrianersOverworld/NPCs/DPPt_BugCatcher.png using Guid(792fa6f0947564c47bf85b762fc7d10f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'b144f39a580a61297b5d6c6d8f4025ea') in 0.109153 seconds 
+  Import took 0.113397 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.432542 seconds.
+  path: Assets/Resources/Art/TrianersOverworld/NPCs/DPPt_CameraMan.png
+  artifactKey: Guid(820c20437a0f3c040afa015341450a68) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Art/TrianersOverworld/NPCs/DPPt_CameraMan.png using Guid(820c20437a0f3c040afa015341450a68) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'a8dfd96fce7a10b40bbe2497675e6d64') in 0.051238 seconds 
+  Import took 0.056547 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.571761 seconds.
+  path: Assets/Resources/Art/TrianersOverworld/NPCs/DPPt_Candice.png
+  artifactKey: Guid(f0b6baa1f4e9e294dbeab69d06a96c70) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Art/TrianersOverworld/NPCs/DPPt_Candice.png using Guid(f0b6baa1f4e9e294dbeab69d06a96c70) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'e9ba0ada015c8bcdd67bd385ebb4fa20') in 0.054406 seconds 
+  Import took 0.058553 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 52.513663 seconds.
+  path: Assets/Resources/Art/TrianersOverworld/NPCs/DPPt_Clown.png
+  artifactKey: Guid(0d443ab43af07614798814acb14e797e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Art/TrianersOverworld/NPCs/DPPt_Clown.png using Guid(0d443ab43af07614798814acb14e797e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'c639a0899c85ead7fb300be3e58dd98c') in 0.063796 seconds 
+  Import took 0.068533 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 4.725873 seconds.
+  path: Assets/Resources/Art/TrianersOverworld/NPCs/DPPt_Clown.png
+  artifactKey: Guid(0d443ab43af07614798814acb14e797e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Art/TrianersOverworld/NPCs/DPPt_Clown.png using Guid(0d443ab43af07614798814acb14e797e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '5aafaec6e6b1c2374d01b2e4eb427784') in 0.062239 seconds 
+  Import took 0.074605 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 31.744147 seconds.
+  path: Assets/Resources/Art/TrianersOverworld/NPCs/DPPt_Hiker.png
+  artifactKey: Guid(f59a503b6480159429562353800d76a9) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Art/TrianersOverworld/NPCs/DPPt_Hiker.png using Guid(f59a503b6480159429562353800d76a9) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'f93d3dc0e3361e9d9e87688102bfd7e0') in 0.075422 seconds 
+  Import took 0.079842 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 18.834850 seconds.
+  path: Assets/Resources/Art/TrianersOverworld/NPCs/DPPt_Psychic.png
+  artifactKey: Guid(54b41b7941a456646a7b87a56d2ea15a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Art/TrianersOverworld/NPCs/DPPt_Psychic.png using Guid(54b41b7941a456646a7b87a56d2ea15a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '33e63b6e1b08fad7566d4fc1e6eb05e2') in 0.088146 seconds 
+  Import took 0.103512 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 532.258232 seconds.
+  path: Assets/Resources/Art/EntityDataArt/Non Playable/Falkner.asset
+  artifactKey: Guid(15c8c3e185bdcad42a8cd7280bf71c02) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Art/EntityDataArt/Non Playable/Falkner.asset using Guid(15c8c3e185bdcad42a8cd7280bf71c02) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '3e78b2dc1f00e7fb69e2b2c0ee2ba215') in 0.020973 seconds 
+  Import took 0.027487 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 6.886699 seconds.
+  path: Assets/Resources/Art/EntityDataArt/Non Playable/HGSSFemaleAce.asset
+  artifactKey: Guid(e687e2eb05cd1894aaee910632243e1b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Art/EntityDataArt/Non Playable/HGSSFemaleAce.asset using Guid(e687e2eb05cd1894aaee910632243e1b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '1eec3dd53c4753ff6828fadac4600ec1') in 0.137154 seconds 
+  Import took 0.169080 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.283894 seconds.
+  path: Assets/Resources/Art/EntityDataArt/Non Playable/HGSSFemaleRocketGrunt.asset
+  artifactKey: Guid(c9e0fa276f9681743b73a686384c6f35) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Art/EntityDataArt/Non Playable/HGSSFemaleRocketGrunt.asset using Guid(c9e0fa276f9681743b73a686384c6f35) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '1e50c10951dde82631d42e94b5fd1273') in 0.050145 seconds 
+  Import took 0.101071 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 28.471570 seconds.
+  path: Assets/Resources/Art/TrianersOverworld/NPCs/HGSS_BugCatcher.png
+  artifactKey: Guid(ce86d8a7293203c4eb90f1c49be77132) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Art/TrianersOverworld/NPCs/HGSS_BugCatcher.png using Guid(ce86d8a7293203c4eb90f1c49be77132) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '8e9a9e837b4350e93d8e60afc98de8b4') in 0.106462 seconds 
+  Import took 0.145924 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 22.030298 seconds.
+  path: Assets/Resources/Art/EntityDataArt/Non Playable/HGSSFireBreather.asset
+  artifactKey: Guid(ff5923d037c65234ba2a3dfc2eb92d4a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Art/EntityDataArt/Non Playable/HGSSFireBreather.asset using Guid(ff5923d037c65234ba2a3dfc2eb92d4a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '3b1ac702e08209627dfd311ae7c4ece4') in 0.060020 seconds 
+  Import took 0.100940 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.674330 seconds.
+  path: Assets/Resources/Art/EntityDataArt/Non Playable/HGSSJuggler.asset
+  artifactKey: Guid(e22ff4a5c57032a46b86e799e6670893) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Art/EntityDataArt/Non Playable/HGSSJuggler.asset using Guid(e22ff4a5c57032a46b86e799e6670893) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '04df772dfdc96edcc0d704ef7e2329f2') in 0.004004 seconds 
+  Import took 0.602345 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.406185 seconds.
+  path: Assets/Resources/Art/EntityDataArt/Non Playable/HGSSLass.asset
+  artifactKey: Guid(8b0b4b91a8c01724f9672a3981e7a2ef) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Art/EntityDataArt/Non Playable/HGSSLass.asset using Guid(8b0b4b91a8c01724f9672a3981e7a2ef) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '1c144294ce1bbd9c49a3a033362a43e0') in 0.024629 seconds 
+  Import took 0.028818 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 1.096251 seconds.
+  path: Assets/Resources/Art/EntityDataArt/Non Playable/HGSSLittleBoy.asset
+  artifactKey: Guid(fc642a372d8ca7342824bf8e323a3537) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Art/EntityDataArt/Non Playable/HGSSLittleBoy.asset using Guid(fc642a372d8ca7342824bf8e323a3537) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '2d8d5d2e5f63b65435d2761bf377a78f') in 0.021311 seconds 
+  Import took 0.046350 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 1.087281 seconds.
+  path: Assets/Resources/Art/EntityDataArt/Non Playable/HGSSLittleGirl.asset
+  artifactKey: Guid(b78b8c55743ac174e91339488ca4322a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Art/EntityDataArt/Non Playable/HGSSLittleGirl.asset using Guid(b78b8c55743ac174e91339488ca4322a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '2fcb99d10918c30b05531922978e2587') in 0.006467 seconds 
+  Import took 0.038842 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 1.492868 seconds.
+  path: Assets/Resources/Art/EntityDataArt/Non Playable/HGSSMaleAce.asset
+  artifactKey: Guid(42a3c5c5f3930a54197484d19b700839) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Art/EntityDataArt/Non Playable/HGSSMaleAce.asset using Guid(42a3c5c5f3930a54197484d19b700839) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'ec6175c29e9de63ecd3d72a0fbc46329') in 0.233140 seconds 
+  Import took 0.456772 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 1.986530 seconds.
+  path: Assets/Resources/Art/EntityDataArt/Non Playable/HGSSMaleRocketGrunt.asset
+  artifactKey: Guid(3632756577890194e9c2699fd8e9a98b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Art/EntityDataArt/Non Playable/HGSSMaleRocketGrunt.asset using Guid(3632756577890194e9c2699fd8e9a98b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'd8c15ff4e6f0dafc8d23d4d041a6cef3') in 0.022603 seconds 
+  Import took 0.054520 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 1.359322 seconds.
+  path: Assets/Resources/Art/EntityDataArt/Non Playable/HGSSOldMan.asset
+  artifactKey: Guid(faf56a5c8cf26014b92b40e851979c55) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Art/EntityDataArt/Non Playable/HGSSOldMan.asset using Guid(faf56a5c8cf26014b92b40e851979c55) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'e7c26fedb9ad706e05b4ea9421f117e9') in 0.095399 seconds 
+  Import took 0.259825 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.801612 seconds.
+  path: Assets/Resources/Art/EntityDataArt/Non Playable/HGSSOldManA.asset
+  artifactKey: Guid(3e504a733770a5248805f0e853b651b4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Art/EntityDataArt/Non Playable/HGSSOldManA.asset using Guid(3e504a733770a5248805f0e853b651b4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '45142b8add819b71412452fe0e114fd8') in 0.011763 seconds 
+  Import took 0.016134 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.763781 seconds.
+  path: Assets/Resources/Art/EntityDataArt/Non Playable/HGSSOldWoman.asset
+  artifactKey: Guid(7734881ec81cce547b35160a227060c0) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Art/EntityDataArt/Non Playable/HGSSOldWoman.asset using Guid(7734881ec81cce547b35160a227060c0) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '35e36aa918cbcfe8dc0476fe58d9156c') in 0.031458 seconds 
+  Import took 0.071441 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 1.028470 seconds.
+  path: Assets/Resources/Art/EntityDataArt/Non Playable/HGSSSuperNerd.asset
+  artifactKey: Guid(984a7f06f187f3e46ae2eb23b061baa9) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Art/EntityDataArt/Non Playable/HGSSSuperNerd.asset using Guid(984a7f06f187f3e46ae2eb23b061baa9) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'eeab6213197d61c124a6c13364d7eae9') in 0.006884 seconds 
+  Import took 0.028846 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 1.966870 seconds.
+  path: Assets/Resources/Art/EntityDataArt/Non Playable/HGSSYoungster.asset
+  artifactKey: Guid(70348cd1cff78354c908e981f86fcf82) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Art/EntityDataArt/Non Playable/HGSSYoungster.asset using Guid(70348cd1cff78354c908e981f86fcf82) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '26c25ba47af43206e44820ab03fa824e') in 0.604935 seconds 
+  Import took 0.609697 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.969750 seconds.
+  path: Assets/Resources/Art/EntityDataArt/Non Playable/Karen.asset
+  artifactKey: Guid(05a1e322ac5e0fc4dacc18c336f5a667) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Art/EntityDataArt/Non Playable/Karen.asset using Guid(05a1e322ac5e0fc4dacc18c336f5a667) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '258b7ff1a25817eaaea59a247d297dc3') in 0.007425 seconds 
+  Import took 0.053183 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 1.476382 seconds.
+  path: Assets/Resources/Art/EntityDataArt/Non Playable/Misty.asset
+  artifactKey: Guid(9ce119fbb60ffdd4381f9b71c1efa8fa) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Art/EntityDataArt/Non Playable/Misty.asset using Guid(9ce119fbb60ffdd4381f9b71c1efa8fa) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'c6189e308cbd35db3f09e0a54b18884f') in 0.036109 seconds 
+  Import took 0.040809 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 13.472698 seconds.
+  path: Assets/Resources/Art/TrianersOverworld/NPCs/DPPt_Aaron.png
+  artifactKey: Guid(0ff0b0b733c2ed44e8262da62e3d42b5) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Art/TrianersOverworld/NPCs/DPPt_Aaron.png using Guid(0ff0b0b733c2ed44e8262da62e3d42b5) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'b071954b067e566c17f9b5c9876bcac6') in 0.990204 seconds 
+  Import took 1.078229 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 14.947722 seconds.
+  path: Assets/Resources/Art/EntityDataArt/Non Playable/DPPtCamper.asset
+  artifactKey: Guid(0c117acfc6bf15448b04d9eaf11363c5) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Art/EntityDataArt/Non Playable/DPPtCamper.asset using Guid(0c117acfc6bf15448b04d9eaf11363c5) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '0a1d59af7d4c5a6247bd2bcfd3c15f08') in 0.245896 seconds 
+  Import took 0.250196 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 4.777532 seconds.
+  path: Assets/Resources/Art/EntityDataArt/Non Playable/DPPtClown.asset
+  artifactKey: Guid(f72661efcc37d99439ad6861f39e6297) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Art/EntityDataArt/Non Playable/DPPtClown.asset using Guid(f72661efcc37d99439ad6861f39e6297) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '8e644d31f07a32a6b8fd66db93ea7bb9') in 0.717951 seconds 
+  Import took 0.851515 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 2.613636 seconds.
+  path: Assets/Resources/Art/EntityDataArt/Non Playable/DPPtFemalePsychic.asset
+  artifactKey: Guid(4ebe1d0b2596bb149aafdf3f72987004) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Art/EntityDataArt/Non Playable/DPPtFemalePsychic.asset using Guid(4ebe1d0b2596bb149aafdf3f72987004) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '3abac8b73a35900f663c78951035b264') in 0.288607 seconds 
+  Import took 0.292686 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 4.073182 seconds.
+  path: Assets/Resources/Art/EntityDataArt/Non Playable/DPPtHiker.asset
+  artifactKey: Guid(97df11ee2e9930f4b97fa6b56458c1be) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Art/EntityDataArt/Non Playable/DPPtHiker.asset using Guid(97df11ee2e9930f4b97fa6b56458c1be) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'deabadef88451bbe6aa4e896ef5798ae') in 0.086513 seconds 
+  Import took 0.130255 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 3.868611 seconds.
+  path: Assets/Resources/Art/EntityDataArt/Non Playable/DPPtJogger.asset
+  artifactKey: Guid(8a8b2116ed7cdbe458bbeabc32721b87) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Art/EntityDataArt/Non Playable/DPPtJogger.asset using Guid(8a8b2116ed7cdbe458bbeabc32721b87) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'fe2d50998be86aca0ebbc0778f13cdc3') in 0.708714 seconds 
+  Import took 0.757991 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 5.001372 seconds.
+  path: Assets/Resources/Art/EntityDataArt/Non Playable/DPPtMalePsychic.asset
+  artifactKey: Guid(fd0ef6d974101ad47b0e0714b8ef9f28) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Art/EntityDataArt/Non Playable/DPPtMalePsychic.asset using Guid(fd0ef6d974101ad47b0e0714b8ef9f28) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '02383cd27c1c5361b150b109f97d8ff7') in 0.074945 seconds 
+  Import took 0.100521 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 4.537955 seconds.
+  path: Assets/Resources/Art/EntityDataArt/Non Playable/DPPtPicnicker.asset
+  artifactKey: Guid(0a30c8bd62fe3024aaa3af58b473901d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Art/EntityDataArt/Non Playable/DPPtPicnicker.asset using Guid(0a30c8bd62fe3024aaa3af58b473901d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '8954c37a61af9c2be2fccd89486edf14') in 0.109732 seconds 
+  Import took 0.671589 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 28.774831 seconds.
+  path: Assets/Resources/Art/EntityDataArt/Non Playable/Nurse.asset
+  artifactKey: Guid(877a956dfbb8a56458ea7a2b5bc6c59c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Art/EntityDataArt/Non Playable/Nurse.asset using Guid(877a956dfbb8a56458ea7a2b5bc6c59c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '59e0592aa01a6b9d433c9a12edc55704') in 0.006781 seconds 
+  Import took 0.029986 seconds .
+
+AssetImportWorkerClient::OnTransportError - code=2 error=End of file
