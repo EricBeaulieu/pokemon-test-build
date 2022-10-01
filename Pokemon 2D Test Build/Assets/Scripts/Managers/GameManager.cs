@@ -50,6 +50,7 @@ public class GameManager : MonoBehaviour
     public static LayerMask eastLedgeLayerMask { get; private set; }
     public static LayerMask westLedgeLayerMask { get; private set; }
     public static LayerMask waterLayerMask { get; private set; }
+    public static LayerMask triggerLayerMask { get; private set; }
 
     [SerializeField] Test tester;
     bool testPokemonBeenSet = false;
@@ -76,6 +77,17 @@ public class GameManager : MonoBehaviour
             Destroy(gameObject);
         }
 
+        solidObjectLayermask = LayerMask.GetMask("SolidObjects");
+        interactableLayermask = LayerMask.GetMask("Interactable");
+        grassLayermask = LayerMask.GetMask("Grass");
+        playerLayerMask = LayerMask.GetMask("Player");
+        portalLayerMask = LayerMask.GetMask("Portal");
+        southLedgeLayerMask = LayerMask.GetMask("SouthLedge");
+        eastLedgeLayerMask = LayerMask.GetMask("EastLedge");
+        westLedgeLayerMask = LayerMask.GetMask("WestLedge");
+        waterLayerMask = LayerMask.GetMask("Water");
+        triggerLayerMask = LayerMask.GetMask("Trigger");
+
         GlobalDataBase.InitializeAllDatabases();
     }
 
@@ -93,16 +105,6 @@ public class GameManager : MonoBehaviour
         shopSystem.Initialization();
         AudioManager.Initialization(audioMusic,audioSFX,trainerBattleMusic,wildBattleMusic);
         SpecializedMoves.Initialization();
-
-        solidObjectLayermask = LayerMask.GetMask("SolidObjects");
-        interactableLayermask = LayerMask.GetMask("Interactable");
-        grassLayermask = LayerMask.GetMask("Grass");
-        playerLayerMask = LayerMask.GetMask("Player");
-        portalLayerMask = LayerMask.GetMask("Portal");
-        southLedgeLayerMask = LayerMask.GetMask("SouthLedge");
-        eastLedgeLayerMask = LayerMask.GetMask("EastLedge");
-        westLedgeLayerMask = LayerMask.GetMask("WestLedge");
-        waterLayerMask = LayerMask.GetMask("Water");
 
         if (startNewSaveEveryStart == false)
         {
@@ -308,6 +310,10 @@ public class GameManager : MonoBehaviour
     {
         yield return Fade(portal.FadeStyle, true);
         Portal exit = portal.AlternativeScene.GetLevelManager.GetAllPortalsInLevel().FirstOrDefault(x => x.MatchingIdentifier == portal.MatchingIdentifier);
+        if(exit == null)
+        {
+            Debug.Log($"Portal Exit not found {portal.MatchingIdentifier}");
+        }
         exit.PlayerPassedThroughPortal();
         playerController.transform.root.position = exit.SpawnPoint;
         playerController.SnapToGrid();

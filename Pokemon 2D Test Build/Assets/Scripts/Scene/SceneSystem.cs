@@ -75,6 +75,7 @@ public static class SceneSystem
             GameSceneBaseSO matching = allGameSceneBaseSO.FirstOrDefault(x => x.name == loadedScenes[i].name);
             if (matching != null)
             {
+                matching.GetLevelManager.Initilization();
                 current.Add(matching);
             }
         }

@@ -18,6 +18,7 @@ public abstract class Entity : MonoBehaviour
     internal LayerMask eastLedgeLayerMask;
     internal LayerMask westLedgeLayerMask;
     internal LayerMask waterLayerMask;
+    internal LayerMask triggerLayerMask;
 
     bool _isMoving;
     bool _isRunning;
@@ -84,7 +85,9 @@ public abstract class Entity : MonoBehaviour
         eastLedgeLayerMask = GameManager.eastLedgeLayerMask;
         westLedgeLayerMask = GameManager.westLedgeLayerMask;
         waterLayerMask = GameManager.waterLayerMask;
-        
+        triggerLayerMask = GameManager.triggerLayerMask;
+
+
         SnapToGrid();
 
         if(positionMovingTo == null)

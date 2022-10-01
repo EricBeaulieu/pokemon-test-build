@@ -4947,7 +4947,7 @@ MonoBehaviour:
   startWithPresetBoxes: 1
   turnOffWildPokemon: 0
   turnOffTrainerBattles: 0
-  debugGrid: 1
+  debugGrid: 0
   playerPrefab: {fileID: 5712684506751752012, guid: df0ad118f1b16b94188f1a819d172b55,
     type: 3}
   gridPrefab: {fileID: -1032944288755050198, guid: b97f60bf8ab9d57488f7834f5f988972,
@@ -36264,6 +36264,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1063938018}
     m_Modifications:
+    - target: {fileID: 1451738874550996666, guid: 117dcd4b5f798d24a8a2046c85f93155,
+        type: 3}
+      propertyPath: m_UseSpriteMesh
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1451738874550996666, guid: 117dcd4b5f798d24a8a2046c85f93155,
+        type: 3}
+      propertyPath: m_PreserveAspect
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1451738875540242384, guid: 117dcd4b5f798d24a8a2046c85f93155,
         type: 3}
       propertyPath: trainerImage

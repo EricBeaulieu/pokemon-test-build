@@ -25,10 +25,12 @@ public class PlayerController : Entity
     [SerializeField] AudioClip ledgeJumpSFX;
     [SerializeField] AudioClip itemObtainedSFX;
 
-    [HideInInspector]
-    public bool spottedByTrainer;
+    
+    public bool spottedByTrainer { get; set; }
     bool _ignorePlayerInput;
     bool _ignoreMenuOpen;
+
+    TriggerableRegion lastTriggerableRegion;
 
     public int money { get; set; } = 100000;
 
@@ -131,15 +133,22 @@ public class PlayerController : Entity
 
     protected override IEnumerator MoveToPosition(Vector2 moveVector)
     {
+        Vector2 currentPos = transform.position;
         yield return base.MoveToPosition(moveVector);
 
-        OnMoveOver();
+        if((Vector2)transform.position != currentPos)
+        {
+            OnMoveOver();
+        }
     }
 
     void OnMoveOver()
     {
-        Collider2D col = Physics2D.OverlapCircle(transform.position, 0.25f, grassLayermask|portalLayerMask);
-        if(col != null)
+        Collider2D col = Physics2D.OverlapCircle(transform.position, 0.25f, grassLayermask|portalLayerMask|triggerLayerMask);
+
+        TriggerableRegion triggerable = null;
+
+        if (col != null)
         {
             if(grassLayermask == (grassLayermask | (1 << col.gameObject.layer)))
             {
@@ -152,7 +161,22 @@ public class PlayerController : Entity
                 PortalEntered(col.GetComponent<Portal>());
                 return;
             }
+            else if(triggerLayerMask == (triggerLayerMask | (1 << col.gameObject.layer)))
+            {
+                triggerable = col.GetComponent<TriggerableRegion>();
+                if(triggerable != null && triggerable != lastTriggerableRegion)
+                {
+                    triggerable.TriggerEntered();
+                    lastTriggerableRegion = triggerable;
+                    return;
+                }
+            }
         }
+        else
+        {
+            lastTriggerableRegion = null;
+        }
+
 
         if (wildEncountersGrassSpecific == false)
         {
