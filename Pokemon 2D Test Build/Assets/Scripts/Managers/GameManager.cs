@@ -320,6 +320,15 @@ public class GameManager : MonoBehaviour
         yield return Fade(exit.FadeStyle, false);
     }
 
+    public IEnumerator PlayerUsedHMAnimation(Pokemon pokemonUsingHM)
+    {
+        fadeSystem.SetPokemonUsingHm(pokemonUsingHM);
+        yield return Fade(FadeStyle.PokemonHM,true);
+        yield return fadeSystem.PokemonAnimationPassBy();
+        yield return Fade(FadeStyle.PokemonHM, false);
+        playerController.AnimationComplete();
+    }
+
     public void SaveGame()
     {
         SavingSystem.SavePlayer(playerController, SceneSystem.currentLevelManager.GameSceneBase, inventorySystem.CurrentInventory(),pCSystem.SaveBoxData());

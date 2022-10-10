@@ -24,7 +24,6 @@ public class PlayerController : Entity
     [SerializeField] AudioClip bumpSFX;
     [SerializeField] AudioClip ledgeJumpSFX;
     [SerializeField] AudioClip itemObtainedSFX;
-
     
     public bool spottedByTrainer { get; set; }
     bool _ignorePlayerInput;
@@ -33,6 +32,10 @@ public class PlayerController : Entity
     TriggerableRegion lastTriggerableRegion;
 
     public int money { get; set; } = 100000;
+
+    //Surfing
+    const string surfingAvailable = "The water is dyed a deep blue...\nWould you like to surf?";
+    bool animationActive = false;
 
     void Awake()
     {
@@ -82,17 +85,23 @@ public class PlayerController : Entity
 
             if(Input.GetKeyDown(KeyCode.Space))
             {
-                isRunning = true;
+                if(isBiking == false || isSurfing == false)
+                {
+                    isRunning = true;
+                }
             }
 
             if (Input.GetKeyUp(KeyCode.Space))
             {
-                isRunning = false;
+                if(isRunning)
+                {
+                    isRunning = false;
+                }
             }
 
             if (Input.GetKeyUp(KeyCode.Alpha0))
             {
-                GameManager.instance.LoadGame();
+                isBiking = !isBiking;
             }
 
             if (IsMoving == false)
@@ -129,6 +138,7 @@ public class PlayerController : Entity
         }
         _anim.SetBool("isMoving", IsMoving);
         _anim.SetBool("isRunning", isRunning);
+        _anim.SetBool("isBiking", isBiking);
     }
 
     protected override IEnumerator MoveToPosition(Vector2 moveVector)
@@ -223,6 +233,39 @@ public class PlayerController : Entity
             else
             {
                 yield return interactor.GetComponent<IInteractable>()?.OnInteract((Vector2)transform.position);
+            }
+        }
+
+        Collider2D col = Physics2D.OverlapCircle(interactablePOS, 0.25f, waterLayerMask);
+
+        if(col != null)
+        {
+            Pokemon pokemon = pokemonParty.ContainsMove("Surf");
+
+            if (pokemon != null)
+            {
+                DialogManager dialogManager = GameManager.instance.GetDialogSystem;
+                bool surfUsed = false;
+                string pokemonUse = $"{pokemon.currentName} used surf!";
+                dialogManager.ActivateDialog(true);
+                yield return dialogManager.TypeDialog(surfingAvailable, true);
+                yield return dialogManager.SetChoiceBox(() =>
+                {
+                    surfUsed = true;
+                });
+
+                if (surfUsed == true)
+                {
+                    yield return dialogManager.TypeDialog(pokemonUse);
+                    dialogManager.ActivateDialog(false);
+                    GameManager.SetGameState(GameState.Dialog);
+                    yield return PlayHMAnimation(pokemon);
+                    GameManager.SetGameState(GameState.Overworld);
+                }
+                else
+                {
+                    dialogManager.ActivateDialog(false);
+                }
             }
         }
     }
@@ -323,6 +366,35 @@ public class PlayerController : Entity
         audioSFX.clip = clip;
         audioSFX.volume = volume;
         audioSFX.Play();
+    }
+
+    public IEnumerator PlayHMAnimation(Pokemon pokemonUsingHm)
+    {
+        yield return PlayAnimatorAnimation("HMStart");
+        yield return new WaitForSeconds(0.5f);
+        yield return GameManager.instance.PlayerUsedHMAnimation(pokemonUsingHm);
+        yield return PlayAnimatorAnimation("HMEnd");
+    }
+
+    IEnumerator PlayAnimatorAnimation(string TriggerName = null)
+    {
+        if (string.IsNullOrEmpty(TriggerName) == true)
+        {
+            yield break;
+        }
+
+        animationActive = true;
+        _anim.SetTrigger(TriggerName);
+
+        while (animationActive == true)
+        {
+            yield return null;
+        }
+    }
+
+    public void AnimationComplete()
+    {
+        animationActive = false;
     }
 
 }

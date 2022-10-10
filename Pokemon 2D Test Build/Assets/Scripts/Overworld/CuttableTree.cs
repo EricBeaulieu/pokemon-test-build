@@ -59,6 +59,7 @@ public class CuttableTree : MonoBehaviour,IInteractable, ISaveable
                 yield return dialogManager.TypeDialog(pokemonUse);
                 dialogManager.ActivateDialog(false);
                 GameManager.SetGameState(GameState.Dialog);
+                yield return GameManager.instance.GetPlayerController.PlayHMAnimation(pokemon);
                 yield return CutAnimation();
                 gameObject.SetActive(false);
                 GameManager.SetGameState(GameState.Overworld);

@@ -23,6 +23,9 @@ public abstract class Entity : MonoBehaviour
     bool _isMoving;
     bool _isRunning;
     bool _isJumping;
+    bool _isBiking;
+    bool _isSurfing;
+    bool _isFishing;
 
     protected Animator _anim;
     /// <summary>
@@ -34,6 +37,7 @@ public abstract class Entity : MonoBehaviour
     protected const float STANDARD_WALKING_SPEED = 5f;
     internal const float STANDARD_JUMPING_SPEED = 3.5f;
     protected const float STANDARD_RUNNING_SPEED = 12.5f;
+    protected const float STANDARD_BIKING_SPEED = 20f;
     const float ENTITY_Y_OFFSET = 0.3f;
     const float ENTITY_JUMP_HEIGHT = 0.8f;
 
@@ -56,6 +60,34 @@ public abstract class Entity : MonoBehaviour
             {
                 movementSpeed = STANDARD_WALKING_SPEED;
             }
+        }
+    }
+
+    protected bool isBiking
+    {
+        get { return _isBiking; }
+
+        set
+        {
+            _isBiking = value;
+            if (value == true)
+            {
+                movementSpeed = STANDARD_BIKING_SPEED;
+            }
+            else
+            {
+                movementSpeed = STANDARD_WALKING_SPEED;
+            }
+        }
+    }
+
+    protected bool isSurfing
+    {
+        get { return _isSurfing; }
+
+        set
+        {
+            _isSurfing = value;
         }
     }
 

@@ -307,7 +307,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   graphics: {fileID: 5712684506159866602}
-  characterArt: {fileID: 11400000, guid: cf762157deb2ce64b90ff119d1775dc5, type: 2}
+  characterArt: {fileID: 11400000, guid: 61476289ca60d5c42bc38c5102a87b28, type: 2}
   movementSpeed: 5
   positionMovingTo: {fileID: 5712684506455966291}
   trainerName: Eric
@@ -315,7 +315,6 @@ MonoBehaviour:
   bumpSFX: {fileID: 0}
   ledgeJumpSFX: {fileID: 0}
   itemObtainedSFX: {fileID: 0}
-  spottedByTrainer: 0
 --- !u!114 &5712684506751751984
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -335,7 +334,7 @@ MonoBehaviour:
     - {fileID: 11400000, guid: 51ad8441dfbef0f4082681d64b47c4e2, type: 2}
     - {fileID: 11400000, guid: 76d374e9999eb2c459492d09bf19d067, type: 2}
     - {fileID: 11400000, guid: 88ebf4bead5cc4a4fa81828f041330f6, type: 2}
-    - {fileID: 11400000, guid: 74776a55aab78af45a268d0b4777c811, type: 2}
+    - {fileID: 11400000, guid: a9919ae0998dedd43ae87fbc50ce5a82, type: 2}
     _isShiny: 0
     _gender: 0
     nature: {fileID: 0}
@@ -404,7 +403,8 @@ MonoBehaviour:
     currentHeldItem: {fileID: 11400000, guid: c6737df4cf197444aa0084db8ba52173, type: 2}
   - _pokemonBase: {fileID: 11400000, guid: d2d598222a9f08f41bf9b00c66f94a61, type: 2}
     _level: 15
-    presetMoves: []
+    presetMoves:
+    - {fileID: 11400000, guid: 3c77aba6679830646b2181737797021e, type: 2}
     _isShiny: 0
     _gender: 0
     nature: {fileID: 0}

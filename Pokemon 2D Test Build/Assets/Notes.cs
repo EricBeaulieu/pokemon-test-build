@@ -6,6 +6,8 @@ public class Notes
 {
     //To do list
 
+    //fix the smooth transistion calls in battle unit
+
     //specialized moves
     //Fix pc bug where i put pokemon in the 6th slot and didnt move
 

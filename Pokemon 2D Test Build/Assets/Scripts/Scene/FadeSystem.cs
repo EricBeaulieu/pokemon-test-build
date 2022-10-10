@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public enum FadeStyle { FullFade,Clockwise,InnerCircle,HorizontalSplit}
+public enum FadeStyle { FullFade,Clockwise,InnerCircle,HorizontalSplit,PokemonHM}
 
 public class FadeSystem : MonoBehaviour
 {
@@ -12,12 +12,18 @@ public class FadeSystem : MonoBehaviour
     [SerializeField] Image innerMaskCircle;
     [SerializeField] Image horizontalSplitTop;
     [SerializeField] Image horizontalSplitBottom;
+    [SerializeField] Image pokemonUsingHm;
+    [SerializeField] Image pokemonUsingHmHorizontalSplitTop;
+    [SerializeField] Image pokemonUsingHmHorizontalSplitBottom;
+    int originalXPos;//pokemon using hm image
+
 
     const int INNER_MAX_CIRCLE_MAX = 1000;
 
     private void Start()
     {
         gameObject.SetActive(false);
+        originalXPos = (int)pokemonUsingHm.rectTransform.localPosition.x;
     }
 
     public IEnumerator FadeIn(FadeStyle style)
@@ -36,6 +42,9 @@ public class FadeSystem : MonoBehaviour
                 break;
             case FadeStyle.HorizontalSplit:
                 yield return HorizontalSplitIn();
+                break;
+            case FadeStyle.PokemonHM:
+                yield return PokemonUsingHmIn();
                 break;
             default:
                 break;
@@ -58,6 +67,9 @@ public class FadeSystem : MonoBehaviour
                 break;
             case FadeStyle.HorizontalSplit:
                 yield return HorizontalSplitOut();
+                break;
+            case FadeStyle.PokemonHM:
+                yield return PokemonUsingHmOut();
                 break;
             default:
                 break;
@@ -229,6 +241,64 @@ public class FadeSystem : MonoBehaviour
         horizontalSplitTop.fillAmount = 0;
         horizontalSplitBottom.fillAmount = 0;
     }
+
+    #endregion
+
+    #region PokemonUsingHm
+
+    public void SetPokemonUsingHm(Pokemon pokemon)
+    {
+        pokemonUsingHm.sprite = pokemon.pokemonBase.GetFrontSprite(pokemon.isShiny, pokemon.gender)[0];
+    }
+
+    public IEnumerator PokemonAnimationPassBy()
+    {
+        float animationTime = 0.75f;
+        float idleTime = 0.5f;
+        pokemonUsingHm.transform.localPosition = new Vector3(originalXPos, 0, 0);
+        Vector3 uIPositions = Vector3.zero;
+
+        yield return GlobalTools.SmoothTransitionToPositionUsingLocalPosition(pokemonUsingHm.transform, uIPositions, animationTime);
+        yield return new WaitForSeconds(idleTime);
+        uIPositions = new Vector3(-originalXPos, 0, 0);
+        yield return GlobalTools.SmoothTransitionToPositionUsingLocalPosition(pokemonUsingHm.transform, uIPositions, animationTime);
+    }
+
+
+    IEnumerator PokemonUsingHmIn()
+    {
+        float fillAmount = 0;
+        float animationTime = 2f;
+
+        while (fillAmount < 1)
+        {
+            fillAmount += (0.01f * animationTime);
+
+            pokemonUsingHmHorizontalSplitTop.fillAmount = fillAmount / 2;
+            pokemonUsingHmHorizontalSplitBottom.fillAmount = fillAmount / 2;
+            yield return new WaitForSeconds(0.01f);
+        }
+        pokemonUsingHmHorizontalSplitTop.fillAmount = 0.5f;
+        pokemonUsingHmHorizontalSplitBottom.fillAmount = 0.5f;
+    }
+
+    IEnumerator PokemonUsingHmOut()
+    {
+        float fillAmount = 1;
+        float animationTime = 2f;
+
+        while (fillAmount > 0)
+        {
+            fillAmount -= (0.01f * animationTime);
+
+            pokemonUsingHmHorizontalSplitTop.fillAmount = fillAmount / 2;
+            pokemonUsingHmHorizontalSplitBottom.fillAmount = fillAmount / 2;
+            yield return new WaitForSeconds(0.01f);
+        }
+        pokemonUsingHmHorizontalSplitTop.fillAmount = 0;
+        pokemonUsingHmHorizontalSplitBottom.fillAmount = 0;
+    }
+
 
     #endregion
 
