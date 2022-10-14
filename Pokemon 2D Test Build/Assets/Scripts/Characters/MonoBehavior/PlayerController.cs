@@ -32,10 +32,16 @@ public class PlayerController : Entity
     TriggerableRegion lastTriggerableRegion;
 
     public int money { get; set; } = 100000;
+    [SerializeField] GameObject exclamationMark;
 
     //Surfing
     const string surfingAvailable = "The water is dyed a deep blue...\nWould you like to surf?";
     bool animationActive = false;
+
+    const int OLD_ROD_FISHING_PERCENT = 50;
+    const int GOOD_ROD_FISHING_PERCENT = 70;
+    const int SUPER_ROD_FISHING_PERCENT = 85;
+    const int ROCK_SMASH_PERCENT = 40;
 
     void Awake()
     {
@@ -104,6 +110,21 @@ public class PlayerController : Entity
                 isBiking = !isBiking;
             }
 
+            if (Input.GetKeyUp(KeyCode.Alpha9))
+            {
+                GoFishing();
+            }
+
+            if (Input.GetKeyUp(KeyCode.Alpha8))
+            {
+                GoFishing(false);
+            }
+
+            if (Input.GetKeyUp(KeyCode.Alpha7))
+            {
+                GoFishing(true);
+            }
+
             if (IsMoving == false)
             {
                 _currentInput.x = Input.GetAxisRaw("Horizontal");
@@ -154,7 +175,7 @@ public class PlayerController : Entity
 
     void OnMoveOver()
     {
-        Collider2D col = Physics2D.OverlapCircle(transform.position, 0.25f, grassLayermask|portalLayerMask|triggerLayerMask);
+        Collider2D col = Physics2D.OverlapCircle(transform.position, 0.25f, grassLayermask| waterLayerMask | portalLayerMask|triggerLayerMask);
 
         TriggerableRegion triggerable = null;
 
@@ -162,7 +183,11 @@ public class PlayerController : Entity
         {
             if(grassLayermask == (grassLayermask | (1 << col.gameObject.layer)))
             {
-                PlayerHasWildEncounter();
+                PlayerHasWildEncounter(WildPokemonEncounterTypes.Walking);
+            }
+            else if (waterLayerMask == (waterLayerMask | (1 << col.gameObject.layer)))
+            {
+                PlayerHasWildEncounter(WildPokemonEncounterTypes.Surfing);
             }
             else if(portalLayerMask == (portalLayerMask | (1 << col.gameObject.layer)))
             {
@@ -190,7 +215,7 @@ public class PlayerController : Entity
 
         if (wildEncountersGrassSpecific == false)
         {
-            PlayerHasWildEncounter();
+            PlayerHasWildEncounter(WildPokemonEncounterTypes.Walking);
         }
     }
 
@@ -238,7 +263,7 @@ public class PlayerController : Entity
 
         Collider2D col = Physics2D.OverlapCircle(interactablePOS, 0.25f, waterLayerMask);
 
-        if(col != null)
+        if(col != null && isSurfing == false)
         {
             Pokemon pokemon = pokemonParty.ContainsMove("Surf");
 
@@ -260,6 +285,10 @@ public class PlayerController : Entity
                     dialogManager.ActivateDialog(false);
                     GameManager.SetGameState(GameState.Dialog);
                     yield return PlayHMAnimation(pokemon);
+                    isSurfing = true;
+                    IsJumping = true;
+                    yield return MoveToPosition(new Vector2(_anim.GetFloat("moveX"), _anim.GetFloat("moveY")));
+                    _anim.SetBool("isSurfing", true);
                     GameManager.SetGameState(GameState.Overworld);
                 }
                 else
@@ -319,26 +348,37 @@ public class PlayerController : Entity
         _ignoreMenuOpen = true;
     }
 
+    #region PokemonBattleEncounters
     public void SetWildEncounter(bool grassSpecific)
     {
         wildEncountersGrassSpecific = grassSpecific;
     }
 
-    void PlayerHasWildEncounter()
+    void PlayerHasWildEncounter(WildPokemonEncounterTypes encounterType)
     {
         if(GameManager.instance.turnOffWildPokemon == true)
         {
             return;
         }
 
-        if(Random.Range(1,101) <= 11)
+        if(encounterType == WildPokemonEncounterTypes.Walking || encounterType == WildPokemonEncounterTypes.Surfing)
         {
-            _anim.SetBool("isMoving", false);
-            isRunning = false;
-            GameManager.instance.StartWildPokemonBattle();
+            if (Random.Range(1, 101) > 11)
+            {
+                return;
+            }
         }
+
+        _anim.SetBool("isMoving", false);
+        isRunning = false;
+        GameManager.instance.StartWildPokemonBattle(encounterType);
+
+
     }
 
+    #endregion
+
+    #region PlayerSaveData
     public object CaptureState()
     {
         isRunning = false;
@@ -361,6 +401,8 @@ public class PlayerController : Entity
         FaceTowardsDirection(saveData.savedDirection);
     }
 
+    #endregion
+
     public void PlaySFX(AudioClip clip, float volume = 1)
     {
         audioSFX.clip = clip;
@@ -371,7 +413,7 @@ public class PlayerController : Entity
     public IEnumerator PlayHMAnimation(Pokemon pokemonUsingHm)
     {
         yield return PlayAnimatorAnimation("HMStart");
-        yield return new WaitForSeconds(0.5f);
+        //yield return new WaitForSeconds(0.5f);
         yield return GameManager.instance.PlayerUsedHMAnimation(pokemonUsingHm);
         yield return PlayAnimatorAnimation("HMEnd");
     }
@@ -397,4 +439,127 @@ public class PlayerController : Entity
         animationActive = false;
     }
 
+    IEnumerator PlayerCantUseThat()
+    {
+        DialogManager dialogManager = GameManager.instance.GetDialogSystem;
+        dialogManager.ActivateDialog(true);
+        yield return dialogManager.TypeDialog($"{trainerName}! This isn't the time to use that!", true);
+        dialogManager.ActivateDialog(false);
+    }
+
+    /// <summary>
+    /// When an item is used the player will check to see if there is water infront of them and play the fishing animation
+    /// </summary>
+    /// <param name="rod">
+    /// null == old rod
+    /// false == good rod
+    /// true == super rod
+    /// </param>
+    public void GoFishing(bool? rod = null)
+    {
+        Vector2 interactablePOS = (Vector2)transform.position + new Vector2(_anim.GetFloat("moveX"), _anim.GetFloat("moveY"));
+        Collider2D col = Physics2D.OverlapCircle(interactablePOS, 0.25f, waterLayerMask);
+
+        if(col != null)
+        {
+            Debug.Log("called coroutine");
+            StartCoroutine(GoFishingCoroutine(rod));
+        }
+        else
+        {
+            StartCoroutine(PlayerCantUseThat());
+        }
+    }
+
+    IEnumerator GoFishingCoroutine(bool? rod = null)
+    {
+        yield return PlayAnimatorAnimation("GoFishing");
+        int catchRate = Random.Range(1, 101);
+
+        if(rod == null)
+        {
+            if (catchRate <= OLD_ROD_FISHING_PERCENT)
+            {
+                catchRate = Random.Range(1, 10);
+            }
+        }
+        else
+        {
+            if(rod == false)
+            {
+                if (catchRate <= GOOD_ROD_FISHING_PERCENT)
+                {
+                    catchRate = Random.Range(1, 10);
+                }
+            }
+            else
+            {
+                if (catchRate <= SUPER_ROD_FISHING_PERCENT)
+                {
+                    catchRate = Random.Range(1, 10);
+                }
+            }
+        }
+
+        bool willCatchOnWait = true;
+
+        if (catchRate >= 10)
+        {
+            willCatchOnWait = false;
+            catchRate = 10;
+        }
+
+        bool done = false;
+        float timer = 0;
+        while (!done)//this is so the player can break out of fishing
+        {
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                willCatchOnWait = false;
+                done = true; // breaks the loop
+            }
+
+            if (timer > catchRate)
+            {
+                done = true;
+            }
+            timer += Time.deltaTime;
+            yield return null;
+        }
+
+        DialogManager dialogManager = GameManager.instance.GetDialogSystem;
+
+        if (willCatchOnWait == false)
+        {
+            yield return PlayAnimatorAnimation("Reel");
+            dialogManager.ActivateDialog(true);
+            yield return dialogManager.TypeDialog("Nothings Biting", true);
+            dialogManager.ActivateDialog(false);
+            yield break;
+        }
+        else
+        {
+            _anim.SetTrigger("Hooked");
+            dialogManager.ActivateDialog(true);
+            yield return dialogManager.TypeDialog("Somethings on the hook", true);
+            dialogManager.ActivateDialog(false);
+            yield return PlayAnimatorAnimation("Reel");
+
+            if (rod == null)
+            {
+                PlayerHasWildEncounter(WildPokemonEncounterTypes.OldRod);
+            }
+            else
+            {
+                if (rod == false)
+                {
+                    PlayerHasWildEncounter(WildPokemonEncounterTypes.GoodRod);
+                }
+                else
+                {
+                    PlayerHasWildEncounter(WildPokemonEncounterTypes.SuperRod);
+                }
+            }
+        }
+    }
 }

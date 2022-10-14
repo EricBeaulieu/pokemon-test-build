@@ -5,8 +5,6 @@ using UnityEditor;
 
 public class SpriteSheetSwap : MonoBehaviour
 {
-    //[SerializeField] Sprite newSpriteSheet;
-
     Dictionary<string, Sprite> _spriteSheet;
     SpriteRenderer _spriteRenderer;
 
@@ -39,5 +37,21 @@ public class SpriteSheetSwap : MonoBehaviour
         var sprites = obj.Where(x => x is Sprite).Cast<Sprite>();
 
         return sprites.ToDictionary(x => x.name, x => x);
+    }
+
+    //this is adjusted in the animators
+    void SnapGraphicsToOffsetXPos(float x)
+    {
+        transform.localPosition = new Vector2(x, transform.localPosition.y);
+    }
+
+    void SnapGraphicsToOffsetYPos(float y)
+    {
+        transform.localPosition = new Vector2(transform.localPosition.x, y);
+    }
+
+    void testing(string s)
+    {
+        Debug.Log(s);
     }
 }

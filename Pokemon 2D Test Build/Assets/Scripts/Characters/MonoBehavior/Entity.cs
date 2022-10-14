@@ -38,7 +38,7 @@ public abstract class Entity : MonoBehaviour
     internal const float STANDARD_JUMPING_SPEED = 3.5f;
     protected const float STANDARD_RUNNING_SPEED = 12.5f;
     protected const float STANDARD_BIKING_SPEED = 20f;
-    const float ENTITY_Y_OFFSET = 0.3f;
+    const float ENTITY_Y_OFFSET = 0.6f;
     const float ENTITY_JUMP_HEIGHT = 0.8f;
 
     internal Vector3 standardGraphicsSetting = new Vector3(0, ENTITY_Y_OFFSET, 0);
@@ -84,21 +84,14 @@ public abstract class Entity : MonoBehaviour
     protected bool isSurfing
     {
         get { return _isSurfing; }
-
         set
         {
             _isSurfing = value;
         }
     }
 
-    public bool IsMoving
-    {
-        get { return _isMoving; }
-        set
-        {
-            _isMoving = value;
-        }
-    }
+    public bool IsMoving { get { return _isMoving; } set { _isMoving = value; } }
+    public bool IsJumping { get { return _isJumping; } set { _isJumping = value; } }
 
     public CharacterArtSO CharacterArt { get { return characterArt; } set { characterArt = value; } }
 
@@ -217,12 +210,23 @@ public abstract class Entity : MonoBehaviour
                 targetPositionFixed += moveVector;
                 collider = Physics2D.OverlapCircle(targetPositionFixed, 0.25f, solidObjectLayermask | interactableLayermask | playerLayerMask | waterLayerMask);
             }
+            else if ((waterLayerMask & 1 << collider.gameObject.layer) == 1 << collider.gameObject.layer && isSurfing == true)
+            {
+                positionMovingTo.position = targetPositionFixed;
+                return true;
+            }
             
             if (collider != null)
             {
                 return false;
             }
             _isJumping = true;
+        }
+        else if(isSurfing == true)
+        {
+            _isJumping = true;
+            isSurfing = false;
+            _anim.SetBool("isSurfing", false);
         }
 
         positionMovingTo.position = targetPositionFixed;

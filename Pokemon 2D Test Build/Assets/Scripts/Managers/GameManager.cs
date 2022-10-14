@@ -153,9 +153,9 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void StartWildPokemonBattle()
+    public void StartWildPokemonBattle(WildPokemonEncounterTypes encounterType)
     {
-        Pokemon currentWildPokemon = SceneSystem.currentLevelManager.WildPokemon();
+        Pokemon currentWildPokemon = SceneSystem.currentLevelManager.WildPokemon(encounterType);
 
         if(currentWildPokemon == null)
         {

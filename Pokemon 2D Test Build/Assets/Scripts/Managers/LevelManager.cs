@@ -3,13 +3,18 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+public enum WildPokemonEncounterTypes { Walking,Surfing,OldRod,GoodRod,SuperRod,RockSmash}//headbutting trees, honey trees
 public class LevelManager : MonoBehaviour
 {
     [SerializeField] BattleFieldLayoutBaseSO currentAreaDetails;
     [SerializeField] bool showLabelUponEntry = true;
     [SerializeField] bool grassOnlyWildPokemon = true;
-    [SerializeField] List<WildPokemon> standardWalking;
-    [SerializeField] List<WildPokemon> standardSurfing;
+    [SerializeField] List<WildPokemon> walking;
+    [SerializeField] List<WildPokemon> surfing;
+    [SerializeField] List<WildPokemon> oldRod;
+    [SerializeField] List<WildPokemon> goodRod;
+    [SerializeField] List<WildPokemon> superRod;
+    [SerializeField] List<WildPokemon> rockSmash;
     [SerializeField] GameSceneBaseSO sceneReference;
     [SerializeField] GridManager currentGrid;
     public GridManager GetGrid { get { return currentGrid; } }
@@ -28,22 +33,14 @@ public class LevelManager : MonoBehaviour
             Debug.LogWarning("currentAreaDetails not set", gameObject);
         }
 
-        if(standardWalking.Count > 0)
-        {
-            for (int i = 0; i < standardWalking.Count; i++)
-            {
-                if (standardWalking[i].PokemonBase == null)
-                {
-                    Debug.LogWarning($"pokemon at position {i} has not been set", gameObject);
-                }
-                if(standardWalking[i].Level == 0)
-                {
-                    Debug.LogWarning($"pokemon at position {i} level has not been set", gameObject);
-                }
-            }
-        }
+        StartingCheckerEncounterList(walking);
+        StartingCheckerEncounterList(surfing);
+        StartingCheckerEncounterList(oldRod);
+        StartingCheckerEncounterList(goodRod);
+        StartingCheckerEncounterList(superRod);
+        StartingCheckerEncounterList(rockSmash);
 
-        if(sceneReference == null)
+        if (sceneReference == null)
         {
             Debug.LogError("Current Scene Reference is missing", gameObject);
         }
@@ -53,6 +50,28 @@ public class LevelManager : MonoBehaviour
             Debug.LogWarning("Current Grid Reference is missing", gameObject);
         }
         sceneReference.SetLevelManager(this);
+    }
+
+    void StartingCheckerEncounterList(List<WildPokemon> currentList)
+    {
+        if (currentList.Count > 0)
+        {
+            for (int i = 0; i < currentList.Count; i++)
+            {
+                if (currentList[i].PokemonBase == null)
+                {
+                    Debug.LogWarning($"pokemon at position {i} has not been set", gameObject);
+                }
+                if (currentList[i].Level == 0)
+                {
+                    Debug.LogWarning($"pokemon at position {i} level has not been set", gameObject);
+                }
+                if (currentList[i].WildEncounterChance == 0)
+                {
+                    Debug.LogWarning($"pokemon at position {i} encounter chance has not been set", gameObject);
+                }
+            }
+        }
     }
 
     public void Initilization()
@@ -72,30 +91,56 @@ public class LevelManager : MonoBehaviour
         loaded = true;
     }
 
-    public Pokemon WildPokemon()
+    public Pokemon WildPokemon(WildPokemonEncounterTypes encounterType)
     {
-        if (standardWalking.Count == 0)
-            return null;
-
-        return new Pokemon(getWildPokemon());
-    }
-
-    WildPokemon getWildPokemon()
-    {
+        switch (encounterType)
+        {
+            case WildPokemonEncounterTypes.Walking:
+                if (walking.Count <= 0)
+                    return null;
+                return new Pokemon(getWildPokemon(walking));
+            case WildPokemonEncounterTypes.Surfing:
+                if (surfing.Count <= 0)
+                    return null;
+                return new Pokemon(getWildPokemon(surfing));
+            case WildPokemonEncounterTypes.OldRod:
+                if (oldRod.Count <= 0)
+                    return null;
+                return new Pokemon(getWildPokemon(oldRod));
+            case WildPokemonEncounterTypes.GoodRod:
+                if (goodRod.Count <= 0)
+                    return null;
+                return new Pokemon(getWildPokemon(goodRod));
+            case WildPokemonEncounterTypes.SuperRod:
+                if (superRod.Count <= 0)
+                    return null;
+                return new Pokemon(getWildPokemon(superRod));
+            case WildPokemonEncounterTypes.RockSmash:
+                if (rockSmash.Count <= 0)
+                    return null;
+                return new Pokemon(getWildPokemon(rockSmash));
+            default:
+                return null;
+        }
         
 
+        
+    }
+
+    WildPokemon getWildPokemon(List<WildPokemon> wildPokemon)
+    {
         int olderValuesChecked = 0;
         int pokemonFound = Random.Range(0, 100);
-        for (int i = 0; i < standardWalking.Count; i++)
+        for (int i = 0; i < wildPokemon.Count; i++)
         {
-            if (pokemonFound <= (olderValuesChecked + standardWalking[i].WildEncounterChance))
+            if (pokemonFound <= (olderValuesChecked + wildPokemon[i].WildEncounterChance))
             {
-                return standardWalking[i];
+                return wildPokemon[i];
             }
-            olderValuesChecked += standardWalking[i].WildEncounterChance;
+            olderValuesChecked += wildPokemon[i].WildEncounterChance;
         }
 
-        return standardWalking[standardWalking.Count];
+        return wildPokemon[wildPokemon.Count];
     }
 
     public List<Entity> GetAllEntities()
@@ -237,22 +282,25 @@ public class LevelManager : MonoBehaviour
         return saveableEntities;
     }
 
-    public int GetStandardWalkingCount()
+    public string GetCurrentListCount()
     {
-        int count = 0;
-        for (int i = 0; i < standardWalking.Count; i++)
-        {
-            count += standardWalking[i].WildEncounterChance;
-        }
-        return count;
+        string s;
+
+        s = $"Current Level Manager Walking Encounter Total: {GetWildPokemonListCount(walking)}";
+        s += $"\nCurrent Level Manager Surfing Encounter Total: {GetWildPokemonListCount(surfing)}";
+        s += $"\nCurrent Level Manager Old Rod Encounter Total: {GetWildPokemonListCount(oldRod)}";
+        s += $"\nCurrent Level Manager Good Rod Encounter Total: {GetWildPokemonListCount(goodRod)}";
+        s += $"\nCurrent Level Manager Super Rod Encounter Total: {GetWildPokemonListCount(superRod)}";
+        s += $"\nCurrent Level Manager Rock Smash Encounter Total: {GetWildPokemonListCount(rockSmash)}";
+        return s;
     }
 
-    public int GetStandardSurfingCount()
+    public int GetWildPokemonListCount(List<WildPokemon> currentList)
     {
         int count = 0;
-        for (int i = 0; i < standardSurfing.Count; i++)
+        for (int i = 0; i < currentList.Count; i++)
         {
-            count += standardSurfing[i].WildEncounterChance;
+            count += currentList[i].WildEncounterChance;
         }
         return count;
     }
@@ -275,7 +323,7 @@ public class LevelManager : MonoBehaviour
             return;
         }
 
-        WildPokemonController temp = GameManager.instance.GetWildPokemonPrefab(getWildPokemon());
+        WildPokemonController temp = GameManager.instance.GetWildPokemonPrefab(getWildPokemon(walking));
         Instantiate(temp, spawnLocation, Quaternion.identity,wildPokemonSpawnParent);
     }
 }
