@@ -27,6 +27,8 @@ public abstract class Entity : MonoBehaviour
     bool _isSurfing;
     bool _isFishing;
 
+    float jumpHeight = 0;
+
     protected Animator _anim;
     /// <summary>
     /// this is here to prevent some entities walking through eachother stating that someone is currently moving to this position
@@ -38,7 +40,7 @@ public abstract class Entity : MonoBehaviour
     internal const float STANDARD_JUMPING_SPEED = 3.5f;
     protected const float STANDARD_RUNNING_SPEED = 12.5f;
     protected const float STANDARD_BIKING_SPEED = 20f;
-    const float ENTITY_Y_OFFSET = 0.6f;
+    public const float ENTITY_Y_OFFSET = 0.6f;
     const float ENTITY_JUMP_HEIGHT = 0.8f;
 
     internal Vector3 standardGraphicsSetting = new Vector3(0, ENTITY_Y_OFFSET, 0);
@@ -144,10 +146,11 @@ public abstract class Entity : MonoBehaviour
         if(_isJumping == true)
         {
             Vector3 graphicsRef = standardGraphicsSetting;
+            float halfwayPoint = Vector3.Distance(targetPos, transform.position) / 2;
 
             while ((targetPos - transform.position).sqrMagnitude > Mathf.Epsilon)
             {
-                float height = Mathf.Abs((Vector3.Distance(targetPos, transform.position) - 1));
+                float height = Mathf.Abs((Vector3.Distance(targetPos, transform.position)/halfwayPoint - 1));
                 height = (1 - height) * ENTITY_JUMP_HEIGHT;
                 graphicsRef.y = height + ENTITY_Y_OFFSET;
                 graphics.localPosition = graphicsRef;
@@ -224,9 +227,7 @@ public abstract class Entity : MonoBehaviour
         }
         else if(isSurfing == true)
         {
-            _isJumping = true;
-            isSurfing = false;
-            _anim.SetBool("isSurfing", false);
+            SurfingEnds();
         }
 
         positionMovingTo.position = targetPositionFixed;
@@ -283,6 +284,12 @@ public abstract class Entity : MonoBehaviour
     }
 
     public virtual void PlayerInteractingWithWhenDoneMoving() { }
+    protected virtual void SurfingEnds() 
+    {
+        _isJumping = true;
+        isSurfing = false;
+        _anim.SetBool("isSurfing", false);
+    }
 
     protected Vector2 GetDirection()
     {

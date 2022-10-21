@@ -45,13 +45,9 @@ public class SpriteSheetSwap : MonoBehaviour
         transform.localPosition = new Vector2(x, transform.localPosition.y);
     }
 
-    void SnapGraphicsToOffsetYPos(float y)
+    //this is adjusted in the animators
+    public void SnapGraphicsToOffsetYPos(float y)
     {
         transform.localPosition = new Vector2(transform.localPosition.x, y);
-    }
-
-    void testing(string s)
-    {
-        Debug.Log(s);
     }
 }

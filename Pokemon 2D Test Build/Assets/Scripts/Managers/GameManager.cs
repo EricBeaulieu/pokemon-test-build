@@ -40,6 +40,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] List<AudioClip> trainerBattleMusic;
     [SerializeField] List<AudioClip> wildBattleMusic;
     [SerializeField] WildPokemonController wildPokemonPrefab;
+    [SerializeField] SurfableEntity surfableEntityPrefab;
+    static SurfableEntity playersurfableEntityController;
 
     public static LayerMask solidObjectLayermask { get; private set; }
     public static LayerMask interactableLayermask { get; private set; }
@@ -495,5 +497,18 @@ public class GameManager : MonoBehaviour
     {
         wildPokemonPrefab.SetWildPokemon(wildPokemon);
         return wildPokemonPrefab;
+    }
+
+    public SurfableEntity GetPlayerSurfableEntityController
+    {
+        get 
+        { 
+            if(playersurfableEntityController == null)
+            {
+                playersurfableEntityController = Instantiate(surfableEntityPrefab, Vector3.zero, Quaternion.identity);
+                playersurfableEntityController.gameObject.SetActive(false);
+            }
+            return playersurfableEntityController; 
+        }
     }
 }

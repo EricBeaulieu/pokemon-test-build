@@ -16,6 +16,7 @@ public class PlayerController : Entity
     bool wildEncountersGrassSpecific;
     public event Action OpenStartMenu;
     public event Action <Portal> PortalEntered;
+    event Action OnMoveOverFinished;
 
     Vector2 _currentInput;
 
@@ -37,6 +38,7 @@ public class PlayerController : Entity
     //Surfing
     const string surfingAvailable = "The water is dyed a deep blue...\nWould you like to surf?";
     bool animationActive = false;
+    SurfableEntity surfableEntity;
 
     const int OLD_ROD_FISHING_PERCENT = 50;
     const int GOOD_ROD_FISHING_PERCENT = 70;
@@ -160,6 +162,11 @@ public class PlayerController : Entity
         _anim.SetBool("isMoving", IsMoving);
         _anim.SetBool("isRunning", isRunning);
         _anim.SetBool("isBiking", isBiking);
+
+        if(surfableEntity != null)
+        {
+            surfableEntity.SnaptoDirection(GlobalTools.CurrentDirectionFacing(_anim));
+        }
     }
 
     protected override IEnumerator MoveToPosition(Vector2 moveVector)
@@ -217,6 +224,12 @@ public class PlayerController : Entity
         {
             PlayerHasWildEncounter(WildPokemonEncounterTypes.Walking);
         }
+
+        if(OnMoveOverFinished != null)
+        {
+            OnMoveOverFinished.Invoke();
+            OnMoveOverFinished = null;
+        }
     }
 
     IEnumerator Interact()
@@ -265,37 +278,7 @@ public class PlayerController : Entity
 
         if(col != null && isSurfing == false)
         {
-            Pokemon pokemon = pokemonParty.ContainsMove("Surf");
-
-            if (pokemon != null)
-            {
-                DialogManager dialogManager = GameManager.instance.GetDialogSystem;
-                bool surfUsed = false;
-                string pokemonUse = $"{pokemon.currentName} used surf!";
-                dialogManager.ActivateDialog(true);
-                yield return dialogManager.TypeDialog(surfingAvailable, true);
-                yield return dialogManager.SetChoiceBox(() =>
-                {
-                    surfUsed = true;
-                });
-
-                if (surfUsed == true)
-                {
-                    yield return dialogManager.TypeDialog(pokemonUse);
-                    dialogManager.ActivateDialog(false);
-                    GameManager.SetGameState(GameState.Dialog);
-                    yield return PlayHMAnimation(pokemon);
-                    isSurfing = true;
-                    IsJumping = true;
-                    yield return MoveToPosition(new Vector2(_anim.GetFloat("moveX"), _anim.GetFloat("moveY")));
-                    _anim.SetBool("isSurfing", true);
-                    GameManager.SetGameState(GameState.Overworld);
-                }
-                else
-                {
-                    dialogManager.ActivateDialog(false);
-                }
-            }
+            yield return TryToSurf(interactablePOS);
         }
     }
 
@@ -539,9 +522,11 @@ public class PlayerController : Entity
         }
         else
         {
+            exclamationMark.SetActive(true);
             _anim.SetTrigger("Hooked");
             dialogManager.ActivateDialog(true);
             yield return dialogManager.TypeDialog("Somethings on the hook", true);
+            exclamationMark.SetActive(false);
             dialogManager.ActivateDialog(false);
             yield return PlayAnimatorAnimation("Reel");
 
@@ -561,5 +546,62 @@ public class PlayerController : Entity
                 }
             }
         }
+    }
+
+    IEnumerator TryToSurf(Vector2 currentPosition)
+    {
+        Pokemon pokemon = pokemonParty.ContainsMove("Surf");
+
+        if (pokemon != null)
+        {
+            DialogManager dialogManager = GameManager.instance.GetDialogSystem;
+            bool surfUsed = false;
+            string pokemonUse = $"{pokemon.currentName} used surf!";
+            dialogManager.ActivateDialog(true);
+            yield return dialogManager.TypeDialog(surfingAvailable, true);
+            yield return dialogManager.SetChoiceBox(() =>
+            {
+                surfUsed = true;
+            });
+
+            if (surfUsed == true)
+            {
+                yield return dialogManager.TypeDialog(pokemonUse);
+                dialogManager.ActivateDialog(false);
+                GameManager.SetGameState(GameState.Dialog);
+                yield return PlayHMAnimation(pokemon);
+                isSurfing = true;
+                IsJumping = true;
+                //Setting the surfable pokemon
+                surfableEntity = GameManager.instance.GetPlayerSurfableEntityController;
+                surfableEntity.gameObject.SetActive(true);
+                surfableEntity.SetPositionPlusOffset(currentPosition, GlobalTools.CurrentDirectionFacing(_anim));
+                yield return MoveToPosition(new Vector2(_anim.GetFloat("moveX"), _anim.GetFloat("moveY")));
+                _anim.SetBool("isSurfing", true);
+                GameManager.SetGameState(GameState.Overworld);
+                surfableEntity.transform.parent = transform;
+                surfableEntity.SetCharactersSpriteSwap(GetComponentInChildren<SpriteSheetSwap>(), GlobalTools.CurrentDirectionFacing(_anim));
+            }
+            else
+            {
+                dialogManager.ActivateDialog(false);
+            }
+        }
+    }
+
+    protected override void SurfingEnds()
+    {
+        base.SurfingEnds();
+        surfableEntity.SetCharactersSpriteSwap();
+        surfableEntity.transform.parent = null;
+        OnMoveOverFinished += ClearSurfableEntity;
+    }
+
+    void ClearSurfableEntity()
+    {
+        surfableEntity.gameObject.transform.position = Vector3.zero;
+        surfableEntity.gameObject.SetActive(false);
+        surfableEntity = null;
+        Debug.Log("SurfableEntityRemoved");
     }
 }

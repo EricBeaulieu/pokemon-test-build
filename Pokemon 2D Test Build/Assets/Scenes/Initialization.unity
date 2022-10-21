@@ -4945,8 +4945,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startNewSaveEveryStart: 1
   startWithPresetBoxes: 1
-  turnOffWildPokemon: 0
-  turnOffTrainerBattles: 0
+  turnOffWildPokemon: 1
+  turnOffTrainerBattles: 1
   debugGrid: 0
   playerPrefab: {fileID: 5712684506751752012, guid: df0ad118f1b16b94188f1a819d172b55,
     type: 3}
@@ -4988,6 +4988,8 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 498dd12fc198e1049b9d5cc264170776, type: 3}
   - {fileID: 8300000, guid: f82dea70c76d121448af2f86f4b5b2dd, type: 3}
   wildPokemonPrefab: {fileID: 8702414446051476572, guid: 3c8fa08ba51dbbe40891220d1b1ca7b6,
+    type: 3}
+  surfableEntityPrefab: {fileID: 8652759695395105887, guid: d05a088c33be2a749962d31e455e779c,
     type: 3}
   tester: {fileID: 1801515959}
 --- !u!4 &291317940
@@ -38567,6 +38569,80 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6c34561d46222554c912985371129d81, type: 3}
+--- !u!1001 &6386930152321877267
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 900650076572825630, guid: d05a088c33be2a749962d31e455e779c,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 900650076572825630, guid: d05a088c33be2a749962d31e455e779c,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 135.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 900650076572825630, guid: d05a088c33be2a749962d31e455e779c,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -107.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 900650076572825630, guid: d05a088c33be2a749962d31e455e779c,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 900650076572825630, guid: d05a088c33be2a749962d31e455e779c,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 900650076572825630, guid: d05a088c33be2a749962d31e455e779c,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 900650076572825630, guid: d05a088c33be2a749962d31e455e779c,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 900650076572825630, guid: d05a088c33be2a749962d31e455e779c,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 900650076572825630, guid: d05a088c33be2a749962d31e455e779c,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 900650076572825630, guid: d05a088c33be2a749962d31e455e779c,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 900650076572825630, guid: d05a088c33be2a749962d31e455e779c,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2593745402508839188, guid: d05a088c33be2a749962d31e455e779c,
+        type: 3}
+      propertyPath: m_Name
+      value: Surfable
+      objectReference: {fileID: 0}
+    - target: {fileID: 9057143904834059356, guid: d05a088c33be2a749962d31e455e779c,
+        type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 75cfdbe74b136174283318b48aa02a60, type: 2}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: d05a088c33be2a749962d31e455e779c, type: 3}
 --- !u!114 &7091348568213647861
 MonoBehaviour:
   m_ObjectHideFlags: 0
