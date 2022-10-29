@@ -53,19 +53,21 @@
     <UnityVersion>2020.3.22f1</UnityVersion>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Assets\Scripts\Editor\Overworld\OverworldBedEditor.cs" />
     <Compile Include="Assets\Scripts\Editor\Characters\EntityAIEditor.cs" />
     <Compile Include="Assets\Scripts\Editor\AssetProcessorPokemonArt.cs" />
     <Compile Include="Assets\Scripts\Editor\LevelManagerEditor.cs" />
     <Compile Include="Assets\Scripts\Editor\PokemonBaseEditor.cs" />
+    <Compile Include="Assets\Scripts\Editor\Overworld\PortalEditor.cs" />
     <Compile Include="Assets\Scripts\Editor\Characters\EntityEditor.cs" />
     <Compile Include="Assets\Scripts\Editor\OrganizePokemonArt.cs" />
     <Compile Include="Assets\Scripts\Editor\GeneratePokeApiDataToScriptableObject.cs" />
     <Compile Include="Assets\Scripts\Editor\Characters\TrainerControllerEditor.cs" />
     <Compile Include="Assets\Scripts\Editor\SaveableEntityEditor.cs" />
+    <Compile Include="Assets\Scripts\Editor\StampOverworldSprite.cs" />
     <Compile Include="Assets\Scripts\Editor\Characters\OverworldItemEditor.cs" />
     <Compile Include="Assets\Scripts\Editor\Characters\WildPokemonEditor.cs" />
     <Compile Include="Assets\Scripts\Editor\PropertyDrawer\ReadOnlyDrawer.cs" />
-    <Compile Include="Assets\Scripts\Editor\StampOverworldSprite.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">

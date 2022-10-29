@@ -182,6 +182,7 @@
     <Compile Include="Assets\Scripts\Data\HoldItems\Standard\LustrousOrb.cs" />
     <Compile Include="Assets\Scripts\Data\HoldItems\Standard\BlackGlasses.cs" />
     <Compile Include="Assets\Scripts\Data\Conditions\VolatileStatus\Bound.cs" />
+    <Compile Include="Assets\Scripts\Characters\MonoBehavior\SurfableEntity.cs" />
     <Compile Include="Assets\Scripts\Data\HoldItems\Berries\Charti.cs" />
     <Compile Include="Assets\Scripts\Data\HoldItems\Berries\Haban.cs" />
     <Compile Include="Assets\Scripts\Saving\PokemonSaveData.cs" />
@@ -285,11 +286,12 @@
     <Compile Include="Assets\Scripts\Data\HoldItems\Berries\Colbur.cs" />
     <Compile Include="Assets\Scripts\Items\ScriptableObjects\PokeballItem.cs" />
     <Compile Include="Assets\Scripts\Data\Abilitys\List\Levitate.cs" />
-    <Compile Include="Assets\Scripts\Overworld\Signs.cs" />
+    <Compile Include="Assets\Scripts\Overworld\InteractableObject.cs" />
     <Compile Include="Assets\Scripts\Pathfinding\Pathfinding.cs" />
     <Compile Include="Assets\Scripts\Data\HoldItems\Berries\Figy.cs" />
     <Compile Include="Assets\Scripts\Data\Abilitys\List\Limber.cs" />
     <Compile Include="Assets\Scripts\Data\HoldItems\HoldItemDB.cs" />
+    <Compile Include="Assets\Scripts\Scene\DoorPortal.cs" />
     <Compile Include="Assets\Scripts\Data\Abilitys\List\Dazzling.cs" />
     <Compile Include="Assets\Scripts\Data\Abilitys\List\WaterVeil.cs" />
     <Compile Include="Assets\Scripts\Data\HoldItems\Standard\MentalHerb.cs" />
@@ -558,7 +560,8 @@
     <Compile Include="Assets\Scripts\Data\Abilitys\List\RainDish.cs" />
     <Compile Include="Assets\Scripts\Data\Abilitys\List\Justified.cs" />
     <Compile Include="Assets\Scripts\Data\Abilitys\List\Soundproof.cs" />
-    <Compile Include="Assets\Scripts\Characters\MonoBehavior\SurfableEntity.cs" />
+    <Compile Include="Assets\Scripts\Overworld\InteractableHealerObject.cs" />
+    <Compile Include="Assets\Scripts\Overworld\OverworldBed.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\ScriptTemplates\82-EricBeaulieu__BerryBase-NewBerryBase.cs.txt" />

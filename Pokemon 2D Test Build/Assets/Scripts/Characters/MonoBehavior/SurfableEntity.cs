@@ -84,8 +84,6 @@ public class SurfableEntity : MonoBehaviour
             return;
         }
 
-        Debug.Log($"{currentDirection}: {y}",gameObject);
-
         if(entityGraphics != null)
         entityGraphics.SnapGraphicsToOffsetYPos(y + Entity.ENTITY_Y_OFFSET);
     }

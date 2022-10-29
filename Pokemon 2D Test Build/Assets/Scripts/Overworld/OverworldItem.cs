@@ -16,7 +16,7 @@ public class OverworldItem : MonoBehaviour,IInteractable,ISaveable
 
     void Start()
     {
-        transform.position = GlobalTools.SnapToGrid(transform.position);
+        transform.SnapToGrid();
     }
 
     public IEnumerator OnInteract(Vector2 vector2)
@@ -24,19 +24,17 @@ public class OverworldItem : MonoBehaviour,IInteractable,ISaveable
         string inGameText;
         if(count >1)
         {
-            inGameText = $"You found {count} {itemBase.ItemName}'s";
+            inGameText = $"{GameManager.instance.GetPlayerController.TrainerName} found {count} {itemBase.ItemName}'s";
         }
         else
         {
-            inGameText = $"You found {itemBase.ItemName}";
+            inGameText = $"{GameManager.instance.GetPlayerController.TrainerName} found {itemBase.ItemName}";
         }
         itemPickedUp = true;
         gameObject.SetActive(false);
         yield return GameManager.instance.GetDialogSystem.ShowDialogBox(new Dialog(inGameText));
         GameManager.instance.GetInventorySystem.AddItem(itemBase, count);
         SavingSystem.AddInfoTobeSaved(saveableEntity);
-
-        yield break;
     }
 
     public object CaptureState(bool playerSave = false)

@@ -16,7 +16,7 @@ public class OverworldPokeballContainingPokemon : MonoBehaviour,IInteractable, I
 
     void Start()
     {
-        transform.position = GlobalTools.SnapToGrid(transform.position);
+        transform.SnapToGrid();
     }
 
     public IEnumerator OnInteract(Vector2 vector2)

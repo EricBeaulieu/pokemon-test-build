@@ -57,7 +57,10 @@ MonoBehaviour:
   canLookDown: 1
   canLookLeft: 1
   canLookRight: 1
+  lookDirectionAfterInteraction: 0
+  directionAfterInteraction: 0
   aiDecisionList: []
+  pathLocation: {x: 0, y: 0}
   timeUntilMoveMin: 1
   timeUntilMoveMax: 3
   greetingDialog:
@@ -232,12 +235,13 @@ SpriteRenderer:
   m_SortingLayerID: -1225198101
   m_SortingLayer: 3
   m_SortingOrder: 0
-  m_Sprite: {fileID: 98462526967728270, guid: 307471987687d084dbfef8e490372cbf, type: 3}
+  m_Sprite: {fileID: -992397216984684913, guid: 810a7fd3102feb349870f39a16be0425,
+    type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1.0625, y: 1.5}
+  m_Size: {x: 1.9375, y: 1.9375}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1

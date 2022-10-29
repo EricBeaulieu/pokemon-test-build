@@ -318,6 +318,10 @@ public class GameManager : MonoBehaviour
         }
         exit.PlayerPassedThroughPortal();
         playerController.transform.root.position = exit.SpawnPoint;
+        if(portal.FaceDirectionAfterMoving == true)
+        {
+            playerController.FaceTowardsDirection(portal.DirectionUponExiting);
+        }
         playerController.SnapToGrid();
         yield return Fade(exit.FadeStyle, false);
     }

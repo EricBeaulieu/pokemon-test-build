@@ -218,7 +218,23 @@ public abstract class Entity : MonoBehaviour
                 positionMovingTo.position = targetPositionFixed;
                 return true;
             }
-            
+            else if ((interactableLayermask & 1 << collider.gameObject.layer) == 1 << collider.gameObject.layer)
+            {
+                if(collider.GetComponent<BoxCollider2D>().isTrigger == true)
+                {
+                    collider = Physics2D.OverlapCircle(targetPositionFixed, 0.25f, solidObjectLayermask | playerLayerMask | waterLayerMask);
+
+                    if (collider != null)
+                    {
+                        return false;
+                    }
+                    positionMovingTo.position = targetPositionFixed;
+                    return true;
+                }
+                return false;
+            }
+
+
             if (collider != null)
             {
                 return false;
@@ -255,7 +271,7 @@ public abstract class Entity : MonoBehaviour
         }
     }
 
-    protected virtual void FaceTowardsDirection(FacingDirections dir)
+    public virtual void FaceTowardsDirection(FacingDirections dir)
     {
         Vector2 targetDir = new Vector2().GetDirection(dir);
 
@@ -270,7 +286,7 @@ public abstract class Entity : MonoBehaviour
 
     public void SnapToGrid()
     {
-        transform.position = GlobalTools.SnapToGrid(transform.position);
+        transform.SnapToGrid();
         positionMovingTo.localPosition = Vector3.zero;
     }
 

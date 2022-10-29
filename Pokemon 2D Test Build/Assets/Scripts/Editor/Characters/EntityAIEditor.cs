@@ -18,6 +18,11 @@ public class EntityAIEditor : EntityEditor
     {
         base.OnInspectorGUI();
 
+        if (Application.isPlaying || GlobalTools.isInPrefabStage())
+        {
+            return;
+        }
+
         GUILayout.BeginHorizontal();
 
         if (GUILayout.Button("Generate Path"))

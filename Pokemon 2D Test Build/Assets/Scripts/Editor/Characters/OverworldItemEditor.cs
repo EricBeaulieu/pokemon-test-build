@@ -15,6 +15,11 @@ public class OverworldItemEditor : Editor
     {
         base.OnInspectorGUI();
 
+        if (Application.isPlaying || GlobalTools.isInPrefabStage())
+        {
+            return;
+        }
+
         UpdateName();
     }
 

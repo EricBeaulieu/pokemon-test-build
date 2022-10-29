@@ -49,13 +49,10 @@ public static class GlobalTools
         return original;
     }
 
-    public static Vector3 SnapToGrid(Vector3 currentPos)
+    public static void SnapToGrid(this Transform currentTran)
     {
-        currentPos.x = Mathf.FloorToInt(currentPos.x) + Entity.TILE_CENTER_OFFSET;
-        currentPos.y = Mathf.FloorToInt(currentPos.y) + Entity.TILE_CENTER_OFFSET;
-        currentPos.z = 0;
-
-        return currentPos;
+        Vector3 currentPos = currentTran.position;
+        currentTran.position = new Vector3(Mathf.FloorToInt(currentPos.x) + Entity.TILE_CENTER_OFFSET, Mathf.FloorToInt(currentPos.y) + Entity.TILE_CENTER_OFFSET, 0);
     }
 
     public static FacingDirections CurrentDirectionFacing(Animator entityAnim)
@@ -72,6 +69,34 @@ public static class GlobalTools
                 return FacingDirections.Left;
             default:
                 return FacingDirections.Right;
+        }
+    }
+
+    public static FacingDirections CurrentDirectionFacing(Vector2 original, Vector2 target)
+    {
+        Vector2 curDir = new Vector2(Mathf.Round(target.x - original.x), Mathf.Round(target.y - original.y));
+
+        if(Mathf.Abs(curDir.y) > Mathf.Abs(curDir.x))
+        {
+            if(curDir.y > 0)
+            {
+                return FacingDirections.Up;
+            }
+            else
+            {
+                return FacingDirections.Down;
+            }
+        }
+        else
+        {
+            if (curDir.x > 0)
+            {
+                return FacingDirections.Right;
+            }
+            else
+            {
+                return FacingDirections.Left;
+            }
         }
     }
 
@@ -113,7 +138,15 @@ public static class GlobalTools
 
     public static FacingDirections GetDirectionFacingOnStart(Entity entity)
     {
-        string facing = entity.GetComponentInChildren<SpriteRenderer>().sprite.name;
+        string facing;
+        if (entity.GetComponentInChildren<SpriteRenderer>().sprite == null)
+        {
+            facing = "Down_Idle";
+        }
+        else
+        {
+            facing = entity.GetComponentInChildren<SpriteRenderer>().sprite.name;
+        }
 
         switch (facing)
         {
@@ -186,5 +219,13 @@ public static class GlobalTools
         return char.ToUpper(s[0]) + s.Substring(1);
     }
 
-
+    public static bool isInPrefabStage()
+    {
+#if UNITY_2018_3_OR_NEWER
+        var stage = UnityEditor.Experimental.SceneManagement.PrefabStageUtility.GetCurrentPrefabStage();
+        return stage != null;
+#else
+    return false;
+#endif
+    }
 }

@@ -237,18 +237,7 @@ public class PlayerController : Entity
         Vector2 interactablePOS = (Vector2)transform.position + new Vector2(_anim.GetFloat("moveX"), _anim.GetFloat("moveY"));
 
         Debug.DrawLine(transform.position, interactablePOS,Color.red,1f);
-
-        var collider = Physics2D.OverlapCircleAll(interactablePOS, 0.25f, interactableLayermask);
-        Collider2D interactor = null;
-
-        for (int i = 0; i < collider.Length; i++)
-        {
-            if (GlobalTools.IsOnTheSameXOrYGrid(transform.position,collider[i].transform.position) == true)
-            {
-                interactor = collider[i];
-                break;
-            }
-        }
+        Collider2D interactor = Physics2D.OverlapCircle(interactablePOS, 0.25f, interactableLayermask);
 
         if (interactor != null)
         {
@@ -396,7 +385,6 @@ public class PlayerController : Entity
     public IEnumerator PlayHMAnimation(Pokemon pokemonUsingHm)
     {
         yield return PlayAnimatorAnimation("HMStart");
-        //yield return new WaitForSeconds(0.5f);
         yield return GameManager.instance.PlayerUsedHMAnimation(pokemonUsingHm);
         yield return PlayAnimatorAnimation("HMEnd");
     }

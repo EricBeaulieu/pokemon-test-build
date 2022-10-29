@@ -21,7 +21,10 @@ public class EntityEditor : Editor
     {
         base.OnInspectorGUI();
 
-        if (Application.isPlaying) return;
+        if (Application.isPlaying || GlobalTools.isInPrefabStage())
+        {
+            return;
+        }
 
         if (target is WildPokemonController)
         {

@@ -155,7 +155,7 @@ public class TrainerController : EntityAI,IInteractable,ISaveable
         AdjustSight(targetPos);
     }
 
-    protected override void FaceTowardsDirection(FacingDirections dir)
+    public override void FaceTowardsDirection(FacingDirections dir)
     {
         _changingSight = true;
         base.FaceTowardsDirection(dir);

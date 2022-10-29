@@ -2,31 +2,28 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum DestinationIdentifier { A,B,C,D,E}
+public enum DestinationIdentifier { A,B,C,D,E,F}
 public class Portal : MonoBehaviour
 {
     [SerializeField] Transform spawnPoint;
+    public Vector3 SpawnPoint { get { return spawnPoint.position; } }
     [SerializeField] GameSceneBaseSO alternativeScene;
+    public GameSceneBaseSO AlternativeScene { get { return alternativeScene; } }
     [SerializeField] bool exitOnly;
     [SerializeField] DestinationIdentifier destinationIdentifier;
     [SerializeField] FadeStyle fadeStyle;
+    public FadeStyle FadeStyle { get { return fadeStyle; } }
+    [SerializeField] bool faceDirectionAfterMoving;
+    public bool FaceDirectionAfterMoving { get { return faceDirectionAfterMoving; } }
+    [SerializeField] FacingDirections direction;
+    public FacingDirections DirectionUponExiting { get { return direction; } }
 
     //This is to prevent the player going in and out if they cannot move ontop of it
-    public bool canPlayerPassThrough { get; private set; } = true;
-
-    public GameSceneBaseSO AlternativeScene
-    {
-        get { return alternativeScene; }
-    }
+    public bool canPlayerPassThrough { get; protected set; } = true;
 
     public DestinationIdentifier MatchingIdentifier
     {
         get { return destinationIdentifier; }
-    }
-
-    public Vector3 SpawnPoint
-    {
-        get { return spawnPoint.position; }
     }
 
     public void PlayerPassedThroughPortal()
@@ -38,12 +35,8 @@ public class Portal : MonoBehaviour
     {
         if (col.CompareTag("Player"))
         {
+            Debug.Log("Portal Called");
             canPlayerPassThrough = true;
         }
-    }
-
-    public FadeStyle FadeStyle
-    {
-        get { return fadeStyle; }
     }
 }

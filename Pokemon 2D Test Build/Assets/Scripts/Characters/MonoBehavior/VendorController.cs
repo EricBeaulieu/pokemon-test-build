@@ -29,6 +29,10 @@ public class VendorController : EntityAI, IInteractable
 
     public IEnumerator OnInteract(Vector2 initiator)
     {
+        if (GlobalTools.IsOnTheSameXOrYGrid(transform.position, initiator) == false)
+        {
+            yield break;
+        }
         GameManager.SetGameState(GameState.Dialog);
         FaceTowardsDirection(initiator);
         dialogManager.ActivateDialog(true);

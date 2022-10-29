@@ -8,7 +8,7 @@ using Object = UnityEngine.Object;
 [CustomEditor(typeof(TrainerController))]
 public class TrainerControllerEditor : EntityEditor
 {
-    public string trainerName;
+    string trainerName;
 
     void OnEnable()
     {
@@ -17,9 +17,13 @@ public class TrainerControllerEditor : EntityEditor
 
     public override void OnInspectorGUI()
     {
-        string previousValue = target.name;
-        
         base.OnInspectorGUI();
+
+        if (Application.isPlaying || GlobalTools.isInPrefabStage())
+        {
+            return;
+        }
+        string previousValue = target.name;
 
         trainerName = CurrentTrainerInfo(((TrainerController)target).TrainerName);
 

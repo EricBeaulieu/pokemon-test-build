@@ -17,7 +17,7 @@ public class CuttableTree : MonoBehaviour,IInteractable, ISaveable
     void Awake()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
-        transform.position = GlobalTools.SnapToGrid(transform.position);
+        transform.SnapToGrid();
     }
 
     public void RestoreTree()
