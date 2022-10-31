@@ -1,0 +1,2940 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!29 &1
+OcclusionCullingSettings:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_OcclusionBakeSettings:
+    smallestOccluder: 5
+    smallestHole: 0.25
+    backfaceThreshold: 100
+  m_SceneGUID: 00000000000000000000000000000000
+  m_OcclusionCullingData: {fileID: 0}
+--- !u!104 &2
+RenderSettings:
+  m_ObjectHideFlags: 0
+  serializedVersion: 9
+  m_Fog: 0
+  m_FogColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  m_FogMode: 3
+  m_FogDensity: 0.01
+  m_LinearFogStart: 0
+  m_LinearFogEnd: 300
+  m_AmbientSkyColor: {r: 0.212, g: 0.227, b: 0.259, a: 1}
+  m_AmbientEquatorColor: {r: 0.114, g: 0.125, b: 0.133, a: 1}
+  m_AmbientGroundColor: {r: 0.047, g: 0.043, b: 0.035, a: 1}
+  m_AmbientIntensity: 1
+  m_AmbientMode: 3
+  m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
+  m_SkyboxMaterial: {fileID: 0}
+  m_HaloStrength: 0.5
+  m_FlareStrength: 1
+  m_FlareFadeSpeed: 3
+  m_HaloTexture: {fileID: 0}
+  m_SpotCookie: {fileID: 10001, guid: 0000000000000000e000000000000000, type: 0}
+  m_DefaultReflectionMode: 0
+  m_DefaultReflectionResolution: 128
+  m_ReflectionBounces: 1
+  m_ReflectionIntensity: 1
+  m_CustomReflection: {fileID: 0}
+  m_Sun: {fileID: 0}
+  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
+  m_UseRadianceAmbientProbe: 0
+--- !u!157 &3
+LightmapSettings:
+  m_ObjectHideFlags: 0
+  serializedVersion: 12
+  m_GIWorkflowMode: 1
+  m_GISettings:
+    serializedVersion: 2
+    m_BounceScale: 1
+    m_IndirectOutputScale: 1
+    m_AlbedoBoost: 1
+    m_EnvironmentLightingMode: 0
+    m_EnableBakedLightmaps: 0
+    m_EnableRealtimeLightmaps: 0
+  m_LightmapEditorSettings:
+    serializedVersion: 12
+    m_Resolution: 2
+    m_BakeResolution: 40
+    m_AtlasSize: 1024
+    m_AO: 0
+    m_AOMaxDistance: 1
+    m_CompAOExponent: 1
+    m_CompAOExponentDirect: 0
+    m_ExtractAmbientOcclusion: 0
+    m_Padding: 2
+    m_LightmapParameters: {fileID: 0}
+    m_LightmapsBakeMode: 1
+    m_TextureCompression: 1
+    m_FinalGather: 0
+    m_FinalGatherFiltering: 1
+    m_FinalGatherRayCount: 256
+    m_ReflectionCompression: 2
+    m_MixedBakeMode: 2
+    m_BakeBackend: 1
+    m_PVRSampling: 1
+    m_PVRDirectSampleCount: 32
+    m_PVRSampleCount: 512
+    m_PVRBounces: 2
+    m_PVREnvironmentSampleCount: 256
+    m_PVREnvironmentReferencePointCount: 2048
+    m_PVRFilteringMode: 1
+    m_PVRDenoiserTypeDirect: 1
+    m_PVRDenoiserTypeIndirect: 1
+    m_PVRDenoiserTypeAO: 1
+    m_PVRFilterTypeDirect: 0
+    m_PVRFilterTypeIndirect: 0
+    m_PVRFilterTypeAO: 0
+    m_PVREnvironmentMIS: 1
+    m_PVRCulling: 1
+    m_PVRFilteringGaussRadiusDirect: 1
+    m_PVRFilteringGaussRadiusIndirect: 5
+    m_PVRFilteringGaussRadiusAO: 2
+    m_PVRFilteringAtrousPositionSigmaDirect: 0.5
+    m_PVRFilteringAtrousPositionSigmaIndirect: 2
+    m_PVRFilteringAtrousPositionSigmaAO: 1
+    m_ExportTrainingData: 0
+    m_TrainingDataDestination: TrainingData
+    m_LightProbeSampleCountMultiplier: 4
+  m_LightingDataAsset: {fileID: 0}
+  m_LightingSettings: {fileID: 0}
+--- !u!196 &4
+NavMeshSettings:
+  serializedVersion: 2
+  m_ObjectHideFlags: 0
+  m_BuildSettings:
+    serializedVersion: 2
+    agentTypeID: 0
+    agentRadius: 0.5
+    agentHeight: 2
+    agentSlope: 45
+    agentClimb: 0.4
+    ledgeDropHeight: 0
+    maxJumpAcrossDistance: 0
+    minRegionArea: 2
+    manualCellSize: 0
+    cellSize: 0.16666667
+    manualTileSize: 0
+    tileSize: 256
+    accuratePlacement: 0
+    maxJobWorkers: 0
+    preserveTilesOutsideBounds: 0
+    debug:
+      m_Flags: 0
+  m_NavMeshData: {fileID: 0}
+--- !u!1001 &62693869
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: -5716534250426172903, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: id
+      value: fd84475f-bd00-4702-9905-6992fba9f07f
+      objectReference: {fileID: 0}
+    - target: {fileID: 2072594005822930160, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: pokemonParty.Array.size
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2072594005822930160, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: pokemonParty.Array.data[0]._level
+      value: 52
+      objectReference: {fileID: 0}
+    - target: {fileID: 2072594005822930160, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: pokemonParty.Array.data[1]._level
+      value: 54
+      objectReference: {fileID: 0}
+    - target: {fileID: 2072594005822930160, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: pokemonParty.Array.data[2]._level
+      value: 55
+      objectReference: {fileID: 0}
+    - target: {fileID: 2072594005822930160, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: pokemonParty.Array.data[3]._level
+      value: 55
+      objectReference: {fileID: 0}
+    - target: {fileID: 2072594005822930160, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: pokemonParty.Array.data[4]._level
+      value: 56
+      objectReference: {fileID: 0}
+    - target: {fileID: 2072594005822930160, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: pokemonParty.Array.data[0]._pokemonBase
+      value: 
+      objectReference: {fileID: 11400000, guid: fbe1bf8e793ac244d9c7b54895980fb7,
+        type: 2}
+    - target: {fileID: 2072594005822930160, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: pokemonParty.Array.data[1]._pokemonBase
+      value: 
+      objectReference: {fileID: 11400000, guid: c2c41320aad2dbf49b405f5ed584b3d1,
+        type: 2}
+    - target: {fileID: 2072594005822930160, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: pokemonParty.Array.data[2]._pokemonBase
+      value: 
+      objectReference: {fileID: 11400000, guid: f638338f4fe81a04f92e962a21a0d788,
+        type: 2}
+    - target: {fileID: 2072594005822930160, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: pokemonParty.Array.data[3]._pokemonBase
+      value: 
+      objectReference: {fileID: 11400000, guid: d4f52f408fb2af545b2ec189cfb278d0,
+        type: 2}
+    - target: {fileID: 2072594005822930160, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: pokemonParty.Array.data[4]._pokemonBase
+      value: 
+      objectReference: {fileID: 11400000, guid: c8d2809f8e3f471408973c0a92bc34f6,
+        type: 2}
+    - target: {fileID: 2072594005822930160, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: pokemonParty.Array.data[1].currentHeldItem
+      value: 
+      objectReference: {fileID: 11400000, guid: e23552926e6b36a4e822580d7a36a04e,
+        type: 2}
+    - target: {fileID: 2072594005822930160, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: pokemonParty.Array.data[2].currentHeldItem
+      value: 
+      objectReference: {fileID: 11400000, guid: b4bd485833f2ead4a9f93fa15106d0d1,
+        type: 2}
+    - target: {fileID: 2072594005822930160, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: pokemonParty.Array.data[3].currentHeldItem
+      value: 
+      objectReference: {fileID: 11400000, guid: 59c8408086b77964fa9a79cebf93bfda,
+        type: 2}
+    - target: {fileID: 2072594005822930160, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: pokemonParty.Array.data[4].currentHeldItem
+      value: 
+      objectReference: {fileID: 11400000, guid: 2c73e9ce53434e94b8428f673eea002e,
+        type: 2}
+    - target: {fileID: 5864479953946560453, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: -992397216984684913, guid: 56298d9e205e5514986394dae4f688ea,
+        type: 3}
+    - target: {fileID: 5864479954145141585, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: m_Name
+      value: Paulina_Trainer (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5864479954145141587, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5864479954145141587, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -34.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5864479954145141587, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 2.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5864479954145141587, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5864479954145141587, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5864479954145141587, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5864479954145141587, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5864479954145141587, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5864479954145141587, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5864479954145141587, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5864479954145141587, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5937812492033838737, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: canLookUp
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5937812492033838737, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: canLookLeft
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5937812492033838737, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: trainerBase
+      value: 
+      objectReference: {fileID: 11400000, guid: 5803d4898543c2f43b7ae7ee028f1945,
+        type: 2}
+    - target: {fileID: 5937812492033838737, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: trainerName
+      value: Paulina
+      objectReference: {fileID: 0}
+    - target: {fileID: 5937812492033838737, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: characterArt
+      value: 
+      objectReference: {fileID: 11400000, guid: e687e2eb05cd1894aaee910632243e1b,
+        type: 2}
+    - target: {fileID: 5937812492033838737, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: preBattleDialog.lines.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5937812492033838737, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: preBattleDialog.lines.Array.data[0]
+      value: Lets battle while im relaxing
+      objectReference: {fileID: 0}
+    - target: {fileID: 5937812492033838737, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: inBattleDialogOnDefeat.lines.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5937812492033838737, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: inBattleDialogOnVictory.lines.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5937812492033838737, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: inBattleDialogOnDefeat.lines.Array.data[0]
+      value: Oh, that wasnt much of fight from me was it
+      objectReference: {fileID: 0}
+    - target: {fileID: 5937812492033838737, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: postDefeatOverworldDialog.lines.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5937812492033838737, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: inBattleDialogOnVictory.lines.Array.data[0]
+      value: That was fun, lets do it again!
+      objectReference: {fileID: 0}
+    - target: {fileID: 5937812492033838737, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: postDefeatOverworldDialog.lines.Array.data[0]
+      value: Im going to exercise again
+      objectReference: {fileID: 0}
+    - target: {fileID: 5937812492033838737, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: postDefeatOverworldDialog.lines.Array.data[1]
+      value: Then I'll focus on training my Pokemon to beat you
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 9c885606b53f3e4469b2ac5a06cd95e1, type: 3}
+--- !u!1001 &128256475
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 2072594005822930160, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: pokemonParty.Array.size
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 2072594005822930160, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: pokemonParty.Array.data[3]._level
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 2072594005822930160, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: pokemonParty.Array.data[4]._level
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 2072594005822930160, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: pokemonParty.Array.data[5]._level
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 2072594005822930160, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: pokemonParty.Array.data[0]._pokemonBase
+      value: 
+      objectReference: {fileID: 11400000, guid: 0d3ba7ec8d064244c903d53805cc8867,
+        type: 2}
+    - target: {fileID: 2072594005822930160, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: pokemonParty.Array.data[1]._pokemonBase
+      value: 
+      objectReference: {fileID: 11400000, guid: 2644f0f0225129649abafceda30c462a,
+        type: 2}
+    - target: {fileID: 2072594005822930160, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: pokemonParty.Array.data[2]._pokemonBase
+      value: 
+      objectReference: {fileID: 11400000, guid: 6aaa7b69dbf098d419061c4ce1b4d85d,
+        type: 2}
+    - target: {fileID: 2072594005822930160, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: pokemonParty.Array.data[3]._pokemonBase
+      value: 
+      objectReference: {fileID: 11400000, guid: 4c84da8921a95bb4fbe8cc8463547218,
+        type: 2}
+    - target: {fileID: 2072594005822930160, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: pokemonParty.Array.data[4]._pokemonBase
+      value: 
+      objectReference: {fileID: 11400000, guid: e3dd61363c7f82143adc6fa4d15c3fff,
+        type: 2}
+    - target: {fileID: 2072594005822930160, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: pokemonParty.Array.data[5]._pokemonBase
+      value: 
+      objectReference: {fileID: 11400000, guid: 0678276f3e66a55458eeab6be4bc5179,
+        type: 2}
+    - target: {fileID: 5864479953946560453, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: -992397216984684913, guid: ce86d8a7293203c4eb90f1c49be77132,
+        type: 3}
+    - target: {fileID: 5864479954145141585, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: m_Name
+      value: Isaac_Trainer (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5864479954145141585, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5864479954145141587, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 5864479954145141587, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -19.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5864479954145141587, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 15.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5864479954145141587, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5864479954145141587, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5864479954145141587, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5864479954145141587, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5864479954145141587, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5864479954145141587, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5864479954145141587, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5864479954145141587, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5937812492033838737, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: trainerName
+      value: Isaac
+      objectReference: {fileID: 0}
+    - target: {fileID: 5937812492033838737, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: characterArt
+      value: 
+      objectReference: {fileID: 11400000, guid: 8e3357957002de143a654d6006d55dfc,
+        type: 2}
+    - target: {fileID: 5937812492033838737, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: lineOfSightSize
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5937812492033838737, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: timeUntilMoveMin
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5937812492033838737, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: standAroundAndLook
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5937812492033838737, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: aiDecisionList.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5937812492033838737, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: preBattleDialog.lines.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5937812492033838737, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: preBattleDialog.lines.Array.data[0]
+      value: I'll battle you instead
+      objectReference: {fileID: 0}
+    - target: {fileID: 5937812492033838737, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: aiDecisionList.Array.data[0].movement.y
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 5937812492033838737, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: aiDecisionList.Array.data[1].movement.y
+      value: -8
+      objectReference: {fileID: 0}
+    - target: {fileID: 5937812492033838737, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: inBattleDialogOnDefeat.lines.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5937812492033838737, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: inBattleDialogOnVictory.lines.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5937812492033838737, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: inBattleDialogOnDefeat.lines.Array.data[0]
+      value: You're alot stronger than the pokemon in this area
+      objectReference: {fileID: 0}
+    - target: {fileID: 5937812492033838737, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: postDefeatOverworldDialog.lines.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5937812492033838737, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: inBattleDialogOnVictory.lines.Array.data[0]
+      value: I thought you'd be stronger than the pokemon in this area.
+      objectReference: {fileID: 0}
+    - target: {fileID: 5937812492033838737, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: postDefeatOverworldDialog.lines.Array.data[0]
+      value: I love collecting bug pokemon.
+      objectReference: {fileID: 0}
+    - target: {fileID: 5937812492033838737, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: postDefeatOverworldDialog.lines.Array.data[1]
+      value: I'd love to find Pinsir. I've heard he has a form that can fly!
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 9c885606b53f3e4469b2ac5a06cd95e1, type: 3}
+--- !u!1001 &149422501
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 2072594005822930160, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: pokemonParty.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 2072594005822930160, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: pokemonParty.Array.data[2]._level
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2072594005822930160, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: pokemonParty.Array.data[3]._level
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2072594005822930160, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: pokemonParty.Array.data[0]._pokemonBase
+      value: 
+      objectReference: {fileID: 11400000, guid: 28d493d2c07088a468f09a7518848336,
+        type: 2}
+    - target: {fileID: 2072594005822930160, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: pokemonParty.Array.data[1]._pokemonBase
+      value: 
+      objectReference: {fileID: 11400000, guid: 72814d1c0d9ff1c488a6bf8d04f8c20d,
+        type: 2}
+    - target: {fileID: 2072594005822930160, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: pokemonParty.Array.data[2]._pokemonBase
+      value: 
+      objectReference: {fileID: 11400000, guid: 9b3b8bd8689de974580db79c75fbe89e,
+        type: 2}
+    - target: {fileID: 2072594005822930160, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: pokemonParty.Array.data[3]._pokemonBase
+      value: 
+      objectReference: {fileID: 11400000, guid: d8b26f010e4d9854998bcdf7611b6798,
+        type: 2}
+    - target: {fileID: 5864479953946560453, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: -992397216984684913, guid: 44455a367b83f7b41b4abf48d8737991,
+        type: 3}
+    - target: {fileID: 5864479954145141585, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: m_Name
+      value: Matt_Trainer (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5864479954145141585, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5864479954145141587, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5864479954145141587, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 11.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5864479954145141587, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 36.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5864479954145141587, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5864479954145141587, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5864479954145141587, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5864479954145141587, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5864479954145141587, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5864479954145141587, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5864479954145141587, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5864479954145141587, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5937812492033838737, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: canLookUp
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5937812492033838737, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: trainerName
+      value: Matt
+      objectReference: {fileID: 0}
+    - target: {fileID: 5937812492033838737, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: canLookRight
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5937812492033838737, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: characterArt
+      value: 
+      objectReference: {fileID: 11400000, guid: 0c117acfc6bf15448b04d9eaf11363c5,
+        type: 2}
+    - target: {fileID: 5937812492033838737, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: lineOfSightSize
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5937812492033838737, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: preBattleDialog.lines.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5937812492033838737, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: preBattleDialog.lines.Array.data[0]
+      value: You don;t look that strong.
+      objectReference: {fileID: 0}
+    - target: {fileID: 5937812492033838737, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: inBattleDialogOnDefeat.lines.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5937812492033838737, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: inBattleDialogOnVictory.lines.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5937812492033838737, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: inBattleDialogOnDefeat.lines.Array.data[0]
+      value: You're stronger then I expected...
+      objectReference: {fileID: 0}
+    - target: {fileID: 5937812492033838737, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: postDefeatOverworldDialog.lines.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5937812492033838737, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: inBattleDialogOnVictory.lines.Array.data[0]
+      value: Yeah! I'll be here waiting for a rematch
+      objectReference: {fileID: 0}
+    - target: {fileID: 5937812492033838737, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: postDefeatOverworldDialog.lines.Array.data[0]
+      value: We just came back from the mountains, It's my favorite color!
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 9c885606b53f3e4469b2ac5a06cd95e1, type: 3}
+--- !u!1001 &618843552
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: -5716534250426172903, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: id
+      value: 0e275e73-72cd-45cc-b8a1-01af29f332ef
+      objectReference: {fileID: 0}
+    - target: {fileID: 2072594005822930160, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: pokemonParty.Array.data[0]._pokemonBase
+      value: 
+      objectReference: {fileID: 11400000, guid: 62729574f1ca7a3409f565d032330e1a,
+        type: 2}
+    - target: {fileID: 2072594005822930160, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: pokemonParty.Array.data[1]._pokemonBase
+      value: 
+      objectReference: {fileID: 11400000, guid: e9e17018b48fd0447a37f475d1f258ae,
+        type: 2}
+    - target: {fileID: 2072594005822930160, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: pokemonParty.Array.data[2]._pokemonBase
+      value: 
+      objectReference: {fileID: 11400000, guid: a9326a20c91c5c84d81ce275035b2a7b,
+        type: 2}
+    - target: {fileID: 5864479953946560453, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: -992397216984684913, guid: 810a7fd3102feb349870f39a16be0425,
+        type: 3}
+    - target: {fileID: 5864479954145141585, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: m_Name
+      value: Steve_Trainer (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5864479954145141585, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5864479954145141587, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 5864479954145141587, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -2.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5864479954145141587, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 23.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5864479954145141587, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5864479954145141587, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5864479954145141587, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5864479954145141587, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5864479954145141587, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5864479954145141587, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5864479954145141587, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5864479954145141587, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5937812492033838737, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: canLookUp
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5937812492033838737, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: canLookDown
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5937812492033838737, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: canLookLeft
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5937812492033838737, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: trainerBase
+      value: 
+      objectReference: {fileID: 11400000, guid: 0bfcf2a311a2b0f448b2607ed5ba7be2,
+        type: 2}
+    - target: {fileID: 5937812492033838737, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: trainerName
+      value: Steve
+      objectReference: {fileID: 0}
+    - target: {fileID: 5937812492033838737, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: canLookRight
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5937812492033838737, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: characterArt
+      value: 
+      objectReference: {fileID: 11400000, guid: 15c8c3e185bdcad42a8cd7280bf71c02,
+        type: 2}
+    - target: {fileID: 5937812492033838737, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: lineOfSightSize
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5937812492033838737, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: standAroundAndLook
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5937812492033838737, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: preBattleDialog.lines.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5937812492033838737, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: preBattleDialog.lines.Array.data[0]
+      value: Let's see what you can do
+      objectReference: {fileID: 0}
+    - target: {fileID: 5937812492033838737, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: inBattleDialogOnDefeat.lines.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5937812492033838737, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: inBattleDialogOnVictory.lines.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5937812492033838737, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: inBattleDialogOnDefeat.lines.Array.data[0]
+      value: I may have lost but that was fun
+      objectReference: {fileID: 0}
+    - target: {fileID: 5937812492033838737, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: postDefeatOverworldDialog.lines.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5937812492033838737, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: inBattleDialogOnVictory.lines.Array.data[0]
+      value: Lets battle again sometime
+      objectReference: {fileID: 0}
+    - target: {fileID: 5937812492033838737, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: postDefeatOverworldDialog.lines.Array.data[0]
+      value: I've always enjoyed a good battle
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 9c885606b53f3e4469b2ac5a06cd95e1, type: 3}
+--- !u!1001 &632036443
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: -5716534250426172903, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: id
+      value: e26191af-dc13-48c8-ad57-3773ad7ccf4e
+      objectReference: {fileID: 0}
+    - target: {fileID: 2072594005822930160, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: pokemonParty.Array.size
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 2072594005822930160, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: pokemonParty.Array.data[0]._level
+      value: 51
+      objectReference: {fileID: 0}
+    - target: {fileID: 2072594005822930160, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: pokemonParty.Array.data[1]._level
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 2072594005822930160, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: pokemonParty.Array.data[2]._level
+      value: 53
+      objectReference: {fileID: 0}
+    - target: {fileID: 2072594005822930160, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: pokemonParty.Array.data[3]._level
+      value: 55
+      objectReference: {fileID: 0}
+    - target: {fileID: 2072594005822930160, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: pokemonParty.Array.data[4]._level
+      value: 56
+      objectReference: {fileID: 0}
+    - target: {fileID: 2072594005822930160, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: pokemonParty.Array.data[5]._level
+      value: 58
+      objectReference: {fileID: 0}
+    - target: {fileID: 2072594005822930160, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: pokemonParty.Array.data[0]._pokemonBase
+      value: 
+      objectReference: {fileID: 11400000, guid: 78c8c2023b6430e44b1ef54da86f05f9,
+        type: 2}
+    - target: {fileID: 2072594005822930160, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: pokemonParty.Array.data[1]._pokemonBase
+      value: 
+      objectReference: {fileID: 11400000, guid: 4a17e07a09bd8f84d96137ca3f139562,
+        type: 2}
+    - target: {fileID: 2072594005822930160, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: pokemonParty.Array.data[2]._pokemonBase
+      value: 
+      objectReference: {fileID: 11400000, guid: 2f6b7760f59493649ab61deb246a1748,
+        type: 2}
+    - target: {fileID: 2072594005822930160, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: pokemonParty.Array.data[3]._pokemonBase
+      value: 
+      objectReference: {fileID: 11400000, guid: e08da9c1fde2e2d42a85405c1ea2a7b2,
+        type: 2}
+    - target: {fileID: 2072594005822930160, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: pokemonParty.Array.data[4]._pokemonBase
+      value: 
+      objectReference: {fileID: 11400000, guid: 0678276f3e66a55458eeab6be4bc5179,
+        type: 2}
+    - target: {fileID: 2072594005822930160, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: pokemonParty.Array.data[5]._pokemonBase
+      value: 
+      objectReference: {fileID: 11400000, guid: c4dd55ad047f5cb4d9c167f439657170,
+        type: 2}
+    - target: {fileID: 2072594005822930160, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: pokemonParty.Array.data[0].currentHeldItem
+      value: 
+      objectReference: {fileID: 11400000, guid: b4bd485833f2ead4a9f93fa15106d0d1,
+        type: 2}
+    - target: {fileID: 2072594005822930160, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: pokemonParty.Array.data[1].currentHeldItem
+      value: 
+      objectReference: {fileID: 11400000, guid: d7999e6893505db4886f3a33be636415,
+        type: 2}
+    - target: {fileID: 2072594005822930160, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: pokemonParty.Array.data[2].currentHeldItem
+      value: 
+      objectReference: {fileID: 11400000, guid: f2fb327a4441c5a4dad79476b1e47987,
+        type: 2}
+    - target: {fileID: 2072594005822930160, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: pokemonParty.Array.data[3].currentHeldItem
+      value: 
+      objectReference: {fileID: 11400000, guid: 0de3b2c8e9bba15468ad8418809a15f5,
+        type: 2}
+    - target: {fileID: 2072594005822930160, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: pokemonParty.Array.data[4].currentHeldItem
+      value: 
+      objectReference: {fileID: 11400000, guid: c1488952164074b4e97ea0c3ac26201d,
+        type: 2}
+    - target: {fileID: 2072594005822930160, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: pokemonParty.Array.data[5].currentHeldItem
+      value: 
+      objectReference: {fileID: 11400000, guid: fcb547ac01983b2428e979329933cffb,
+        type: 2}
+    - target: {fileID: 5864479953946560453, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: -992397216984684913, guid: 86d20732cc3ef8c41a43361dacbe089f,
+        type: 3}
+    - target: {fileID: 5864479954145141585, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: m_Name
+      value: Joanna_Trainer (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5864479954145141587, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5864479954145141587, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -43.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5864479954145141587, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 3.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5864479954145141587, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5864479954145141587, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5864479954145141587, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5864479954145141587, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5864479954145141587, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5864479954145141587, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5864479954145141587, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5864479954145141587, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5937812492033838737, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: canLookUp
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5937812492033838737, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: trainerBase
+      value: 
+      objectReference: {fileID: 11400000, guid: 13c75f7cda78a294eb96d38c768b836c,
+        type: 2}
+    - target: {fileID: 5937812492033838737, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: trainerName
+      value: Joanna
+      objectReference: {fileID: 0}
+    - target: {fileID: 5937812492033838737, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: characterArt
+      value: 
+      objectReference: {fileID: 11400000, guid: c9e0fa276f9681743b73a686384c6f35,
+        type: 2}
+    - target: {fileID: 5937812492033838737, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: lineOfSightSize
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5937812492033838737, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: preBattleDialog.lines.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5937812492033838737, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: preBattleDialog.lines.Array.data[0]
+      value: Let's see what you got!
+      objectReference: {fileID: 0}
+    - target: {fileID: 5937812492033838737, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: inBattleDialogOnDefeat.lines.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5937812492033838737, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: inBattleDialogOnVictory.lines.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5937812492033838737, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: inBattleDialogOnDefeat.lines.Array.data[0]
+      value: More then i could handle
+      objectReference: {fileID: 0}
+    - target: {fileID: 5937812492033838737, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: postDefeatOverworldDialog.lines.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5937812492033838737, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: inBattleDialogOnVictory.lines.Array.data[0]
+      value: Ha! Couldnt handle this!
+      objectReference: {fileID: 0}
+    - target: {fileID: 5937812492033838737, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: postDefeatOverworldDialog.lines.Array.data[0]
+      value: Im going to go train more
+      objectReference: {fileID: 0}
+    - target: {fileID: 5937812492033838737, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: postDefeatOverworldDialog.lines.Array.data[1]
+      value: We're going to battle again, dont worry
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 9c885606b53f3e4469b2ac5a06cd95e1, type: 3}
+--- !u!1001 &932864537
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: -5716534250426172903, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: id
+      value: 525f9a59-61e9-4ef0-a33e-e6e602be2423
+      objectReference: {fileID: 0}
+    - target: {fileID: 2072594005822930160, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: pokemonParty.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 2072594005822930160, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: pokemonParty.Array.data[0]._level
+      value: 52
+      objectReference: {fileID: 0}
+    - target: {fileID: 2072594005822930160, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: pokemonParty.Array.data[1]._level
+      value: 53
+      objectReference: {fileID: 0}
+    - target: {fileID: 2072594005822930160, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: pokemonParty.Array.data[2]._level
+      value: 52
+      objectReference: {fileID: 0}
+    - target: {fileID: 2072594005822930160, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: pokemonParty.Array.data[3]._level
+      value: 54
+      objectReference: {fileID: 0}
+    - target: {fileID: 2072594005822930160, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: pokemonParty.Array.data[4]._level
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 2072594005822930160, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: pokemonParty.Array.data[0]._pokemonBase
+      value: 
+      objectReference: {fileID: 11400000, guid: 2644f0f0225129649abafceda30c462a,
+        type: 2}
+    - target: {fileID: 2072594005822930160, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: pokemonParty.Array.data[1]._pokemonBase
+      value: 
+      objectReference: {fileID: 11400000, guid: 035955532a56c544eba76cdb240c24e3,
+        type: 2}
+    - target: {fileID: 2072594005822930160, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: pokemonParty.Array.data[2]._pokemonBase
+      value: 
+      objectReference: {fileID: 11400000, guid: 4a17e07a09bd8f84d96137ca3f139562,
+        type: 2}
+    - target: {fileID: 2072594005822930160, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: pokemonParty.Array.data[3]._pokemonBase
+      value: 
+      objectReference: {fileID: 11400000, guid: 0de182fa461919c43a3b04828e18d2a5,
+        type: 2}
+    - target: {fileID: 2072594005822930160, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: pokemonParty.Array.data[4]._pokemonBase
+      value: 
+      objectReference: {fileID: 11400000, guid: a5077a98ad912594f8e38408d3ce9f02,
+        type: 2}
+    - target: {fileID: 2072594005822930160, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: pokemonParty.Array.data[0].currentHeldItem
+      value: 
+      objectReference: {fileID: 11400000, guid: fcb547ac01983b2428e979329933cffb,
+        type: 2}
+    - target: {fileID: 2072594005822930160, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: pokemonParty.Array.data[1].currentHeldItem
+      value: 
+      objectReference: {fileID: 11400000, guid: f52a796b92f5abd45a2d904e5d37f521,
+        type: 2}
+    - target: {fileID: 2072594005822930160, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: pokemonParty.Array.data[2].currentHeldItem
+      value: 
+      objectReference: {fileID: 11400000, guid: 0de3b2c8e9bba15468ad8418809a15f5,
+        type: 2}
+    - target: {fileID: 2072594005822930160, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: pokemonParty.Array.data[3].currentHeldItem
+      value: 
+      objectReference: {fileID: 11400000, guid: 77dcc98bed0a8854f813552858151751,
+        type: 2}
+    - target: {fileID: 5864479953946560453, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: -992397216984684913, guid: 96b578c45b617e04f97e1dfdf8e5887d,
+        type: 3}
+    - target: {fileID: 5864479954145141585, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: m_Name
+      value: Emma_Trainer (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5864479954145141587, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5864479954145141587, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -17.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5864479954145141587, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 5.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5864479954145141587, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5864479954145141587, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5864479954145141587, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5864479954145141587, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5864479954145141587, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5864479954145141587, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5864479954145141587, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5864479954145141587, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5937812492033838737, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: canLookUp
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5937812492033838737, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: canLookDown
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5937812492033838737, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: trainerBase
+      value: 
+      objectReference: {fileID: 11400000, guid: ef437078a863f884ab11133ae16cd1ed,
+        type: 2}
+    - target: {fileID: 5937812492033838737, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: trainerName
+      value: Emma
+      objectReference: {fileID: 0}
+    - target: {fileID: 5937812492033838737, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: canLookRight
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5937812492033838737, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: characterArt
+      value: 
+      objectReference: {fileID: 11400000, guid: 8b0b4b91a8c01724f9672a3981e7a2ef,
+        type: 2}
+    - target: {fileID: 5937812492033838737, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: lineOfSightSize
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 5937812492033838737, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: preBattleDialog.lines.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5937812492033838737, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: preBattleDialog.lines.Array.data[0]
+      value: Is'nt it beautiful out here
+      objectReference: {fileID: 0}
+    - target: {fileID: 5937812492033838737, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: preBattleDialog.lines.Array.data[1]
+      value: Lets see our pokemon in this beautiful environment
+      objectReference: {fileID: 0}
+    - target: {fileID: 5937812492033838737, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: inBattleDialogOnDefeat.lines.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5937812492033838737, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: inBattleDialogOnVictory.lines.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5937812492033838737, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: inBattleDialogOnDefeat.lines.Array.data[0]
+      value: That was fun, lets do it again sometime
+      objectReference: {fileID: 0}
+    - target: {fileID: 5937812492033838737, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: postDefeatOverworldDialog.lines.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5937812492033838737, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: inBattleDialogOnVictory.lines.Array.data[0]
+      value: Oh my, you have to try harder
+      objectReference: {fileID: 0}
+    - target: {fileID: 5937812492033838737, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: postDefeatOverworldDialog.lines.Array.data[0]
+      value: I could just sit here and take in the environment all day
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 9c885606b53f3e4469b2ac5a06cd95e1, type: 3}
+--- !u!1001 &967253858
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: -5716534250426172903, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: id
+      value: 02017bdc-1c56-46a3-9f34-0c7842960480
+      objectReference: {fileID: 0}
+    - target: {fileID: 2072594005822930160, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: pokemonParty.Array.data[0]._level
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 2072594005822930160, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: pokemonParty.Array.data[1]._level
+      value: 29
+      objectReference: {fileID: 0}
+    - target: {fileID: 2072594005822930160, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: pokemonParty.Array.data[2]._level
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 2072594005822930160, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: pokemonParty.Array.data[0]._pokemonBase
+      value: 
+      objectReference: {fileID: 11400000, guid: 237f1753889b02f44b00f72027cb1354,
+        type: 2}
+    - target: {fileID: 2072594005822930160, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: pokemonParty.Array.data[1]._pokemonBase
+      value: 
+      objectReference: {fileID: 11400000, guid: 78c8c2023b6430e44b1ef54da86f05f9,
+        type: 2}
+    - target: {fileID: 2072594005822930160, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: pokemonParty.Array.data[2]._pokemonBase
+      value: 
+      objectReference: {fileID: 11400000, guid: 236c65196852c4346bd23759a414beef,
+        type: 2}
+    - target: {fileID: 2072594005822930160, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: pokemonParty.Array.data[1].currentHeldItem
+      value: 
+      objectReference: {fileID: 11400000, guid: 2c73e9ce53434e94b8428f673eea002e,
+        type: 2}
+    - target: {fileID: 2072594005822930160, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: pokemonParty.Array.data[2].currentHeldItem
+      value: 
+      objectReference: {fileID: 11400000, guid: fcb547ac01983b2428e979329933cffb,
+        type: 2}
+    - target: {fileID: 5864479953946560453, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: -992397216984684913, guid: bca9dbcec1517f249a39b01a469cedf1,
+        type: 3}
+    - target: {fileID: 5864479954145141585, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: m_Name
+      value: Rayan_Trainer
+      objectReference: {fileID: 0}
+    - target: {fileID: 5864479954145141585, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5864479954145141587, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 5864479954145141587, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -19.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5864479954145141587, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 44.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5864479954145141587, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5864479954145141587, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5864479954145141587, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5864479954145141587, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5864479954145141587, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5864479954145141587, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5864479954145141587, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5864479954145141587, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5937812492033838737, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: canLookUp
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5937812492033838737, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: canLookLeft
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5937812492033838737, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: trainerBase
+      value: 
+      objectReference: {fileID: 11400000, guid: 994bdc33263b9e347b7ff52e728cb983,
+        type: 2}
+    - target: {fileID: 5937812492033838737, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: trainerName
+      value: Rayan
+      objectReference: {fileID: 0}
+    - target: {fileID: 5937812492033838737, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: canLookRight
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5937812492033838737, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: characterArt
+      value: 
+      objectReference: {fileID: 11400000, guid: 70348cd1cff78354c908e981f86fcf82,
+        type: 2}
+    - target: {fileID: 5937812492033838737, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: timeUntilMoveMin
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5937812492033838737, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: preBattleDialog.lines.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5937812492033838737, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: preBattleDialog.lines.Array.data[0]
+      value: Yo! Check out what I have!
+      objectReference: {fileID: 0}
+    - target: {fileID: 5937812492033838737, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: inBattleDialogOnDefeat.lines.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5937812492033838737, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: inBattleDialogOnVictory.lines.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5937812492033838737, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: inBattleDialogOnDefeat.lines.Array.data[0]
+      value: Really, dude that's not fair
+      objectReference: {fileID: 0}
+    - target: {fileID: 5937812492033838737, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: postDefeatOverworldDialog.lines.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5937812492033838737, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: inBattleDialogOnVictory.lines.Array.data[0]
+      value: NO CHANCE!
+      objectReference: {fileID: 0}
+    - target: {fileID: 5937812492033838737, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: postDefeatOverworldDialog.lines.Array.data[0]
+      value: next time you'll have no chance
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 9c885606b53f3e4469b2ac5a06cd95e1, type: 3}
+--- !u!1001 &1349441238
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 2072594005822930160, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: pokemonParty.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 2072594005822930160, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: pokemonParty.Array.data[0]._level
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 2072594005822930160, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: pokemonParty.Array.data[1]._level
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2072594005822930160, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: pokemonParty.Array.data[2]._level
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2072594005822930160, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: pokemonParty.Array.data[3]._level
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2072594005822930160, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: pokemonParty.Array.data[0]._pokemonBase
+      value: 
+      objectReference: {fileID: 11400000, guid: 5a61245d76c260c4bb0b41d90f657180,
+        type: 2}
+    - target: {fileID: 2072594005822930160, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: pokemonParty.Array.data[1]._pokemonBase
+      value: 
+      objectReference: {fileID: 11400000, guid: b2cbdc29d3a35d94bb3848b0817423e8,
+        type: 2}
+    - target: {fileID: 2072594005822930160, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: pokemonParty.Array.data[2]._pokemonBase
+      value: 
+      objectReference: {fileID: 11400000, guid: 699cdb8144bb5e546bd7c06c113ccb97,
+        type: 2}
+    - target: {fileID: 2072594005822930160, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: pokemonParty.Array.data[3]._pokemonBase
+      value: 
+      objectReference: {fileID: 11400000, guid: df48c9d69ebd1924b8b995cb140bf9ed,
+        type: 2}
+    - target: {fileID: 5864479953946560453, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: -992397216984684913, guid: 44455a367b83f7b41b4abf48d8737991,
+        type: 3}
+    - target: {fileID: 5864479954145141585, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: m_Name
+      value: Kevin_Trainer (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5864479954145141585, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5864479954145141587, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 5864479954145141587, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 22.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5864479954145141587, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 39.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5864479954145141587, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5864479954145141587, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5864479954145141587, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5864479954145141587, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5864479954145141587, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5864479954145141587, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5864479954145141587, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5864479954145141587, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5937812492033838737, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: canLookUp
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5937812492033838737, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: canLookDown
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5937812492033838737, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: trainerName
+      value: Kevin
+      objectReference: {fileID: 0}
+    - target: {fileID: 5937812492033838737, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: canLookRight
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5937812492033838737, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: characterArt
+      value: 
+      objectReference: {fileID: 11400000, guid: 0c117acfc6bf15448b04d9eaf11363c5,
+        type: 2}
+    - target: {fileID: 5937812492033838737, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: timeUntilMoveMin
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5937812492033838737, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: standAroundAndLook
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5937812492033838737, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: preBattleDialog.lines.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5937812492033838737, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: preBattleDialog.lines.Array.data[0]
+      value: Is this love at first sight!??
+      objectReference: {fileID: 0}
+    - target: {fileID: 5937812492033838737, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: inBattleDialogOnDefeat.lines.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5937812492033838737, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: inBattleDialogOnVictory.lines.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5937812492033838737, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: inBattleDialogOnDefeat.lines.Array.data[0]
+      value: Hard to get, I like it.
+      objectReference: {fileID: 0}
+    - target: {fileID: 5937812492033838737, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: postDefeatOverworldDialog.lines.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5937812492033838737, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: inBattleDialogOnVictory.lines.Array.data[0]
+      value: Get dominated
+      objectReference: {fileID: 0}
+    - target: {fileID: 5937812492033838737, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: postDefeatOverworldDialog.lines.Array.data[0]
+      value: You have beautiful eyes, I'll never forget you.
+      objectReference: {fileID: 0}
+    - target: {fileID: 5937812492033838737, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: postDefeatOverworldDialog.lines.Array.data[1]
+      value: Hey wait, come back!
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 9c885606b53f3e4469b2ac5a06cd95e1, type: 3}
+--- !u!1001 &1353429167
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: -5716534250426172903, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: id
+      value: 76ab1627-a6fc-4b05-81cf-ee78683aef2d
+      objectReference: {fileID: 0}
+    - target: {fileID: 2072594005822930160, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: pokemonParty.Array.size
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 2072594005822930160, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: pokemonParty.Array.data[0]._level
+      value: 38
+      objectReference: {fileID: 0}
+    - target: {fileID: 2072594005822930160, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: pokemonParty.Array.data[1]._level
+      value: 38
+      objectReference: {fileID: 0}
+    - target: {fileID: 2072594005822930160, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: pokemonParty.Array.data[2]._level
+      value: 40
+      objectReference: {fileID: 0}
+    - target: {fileID: 2072594005822930160, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: pokemonParty.Array.data[3]._level
+      value: 39
+      objectReference: {fileID: 0}
+    - target: {fileID: 2072594005822930160, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: pokemonParty.Array.data[4]._level
+      value: 40
+      objectReference: {fileID: 0}
+    - target: {fileID: 2072594005822930160, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: pokemonParty.Array.data[5]._level
+      value: 42
+      objectReference: {fileID: 0}
+    - target: {fileID: 2072594005822930160, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: pokemonParty.Array.data[4]._gender
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2072594005822930160, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: pokemonParty.Array.data[4]._isShiny
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2072594005822930160, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: pokemonParty.Array.data[0]._pokemonBase
+      value: 
+      objectReference: {fileID: 11400000, guid: f65d4ef18e0710d45b5a6a49fed32a2f,
+        type: 2}
+    - target: {fileID: 2072594005822930160, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: pokemonParty.Array.data[1]._pokemonBase
+      value: 
+      objectReference: {fileID: 11400000, guid: 4f5aecb623c33e4438aa61717386bc4d,
+        type: 2}
+    - target: {fileID: 2072594005822930160, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: pokemonParty.Array.data[2]._pokemonBase
+      value: 
+      objectReference: {fileID: 11400000, guid: ef4528d540cd1984eb7883d61b9a9a9c,
+        type: 2}
+    - target: {fileID: 2072594005822930160, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: pokemonParty.Array.data[3]._pokemonBase
+      value: 
+      objectReference: {fileID: 11400000, guid: 5c0c9c30591486942a4a12ef8d684598,
+        type: 2}
+    - target: {fileID: 2072594005822930160, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: pokemonParty.Array.data[4]._pokemonBase
+      value: 
+      objectReference: {fileID: 11400000, guid: e08da9c1fde2e2d42a85405c1ea2a7b2,
+        type: 2}
+    - target: {fileID: 2072594005822930160, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: pokemonParty.Array.data[5]._pokemonBase
+      value: 
+      objectReference: {fileID: 11400000, guid: e312cc81d657c2447afbd3da7e4a700b,
+        type: 2}
+    - target: {fileID: 2072594005822930160, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: pokemonParty.Array.data[2].currentHeldItem
+      value: 
+      objectReference: {fileID: 11400000, guid: 4ea627a36c7c4cd4486d0c3b26726480,
+        type: 2}
+    - target: {fileID: 2072594005822930160, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: pokemonParty.Array.data[3].currentHeldItem
+      value: 
+      objectReference: {fileID: 11400000, guid: 77dcc98bed0a8854f813552858151751,
+        type: 2}
+    - target: {fileID: 2072594005822930160, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: pokemonParty.Array.data[4].currentHeldItem
+      value: 
+      objectReference: {fileID: 11400000, guid: 0de3b2c8e9bba15468ad8418809a15f5,
+        type: 2}
+    - target: {fileID: 2072594005822930160, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: pokemonParty.Array.data[5].currentHeldItem
+      value: 
+      objectReference: {fileID: 11400000, guid: 8f2c4b786d1f69043bf406beb1488738,
+        type: 2}
+    - target: {fileID: 5864479953946560453, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: -992397216984684913, guid: 6c6f581166315314ab7d415307ee3bc4,
+        type: 3}
+    - target: {fileID: 5864479954145141585, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: m_Icon
+      value: 
+      objectReference: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000,
+        type: 0}
+    - target: {fileID: 5864479954145141585, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: m_Name
+      value: Brian_Trainer (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5864479954145141585, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5864479954145141587, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 5864479954145141587, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -13.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5864479954145141587, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 25.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5864479954145141587, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5864479954145141587, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5864479954145141587, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5864479954145141587, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5864479954145141587, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5864479954145141587, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5864479954145141587, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5864479954145141587, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5937812492033838737, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: canLookUp
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5937812492033838737, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: canLookLeft
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5937812492033838737, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: trainerBase
+      value: 
+      objectReference: {fileID: 11400000, guid: 4b25ff9f2b1cfca42a60e8310ed38363,
+        type: 2}
+    - target: {fileID: 5937812492033838737, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: trainerName
+      value: Brian
+      objectReference: {fileID: 0}
+    - target: {fileID: 5937812492033838737, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: characterArt
+      value: 
+      objectReference: {fileID: 11400000, guid: 42a3c5c5f3930a54197484d19b700839,
+        type: 2}
+    - target: {fileID: 5937812492033838737, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: lineOfSightSize
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 5937812492033838737, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: preBattleDialog.lines.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5937812492033838737, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: preBattleDialog.lines.Array.data[0]
+      value: Im looking for Bozo the clown
+      objectReference: {fileID: 0}
+    - target: {fileID: 5937812492033838737, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: preBattleDialog.lines.Array.data[1]
+      value: Have You Seen Him Around
+      objectReference: {fileID: 0}
+    - target: {fileID: 5937812492033838737, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: inBattleDialogOnDefeat.lines.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5937812492033838737, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: inBattleDialogOnVictory.lines.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5937812492033838737, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: inBattleDialogOnDefeat.lines.Array.data[0]
+      value: ok but, have you seen that clown
+      objectReference: {fileID: 0}
+    - target: {fileID: 5937812492033838737, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: postDefeatOverworldDialog.lines.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5937812492033838737, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: inBattleDialogOnVictory.lines.Array.data[0]
+      value: Yeah Baby, but this doesnt help me find that clown
+      objectReference: {fileID: 0}
+    - target: {fileID: 5937812492033838737, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: postDefeatOverworldDialog.lines.Array.data[0]
+      value: If you see a guy named bozo, im looking for him
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 9c885606b53f3e4469b2ac5a06cd95e1, type: 3}
+--- !u!1001 &1426045618
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 2072594005822930160, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: pokemonParty.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2072594005822930160, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: pokemonParty.Array.data[2]._level
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2072594005822930160, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: pokemonParty.Array.data[0]._pokemonBase
+      value: 
+      objectReference: {fileID: 11400000, guid: 6ab3f27a4c092084f8d6da8f65000dd1,
+        type: 2}
+    - target: {fileID: 2072594005822930160, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: pokemonParty.Array.data[1]._pokemonBase
+      value: 
+      objectReference: {fileID: 11400000, guid: 97c44ab4579286f489ebf160de5988bc,
+        type: 2}
+    - target: {fileID: 2072594005822930160, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: pokemonParty.Array.data[2]._pokemonBase
+      value: 
+      objectReference: {fileID: 11400000, guid: f58aa3f7f88da514b8da8cb466087e71,
+        type: 2}
+    - target: {fileID: 5864479953946560453, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: -992397216984684913, guid: d8861be84a29bfb4580c2773c9103b2a,
+        type: 3}
+    - target: {fileID: 5864479954145141585, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: m_Name
+      value: Alicia_Trainer (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5864479954145141585, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5864479954145141587, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 5864479954145141587, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 10.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5864479954145141587, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 36.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5864479954145141587, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5864479954145141587, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5864479954145141587, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5864479954145141587, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5864479954145141587, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5864479954145141587, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5864479954145141587, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5864479954145141587, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5937812492033838737, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: canLookUp
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5937812492033838737, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: trainerName
+      value: Alicia
+      objectReference: {fileID: 0}
+    - target: {fileID: 5937812492033838737, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: canLookRight
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5937812492033838737, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: characterArt
+      value: 
+      objectReference: {fileID: 11400000, guid: 0a30c8bd62fe3024aaa3af58b473901d,
+        type: 2}
+    - target: {fileID: 5937812492033838737, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: lineOfSightSize
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5937812492033838737, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: preBattleDialog.lines.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5937812492033838737, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: preBattleDialog.lines.Array.data[0]
+      value: Instead of resting, I'll battle you.
+      objectReference: {fileID: 0}
+    - target: {fileID: 5937812492033838737, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: inBattleDialogOnDefeat.lines.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5937812492033838737, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: inBattleDialogOnVictory.lines.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5937812492033838737, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: inBattleDialogOnDefeat.lines.Array.data[0]
+      value: oh man
+      objectReference: {fileID: 0}
+    - target: {fileID: 5937812492033838737, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: postDefeatOverworldDialog.lines.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5937812492033838737, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: inBattleDialogOnVictory.lines.Array.data[0]
+      value: Yeah! I'll be here waiting for a rematch
+      objectReference: {fileID: 0}
+    - target: {fileID: 5937812492033838737, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: postDefeatOverworldDialog.lines.Array.data[0]
+      value: I like to go over to Limestone Mountain to train my Pokemon.
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 9c885606b53f3e4469b2ac5a06cd95e1, type: 3}
+--- !u!1001 &1748310401
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: -5716534250426172903, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: id
+      value: eee9da94-4245-46a7-b5ea-b889129d3b99
+      objectReference: {fileID: 0}
+    - target: {fileID: 2072594005822930160, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: pokemonParty.Array.size
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 2072594005822930160, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: pokemonParty.Array.data[0]._level
+      value: 53
+      objectReference: {fileID: 0}
+    - target: {fileID: 2072594005822930160, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: pokemonParty.Array.data[1]._level
+      value: 52
+      objectReference: {fileID: 0}
+    - target: {fileID: 2072594005822930160, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: pokemonParty.Array.data[2]._level
+      value: 53
+      objectReference: {fileID: 0}
+    - target: {fileID: 2072594005822930160, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: pokemonParty.Array.data[3]._level
+      value: 54
+      objectReference: {fileID: 0}
+    - target: {fileID: 2072594005822930160, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: pokemonParty.Array.data[4]._level
+      value: 55
+      objectReference: {fileID: 0}
+    - target: {fileID: 2072594005822930160, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: pokemonParty.Array.data[5]._level
+      value: 57
+      objectReference: {fileID: 0}
+    - target: {fileID: 2072594005822930160, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: pokemonParty.Array.data[4].abilityID
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 2072594005822930160, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: pokemonParty.Array.data[5].abilityID
+      value: 55
+      objectReference: {fileID: 0}
+    - target: {fileID: 2072594005822930160, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: pokemonParty.Array.data[0]._pokemonBase
+      value: 
+      objectReference: {fileID: 11400000, guid: 1ac464bcd6f95af45bdd6f764ceca8dc,
+        type: 2}
+    - target: {fileID: 2072594005822930160, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: pokemonParty.Array.data[1]._pokemonBase
+      value: 
+      objectReference: {fileID: 11400000, guid: bef694552a1809d4caa45294540f9b34,
+        type: 2}
+    - target: {fileID: 2072594005822930160, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: pokemonParty.Array.data[2]._pokemonBase
+      value: 
+      objectReference: {fileID: 11400000, guid: 2f6b7760f59493649ab61deb246a1748,
+        type: 2}
+    - target: {fileID: 2072594005822930160, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: pokemonParty.Array.data[3]._pokemonBase
+      value: 
+      objectReference: {fileID: 11400000, guid: a112d9698f51ae74f88302f441a7e959,
+        type: 2}
+    - target: {fileID: 2072594005822930160, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: pokemonParty.Array.data[4]._pokemonBase
+      value: 
+      objectReference: {fileID: 11400000, guid: 4b8528ddd91643942a580e1c9ef98f44,
+        type: 2}
+    - target: {fileID: 2072594005822930160, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: pokemonParty.Array.data[5]._pokemonBase
+      value: 
+      objectReference: {fileID: 11400000, guid: 0e4489ec7524a924299a4ee856c26239,
+        type: 2}
+    - target: {fileID: 2072594005822930160, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: pokemonParty.Array.data[0].currentHeldItem
+      value: 
+      objectReference: {fileID: 11400000, guid: b4bd485833f2ead4a9f93fa15106d0d1,
+        type: 2}
+    - target: {fileID: 2072594005822930160, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: pokemonParty.Array.data[1].currentHeldItem
+      value: 
+      objectReference: {fileID: 11400000, guid: 0b4d585b50c127d49b05232257a645ee,
+        type: 2}
+    - target: {fileID: 2072594005822930160, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: pokemonParty.Array.data[2].currentHeldItem
+      value: 
+      objectReference: {fileID: 11400000, guid: 4dc9e2e0752c2b14bafc96cfec162e9d,
+        type: 2}
+    - target: {fileID: 2072594005822930160, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: pokemonParty.Array.data[3].currentHeldItem
+      value: 
+      objectReference: {fileID: 11400000, guid: 2c73e9ce53434e94b8428f673eea002e,
+        type: 2}
+    - target: {fileID: 2072594005822930160, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: pokemonParty.Array.data[4].currentHeldItem
+      value: 
+      objectReference: {fileID: 11400000, guid: 77dcc98bed0a8854f813552858151751,
+        type: 2}
+    - target: {fileID: 2072594005822930160, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: pokemonParty.Array.data[5].currentHeldItem
+      value: 
+      objectReference: {fileID: 11400000, guid: c1488952164074b4e97ea0c3ac26201d,
+        type: 2}
+    - target: {fileID: 5864479953946560453, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: -992397216984684913, guid: 2fd3f1ecf50f48c41997ed07b83aab7c,
+        type: 3}
+    - target: {fileID: 5864479954145141585, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: m_Name
+      value: Manny_Trainer
+      objectReference: {fileID: 0}
+    - target: {fileID: 5864479954145141587, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5864479954145141587, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -62.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5864479954145141587, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5864479954145141587, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5864479954145141587, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5864479954145141587, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5864479954145141587, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5864479954145141587, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5864479954145141587, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5864479954145141587, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5864479954145141587, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5937812492033838737, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: canLookUp
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5937812492033838737, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: trainerBase
+      value: 
+      objectReference: {fileID: 11400000, guid: 7ab04580a316b6949afc068d0edb8351,
+        type: 2}
+    - target: {fileID: 5937812492033838737, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: trainerName
+      value: Manny
+      objectReference: {fileID: 0}
+    - target: {fileID: 5937812492033838737, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: characterArt
+      value: 
+      objectReference: {fileID: 11400000, guid: 8a8b2116ed7cdbe458bbeabc32721b87,
+        type: 2}
+    - target: {fileID: 5937812492033838737, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: lineOfSightSize
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5937812492033838737, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: timeUntilMoveMin
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5937812492033838737, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: standAroundAndLook
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5937812492033838737, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: aiDecisionList.Array.size
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 5937812492033838737, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: preBattleDialog.lines.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5937812492033838737, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: preBattleDialog.lines.Array.data[0]
+      value: Hey, want to battle. I need a little break
+      objectReference: {fileID: 0}
+    - target: {fileID: 5937812492033838737, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: aiDecisionList.Array.data[0].movement.x
+      value: 40
+      objectReference: {fileID: 0}
+    - target: {fileID: 5937812492033838737, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: aiDecisionList.Array.data[1].movement.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5937812492033838737, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: aiDecisionList.Array.data[1].movement.y
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5937812492033838737, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: aiDecisionList.Array.data[2].movement.x
+      value: -40
+      objectReference: {fileID: 0}
+    - target: {fileID: 5937812492033838737, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: aiDecisionList.Array.data[2].movement.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5937812492033838737, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: aiDecisionList.Array.data[3].movement.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5937812492033838737, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: aiDecisionList.Array.data[3].movement.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5937812492033838737, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: aiDecisionList.Array.data[4].movement.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5937812492033838737, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: inBattleDialogOnDefeat.lines.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5937812492033838737, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: inBattleDialogOnVictory.lines.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5937812492033838737, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: inBattleDialogOnDefeat.lines.Array.data[0]
+      value: oh damn! That was fun though!
+      objectReference: {fileID: 0}
+    - target: {fileID: 5937812492033838737, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: postDefeatOverworldDialog.lines.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5937812492033838737, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: inBattleDialogOnVictory.lines.Array.data[0]
+      value: Hey I still got it
+      objectReference: {fileID: 0}
+    - target: {fileID: 5937812492033838737, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: postDefeatOverworldDialog.lines.Array.data[0]
+      value: Looks like im better at exercising then battling
+      objectReference: {fileID: 0}
+    - target: {fileID: 5937812492033838737, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: aiDecisionList.Array.data[4].directionToFace.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5937812492033838737, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: aiDecisionList.Array.data[5].directionToFace.x
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5937812492033838737, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: aiDecisionList.Array.data[6].directionToFace.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5937812492033838737, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: aiDecisionList.Array.data[4].specificTimeUniltNextExecution
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5937812492033838737, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: aiDecisionList.Array.data[5].specificTimeUniltNextExecution
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5937812492033838737, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: aiDecisionList.Array.data[6].specificTimeUniltNextExecution
+      value: 3
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 9c885606b53f3e4469b2ac5a06cd95e1, type: 3}
+--- !u!1001 &2109890928
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: -5716534250426172903, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: id
+      value: 5f9923c9-c6f1-43c5-82c5-851f7921ec33
+      objectReference: {fileID: 0}
+    - target: {fileID: 2072594005822930160, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: pokemonParty.Array.size
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 2072594005822930160, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: pokemonParty.Array.data[0]._level
+      value: 28
+      objectReference: {fileID: 0}
+    - target: {fileID: 2072594005822930160, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: pokemonParty.Array.data[1]._level
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 2072594005822930160, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: pokemonParty.Array.data[2]._level
+      value: 27
+      objectReference: {fileID: 0}
+    - target: {fileID: 2072594005822930160, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: pokemonParty.Array.data[3]._level
+      value: 31
+      objectReference: {fileID: 0}
+    - target: {fileID: 2072594005822930160, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: pokemonParty.Array.data[4]._level
+      value: 33
+      objectReference: {fileID: 0}
+    - target: {fileID: 2072594005822930160, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: pokemonParty.Array.data[5]._level
+      value: 34
+      objectReference: {fileID: 0}
+    - target: {fileID: 2072594005822930160, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: pokemonParty.Array.data[0]._pokemonBase
+      value: 
+      objectReference: {fileID: 11400000, guid: c2246570b6630c945ada765f3158816d,
+        type: 2}
+    - target: {fileID: 2072594005822930160, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: pokemonParty.Array.data[1]._pokemonBase
+      value: 
+      objectReference: {fileID: 11400000, guid: 4a17e07a09bd8f84d96137ca3f139562,
+        type: 2}
+    - target: {fileID: 2072594005822930160, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: pokemonParty.Array.data[2]._pokemonBase
+      value: 
+      objectReference: {fileID: 11400000, guid: 45cbfd932f667df43af46c61e0eb50b4,
+        type: 2}
+    - target: {fileID: 2072594005822930160, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: pokemonParty.Array.data[3]._pokemonBase
+      value: 
+      objectReference: {fileID: 11400000, guid: 6f28a9f01361e43439e21d1e9269e7ed,
+        type: 2}
+    - target: {fileID: 2072594005822930160, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: pokemonParty.Array.data[4]._pokemonBase
+      value: 
+      objectReference: {fileID: 11400000, guid: ab180f3b64b50cf4984d283162fda62e,
+        type: 2}
+    - target: {fileID: 2072594005822930160, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: pokemonParty.Array.data[5]._pokemonBase
+      value: 
+      objectReference: {fileID: 11400000, guid: dbdcca6f9a3a7b0458e31296a286c81b,
+        type: 2}
+    - target: {fileID: 2072594005822930160, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: pokemonParty.Array.data[0].currentHeldItem
+      value: 
+      objectReference: {fileID: 11400000, guid: f52a796b92f5abd45a2d904e5d37f521,
+        type: 2}
+    - target: {fileID: 2072594005822930160, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: pokemonParty.Array.data[1].currentHeldItem
+      value: 
+      objectReference: {fileID: 11400000, guid: 87a95e5e7da813f42a1d7baf78176400,
+        type: 2}
+    - target: {fileID: 2072594005822930160, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: pokemonParty.Array.data[2].currentHeldItem
+      value: 
+      objectReference: {fileID: 11400000, guid: 77dcc98bed0a8854f813552858151751,
+        type: 2}
+    - target: {fileID: 2072594005822930160, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: pokemonParty.Array.data[3].currentHeldItem
+      value: 
+      objectReference: {fileID: 11400000, guid: 77dcc98bed0a8854f813552858151751,
+        type: 2}
+    - target: {fileID: 2072594005822930160, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: pokemonParty.Array.data[4].currentHeldItem
+      value: 
+      objectReference: {fileID: 11400000, guid: 0de3b2c8e9bba15468ad8418809a15f5,
+        type: 2}
+    - target: {fileID: 2072594005822930160, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: pokemonParty.Array.data[5].currentHeldItem
+      value: 
+      objectReference: {fileID: 11400000, guid: fcb547ac01983b2428e979329933cffb,
+        type: 2}
+    - target: {fileID: 5864479953946560453, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: -992397216984684913, guid: 54b41b7941a456646a7b87a56d2ea15a,
+        type: 3}
+    - target: {fileID: 5864479954145141585, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: m_Name
+      value: Sophia_Trainer (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5864479954145141585, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5864479954145141587, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 5864479954145141587, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -23.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5864479954145141587, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 44.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5864479954145141587, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5864479954145141587, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5864479954145141587, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5864479954145141587, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5864479954145141587, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5864479954145141587, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5864479954145141587, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5864479954145141587, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5937812492033838737, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: canLookUp
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5937812492033838737, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: trainerBase
+      value: 
+      objectReference: {fileID: 11400000, guid: a049630c4f636904eb861d547785c6fa,
+        type: 2}
+    - target: {fileID: 5937812492033838737, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: trainerName
+      value: Sophia
+      objectReference: {fileID: 0}
+    - target: {fileID: 5937812492033838737, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: canLookRight
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5937812492033838737, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: characterArt
+      value: 
+      objectReference: {fileID: 11400000, guid: 4ebe1d0b2596bb149aafdf3f72987004,
+        type: 2}
+    - target: {fileID: 5937812492033838737, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: specializedBattleMusic
+      value: 
+      objectReference: {fileID: 8300000, guid: d7a811e7e01d2aa479a4180cf254faac, type: 3}
+    - target: {fileID: 5937812492033838737, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: preBattleDialog.lines.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5937812492033838737, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: preBattleDialog.lines.Array.data[0]
+      value: Your going down!
+      objectReference: {fileID: 0}
+    - target: {fileID: 5937812492033838737, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: inBattleDialogOnDefeat.lines.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5937812492033838737, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: inBattleDialogOnVictory.lines.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5937812492033838737, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: inBattleDialogOnDefeat.lines.Array.data[0]
+      value: I hate loosing! its not fair!
+      objectReference: {fileID: 0}
+    - target: {fileID: 5937812492033838737, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: postDefeatOverworldDialog.lines.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5937812492033838737, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: inBattleDialogOnVictory.lines.Array.data[0]
+      value: You didnt have a chance
+      objectReference: {fileID: 0}
+    - target: {fileID: 5937812492033838737, guid: 9c885606b53f3e4469b2ac5a06cd95e1,
+        type: 3}
+      propertyPath: postDefeatOverworldDialog.lines.Array.data[0]
+      value: Im going to go train in a bit, just leave me alone
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 9c885606b53f3e4469b2ac5a06cd95e1, type: 3}

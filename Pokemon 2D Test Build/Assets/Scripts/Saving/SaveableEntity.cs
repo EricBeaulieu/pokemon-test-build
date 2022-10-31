@@ -18,6 +18,10 @@ public class SaveableEntity : MonoBehaviour
         {
             GenerateID();
             Debug.Log(id, gameObject);
+            if(Application.isPlaying)
+            {
+                Debug.LogError("This needs to be set inside of the scene", gameObject);
+            }
         }
     }
 

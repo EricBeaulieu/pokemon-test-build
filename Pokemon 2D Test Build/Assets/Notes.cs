@@ -5,12 +5,9 @@ using UnityEngine;
 public class Notes
 {
     //To do list
-
-    //Portals and doors, make it so it shows the prefabs name plus destination
-    //create beds to be only interactable while inside them, split everything into different layers and when interacting with the bottom it will ask if they want to go to bed
+    
     //fix the smooth transistion calls in battle unit
     //update level managers to have what pokemon were in them before
-    //dialog to have a player reference that can be placed in inspector
 
     //specialized moves
     //Fix pc bug where i put pokemon in the 6th slot and didnt move

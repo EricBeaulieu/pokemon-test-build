@@ -27,6 +27,12 @@ public abstract class EntityAI : Entity
 
     protected bool interactWhenPossible;
 
+    protected override void Initialization()
+    {
+        base.Initialization();
+        FaceTowardsDirection(GlobalTools.GetDirectionFacingOnStart(this));
+    }
+
     protected IEnumerator Walk()
     {
         Vector2 desiredPosition = aiDecisionList[currentMovementPattern].movement - (Vector2)transform.position;

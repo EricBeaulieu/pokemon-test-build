@@ -220,7 +220,17 @@ public abstract class Entity : MonoBehaviour
             }
             else if ((interactableLayermask & 1 << collider.gameObject.layer) == 1 << collider.gameObject.layer)
             {
-                if(collider.GetComponent<BoxCollider2D>().isTrigger == true)
+                BoxCollider2D boxCollider2D;
+                if (collider.transform.root.GetComponent<BoxCollider2D>() != null)
+                {
+                    boxCollider2D = collider.transform.root.GetComponent<BoxCollider2D>();
+                }
+                else
+                {
+                    boxCollider2D = collider.GetComponent<BoxCollider2D>();
+                }
+
+                if(boxCollider2D.isTrigger == true)
                 {
                     collider = Physics2D.OverlapCircle(targetPositionFixed, 0.25f, solidObjectLayermask | playerLayerMask | waterLayerMask);
 

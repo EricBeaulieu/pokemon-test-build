@@ -45,7 +45,6 @@ public class TrainerController : EntityAI,IInteractable,ISaveable
             }
         }
 
-        FaceTowardsDirection(GlobalTools.GetDirectionFacingOnStart(this));
         idleTimerLimit = SetNewIdleTimer();
         exclamationMark.SetActive(false);
         pokemonParty = GetComponent<PokemonParty>();
