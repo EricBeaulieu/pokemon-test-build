@@ -27,7 +27,7 @@ public class CuttableTree : MonoBehaviour,IInteractable, ISaveable
             return;
         }
 
-        Debug.Log("help", gameObject);
+        Debug.Log("Cuttable Tree Restored", gameObject);
 
         spriteRenderer.sprite = standardTree;
         gameObject.SetActive(true);

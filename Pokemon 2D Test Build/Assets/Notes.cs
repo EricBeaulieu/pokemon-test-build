@@ -6,11 +6,10 @@ public class Notes
 {
     //To do list
     
+    //Rock Smash
+    //Speed up animation when using an HM
+    //Different forms for unkown and deoxys
     //fix the smooth transistion calls in battle unit
-    //update level managers to have what pokemon were in them before
-
-    //specialized moves
-    //Fix pc bug where i put pokemon in the 6th slot and didnt move
 
     //fix the preanimtion for confused
 
@@ -95,7 +94,9 @@ public class Notes
     //Uproar pokemon cant fall asleep during these turns
 
 
-
+    //Additions that will need to be mentioned
     //earth power now hits pokemon while theyre semi invernerable while theyre dug underground
     //magnitude and earth power doubles and fissure accuracy increases to 50% while theyre in dig state
+    //Hidden Power Attack Power increased to 90, also includes fairy type
+
 }

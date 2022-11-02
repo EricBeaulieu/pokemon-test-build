@@ -101,6 +101,11 @@ public class MoveBase : ScriptableObject {
         hpRecovered += hpRecoveredIncrease;
     }
 
+    public void AdjustedDefrostsWhenUsed(bool value)
+    {
+        defrostsWhenUsed = value;
+    }
+
     public void SetHPRecoveredByMultiplier(float hpRecoveredmultiplier)
     {
         hpRecovered *= hpRecoveredmultiplier;

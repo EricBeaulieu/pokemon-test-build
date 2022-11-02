@@ -9,6 +9,7 @@ public class GameSceneBaseSO : ScriptableObject
     [SerializeField] string sceneName;
     [SerializeField] string shortDescription;
     [SerializeField] List<GameSceneBaseSO> adjacentGameScenes;
+    static char[] delimiterChars = { '.' };
 
     [Header("Sounds")]
     [SerializeField] AudioClip music;
@@ -25,7 +26,15 @@ public class GameSceneBaseSO : ScriptableObject
 
     public string GetScenePath
     {
-        get { return $"Assets/Scenes/{name}"; }
+        get { return GetAssetPath(this); }
+    }
+
+    static string GetAssetPath(GameSceneBaseSO gSBSO)
+    {
+        string currentPath = UnityEditor.AssetDatabase.GetAssetPath(gSBSO);
+        currentPath = currentPath.Replace("Assets/Resources/SceneData/", "Assets/Scenes/");
+        currentPath = currentPath.Split(delimiterChars)[0];
+        return currentPath;
     }
 
     public AudioClip GetLevelMusic

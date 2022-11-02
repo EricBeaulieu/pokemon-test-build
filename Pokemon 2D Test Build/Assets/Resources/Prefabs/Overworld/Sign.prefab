@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 5269115998395772208}
   - component: {fileID: 7924166439086085356}
   - component: {fileID: 2471150817348791758}
-  m_Layer: 6
+  m_Layer: 8
   m_Name: Sign
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -45,6 +45,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: edb17b95127724f41b905bd94fcdda44, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  saveableEntity: {fileID: 0}
+  specifiedDirectionOnly: 0
+  interactablesDirection: 0
+  dialog:
+    lines: []
+  dialogBeforeItemPickUp:
+    lines: []
+  itemBase: {fileID: 0}
+  count: 1
 --- !u!212 &7924166439086085356
 SpriteRenderer:
   m_ObjectHideFlags: 0

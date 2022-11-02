@@ -38,6 +38,7 @@ public class PCParty : MonoBehaviour
     public void SetupData()
     {
         List<Pokemon> playerParty = GameManager.instance.GetPlayerController.pokemonParty.CurrentPokemonList();
+        changingPokemon = true;// this is to prevent PartyPokemonChanged() from running at the start checking each pokemon and cycling them through
         for (int i = 0; i < partyPokemon.Length; i++)
         {
             if(i < playerParty.Count)
@@ -47,6 +48,7 @@ public class PCParty : MonoBehaviour
             }
             partyPokemon[i].DepositPokemon(null);
         }
+        changingPokemon = false;
     }
 
     public void PartyPokemonChanged()

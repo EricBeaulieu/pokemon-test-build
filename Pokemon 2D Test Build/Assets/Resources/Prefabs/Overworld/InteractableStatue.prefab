@@ -92,8 +92,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3558281288952309721}
+  - component: {fileID: 7195205646889688874}
   - component: {fileID: 3558281288952309720}
   - component: {fileID: 3558281288952309723}
+  - component: {fileID: 3785066401023148501}
   m_Layer: 8
   m_Name: InteractableStatue
   m_TagString: Untagged
@@ -116,6 +118,27 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7195205646889688874
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3558281288952309722}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: edb17b95127724f41b905bd94fcdda44, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  saveableEntity: {fileID: 3785066401023148501}
+  specifiedDirectionOnly: 1
+  interactablesDirection: 1
+  dialog:
+    lines: []
+  dialogBeforeItemPickUp:
+    lines: []
+  itemBase: {fileID: 0}
+  count: 1
 --- !u!212 &3558281288952309720
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -153,8 +176,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -1064127755
-  m_SortingLayer: 4
+  m_SortingLayerID: 724681323
+  m_SortingLayer: 2
   m_SortingOrder: 0
   m_Sprite: {fileID: 757563548880975807, guid: 13d6dce9884ad504eadd76cfcb15b4da, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -193,3 +216,16 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &3785066401023148501
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3558281288952309722}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a7a63665f8ec1b340a2666d3395770d5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  id: fa2812e2-e21c-48e7-9816-4a615b3250d5

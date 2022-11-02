@@ -7,7 +7,7 @@ using Random = UnityEngine.Random;
 [RequireComponent(typeof(PokemonParty))]
 public class TrainerController : EntityAI,IInteractable,ISaveable
 {
-    [Header("Trainer Controller")]
+    [Header("This is where this shit starts")]
     [SerializeField] string trainerName;
     [SerializeField] Dialog preBattleDialog;
     [SerializeField] Dialog inBattleDialogOnDefeat;

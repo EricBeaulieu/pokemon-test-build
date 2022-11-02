@@ -18,6 +18,7 @@ public class PokemonBase : ScriptableObject {
 
     [Header("PokeDex Information")]
     [SerializeField] int _pokedexNumber;
+    [SerializeField] string _form;
     [TextArea]
     [SerializeField] string _pokedexDescription;
     [SerializeField] string _classification;
@@ -392,6 +393,11 @@ public class PokemonBase : ScriptableObject {
     string GetStartingSpriteNameEntry(bool isShiny,bool? gender = null)
     {
         string spriteName = $"{GetPokedexNumber().ToString("000")}_{PokemonNameList.GetPokeDexName(_pokedexNumber)}_";
+
+        if(string.IsNullOrEmpty(_form) == false)
+        {
+            spriteName += $"{_form}_";
+        }
 
         if (isShiny == true)
         {

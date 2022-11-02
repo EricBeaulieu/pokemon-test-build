@@ -955,10 +955,27 @@ public static class PokemonNameList
         214,215,217,221,224,
         229,232,
 
+        //Hoenn
+        255,256,257,267,269,
+        272,274,275,307,308,
+        315,316,317,322,323,
+        332,350,369,
+
+        //Sinnoh
+
         //Custom
         906
 
 
+    };
+    public static string[] UnownForm =
+    {
+        "A","B","C","D","E",
+        "F","G","H","I","J",
+        "K","L","M","N","O",
+        "P","Q","R","S","T",
+        "U","V","W","X","Y",
+        "Z","!","?",
     };
 
     /// <summary>

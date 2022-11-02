@@ -396,6 +396,50 @@ public static class SpecializedMoves
         return (sourceUnit.pokemon.currentHitPoints > currentHP);
     }
 
+    static ElementType GetHiddenPowerType(Pokemon pokemon)
+    {
+        int value = Mathf.RoundToInt((pokemon.individualValues.hitPoints + (2 * pokemon.individualValues.attack) + (4 * pokemon.individualValues.defense) +
+            (8 * pokemon.individualValues.speed) + (16 * pokemon.individualValues.specialAttack) + (32 * pokemon.individualValues.specialDefense) * 5) / 21);
+
+        switch (value%17)
+        {
+            case 0:
+                return ElementType.Fighting;
+            case 1:
+                return ElementType.Flying;
+            case 2:
+                return ElementType.Poison;
+            case 3:
+                return ElementType.Ground;
+            case 4:
+                return ElementType.Rock;
+            case 5:
+                return ElementType.Bug;
+            case 6:
+                return ElementType.Ghost;
+            case 7:
+                return ElementType.Steel;
+            case 8:
+                return ElementType.Fire;
+            case 9:
+                return ElementType.Water;
+            case 10:
+                return ElementType.Grass;
+            case 11:
+                return ElementType.Electric;
+            case 12:
+                return ElementType.Psychic;
+            case 13:
+                return ElementType.Ice;
+            case 14:
+                return ElementType.Dragon;
+            case 15:
+                return ElementType.Dark;
+            default://16
+                return ElementType.Fairy;
+        }
+    }
+
     #endregion
 
     public static MoveBase SpecifiedMovesWithConditions(BattleUnit attackingUnit, BattleUnit defendingUnit, MoveBase originalMove,MoveBase alteredMove,int currentMovePP)
@@ -657,6 +701,17 @@ public static class SpecializedMoves
             {
                 alteredMove.AdjustedMovePower(1);
             }
+        }
+        else if (originalMove.MoveName == "Hidden Power")
+        {
+            alteredMove.AdjustedMoveType(GetHiddenPowerType(attackingUnit.pokemon));
+            Debug.Log($"Hidden Power changed to {alteredMove.Type}");
+
+            if(alteredMove.Type == ElementType.Fire)
+            {
+                alteredMove.AdjustedDefrostsWhenUsed(true);
+            }
+
         }
         else if(originalMove.MoveName == "Hurricane" || originalMove.MoveName == "Thunder")
         {

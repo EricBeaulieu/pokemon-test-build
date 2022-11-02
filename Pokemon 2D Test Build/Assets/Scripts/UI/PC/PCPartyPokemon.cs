@@ -9,10 +9,7 @@ public class PCPartyPokemon : PCPokemon
     public override void DepositPokemon(Pokemon newPokemon)
     {
         base.DepositPokemon(newPokemon);
-        if (PCSystem.pointer.currentPokemon == null)
-        {
-            partyUI.PartyPokemonChanged();
-        }
+        partyUI.PartyPokemonChanged();
     }
 
     public override Pokemon WithdrawPokemon()
