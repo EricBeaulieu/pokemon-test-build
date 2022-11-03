@@ -155,9 +155,17 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void StartWildPokemonBattle(WildPokemonEncounterTypes encounterType)
+    public void StartWildPokemonBattle(WildPokemonEncounterTypes encounterType, WildPokemon specifiedPokemon = null)
     {
-        Pokemon currentWildPokemon = SceneSystem.currentLevelManager.WildPokemon(encounterType);
+        Pokemon currentWildPokemon;
+        if (specifiedPokemon == null)
+        {
+            currentWildPokemon = new Pokemon(specifiedPokemon);
+        }
+        else
+        {
+            currentWildPokemon = SceneSystem.currentLevelManager.WildPokemon(encounterType);
+        }
 
         if(currentWildPokemon == null)
         {

@@ -43,7 +43,10 @@ public class EvolutionEggUI : MonoBehaviour
         dialogSystem.SetDialogText($"What?! \n{pokemon.currentName} is evolving!");
 
         yield return new WaitForSeconds(BattleUnit.ENTRY_SPRITE_ANIMATION_SPEED);
-        pokemonEvolving.sprite = pokemonSpriteAnimations[1];
+        if(pokemonSpriteAnimations[1] != null)
+        {
+            pokemonEvolving.sprite = pokemonSpriteAnimations[1];
+        }
         yield return new WaitForSeconds(BattleUnit.ENTRY_SPRITE_ANIMATION_SPEED);
         pokemonEvolving.sprite = pokemonSpriteAnimations[0];
 
@@ -58,7 +61,10 @@ public class EvolutionEggUI : MonoBehaviour
         yield return FadeOverlay(true);
         
         yield return new WaitForSeconds(BattleUnit.ENTRY_SPRITE_ANIMATION_SPEED);
-        pokemonEvolving.sprite = pokemonSpriteAnimations[3];
+        if (pokemonSpriteAnimations[3] != null)
+        {
+            pokemonEvolving.sprite = pokemonSpriteAnimations[3];
+        }
         yield return new WaitForSeconds(BattleUnit.ENTRY_SPRITE_ANIMATION_SPEED);
         pokemonEvolving.sprite = pokemonSpriteAnimations[2];
 

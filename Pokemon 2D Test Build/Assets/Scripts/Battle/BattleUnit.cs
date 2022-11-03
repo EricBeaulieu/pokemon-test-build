@@ -218,7 +218,10 @@ public class BattleUnit : MonoBehaviour
         }
         else
         {
-            yield return AnimateSpriteUponEntry();
+            if(pokemonSpriteAnimations[1] != null)
+            {
+                yield return AnimateSpriteUponEntry();
+            }
             yield return hud.PlayEnterAnimation(HUD_ANIMATION_SPEED);
         }
     }
@@ -238,7 +241,10 @@ public class BattleUnit : MonoBehaviour
             yield return SmoothTransitionToPosition(pokemonSprite.gameObject, pokemonSpriteOriginalPosition, 0.75f);
         }
 
-        yield return AnimateSpriteUponEntry();
+        if (pokemonSpriteAnimations[1] != null)
+        {
+            yield return AnimateSpriteUponEntry();
+        }
         yield return hud.PlayEnterAnimation(HUD_ANIMATION_SPEED);
     }
 

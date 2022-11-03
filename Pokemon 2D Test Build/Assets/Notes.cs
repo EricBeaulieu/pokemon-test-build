@@ -5,7 +5,8 @@ using UnityEngine;
 public class Notes
 {
     //To do list
-    
+    // with a wild battle, if both pokemon faint show the animation for both pokemon dying, currently it just ends with the players unit still standing even though they wont get the exp
+
     //Rock Smash
     //Speed up animation when using an HM
     //Different forms for unkown and deoxys
@@ -82,14 +83,14 @@ public class Notes
     Retaliate,Rollout,Secret Power,Sky Drop,Smack Down,Spectral Thief,Sunsteel Strike,Thousand Arrows,Thrash,U-turn
 
     Belch, Burn Up,Core Enforcer,Doom Desire,Dragon Rage,Final Gambit,Fire/Grass/Water Pledge,
-    Fusion Flare,Future Sight,Grass Knot,Hidden Power,Judgment,Mirror Coat,Moongeist Beam,Nature's Madness,Night Shade,Petal Dance,
+    Fusion Flare,Future Sight,Grass Knot,Judgment,Mirror Coat,Moongeist Beam,Nature's Madness,Night Shade,Petal Dance,
     Photon Geyser,Psyshock,Psystrike,Relic Song,Revelation Dance,Secret Sword,Sheer Cold,Sonic Boom,Spit Ups,Techno Blast,Volt Switch
 
     After You, Ally Switch,Aromatherapy,Aromatic Mist,Assist,Baneful Bunker,Baton Pass,Bestow,Camouflage,Captivate
     */
 
     //Incinerate berry removal
-    //gust/twister double damage against flying unit
+    //gust/twister double damage against flying unit(semi-invernerable state)
     //Freeze-Dry and flying press have their own specialzed type manor
     //Uproar pokemon cant fall asleep during these turns
 

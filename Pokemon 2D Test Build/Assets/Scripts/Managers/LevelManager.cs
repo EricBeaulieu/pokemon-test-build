@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public enum WildPokemonEncounterTypes { Walking,Surfing,OldRod,GoodRod,SuperRod,RockSmash}//headbutting trees, honey trees
+public enum WildPokemonEncounterTypes { Walking,Surfing,OldRod,GoodRod,SuperRod,RockSmash,CuttableTree }//headbutting trees, honey trees
 public class LevelManager : MonoBehaviour
 {
     [SerializeField] BattleFieldLayoutBaseSO currentAreaDetails;
@@ -14,13 +14,14 @@ public class LevelManager : MonoBehaviour
     [SerializeField] List<WildPokemon> oldRod;
     [SerializeField] List<WildPokemon> goodRod;
     [SerializeField] List<WildPokemon> superRod;
+    [SerializeField] List<WildPokemon> cuttableTree;
     [SerializeField] List<WildPokemon> rockSmash;
     [SerializeField] GameSceneBaseSO sceneReference;
     [SerializeField] GridManager currentGrid;
     public GridManager GetGrid { get { return currentGrid; } }
     List<Portal> allInLevelPortals = new List<Portal>();
     List<Entity> allEntitiesInScene = new List<Entity>();
-    List<CuttableTree> allTreesInScene = new List<CuttableTree>();
+    List<DestroyableObject> allDestroyableObjectsInScene = new List<DestroyableObject>();
     bool loaded;
     [SerializeField] Transform wildPokemonSpawnParent;
 
@@ -38,6 +39,7 @@ public class LevelManager : MonoBehaviour
         StartingCheckerEncounterList(oldRod);
         StartingCheckerEncounterList(goodRod);
         StartingCheckerEncounterList(superRod);
+        StartingCheckerEncounterList(cuttableTree);
         StartingCheckerEncounterList(rockSmash);
 
         if (sceneReference == null)
@@ -86,7 +88,7 @@ public class LevelManager : MonoBehaviour
         ReloadSavedSettings();
         allEntitiesInScene = ReturnAllEntities(temp);
         allInLevelPortals = ReturnAllPortals(temp);
-        allTreesInScene = ReturnAllCuttableTrees(temp);
+        allDestroyableObjectsInScene = ReturnAllCuttableTrees(temp);
 
         loaded = true;
     }
@@ -119,12 +121,13 @@ public class LevelManager : MonoBehaviour
                 if (rockSmash.Count <= 0)
                     return null;
                 return new Pokemon(getWildPokemon(rockSmash));
+            case WildPokemonEncounterTypes.CuttableTree:
+                if (cuttableTree.Count <= 0)
+                    return null;
+                return new Pokemon(getWildPokemon(cuttableTree));
             default:
                 return null;
         }
-        
-
-        
     }
 
     WildPokemon getWildPokemon(List<WildPokemon> wildPokemon)
@@ -171,9 +174,9 @@ public class LevelManager : MonoBehaviour
     {
         if (col.CompareTag("Player"))
         {
-            for (int i = 0; i < allTreesInScene.Count; i++)
+            for (int i = 0; i < allDestroyableObjectsInScene.Count; i++)
             {
-                allTreesInScene[i].RestoreTree();
+                allDestroyableObjectsInScene[i].RestoreBreakableObject();
             }
         }
     }
@@ -217,13 +220,13 @@ public class LevelManager : MonoBehaviour
         return portals;
     }
 
-    List<CuttableTree> ReturnAllCuttableTrees(GameObject[] gameObjects)
+    List<DestroyableObject> ReturnAllCuttableTrees(GameObject[] gameObjects)
     {
-        List<CuttableTree> trees = new List<CuttableTree>();
+        List<DestroyableObject> trees = new List<DestroyableObject>();
 
         for (int i = 0; i < gameObjects.Length; i++)
         {
-            trees.AddRange(gameObjects[i].GetComponentsInChildren<CuttableTree>());
+            trees.AddRange(gameObjects[i].GetComponentsInChildren<DestroyableObject>());
         }
 
         return trees;
@@ -253,7 +256,7 @@ public class LevelManager : MonoBehaviour
         {
             foreach (SaveableEntity saveable in SaveableEntities())
             {
-                if(saveable.GetComponent<CuttableTree>() == true)
+                if(saveable.GetComponent<DestroyableObject>() == true)
                 {
                     continue;
                 }
@@ -291,6 +294,7 @@ public class LevelManager : MonoBehaviour
         s += $"\nCurrent Level Manager Old Rod Encounter Total: {GetWildPokemonListCount(oldRod)}";
         s += $"\nCurrent Level Manager Good Rod Encounter Total: {GetWildPokemonListCount(goodRod)}";
         s += $"\nCurrent Level Manager Super Rod Encounter Total: {GetWildPokemonListCount(superRod)}";
+        s += $"\nCurrent Level Manager Cuttable Tree Encounter Total: {GetWildPokemonListCount(cuttableTree)}";
         s += $"\nCurrent Level Manager Rock Smash Encounter Total: {GetWildPokemonListCount(rockSmash)}";
         return s;
     }

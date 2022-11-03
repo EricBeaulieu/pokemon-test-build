@@ -50,7 +50,15 @@ public class SummaryDisplay : SummaryUIBase
         {
             StopCoroutine(_animatedCoroutine);
         }
-        _animatedCoroutine = StartCoroutine(AnimateSprite());
+
+        if(_pokemonSpriteAnimations[1]!= null)
+        {
+            _animatedCoroutine = StartCoroutine(AnimateSprite());
+        }
+        else
+        {
+            pokemonSprite.sprite = _pokemonSpriteAnimations[0];
+        }
     }
     
     IEnumerator AnimateSprite()
