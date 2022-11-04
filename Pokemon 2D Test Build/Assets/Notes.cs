@@ -5,13 +5,9 @@ using UnityEngine;
 public class Notes
 {
     //To do list
-    // with a wild battle, if both pokemon faint show the animation for both pokemon dying, currently it just ends with the players unit still standing even though they wont get the exp
-
-    //Rock Smash
-    //Speed up animation when using an HM
-    //Different forms for unkown and deoxys
+    //double check into wurmples evolutions to have a specified way + nincada
+    //with a wild battle, if both pokemon faint show the animation for both pokemon dying, currently it just ends with the players unit still standing even though they wont get the exp
     //fix the smooth transistion calls in battle unit
-
     //fix the preanimtion for confused
 
     //Shop

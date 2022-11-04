@@ -70,12 +70,14 @@ public class EvolutionBase
         return false;
     }
 
-    //public override bool CanEvolve(Pokemon pokemon,ItemBase item)
-    //{
-    //    return (pokemon.moves.Exists(x => x.moveBase == moveRequired));
-    //}
-
-    public PokemonBase NewPokemonEvolution() { return evolvedPokemon; }
+    public PokemonBase NewPokemonEvolution(Pokemon evolvingPokemon) 
+    {
+        if(PokemonNameList.PokemonHasUniqueEvolution(evolvingPokemon.pokemonBase.GetPokedexNumber()))
+        {
+            return PokemonNameList.ReturnUniqueEvolution(evolvingPokemon);
+        }
+        return evolvedPokemon; 
+    }
     public EvolutionStoneBase RequiredStone
     {
         get { return evolutionStone; }

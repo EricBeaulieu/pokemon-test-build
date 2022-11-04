@@ -977,6 +977,10 @@ public static class PokemonNameList
         "U","V","W","X","Y",
         "Z","!","?",
     };
+    static int[] PokemonHasUniqueEvolutionList =
+    {
+        236,265
+    };
 
     /// <summary>
     /// Enter in the pokedex number to return the name
@@ -999,5 +1003,35 @@ public static class PokemonNameList
     public static bool GenderExclusive(int pokedexNumber)
     {
         return PokemonDifferentGenderSprites.Contains(pokedexNumber);
+    }
+    /// <summary>
+    /// Checks to see if this pokemon has a unique evolution
+    /// </summary>
+    /// <param name="pokedexNumber">Pokedex Number</param>
+    /// <returns></returns>
+    public static bool PokemonHasUniqueEvolution(int pokedexNumber)
+    {
+        return PokemonHasUniqueEvolutionList.Contains(pokedexNumber);
+    }
+
+    public static PokemonBase ReturnUniqueEvolution(Pokemon pokemon)
+    {
+        if(pokemon.pokemonBase.GetPokedexNumber() == 236)//Tyrogue
+        {
+            if(pokemon.attack > pokemon.defense)
+            {
+                return Resources.Load<PokemonBase>("Pokedex/Gen1/106 Hitmonlee");
+            }
+            else if(pokemon.attack < pokemon.defense)
+            {
+                return Resources.Load<PokemonBase>("Pokedex/Gen1/107 Hitmonchan");
+            }
+            return Resources.Load<PokemonBase>("Pokedex/Gen2/237 Hitmontop");
+        }
+        if (pokemon.pokemonBase.GetPokedexNumber() == 265)// Wurmple
+        {
+
+        }
+        return null;
     }
 }

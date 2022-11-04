@@ -16,6 +16,7 @@ public class FadeSystem : MonoBehaviour
     [SerializeField] Image pokemonUsingHmHorizontalSplitTop;
     [SerializeField] Image pokemonUsingHmHorizontalSplitBottom;
     int originalXPos;//pokemon using hm image
+    float animationTime;
 
 
     const int INNER_MAX_CIRCLE_MAX = 1000;
@@ -106,7 +107,7 @@ public class FadeSystem : MonoBehaviour
     IEnumerator FullFadeIn()
     {
         float tempAlpha = 0;
-        float animationTime = 1.5f;
+        animationTime = 1.5f;
 
         while (tempAlpha < 1)
         {
@@ -121,7 +122,7 @@ public class FadeSystem : MonoBehaviour
     IEnumerator FullFadeOut()
     {
         float tempAlpha = 1;
-        float animationTime = 1.5f;
+        animationTime = 1.5f;
 
         while (tempAlpha > 0)
         {
@@ -141,7 +142,7 @@ public class FadeSystem : MonoBehaviour
     IEnumerator ClockwiseIn()
     {
         float fillAmount = 0;
-        float animationTime = 1.5f;
+        animationTime = 1.5f;
 
         while (fillAmount < 1)
         {
@@ -156,7 +157,7 @@ public class FadeSystem : MonoBehaviour
     IEnumerator ClockwiseOut()
     {
         float fillAmount = 1;
-        float animationTime = 1.5f;
+        animationTime = 1.5f;
 
         while (fillAmount > 0)
         {
@@ -176,7 +177,7 @@ public class FadeSystem : MonoBehaviour
     {
         float circleSize = INNER_MAX_CIRCLE_MAX;
         RectTransform rT = innerMaskCircle.GetComponent<RectTransform>();
-        float animationTime = 2.5f;
+        animationTime = 2.5f;
 
         while (circleSize > 0)
         {
@@ -192,7 +193,7 @@ public class FadeSystem : MonoBehaviour
     {
         float circleSize = 0;
         RectTransform rT = innerMaskCircle.GetComponent<RectTransform>();
-        float animationTime = 2.5f;
+        animationTime = 2.5f;
 
         while (circleSize < INNER_MAX_CIRCLE_MAX)
         {
@@ -211,7 +212,7 @@ public class FadeSystem : MonoBehaviour
     IEnumerator HorizontalSplitIn()
     {
         float fillAmount = 0;
-        float animationTime = 2f;
+        animationTime = 2f;
 
         while (fillAmount < 1)
         {
@@ -228,7 +229,7 @@ public class FadeSystem : MonoBehaviour
     IEnumerator HorizontalSplitOut()
     {
         float fillAmount = 1;
-        float animationTime = 2f;
+        animationTime = 2f;
 
         while (fillAmount > 0)
         {
@@ -253,7 +254,7 @@ public class FadeSystem : MonoBehaviour
 
     public IEnumerator PokemonAnimationPassBy()
     {
-        float animationTime = 0.75f;
+        animationTime = 0.5f;
         float idleTime = 0.5f;
         pokemonUsingHm.transform.localPosition = new Vector3(originalXPos, 0, 0);
         Vector3 uIPositions = Vector3.zero;
@@ -268,11 +269,11 @@ public class FadeSystem : MonoBehaviour
     IEnumerator PokemonUsingHmIn()
     {
         float fillAmount = 0;
-        float animationTime = 2f;
+        animationTime = 0.35f;
 
         while (fillAmount < 1)
         {
-            fillAmount += (0.01f * animationTime);
+            fillAmount += (0.01f / animationTime);
 
             pokemonUsingHmHorizontalSplitTop.fillAmount = fillAmount / 2;
             pokemonUsingHmHorizontalSplitBottom.fillAmount = fillAmount / 2;
@@ -285,11 +286,11 @@ public class FadeSystem : MonoBehaviour
     IEnumerator PokemonUsingHmOut()
     {
         float fillAmount = 1;
-        float animationTime = 2f;
+        animationTime = 0.35f;
 
         while (fillAmount > 0)
         {
-            fillAmount -= (0.01f * animationTime);
+            fillAmount -= (0.01f / animationTime);
 
             pokemonUsingHmHorizontalSplitTop.fillAmount = fillAmount / 2;
             pokemonUsingHmHorizontalSplitBottom.fillAmount = fillAmount / 2;

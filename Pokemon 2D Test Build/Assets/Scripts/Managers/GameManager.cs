@@ -158,7 +158,7 @@ public class GameManager : MonoBehaviour
     public void StartWildPokemonBattle(WildPokemonEncounterTypes encounterType, WildPokemon specifiedPokemon = null)
     {
         Pokemon currentWildPokemon;
-        if (specifiedPokemon == null)
+        if (specifiedPokemon != null)
         {
             currentWildPokemon = new Pokemon(specifiedPokemon);
         }
@@ -448,7 +448,7 @@ public class GameManager : MonoBehaviour
         for (int i = 0; i < pokemonEvolving.Count(); i++)
         {
             pokemon = pokemonEvolving[i];
-            PokemonBase newEvolution = pokemonEvolving[i].pokemonBase.Evolutions.Find(x => x.CanEvolve(pokemon) == true).NewPokemonEvolution();
+            PokemonBase newEvolution = pokemonEvolving[i].pokemonBase.Evolutions.Find(x => x.CanEvolve(pokemon) == true).NewPokemonEvolution(pokemon);
             yield return evolutionSystem.PokemonEvolving(pokemon, newEvolution);
         }
         pokemonEvolving.Clear();

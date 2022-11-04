@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: 185 Sudowoodo
   m_EditorClassIdentifier: 
   _pokedexNumber: 185
+  _form: 
   _pokedexDescription: 
   _classification: 
   _baseHappiness: 50
@@ -25,7 +26,6 @@ MonoBehaviour:
   rewardedEffortValue:
   - _statAttribute: 2
     _statValue: 2
-  _hasGender: 1
   _maleFemaleRatio: 4
   _baseGroup: 2
   rewardedBaseExp: 144
@@ -33,6 +33,7 @@ MonoBehaviour:
   _type2: -1
   _eggGroup1: 9
   _eggGroup2: -1
+  _hatchCounter: 0
   _maxHitPoints: 70
   _attack: 100
   _defense: 115
@@ -42,7 +43,9 @@ MonoBehaviour:
   firstAbility: 125
   secondAbility: 103
   hiddenAbility: 99
-  _learnableMoves: []
+  _learnableMoves:
+  - _moveBase: {fileID: 11400000, guid: 994197cb6dda3834781468b37aa53959, type: 2}
+    _levelLeanred: 0
   learnableTMHMMoves: []
   evolutions: []
   wildPokemonHoldItems: []

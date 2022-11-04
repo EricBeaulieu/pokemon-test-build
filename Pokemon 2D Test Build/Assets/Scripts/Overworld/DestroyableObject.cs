@@ -69,7 +69,6 @@ public class DestroyableObject : MonoBehaviour, IInteractable, ISaveable
                 GameManager.SetGameState(GameState.Dialog);
                 yield return GameManager.instance.GetPlayerController.PlayHMAnimation(pokemon);
                 yield return DestroyAnimation();
-                gameObject.SetActive(false);
                 
                 if (Random.Range(0, 100) <= wildEncounterChance)
                 {
@@ -91,6 +90,7 @@ public class DestroyableObject : MonoBehaviour, IInteractable, ISaveable
             {
                 dialogManager.ActivateDialog(false);
             }
+            gameObject.SetActive(false);
         }
     }
 
@@ -101,7 +101,6 @@ public class DestroyableObject : MonoBehaviour, IInteractable, ISaveable
             yield return new WaitForSeconds(animationSpeed);
             spriteRenderer.sprite = destroyedAnimationSprites[i];
         }
-        yield return new WaitForSeconds(animationSpeed);
     }
 
     public object CaptureState(bool playerSave = false)
