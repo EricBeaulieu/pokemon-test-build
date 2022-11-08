@@ -481,6 +481,15 @@ public class Pokemon {
     {
         if (pokemonBase.MaleFemaleGenderRatio >= 0)
         {
+            if(pokemonBase.MaleFemaleGenderRatio == 0)
+            {
+                return true;
+            }
+            else if(pokemonBase.MaleFemaleGenderRatio >= 8)
+            {
+                return false;
+            }
+
             if(serializedGender.HasValue)
             {
                 return serializedGender;

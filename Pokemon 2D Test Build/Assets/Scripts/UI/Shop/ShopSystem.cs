@@ -234,6 +234,25 @@ public class ShopSystem : CoreSystem
             UpdatePlayerMoney();
             yield return dialogSystem.TypeDialog("Here you are!\nThank you!");
             yield return new WaitForSeconds(0.5f);
+            if(itemBeingPurchased is PokeballItem)
+            {
+                int bonusBall = Mathf.FloorToInt(currentPurchasingAmount / 10);
+                if (bonusBall > 0)
+                {
+                    PokeballItem premierBall = Resources.Load<PokeballItem>("Items/Pokeballs/Premier Ball");
+
+                    if(bonusBall == 1)
+                    {
+                        yield return dialogSystem.TypeDialog($"You also get a {premierBall.ItemName} as a added bonus");
+                    }
+                    else
+                    {
+                        yield return dialogSystem.TypeDialog($"You also recieved {bonusBall} {premierBall.ItemName}'s as a added bonus");
+                    }
+                    inventory.AddItem(premierBall, bonusBall);
+                }
+            }
+
         }
 
         ClosePurchaseDetails();

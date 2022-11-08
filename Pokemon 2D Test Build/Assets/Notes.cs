@@ -6,16 +6,12 @@ public class Notes
 {
     //To do list
     //create player and enemies team lineup on battle
-    //create and edit pokeballs in SO data
     //Fix the Genders
-    //Pokeballs, make all the different kind and include heavy ball
-    //double check into wurmples evolutions to have a specified way + nincada
     //with a wild battle, if both pokemon faint show the animation for both pokemon dying, currently it just ends with the players unit still standing even though they wont get the exp
     //fix the smooth transistion calls in battle unit
     //fix the preanimtion for confused
 
     //Shop
-    //When the player buys X10 amount of pokeballs then they give them premier balls
     //Noticed when you changed the amount to buy, the item selection flashed and caught my eye.
     //repel/super/max repel and pokedoll for shop
 
@@ -36,7 +32,6 @@ public class Notes
     //alter xp modifier if they can evolve
 
     //add in specific moves
-    //hidden power
     //transform
     //smack down + Thousand Arrows -- needs a special change in the charging turn class
     //variations of arena trap
@@ -57,7 +52,6 @@ public class Notes
     //Add in
 
     //Roar
-
     //aura break when fairy aura and dark aura are added in, all these abilities share the info together
 
     //Wishes
@@ -66,7 +60,6 @@ public class Notes
     //pollen puff to heal ally
 
     //Bugs
-
     //on turn end for bound moves the pokemon doesnt play flash of hit animation
 
     //Others
