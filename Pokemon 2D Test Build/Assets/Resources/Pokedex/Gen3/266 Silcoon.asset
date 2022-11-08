@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: 266 Silcoon
   m_EditorClassIdentifier: 
   _pokedexNumber: 266
+  _form: 
   _pokedexDescription: 
   _classification: 
   _baseHappiness: 70
@@ -39,10 +40,17 @@ MonoBehaviour:
   _specialAttack: 25
   _specialDefense: 25
   _speed: 15
-  firstAbility: -1
+  firstAbility: 19
   secondAbility: -1
   hiddenAbility: -1
   _learnableMoves: []
   learnableTMHMMoves: []
-  evolutions: []
+  evolutions:
+  - evolvedPokemon: {fileID: 11400000, guid: ded608d35e95ef644bf59bd649ad67f6, type: 2}
+    levelRequirement: 10
+    maxFriendShipRequired: 0
+    evolutionStone: {fileID: 0}
+    specifiedHoldItem: {fileID: 0}
+    timeSpecific: 0
+    specifiedMove: {fileID: 0}
   wildPokemonHoldItems: []

@@ -43,6 +43,11 @@ public class DestroyableObject : MonoBehaviour, IInteractable, ISaveable
 
     public IEnumerator OnInteract(Vector2 vector2)
     {
+        if(gameObject.activeInHierarchy == false)
+        {
+            yield break;
+        }
+
         Pokemon pokemon = GameManager.instance.GetPlayerController.pokemonParty.ContainsMove(moveToDestroy.MoveName);
         DialogManager dialogManager = GameManager.instance.GetDialogSystem;
 
@@ -82,15 +87,16 @@ public class DestroyableObject : MonoBehaviour, IInteractable, ISaveable
                     {
                         GameManager.instance.StartWildPokemonBattle(tableType);
                     }
+                    gameObject.SetActive(false);
                     yield break;
                 }
                 GameManager.SetGameState(GameState.Overworld);
+                gameObject.SetActive(false);
             }
             else
             {
                 dialogManager.ActivateDialog(false);
             }
-            gameObject.SetActive(false);
         }
     }
 

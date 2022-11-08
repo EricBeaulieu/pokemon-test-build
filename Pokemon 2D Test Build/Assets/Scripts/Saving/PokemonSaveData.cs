@@ -22,4 +22,5 @@ public class PokemonSaveData
     public string currentOTId;
     public string currentPokeball;
     public string currentItem = null;
+    public int personailtyValue;
 }

@@ -178,7 +178,7 @@ public class GameManager : MonoBehaviour
 
 
         battleSystem.SetupBattleArt(SceneSystem.GetBattleEnvironmentArt);
-        battleSystem.StartBattle(playerController, currentWildPokemon);
+        battleSystem.StartBattle(playerController, currentWildPokemon,encounterType);
     }
 
     public void StartWildPokemonBattle(WildPokemonController wildPokemon)

@@ -350,10 +350,11 @@ public class PokemonBase : ScriptableObject {
 
     #endregion
 
-    public List<EarnableEV> rewardedEfforValue
-    {
-        get { return rewardedEffortValue; }
-    }
+    public float height { get { return _heightInMeters / 10; } }
+
+    public float weight { get { return _weightInKg / 10; } }
+
+    public List<EarnableEV> rewardedEfforValue{get { return rewardedEffortValue; } }
 
     public int GetExpForLevel(int level)
     {

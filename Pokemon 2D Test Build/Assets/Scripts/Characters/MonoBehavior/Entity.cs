@@ -27,8 +27,6 @@ public abstract class Entity : MonoBehaviour
     bool _isSurfing;
     bool _isFishing;
 
-    float jumpHeight = 0;
-
     protected Animator _anim;
     /// <summary>
     /// this is here to prevent some entities walking through eachother stating that someone is currently moving to this position
@@ -83,10 +81,10 @@ public abstract class Entity : MonoBehaviour
         }
     }
 
-    protected bool isSurfing
+    public bool isSurfing
     {
         get { return _isSurfing; }
-        set
+        protected set
         {
             _isSurfing = value;
         }

@@ -72,6 +72,11 @@ public class Pokemon {
     public ConditionID PreAttackStatusAnimation { get; set; } = ConditionID.NA;
     public ConditionID MoveFailedAnimation { get; set; } = ConditionID.NA;
 
+    /// <summary>
+    /// first 4 numbers will be used for shiny rates/ last number will be for wurmple form
+    /// </summary>
+    public int personalityValue { get; private set; }//mainly used for weird little things like UnkownShape but will be used only for wurmple
+
     #region Constructors
 
     public void SetUpData()
@@ -105,6 +110,8 @@ public class Pokemon {
         SetMoves(presetMoves);
         statusChanges = new Queue<string>();
         volatileStatus = new List<ConditionBase>();
+
+        personalityValue = Random.Range(0, 99999);
     }
 
     public Pokemon(PokemonSaveData saveData)
@@ -139,6 +146,8 @@ public class Pokemon {
         {
             GivePokemonItemToHold(Resources.Load<ItemBase>(saveData.currentItem));
         }
+
+        personalityValue = saveData.personailtyValue;
     }
 
     public Pokemon(WildPokemon wildPokemon)
@@ -162,6 +171,8 @@ public class Pokemon {
         GivePokemonItemToHold(wildPokemon.HoldItemUponBeingFound());
 
         SetMoves();
+
+        personalityValue = Random.Range(0,99999);
     }
 
     #endregion
@@ -220,6 +231,7 @@ public class Pokemon {
         originalTrainer = player.TrainerName;
         originalTrainerID = player.TrainerIDNumber;
         pokeballCapturedIn = pokeball;
+        CatchingMechanics.ApplyEffectsAfterCatch(pokeball.PokeballId,this);
     }
 
     #region Stats
@@ -252,7 +264,7 @@ public class Pokemon {
     }
     
 
-    public void ResetStatBoosts()//clear smog/haze calls this
+    public void ResetStatBoosts()//clear smog/haze calls this/ as well as after the battle for tyrogue evolution
     {
         statBoosts[StatAttribute.Attack] = 0;
         statBoosts[StatAttribute.Defense] = 0;
@@ -1213,6 +1225,8 @@ public class Pokemon {
         {
             pokemonSaveData.currentItem = SavingSystem.GetAssetPath(currentHeldItem);
         }
+
+        pokemonSaveData.personailtyValue = personalityValue;
         
         return pokemonSaveData;
     }

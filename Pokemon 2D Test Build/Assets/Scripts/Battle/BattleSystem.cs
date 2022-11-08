@@ -34,6 +34,7 @@ public class BattleSystem : CoreSystem
 
     static WeatherEffectBase _currentWeather;
     public static bool InBattle { get; private set; } = false;
+    public static bool CaughtByRod { get; private set; } = false;
     public static bool Gravity { get; private set; } = false;
     const float GRAVITY_ACCURACY_BONUS = 5f / 3f;
 
@@ -207,11 +208,12 @@ public class BattleSystem : CoreSystem
         enemyBattleUnit.SetBattlePositionArt(levelArt.GetEnemyPosition);
     }
 
-    public void StartBattle(PlayerController player, Pokemon wildPokemon)
+    public void StartBattle(PlayerController player, Pokemon wildPokemon, WildPokemonEncounterTypes encounterType)
     {
         playerController = player;
         trainerController = null;
         wildPokemonController = null;
+        CaughtByRod = (encounterType >= WildPokemonEncounterTypes.OldRod && encounterType <= WildPokemonEncounterTypes.SuperRod);
 
         AudioManager.PlayRandomBattleMusic(false);
 
@@ -2739,10 +2741,10 @@ public class BattleSystem : CoreSystem
     {
         dialogSystem.SetCurrentDialogBox(dialogBox);
         EnableActionSelector(false);
-        StartCoroutine(PlayerThrewPokeball(enemyBattleUnit,pokeball));
+        StartCoroutine(PlayerThrewPokeball(enemyBattleUnit,playerBattleUnit,pokeball));
     }
 
-    IEnumerator PlayerThrewPokeball(BattleUnit targetUnit,PokeballItem currentPokeball)
+    IEnumerator PlayerThrewPokeball(BattleUnit targetUnit, BattleUnit playerUnit,PokeballItem currentPokeball)
     {
         if(trainerController != null)
         {
@@ -2781,7 +2783,7 @@ public class BattleSystem : CoreSystem
         yield return new WaitForSeconds(1f);
 
         // start capture mechanics of it rocking
-        int shakeCount = CatchingMechanics.CatchRate(targetUnit.pokemon, currentBall.CurrentPokeball,battleDuration);
+        int shakeCount = CatchingMechanics.CatchRate(targetUnit.pokemon,playerUnit.pokemon, currentBall.CurrentPokeball,battleDuration);
 
         for (int i = 0; i < Mathf.Min(shakeCount,3); i++)
         {
@@ -2942,7 +2944,7 @@ public class BattleSystem : CoreSystem
 
     #region Specialized Attacks
 
-    public static bool CheckIfTargetCanBeInflatuated(Pokemon sourcePokemon, Pokemon targetPokemon)
+    public static bool CheckIfTargetCanBeInflatuated(Pokemon sourcePokemon, Pokemon targetPokemon,bool skipInflatuatedCheck = false)
     {
         if(sourcePokemon.gender.HasValue == false)
         {
@@ -2952,7 +2954,7 @@ public class BattleSystem : CoreSystem
         {
             return false;
         }
-        else if(targetPokemon.HasCurrentVolatileStatus(ConditionID.Infatuation) == true)
+        else if(targetPokemon.HasCurrentVolatileStatus(ConditionID.Infatuation) == true && skipInflatuatedCheck == false)
         {
             return false;
         }

@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: 290 Nincada
   m_EditorClassIdentifier: 
   _pokedexNumber: 290
+  _form: 
   _pokedexDescription: 
   _classification: 
   _baseHappiness: 50
@@ -44,5 +45,12 @@ MonoBehaviour:
   hiddenAbility: -1
   _learnableMoves: []
   learnableTMHMMoves: []
-  evolutions: []
+  evolutions:
+  - evolvedPokemon: {fileID: 11400000, guid: b3dd52bdd30f8414ca55ff35de7d6542, type: 2}
+    levelRequirement: 20
+    maxFriendShipRequired: 0
+    evolutionStone: {fileID: 0}
+    specifiedHoldItem: {fileID: 0}
+    timeSpecific: 0
+    specifiedMove: {fileID: 0}
   wildPokemonHoldItems: []

@@ -5,18 +5,23 @@ using UnityEngine;
 public class Notes
 {
     //To do list
+    //create player and enemies team lineup on battle
+    //create and edit pokeballs in SO data
+    //Fix the Genders
+    //Pokeballs, make all the different kind and include heavy ball
     //double check into wurmples evolutions to have a specified way + nincada
     //with a wild battle, if both pokemon faint show the animation for both pokemon dying, currently it just ends with the players unit still standing even though they wont get the exp
     //fix the smooth transistion calls in battle unit
     //fix the preanimtion for confused
 
     //Shop
+    //When the player buys X10 amount of pokeballs then they give them premier balls
     //Noticed when you changed the amount to buy, the item selection flashed and caught my eye.
     //repel/super/max repel and pokedoll for shop
+
     //iron ball for grounded
     //fix stealth rock to not miss when target is semi invernerable
-    //for certain attacks, such as natural gift/z moves, it will replace the move base to something from a static table. 
-    //these moves will be pre created somewhere else
+    //Update catching mechanics once happiness has been added and implimented
 
     //power points stuff not implimented for when item is used on pokemon
     //in regards to specialized messages, they can be thrown into stat boost and displayed when given into effect

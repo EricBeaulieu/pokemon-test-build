@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: 268 Cascoon
   m_EditorClassIdentifier: 
   _pokedexNumber: 268
+  _form: 
   _pokedexDescription: 
   _classification: 
   _baseHappiness: 70
@@ -39,10 +40,17 @@ MonoBehaviour:
   _specialAttack: 25
   _specialDefense: 25
   _speed: 15
-  firstAbility: -1
+  firstAbility: 19
   secondAbility: -1
   hiddenAbility: -1
   _learnableMoves: []
   learnableTMHMMoves: []
-  evolutions: []
+  evolutions:
+  - evolvedPokemon: {fileID: 11400000, guid: 1dbcb929f39b50d4c869ab5a3132683f, type: 2}
+    levelRequirement: 10
+    maxFriendShipRequired: 0
+    evolutionStone: {fileID: 0}
+    specifiedHoldItem: {fileID: 0}
+    timeSpecific: 0
+    specifiedMove: {fileID: 0}
   wildPokemonHoldItems: []

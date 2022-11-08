@@ -95,6 +95,11 @@ public class PokemonParty : MonoBehaviour
     public void SetPositionstoBeforeBattle()
     {
         pokemonParty = _originalPos;
+
+        foreach (Pokemon pokemon in pokemonParty)
+        {
+            pokemon.ResetStatBoosts();
+        }
     }
 
     public void CleanUpPartyOrderOnStart(Pokemon startPokemon)

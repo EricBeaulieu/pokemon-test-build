@@ -1028,10 +1028,22 @@ public static class PokemonNameList
             }
             return Resources.Load<PokemonBase>("Pokedex/Gen2/237 Hitmontop");
         }
-        if (pokemon.pokemonBase.GetPokedexNumber() == 265)// Wurmple
+        else if (pokemon.pokemonBase.GetPokedexNumber() == 265)// Wurmple
         {
-
+            if(pokemon.personalityValue % 2 == 0)
+            {
+                return Resources.Load<PokemonBase>("Pokedex/Gen3/266 Silcoon");
+            }
+            else
+            {
+                return Resources.Load<PokemonBase>("Pokedex/Gen3/268 Cascoon");
+            }
         }
         return null;
+    }
+
+    public static bool IsNincada(int pokedexNumber)
+    {
+        return (pokedexNumber == 290);
     }
 }

@@ -70,6 +70,21 @@ public class EvolutionEggUI : MonoBehaviour
 
         yield return dialogSystem.TypeDialog($"Congratulations! {pokemon.currentName} evolved into {newEvolution.GetPokedexName()}",true);
 
+        if(PokemonNameList.IsNincada(pokemon.pokemonBase.GetPokedexNumber()) == true)
+        {
+            PokemonParty playerParty = GameManager.instance.GetPlayerController.pokemonParty;
+            
+            if(playerParty.PartyIsFull() == false)
+            {
+                if(GameManager.instance.GetInventorySystem.PlayerHasPokeballForShedninja() == true)
+                {
+                    Pokemon Shedinja = new Pokemon(pokemon.GetSaveData());
+                    Shedinja.ItemUsed();
+                    Shedinja.NewEvolution(Resources.Load<PokemonBase>("Pokedex/Gen3/292 Shedinja"));
+                    playerParty.AddGiftPokemon(Shedinja);
+                }
+            }
+        }
         pokemon.NewEvolution(newEvolution);
 
         newMovesLearned.Clear();

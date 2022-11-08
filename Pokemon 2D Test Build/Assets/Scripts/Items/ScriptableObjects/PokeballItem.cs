@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum PokeballCaptureID { Poke, Great,Ultra,Master,Net,Dive,Nest,Repeat,Timer,Quick}
+public enum PokeballCaptureID { Poke, Great,Ultra,Master,Net,Dive,Nest,Repeat,Timer,Quick,Luxury,Dusk,Heal,Fast,Friend,Heavy,Level,Love,Lure,Moon}
 
 [CreateAssetMenu(menuName = "Item/Create New PokeBall")]
 public class PokeballItem : ItemBase

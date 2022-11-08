@@ -625,4 +625,17 @@ public class InventorySystem : CoreSystem
     {
         currentInventory = loadedInventory;
     }
+
+    public bool PlayerHasPokeballForShedninja()
+    {
+        PokeballItem pokeball = Resources.Load<PokeballItem>("Items/Pokeballs/Poke Ball");
+
+        Item currentBall = currentInventory.Find(x => x.ItemBase == pokeball);
+        if (currentBall != null)
+        {
+            RemoveItem(currentBall);
+            return true;
+        }
+        return false;
+    }
 }
