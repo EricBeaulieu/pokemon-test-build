@@ -13,35 +13,40 @@ MonoBehaviour:
   m_Name: 105 Marowak
   m_EditorClassIdentifier: 
   _pokedexNumber: 105
+  _form: 
   _pokedexDescription: "Originally, it was weak and timid. After evolution, its temperament
     becomes violent, and it begins to wield bones as weapons.\r\nMoon\tThis Pok\xE9mon
     is out for vengeance on its natural enemy, Mandibuzz. It throws bones like boomerangs
     to try to take it down."
   _classification: 
-  _heightInMeters: 0
-  _weightInPounds: 0
+  _baseHappiness: 50
+  _isBaby: 0
+  _isLegendary: 0
+  _isMythical: 0
+  _heightInMeters: 10
+  _weightInKg: 450
   _captureRate: 75
   rewardedEffortValue:
-  - _statAttribute: 3
+  - _statAttribute: 2
     _statValue: 2
-  _hasGender: 1
-  _maleFemaleRatio: 50
+  _maleFemaleRatio: 4
   _baseGroup: 2
   rewardedBaseExp: 149
   _type1: 10
   _type2: -1
-  _eggGroup1: 11
-  _eggGroup2: 0
+  _eggGroup1: 10
+  _eggGroup2: -1
+  _hatchCounter: 5120
   _maxHitPoints: 60
   _attack: 80
   _defense: 110
   _specialAttack: 50
   _specialDefense: 80
   _speed: 45
-  firstAbility: 70
-  secondAbility: 0
-  hiddenAbility: 5
+  firstAbility: 103
+  secondAbility: 74
+  hiddenAbility: 11
   _learnableMoves: []
   learnableTMHMMoves: []
-  evolveLevelBased: []
-  evolutionsByStone: []
+  evolutions: []
+  wildPokemonHoldItems: []

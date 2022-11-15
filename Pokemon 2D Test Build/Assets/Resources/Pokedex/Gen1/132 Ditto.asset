@@ -13,33 +13,38 @@ MonoBehaviour:
   m_Name: 132 Ditto
   m_EditorClassIdentifier: 
   _pokedexNumber: 132
+  _form: 
   _pokedexDescription: It can reorganize its cells to make itself into a duplicate
     of anything it sees. The quality of the duplicate depends on the individual.
   _classification: 
-  _heightInMeters: 0
-  _weightInPounds: 0
+  _baseHappiness: 50
+  _isBaby: 0
+  _isLegendary: 0
+  _isMythical: 0
+  _heightInMeters: 3
+  _weightInKg: 40
   _captureRate: 35
   rewardedEffortValue:
-  - _statAttribute: 1
+  - _statAttribute: 0
     _statValue: 1
-  _hasGender: 0
-  _maleFemaleRatio: 50
+  _maleFemaleRatio: -1
   _baseGroup: 2
   rewardedBaseExp: 101
   _type1: 12
   _type2: -1
-  _eggGroup1: 2
-  _eggGroup2: 0
+  _eggGroup1: 1
+  _eggGroup2: -1
+  _hatchCounter: 5120
   _maxHitPoints: 48
   _attack: 48
   _defense: 48
   _specialAttack: 48
   _specialDefense: 48
   _speed: 48
-  firstAbility: 48
-  secondAbility: 0
-  hiddenAbility: 0
+  firstAbility: 75
+  secondAbility: -1
+  hiddenAbility: -1
   _learnableMoves: []
   learnableTMHMMoves: []
-  evolveLevelBased: []
-  evolutionsByStone: []
+  evolutions: []
+  wildPokemonHoldItems: []

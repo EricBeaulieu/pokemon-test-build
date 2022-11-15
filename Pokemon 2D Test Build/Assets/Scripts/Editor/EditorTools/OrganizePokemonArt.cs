@@ -70,17 +70,6 @@ public class OrganizePokemonArt : EditorWindow
         ScriptableObject target = this;
         SerializedObject sO = new SerializedObject(target);
 
-        //This is left here for educational purposes, if someone would like to see the boxes contain the names of the 
-        //pokemon that it auto loaded prior to cleaning it up and updating it to a more dynamic method compared to how
-        //static it was before and any changes needed to be made through code
-
-        //pokemonNames = PokemonNameList.PokemonNameKanto1to151;
-        //differentGenderArt = PokemonNameList.PokemonKantoDifferentGenderSprites;
-        //SerializedProperty stringsProperty = sO.FindProperty("pokemonNames");
-        //SerializedProperty intProperty = sO.FindProperty("differentGenderArt");
-        //EditorGUILayout.PropertyField(stringsProperty, true);
-        //EditorGUILayout.PropertyField(intProperty, true);
-
         sO.ApplyModifiedProperties(); // Remember to apply modified properties
 
         if (GUILayout.Button("Organize Pokemon Selection"))
@@ -98,8 +87,11 @@ public class OrganizePokemonArt : EditorWindow
                 for (int i = startingInteger; i < endingInteger + 1; i++)
                 {
                     pokemonNames.Add(PokemonNameList.GetPokeDexName(i));
-                    if (PokemonNameList.GenderExclusive(i))
+                    string[] differentFormNames = PokemonAlternativeFormNamesForArt(i);
+
+                    if (differentFormNames != null)
                     {
+                        //if(PokemonNameList.GenderExclusive(i) == false)
                         differentGenderArt.Add(i);
                     }
                 }
@@ -168,7 +160,11 @@ public class OrganizePokemonArt : EditorWindow
 
         int pokedexNumber = startingInteger;
         int currentVariant = 0;
-        bool hasDifferentGenderArt = false;
+        bool skipArtAddition = false;
+        string[] differentForms = null;
+        int differentFormVariation = 0;
+        int differentFormVariationsTotal = 0;
+        int totalArtSlices = 0;
 
         foreach (Rect rect in rectsList)
         {
@@ -178,66 +174,141 @@ public class OrganizePokemonArt : EditorWindow
             meta.rect = rect;
             Debug.Log(pokemonNames[pokedexNumber - startingInteger]);
             string spriteName = $"{pokedexNumber.ToString("000")}_{pokemonNames[pokedexNumber - startingInteger]}_";
+            skipArtAddition = false;
 
-            if (currentVariant > 3 && currentVariant < 8)
+            if (currentVariant == 0)
+            {
+                differentForms = PokemonAlternativeFormNamesForArt(pokedexNumber);
+                if (differentForms != null)
+                {
+                    differentFormVariationsTotal = 11;
+                    totalArtSlices = 11 * differentForms.Length;
+                    //if (PokemonNameList.GenderExclusive(pokedexNumber) == true)
+                    //{
+                    //    differentFormVariationsTotal = 8;
+                    //    totalArtSlices = (differentFormVariationsTotal * differentForms.Length) + 3;
+                    //}
+                    //else
+                    //{
+                    //    differentFormVariationsTotal = 11;
+                    //    totalArtSlices = 11 * differentForms.Length;
+                    //}
+                }
+                else
+                {
+                    differentFormVariationsTotal = 11;
+                    totalArtSlices = 11;
+                }
+            }
+
+            if ((currentVariant % differentFormVariationsTotal) > 3 && (currentVariant % differentFormVariationsTotal) < 8)
             {
                 spriteName += "Shiny_";
             }
 
-            if (currentVariant == 0)
+            if (differentForms != null)
             {
-                if (hasDifferentGenderArt == false && differentGenderArt.Contains(pokedexNumber) == true)
+                differentFormVariation = Mathf.FloorToInt(currentVariant / differentFormVariationsTotal);
+                if (differentFormVariation < differentForms.Length)
                 {
-                    hasDifferentGenderArt = true;
+                    if (string.IsNullOrEmpty(differentForms[differentFormVariation]) == false)
+                    {
+                        spriteName += $"{differentForms[differentFormVariation]}_";
+                    }
+                }
+
+                if(PokemonNameList.GenderExclusive(pokedexNumber) == true)
+                {
+                    if ((currentVariant % differentFormVariationsTotal) < 8)
+                    {
+                        spriteName += Variant(currentVariant % 4);
+                    }
+                    else if ((currentVariant % differentFormVariationsTotal) == 8)
+                    {
+                        if (differentFormVariation != 1)
+                        {
+                            skipArtAddition = true;
+                        }
+                        spriteName += "SpriteA";
+                    }
+                    else if ((currentVariant % differentFormVariationsTotal) == 9)
+                    {
+                        if (differentFormVariation != 1)
+                        {
+                            skipArtAddition = true;
+                        }
+                        spriteName += "SpriteB";
+                    }
+                    else if ((currentVariant % differentFormVariationsTotal) == 10)
+                    {
+                        if (differentFormVariation != 1)
+                        {
+                            skipArtAddition = true;
+                        }
+                        spriteName += "FootPrint";
+                    }
                 }
                 else
                 {
-                    hasDifferentGenderArt = false;
+                    if ((currentVariant % differentFormVariationsTotal) < 8)
+                    {
+                        spriteName += Variant(currentVariant % 4);
+                    }
+                    else if ((currentVariant % differentFormVariationsTotal) == 8)
+                    {
+                        spriteName += "SpriteA";
+                    }
+                    else if ((currentVariant % differentFormVariationsTotal) == 9)
+                    {
+                        spriteName += "SpriteB";
+                    }
+                    else if ((currentVariant % differentFormVariationsTotal) == 10)
+                    {
+                        if(differentFormVariation != 0)
+                        {
+                            skipArtAddition = true;
+                        }
+                        spriteName += "FootPrint";
+                    }
+                }
+            }
+            else
+            {
+                if (currentVariant < 8)
+                {
+                    spriteName += Variant(currentVariant % 4);
+                }
+                else if (currentVariant == 8)
+                {
+                    spriteName += "SpriteA";
+                }
+                else if (currentVariant == 9)
+                {
+                    spriteName += "SpriteB";
+                }
+                else if (currentVariant == 10)
+                {
+                    spriteName += "FootPrint";
                 }
             }
 
-            if (differentGenderArt.Contains(pokedexNumber) == true && currentVariant < 8)
-            {
-                if (hasDifferentGenderArt == true)
-                {
-                    spriteName += "Male_";
-                }
-                else
-                {
-                    spriteName += "Female_";
-                }
-            }
-
-            if (currentVariant < 8)
-            {
-                spriteName += Variant(currentVariant % 4);
-            }
-            else if (currentVariant == 8)
-            {
-                spriteName += "SpriteA";
-            }
-            else if (currentVariant == 9)
-            {
-                spriteName += "SpriteB";
-            }
-            else if (currentVariant == 10)
-            {
-                spriteName += "FootPrint";
-            }
 
             currentVariant++;
-            if (currentVariant >= 11)
+            if (currentVariant >= totalArtSlices)
             {
                 pokedexNumber++;
                 currentVariant = 0;
             }
-            else if (currentVariant >= 8 && hasDifferentGenderArt == true)
+            //else if (currentVariant >= 8 && hasDifferentGenderArt == true)
+            //{
+            //    currentVariant = 0;
+            //}
+            Debug.Log(spriteName);
+            if(skipArtAddition == false)
             {
-                currentVariant = 0;
+                meta.name = spriteName;
+                metas.Add(meta);
             }
-
-            meta.name = spriteName;
-            metas.Add(meta);
         }
 
         importer.spritesheet = metas.ToArray();
@@ -249,7 +320,13 @@ public class OrganizePokemonArt : EditorWindow
     {
         List<Rect> list = new List<Rect>();
 
-        for (int i = 0; i < (endingInteger + differentGenderArt.Count) - (startingInteger - 1); i++)
+        int additions = 0;
+        foreach (int i in differentGenderArt)
+        {
+            additions += PokemonAlternativeFormNamesForArt(i).Length -1;
+        }
+
+        for (int i = 0; i < (endingInteger + additions) - (startingInteger - 1); i++)
         {
             int XPos = (int)startingSlicingPos.x + ((int)pokemonArtMainSize.x * (i % howManyPerLine));
             int YPos = textureHeight - (int)startingSlicingPos.y - ((int)pokemonArtMainSize.y * ((i / howManyPerLine) + 1));
@@ -268,14 +345,15 @@ public class OrganizePokemonArt : EditorWindow
 
         for (int i = 0; i < slicedUpList.Count; i++)
         {
-            if (hasDifferentGenderArt == false && differentGenderArt.Contains(currentPokemon + startingInteger) == true)
-            {
-                hasDifferentGenderArt = true;
-            }
-            else
-            {
-                hasDifferentGenderArt = false;
-            }
+            //Debug.Log(currentPokemon + startingInteger);
+            //if (hasDifferentGenderArt == false)
+            //{
+            //    hasDifferentGenderArt = true;
+            //}
+            //else
+            //{
+            //    hasDifferentGenderArt = false;
+            //}
 
             //Regular
 
@@ -346,5 +424,46 @@ public class OrganizePokemonArt : EditorWindow
             }
         }
         return list;
+    }
+
+    static string[] PokemonAlternativeFormNamesForArt(int pokedexNumber)
+    {
+        if (PokemonNameList.GenderExclusive(pokedexNumber))
+        {
+            return new string[] { "Male", "Female" };
+        }
+        else if (pokedexNumber == 386)
+        {
+            return new string[] { "Normal", "Attack", "Defense", "Speed" };
+        }
+        else if (pokedexNumber == 412 || pokedexNumber == 413)
+        {
+            return new string[] { "Plant", "Sandy", "Trash" };
+        }
+        else if (pokedexNumber == 421)
+        {
+            return new string[] { "Overcast", "Sunshine" };
+        }
+        else if (pokedexNumber == 422 || pokedexNumber == 423)
+        {
+            return new string[] { "West", "East" };
+        }
+        else if (pokedexNumber == 479)
+        {
+            return new string[] { "", "Heat", "Wash", "Frost", "Fan", "Mow" };
+        }
+        else if (pokedexNumber == 487)
+        {
+            return new string[] { "Altered", "Origin" };
+        }
+        else if (pokedexNumber == 492)
+        {
+            return new string[] { "Land", "Sky" };
+        }
+        else if (pokedexNumber == 493)
+        {
+            return PokemonNameList.ArceusForm;
+        }
+        return null;
     }
 }

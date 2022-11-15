@@ -13,32 +13,37 @@ MonoBehaviour:
   m_Name: 006 Charizard
   m_EditorClassIdentifier: 
   _pokedexNumber: 6
+  _form: 
   _pokedexDescription: It spits fire that is hot enough to melt boulders. It may
     cause forest fires by blowing flames.
   _classification: 
-  _heightInMeters: 0
-  _weightInPounds: 0
+  _baseHappiness: 50
+  _isBaby: 0
+  _isLegendary: 0
+  _isMythical: 0
+  _heightInMeters: 17
+  _weightInKg: 905
   _captureRate: 45
   rewardedEffortValue:
-  - _statAttribute: 4
+  - _statAttribute: 3
     _statValue: 3
-  _hasGender: 1
-  _maleFemaleRatio: 87.5
+  _maleFemaleRatio: 1
   _baseGroup: 3
   rewardedBaseExp: 267
   _type1: 6
   _type2: 7
-  _eggGroup1: 11
-  _eggGroup2: 3
+  _eggGroup1: 10
+  _eggGroup2: 2
+  _hatchCounter: 5120
   _maxHitPoints: 78
   _attack: 84
   _defense: 78
   _specialAttack: 109
   _specialDefense: 85
   _speed: 100
-  firstAbility: 4
-  secondAbility: 0
-  hiddenAbility: 0
+  firstAbility: 15
+  secondAbility: -1
+  hiddenAbility: 116
   _learnableMoves:
   - _moveBase: {fileID: 11400000, guid: 96400c70b73e59f489a1df32578a5979, type: 2}
     _levelLeanred: 0

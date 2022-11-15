@@ -13,32 +13,37 @@ MonoBehaviour:
   m_Name: 007 Squirtle
   m_EditorClassIdentifier: 
   _pokedexNumber: 7
+  _form: 
   _pokedexDescription: When it retracts its long neck into its shell, it squirts
     out water with vigorous force.
   _classification: 
-  _heightInMeters: 0
-  _weightInPounds: 0
+  _baseHappiness: 50
+  _isBaby: 0
+  _isLegendary: 0
+  _isMythical: 0
+  _heightInMeters: 5
+  _weightInKg: 90
   _captureRate: 45
   rewardedEffortValue:
-  - _statAttribute: 3
+  - _statAttribute: 2
     _statValue: 1
-  _hasGender: 1
-  _maleFemaleRatio: 87.5
+  _maleFemaleRatio: 1
   _baseGroup: 3
   rewardedBaseExp: 63
   _type1: 17
   _type2: -1
-  _eggGroup1: 11
-  _eggGroup2: 12
+  _eggGroup1: 10
+  _eggGroup2: 11
+  _hatchCounter: 5120
   _maxHitPoints: 44
   _attack: 48
   _defense: 65
   _specialAttack: 50
   _specialDefense: 64
   _speed: 43
-  firstAbility: 3
-  secondAbility: 0
-  hiddenAbility: 0
+  firstAbility: 132
+  secondAbility: -1
+  hiddenAbility: 98
   _learnableMoves:
   - _moveBase: {fileID: 11400000, guid: 74776a55aab78af45a268d0b4777c811, type: 2}
     _levelLeanred: 0

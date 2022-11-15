@@ -69,7 +69,24 @@ public class Pokemon {
     public Queue<string> statusChanges { get; private set; } = new Queue<string>();
     public ConditionBase status { get; private set; }
     public List<ConditionBase> volatileStatus { get; private set; } = new List<ConditionBase>();
-    public ConditionID PreAttackStatusAnimation { get; set; } = ConditionID.NA;
+    public List<ConditionID> PreAttackStatusAnimation
+    {
+        get
+        {
+            List<ConditionID> conditionIDs = new List<ConditionID>();
+            if (HasCurrentVolatileStatus(ConditionID.Confused))
+            {
+                conditionIDs.Add(ConditionID.Confused);
+            }
+
+            if (HasCurrentVolatileStatus(ConditionID.Infatuation))
+            {
+                conditionIDs.Add(ConditionID.Infatuation);
+            }
+            return conditionIDs;
+        }
+    }
+
     public ConditionID MoveFailedAnimation { get; set; } = ConditionID.NA;
 
     /// <summary>

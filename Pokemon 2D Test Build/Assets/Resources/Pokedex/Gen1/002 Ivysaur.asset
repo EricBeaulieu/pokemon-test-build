@@ -13,34 +13,39 @@ MonoBehaviour:
   m_Name: 002 Ivysaur
   m_EditorClassIdentifier: 
   _pokedexNumber: 2
+  _form: 
   _pokedexDescription: When the bulb on its back grows large, it appears to lose
     the ability to stand on its hind legs.
   _classification: 
-  _heightInMeters: 0
-  _weightInPounds: 0
+  _baseHappiness: 50
+  _isBaby: 0
+  _isLegendary: 0
+  _isMythical: 0
+  _heightInMeters: 10
+  _weightInKg: 130
   _captureRate: 45
   rewardedEffortValue:
+  - _statAttribute: 3
+    _statValue: 1
   - _statAttribute: 4
     _statValue: 1
-  - _statAttribute: 5
-    _statValue: 1
-  _hasGender: 1
-  _maleFemaleRatio: 87.5
+  _maleFemaleRatio: 1
   _baseGroup: 3
   rewardedBaseExp: 142
   _type1: 9
   _type2: 13
-  _eggGroup1: 11
-  _eggGroup2: 7
+  _eggGroup1: 10
+  _eggGroup2: 6
+  _hatchCounter: 5120
   _maxHitPoints: 60
   _attack: 62
   _defense: 63
   _specialAttack: 80
   _specialDefense: 80
   _speed: 60
-  firstAbility: 29
-  secondAbility: 0
-  hiddenAbility: 0
+  firstAbility: 88
+  secondAbility: -1
+  hiddenAbility: 17
   _learnableMoves:
   - _moveBase: {fileID: 11400000, guid: 9d581eae887163b44b5a58876017460a, type: 2}
     _levelLeanred: 0

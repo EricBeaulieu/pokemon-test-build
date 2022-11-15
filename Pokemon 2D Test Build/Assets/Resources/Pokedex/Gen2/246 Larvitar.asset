@@ -13,33 +13,38 @@ MonoBehaviour:
   m_Name: 246 Larvitar
   m_EditorClassIdentifier: 
   _pokedexNumber: 246
+  _form: 
   _pokedexDescription: "Born underground, it eats its way through dirt to the surface,
     where its parents are. It doesn\u2019t deal well with the bright light it finds
     there."
   _classification: 
-  _heightInMeters: 0
-  _weightInPounds: 0
+  _baseHappiness: 35
+  _isBaby: 0
+  _isLegendary: 0
+  _isMythical: 0
+  _heightInMeters: 6
+  _weightInKg: 720
   _captureRate: 45
   rewardedEffortValue:
-  - _statAttribute: 2
+  - _statAttribute: 1
     _statValue: 1
-  _hasGender: 1
-  _maleFemaleRatio: 50
+  _maleFemaleRatio: 4
   _baseGroup: 4
   rewardedBaseExp: 60
   _type1: 15
   _type2: 10
-  _eggGroup1: 11
-  _eggGroup2: 0
+  _eggGroup1: 10
+  _eggGroup2: -1
+  _hatchCounter: 10240
   _maxHitPoints: 50
   _attack: 64
   _defense: 50
   _specialAttack: 45
   _specialDefense: 50
   _speed: 41
-  firstAbility: 53
-  secondAbility: 0
-  hiddenAbility: 108
+  firstAbility: 52
+  secondAbility: -1
+  hiddenAbility: 107
   _learnableMoves: []
   learnableTMHMMoves: []
   evolutions:

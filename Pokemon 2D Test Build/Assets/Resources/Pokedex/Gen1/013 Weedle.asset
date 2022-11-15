@@ -13,32 +13,37 @@ MonoBehaviour:
   m_Name: 013 Weedle
   m_EditorClassIdentifier: 
   _pokedexNumber: 13
+  _form: 
   _pokedexDescription: Beware of the sharp stinger on its head. It hides in grass
     and bushes where it eats leaves.
   _classification: "Hairy Pok\xE9mon"
-  _heightInMeters: 0.3
-  _weightInPounds: 0
+  _baseHappiness: 70
+  _isBaby: 0
+  _isLegendary: 0
+  _isMythical: 0
+  _heightInMeters: 3
+  _weightInKg: 32
   _captureRate: 255
   rewardedEffortValue:
-  - _statAttribute: 6
+  - _statAttribute: 5
     _statValue: 1
-  _hasGender: 1
-  _maleFemaleRatio: 50
+  _maleFemaleRatio: 4
   _baseGroup: 2
   rewardedBaseExp: 39
   _type1: 0
   _type2: 13
-  _eggGroup1: 1
-  _eggGroup2: 0
+  _eggGroup1: 0
+  _eggGroup2: -1
+  _hatchCounter: 3840
   _maxHitPoints: 40
   _attack: 35
   _defense: 30
   _specialAttack: 20
   _specialDefense: 20
   _speed: 50
-  firstAbility: 30
-  secondAbility: 0
-  hiddenAbility: 0
+  firstAbility: -1
+  secondAbility: -1
+  hiddenAbility: -1
   _learnableMoves:
   - _moveBase: {fileID: 11400000, guid: 2848c84d0da4cb04fac0ba2516f3df92, type: 2}
     _levelLeanred: 0

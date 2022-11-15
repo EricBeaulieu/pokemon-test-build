@@ -13,33 +13,38 @@ MonoBehaviour:
   m_Name: 101 Electrode
   m_EditorClassIdentifier: 
   _pokedexNumber: 101
+  _form: 
   _pokedexDescription: Stores electrical energy inside its body. Even the slightest
     shock could trigger a huge explosion.
   _classification: 
-  _heightInMeters: 0
-  _weightInPounds: 0
-  _captureRate: 0
+  _baseHappiness: 70
+  _isBaby: 0
+  _isLegendary: 0
+  _isMythical: 0
+  _heightInMeters: 12
+  _weightInKg: 666
+  _captureRate: 60
   rewardedEffortValue:
-  - _statAttribute: 6
+  - _statAttribute: 5
     _statValue: 2
-  _hasGender: 0
-  _maleFemaleRatio: 50
+  _maleFemaleRatio: -1
   _baseGroup: 2
   rewardedBaseExp: 172
   _type1: 3
   _type2: -1
-  _eggGroup1: 10
-  _eggGroup2: 0
+  _eggGroup1: 9
+  _eggGroup2: -1
+  _hatchCounter: 5120
   _maxHitPoints: 60
   _attack: 50
   _defense: 70
   _specialAttack: 80
   _specialDefense: 80
   _speed: 150
-  firstAbility: 85
-  secondAbility: 87
-  hiddenAbility: 0
+  firstAbility: 118
+  secondAbility: 120
+  hiddenAbility: 2
   _learnableMoves: []
   learnableTMHMMoves: []
-  evolveLevelBased: []
-  evolutionsByStone: []
+  evolutions: []
+  wildPokemonHoldItems: []

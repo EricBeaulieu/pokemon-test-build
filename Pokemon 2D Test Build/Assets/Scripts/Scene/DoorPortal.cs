@@ -6,6 +6,7 @@ using UnityEngine;
 public class DoorPortal : Portal,IInteractable
 {
     [SerializeField] SpriteRenderer _spriteRenderer;
+    [SerializeField] BoxCollider2D _boxCollider;
     [SerializeField] bool isLocked;
     [SerializeField] Dialog doorIsLockedMessage = new Dialog(new List<string>()
     {
@@ -14,17 +15,17 @@ public class DoorPortal : Portal,IInteractable
 
     void Start()
     {
-        if(isLocked)
-        {
-            LockDoor();
-        }
-
         if(AlternativeScene == null)
         {
             Debug.Log($"Current Door does not have a alternative scene set, door will automatically be set to locked", gameObject);
             isLocked = true;
+        }
+
+        if (isLocked == true)
+        {
             LockDoor();
         }
+
     }
     public IEnumerator OnInteract(Vector2 vector2)
     {
@@ -58,11 +59,13 @@ public class DoorPortal : Portal,IInteractable
 
     void LockDoor()
     {
+        _boxCollider.isTrigger = false;
         gameObject.layer = LayerMask.NameToLayer("Interactable");
     }
 
     void UnlockDoor()
     {
+        _boxCollider.isTrigger = true;
         gameObject.layer = LayerMask.NameToLayer("Portal");
     }
 }

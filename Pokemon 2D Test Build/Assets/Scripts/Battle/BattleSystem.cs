@@ -731,7 +731,7 @@ public class BattleSystem : CoreSystem
         yield return ApplyEffectsOnEndTurn(enemyBattleUnit, playerBattleUnit);
 
         //If current pokemon has fainted then it goes to the party system and waits on the selector
-        if (playerBattleUnit.SendOutPokemonOnTurnEnd == true)
+        if (playerBattleUnit.SendOutPokemonOnTurnEnd == true|| playerBattleUnit.pokemon.currentHitPoints <= 0)
         {
             partySystem.OpenSystem();
         }
@@ -777,14 +777,15 @@ public class BattleSystem : CoreSystem
         //This is here incase the pokemon hits itself in confusion for the smooth animation
         int previousHP = sourceUnit.pokemon.currentHitPoints;
 
+
+        //If confused play pre animation
+        foreach (ConditionID condition in sourceUnit.pokemon.PreAttackStatusAnimation)
+        {
+            yield return sourceUnit.StatusConditionAnimation(condition);
+        }
+
         //due to animations instead of it returning a bool it will return the animation
         ConditionID canUseMove = sourceUnit.pokemon.OnBeforeMove(targetUnit.pokemon);
-        //If confused play pre animation
-        if (sourceUnit.pokemon.PreAttackStatusAnimation != ConditionID.NA)
-        {
-            yield return sourceUnit.StatusConditionAnimation(sourceUnit.pokemon.PreAttackStatusAnimation);
-            sourceUnit.pokemon.PreAttackStatusAnimation = ConditionID.NA;
-        }
 
         if (canUseMove != ConditionID.NA)
         {
@@ -792,7 +793,6 @@ public class BattleSystem : CoreSystem
             if (sourceUnit.pokemon.MoveFailedAnimation != ConditionID.NA)
             {
                 yield return sourceUnit.StatusConditionAnimation(sourceUnit.pokemon.MoveFailedAnimation);
-                sourceUnit.pokemon.PreAttackStatusAnimation = ConditionID.NA;
             }
 
             //If it hit itself in its confusion update the HUD
@@ -1314,6 +1314,11 @@ public class BattleSystem : CoreSystem
 
                     if (sourceUnit.pokemon.currentHitPoints <= 0)
                     {
+                        if(targetUnit.pokemon.currentHitPoints <= 0)
+                        {
+                            yield return dialogSystem.TypeDialog($"{targetUnit.pokemon.currentName} has fainted");
+                            targetUnit.PlayFaintAnimation();
+                        }
                         yield return PokemonHasFainted(sourceUnit);
                     }
                 }
@@ -1530,7 +1535,10 @@ public class BattleSystem : CoreSystem
         if (sourceUnit.pokemon.currentHitPoints <= 0)
         {
             yield return PokemonHasFainted(sourceUnit);
+            //CheckForBattleOver(sourceUnit);
         }
+
+        //CheckForBattleOver(targetUnit);
     }
 
     IEnumerator RunMoveEffects(MoveEffects effects, BattleUnit source, BattleUnit target, MoveBase currentMove,MoveTarget moveTarget, bool wasSecondaryEffect = false)
@@ -2384,6 +2392,12 @@ public class BattleSystem : CoreSystem
 
             if (targetBattleUnit.isPlayerPokemon == false)
             {
+                //if(playerBattleUnit.pokemon.currentHitPoints <= 0 && targetBattleUnit.pokemonHasFainted == false)
+                //{
+                //    yield return dialogSystem.TypeDialog($"{playerBattleUnit.pokemon.currentName} has fainted");
+                //    playerBattleUnit.PlayFaintAnimation();
+                //}
+
                 int expYield = targetBattleUnit.pokemon.pokemonBase.RewardedExperienceYield;
                 int level = targetBattleUnit.pokemon.currentLevel;
                 float trainerBonus = (trainerController != null) ? 1.5f : 1;
@@ -2422,7 +2436,6 @@ public class BattleSystem : CoreSystem
                     expGainedAfteritemAffects = Mathf.FloorToInt(pokemon.GetHoldItemEffects.ExperienceModifier() * expGained);
                     if (pokemon == playerBattleUnit.pokemon)
                     {
-                        
                         yield return GainExperience(playerBattleUnit, expGainedAfteritemAffects);
                     }
                     else
@@ -2442,6 +2455,12 @@ public class BattleSystem : CoreSystem
     {
         if (faintedUnit.isPlayerPokemon)
         {
+            //if (enemyBattleUnit.pokemon.currentHitPoints <= 0 && enemyBattleUnit.pokemonHasFainted == false)
+            //{
+            //    yield return dialogSystem.TypeDialog($"{enemyBattleUnit.pokemon.currentName} has fainted");
+            //    enemyBattleUnit.PlayFaintAnimation();
+            //}
+
             Pokemon nextPokemon = playerController.pokemonParty.GetFirstHealthyPokemon();
             if (nextPokemon != null)
             {
@@ -2449,12 +2468,6 @@ public class BattleSystem : CoreSystem
             }
             else
             {
-                if(enemyBattleUnit.pokemon.currentHitPoints <= 0)
-                {
-                    yield return dialogSystem.TypeDialog($"{enemyBattleUnit.pokemon.currentName} has fainted");
-                    enemyBattleUnit.PlayFaintAnimation();
-                }
-
                 if(trainerController != null)
                 {
                     yield return TrainerBattleOver(false);
@@ -2466,6 +2479,11 @@ public class BattleSystem : CoreSystem
         {
             if(trainerController != null)
             {
+                //if (playerBattleUnit.pokemon.currentHitPoints <= 0 && playerBattleUnit.pokemonHasFainted == false)
+                //{
+                //    yield return dialogSystem.TypeDialog($"{playerBattleUnit.pokemon.currentName} has fainted");
+                //    playerBattleUnit.PlayFaintAnimation();
+                //}
                 Pokemon nextPokemon = trainerController.pokemonParty.GetFirstHealthyPokemon();
                 if (nextPokemon != null)
                 {
@@ -2473,11 +2491,6 @@ public class BattleSystem : CoreSystem
                 }
                 else
                 {
-                    if (playerBattleUnit.pokemon.currentHitPoints <= 0)
-                    {
-                        yield return dialogSystem.TypeDialog($"{playerBattleUnit.pokemon.currentName} has fainted");
-                        playerBattleUnit.PlayFaintAnimation();
-                    }
                     yield return TrainerBattleOver(true);
                     OnBattleOver(true);
                 }

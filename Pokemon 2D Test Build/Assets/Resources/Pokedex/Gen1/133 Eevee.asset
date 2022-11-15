@@ -13,32 +13,37 @@ MonoBehaviour:
   m_Name: 133 Eevee
   m_EditorClassIdentifier: 
   _pokedexNumber: 133
+  _form: 
   _pokedexDescription: Possessing an unbalanced and unstable genetic makeup, it conceals
     many possible evolutions.
   _classification: 
-  _heightInMeters: 0
-  _weightInPounds: 0
+  _baseHappiness: 50
+  _isBaby: 0
+  _isLegendary: 0
+  _isMythical: 0
+  _heightInMeters: 3
+  _weightInKg: 65
   _captureRate: 45
   rewardedEffortValue:
-  - _statAttribute: 5
+  - _statAttribute: 4
     _statValue: 1
-  _hasGender: 1
-  _maleFemaleRatio: 88.1
+  _maleFemaleRatio: 1
   _baseGroup: 2
   rewardedBaseExp: 65
   _type1: 12
   _type2: -1
-  _eggGroup1: 5
-  _eggGroup2: 0
+  _eggGroup1: 4
+  _eggGroup2: -1
+  _hatchCounter: 8960
   _maxHitPoints: 55
   _attack: 55
   _defense: 50
   _specialAttack: 45
   _specialDefense: 65
   _speed: 55
-  firstAbility: 0
-  secondAbility: 1
-  hiddenAbility: 0
+  firstAbility: -1
+  secondAbility: 0
+  hiddenAbility: 6
   _learnableMoves: []
   learnableTMHMMoves: []
   evolutions:

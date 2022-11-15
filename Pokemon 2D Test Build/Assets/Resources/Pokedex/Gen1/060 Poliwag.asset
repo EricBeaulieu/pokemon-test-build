@@ -13,32 +13,37 @@ MonoBehaviour:
   m_Name: 060 Poliwag
   m_EditorClassIdentifier: 
   _pokedexNumber: 60
+  _form: 
   _pokedexDescription: "The swirl on its belly is its internal organs showing through.
     If the swirl is tinged white, that means it\u2019s affected by some disease."
   _classification: 
-  _heightInMeters: 0
-  _weightInPounds: 0
+  _baseHappiness: 50
+  _isBaby: 0
+  _isLegendary: 0
+  _isMythical: 0
+  _heightInMeters: 6
+  _weightInKg: 124
   _captureRate: 255
   rewardedEffortValue:
-  - _statAttribute: 6
+  - _statAttribute: 5
     _statValue: 1
-  _hasGender: 1
-  _maleFemaleRatio: 50
+  _maleFemaleRatio: 4
   _baseGroup: 3
   rewardedBaseExp: 60
   _type1: 17
   _type2: -1
-  _eggGroup1: 12
-  _eggGroup2: 0
+  _eggGroup1: 11
+  _eggGroup2: -1
+  _hatchCounter: 5120
   _maxHitPoints: 40
   _attack: 50
   _defense: 40
   _specialAttack: 40
   _specialDefense: 40
   _speed: 90
-  firstAbility: 98
-  secondAbility: 0
-  hiddenAbility: 88
+  firstAbility: 138
+  secondAbility: 27
+  hiddenAbility: 127
   _learnableMoves: []
   learnableTMHMMoves: []
   evolutions:

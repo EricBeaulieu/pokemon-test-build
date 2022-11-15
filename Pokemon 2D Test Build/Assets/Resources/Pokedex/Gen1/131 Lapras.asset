@@ -13,33 +13,38 @@ MonoBehaviour:
   m_Name: 131 Lapras
   m_EditorClassIdentifier: 
   _pokedexNumber: 131
+  _form: 
   _pokedexDescription: "Its high intelligence enables it to comprehend human speech.
     When it\u2019s in a good mood, it sings in its beautiful voice."
   _classification: 
-  _heightInMeters: 0
-  _weightInPounds: 0
+  _baseHappiness: 50
+  _isBaby: 0
+  _isLegendary: 0
+  _isMythical: 0
+  _heightInMeters: 25
+  _weightInKg: 2200
   _captureRate: 45
   rewardedEffortValue:
-  - _statAttribute: 1
+  - _statAttribute: 0
     _statValue: 2
-  _hasGender: 1
-  _maleFemaleRatio: 50
+  _maleFemaleRatio: 4
   _baseGroup: 4
   rewardedBaseExp: 187
   _type1: 17
   _type2: 11
-  _eggGroup1: 11
-  _eggGroup2: 12
+  _eggGroup1: 10
+  _eggGroup2: 11
+  _hatchCounter: 10240
   _maxHitPoints: 130
   _attack: 85
   _defense: 80
   _specialAttack: 85
   _specialDefense: 95
   _speed: 60
-  firstAbility: 104
-  secondAbility: 77
-  hiddenAbility: 0
+  firstAbility: 138
+  secondAbility: 110
+  hiddenAbility: 56
   _learnableMoves: []
   learnableTMHMMoves: []
-  evolveLevelBased: []
-  evolutionsByStone: []
+  evolutions: []
+  wildPokemonHoldItems: []

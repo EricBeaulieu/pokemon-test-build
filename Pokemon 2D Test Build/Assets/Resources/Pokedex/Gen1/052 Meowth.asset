@@ -13,32 +13,37 @@ MonoBehaviour:
   m_Name: 052 Meowth
   m_EditorClassIdentifier: 
   _pokedexNumber: 52
+  _form: 
   _pokedexDescription: It lies around all day, becoming active near dusk. At night,
     it wanders the city in search of loose change.
   _classification: 
-  _heightInMeters: 0
-  _weightInPounds: 0
+  _baseHappiness: 50
+  _isBaby: 0
+  _isLegendary: 0
+  _isMythical: 0
+  _heightInMeters: 4
+  _weightInKg: 42
   _captureRate: 255
   rewardedEffortValue:
-  - _statAttribute: 6
+  - _statAttribute: 5
     _statValue: 1
-  _hasGender: 1
-  _maleFemaleRatio: 50
+  _maleFemaleRatio: 4
   _baseGroup: 2
   rewardedBaseExp: 58
   _type1: 12
   _type2: -1
-  _eggGroup1: 5
-  _eggGroup2: 0
+  _eggGroup1: 4
+  _eggGroup2: -1
+  _hatchCounter: 5120
   _maxHitPoints: 40
   _attack: 45
   _defense: 35
   _specialAttack: 40
   _specialDefense: 40
   _speed: 90
-  firstAbility: 86
-  secondAbility: 0
-  hiddenAbility: 0
+  firstAbility: -1
+  secondAbility: 129
+  hiddenAbility: -1
   _learnableMoves: []
   learnableTMHMMoves: []
   evolutions:

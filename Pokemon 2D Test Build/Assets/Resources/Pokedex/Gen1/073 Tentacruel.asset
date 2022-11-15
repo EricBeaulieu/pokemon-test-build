@@ -13,34 +13,38 @@ MonoBehaviour:
   m_Name: 073 Tentacruel
   m_EditorClassIdentifier: 
   _pokedexNumber: 73
+  _form: 
   _pokedexDescription: Normally, it has 80 poisonous tentacles. The longer one has
     been alive, the fewer tentacles it will have.
   _classification: 
-  _heightInMeters: 0
-  _weightInPounds: 0
+  _baseHappiness: 50
+  _isBaby: 0
+  _isLegendary: 0
+  _isMythical: 0
+  _heightInMeters: 16
+  _weightInKg: 550
   _captureRate: 60
   rewardedEffortValue:
-  - _statAttribute: 5
+  - _statAttribute: 4
     _statValue: 2
-  _hasGender: 1
-  _maleFemaleRatio: 50
+  _maleFemaleRatio: 4
   _baseGroup: 4
   rewardedBaseExp: 180
   _type1: 17
   _type2: 13
-  _eggGroup1: 14
-  _eggGroup2: 0
+  _eggGroup1: 13
+  _eggGroup2: -1
+  _hatchCounter: 5120
   _maxHitPoints: 80
   _attack: 70
   _defense: 65
   _specialAttack: 80
   _specialDefense: 120
   _speed: 100
-  firstAbility: 9
-  secondAbility: 0
-  hiddenAbility: 65
+  firstAbility: 18
+  secondAbility: 76
+  hiddenAbility: 98
   _learnableMoves: []
   learnableTMHMMoves: []
-  evolveLevelBased: []
-  evolutionsByStone: []
+  evolutions: []
   wildPokemonHoldItems: []

@@ -13,32 +13,37 @@ MonoBehaviour:
   m_Name: 050 Diglett
   m_EditorClassIdentifier: 
   _pokedexNumber: 50
+  _form: 
   _pokedexDescription: It chews on plant roots underground. Farmers whose vegetables
     are vulnerable find it can be quite a pest.
   _classification: 
-  _heightInMeters: 0
-  _weightInPounds: 0
+  _baseHappiness: 50
+  _isBaby: 0
+  _isLegendary: 0
+  _isMythical: 0
+  _heightInMeters: 2
+  _weightInKg: 8
   _captureRate: 255
   rewardedEffortValue:
-  - _statAttribute: 6
+  - _statAttribute: 5
     _statValue: 1
-  _hasGender: 1
-  _maleFemaleRatio: 50
+  _maleFemaleRatio: 4
   _baseGroup: 2
   rewardedBaseExp: 53
   _type1: 10
   _type2: -1
-  _eggGroup1: 5
-  _eggGroup2: 0
+  _eggGroup1: 4
+  _eggGroup2: -1
+  _hatchCounter: 5120
   _maxHitPoints: 10
   _attack: 55
   _defense: 25
   _specialAttack: 35
   _specialDefense: 45
   _speed: 95
-  firstAbility: 65
-  secondAbility: 0
-  hiddenAbility: 64
+  firstAbility: 107
+  secondAbility: 7
+  hiddenAbility: 104
   _learnableMoves: []
   learnableTMHMMoves: []
   evolutions:

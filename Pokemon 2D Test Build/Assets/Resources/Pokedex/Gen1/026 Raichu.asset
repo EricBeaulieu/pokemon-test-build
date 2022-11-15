@@ -13,32 +13,38 @@ MonoBehaviour:
   m_Name: 026 Raichu
   m_EditorClassIdentifier: 
   _pokedexNumber: 26
+  _form: 
   _pokedexDescription: It unleashes electric shocks that can reach 100,000 volts.
     When agitated, it can knock out even an Indian elephant.
   _classification: 
-  _heightInFeet: 0
-  _heightInMeters: 0
-  _weightInPounds: 0
-  _weightInKilograms: 0
+  _baseHappiness: 50
+  _isBaby: 0
+  _isLegendary: 0
+  _isMythical: 0
+  _heightInMeters: 8
+  _weightInKg: 300
   _captureRate: 75
   rewardedEffortValue:
-  - _statAttribute: 6
+  - _statAttribute: 5
     _statValue: 3
-  _hasGender: 1
-  _maleFemaleRatio: 50
+  _maleFemaleRatio: 4
   _baseGroup: 2
   rewardedBaseExp: 243
   _type1: 3
   _type2: -1
-  _eggGroup1: 5
-  _eggGroup2: 4
+  _eggGroup1: 4
+  _eggGroup2: 3
+  _hatchCounter: 2560
   _maxHitPoints: 60
   _attack: 90
   _defense: 55
   _specialAttack: 90
   _specialDefense: 80
   _speed: 110
-  firstAbility: 54
-  secondAbility: 0
-  hiddenAbility: 0
+  firstAbility: 120
+  secondAbility: -1
+  hiddenAbility: 74
   _learnableMoves: []
+  learnableTMHMMoves: []
+  evolutions: []
+  wildPokemonHoldItems: []

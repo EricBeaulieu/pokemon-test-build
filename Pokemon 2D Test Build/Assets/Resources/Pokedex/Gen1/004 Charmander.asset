@@ -13,32 +13,37 @@ MonoBehaviour:
   m_Name: 004 Charmander
   m_EditorClassIdentifier: 
   _pokedexNumber: 4
+  _form: 
   _pokedexDescription: It has a preference for hot things. When it rains, steam is
     said to spout from the tip of its tail.
   _classification: 
-  _heightInMeters: 0
-  _weightInPounds: 0
+  _baseHappiness: 50
+  _isBaby: 0
+  _isLegendary: 0
+  _isMythical: 0
+  _heightInMeters: 6
+  _weightInKg: 85
   _captureRate: 45
   rewardedEffortValue:
-  - _statAttribute: 6
+  - _statAttribute: 5
     _statValue: 1
-  _hasGender: 1
-  _maleFemaleRatio: 87.5
+  _maleFemaleRatio: 1
   _baseGroup: 3
   rewardedBaseExp: 62
   _type1: 6
   _type2: -1
-  _eggGroup1: 11
-  _eggGroup2: 3
+  _eggGroup1: 10
+  _eggGroup2: 2
+  _hatchCounter: 5120
   _maxHitPoints: 39
   _attack: 52
   _defense: 43
   _specialAttack: 60
   _specialDefense: 50
   _speed: 65
-  firstAbility: 13
-  secondAbility: 0
-  hiddenAbility: 0
+  firstAbility: 15
+  secondAbility: -1
+  hiddenAbility: 116
   _learnableMoves:
   - _moveBase: {fileID: 11400000, guid: 6efba544b032eea48a08488c387e2d3b, type: 2}
     _levelLeanred: 0

@@ -13,33 +13,38 @@ MonoBehaviour:
   m_Name: 082 Magneton
   m_EditorClassIdentifier: 
   _pokedexNumber: 82
+  _form: 
   _pokedexDescription: When three Magnemite link together, their brains also become
     one. They do not become three times more intelligent.
   _classification: 
-  _heightInMeters: 0
-  _weightInPounds: 0
+  _baseHappiness: 50
+  _isBaby: 0
+  _isLegendary: 0
+  _isMythical: 0
+  _heightInMeters: 10
+  _weightInKg: 600
   _captureRate: 60
   rewardedEffortValue:
-  - _statAttribute: 4
+  - _statAttribute: 3
     _statValue: 2
-  _hasGender: 0
-  _maleFemaleRatio: 50
+  _maleFemaleRatio: -1
   _baseGroup: 2
   rewardedBaseExp: 163
   _type1: 3
   _type2: 16
-  _eggGroup1: 10
-  _eggGroup2: 0
+  _eggGroup1: 9
+  _eggGroup2: -1
+  _hatchCounter: 5120
   _maxHitPoints: 50
   _attack: 60
   _defense: 95
   _specialAttack: 120
   _specialDefense: 70
   _speed: 70
-  firstAbility: 92
-  secondAbility: 0
-  hiddenAbility: 0
+  firstAbility: -1
+  secondAbility: 125
+  hiddenAbility: 4
   _learnableMoves: []
   learnableTMHMMoves: []
-  evolveLevelBased: []
-  evolutionsByStone: []
+  evolutions: []
+  wildPokemonHoldItems: []

@@ -13,33 +13,38 @@ MonoBehaviour:
   m_Name: 085 Dodrio
   m_EditorClassIdentifier: 
   _pokedexNumber: 85
+  _form: 
   _pokedexDescription: "One of Doduo\u2019s two heads splits to form a unique species.
     It runs close to 40 mph in prairies."
   _classification: 
-  _heightInMeters: 0
-  _weightInPounds: 0
+  _baseHappiness: 70
+  _isBaby: 0
+  _isLegendary: 0
+  _isMythical: 0
+  _heightInMeters: 18
+  _weightInKg: 852
   _captureRate: 45
   rewardedEffortValue:
-  - _statAttribute: 2
+  - _statAttribute: 1
     _statValue: 2
-  _hasGender: 1
-  _maleFemaleRatio: 50
+  _maleFemaleRatio: 4
   _baseGroup: 2
   rewardedBaseExp: 165
   _type1: 12
   _type2: 7
-  _eggGroup1: 6
-  _eggGroup2: 0
+  _eggGroup1: 5
+  _eggGroup2: -1
+  _hatchCounter: 5120
   _maxHitPoints: 60
   _attack: 110
   _defense: 70
   _specialAttack: 60
   _specialDefense: 60
   _speed: 110
-  firstAbility: 22
-  secondAbility: 0
-  hiddenAbility: 0
+  firstAbility: -1
+  secondAbility: 37
+  hiddenAbility: -1
   _learnableMoves: []
   learnableTMHMMoves: []
-  evolveLevelBased: []
-  evolutionsByStone: []
+  evolutions: []
+  wildPokemonHoldItems: []

@@ -13,32 +13,37 @@ MonoBehaviour:
   m_Name: 074 Geodude
   m_EditorClassIdentifier: 
   _pokedexNumber: 74
+  _form: 
   _pokedexDescription: "Its round body makes it easy to pick up, but it is hard and
     heavy. It\u2019s dangerous to play with them as if they were snowballs."
   _classification: 
-  _heightInMeters: 0
-  _weightInPounds: 0
+  _baseHappiness: 70
+  _isBaby: 0
+  _isLegendary: 0
+  _isMythical: 0
+  _heightInMeters: 4
+  _weightInKg: 200
   _captureRate: 255
   rewardedEffortValue:
-  - _statAttribute: 3
+  - _statAttribute: 2
     _statValue: 1
-  _hasGender: 1
-  _maleFemaleRatio: 50
+  _maleFemaleRatio: 4
   _baseGroup: 3
   rewardedBaseExp: 60
   _type1: 15
   _type2: 10
-  _eggGroup1: 10
-  _eggGroup2: 0
+  _eggGroup1: 9
+  _eggGroup2: -1
+  _hatchCounter: 3840
   _maxHitPoints: 40
   _attack: 80
   _defense: 100
   _specialAttack: 30
   _specialDefense: 30
   _speed: 20
-  firstAbility: 0
-  secondAbility: 0
-  hiddenAbility: 72
+  firstAbility: 103
+  secondAbility: 125
+  hiddenAbility: 107
   _learnableMoves: []
   learnableTMHMMoves: []
   evolutions:

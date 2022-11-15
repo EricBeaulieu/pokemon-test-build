@@ -962,6 +962,13 @@ public static class PokemonNameList
         332,350,369,
 
         //Sinnoh
+        396,397,398,399,400,
+        401,402,403,404,405,
+        407,415,417,418,419,
+        424,443,444,445,449,
+        450,453,454,456,457,
+        459,460,461,464,465,
+        473,
 
         //Custom
         906
@@ -976,6 +983,13 @@ public static class PokemonNameList
         "P","Q","R","S","T",
         "U","V","W","X","Y",
         "Z","!","?",
+    };
+    public static string[] ArceusForm =
+{
+        "Normal","Fighting","Flying","Poison","Ground",
+        "Rock","Bug","Ghost","Steel","Fire",
+        "Water","Grass","Electric","Psychic","Ice",
+        "Dragon","Dark","???"
     };
     static int[] PokemonHasUniqueEvolutionList =
     {
@@ -1045,5 +1059,55 @@ public static class PokemonNameList
     public static bool IsNincada(int pokedexNumber)
     {
         return (pokedexNumber == 290);
+    }
+
+    public static bool PokemonDoesntHaveAnOriginalFormName(int pokedexNumber)
+    {
+        if(pokedexNumber == 386 || pokedexNumber == 413 || pokedexNumber == 487 || pokedexNumber == 492)
+        {
+            return true;
+        }
+        return false;
+    }
+
+    public static string[] PokemonAlternativeFormNames(int pokedexNumber)
+    {
+        if (pokedexNumber == 19 || pokedexNumber == 20 || (pokedexNumber >= 26 && pokedexNumber <= 28) || pokedexNumber == 37 || pokedexNumber == 38 ||
+            (pokedexNumber >= 50 && pokedexNumber <= 53) || (pokedexNumber >= 74 && pokedexNumber <= 76) || pokedexNumber == 88 || pokedexNumber == 89 ||
+                pokedexNumber == 103 || pokedexNumber == 103)
+        {
+            //if(pokedexNumber == 52)
+            //{
+            //    return new string[] { "Alola","Galarian" };
+            //}
+            return new string[] { "Alola" };
+        }
+        //else if ((pokedexNumber >= 77 && pokedexNumber <= 80) || pokedexNumber == 83 || pokedexNumber == 110 || pokedexNumber == 122 ||
+        //(pokedexNumber >= 144 && pokedexNumber <= 146) || pokedexNumber == 199 || pokedexNumber == 222 || (pokedexNumber >= 263 && pokedexNumber <= 264) || 
+        //(pokedexNumber >= 554 && pokedexNumber <= 555))
+        //{
+        //    return new string[] { "Galarian" };
+        //}//As of Nov 09 2022 Galarian + hisuan forms dont exist for calls, but for some reason origin form dialga palkia exists
+        else if (pokedexNumber == 386)
+        {
+            return new string[] { "Normal", "Attack", "Defense" ,"Speed" };
+        }
+        else if(pokedexNumber == 413)
+        {
+            return new string[] { "Plant", "Sandy", "Trash" };
+        }
+        else if (pokedexNumber >= 483 && pokedexNumber <= 484)
+        {
+            return new string[] { "Origin" };
+        }
+        else if (pokedexNumber == 487)
+        {
+            return new string[] { "Altered", "Origin" };
+        }
+        else if (pokedexNumber == 492)
+        {
+            return new string[] { "Land", "Sky" };
+        }
+        return null;
     }
 }

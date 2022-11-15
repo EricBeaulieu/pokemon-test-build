@@ -4,9 +4,15 @@ using UnityEngine;
 
 public class Notes
 {
+    //Alternative types of starter Pokemon
+    //Rock Fighting and flying
+    //Fighting psychic and dark. problem with that is dark would have immunity over it
+
     //To do list
+    //update Attack button to inherit from DyanmicButton, also update the color to be a gradient rather then a function
+    //Update health bar to be a gradient as well rather than a function
+    //Fix the vendors talking distance, if i talked from underneath it doesnt work but from the right it does
     //create player and enemies team lineup on battle
-    //Fix the Genders
     //with a wild battle, if both pokemon faint show the animation for both pokemon dying, currently it just ends with the players unit still standing even though they wont get the exp
     //fix the smooth transistion calls in battle unit
     //fix the preanimtion for confused

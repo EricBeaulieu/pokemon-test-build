@@ -13,32 +13,37 @@ MonoBehaviour:
   m_Name: 070 Weepinbell
   m_EditorClassIdentifier: 
   _pokedexNumber: 70
+  _form: 
   _pokedexDescription: When hungry, it swallows anything that moves. Its hapless
     prey is dissolved by strong acids.
   _classification: 
-  _heightInMeters: 0
-  _weightInPounds: 0
+  _baseHappiness: 70
+  _isBaby: 0
+  _isLegendary: 0
+  _isMythical: 0
+  _heightInMeters: 10
+  _weightInKg: 64
   _captureRate: 120
   rewardedEffortValue:
-  - _statAttribute: 2
+  - _statAttribute: 1
     _statValue: 2
-  _hasGender: 1
-  _maleFemaleRatio: 50
+  _maleFemaleRatio: 4
   _baseGroup: 3
   rewardedBaseExp: 137
   _type1: 9
   _type2: 13
-  _eggGroup1: 7
-  _eggGroup2: 0
+  _eggGroup1: 6
+  _eggGroup2: -1
+  _hatchCounter: 5120
   _maxHitPoints: 65
   _attack: 90
   _defense: 50
   _specialAttack: 85
   _specialDefense: 45
   _speed: 55
-  firstAbility: 9
-  secondAbility: 0
-  hiddenAbility: 0
+  firstAbility: 17
+  secondAbility: -1
+  hiddenAbility: -1
   _learnableMoves: []
   learnableTMHMMoves: []
   evolutions:

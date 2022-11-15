@@ -13,32 +13,40 @@ MonoBehaviour:
   m_Name: 049 Venomoth
   m_EditorClassIdentifier: 
   _pokedexNumber: 49
+  _form: 
   _pokedexDescription: The powdery scales on its wings are hard to remove from skin.
     They also contain poison that leaks out on contact.
   _classification: 
-  _heightInMeters: 0
-  _weightInPounds: 0
+  _baseHappiness: 70
+  _isBaby: 0
+  _isLegendary: 0
+  _isMythical: 0
+  _heightInMeters: 15
+  _weightInKg: 125
   _captureRate: 75
   rewardedEffortValue:
-  - _statAttribute: 6
+  - _statAttribute: 3
     _statValue: 1
-  - _statAttribute: 4
+  - _statAttribute: 5
     _statValue: 1
-  _hasGender: 1
-  _maleFemaleRatio: 50
+  _maleFemaleRatio: 4
   _baseGroup: 2
   rewardedBaseExp: 158
   _type1: 0
   _type2: 13
-  _eggGroup1: 1
-  _eggGroup2: 0
+  _eggGroup1: 0
+  _eggGroup2: -1
+  _hatchCounter: 5120
   _maxHitPoints: 70
   _attack: 65
   _defense: 60
   _specialAttack: 90
   _specialDefense: 75
   _speed: 90
-  firstAbility: 86
-  secondAbility: 0
-  hiddenAbility: 0
+  firstAbility: -1
+  secondAbility: 131
+  hiddenAbility: -1
   _learnableMoves: []
+  learnableTMHMMoves: []
+  evolutions: []
+  wildPokemonHoldItems: []

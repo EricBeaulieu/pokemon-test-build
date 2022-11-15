@@ -20,21 +20,7 @@ public class PartySystem : CoreSystem
     static bool currentlySwitchingPokemon = false;
     PartyMemberUI specificPartyMemberUI = null;
 
-    [SerializeField] GameObject overworldSelections;
-    [SerializeField] GameObject overworldSelectionsSummaryButton;
-    [SerializeField] GameObject overworldSelectionsSwitchButton;
-    [SerializeField] GameObject overworldSelectionsItemButton;
-    [SerializeField] GameObject overworldSelectionsCancelButton;
-
-    [SerializeField] GameObject itemSelections;
-    [SerializeField] GameObject itemSelectionsGiveButton;
-    [SerializeField] GameObject itemSelectionsTakeButton;
-    [SerializeField] GameObject itemSelectionsCancelButton;
-
-    [SerializeField] GameObject battleSelections;
-    [SerializeField] GameObject battleSelectionShiftButton;
-    [SerializeField] GameObject battleSelectionSummaryButton;
-    [SerializeField] GameObject battleSelectionCancelButton;
+    [SerializeField] UIAdjuster dynamicSelections;
 
     SelectableBoxUI selectableBox;
 
@@ -51,6 +37,7 @@ public class PartySystem : CoreSystem
         learnNewMoveUI = GameManager.instance.GetLearnNewMoveSystem;
         SetupPartyMemberFunctionality();
         summarySystem.Initialization();
+        dynamicSelections.Initialization();
         selectableBox = new SelectableBoxUI(_partyMemberSlots[0].gameObject);
         SetUpStaticArt();
     }
@@ -60,7 +47,7 @@ public class PartySystem : CoreSystem
         //If B button is pressed go back a menu
         if (Input.GetButtonDown("Fire2"))
         {
-            if (battleSelections.activeInHierarchy == true | overworldSelections.activeInHierarchy == true)
+            if (dynamicSelections.gameObject.activeInHierarchy == true)
             {
                 //onCloseParty();
             }
@@ -104,8 +91,7 @@ public class PartySystem : CoreSystem
         selectableBox.SetLastSelected(null);
         selectableBox.SelectBox();
         summarySystem.CloseSummarySystem();
-        overworldSelections.SetActive(false);
-        battleSelections.SetActive(false);
+        dynamicSelections.gameObject.SetActive(false);
         AdjustMessageBoxWidthSize(MESSAGEBOX_STANDARD_SIZE);
     }
 
@@ -180,16 +166,9 @@ public class PartySystem : CoreSystem
 
                 int k = i;
                 _partyMemberSlots[k].GetButton.onClick.RemoveAllListeners();
-                if (BattleSystem.InBattle == true)
-                {
-                    _partyMemberSlots[k].GetButton.onClick.AddListener(() => OpenBattleSelections(_partyMemberSlots[k]));
-                }
-                else
-                {
-                    _partyMemberSlots[k].GetButton.onClick.AddListener(() => OpenOverworldSelections(_partyMemberSlots[k]));
-                }
+                _partyMemberSlots[k].GetButton.onClick.AddListener(() => OpenSelections(_partyMemberSlots[k]));
 
-                if(i+1 == currentParty.Count)
+                if (i+1 == currentParty.Count)
                 {
                     //have to pull the variable out, then change it and set it back in
                     var navigation = _partyMemberSlots[i].GetButton.navigation;
@@ -256,10 +235,18 @@ public class PartySystem : CoreSystem
                             }
                             else
                             {
-                                dialogSystem.SetDialogText($"{item.ItemBase.ItemName} was used on {currentPokemon.currentName}");
-                                hpDif = (hpDif != currentPokemon.currentHitPoints) ? currentPokemon.currentHitPoints - hpDif : 0;
-                                inventorySystem.RemoveItem(item);
-                                StartCoroutine(WaitForInputAfterItemUsage(true, _partyMemberSlots[k], hpDif));
+                                if (((MedicineItem)item.ItemBase).IsSingleItemPPRecovery() == true)
+                                {
+                                    StartCoroutine(RestorePPToSingleMove(_partyMemberSlots[k], item));
+                                }
+                                else
+                                {
+                                    dialogSystem.SetDialogText($"{item.ItemBase.ItemName} was used on {currentPokemon.currentName}");
+                                    hpDif = (hpDif != currentPokemon.currentHitPoints) ? currentPokemon.currentHitPoints - hpDif : 0;
+                                    inventorySystem.RemoveItem(item);
+                                    StartCoroutine(WaitForInputAfterItemUsage(true, _partyMemberSlots[k], hpDif));
+                                }
+
                             }
                             _partyMemberSlots[k].GetButton.onClick.RemoveAllListeners();
                         }
@@ -322,63 +309,70 @@ public class PartySystem : CoreSystem
         rt.sizeDelta = new Vector2(size, rt.sizeDelta.y);
     }
 
-    void OpenBattleSelections(PartyMemberUI currentPartyMember)
+    void OpenSelections(PartyMemberUI currentPartyMember)
     {
         dialogSystem.SetDialogText($"Do what with {currentPartyMember.CurrentPokemon().currentName}");
         currentPartyMember.isCurrentlySelected = true;
-        battleSelections.SetActive(true);
-        selectableBox.SelectBox(battleSelectionShiftButton);
+        if (BattleSystem.InBattle == true)
+        {
+            dynamicSelections.UpdateSizeAccordingToSelection(3);
+        }
+        else
+        {
+            dynamicSelections.UpdateSizeAccordingToSelection(4);
+        }
+        dynamicSelections.gameObject.SetActive(true);
+        selectableBox.SelectBox(dynamicSelections.SelectTopButton());
         AdjustMessageBoxWidthSize(MESSAGEBOX_SELECTED_SIZE);
 
-        battleSelectionShiftButton.GetComponent<Button>().onClick.RemoveAllListeners();
-        battleSelectionShiftButton.GetComponent<Button>().onClick.AddListener(() => ShiftBattleButton(currentPartyMember));
-
-        battleSelectionSummaryButton.GetComponent<Button>().onClick.RemoveAllListeners();
-        battleSelectionSummaryButton.GetComponent<Button>().onClick.AddListener(() =>
+        if (BattleSystem.InBattle == true)
         {
-            SummaryButton(System.Array.IndexOf(_partyMemberSlots, currentPartyMember));
-            selectableBox.SetLastSelected(battleSelectionSummaryButton);
-            selectableBox.Deselect();
-        });
+            dynamicSelections.GetButtonAtPosition(2).UpdateText("Shift");
+            dynamicSelections.GetButtonAtPosition(2).GetButton.onClick.RemoveAllListeners();
+            dynamicSelections.GetButtonAtPosition(2).GetButton.onClick.AddListener(() => ShiftBattleButton(currentPartyMember));
 
-        battleSelectionCancelButton.GetComponent<Button>().onClick.RemoveAllListeners();
-        battleSelectionCancelButton.GetComponent<Button>().onClick.AddListener(() => CancelSubMenuButton(currentPartyMember));
-    }
-
-    void OpenOverworldSelections(PartyMemberUI currentPartyMember)
-    {
-        dialogSystem.SetDialogText($"Do What with {currentPartyMember.CurrentPokemon().currentName}");
-        currentPartyMember.isCurrentlySelected = true;
-        overworldSelections.SetActive(true);
-        itemSelections.SetActive(false);
-        selectableBox.SelectBox(overworldSelectionsSummaryButton);
-        AdjustMessageBoxWidthSize(MESSAGEBOX_SELECTED_SIZE);
-
-        overworldSelectionsSummaryButton.GetComponent<Button>().onClick.RemoveAllListeners();
-        overworldSelectionsSummaryButton.GetComponent<Button>().onClick.AddListener(() => 
+            dynamicSelections.GetButtonAtPosition(1).UpdateText("Summary");
+            dynamicSelections.GetButtonAtPosition(1).GetButton.onClick.RemoveAllListeners();
+            dynamicSelections.GetButtonAtPosition(1).GetButton.onClick.AddListener(() =>
+            {
+                SummaryButton(System.Array.IndexOf(_partyMemberSlots, currentPartyMember));
+                selectableBox.SetLastSelected(dynamicSelections.GetButtonAtPosition(1).gameObject);
+                selectableBox.Deselect();
+            });
+        }
+        else
         {
-            SummaryButton(System.Array.IndexOf(_partyMemberSlots, currentPartyMember));
-            selectableBox.SetLastSelected(overworldSelectionsSummaryButton);
-            selectableBox.Deselect();
-        });
+            dynamicSelections.GetButtonAtPosition(3).UpdateText("Summary");
+            dynamicSelections.GetButtonAtPosition(3).GetButton.onClick.RemoveAllListeners();
+            dynamicSelections.GetButtonAtPosition(3).GetButton.onClick.AddListener(() =>
+            {
+                SummaryButton(System.Array.IndexOf(_partyMemberSlots, currentPartyMember));
+                selectableBox.SetLastSelected(dynamicSelections.GetButtonAtPosition(3).gameObject);
+                selectableBox.Deselect();
+            });
 
-        overworldSelectionsSwitchButton.GetComponent<Button>().onClick.RemoveAllListeners();
-        overworldSelectionsSwitchButton.GetComponent<Button>().onClick.AddListener(() =>
-        {
-            currentPartyMember.SwitchingPokemon = true;
-            specificPartyMemberUI = currentPartyMember;
-            CancelSubMenuButton(currentPartyMember);
-            SetNextPokemonSelectedToSwitchPositions();
-        });
+            dynamicSelections.GetButtonAtPosition(2).UpdateText("Switch");
+            dynamicSelections.GetButtonAtPosition(2).GetButton.onClick.RemoveAllListeners();
+            dynamicSelections.GetButtonAtPosition(2).GetButton.onClick.AddListener(() =>
+            {
+                currentPartyMember.SwitchingPokemon = true;
+                specificPartyMemberUI = currentPartyMember;
+                CancelSubMenuButton(currentPartyMember);
+                SetNextPokemonSelectedToSwitchPositions();
+            });
 
-        overworldSelectionsItemButton.GetComponent<Button>().onClick.RemoveAllListeners();
-        overworldSelectionsItemButton.GetComponent<Button>().onClick.AddListener(() =>
-        {
-            OpenItemSelections(currentPartyMember);
-        });
+            dynamicSelections.GetButtonAtPosition(1).UpdateText("Item");
+            dynamicSelections.GetButtonAtPosition(1).GetButton.onClick.RemoveAllListeners();
+            dynamicSelections.GetButtonAtPosition(1).GetButton.onClick.AddListener(() =>
+            {
+                OpenItemSelections(currentPartyMember);
+            });
 
-        overworldSelectionsCancelButton.GetComponent<Button>().onClick.RemoveAllListeners();
-        overworldSelectionsCancelButton.GetComponent<Button>().onClick.AddListener(() => CancelSubMenuButton(currentPartyMember));
+        }
+
+        dynamicSelections.GetButtonAtPosition(0).UpdateText("Cancel");
+        dynamicSelections.GetButtonAtPosition(0).GetButton.onClick.RemoveAllListeners();
+        dynamicSelections.GetButtonAtPosition(0).GetButton.onClick.AddListener(() => CancelSubMenuButton(currentPartyMember));
     }
 
     void ShiftBattleButton(PartyMemberUI currentPartyMember)
@@ -404,8 +398,7 @@ public class PartySystem : CoreSystem
     {
         AdjustMessageBoxWidthSize(MESSAGEBOX_STANDARD_SIZE);
         previousSelection.isCurrentlySelected = false;
-        battleSelections.SetActive(false);
-        overworldSelections.SetActive(false);
+        dynamicSelections.gameObject.SetActive(false);
         selectableBox.SelectBox(previousSelection.gameObject);
         dialogSystem.SetDialogText(STANDARD_MESSAGE);
     }
@@ -439,6 +432,84 @@ public class PartySystem : CoreSystem
             yield break;
         }
         
+        inventorySystem.ReturnFromPartySystemAfterItemUsage(true);
+    }
+
+    IEnumerator RestorePPToSingleMove(PartyMemberUI partyMemberUI, Item medicine)
+    {
+        partyMemberUI.isCurrentlySelected = true;
+        dynamicSelections.UpdateSizeAccordingToSelection(partyMemberUI.CurrentPokemon().moves.Count +1);
+        dynamicSelections.gameObject.SetActive(true);
+        selectableBox.SelectBox(dynamicSelections.SelectTopButton());
+        AdjustMessageBoxWidthSize(MESSAGEBOX_SELECTED_SIZE);
+        bool waitingForInput = false;
+        bool moveSelectedWasFull = false;
+        bool itemWasUsed = false;
+        for (int i = 0; i < partyMemberUI.CurrentPokemon().moves.Count; i++)
+        {
+            int k = i;
+            dynamicSelections.GetButtonAtPosition(i+1).UpdateText(partyMemberUI.CurrentPokemon().moves[i].moveBase.MoveName);
+            dynamicSelections.GetButtonAtPosition(i + 1).GetButton.onClick.RemoveAllListeners();
+            dynamicSelections.GetButtonAtPosition(i + 1).GetButton.onClick.AddListener(() =>
+            {
+                if(partyMemberUI.CurrentPokemon().moves[k].pP >= partyMemberUI.CurrentPokemon().moves[k].moveBase.PowerPoints)
+                {
+                    moveSelectedWasFull = true;
+                }
+                else
+                {
+                    partyMemberUI.CurrentPokemon().moves[k].pP += ((MedicineItem)medicine.ItemBase).PpRecovered;
+                    itemWasUsed = true;
+                }
+                waitingForInput = true;
+                selectableBox.Deselect();
+            });
+        }
+
+        bool dontCloseSystem = false;
+        dynamicSelections.GetButtonAtPosition(0).UpdateText("Cancel");
+        dynamicSelections.GetButtonAtPosition(0).GetButton.onClick.RemoveAllListeners();
+        dynamicSelections.GetButtonAtPosition(0).GetButton.onClick.AddListener(() =>
+        {
+            dontCloseSystem = true;
+            CancelSubMenuButton(partyMemberUI);
+            waitingForInput = true;
+        });
+
+        yield return new WaitForSeconds(1f);
+        while (waitingForInput == false)
+        {
+            yield return null;
+        }
+
+        if(dontCloseSystem == true)
+        {
+            CancelSubMenuButton(partyMemberUI);
+            SetPartyItem(medicine, true);
+            partyMemberUI.isCurrentlySelected = false;
+            selectableBox.SelectBox(partyMemberUI.gameObject);
+            yield break;
+        }
+
+        if(moveSelectedWasFull == true)
+        {
+            yield return dialogSystem.TypeDialog($"{medicine.ItemBase.ItemName} had no effect", true);
+        }
+        else
+        {
+            yield return dialogSystem.TypeDialog($"{medicine.ItemBase.ItemName} was used on {partyMemberUI.CurrentPokemon().currentName}",true);
+            inventorySystem.RemoveItem(medicine);
+        }
+
+        partyMemberUI.isCurrentlySelected = false;
+        CloseSystem();
+
+        if (BattleSystem.InBattle == true && itemWasUsed == true)
+        {
+            battleSystem.PlayerUsedItemWhileInBattle();
+            yield break;
+        }
+
         inventorySystem.ReturnFromPartySystemAfterItemUsage(true);
     }
 
@@ -613,12 +684,13 @@ public class PartySystem : CoreSystem
 
     void OpenItemSelections(PartyMemberUI currentPartyMember)
     {
-        overworldSelections.SetActive(false);
-        itemSelections.SetActive(true);
-        selectableBox.SelectBox(itemSelectionsGiveButton);
+        dynamicSelections.UpdateSizeAccordingToSelection(3);
+        dynamicSelections.gameObject.SetActive(true);
+        selectableBox.SelectBox(dynamicSelections.SelectTopButton());
 
-        itemSelectionsGiveButton.GetComponent<Button>().onClick.RemoveAllListeners();
-        itemSelectionsGiveButton.GetComponent<Button>().onClick.AddListener(() =>
+        dynamicSelections.GetButtonAtPosition(2).UpdateText("Give");
+        dynamicSelections.GetButtonAtPosition(2).GetButton.onClick.RemoveAllListeners();
+        dynamicSelections.GetButtonAtPosition(2).GetButton.onClick.AddListener(() =>
         {
             specificPartyMemberUI = currentPartyMember;
             selectableBox.Deselect();
@@ -626,24 +698,27 @@ public class PartySystem : CoreSystem
             inventorySystem.OpenUpInventorySystemDueToGivingItemFromParty(currentPartyMember.CurrentPokemon());
         });
 
-        itemSelectionsTakeButton.GetComponent<Button>().onClick.RemoveAllListeners();
-        itemSelectionsTakeButton.GetComponent<Button>().onClick.AddListener(() =>
+        dynamicSelections.GetButtonAtPosition(1).UpdateText("Take");
+        dynamicSelections.GetButtonAtPosition(1).GetButton.onClick.RemoveAllListeners();
+        dynamicSelections.GetButtonAtPosition(1).GetButton.onClick.AddListener(() =>
         {
             ItemBase item = currentPartyMember.CurrentPokemon().GetCurrentItem;
             StartCoroutine(WaitForInputAfterItemTaken(item, currentPartyMember));
         });
 
-        itemSelectionsCancelButton.GetComponent<Button>().onClick.RemoveAllListeners();
-        itemSelectionsCancelButton.GetComponent<Button>().onClick.AddListener(() =>
+        dynamicSelections.GetButtonAtPosition(0).UpdateText("Cancel");
+        dynamicSelections.GetButtonAtPosition(0).GetButton.onClick.RemoveAllListeners();
+        dynamicSelections.GetButtonAtPosition(0).GetButton.onClick.AddListener(() =>
         {
-            OpenOverworldSelections(currentPartyMember);
+            OpenSelections(currentPartyMember);
         });
     }
 
     IEnumerator WaitForInputAfterItemTaken(ItemBase item, PartyMemberUI pokemonPos)
     {
         AdjustMessageBoxWidthSize(MESSAGEBOX_STANDARD_SIZE);
-        itemSelections.SetActive(false);
+        dynamicSelections.gameObject.SetActive(false);
+        //itemSelections.SetActive(false);
         if (item == null)
         {
             yield return dialogSystem.TypeDialog($"{pokemonPos.CurrentPokemon().currentName} isn't holding anything.");
@@ -673,7 +748,7 @@ public class PartySystem : CoreSystem
         }
         else
         {
-            itemSelections.SetActive(false);
+            dynamicSelections.gameObject.SetActive(false);
 
             ItemBase oldItem = specificPartyMemberUI.CurrentPokemon().GetCurrentItem;
             if(oldItem != null)

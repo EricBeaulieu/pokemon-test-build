@@ -13,32 +13,37 @@ MonoBehaviour:
   m_Name: 077 Ponyta
   m_EditorClassIdentifier: 
   _pokedexNumber: 77
+  _form: 
   _pokedexDescription: Capable of jumping incredibly high. Its hooves and sturdy
     legs absorb the impact of a hard landing.
   _classification: 
-  _heightInMeters: 0
-  _weightInPounds: 0
+  _baseHappiness: 50
+  _isBaby: 0
+  _isLegendary: 0
+  _isMythical: 0
+  _heightInMeters: 10
+  _weightInKg: 300
   _captureRate: 190
   rewardedEffortValue:
-  - _statAttribute: 6
+  - _statAttribute: 5
     _statValue: 1
-  _hasGender: 1
-  _maleFemaleRatio: 50
+  _maleFemaleRatio: 4
   _baseGroup: 2
   rewardedBaseExp: 82
   _type1: 6
   _type2: -1
-  _eggGroup1: 5
-  _eggGroup2: 0
+  _eggGroup1: 4
+  _eggGroup2: -1
+  _hatchCounter: 5120
   _maxHitPoints: 50
   _attack: 85
   _defense: 55
   _specialAttack: 65
   _specialDefense: 65
   _speed: 90
-  firstAbility: 26
-  secondAbility: 0
-  hiddenAbility: 24
+  firstAbility: -1
+  secondAbility: 42
+  hiddenAbility: 40
   _learnableMoves: []
   learnableTMHMMoves: []
   evolutions:

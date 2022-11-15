@@ -13,33 +13,38 @@ MonoBehaviour:
   m_Name: 099 Kingler
   m_EditorClassIdentifier: 
   _pokedexNumber: 99
+  _form: 
   _pokedexDescription: One claw grew massively and is as hard as steel. It has 10,000-horsepower
     strength. However, it is too heavy.
   _classification: 
-  _heightInMeters: 0
-  _weightInPounds: 0
+  _baseHappiness: 50
+  _isBaby: 0
+  _isLegendary: 0
+  _isMythical: 0
+  _heightInMeters: 13
+  _weightInKg: 600
   _captureRate: 60
   rewardedEffortValue:
-  - _statAttribute: 2
+  - _statAttribute: 1
     _statValue: 2
-  _hasGender: 1
-  _maleFemaleRatio: 50
+  _maleFemaleRatio: 4
   _baseGroup: 2
   rewardedBaseExp: 166
   _type1: 17
   _type2: -1
-  _eggGroup1: 14
-  _eggGroup2: 0
+  _eggGroup1: 13
+  _eggGroup2: -1
+  _hatchCounter: 5120
   _maxHitPoints: 55
   _attack: 130
   _defense: 115
   _specialAttack: 50
   _specialDefense: 50
   _speed: 75
-  firstAbility: 35
-  secondAbility: 77
-  hiddenAbility: 0
+  firstAbility: 57
+  secondAbility: 110
+  hiddenAbility: -1
   _learnableMoves: []
   learnableTMHMMoves: []
-  evolveLevelBased: []
-  evolutionsByStone: []
+  evolutions: []
+  wildPokemonHoldItems: []

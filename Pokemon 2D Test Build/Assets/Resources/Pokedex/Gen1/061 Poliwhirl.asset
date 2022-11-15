@@ -13,32 +13,37 @@ MonoBehaviour:
   m_Name: 061 Poliwhirl
   m_EditorClassIdentifier: 
   _pokedexNumber: 61
+  _form: 
   _pokedexDescription: Although it can live on land, it prefers to stay in the water,
     where it has fewer natural enemies.
   _classification: 
-  _heightInMeters: 0
-  _weightInPounds: 0
+  _baseHappiness: 50
+  _isBaby: 0
+  _isLegendary: 0
+  _isMythical: 0
+  _heightInMeters: 10
+  _weightInKg: 200
   _captureRate: 120
   rewardedEffortValue:
-  - _statAttribute: 6
+  - _statAttribute: 5
     _statValue: 2
-  _hasGender: 1
-  _maleFemaleRatio: 50
+  _maleFemaleRatio: 4
   _baseGroup: 3
   rewardedBaseExp: 135
   _type1: 17
   _type2: -1
-  _eggGroup1: 12
-  _eggGroup2: 0
+  _eggGroup1: 11
+  _eggGroup2: -1
+  _hatchCounter: 5120
   _maxHitPoints: 65
   _attack: 65
   _defense: 65
   _specialAttack: 50
   _specialDefense: 50
   _speed: 90
-  firstAbility: 98
-  secondAbility: 0
-  hiddenAbility: 88
+  firstAbility: 138
+  secondAbility: 27
+  hiddenAbility: 127
   _learnableMoves: []
   learnableTMHMMoves: []
   evolutions:

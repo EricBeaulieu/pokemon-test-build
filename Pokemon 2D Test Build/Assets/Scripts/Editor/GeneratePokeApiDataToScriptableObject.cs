@@ -7,6 +7,9 @@ using System.Linq;
 
 namespace PokeApi
 {
+    /// <summary>
+    /// For Unown, it was removed as his API calls are weird, so it will generate just a default variation
+    /// </summary>
     public class GeneratePokeApiDataToScriptableObject : EditorWindow
     {
         int startingInteger = 001;
@@ -42,24 +45,70 @@ namespace PokeApi
 
         static void CreateScriptableObjectPokemonBase(int pokedexNumber)
         {
-            PokemonData pokemon;
-            pokemon = APIHelper.GetPokemonData(pokedexNumber);
-            pokemon.species = APIHelper.GetPokemonSpecies(pokedexNumber);
+            List<string> pokemonName = new List<string>();
+            string originalName = PokemonNameList.GetPokeDexName(pokedexNumber);
+            pokemonName.Add(originalName);
 
-            string assetPath = $"Pokedex/{GetGenLocation(pokemon.id)}{pokemon.id.ToString("000")} {pokemon.name.UpperFirstChar()}";
-            PokemonBase existingPokemon = Resources.Load<PokemonBase>(assetPath);
-
-            if (existingPokemon != null)
+            if (PokemonNameList.PokemonDoesntHaveAnOriginalFormName(pokedexNumber) == true)
             {
-                Debug.Log($"Updated {pokemon.id.ToString("000")} {pokemon.name.UpperFirstChar()}");
-                existingPokemon.Initialization(pokemon);
+                pokemonName.Clear();
             }
-            else
+
+            string[] alternativeForms = PokemonNameList.PokemonAlternativeFormNames(pokedexNumber);
+
+            if(alternativeForms != null)
             {
-                Debug.Log($"Created {pokemon.id.ToString("000")} {pokemon.name.UpperFirstChar()}");
-                PokemonBase pokemonBase = ScriptableObject.CreateInstance<PokemonBase>();
-                pokemonBase.Initialization(pokemon);
-                AssetDatabase.CreateAsset(pokemonBase, $"Assets/Resources/{assetPath}.asset");
+                for (int i = 0; i < alternativeForms.Length; i++)
+                {
+                    pokemonName.Add($"{originalName}-{alternativeForms[i]}");
+                }
+            }
+
+            foreach (string tempPokemonName in pokemonName)
+            {
+                string currentPokemonName = tempPokemonName;
+                PokemonData pokemon;
+                Debug.Log($"Calling {currentPokemonName}");
+                
+                if(specialCaseNames(pokedexNumber) == true)
+                {
+                    pokemon = APIHelper.GetPokemonData(pokedexNumber);
+                }
+                else
+                {
+                    pokemon = APIHelper.GetPokemonData(currentPokemonName.ToLower());
+                }
+                pokemon.species = APIHelper.GetPokemonSpecies(pokedexNumber);
+
+                if(specialCaseNames(pokedexNumber) == true)
+                {
+                    Debug.Log($"Before {currentPokemonName}");
+                    currentPokemonName = currentPokemonName.Replace(originalName, pokemon.name.UpperFirstChar());
+                    Debug.Log($"After {currentPokemonName}");
+                }
+
+                string assetPath = $"Pokedex/{GetGenLocation(pokedexNumber)}{pokedexNumber.ToString("000")} {currentPokemonName}";
+
+                if(currentPokemonName.Contains("!"))//Unown
+                {
+                    assetPath.Replace("!", "QuestionMark");
+                }
+
+                PokemonBase existingPokemon = Resources.Load<PokemonBase>(assetPath);
+
+                if (existingPokemon != null)
+                {
+                    Debug.Log($"Updated {pokedexNumber.ToString("000")} {currentPokemonName}");
+                    existingPokemon.Initialization(pokemon, pokedexNumber);
+                    EditorUtility.SetDirty(existingPokemon);
+                }
+                else
+                {
+                    Debug.Log($"Created {pokedexNumber.ToString("000")} {currentPokemonName}");
+                    PokemonBase pokemonBase = ScriptableObject.CreateInstance<PokemonBase>();
+                    pokemonBase.Initialization(pokemon, pokedexNumber);
+                    AssetDatabase.CreateAsset(pokemonBase, $"Assets/Resources/{assetPath}.asset");
+                }
                 AssetDatabase.SaveAssets();
             }
         }
@@ -98,6 +147,15 @@ namespace PokeApi
                     break;
             }
             return s;
+        }
+
+        static bool specialCaseNames(int pokedexNumber)
+        {
+            if(pokedexNumber == 29 || pokedexNumber == 32 || pokedexNumber == 83 || pokedexNumber == 122 || pokedexNumber == 439)
+            {
+                return true;
+            }
+            return false;
         }
     }
 }

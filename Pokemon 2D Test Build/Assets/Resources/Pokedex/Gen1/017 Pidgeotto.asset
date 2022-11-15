@@ -13,32 +13,37 @@ MonoBehaviour:
   m_Name: 017 Pidgeotto
   m_EditorClassIdentifier: 
   _pokedexNumber: 17
+  _form: 
   _pokedexDescription: "This Pok\xE9mon is full of vitality. It constantly flies
     around its large territory in search of prey."
   _classification: 
-  _heightInMeters: 0
-  _weightInPounds: 0
-  _captureRate: 255
+  _baseHappiness: 70
+  _isBaby: 0
+  _isLegendary: 0
+  _isMythical: 0
+  _heightInMeters: 11
+  _weightInKg: 300
+  _captureRate: 120
   rewardedEffortValue:
-  - _statAttribute: 6
+  - _statAttribute: 5
     _statValue: 2
-  _hasGender: 1
-  _maleFemaleRatio: 50
+  _maleFemaleRatio: 4
   _baseGroup: 3
   rewardedBaseExp: 122
   _type1: 12
   _type2: 7
-  _eggGroup1: 0
-  _eggGroup2: 0
+  _eggGroup1: 5
+  _eggGroup2: -1
+  _hatchCounter: 3840
   _maxHitPoints: 63
   _attack: 60
   _defense: 55
   _specialAttack: 50
   _specialDefense: 50
   _speed: 71
-  firstAbility: 34
-  secondAbility: 0
-  hiddenAbility: 0
+  firstAbility: 69
+  secondAbility: -1
+  hiddenAbility: 14
   _learnableMoves:
   - _moveBase: {fileID: 11400000, guid: 74776a55aab78af45a268d0b4777c811, type: 2}
     _levelLeanred: 0

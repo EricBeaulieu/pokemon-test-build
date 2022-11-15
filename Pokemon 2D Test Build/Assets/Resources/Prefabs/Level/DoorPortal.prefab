@@ -121,6 +121,12 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 3966419247080132191}
   m_PrefabAsset: {fileID: 0}
+--- !u!61 &7295746926320092572 stripped
+BoxCollider2D:
+  m_CorrespondingSourceObject: {fileID: 5923428019955747779, guid: 46be96743ea7a5f4690e5b9fac288df7,
+    type: 3}
+  m_PrefabInstance: {fileID: 3966419247080132191}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &7295746926617940675 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5923428020127669404, guid: 46be96743ea7a5f4690e5b9fac288df7,
@@ -199,6 +205,7 @@ MonoBehaviour:
   faceDirectionAfterMoving: 0
   direction: 0
   _spriteRenderer: {fileID: 5733355993747408806}
+  _boxCollider: {fileID: 7295746926320092572}
   isLocked: 0
   doorIsLockedMessage:
     lines:

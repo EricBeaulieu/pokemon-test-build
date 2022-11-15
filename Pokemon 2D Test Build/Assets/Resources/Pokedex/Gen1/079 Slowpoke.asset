@@ -13,33 +13,38 @@ MonoBehaviour:
   m_Name: 079 Slowpoke
   m_EditorClassIdentifier: 
   _pokedexNumber: 79
+  _form: 
   _pokedexDescription: "Its long tail often breaks off. It doesn\u2019t really feel
     any pain, though, and the tail grows back, so Slowpoke isn\u2019t particularly
     bothered."
   _classification: 
-  _heightInMeters: 0
-  _weightInPounds: 0
+  _baseHappiness: 50
+  _isBaby: 0
+  _isLegendary: 0
+  _isMythical: 0
+  _heightInMeters: 12
+  _weightInKg: 360
   _captureRate: 190
   rewardedEffortValue:
-  - _statAttribute: 1
+  - _statAttribute: 0
     _statValue: 1
-  _hasGender: 1
-  _maleFemaleRatio: 50
+  _maleFemaleRatio: 4
   _baseGroup: 2
   rewardedBaseExp: 63
   _type1: 17
   _type2: 14
-  _eggGroup1: 11
-  _eggGroup2: 12
+  _eggGroup1: 10
+  _eggGroup2: 11
+  _hatchCounter: 5120
   _maxHitPoints: 90
   _attack: 65
   _defense: 65
   _specialAttack: 40
   _specialDefense: 40
   _speed: 15
-  firstAbility: 59
-  secondAbility: 57
-  hiddenAbility: 0
+  firstAbility: 87
+  secondAbility: 89
+  hiddenAbility: -1
   _learnableMoves: []
   learnableTMHMMoves: []
   evolutions:

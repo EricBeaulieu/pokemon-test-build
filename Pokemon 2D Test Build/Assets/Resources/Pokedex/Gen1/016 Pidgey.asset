@@ -13,23 +13,28 @@ MonoBehaviour:
   m_Name: 016 Pidgey
   m_EditorClassIdentifier: 
   _pokedexNumber: 16
+  _form: 
   _pokedexDescription: Very docile. If attacked, it will often kick up sand to protect
     itself rather than fight back.
   _classification: 
-  _heightInMeters: 0
-  _weightInPounds: 0
+  _baseHappiness: 70
+  _isBaby: 0
+  _isLegendary: 0
+  _isMythical: 0
+  _heightInMeters: 3
+  _weightInKg: 18
   _captureRate: 255
   rewardedEffortValue:
-  - _statAttribute: 6
+  - _statAttribute: 5
     _statValue: 1
-  _hasGender: 1
-  _maleFemaleRatio: 50
+  _maleFemaleRatio: 4
   _baseGroup: 3
   rewardedBaseExp: 50
   _type1: 12
   _type2: 7
-  _eggGroup1: 0
-  _eggGroup2: 0
+  _eggGroup1: 5
+  _eggGroup2: -1
+  _hatchCounter: 3840
   _maxHitPoints: 40
   _attack: 45
   _defense: 40
@@ -37,8 +42,8 @@ MonoBehaviour:
   _specialDefense: 35
   _speed: 56
   firstAbility: 69
-  secondAbility: 0
-  hiddenAbility: 0
+  secondAbility: -1
+  hiddenAbility: 14
   _learnableMoves:
   - _moveBase: {fileID: 11400000, guid: 74776a55aab78af45a268d0b4777c811, type: 2}
     _levelLeanred: 0

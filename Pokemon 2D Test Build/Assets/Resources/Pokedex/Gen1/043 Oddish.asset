@@ -13,32 +13,37 @@ MonoBehaviour:
   m_Name: 043 Oddish
   m_EditorClassIdentifier: 
   _pokedexNumber: 43
+  _form: 
   _pokedexDescription: It may be mistaken for a clump of weeds. If you try to yank
     it out of the ground, it shrieks horribly.
   _classification: 
-  _heightInMeters: 0
-  _weightInPounds: 0
+  _baseHappiness: 50
+  _isBaby: 0
+  _isLegendary: 0
+  _isMythical: 0
+  _heightInMeters: 5
+  _weightInKg: 54
   _captureRate: 255
   rewardedEffortValue:
-  - _statAttribute: 4
+  - _statAttribute: 3
     _statValue: 1
-  _hasGender: 1
-  _maleFemaleRatio: 50
+  _maleFemaleRatio: 4
   _baseGroup: 3
   rewardedBaseExp: 64
   _type1: 9
-  _type2: -1
-  _eggGroup1: 7
-  _eggGroup2: 0
+  _type2: 13
+  _eggGroup1: 6
+  _eggGroup2: -1
+  _hatchCounter: 5120
   _maxHitPoints: 45
   _attack: 50
   _defense: 55
   _specialAttack: 75
   _specialDefense: 65
   _speed: 30
-  firstAbility: 7
-  secondAbility: 0
-  hiddenAbility: 0
+  firstAbility: 17
+  secondAbility: -1
+  hiddenAbility: -1
   _learnableMoves: []
   learnableTMHMMoves: []
   evolutions:

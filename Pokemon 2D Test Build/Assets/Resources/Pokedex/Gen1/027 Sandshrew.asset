@@ -13,32 +13,37 @@ MonoBehaviour:
   m_Name: 027 Sandshrew
   m_EditorClassIdentifier: 
   _pokedexNumber: 27
+  _form: 
   _pokedexDescription: It can roll its body into a ball. It moves through the desert
     by rolling at high speeds.
   _classification: 
-  _heightInMeters: 0
-  _weightInPounds: 0
+  _baseHappiness: 50
+  _isBaby: 0
+  _isLegendary: 0
+  _isMythical: 0
+  _heightInMeters: 6
+  _weightInKg: 120
   _captureRate: 255
   rewardedEffortValue:
-  - _statAttribute: 3
+  - _statAttribute: 2
     _statValue: 1
-  _hasGender: 1
-  _maleFemaleRatio: 50
+  _maleFemaleRatio: 4
   _baseGroup: 2
   rewardedBaseExp: 60
   _type1: 10
   _type2: -1
-  _eggGroup1: 5
-  _eggGroup2: 0
+  _eggGroup1: 4
+  _eggGroup2: -1
+  _hatchCounter: 5120
   _maxHitPoints: 50
   _attack: 75
   _defense: 85
   _specialAttack: 20
   _specialDefense: 30
   _speed: 40
-  firstAbility: 22
-  secondAbility: 0
-  hiddenAbility: 0
+  firstAbility: 107
+  secondAbility: -1
+  hiddenAbility: 105
   _learnableMoves: []
   learnableTMHMMoves: []
   evolutions:

@@ -77,7 +77,7 @@ public class PokemonBase : ScriptableObject {
 
     #region Initialization 
 
-    public void Initialization(PokeApi.PokemonData pokemonData)
+    public void Initialization(PokeApi.PokemonData pokemonData,int correctPokedexNumber)
     {
         if (pokemonData == null)
         {
@@ -86,7 +86,7 @@ public class PokemonBase : ScriptableObject {
         }
 
         //PokeDex Information
-        _pokedexNumber = pokemonData.id;
+        _pokedexNumber = correctPokedexNumber;//Different forms have different ID numbers
         //_pokedexDescription;
         //_classification;
         _baseHappiness = pokemonData.species.base_happiness;

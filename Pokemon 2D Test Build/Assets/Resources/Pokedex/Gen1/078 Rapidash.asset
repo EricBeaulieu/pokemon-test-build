@@ -13,33 +13,38 @@ MonoBehaviour:
   m_Name: 078 Rapidash
   m_EditorClassIdentifier: 
   _pokedexNumber: 78
+  _form: 
   _pokedexDescription: Just loves to run. If it sees something faster than itself,
     it will give chase at top speed.
   _classification: 
-  _heightInMeters: 0
-  _weightInPounds: 0
+  _baseHappiness: 50
+  _isBaby: 0
+  _isLegendary: 0
+  _isMythical: 0
+  _heightInMeters: 17
+  _weightInKg: 950
   _captureRate: 60
   rewardedEffortValue:
-  - _statAttribute: 6
+  - _statAttribute: 5
     _statValue: 2
-  _hasGender: 1
-  _maleFemaleRatio: 50
+  _maleFemaleRatio: 4
   _baseGroup: 2
   rewardedBaseExp: 175
   _type1: 6
   _type2: -1
-  _eggGroup1: 5
-  _eggGroup2: 0
+  _eggGroup1: 4
+  _eggGroup2: -1
+  _hatchCounter: 5120
   _maxHitPoints: 65
   _attack: 100
   _defense: 70
   _specialAttack: 80
   _specialDefense: 80
   _speed: 105
-  firstAbility: 26
-  secondAbility: 0
-  hiddenAbility: 24
+  firstAbility: -1
+  secondAbility: 42
+  hiddenAbility: 40
   _learnableMoves: []
   learnableTMHMMoves: []
-  evolveLevelBased: []
-  evolutionsByStone: []
+  evolutions: []
+  wildPokemonHoldItems: []

@@ -13,33 +13,38 @@ MonoBehaviour:
   m_Name: 143 Snorlax
   m_EditorClassIdentifier: 
   _pokedexNumber: 143
+  _form: 
   _pokedexDescription: "Its stomach is said to be incomparably strong. Even Muk\u2019s
     poison is nothing more than a hint of spice on Snorlax\u2019s tongue."
   _classification: 
-  _heightInMeters: 0
-  _weightInPounds: 0
+  _baseHappiness: 50
+  _isBaby: 0
+  _isLegendary: 0
+  _isMythical: 0
+  _heightInMeters: 21
+  _weightInKg: 4600
   _captureRate: 25
   rewardedEffortValue:
-  - _statAttribute: 1
+  - _statAttribute: 0
     _statValue: 2
-  _hasGender: 1
-  _maleFemaleRatio: 88.1
+  _maleFemaleRatio: 1
   _baseGroup: 4
   rewardedBaseExp: 189
   _type1: 12
   _type2: -1
-  _eggGroup1: 11
-  _eggGroup2: 0
+  _eggGroup1: 10
+  _eggGroup2: -1
+  _hatchCounter: 10240
   _maxHitPoints: 160
   _attack: 110
   _defense: 65
   _specialAttack: 65
   _specialDefense: 110
   _speed: 30
-  firstAbility: 38
-  secondAbility: 97
-  hiddenAbility: 0
+  firstAbility: 60
+  secondAbility: 130
+  hiddenAbility: -1
   _learnableMoves: []
   learnableTMHMMoves: []
-  evolveLevelBased: []
-  evolutionsByStone: []
+  evolutions: []
+  wildPokemonHoldItems: []

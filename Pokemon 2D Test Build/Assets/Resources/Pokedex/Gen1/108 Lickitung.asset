@@ -13,34 +13,39 @@ MonoBehaviour:
   m_Name: 108 Lickitung
   m_EditorClassIdentifier: 
   _pokedexNumber: 108
+  _form: 
   _pokedexDescription: "It checks out whatever\u2019s around it by licking everything.
     If you don\u2019t clean off a spot where it\u2019s licked you, you\u2019ll break
     out in a rash!"
   _classification: 
-  _heightInMeters: 0
-  _weightInPounds: 0
+  _baseHappiness: 50
+  _isBaby: 0
+  _isLegendary: 0
+  _isMythical: 0
+  _heightInMeters: 12
+  _weightInKg: 655
   _captureRate: 45
   rewardedEffortValue:
-  - _statAttribute: 1
+  - _statAttribute: 0
     _statValue: 2
-  _hasGender: 1
-  _maleFemaleRatio: 50
+  _maleFemaleRatio: 4
   _baseGroup: 2
   rewardedBaseExp: 77
   _type1: 12
   _type2: -1
-  _eggGroup1: 11
-  _eggGroup2: 0
+  _eggGroup1: 10
+  _eggGroup2: -1
+  _hatchCounter: 5120
   _maxHitPoints: 90
   _attack: 55
   _defense: 75
   _specialAttack: 60
   _specialDefense: 75
   _speed: 30
-  firstAbility: 59
-  secondAbility: 57
-  hiddenAbility: 11
+  firstAbility: 89
+  secondAbility: 87
+  hiddenAbility: 19
   _learnableMoves: []
   learnableTMHMMoves: []
-  evolveLevelBased: []
-  evolutionsByStone: []
+  evolutions: []
+  wildPokemonHoldItems: []

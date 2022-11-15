@@ -13,32 +13,37 @@ MonoBehaviour:
   m_Name: 134 Vaporeon
   m_EditorClassIdentifier: 
   _pokedexNumber: 134
+  _form: 
   _pokedexDescription: Its cells are composed of units much like water molecules.
     It lives close to water and is often mistaken for a mermaid.
   _classification: 
-  _heightInMeters: 0
-  _weightInPounds: 0
+  _baseHappiness: 50
+  _isBaby: 0
+  _isLegendary: 0
+  _isMythical: 0
+  _heightInMeters: 10
+  _weightInKg: 290
   _captureRate: 45
   rewardedEffortValue:
-  - _statAttribute: 1
+  - _statAttribute: 0
     _statValue: 2
-  _hasGender: 1
-  _maleFemaleRatio: 88.1
+  _maleFemaleRatio: 1
   _baseGroup: 2
   rewardedBaseExp: 184
   _type1: 17
   _type2: -1
-  _eggGroup1: 5
-  _eggGroup2: 0
+  _eggGroup1: 4
+  _eggGroup2: -1
+  _hatchCounter: 8960
   _maxHitPoints: 130
   _attack: 65
   _defense: 60
   _specialAttack: 110
   _specialDefense: 95
   _speed: 65
-  firstAbility: 79
-  secondAbility: 0
-  hiddenAbility: 0
+  firstAbility: 138
+  secondAbility: -1
+  hiddenAbility: 56
   _learnableMoves:
   - _moveBase: {fileID: 11400000, guid: a780c895cca532b4db375bf87ec37638, type: 2}
     _levelLeanred: -1
@@ -46,6 +51,5 @@ MonoBehaviour:
     _levelLeanred: 5
   learnableTMHMMoves:
   - {fileID: 11400000, guid: 88ebf4bead5cc4a4fa81828f041330f6, type: 2}
-  evolveLevelBased: []
-  evolutionsByStone: []
+  evolutions: []
   wildPokemonHoldItems: []

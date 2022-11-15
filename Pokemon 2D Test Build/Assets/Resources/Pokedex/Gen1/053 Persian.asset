@@ -13,30 +13,38 @@ MonoBehaviour:
   m_Name: 053 Persian
   m_EditorClassIdentifier: 
   _pokedexNumber: 53
+  _form: 
   _pokedexDescription: It has a violent temperament. It will attack anything that
     looks it in the eye. Its sharp claws inflict deep wounds.
   _classification: 
-  _heightInMeters: 0
-  _weightInPounds: 0
+  _baseHappiness: 50
+  _isBaby: 0
+  _isLegendary: 0
+  _isMythical: 0
+  _heightInMeters: 10
+  _weightInKg: 320
   _captureRate: 90
   rewardedEffortValue:
-  - _statAttribute: 6
+  - _statAttribute: 5
     _statValue: 2
-  _hasGender: 1
-  _maleFemaleRatio: 50
+  _maleFemaleRatio: 4
   _baseGroup: 2
   rewardedBaseExp: 154
   _type1: 12
   _type2: -1
-  _eggGroup1: 5
-  _eggGroup2: 0
+  _eggGroup1: 4
+  _eggGroup2: -1
+  _hatchCounter: 5120
   _maxHitPoints: 65
   _attack: 70
   _defense: 60
   _specialAttack: 65
   _specialDefense: 65
   _speed: 115
-  firstAbility: 86
-  secondAbility: 43
-  hiddenAbility: 0
+  firstAbility: 75
+  secondAbility: 129
+  hiddenAbility: -1
   _learnableMoves: []
+  learnableTMHMMoves: []
+  evolutions: []
+  wildPokemonHoldItems: []

@@ -13,37 +13,41 @@ MonoBehaviour:
   m_Name: 248 Tyranitar
   m_EditorClassIdentifier: 
   _pokedexNumber: 248
+  _form: 
   _pokedexDescription: "It wanders through the mountains seeking opponents to fight.
     If it finds an opponent that\u2019s not worthy, Tyranitar ignores it and wanders
     on."
   _classification: 
-  _heightInMeters: 0
-  _weightInPounds: 0
+  _baseHappiness: 35
+  _isBaby: 0
+  _isLegendary: 0
+  _isMythical: 0
+  _heightInMeters: 20
+  _weightInKg: 2020
   _captureRate: 45
   rewardedEffortValue:
-  - _statAttribute: 2
+  - _statAttribute: 1
     _statValue: 3
-  _hasGender: 1
-  _maleFemaleRatio: 50
+  _maleFemaleRatio: 4
   _baseGroup: 4
   rewardedBaseExp: 300
   _type1: 15
   _type2: 1
-  _eggGroup1: 11
-  _eggGroup2: 0
+  _eggGroup1: 10
+  _eggGroup2: -1
+  _hatchCounter: 10240
   _maxHitPoints: 100
   _attack: 134
   _defense: 110
   _specialAttack: 95
   _specialDefense: 100
   _speed: 61
-  firstAbility: 107
-  secondAbility: 0
-  hiddenAbility: 0
+  firstAbility: 106
+  secondAbility: -1
+  hiddenAbility: -1
   _learnableMoves: []
   learnableTMHMMoves: []
-  evolveLevelBased: []
-  evolutionsByStone: []
+  evolutions: []
   wildPokemonHoldItems:
   - holdItem: {fileID: 11400000, guid: aeaf576e77e688148a05e5a2dde9a9c8, type: 2}
     itemPercentChance: 5

@@ -13,32 +13,37 @@ MonoBehaviour:
   m_Name: 072 Tentacool
   m_EditorClassIdentifier: 
   _pokedexNumber: 72
+  _form: 
   _pokedexDescription: They can be found lying dehydrated on beaches, but they are
     often still alive. When soaked in water, they will revive.
   _classification: 
-  _heightInMeters: 0
-  _weightInPounds: 0
+  _baseHappiness: 50
+  _isBaby: 0
+  _isLegendary: 0
+  _isMythical: 0
+  _heightInMeters: 9
+  _weightInKg: 455
   _captureRate: 190
   rewardedEffortValue:
-  - _statAttribute: 5
+  - _statAttribute: 4
     _statValue: 1
-  _hasGender: 1
-  _maleFemaleRatio: 50
+  _maleFemaleRatio: 4
   _baseGroup: 4
   rewardedBaseExp: 67
   _type1: 17
   _type2: 13
-  _eggGroup1: 14
-  _eggGroup2: 0
+  _eggGroup1: 13
+  _eggGroup2: -1
+  _hatchCounter: 5120
   _maxHitPoints: 40
   _attack: 40
   _defense: 35
   _specialAttack: 50
   _specialDefense: 100
   _speed: 70
-  firstAbility: 10
-  secondAbility: 0
-  hiddenAbility: 65
+  firstAbility: 18
+  secondAbility: 76
+  hiddenAbility: 98
   _learnableMoves: []
   learnableTMHMMoves: []
   evolutions:

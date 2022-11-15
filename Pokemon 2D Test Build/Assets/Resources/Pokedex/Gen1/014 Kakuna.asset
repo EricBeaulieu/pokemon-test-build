@@ -13,32 +13,37 @@ MonoBehaviour:
   m_Name: 014 Kakuna
   m_EditorClassIdentifier: 
   _pokedexNumber: 14
+  _form: 
   _pokedexDescription: Able to move only slightly. When endangered, it may stick
     out its stinger and poison its enemy.
   _classification: "Cocoon Pok\xE9mon"
-  _heightInMeters: 0
-  _weightInPounds: 0
+  _baseHappiness: 70
+  _isBaby: 0
+  _isLegendary: 0
+  _isMythical: 0
+  _heightInMeters: 6
+  _weightInKg: 100
   _captureRate: 120
   rewardedEffortValue:
-  - _statAttribute: 3
+  - _statAttribute: 2
     _statValue: 2
-  _hasGender: 1
-  _maleFemaleRatio: 50
+  _maleFemaleRatio: 4
   _baseGroup: 2
   rewardedBaseExp: 72
   _type1: 0
   _type2: 13
-  _eggGroup1: 1
-  _eggGroup2: 0
+  _eggGroup1: 0
+  _eggGroup2: -1
+  _hatchCounter: 3840
   _maxHitPoints: 45
   _attack: 25
   _defense: 50
   _specialAttack: 25
   _specialDefense: 25
   _speed: 35
-  firstAbility: 0
-  secondAbility: 0
-  hiddenAbility: 0
+  firstAbility: -1
+  secondAbility: -1
+  hiddenAbility: -1
   _learnableMoves:
   - _moveBase: {fileID: 11400000, guid: 2848c84d0da4cb04fac0ba2516f3df92, type: 2}
     _levelLeanred: 0

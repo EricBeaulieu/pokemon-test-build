@@ -13,33 +13,38 @@ MonoBehaviour:
   m_Name: 121 Starmie
   m_EditorClassIdentifier: 
   _pokedexNumber: 121
+  _form: 
   _pokedexDescription: Its shining core is thought to receive and transmit enigmatic
     signals. It has been known to cause headaches in those who approach it.
   _classification: 
-  _heightInMeters: 0
-  _weightInPounds: 0
+  _baseHappiness: 50
+  _isBaby: 0
+  _isLegendary: 0
+  _isMythical: 0
+  _heightInMeters: 11
+  _weightInKg: 800
   _captureRate: 60
   rewardedEffortValue:
-  - _statAttribute: 6
+  - _statAttribute: 5
     _statValue: 2
-  _hasGender: 0
-  _maleFemaleRatio: 50
+  _maleFemaleRatio: -1
   _baseGroup: 4
   rewardedBaseExp: 182
   _type1: 17
   _type2: 14
-  _eggGroup1: 14
-  _eggGroup2: 0
+  _eggGroup1: 13
+  _eggGroup2: -1
+  _hatchCounter: 5120
   _maxHitPoints: 60
   _attack: 75
   _defense: 85
   _specialAttack: 100
   _specialDefense: 85
   _speed: 115
-  firstAbility: 0
-  secondAbility: 0
-  hiddenAbility: 0
+  firstAbility: -1
+  secondAbility: -1
+  hiddenAbility: 4
   _learnableMoves: []
   learnableTMHMMoves: []
-  evolveLevelBased: []
-  evolutionsByStone: []
+  evolutions: []
+  wildPokemonHoldItems: []

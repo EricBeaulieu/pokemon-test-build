@@ -8,6 +8,7 @@ public class MedicineItem : ItemBase
     [Header("Medicine Attributes")]
     [SerializeField] int hpRecovered;
     [SerializeField] int ppRecovered;
+    public int PpRecovered { get { return ppRecovered; } }
     [SerializeField] bool multipleMoves;
     [SerializeField] ConditionID specificStatusRecovered;
     [SerializeField] bool cureAllStatus;
@@ -21,8 +22,6 @@ public class MedicineItem : ItemBase
 
     public override bool UseItem(Pokemon pokemon)
     {
-        bool itemUsed = false;
-
         if(pokemon.currentHitPoints <= 0)
         {
             if (revive > 0)
@@ -38,7 +37,7 @@ public class MedicineItem : ItemBase
                 if (pokemon.currentHitPoints < pokemon.maxHitPoints)
                 {
                     pokemon.UpdateHPRestored(hpRecovered);
-                    itemUsed = true;
+                    return true;
                 }
             }
 
@@ -50,7 +49,11 @@ public class MedicineItem : ItemBase
                     {
                         pokemon.moves[i].pP += ppRecovered;
                     }
-                    itemUsed = true;
+                    return true;
+                }
+                else
+                {
+                    return true;
                 }
                 //TO DO
                 // open up UI showing current moves that can be recovered and show one
@@ -61,7 +64,7 @@ public class MedicineItem : ItemBase
                 if (pokemon.status.Id == specificStatusRecovered)
                 {
                     pokemon.CureStatus();
-                    itemUsed = true;
+                    return true;
                 }
             }
 
@@ -70,16 +73,21 @@ public class MedicineItem : ItemBase
                 if (pokemon.status != null)
                 {
                     pokemon.CureStatus();
-                    itemUsed = true;
+                    return true;
                 }
             }
         }
 
-        return itemUsed;
+        return false;
     }
 
     public override bool UseItemOption()
     {
         return true;
+    }
+
+    public bool IsSingleItemPPRecovery()
+    {
+        return (multipleMoves == false && ppRecovered > 0);
     }
 }

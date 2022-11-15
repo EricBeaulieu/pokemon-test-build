@@ -13,33 +13,38 @@ MonoBehaviour:
   m_Name: 083 Farfetchd
   m_EditorClassIdentifier: 
   _pokedexNumber: 83
+  _form: 
   _pokedexDescription: "They live where reedy plants grow. Farfetch\u2019d are rarely
     seen, so it\u2019s thought their numbers are decreasing."
   _classification: 
-  _heightInMeters: 0
-  _weightInPounds: 0
-  _captureRate: 0
+  _baseHappiness: 50
+  _isBaby: 0
+  _isLegendary: 0
+  _isMythical: 0
+  _heightInMeters: 8
+  _weightInKg: 150
+  _captureRate: 45
   rewardedEffortValue:
-  - _statAttribute: 2
+  - _statAttribute: 1
     _statValue: 1
-  _hasGender: 1
-  _maleFemaleRatio: 50
+  _maleFemaleRatio: 4
   _baseGroup: 2
   rewardedBaseExp: 132
   _type1: 12
   _type2: 7
-  _eggGroup1: 6
-  _eggGroup2: 5
+  _eggGroup1: 5
+  _eggGroup2: 4
+  _hatchCounter: 5120
   _maxHitPoints: 52
   _attack: 90
   _defense: 55
   _specialAttack: 58
   _specialDefense: 62
   _speed: 60
-  firstAbility: 44
-  secondAbility: 39
-  hiddenAbility: 16
+  firstAbility: 69
+  secondAbility: 62
+  hiddenAbility: 31
   _learnableMoves: []
   learnableTMHMMoves: []
-  evolveLevelBased: []
-  evolutionsByStone: []
+  evolutions: []
+  wildPokemonHoldItems: []

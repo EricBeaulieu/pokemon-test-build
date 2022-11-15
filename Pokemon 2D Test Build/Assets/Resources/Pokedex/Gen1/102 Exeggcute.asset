@@ -13,32 +13,37 @@ MonoBehaviour:
   m_Name: 102 Exeggcute
   m_EditorClassIdentifier: 
   _pokedexNumber: 102
+  _form: 
   _pokedexDescription: Its six eggs use telepathy to communicate among themselves.
     It is believed to carry plant genes and the genes of other species.
   _classification: 
-  _heightInMeters: 0
-  _weightInPounds: 0
+  _baseHappiness: 50
+  _isBaby: 0
+  _isLegendary: 0
+  _isMythical: 0
+  _heightInMeters: 4
+  _weightInKg: 25
   _captureRate: 90
   rewardedEffortValue:
-  - _statAttribute: 3
+  - _statAttribute: 2
     _statValue: 1
-  _hasGender: 1
-  _maleFemaleRatio: 50
+  _maleFemaleRatio: 4
   _baseGroup: 4
   rewardedBaseExp: 65
   _type1: 9
   _type2: 14
-  _eggGroup1: 7
-  _eggGroup2: 0
+  _eggGroup1: 6
+  _eggGroup2: -1
+  _hatchCounter: 5120
   _maxHitPoints: 60
   _attack: 40
   _defense: 80
   _specialAttack: 60
   _specialDefense: 45
   _speed: 40
-  firstAbility: 9
-  secondAbility: 0
-  hiddenAbility: 0
+  firstAbility: 17
+  secondAbility: -1
+  hiddenAbility: -1
   _learnableMoves: []
   learnableTMHMMoves: []
   evolutions:

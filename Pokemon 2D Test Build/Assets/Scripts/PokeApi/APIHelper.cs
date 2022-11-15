@@ -19,6 +19,19 @@ namespace PokeApi
             return JsonUtility.FromJson<PokemonData>(json);
         }
 
+        public static PokemonData GetPokemonData(string pokemonName)
+        {
+            if (string.IsNullOrEmpty(pokemonName))
+            {
+                return null;
+            }
+            HttpWebRequest request = (HttpWebRequest)WebRequest.Create($"https://pokeapi.co/api/v2/pokemon/{pokemonName}");
+            HttpWebResponse response = (HttpWebResponse)request.GetResponse();
+            StreamReader reader = new StreamReader(response.GetResponseStream());
+            string json = reader.ReadToEnd();
+            return JsonUtility.FromJson<PokemonData>(json);
+        }
+
         public static PokemonSpecies GetPokemonSpecies(int idNumber)
         {
             if (idNumber <= 0)

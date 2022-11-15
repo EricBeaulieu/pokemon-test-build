@@ -13,32 +13,37 @@ MonoBehaviour:
   m_Name: 147 Dratini
   m_EditorClassIdentifier: 
   _pokedexNumber: 147
+  _form: 
   _pokedexDescription: It grows by molting repeatedly. Boots made from the tanned
     cast-off skin are a super luxury item.
   _classification: 
-  _heightInMeters: 0
-  _weightInPounds: 0
+  _baseHappiness: 35
+  _isBaby: 0
+  _isLegendary: 0
+  _isMythical: 0
+  _heightInMeters: 18
+  _weightInKg: 33
   _captureRate: 45
   rewardedEffortValue:
-  - _statAttribute: 2
+  - _statAttribute: 1
     _statValue: 1
-  _hasGender: 1
-  _maleFemaleRatio: 50
+  _maleFemaleRatio: 4
   _baseGroup: 4
   rewardedBaseExp: 60
   _type1: 2
   _type2: -1
-  _eggGroup1: 12
-  _eggGroup2: 3
+  _eggGroup1: 11
+  _eggGroup2: 2
+  _hatchCounter: 10240
   _maxHitPoints: 41
   _attack: 64
   _defense: 45
   _specialAttack: 50
   _specialDefense: 50
   _speed: 50
-  firstAbility: 0
-  secondAbility: 0
-  hiddenAbility: 50
+  firstAbility: -1
+  secondAbility: -1
+  hiddenAbility: 80
   _learnableMoves: []
   learnableTMHMMoves: []
   evolutions:

@@ -13,32 +13,37 @@ MonoBehaviour:
   m_Name: 009 Blastoise
   m_EditorClassIdentifier: 
   _pokedexNumber: 9
+  _form: 
   _pokedexDescription: Once it takes aim at its enemy, it blasts out water with even
     more force than a fire hose.
   _classification: 
-  _heightInMeters: 0
-  _weightInPounds: 0
+  _baseHappiness: 50
+  _isBaby: 0
+  _isLegendary: 0
+  _isMythical: 0
+  _heightInMeters: 16
+  _weightInKg: 855
   _captureRate: 45
   rewardedEffortValue:
-  - _statAttribute: 5
+  - _statAttribute: 4
     _statValue: 3
-  _hasGender: 1
-  _maleFemaleRatio: 87.5
+  _maleFemaleRatio: 1
   _baseGroup: 3
   rewardedBaseExp: 265
   _type1: 17
   _type2: -1
-  _eggGroup1: 0
-  _eggGroup2: 0
+  _eggGroup1: 10
+  _eggGroup2: 11
+  _hatchCounter: 5120
   _maxHitPoints: 79
   _attack: 83
   _defense: 100
   _specialAttack: 85
   _specialDefense: 105
   _speed: 78
-  firstAbility: 34
-  secondAbility: 0
-  hiddenAbility: 0
+  firstAbility: 132
+  secondAbility: -1
+  hiddenAbility: 98
   _learnableMoves:
   - _moveBase: {fileID: 11400000, guid: 7904a62aca223cc499b7b099535a136a, type: 2}
     _levelLeanred: 0
@@ -51,5 +56,5 @@ MonoBehaviour:
   - _moveBase: {fileID: 11400000, guid: bd94e494d56c1f149a394146dc511248, type: 2}
     _levelLeanred: 7
   learnableTMHMMoves: []
-  evolveLevelBased: []
-  evolutionsByStone: []
+  evolutions: []
+  wildPokemonHoldItems: []

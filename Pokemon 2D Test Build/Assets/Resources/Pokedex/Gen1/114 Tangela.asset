@@ -13,33 +13,38 @@ MonoBehaviour:
   m_Name: 114 Tangela
   m_EditorClassIdentifier: 
   _pokedexNumber: 114
+  _form: 
   _pokedexDescription: Its identity is obscured by masses of thick blue vines. The
     vines are said to never stop growing.
   _classification: 
-  _heightInMeters: 0
-  _weightInPounds: 0
+  _baseHappiness: 50
+  _isBaby: 0
+  _isLegendary: 0
+  _isMythical: 0
+  _heightInMeters: 10
+  _weightInKg: 350
   _captureRate: 45
   rewardedEffortValue:
-  - _statAttribute: 3
+  - _statAttribute: 2
     _statValue: 1
-  _hasGender: 1
-  _maleFemaleRatio: 50
+  _maleFemaleRatio: 4
   _baseGroup: 2
   rewardedBaseExp: 87
   _type1: 9
   _type2: -1
-  _eggGroup1: 7
-  _eggGroup2: 0
+  _eggGroup1: 6
+  _eggGroup2: -1
+  _hatchCounter: 5120
   _maxHitPoints: 65
   _attack: 55
   _defense: 115
   _specialAttack: 100
   _specialDefense: 40
   _speed: 60
-  firstAbility: 9
-  secondAbility: 45
-  hiddenAbility: 0
+  firstAbility: 17
+  secondAbility: 71
+  hiddenAbility: -1
   _learnableMoves: []
   learnableTMHMMoves: []
-  evolveLevelBased: []
-  evolutionsByStone: []
+  evolutions: []
+  wildPokemonHoldItems: []

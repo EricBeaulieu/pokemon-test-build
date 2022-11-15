@@ -13,33 +13,38 @@ MonoBehaviour:
   m_Name: 129 Magikarp
   m_EditorClassIdentifier: 
   _pokedexNumber: 129
+  _form: 
   _pokedexDescription: "Although weak and helpless, this Pok\xE9mon is incredibly
     fertile. They exist in such multitudes, you\u2019ll soon grow tired of seeing
     them."
   _classification: 
-  _heightInMeters: 0
-  _weightInPounds: 0
+  _baseHappiness: 50
+  _isBaby: 0
+  _isLegendary: 0
+  _isMythical: 0
+  _heightInMeters: 9
+  _weightInKg: 100
   _captureRate: 255
   rewardedEffortValue:
-  - _statAttribute: 6
+  - _statAttribute: 5
     _statValue: 1
-  _hasGender: 1
-  _maleFemaleRatio: 50
+  _maleFemaleRatio: 4
   _baseGroup: 4
   rewardedBaseExp: 40
   _type1: 17
   _type2: -1
-  _eggGroup1: 13
-  _eggGroup2: 3
+  _eggGroup1: 12
+  _eggGroup2: 2
+  _hatchCounter: 1280
   _maxHitPoints: 20
   _attack: 10
   _defense: 55
   _specialAttack: 15
   _specialDefense: 20
   _speed: 80
-  firstAbility: 94
-  secondAbility: 0
-  hiddenAbility: 67
+  firstAbility: 127
+  secondAbility: -1
+  hiddenAbility: 99
   _learnableMoves: []
   learnableTMHMMoves: []
   evolutions:

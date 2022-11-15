@@ -13,32 +13,37 @@ MonoBehaviour:
   m_Name: 039 Jigglypuff
   m_EditorClassIdentifier: 
   _pokedexNumber: 39
+  _form: 
   _pokedexDescription: "It hugely inflates its stomach and sings a mysterious melody.
     If you hear this melody, you\u2019ll become sleepy right away."
   _classification: 
-  _heightInMeters: 0
-  _weightInPounds: 0
+  _baseHappiness: 50
+  _isBaby: 0
+  _isLegendary: 0
+  _isMythical: 0
+  _heightInMeters: 5
+  _weightInKg: 55
   _captureRate: 170
   rewardedEffortValue:
-  - _statAttribute: 1
+  - _statAttribute: 0
     _statValue: 2
-  _hasGender: 1
-  _maleFemaleRatio: 24.6
+  _maleFemaleRatio: 6
   _baseGroup: 1
   rewardedBaseExp: 95
   _type1: 12
   _type2: 4
-  _eggGroup1: 4
-  _eggGroup2: 0
+  _eggGroup1: 3
+  _eggGroup2: -1
+  _hatchCounter: 2560
   _maxHitPoints: 115
   _attack: 45
   _defense: 20
   _specialAttack: 45
   _specialDefense: 25
   _speed: 20
-  firstAbility: 11
-  secondAbility: 10
-  hiddenAbility: 0
+  firstAbility: 26
+  secondAbility: 21
+  hiddenAbility: -1
   _learnableMoves:
   - _moveBase: {fileID: 11400000, guid: 3cee35cefcca6c94ab2fb4099742c7e2, type: 2}
     _levelLeanred: 0

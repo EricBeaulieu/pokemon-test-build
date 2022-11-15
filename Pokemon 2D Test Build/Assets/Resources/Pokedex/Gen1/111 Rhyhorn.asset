@@ -13,32 +13,37 @@ MonoBehaviour:
   m_Name: 111 Rhyhorn
   m_EditorClassIdentifier: 
   _pokedexNumber: 111
+  _form: 
   _pokedexDescription: "A Pok\xE9mon with a one-track mind. Once it charges, it won\u2019t
     stop running until it falls asleep."
   _classification: 
-  _heightInMeters: 0
-  _weightInPounds: 0
+  _baseHappiness: 50
+  _isBaby: 0
+  _isLegendary: 0
+  _isMythical: 0
+  _heightInMeters: 10
+  _weightInKg: 1150
   _captureRate: 120
   rewardedEffortValue:
-  - _statAttribute: 3
+  - _statAttribute: 2
     _statValue: 1
-  _hasGender: 1
-  _maleFemaleRatio: 50
+  _maleFemaleRatio: 4
   _baseGroup: 4
   rewardedBaseExp: 69
   _type1: 10
   _type2: 15
-  _eggGroup1: 11
-  _eggGroup2: 5
+  _eggGroup1: 10
+  _eggGroup2: 4
+  _hatchCounter: 5120
   _maxHitPoints: 80
   _attack: 85
   _defense: 95
   _specialAttack: 30
   _specialDefense: 30
   _speed: 25
-  firstAbility: 47
-  secondAbility: 70
-  hiddenAbility: 68
+  firstAbility: 74
+  secondAbility: 103
+  hiddenAbility: 100
   _learnableMoves: []
   learnableTMHMMoves: []
   evolutions:
