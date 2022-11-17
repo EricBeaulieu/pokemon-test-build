@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: Shadow Bone
   m_EditorClassIdentifier: 
   moveName: Shadow Bone
-  moveDescription: 
+  moveDescription: The user attacks by beating the target with a bone that contains
+    a spirit. This may also lower the target's Defense stat.
   elementType: 8
   moveType: 0
   moveEffects:
@@ -57,3 +58,6 @@ MonoBehaviour:
   recoilPercentage: 0
   hpRecovered: 0
   leavesTargetWith1HP: 0
+  stealsTargetsItem: 0
+  bypassesTargetsStatBoosts: 0
+  oneHitKO: 0

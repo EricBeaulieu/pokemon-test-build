@@ -183,16 +183,6 @@ public class OrganizePokemonArt : EditorWindow
                 {
                     differentFormVariationsTotal = 11;
                     totalArtSlices = 11 * differentForms.Length;
-                    //if (PokemonNameList.GenderExclusive(pokedexNumber) == true)
-                    //{
-                    //    differentFormVariationsTotal = 8;
-                    //    totalArtSlices = (differentFormVariationsTotal * differentForms.Length) + 3;
-                    //}
-                    //else
-                    //{
-                    //    differentFormVariationsTotal = 11;
-                    //    totalArtSlices = 11 * differentForms.Length;
-                    //}
                 }
                 else
                 {
@@ -213,7 +203,10 @@ public class OrganizePokemonArt : EditorWindow
                 {
                     if (string.IsNullOrEmpty(differentForms[differentFormVariation]) == false)
                     {
-                        spriteName += $"{differentForms[differentFormVariation]}_";
+                        if((PokemonNameList.GenderExclusive(pokedexNumber) == true && (currentVariant % differentFormVariationsTotal) >= 8) == false)
+                        {
+                            spriteName += $"{differentForms[differentFormVariation]}_";
+                        }
                     }
                 }
 

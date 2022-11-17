@@ -1535,10 +1535,7 @@ public class BattleSystem : CoreSystem
         if (sourceUnit.pokemon.currentHitPoints <= 0)
         {
             yield return PokemonHasFainted(sourceUnit);
-            //CheckForBattleOver(sourceUnit);
         }
-
-        //CheckForBattleOver(targetUnit);
     }
 
     IEnumerator RunMoveEffects(MoveEffects effects, BattleUnit source, BattleUnit target, MoveBase currentMove,MoveTarget moveTarget, bool wasSecondaryEffect = false)
@@ -2392,12 +2389,6 @@ public class BattleSystem : CoreSystem
 
             if (targetBattleUnit.isPlayerPokemon == false)
             {
-                //if(playerBattleUnit.pokemon.currentHitPoints <= 0 && targetBattleUnit.pokemonHasFainted == false)
-                //{
-                //    yield return dialogSystem.TypeDialog($"{playerBattleUnit.pokemon.currentName} has fainted");
-                //    playerBattleUnit.PlayFaintAnimation();
-                //}
-
                 int expYield = targetBattleUnit.pokemon.pokemonBase.RewardedExperienceYield;
                 int level = targetBattleUnit.pokemon.currentLevel;
                 float trainerBonus = (trainerController != null) ? 1.5f : 1;
@@ -2455,12 +2446,6 @@ public class BattleSystem : CoreSystem
     {
         if (faintedUnit.isPlayerPokemon)
         {
-            //if (enemyBattleUnit.pokemon.currentHitPoints <= 0 && enemyBattleUnit.pokemonHasFainted == false)
-            //{
-            //    yield return dialogSystem.TypeDialog($"{enemyBattleUnit.pokemon.currentName} has fainted");
-            //    enemyBattleUnit.PlayFaintAnimation();
-            //}
-
             Pokemon nextPokemon = playerController.pokemonParty.GetFirstHealthyPokemon();
             if (nextPokemon != null)
             {
@@ -2479,11 +2464,6 @@ public class BattleSystem : CoreSystem
         {
             if(trainerController != null)
             {
-                //if (playerBattleUnit.pokemon.currentHitPoints <= 0 && playerBattleUnit.pokemonHasFainted == false)
-                //{
-                //    yield return dialogSystem.TypeDialog($"{playerBattleUnit.pokemon.currentName} has fainted");
-                //    playerBattleUnit.PlayFaintAnimation();
-                //}
                 Pokemon nextPokemon = trainerController.pokemonParty.GetFirstHealthyPokemon();
                 if (nextPokemon != null)
                 {

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public enum DayTimeSpecific { NA, Day, Night }
-
+public enum GenderSpecific { NA, Male, Female }
 [System.Serializable]
 public class EvolutionBase
 {
@@ -16,6 +16,7 @@ public class EvolutionBase
     [Tooltip("This will evolve the pokemon if theyre holding the specified item upon leveling up")]
     [SerializeField] ItemBase specifiedHoldItem;
     [SerializeField] DayTimeSpecific timeSpecific = DayTimeSpecific.NA;
+    [SerializeField] GenderSpecific genderSpecific = GenderSpecific.NA;
     [SerializeField] MoveBase specifiedMove;
 
     public bool CanEvolve(Pokemon pokemon, EvolutionStoneBase currentStone)
@@ -32,7 +33,7 @@ public class EvolutionBase
 
     public bool CanEvolve(Pokemon pokemon)
     {
-        if(evolvedPokemon == null)
+        if(evolvedPokemon == null)//This has been changed to go through everything and if it hits the end then always put true
         {
             Debug.Log($"{pokemon.pokemonBase.name} pokemon base has a null reference for evolved pokemon");
             return false;
@@ -45,29 +46,48 @@ public class EvolutionBase
 
         if(specifiedHoldItem != null)
         {
-            if(levelRequirement > 0)
+            if(specifiedHoldItem != pokemon.GetCurrentItem)
             {
-                if(specifiedHoldItem == pokemon.GetCurrentItem)
-                {
-                    return (pokemon.currentLevel >= levelRequirement);
-                }
                 return false;
             }
-            else
-            {
-                if (specifiedHoldItem == pokemon.GetCurrentItem)
-                {
-                    return true;
-                }
-            }
+        }
+
+        if(pokemon.currentLevel < levelRequirement)
+        {
             return false;
         }
 
-        if(levelRequirement > 0)
+        if(genderSpecific != GenderSpecific.NA)
         {
-            return (pokemon.currentLevel >= levelRequirement);
+            if(pokemon.gender.HasValue == false)
+            {
+                return false;
+            }
+
+            if(genderSpecific == GenderSpecific.Male)
+            {
+                if(pokemon.gender.Value == false)//is female
+                {
+                    return false;
+                }
+            }
+            else //is it female required
+            {
+                if (pokemon.gender.Value == true)
+                {
+                    return false;
+                }
+            }
         }
-        return false;
+
+        if(specifiedMove != null)
+        {
+            if (pokemon.moves.Exists(x => x.moveBase == specifiedMove) == false)
+            {
+                return false;
+            }
+        }
+        return true;
     }
 
     public PokemonBase NewPokemonEvolution(Pokemon evolvingPokemon) 

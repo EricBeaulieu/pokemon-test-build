@@ -15,6 +15,11 @@ public class Pokemon {
     [SerializeField] bool _isShiny;
     public bool isShiny { get { return _isShiny; } private set { _isShiny = value; } }
     [SerializeField] bool _gender;
+    /// <summary>
+    /// null = genderless
+    /// true = male
+    /// false = female
+    /// </summary>
     public bool? gender { get { if (pokemonBase.MaleFemaleGenderRatio < 0) { return null; } return _gender; }  
         private set { if (value.HasValue) { _gender = value.Value;  }else _gender = false; } }
     [SerializeField] NatureBase nature;
@@ -1163,7 +1168,11 @@ public class Pokemon {
         currentHeldItem = null;
     }
 
-    public void NewEvolution(PokemonBase newEvolution)
+    /// <summary>
+    /// this is for pokemon that change forms, New Evolutions
+    /// </summary>
+    /// <param name="newEvolution"></param>
+    public void UpdatePokemonBase(PokemonBase newEvolution)
     {
         if(currentName == pokemonBase.GetPokedexName())
         {

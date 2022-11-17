@@ -16,6 +16,6 @@ public class Intimidate : AbilityBase
         {
             return null;
         }
-        return new StatBoost(StatAttribute.Attack,1);
+        return new StatBoost(StatAttribute.Attack,-1);
     }
 }

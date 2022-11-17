@@ -1,0 +1,67 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1bad4d665bd6f7f438fdb0d0edd2ee35, type: 3}
+  m_Name: 412 Burmy-Plant
+  m_EditorClassIdentifier: 
+  _pokedexNumber: 412
+  _form: Plant
+  _pokedexDescription: "If its cloak is even slightly damaged, Burmy will immediately
+    repair it with whatever is close at hand. The Pok\xE9mon within the cloak is
+    scrawny and vulnerable to the cold."
+  _classification: 
+  _baseHappiness: 70
+  _isBaby: 0
+  _isLegendary: 0
+  _isMythical: 0
+  _heightInMeters: 2
+  _weightInKg: 34
+  _captureRate: 120
+  rewardedEffortValue:
+  - _statAttribute: 4
+    _statValue: 1
+  _maleFemaleRatio: 4
+  _baseGroup: 2
+  rewardedBaseExp: 45
+  _type1: 0
+  _type2: -1
+  _eggGroup1: 0
+  _eggGroup2: -1
+  _hatchCounter: 3840
+  _maxHitPoints: 40
+  _attack: 29
+  _defense: 45
+  _specialAttack: 29
+  _specialDefense: 45
+  _speed: 36
+  firstAbility: 0
+  secondAbility: -1
+  hiddenAbility: -1
+  _learnableMoves: []
+  learnableTMHMMoves: []
+  evolutions:
+  - evolvedPokemon: {fileID: 11400000, guid: fb7359c40188b7247b173cee38650fbe, type: 2}
+    levelRequirement: 20
+    maxFriendShipRequired: 0
+    evolutionStone: {fileID: 0}
+    specifiedHoldItem: {fileID: 0}
+    timeSpecific: 0
+    genderSpecific: 2
+    specifiedMove: {fileID: 0}
+  - evolvedPokemon: {fileID: 11400000, guid: b848c573455bd414ea45e76a51b7b901, type: 2}
+    levelRequirement: 20
+    maxFriendShipRequired: 0
+    evolutionStone: {fileID: 0}
+    specifiedHoldItem: {fileID: 0}
+    timeSpecific: 0
+    genderSpecific: 1
+    specifiedMove: {fileID: 0}
+  wildPokemonHoldItems: []

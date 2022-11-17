@@ -11,6 +11,8 @@ public class SpriteAtlas : MonoBehaviour
     [SerializeField] Texture2D gen2;
     [SerializeField] Texture2D unown;
     [SerializeField] Texture2D gen3;
+    [SerializeField] Texture2D gen4;
+    [SerializeField] Texture2D arceus;
     [Header("Standard Battle Sprites")]
     [SerializeField] Texture2D gen1Overworld;
     [SerializeField] Texture2D gen2Overworld;
@@ -24,6 +26,8 @@ public class SpriteAtlas : MonoBehaviour
         AddTextureSpritesToList(gen2);
         AddTextureSpritesToList(unown);
         AddTextureSpritesToList(gen3);
+        AddTextureSpritesToList(gen4);
+        AddTextureSpritesToList(arceus);
         AddTextureSpritesToList(gen1Overworld);
         AddTextureSpritesToList(gen2Overworld);
 

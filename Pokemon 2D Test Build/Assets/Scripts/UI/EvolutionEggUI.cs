@@ -80,12 +80,12 @@ public class EvolutionEggUI : MonoBehaviour
                 {
                     Pokemon Shedinja = new Pokemon(pokemon.GetSaveData());
                     Shedinja.ItemUsed();
-                    Shedinja.NewEvolution(Resources.Load<PokemonBase>("Pokedex/Gen3/292 Shedinja"));
+                    Shedinja.UpdatePokemonBase(Resources.Load<PokemonBase>("Pokedex/Gen3/292 Shedinja"));
                     playerParty.AddGiftPokemon(Shedinja);
                 }
             }
         }
-        pokemon.NewEvolution(newEvolution);
+        pokemon.UpdatePokemonBase(newEvolution);
 
         newMovesLearned.Clear();
         newMovesLearned.AddRange(pokemon.GetLearnableMoveUponEvolution());
