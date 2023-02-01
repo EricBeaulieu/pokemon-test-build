@@ -1,6 +1,6 @@
 Using pre-set license
 Built from '2020.3/staging' branch; Version is '2020.3.22f1 (e1a7f79fd887) revision 14788599'; Using compiler version '192528614'; Build Type 'Release'
-OS: 'Windows 10 Home; OS build 22000.1219; Version 2009; 64bit' Language: 'en' Physical Memory: 16230 MB
+OS: 'Windows 10 Home; OS build 22000.1455; Version 2009; 64bit' Language: 'en' Physical Memory: 16230 MB
 BatchMode: 1, IsHumanControllingUs: 0, StartBugReporterOnCrash: 0, Is64bit: 1, IsPro: 0
 
 COMMAND LINE ARGUMENTS:
@@ -15,11 +15,11 @@ D:/GitHub/pokemon-test-build/Pokemon 2D Test Build
 -logFile
 Logs/AssetImportWorker0.log
 -srvPort
-60249
+55799
 Successfully changed project path to: D:/GitHub/pokemon-test-build/Pokemon 2D Test Build
 D:/GitHub/pokemon-test-build/Pokemon 2D Test Build
 Using Asset Import Pipeline V2.
-Refreshing native plugins compatible for Editor in 152.56 ms, found 2 plugins.
+Refreshing native plugins compatible for Editor in 148.98 ms, found 2 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Initialize engine version: 2020.3.22f1 (e1a7f79fd887)
 [Subsystems] Discovering subsystems at path C:/Program Files/Unity/Hub/Editor/2020.3.22f1/Editor/Data/Resources/UnitySubsystems
@@ -35,89 +35,89 @@ Initialize mono
 Mono path[0] = 'C:/Program Files/Unity/Hub/Editor/2020.3.22f1/Editor/Data/Managed'
 Mono path[1] = 'C:/Program Files/Unity/Hub/Editor/2020.3.22f1/Editor/Data/MonoBleedingEdge/lib/mono/unityjit'
 Mono config path = 'C:/Program Files/Unity/Hub/Editor/2020.3.22f1/Editor/Data/MonoBleedingEdge/etc'
-Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56488
+Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56892
 Begin MonoManager ReloadAssembly
 Registering precompiled unity dll's ...
 Register platform support module: C:/Program Files/Unity/Hub/Editor/2020.3.22f1/Editor/Data/PlaybackEngines/WindowsStandaloneSupport/UnityEditor.WindowsStandalone.Extensions.dll
-Registered in 0.003060 seconds.
+Registered in 0.001857 seconds.
 Native extension for WindowsStandalone target not found
-Refreshing native plugins compatible for Editor in 131.06 ms, found 2 plugins.
+Refreshing native plugins compatible for Editor in 154.25 ms, found 2 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Mono: successfully reloaded assembly
-- Completed reload, in  1.594 seconds
+- Completed reload, in  1.561 seconds
 Domain Reload Profiling:
-	ReloadAssembly (1594ms)
-		BeginReloadAssembly (54ms)
+	ReloadAssembly (1562ms)
+		BeginReloadAssembly (56ms)
 			ExecutionOrderSort (0ms)
 			DisableScriptedObjects (0ms)
 			BackupInstance (0ms)
 			ReleaseScriptingObjects (0ms)
 			CreateAndSetChildDomain (1ms)
-		EndReloadAssembly (553ms)
-			LoadAssemblies (52ms)
+		EndReloadAssembly (647ms)
+			LoadAssemblies (54ms)
 			RebuildTransferFunctionScriptingTraits (0ms)
-			SetupTypeCache (147ms)
+			SetupTypeCache (173ms)
 			ReleaseScriptCaches (0ms)
-			RebuildScriptCaches (37ms)
-			SetupLoadedEditorAssemblies (268ms)
+			RebuildScriptCaches (44ms)
+			SetupLoadedEditorAssemblies (312ms)
 				LogAssemblyErrors (0ms)
-				InitializePlatformSupportModulesInManaged (4ms)
+				InitializePlatformSupportModulesInManaged (5ms)
 				SetLoadedEditorAssemblies (0ms)
-				RefreshPlugins (131ms)
-				BeforeProcessingInitializeOnLoad (17ms)
-				ProcessInitializeOnLoadAttributes (85ms)
-				ProcessInitializeOnLoadMethodAttributes (29ms)
+				RefreshPlugins (154ms)
+				BeforeProcessingInitializeOnLoad (20ms)
+				ProcessInitializeOnLoadAttributes (99ms)
+				ProcessInitializeOnLoadMethodAttributes (34ms)
 				AfterProcessingInitializeOnLoad (0ms)
 				EditorAssembliesLoaded (0ms)
 			ExecutionOrderSort2 (0ms)
 			AwakeInstancesAfterBackupRestoration (0ms)
 Platform modules already initialized, skipping
 Registering precompiled user dll's ...
-Registered in 0.006482 seconds.
+Registered in 0.007641 seconds.
 Begin MonoManager ReloadAssembly
 Native extension for WindowsStandalone target not found
-Refreshing native plugins compatible for Editor in 1.55 ms, found 2 plugins.
+Refreshing native plugins compatible for Editor in 1.62 ms, found 2 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Mono: successfully reloaded assembly
-- Completed reload, in  1.213 seconds
+- Completed reload, in  1.240 seconds
 Domain Reload Profiling:
-	ReloadAssembly (1214ms)
-		BeginReloadAssembly (145ms)
+	ReloadAssembly (1241ms)
+		BeginReloadAssembly (149ms)
 			ExecutionOrderSort (0ms)
-			DisableScriptedObjects (5ms)
+			DisableScriptedObjects (6ms)
 			BackupInstance (0ms)
 			ReleaseScriptingObjects (0ms)
-			CreateAndSetChildDomain (19ms)
-		EndReloadAssembly (1009ms)
-			LoadAssemblies (100ms)
+			CreateAndSetChildDomain (20ms)
+		EndReloadAssembly (1026ms)
+			LoadAssemblies (101ms)
 			RebuildTransferFunctionScriptingTraits (0ms)
-			SetupTypeCache (297ms)
-			ReleaseScriptCaches (0ms)
-			RebuildScriptCaches (62ms)
-			SetupLoadedEditorAssemblies (440ms)
+			SetupTypeCache (309ms)
+			ReleaseScriptCaches (1ms)
+			RebuildScriptCaches (63ms)
+			SetupLoadedEditorAssemblies (449ms)
 				LogAssemblyErrors (0ms)
-				InitializePlatformSupportModulesInManaged (6ms)
+				InitializePlatformSupportModulesInManaged (5ms)
 				SetLoadedEditorAssemblies (0ms)
 				RefreshPlugins (2ms)
-				BeforeProcessingInitializeOnLoad (107ms)
-				ProcessInitializeOnLoadAttributes (264ms)
-				ProcessInitializeOnLoadMethodAttributes (55ms)
+				BeforeProcessingInitializeOnLoad (111ms)
+				ProcessInitializeOnLoadAttributes (273ms)
+				ProcessInitializeOnLoadMethodAttributes (52ms)
 				AfterProcessingInitializeOnLoad (6ms)
 				EditorAssembliesLoaded (0ms)
 			ExecutionOrderSort2 (0ms)
-			AwakeInstancesAfterBackupRestoration (8ms)
+			AwakeInstancesAfterBackupRestoration (9ms)
 Platform modules already initialized, skipping
 ========================================================================
 Worker process is ready to serve import requests
-Launched and connected shader compiler UnityShaderCompiler.exe after 0.05 seconds
-Refreshing native plugins compatible for Editor in 1.56 ms, found 2 plugins.
+Launched and connected shader compiler UnityShaderCompiler.exe after 0.10 seconds
+Refreshing native plugins compatible for Editor in 1.80 ms, found 2 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Unloading 2685 Unused Serialized files (Serialized files now loaded: 0)
 System memory in use before: 106.6 MB.
 System memory in use after: 106.8 MB.
 
 Unloading 57 unused Assets to reduce memory usage. Loaded Objects now: 3092.
-Total: 7.918800 ms (FindLiveObjects: 0.281600 ms CreateObjectMapping: 0.120800 ms MarkObjects: 7.474500 ms  DeleteObjects: 0.040600 ms)
+Total: 7.734900 ms (FindLiveObjects: 0.263700 ms CreateObjectMapping: 0.117600 ms MarkObjects: 7.310800 ms  DeleteObjects: 0.041400 ms)
 
 AssetImportParameters requested are different than current active one (requested -> active):
   custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
@@ -132,1059 +132,53 @@ AssetImportParameters requested are different than current active one (requested
   custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
 ========================================================================
 Received Import Request.
-  path: Assets/Resources/Moveset/Physical/Shadow Bone.asset
-  artifactKey: Guid(deb3dc6f2a8a5874ba6ad2c418cadc66) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Resources/Moveset/Physical/Shadow Bone.asset using Guid(deb3dc6f2a8a5874ba6ad2c418cadc66) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '30c75cc4efa85379473960970d799c58') in 0.071004 seconds 
-  Import took 0.102880 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 131.163757 seconds.
-  path: Assets/Scripts/Data/Abilitys/List/Intimidate.cs
-  artifactKey: Guid(73aaabd6e10b01c40b4082d19057cd70) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Scripts/Data/Abilitys/List/Intimidate.cs using Guid(73aaabd6e10b01c40b4082d19057cd70) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'dceabfa444054845aaafa147257a1945') in 0.022114 seconds 
-  Import took 0.040565 seconds .
-
-========================================================================
-Received Prepare
-Registering precompiled user dll's ...
-Registered in 0.015189 seconds.
-Begin MonoManager ReloadAssembly
-Native extension for WindowsStandalone target not found
-Refreshing native plugins compatible for Editor in 2.56 ms, found 2 plugins.
-Preloading 0 native plugins for Editor in 0.00 ms.
-Mono: successfully reloaded assembly
-- Completed reload, in  1.238 seconds
-Domain Reload Profiling:
-	ReloadAssembly (1238ms)
-		BeginReloadAssembly (135ms)
-			ExecutionOrderSort (0ms)
-			DisableScriptedObjects (8ms)
-			BackupInstance (0ms)
-			ReleaseScriptingObjects (0ms)
-			CreateAndSetChildDomain (42ms)
-		EndReloadAssembly (1035ms)
-			LoadAssemblies (114ms)
-			RebuildTransferFunctionScriptingTraits (0ms)
-			SetupTypeCache (311ms)
-			ReleaseScriptCaches (2ms)
-			RebuildScriptCaches (67ms)
-			SetupLoadedEditorAssemblies (438ms)
-				LogAssemblyErrors (0ms)
-				InitializePlatformSupportModulesInManaged (7ms)
-				SetLoadedEditorAssemblies (1ms)
-				RefreshPlugins (3ms)
-				BeforeProcessingInitializeOnLoad (109ms)
-				ProcessInitializeOnLoadAttributes (263ms)
-				ProcessInitializeOnLoadMethodAttributes (49ms)
-				AfterProcessingInitializeOnLoad (6ms)
-				EditorAssembliesLoaded (0ms)
-			ExecutionOrderSort2 (0ms)
-			AwakeInstancesAfterBackupRestoration (7ms)
-Platform modules already initialized, skipping
-Refreshing native plugins compatible for Editor in 1.84 ms, found 2 plugins.
-Preloading 0 native plugins for Editor in 0.00 ms.
-Unloading 2678 Unused Serialized files (Serialized files now loaded: 0)
-System memory in use before: 106.4 MB.
-System memory in use after: 106.6 MB.
-
-Unloading 49 unused Assets to reduce memory usage. Loaded Objects now: 3094.
-Total: 7.519000 ms (FindLiveObjects: 0.221700 ms CreateObjectMapping: 0.130600 ms MarkObjects: 7.128300 ms  DeleteObjects: 0.037000 ms)
-
-AssetImportParameters requested are different than current active one (requested -> active):
-  custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
-  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
-  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
-  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
-  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
-  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
-  custom:video-codec-MediaFoundation-h265: 746d11721c4dcdbdad8f713fa42b33f4 -> 
-  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
-  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
-  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
-========================================================================
-Received Prepare
-Registering precompiled user dll's ...
-Registered in 0.076692 seconds.
-Begin MonoManager ReloadAssembly
-Native extension for WindowsStandalone target not found
-Refreshing native plugins compatible for Editor in 1.90 ms, found 2 plugins.
-Preloading 0 native plugins for Editor in 0.00 ms.
-Mono: successfully reloaded assembly
-- Completed reload, in  1.159 seconds
-Domain Reload Profiling:
-	ReloadAssembly (1160ms)
-		BeginReloadAssembly (129ms)
-			ExecutionOrderSort (0ms)
-			DisableScriptedObjects (7ms)
-			BackupInstance (0ms)
-			ReleaseScriptingObjects (0ms)
-			CreateAndSetChildDomain (48ms)
-		EndReloadAssembly (962ms)
-			LoadAssemblies (96ms)
-			RebuildTransferFunctionScriptingTraits (0ms)
-			SetupTypeCache (292ms)
-			ReleaseScriptCaches (1ms)
-			RebuildScriptCaches (60ms)
-			SetupLoadedEditorAssemblies (409ms)
-				LogAssemblyErrors (0ms)
-				InitializePlatformSupportModulesInManaged (6ms)
-				SetLoadedEditorAssemblies (0ms)
-				RefreshPlugins (2ms)
-				BeforeProcessingInitializeOnLoad (105ms)
-				ProcessInitializeOnLoadAttributes (245ms)
-				ProcessInitializeOnLoadMethodAttributes (44ms)
-				AfterProcessingInitializeOnLoad (6ms)
-				EditorAssembliesLoaded (0ms)
-			ExecutionOrderSort2 (0ms)
-			AwakeInstancesAfterBackupRestoration (9ms)
-Platform modules already initialized, skipping
-Refreshing native plugins compatible for Editor in 1.60 ms, found 2 plugins.
-Preloading 0 native plugins for Editor in 0.00 ms.
-Unloading 2678 Unused Serialized files (Serialized files now loaded: 0)
-System memory in use before: 106.4 MB.
-System memory in use after: 106.7 MB.
-
-Unloading 49 unused Assets to reduce memory usage. Loaded Objects now: 3096.
-Total: 8.085200 ms (FindLiveObjects: 0.247700 ms CreateObjectMapping: 0.112400 ms MarkObjects: 7.689600 ms  DeleteObjects: 0.034100 ms)
-
-AssetImportParameters requested are different than current active one (requested -> active):
-  custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
-  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
-  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
-  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
-  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
-  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
-  custom:video-codec-MediaFoundation-h265: 746d11721c4dcdbdad8f713fa42b33f4 -> 
-  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
-  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
-  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
-========================================================================
-Received Import Request.
-  Time since last request: 886.538499 seconds.
-  path: Assets/Resources/Pokedex/Gen4/411 Bastiodon.asset
-  artifactKey: Guid(8a7467e4cf24dc643bb730aa28edaa62) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Resources/Pokedex/Gen4/411 Bastiodon.asset using Guid(8a7467e4cf24dc643bb730aa28edaa62) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '4ca96e519fc7848ffb75088ab81e1373') in 0.028978 seconds 
-  Import took 0.069111 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 175.176819 seconds.
-  path: Assets/Resources/Pokedex/Gen4/412 Burmy 1.asset
-  artifactKey: Guid(98dd62f836bfa9e49957e9cbcf17ba1b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Resources/Pokedex/Gen4/412 Burmy 1.asset using Guid(98dd62f836bfa9e49957e9cbcf17ba1b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'c96bf52ce1b7bcfd67acce70dc5c82ca') in 0.006955 seconds 
-  Import took 0.037300 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.659260 seconds.
-  path: Assets/Resources/Pokedex/Gen4/412 Burmy 2.asset
-  artifactKey: Guid(b72530cca4482324caf3354d937817ea) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Resources/Pokedex/Gen4/412 Burmy 2.asset using Guid(b72530cca4482324caf3354d937817ea) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '641fec78019688f9394460032f35c609') in 0.007277 seconds 
-  Import took 0.050403 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 7.719905 seconds.
-  path: Assets/Resources/Pokedex/Gen4/412 Burmy-Plant.asset
-  artifactKey: Guid(8098967842671404bbc6210cc0a9f64d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Resources/Pokedex/Gen4/412 Burmy-Plant.asset using Guid(8098967842671404bbc6210cc0a9f64d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '485552f18e7c4c99e20663f3fd14dd75') in 0.006229 seconds 
-  Import took 0.035659 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 6.679581 seconds.
-  path: Assets/Resources/Pokedex/Gen4/412 Burmy-Sand.asset
-  artifactKey: Guid(b72530cca4482324caf3354d937817ea) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Resources/Pokedex/Gen4/412 Burmy-Sand.asset using Guid(b72530cca4482324caf3354d937817ea) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'aa912123cf0fb7b3812b423f9c728718') in 0.005577 seconds 
-  Import took 0.040559 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 1.801970 seconds.
-  path: Assets/Resources/Pokedex/Gen4/413 Wormadam-Sandy.asset
-  artifactKey: Guid(d94f96a7c4beeb7429403d4ade77f3df) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Resources/Pokedex/Gen4/413 Wormadam-Sandy.asset using Guid(d94f96a7c4beeb7429403d4ade77f3df) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '6585c366cc71832c2144870ca9782e8c') in 0.038129 seconds 
-  Import took 0.067997 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 1.011610 seconds.
-  path: Assets/Resources/Pokedex/Gen4/413 Wormadam-Plant.asset
-  artifactKey: Guid(fb7359c40188b7247b173cee38650fbe) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Resources/Pokedex/Gen4/413 Wormadam-Plant.asset using Guid(fb7359c40188b7247b173cee38650fbe) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '4f664dae1774004ce9137a69b7cf1c89') in 0.007152 seconds 
-  Import took 0.117950 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 1.721460 seconds.
-  path: Assets/Resources/Pokedex/Gen4/413 Wormadam-Trash.asset
-  artifactKey: Guid(009448a105b73ce46af36270720a6924) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Resources/Pokedex/Gen4/413 Wormadam-Trash.asset using Guid(009448a105b73ce46af36270720a6924) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '308508bb916ffbe7fdae299f24051eb7') in 0.007008 seconds 
-  Import took 0.042960 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 3.561682 seconds.
-  path: Assets/Resources/Pokedex/Gen4/412 Burmy-Sandy.asset
-  artifactKey: Guid(b72530cca4482324caf3354d937817ea) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Resources/Pokedex/Gen4/412 Burmy-Sandy.asset using Guid(b72530cca4482324caf3354d937817ea) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '9d808eaff624ca79cc156f49e2fee178') in 0.005721 seconds 
-  Import took 0.023020 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 7.993207 seconds.
-  path: Assets/Resources/Pokedex/Gen4/412 Burmy-Trash.asset
-  artifactKey: Guid(98dd62f836bfa9e49957e9cbcf17ba1b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Resources/Pokedex/Gen4/412 Burmy-Trash.asset using Guid(98dd62f836bfa9e49957e9cbcf17ba1b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '422da5a276dca2adbecb40d0124da715') in 0.006794 seconds 
-  Import took 0.031323 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 72.126894 seconds.
-  path: Assets/Resources/Pokedex/Gen4/412 Burmy-Trash.asset
-  artifactKey: Guid(98dd62f836bfa9e49957e9cbcf17ba1b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Resources/Pokedex/Gen4/412 Burmy-Trash.asset using Guid(98dd62f836bfa9e49957e9cbcf17ba1b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'acda7c6beb32c966f7c35774a7e02638') in 0.002878 seconds 
-  Import took 0.049802 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 69.972339 seconds.
-  path: Assets/Resources/Pokedex/Gen4/414 Mothim.asset
-  artifactKey: Guid(b848c573455bd414ea45e76a51b7b901) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Resources/Pokedex/Gen4/414 Mothim.asset using Guid(b848c573455bd414ea45e76a51b7b901) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '5210e4ee452e6de6bfb450c660a5a7b4') in 0.008503 seconds 
-  Import took 0.035645 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 63.625451 seconds.
-  path: Assets/Scripts/Pokemon/EvolutionBase.cs
-  artifactKey: Guid(31511207b2efc034ab5b22ad17bb62bf) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Scripts/Pokemon/EvolutionBase.cs using Guid(31511207b2efc034ab5b22ad17bb62bf) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'c4306bad5ff9421ebab763f94cf325e3') in 0.008449 seconds 
-  Import took 0.047990 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 32.791601 seconds.
-  path: Assets/Scripts/Pokemon/EvolutionBase.cs
-  artifactKey: Guid(31511207b2efc034ab5b22ad17bb62bf) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Scripts/Pokemon/EvolutionBase.cs using Guid(31511207b2efc034ab5b22ad17bb62bf) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'bb857f52a20373dfc836c65935370c4e') in 0.002243 seconds 
-  Import took 0.041668 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 370.096253 seconds.
-  path: Assets/Scripts/Pokemon/EvolutionBase.cs
-  artifactKey: Guid(31511207b2efc034ab5b22ad17bb62bf) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Scripts/Pokemon/EvolutionBase.cs using Guid(31511207b2efc034ab5b22ad17bb62bf) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'e3be4516bf21139d70f0fe3f3a288c5d') in 0.001949 seconds 
-  Import took 0.044563 seconds .
-
-========================================================================
-Received Prepare
-Registering precompiled user dll's ...
-Registered in 0.006561 seconds.
-Begin MonoManager ReloadAssembly
-Native extension for WindowsStandalone target not found
-Refreshing native plugins compatible for Editor in 1.78 ms, found 2 plugins.
-Preloading 0 native plugins for Editor in 0.00 ms.
-Mono: successfully reloaded assembly
-- Completed reload, in  1.172 seconds
-Domain Reload Profiling:
-	ReloadAssembly (1172ms)
-		BeginReloadAssembly (128ms)
-			ExecutionOrderSort (0ms)
-			DisableScriptedObjects (7ms)
-			BackupInstance (0ms)
-			ReleaseScriptingObjects (0ms)
-			CreateAndSetChildDomain (40ms)
-		EndReloadAssembly (983ms)
-			LoadAssemblies (108ms)
-			RebuildTransferFunctionScriptingTraits (0ms)
-			SetupTypeCache (290ms)
-			ReleaseScriptCaches (1ms)
-			RebuildScriptCaches (64ms)
-			SetupLoadedEditorAssemblies (415ms)
-				LogAssemblyErrors (0ms)
-				InitializePlatformSupportModulesInManaged (5ms)
-				SetLoadedEditorAssemblies (0ms)
-				RefreshPlugins (2ms)
-				BeforeProcessingInitializeOnLoad (107ms)
-				ProcessInitializeOnLoadAttributes (249ms)
-				ProcessInitializeOnLoadMethodAttributes (45ms)
-				AfterProcessingInitializeOnLoad (6ms)
-				EditorAssembliesLoaded (0ms)
-			ExecutionOrderSort2 (0ms)
-			AwakeInstancesAfterBackupRestoration (7ms)
-Platform modules already initialized, skipping
-Refreshing native plugins compatible for Editor in 1.66 ms, found 2 plugins.
-Preloading 0 native plugins for Editor in 0.00 ms.
-Unloading 2678 Unused Serialized files (Serialized files now loaded: 0)
-System memory in use before: 106.5 MB.
-System memory in use after: 106.7 MB.
-
-Unloading 49 unused Assets to reduce memory usage. Loaded Objects now: 3098.
-Total: 8.597500 ms (FindLiveObjects: 0.254900 ms CreateObjectMapping: 0.104200 ms MarkObjects: 8.197900 ms  DeleteObjects: 0.039300 ms)
-
-AssetImportParameters requested are different than current active one (requested -> active):
-  custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
-  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
-  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
-  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
-  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
-  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
-  custom:video-codec-MediaFoundation-h265: 746d11721c4dcdbdad8f713fa42b33f4 -> 
-  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
-  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
-  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
-========================================================================
-Received Import Request.
-  Time since last request: 23.481618 seconds.
-  path: Assets/Resources/Pokedex/Gen4/412 Burmy-Plant.asset
-  artifactKey: Guid(8098967842671404bbc6210cc0a9f64d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Resources/Pokedex/Gen4/412 Burmy-Plant.asset using Guid(8098967842671404bbc6210cc0a9f64d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '7032c254ff64e2e8b71d2cd495cd6aeb') in 0.023869 seconds 
-  Import took 0.080700 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 5.643103 seconds.
-  path: Assets/Resources/Pokedex/Gen1/001 Bulbasaur.asset
-  artifactKey: Guid(bade22afe7cd4784db56d42b0b18940e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Resources/Pokedex/Gen1/001 Bulbasaur.asset using Guid(bade22afe7cd4784db56d42b0b18940e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '112bdb8b407431bd162407c19f5d54fc') in 0.070810 seconds 
-  Import took 0.113379 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 16.842731 seconds.
-  path: Assets/Resources/Pokedex/Gen2/196 Espeon.asset
-  artifactKey: Guid(ef4528d540cd1984eb7883d61b9a9a9c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Resources/Pokedex/Gen2/196 Espeon.asset using Guid(ef4528d540cd1984eb7883d61b9a9a9c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '046e6acbd87bdd15f8f566ca84136ede') in 0.008277 seconds 
-  Import took 0.032830 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 2.082912 seconds.
-  path: Assets/Resources/Pokedex/Gen2/197 Umbreon.asset
-  artifactKey: Guid(5c0c9c30591486942a4a12ef8d684598) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Resources/Pokedex/Gen2/197 Umbreon.asset using Guid(5c0c9c30591486942a4a12ef8d684598) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'badbb7944ad6affbb1877158f415cdd0') in 0.046890 seconds 
-  Import took 0.070911 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 6.969121 seconds.
-  path: Assets/Resources/Pokedex/Gen1/133 Eevee.asset
-  artifactKey: Guid(6145097cc7c3b3a4aa4f851c86bb191f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Resources/Pokedex/Gen1/133 Eevee.asset using Guid(6145097cc7c3b3a4aa4f851c86bb191f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '5a099b86afedaa03ff63fc7fee18246d') in 0.036100 seconds 
-  Import took 0.061658 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 26.193033 seconds.
-  path: Assets/Resources/Pokedex/Gen2/188 Skiploom.asset
-  artifactKey: Guid(0dda37c0ff7266c4e9934b61f3bf66df) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Resources/Pokedex/Gen2/188 Skiploom.asset using Guid(0dda37c0ff7266c4e9934b61f3bf66df) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '64e3ecbde9e6477817fb2272197e1674') in 0.030438 seconds 
-  Import took 0.056986 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000310 seconds.
-  path: Assets/Resources/Pokedex/Gen2/201 Unown-G.asset
-  artifactKey: Guid(b88acabfc9a294343afad0296a917863) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Resources/Pokedex/Gen2/201 Unown-G.asset using Guid(b88acabfc9a294343afad0296a917863) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'a048680e7cb4f4b9a3c6c820fea0db68') in 0.032711 seconds 
-  Import took 0.065261 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000527 seconds.
-  path: Assets/Resources/Pokedex/Gen2/195 Quagsire.asset
-  artifactKey: Guid(589301c25d7ca06458cda09d05e3fa18) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Resources/Pokedex/Gen2/195 Quagsire.asset using Guid(589301c25d7ca06458cda09d05e3fa18) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '07aa4ea8a8ea2adc5e376e7b2d6c3001') in 0.022782 seconds 
-  Import took 0.053132 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000295 seconds.
-  path: Assets/Resources/Pokedex/Gen2/193 Yanma.asset
-  artifactKey: Guid(e8bd58eca38c1bc4d8346ce218e8bb4e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Resources/Pokedex/Gen2/193 Yanma.asset using Guid(e8bd58eca38c1bc4d8346ce218e8bb4e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '9b34a8c2af79b0dcbce455fe4dddbf62') in 0.030609 seconds 
-  Import took 0.055516 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000237 seconds.
-  path: Assets/Resources/Pokedex/Gen2/190 Aipom.asset
-  artifactKey: Guid(b64469ffc10ecfd4f84f2077353bc727) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Resources/Pokedex/Gen2/190 Aipom.asset using Guid(b64469ffc10ecfd4f84f2077353bc727) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '716dea62c22be816ab017dea80e3fb6b') in 0.024630 seconds 
-  Import took 0.079918 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000294 seconds.
-  path: Assets/Resources/Pokedex/Gen2/201 Unown-F.asset
-  artifactKey: Guid(7efd4d6f2ef003c41a2eea4a7d062df4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Resources/Pokedex/Gen2/201 Unown-F.asset using Guid(7efd4d6f2ef003c41a2eea4a7d062df4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '4009b1dd74575115a89a1aa08f83a881') in 0.021667 seconds 
-  Import took 0.060429 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000553 seconds.
-  path: Assets/Resources/Pokedex/Gen2/194 Wooper.asset
-  artifactKey: Guid(a80e04d0a1a2d6949a2c27eb33edd45f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Resources/Pokedex/Gen2/194 Wooper.asset using Guid(a80e04d0a1a2d6949a2c27eb33edd45f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '8b37bfb6792db0fd3963bc325837a917') in 0.029018 seconds 
-  Import took 0.124443 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000272 seconds.
-  path: Assets/Resources/Pokedex/Gen2/191 Sunkern.asset
-  artifactKey: Guid(cef4a6b28a00b0345b9b8d95ca61b910) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Resources/Pokedex/Gen2/191 Sunkern.asset using Guid(cef4a6b28a00b0345b9b8d95ca61b910) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'b195eef7e5793a6d41b7add95bac2cdc') in 0.027053 seconds 
-  Import took 0.053151 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000288 seconds.
-  path: Assets/Resources/Pokedex/Gen2/198 Murkrow.asset
-  artifactKey: Guid(35311bf07455897489ae93bf94a241ca) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Resources/Pokedex/Gen2/198 Murkrow.asset using Guid(35311bf07455897489ae93bf94a241ca) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '6ed7832b2c9b6611a987b8b9857b92b7') in 0.023871 seconds 
-  Import took 0.052591 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000333 seconds.
-  path: Assets/Resources/Pokedex/Gen2/201 Unown-B.asset
-  artifactKey: Guid(b252e74d9ade4b94f971bfafc69c8c48) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Resources/Pokedex/Gen2/201 Unown-B.asset using Guid(b252e74d9ade4b94f971bfafc69c8c48) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '035cf222d040cec88253619a5b2dcf3b') in 0.031306 seconds 
-  Import took 0.055806 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000439 seconds.
-  path: Assets/Resources/Pokedex/Gen2/201 Unown-K.asset
-  artifactKey: Guid(2c1aca52fd0587e4391a51715de99f5d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Resources/Pokedex/Gen2/201 Unown-K.asset using Guid(2c1aca52fd0587e4391a51715de99f5d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'd91e36ffed00861a1304150a58e84a01') in 0.017980 seconds 
-  Import took 0.036279 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000291 seconds.
-  path: Assets/Resources/Pokedex/Gen2/201 Unown-D.asset
-  artifactKey: Guid(43341a311d4d8d843a6b36b4dc756d28) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Resources/Pokedex/Gen2/201 Unown-D.asset using Guid(43341a311d4d8d843a6b36b4dc756d28) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '041b583f6256911ca53eafd7c6a09b16') in 0.024369 seconds 
-  Import took 0.044727 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000293 seconds.
-  path: Assets/Resources/Pokedex/Gen2/201 Unown-I.asset
-  artifactKey: Guid(546ac692398cb914e9541ad666abaf42) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Resources/Pokedex/Gen2/201 Unown-I.asset using Guid(546ac692398cb914e9541ad666abaf42) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '08d019115552f09af9b44bebb957ca34') in 0.024735 seconds 
-  Import took 0.060256 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000298 seconds.
-  path: Assets/Resources/Pokedex/Gen2/201 Unown-C.asset
-  artifactKey: Guid(4100928aa409434458a33bdf7cc9d655) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Resources/Pokedex/Gen2/201 Unown-C.asset using Guid(4100928aa409434458a33bdf7cc9d655) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '30b7dc75c8edc118d10efe2c97f50893') in 0.011250 seconds 
-  Import took 0.033133 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000374 seconds.
-  path: Assets/Resources/Pokedex/Gen2/189 Jumpluff.asset
-  artifactKey: Guid(9f841c05bf75eb34b996b173df0c002b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Resources/Pokedex/Gen2/189 Jumpluff.asset using Guid(9f841c05bf75eb34b996b173df0c002b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '13bb4dc0182d480b443eec16cde61030') in 0.025818 seconds 
-  Import took 0.056364 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000324 seconds.
-  path: Assets/Resources/Pokedex/Gen2/201 Unown-J.asset
-  artifactKey: Guid(1d3d5377f92727d47acde966390747d9) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Resources/Pokedex/Gen2/201 Unown-J.asset using Guid(1d3d5377f92727d47acde966390747d9) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '98734855f58c99f20829f99a1894aad8') in 0.031749 seconds 
-  Import took 0.049188 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000295 seconds.
-  path: Assets/Resources/Pokedex/Gen2/192 Sunflora.asset
-  artifactKey: Guid(538d9372100457049bc31925aeba0c35) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Resources/Pokedex/Gen2/192 Sunflora.asset using Guid(538d9372100457049bc31925aeba0c35) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'c7a9f4f3fe33fca2ef4663c3f9ce70f5') in 0.020504 seconds 
-  Import took 0.039146 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000330 seconds.
-  path: Assets/Resources/Pokedex/Gen2/201 Unown-E.asset
-  artifactKey: Guid(19813b2f1525eaf42bfd4055dc5cc875) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Resources/Pokedex/Gen2/201 Unown-E.asset using Guid(19813b2f1525eaf42bfd4055dc5cc875) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '12ae0144df28b2d4d8a999376ee0e0a6') in 0.027698 seconds 
-  Import took 0.051835 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000403 seconds.
-  path: Assets/Resources/Pokedex/Gen2/201 Unown-H.asset
-  artifactKey: Guid(e314b5b52dd11974d86811ed8d497e28) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Resources/Pokedex/Gen2/201 Unown-H.asset using Guid(e314b5b52dd11974d86811ed8d497e28) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '94e96238c95a5e8f6ce3edca1ba8d0f1') in 0.023909 seconds 
-  Import took 0.045651 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 1.445261 seconds.
-  path: Assets/Resources/Pokedex/Gen3/274 Nuzleaf.asset
-  artifactKey: Guid(86243b340633e404eb07cacda7553deb) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Resources/Pokedex/Gen3/274 Nuzleaf.asset using Guid(86243b340633e404eb07cacda7553deb) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '70190cdfc10c0d3f7d8cdc91dd82d85d') in 0.039538 seconds 
-  Import took 0.045391 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000252 seconds.
-  path: Assets/Resources/Pokedex/Gen4/470 Leafeon.asset
-  artifactKey: Guid(f138047b36ff3094f869fcba0205a7b5) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Resources/Pokedex/Gen4/470 Leafeon.asset using Guid(f138047b36ff3094f869fcba0205a7b5) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '303d48a8d1065ee2abddf1b9591aa80b') in 0.034813 seconds 
-  Import took 0.054808 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 5.793846 seconds.
-  path: Assets/Resources/Items/StandardItems/EvolutionStones/King's Rock.asset
-  artifactKey: Guid(d58664c7929c2fa44a0acf10dfb15bb5) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Resources/Items/StandardItems/EvolutionStones/King's Rock.asset using Guid(d58664c7929c2fa44a0acf10dfb15bb5) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '81c8276d4cebea81365459f3c1f3977f') in 0.053750 seconds 
-  Import took 0.079173 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000363 seconds.
-  path: Assets/Resources/Items/StandardItems/EvolutionStones/Metal Coat.asset
-  artifactKey: Guid(04b18c1ca7c4d8643a9ba40743d57b62) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Resources/Items/StandardItems/EvolutionStones/Metal Coat.asset using Guid(04b18c1ca7c4d8643a9ba40743d57b62) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '2d39cf042dad3e9c50c29a347cbd7f11') in 0.021642 seconds 
-  Import took 0.054157 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000523 seconds.
-  path: Assets/Resources/Items/StandardItems/EvolutionStones/Razor Fang.asset
-  artifactKey: Guid(9bcdf2f92864c044f883dbe785b9ca77) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Resources/Items/StandardItems/EvolutionStones/Razor Fang.asset using Guid(9bcdf2f92864c044f883dbe785b9ca77) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '147a51ba43adceadadf7db8498bd34f0') in 0.046730 seconds 
-  Import took 0.068815 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000270 seconds.
-  path: Assets/Resources/Items/StandardItems/EvolutionStones/Magmarizer.asset
-  artifactKey: Guid(fe2c43c0d082cb142bbfa50e0d52eb6f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Resources/Items/StandardItems/EvolutionStones/Magmarizer.asset using Guid(fe2c43c0d082cb142bbfa50e0d52eb6f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '299254bf5151dea140c29109f66266b6') in 0.038946 seconds 
-  Import took 0.055914 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000338 seconds.
-  path: Assets/Resources/Items/StandardItems/EvolutionStones/Oval Stone.asset
-  artifactKey: Guid(b0ee9caf271de0b47bbbcac3556a8059) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Resources/Items/StandardItems/EvolutionStones/Oval Stone.asset using Guid(b0ee9caf271de0b47bbbcac3556a8059) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'c873d807b42d42a98f86f16766f141b1') in 0.021474 seconds 
-  Import took 0.041126 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000339 seconds.
-  path: Assets/Resources/Items/StandardItems/EvolutionStones/Razor Claw.asset
-  artifactKey: Guid(dd70e9b2cde2933429f42e79e0113ad8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Resources/Items/StandardItems/EvolutionStones/Razor Claw.asset using Guid(dd70e9b2cde2933429f42e79e0113ad8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '4cbc82b58baf52f20f6dafa5c1f6bdab') in 0.013420 seconds 
-  Import took 0.023042 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 10.164549 seconds.
-  path: Assets/Resources/Pokedex/Gen4/464 Rhyperior.asset
-  artifactKey: Guid(22f493b06e385024e8338ad93cc4e2da) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Resources/Pokedex/Gen4/464 Rhyperior.asset using Guid(22f493b06e385024e8338ad93cc4e2da) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '9ff7a8ee2a281a2aa832fcd3129f0c50') in 0.031492 seconds 
-  Import took 0.044555 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000231 seconds.
-  path: Assets/Resources/Pokedex/Gen4/473 Mamoswine.asset
-  artifactKey: Guid(f57023098cdde3d489689b24f61ba5ec) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Resources/Pokedex/Gen4/473 Mamoswine.asset using Guid(f57023098cdde3d489689b24f61ba5ec) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'ffbd64d616b6f7ce183d22da5394b777') in 0.019585 seconds 
-  Import took 0.036756 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000322 seconds.
-  path: Assets/Resources/Pokedex/Gen4/477 Dusknoir.asset
-  artifactKey: Guid(5f11b75733c8d1441a389866e2762035) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Resources/Pokedex/Gen4/477 Dusknoir.asset using Guid(5f11b75733c8d1441a389866e2762035) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '8846cb2d0913a7893f449e3ff56a8707') in 0.023235 seconds 
-  Import took 0.040111 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000380 seconds.
-  path: Assets/Resources/Pokedex/Gen4/484 Palkia-Origin.asset
-  artifactKey: Guid(4e806a3c0a8f16d44b8ac0b4a331ce31) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Resources/Pokedex/Gen4/484 Palkia-Origin.asset using Guid(4e806a3c0a8f16d44b8ac0b4a331ce31) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '0b39483134d679b8ad56a592d883078b') in 0.025316 seconds 
-  Import took 0.054484 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000347 seconds.
-  path: Assets/Resources/Pokedex/Gen4/467 Magmortar.asset
-  artifactKey: Guid(73c2b6c70fd2c0249be669b75c812cc8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Resources/Pokedex/Gen4/467 Magmortar.asset using Guid(73c2b6c70fd2c0249be669b75c812cc8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '212a6b9dc9dc565f264c1b8726b445f9') in 0.026408 seconds 
-  Import took 0.045315 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000324 seconds.
-  path: Assets/Resources/Pokedex/Gen4/479 Rotom.asset
-  artifactKey: Guid(3b1bb3725db0f334ea780c50b9aee007) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Resources/Pokedex/Gen4/479 Rotom.asset using Guid(3b1bb3725db0f334ea780c50b9aee007) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'c68c277a8e0e59a84a396baa2c90e167') in 0.034281 seconds 
-  Import took 0.058510 seconds .
+  path: Assets/Resources/Art/TrianersOverworld/NPCs/HGSS_BugCatcher.png
+  artifactKey: Guid(ce86d8a7293203c4eb90f1c49be77132) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Art/TrianersOverworld/NPCs/HGSS_BugCatcher.png using Guid(ce86d8a7293203c4eb90f1c49be77132) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '8e9a9e837b4350e93d8e60afc98de8b4') in 0.201418 seconds 
+  Import took 0.242973 seconds .
 
 ========================================================================
 Received Import Request.
   Time since last request: 0.000385 seconds.
-  path: Assets/Resources/Pokedex/Gen4/486 Regigigas.asset
-  artifactKey: Guid(b05005550fb4a014a8323fed3875f7e6) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Resources/Pokedex/Gen4/486 Regigigas.asset using Guid(b05005550fb4a014a8323fed3875f7e6) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '3c0b7ed6de8926a1e1b978b4d1e54b29') in 0.020940 seconds 
-  Import took 0.038076 seconds .
+  path: Assets/Resources/Art/EntityDataArt/Non Playable/HGSSBugCatcher.asset
+  artifactKey: Guid(8e3357957002de143a654d6006d55dfc) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Art/EntityDataArt/Non Playable/HGSSBugCatcher.asset using Guid(8e3357957002de143a654d6006d55dfc) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '73d7061c59dfdcf7683326fdba116224') in 0.032757 seconds 
+  Import took 0.073013 seconds .
 
 ========================================================================
 Received Import Request.
-  Time since last request: 0.000694 seconds.
-  path: Assets/Resources/Pokedex/Gen4/475 Gallade.asset
-  artifactKey: Guid(4bbacab4c44a0ac48bc4e9ded8237e40) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Resources/Pokedex/Gen4/475 Gallade.asset using Guid(4bbacab4c44a0ac48bc4e9ded8237e40) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '0646d918bef5d5969243ecdbcf8a33dc') in 0.023547 seconds 
-  Import took 0.048625 seconds .
+  Time since last request: 16.134690 seconds.
+  path: Assets/Resources/Art/TrianersOverworld/NPCs/HGSS_Buglar.png
+  artifactKey: Guid(522201d601776e24c81797e54411287f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Art/TrianersOverworld/NPCs/HGSS_Buglar.png using Guid(522201d601776e24c81797e54411287f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '447a2f534d7ade63ac1eff1291e13050') in 0.110797 seconds 
+  Import took 0.147654 seconds .
 
 ========================================================================
 Received Import Request.
-  Time since last request: 0.000251 seconds.
-  path: Assets/Resources/Pokedex/Gen4/478 Froslass.asset
-  artifactKey: Guid(f6a78c7a8c5c13a4aa58b3a24b9fc6a5) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Resources/Pokedex/Gen4/478 Froslass.asset using Guid(f6a78c7a8c5c13a4aa58b3a24b9fc6a5) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '07637e2dc704e361477cf86eaefe10ee') in 0.025333 seconds 
-  Import took 0.041261 seconds .
+  Time since last request: 0.000326 seconds.
+  path: Assets/Resources/Art/TrianersOverworld/NPCs/HGSS_Bugsy.png
+  artifactKey: Guid(7d6cfa4e7cbcaf44dad9993d881bb3f8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Art/TrianersOverworld/NPCs/HGSS_Bugsy.png using Guid(7d6cfa4e7cbcaf44dad9993d881bb3f8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'e01ab8dbb0362847a24dbae38f879aea') in 0.063065 seconds 
+  Import took 0.093777 seconds .
 
 ========================================================================
 Received Import Request.
-  Time since last request: 0.000331 seconds.
-  path: Assets/Resources/Pokedex/Gen4/485 Heatran.asset
-  artifactKey: Guid(f6e8d8d8c25875446a57bbeaee400c0b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Resources/Pokedex/Gen4/485 Heatran.asset using Guid(f6e8d8d8c25875446a57bbeaee400c0b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'b3e2b432ada3e7c60412019dd1c7f3a7') in 0.023426 seconds 
-  Import took 0.076534 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000384 seconds.
-  path: Assets/Resources/Pokedex/Gen4/481 Mesprit.asset
-  artifactKey: Guid(d819043b8c7861a4d9e5f72fe20fdbfb) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Resources/Pokedex/Gen4/481 Mesprit.asset using Guid(d819043b8c7861a4d9e5f72fe20fdbfb) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '5f916c0240ff2af2c1340112e417d98c') in 0.046027 seconds 
-  Import took 0.065515 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000331 seconds.
-  path: Assets/Resources/Pokedex/Gen4/474 Porygon-z.asset
-  artifactKey: Guid(809e8281e258b274c9631423c2f0a2f5) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Resources/Pokedex/Gen4/474 Porygon-z.asset using Guid(809e8281e258b274c9631423c2f0a2f5) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'a332e1d8e6c8d01b73c36aba2c8a4a77') in 0.041027 seconds 
-  Import took 0.148820 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000305 seconds.
-  path: Assets/Resources/Pokedex/Gen4/483 Dialga-Origin.asset
-  artifactKey: Guid(80ae3bf3a5a2aa74891586bb0675a449) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Resources/Pokedex/Gen4/483 Dialga-Origin.asset using Guid(80ae3bf3a5a2aa74891586bb0675a449) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '36aafd726b0820d8d8f104ddc95de20c') in 0.031291 seconds 
-  Import took 0.062097 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000234 seconds.
-  path: Assets/Resources/Pokedex/Gen4/465 Tangrowth.asset
-  artifactKey: Guid(1284a203c5bbac94586a3200470e2a7c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Resources/Pokedex/Gen4/465 Tangrowth.asset using Guid(1284a203c5bbac94586a3200470e2a7c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '09a9b6406f980fba59fb0cc89441f032') in 0.028164 seconds 
-  Import took 0.032924 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000319 seconds.
-  path: Assets/Resources/Pokedex/Gen4/468 Togekiss.asset
-  artifactKey: Guid(e153866c72d7a9041ab16bc938d7872c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Resources/Pokedex/Gen4/468 Togekiss.asset using Guid(e153866c72d7a9041ab16bc938d7872c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '3ef3bb944a56d62263eb6f0ae1b53e00') in 0.029863 seconds 
-  Import took 0.054434 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.001019 seconds.
-  path: Assets/Resources/Pokedex/Gen4/482 Azelf.asset
-  artifactKey: Guid(1cfebd16a8c912e48b86d16a26c945aa) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Resources/Pokedex/Gen4/482 Azelf.asset using Guid(1cfebd16a8c912e48b86d16a26c945aa) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'bb328cc5aefd5b0aabbb96ecf3465506') in 0.043505 seconds 
-  Import took 0.076264 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000303 seconds.
-  path: Assets/Resources/Pokedex/Gen4/476 Probopass.asset
-  artifactKey: Guid(bc35ea7b920ad5f40adb5bc6632cfcab) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Resources/Pokedex/Gen4/476 Probopass.asset using Guid(bc35ea7b920ad5f40adb5bc6632cfcab) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '25bc0262bd43b99822fdcecfe0b9f922') in 0.029477 seconds 
-  Import took 0.045602 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000363 seconds.
-  path: Assets/Resources/Pokedex/Gen4/472 Gliscor.asset
-  artifactKey: Guid(d862c51d003ec8647a82bb412c7360b9) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Resources/Pokedex/Gen4/472 Gliscor.asset using Guid(d862c51d003ec8647a82bb412c7360b9) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'aa30b1bedd971e0fb5581e9b667dd9f0') in 0.021785 seconds 
-  Import took 0.041199 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000376 seconds.
-  path: Assets/Resources/Pokedex/Gen4/466 Electivire.asset
-  artifactKey: Guid(89afc52993f26e9499d4d5d017ab63c0) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Resources/Pokedex/Gen4/466 Electivire.asset using Guid(89afc52993f26e9499d4d5d017ab63c0) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '98415fcbc11519a7418df1ce4e5a3aa9') in 0.035895 seconds 
-  Import took 0.060818 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000317 seconds.
-  path: Assets/Resources/Pokedex/Gen4/469 Yanmega.asset
-  artifactKey: Guid(661039001fa0d4a45ad17bb3154dbfc6) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Resources/Pokedex/Gen4/469 Yanmega.asset using Guid(661039001fa0d4a45ad17bb3154dbfc6) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'dd603e1a43adff5959a221d123fce909') in 0.030328 seconds 
-  Import took 0.051993 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000299 seconds.
-  path: Assets/Resources/Pokedex/Gen4/471 Glaceon.asset
-  artifactKey: Guid(867bc96f14e47ff4a9ed22255edcef71) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Resources/Pokedex/Gen4/471 Glaceon.asset using Guid(867bc96f14e47ff4a9ed22255edcef71) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'bc25ad92038c2bdb8f0779e3ea7bf2fc') in 0.018713 seconds 
-  Import took 0.036172 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000293 seconds.
-  path: Assets/Resources/Pokedex/Gen4/480 Uxie.asset
-  artifactKey: Guid(521bc23b5722ca346ba080c9b7fd6727) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Resources/Pokedex/Gen4/480 Uxie.asset using Guid(521bc23b5722ca346ba080c9b7fd6727) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'f7a98b6603ed50f077715f568a7deb6d') in 0.026612 seconds 
-  Import took 0.044477 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 2.052504 seconds.
-  path: Assets/Resources/Items/StandardItems/EvolutionStones/DubiousDisc.asset
-  artifactKey: Guid(e9ba0fb7aebaeca4897a8bfba3a8a567) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Resources/Items/StandardItems/EvolutionStones/DubiousDisc.asset using Guid(e9ba0fb7aebaeca4897a8bfba3a8a567) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '1e8d63bdfc7959a84968701c5e956327') in 0.017313 seconds 
-  Import took 0.052827 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 149.067155 seconds.
-  path: Assets/Resources/Pokedex/Gen2/232 Donphan.asset
-  artifactKey: Guid(16e647071ce31824d89b303fffe4a81e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Resources/Pokedex/Gen2/232 Donphan.asset using Guid(16e647071ce31824d89b303fffe4a81e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'c3ff794831847f8a121bfc289142a72e') in 0.051500 seconds 
-  Import took 0.066761 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000338 seconds.
-  path: Assets/Resources/Pokedex/Gen2/241 Miltank.asset
-  artifactKey: Guid(894276455e05b8543999ce16ab3b8e2c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Resources/Pokedex/Gen2/241 Miltank.asset using Guid(894276455e05b8543999ce16ab3b8e2c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '463064449ffc91e96b4f2ee1f0519b54') in 0.019526 seconds 
-  Import took 0.048049 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000487 seconds.
-  path: Assets/Resources/Pokedex/Gen2/239 Elekid.asset
-  artifactKey: Guid(8b31105d38eb14a4092f667283b214d8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Resources/Pokedex/Gen2/239 Elekid.asset using Guid(8b31105d38eb14a4092f667283b214d8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '6837395e035b0dccc72432d1c311070e') in 0.032689 seconds 
-  Import took 0.064033 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000290 seconds.
-  path: Assets/Resources/Pokedex/Gen2/243 Raikou.asset
-  artifactKey: Guid(5d46b3501c604ab4dadb613b49b7b033) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Resources/Pokedex/Gen2/243 Raikou.asset using Guid(5d46b3501c604ab4dadb613b49b7b033) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'c1b7dcba405bb4cbdb5c4e34417695fd') in 0.024519 seconds 
-  Import took 0.047456 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000289 seconds.
-  path: Assets/Resources/Pokedex/Gen2/246 Larvitar.asset
-  artifactKey: Guid(52862263111a40a4a88688ae47761d30) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Resources/Pokedex/Gen2/246 Larvitar.asset using Guid(52862263111a40a4a88688ae47761d30) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'c2d63755bcc5051afcc21e9b8c6b465f') in 0.075966 seconds 
-  Import took 0.092073 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000277 seconds.
-  path: Assets/Resources/Pokedex/Gen2/245 Suicune.asset
-  artifactKey: Guid(ce325633c100e8b4c876ab1528438c8a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Resources/Pokedex/Gen2/245 Suicune.asset using Guid(ce325633c100e8b4c876ab1528438c8a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'bdcd6b0dd5cd0734deae3dffd37b4922') in 0.011993 seconds 
-  Import took 0.019094 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000308 seconds.
-  path: Assets/Resources/Pokedex/Gen2/233 Porygon2.asset
-  artifactKey: Guid(931e05447ae7c944786299dce95d49f5) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Resources/Pokedex/Gen2/233 Porygon2.asset using Guid(931e05447ae7c944786299dce95d49f5) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '8078fcbbd50ba406f76f16a29fd36ffd') in 0.023589 seconds 
-  Import took 0.039284 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000788 seconds.
-  path: Assets/Resources/Pokedex/Gen2/251 Celebi.asset
-  artifactKey: Guid(661554e02057975418aeb1aa5e0c1d05) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Resources/Pokedex/Gen2/251 Celebi.asset using Guid(661554e02057975418aeb1aa5e0c1d05) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '055f3d6e9d3569d341242ef9000a3760') in 0.010716 seconds 
-  Import took 0.026032 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000347 seconds.
-  path: Assets/Resources/Pokedex/Gen2/244 Entei.asset
-  artifactKey: Guid(6dcdbb5614f61bf4b9985043e7f9ee41) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Resources/Pokedex/Gen2/244 Entei.asset using Guid(6dcdbb5614f61bf4b9985043e7f9ee41) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '658780cfcaefb09802ff3c3ba37afb13') in 0.011194 seconds 
-  Import took 0.015491 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000320 seconds.
-  path: Assets/Resources/Pokedex/Gen3/252 Treecko.asset
-  artifactKey: Guid(7f196b425bf7fcc4599fcc7468b01a19) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Resources/Pokedex/Gen3/252 Treecko.asset using Guid(7f196b425bf7fcc4599fcc7468b01a19) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '735ed42593ff35e6eb3c47fc0b9b31bf') in 0.023877 seconds 
-  Import took 0.048885 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.001021 seconds.
-  path: Assets/Resources/Pokedex/Gen3/256 Combusken.asset
-  artifactKey: Guid(b3a2c0e5fb45fef42926e496ed6f6c0b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Resources/Pokedex/Gen3/256 Combusken.asset using Guid(b3a2c0e5fb45fef42926e496ed6f6c0b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '825a0cc6c23a4569c4d4c8ea7aec0100') in 0.031282 seconds 
-  Import took 0.060005 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000389 seconds.
-  path: Assets/Resources/Pokedex/Gen2/250 Ho-oh.asset
-  artifactKey: Guid(2d6b246113aadd647a30d87b6e15ec9f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Resources/Pokedex/Gen2/250 Ho-oh.asset using Guid(2d6b246113aadd647a30d87b6e15ec9f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '7f98f787287fca18b694d2cdc1d3c6a6') in 0.018202 seconds 
-  Import took 0.035651 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000373 seconds.
-  path: Assets/Resources/Pokedex/Gen2/238 Smoochum.asset
-  artifactKey: Guid(8157a965f1b4d6b458619f40514dc9f1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Resources/Pokedex/Gen2/238 Smoochum.asset using Guid(8157a965f1b4d6b458619f40514dc9f1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '8ff9a17f8928a7de98bb5f8801f25b70') in 0.015420 seconds 
-  Import took 0.034313 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000329 seconds.
-  path: Assets/Resources/Pokedex/Gen2/240 Magby.asset
-  artifactKey: Guid(d62bb53211d25904bb89d5328c7f0126) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Resources/Pokedex/Gen2/240 Magby.asset using Guid(d62bb53211d25904bb89d5328c7f0126) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'c626b012ce3095ab5764159e9f95fe31') in 0.018030 seconds 
-  Import took 0.034169 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000297 seconds.
-  path: Assets/Resources/Pokedex/Gen2/248 Tyranitar.asset
-  artifactKey: Guid(334017a5f346591409c000c2f1eb2145) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Resources/Pokedex/Gen2/248 Tyranitar.asset using Guid(334017a5f346591409c000c2f1eb2145) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'f47772f57e697fa67ec6ffaf01263f7b') in 0.009444 seconds 
-  Import took 0.033660 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000294 seconds.
-  path: Assets/Resources/Pokedex/Gen3/254 Sceptile.asset
-  artifactKey: Guid(8d73f41ddc7c221428c88932b5ee0f22) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Resources/Pokedex/Gen3/254 Sceptile.asset using Guid(8d73f41ddc7c221428c88932b5ee0f22) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '224f2d7434d22cb3992017fa9dbff0df') in 0.029138 seconds 
-  Import took 0.046983 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000322 seconds.
-  path: Assets/Resources/Pokedex/Gen2/249 Lugia.asset
-  artifactKey: Guid(7765771595f626f448119f7399e76870) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Resources/Pokedex/Gen2/249 Lugia.asset using Guid(7765771595f626f448119f7399e76870) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '6a7cf7769260a92956ab8c2ce26d1a44') in 0.014079 seconds 
-  Import took 0.040359 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000325 seconds.
-  path: Assets/Resources/Pokedex/Gen2/242 Blissey.asset
-  artifactKey: Guid(ef7cc61d272959f459a344095f5a8714) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Resources/Pokedex/Gen2/242 Blissey.asset using Guid(ef7cc61d272959f459a344095f5a8714) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '06cc0a00ce54e2dcbe7b909b60e554cf') in 0.039745 seconds 
-  Import took 0.057849 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000306 seconds.
-  path: Assets/Resources/Pokedex/Gen3/253 Grovyle.asset
-  artifactKey: Guid(7c6c31ca7b7088d4692f662cc3478638) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Resources/Pokedex/Gen3/253 Grovyle.asset using Guid(7c6c31ca7b7088d4692f662cc3478638) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'be3f5f130fac720b411229bde6317667') in 0.033292 seconds 
-  Import took 0.066469 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000361 seconds.
-  path: Assets/Resources/Pokedex/Gen2/247 Pupitar.asset
-  artifactKey: Guid(8d3d8511e8a216040ac5997be357d10a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Resources/Pokedex/Gen2/247 Pupitar.asset using Guid(8d3d8511e8a216040ac5997be357d10a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '78e97f7bd31101505fe7155f97966965') in 0.008602 seconds 
-  Import took 0.031932 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000289 seconds.
-  path: Assets/Resources/Pokedex/Gen3/255 Torchic.asset
-  artifactKey: Guid(f5ebf035ed28e4444a6808ba62b02fae) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Resources/Pokedex/Gen3/255 Torchic.asset using Guid(f5ebf035ed28e4444a6808ba62b02fae) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '0759252bf27acc452ccea352c8d6aac2') in 0.043600 seconds 
-  Import took 0.072144 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 1.591583 seconds.
-  path: Assets/Resources/Pokedex/Gen4/412 Burmy-Plant.asset
-  artifactKey: Guid(8098967842671404bbc6210cc0a9f64d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Resources/Pokedex/Gen4/412 Burmy-Plant.asset using Guid(8098967842671404bbc6210cc0a9f64d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '874ee2fc85dc3b9d5ab6ab81bd98caed') in 0.006283 seconds 
-  Import took 0.034551 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000405 seconds.
-  path: Assets/Resources/Pokedex/Gen4/412 Burmy-Trash.asset
-  artifactKey: Guid(98dd62f836bfa9e49957e9cbcf17ba1b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Resources/Pokedex/Gen4/412 Burmy-Trash.asset using Guid(98dd62f836bfa9e49957e9cbcf17ba1b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '27a41ca569b02488322f5c4c65bedc3f') in 0.005495 seconds 
-  Import took 0.015200 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000512 seconds.
-  path: Assets/Resources/Pokedex/Gen4/412 Burmy-Sandy.asset
-  artifactKey: Guid(b72530cca4482324caf3354d937817ea) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Resources/Pokedex/Gen4/412 Burmy-Sandy.asset using Guid(b72530cca4482324caf3354d937817ea) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '4ce0e081203043e7f3147225ec9e114d') in 0.003061 seconds 
-  Import took 0.019074 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 2.343431 seconds.
-  path: Assets/Resources/Prefabs/Characters/Player.prefab
-  artifactKey: Guid(df0ad118f1b16b94188f1a819d172b55) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Resources/Prefabs/Characters/Player.prefab using Guid(df0ad118f1b16b94188f1a819d172b55) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'b4a17406c9a8157d1e1ef3a911e32959') in 0.655032 seconds 
-  Import took 0.684033 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 12.003464 seconds.
-  path: Assets/Resources/Moveset/OneHitKO.asset
-  artifactKey: Guid(419861085445baa45b72fcc21d079701) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Resources/Moveset/OneHitKO.asset using Guid(419861085445baa45b72fcc21d079701) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'efd325739fc31d056d567aacd2fe85a6') in 0.032243 seconds 
-  Import took 0.060326 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 1.845206 seconds.
-  path: Assets/Resources/Prefabs/Characters/Player.prefab
-  artifactKey: Guid(df0ad118f1b16b94188f1a819d172b55) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Resources/Prefabs/Characters/Player.prefab using Guid(df0ad118f1b16b94188f1a819d172b55) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '0dcfd22e90cf988c6dfeb4451fb82c61') in 0.035807 seconds 
-  Import took 0.056055 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 4.060249 seconds.
-  path: Assets/Resources/Prefabs/Characters/Player.prefab
-  artifactKey: Guid(df0ad118f1b16b94188f1a819d172b55) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Resources/Prefabs/Characters/Player.prefab using Guid(df0ad118f1b16b94188f1a819d172b55) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'e3c699daaf6e2383f900c8dc298a23f5') in 0.050455 seconds 
-  Import took 0.055863 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 42.967322 seconds.
-  path: Assets/Resources/Prefabs/Characters/Player.prefab
-  artifactKey: Guid(df0ad118f1b16b94188f1a819d172b55) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Resources/Prefabs/Characters/Player.prefab using Guid(df0ad118f1b16b94188f1a819d172b55) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'be762282a32ec30ef98659af0f162bc6') in 0.039694 seconds 
-  Import took 0.057158 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.803138 seconds.
-  path: Assets/Resources/Prefabs/Characters/Player.prefab
-  artifactKey: Guid(df0ad118f1b16b94188f1a819d172b55) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Resources/Prefabs/Characters/Player.prefab using Guid(df0ad118f1b16b94188f1a819d172b55) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'cd095e74195cba84554597014c0ae588') in 0.034956 seconds 
-  Import took 0.052969 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.769679 seconds.
-  path: Assets/Resources/Prefabs/Characters/Player.prefab
-  artifactKey: Guid(df0ad118f1b16b94188f1a819d172b55) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Resources/Prefabs/Characters/Player.prefab using Guid(df0ad118f1b16b94188f1a819d172b55) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '5b31938f2096088895250726251608c6') in 0.048726 seconds 
-  Import took 0.070450 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 3.048555 seconds.
-  path: Assets/Resources/Prefabs/Characters/Player.prefab
-  artifactKey: Guid(df0ad118f1b16b94188f1a819d172b55) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Resources/Prefabs/Characters/Player.prefab using Guid(df0ad118f1b16b94188f1a819d172b55) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '544ac6e8c6a42bcd0b03de4fca471b07') in 0.033978 seconds 
-  Import took 0.054278 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 4.193316 seconds.
-  path: Assets/Resources/Prefabs/Characters/Player.prefab
-  artifactKey: Guid(df0ad118f1b16b94188f1a819d172b55) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Resources/Prefabs/Characters/Player.prefab using Guid(df0ad118f1b16b94188f1a819d172b55) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '46f1ddfc2f64677e342f88005d80d8d6') in 0.035518 seconds 
-  Import took 0.076685 seconds .
+  Time since last request: 4.602825 seconds.
+  path: Assets/Resources/Art/TrianersOverworld/NPCs/HGSS_Buena.png
+  artifactKey: Guid(8e1a0cd53f903654b964fa1ab18b6ad6) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Art/TrianersOverworld/NPCs/HGSS_Buena.png using Guid(8e1a0cd53f903654b964fa1ab18b6ad6) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '324afdde4f99edde9209b1ceb529728a') in 0.051212 seconds 
+  Import took 0.082305 seconds .
 
 ========================================================================
 Received Prepare
-Registering precompiled user dll's ...
-Registered in 0.007033 seconds.
-Begin MonoManager ReloadAssembly
-Native extension for WindowsStandalone target not found
-Refreshing native plugins compatible for Editor in 1.75 ms, found 2 plugins.
+Refreshing native plugins compatible for Editor in 14.25 ms, found 2 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
-Mono: successfully reloaded assembly
-- Completed reload, in  1.405 seconds
-Domain Reload Profiling:
-	ReloadAssembly (1405ms)
-		BeginReloadAssembly (160ms)
-			ExecutionOrderSort (0ms)
-			DisableScriptedObjects (7ms)
-			BackupInstance (0ms)
-			ReleaseScriptingObjects (0ms)
-			CreateAndSetChildDomain (42ms)
-		EndReloadAssembly (1165ms)
-			LoadAssemblies (127ms)
-			RebuildTransferFunctionScriptingTraits (0ms)
-			SetupTypeCache (399ms)
-			ReleaseScriptCaches (2ms)
-			RebuildScriptCaches (76ms)
-			SetupLoadedEditorAssemblies (469ms)
-				LogAssemblyErrors (0ms)
-				InitializePlatformSupportModulesInManaged (6ms)
-				SetLoadedEditorAssemblies (1ms)
-				RefreshPlugins (2ms)
-				BeforeProcessingInitializeOnLoad (118ms)
-				ProcessInitializeOnLoadAttributes (281ms)
-				ProcessInitializeOnLoadMethodAttributes (55ms)
-				AfterProcessingInitializeOnLoad (6ms)
-				EditorAssembliesLoaded (0ms)
-			ExecutionOrderSort2 (0ms)
-			AwakeInstancesAfterBackupRestoration (8ms)
-Platform modules already initialized, skipping
-Refreshing native plugins compatible for Editor in 2.89 ms, found 2 plugins.
-Preloading 0 native plugins for Editor in 0.00 ms.
-Unloading 2678 Unused Serialized files (Serialized files now loaded: 0)
-System memory in use before: 109.6 MB.
-System memory in use after: 109.9 MB.
+Unloading 47 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 57.6 MB.
+System memory in use after: 57.9 MB.
 
-Unloading 49 unused Assets to reduce memory usage. Loaded Objects now: 3107.
-Total: 10.670400 ms (FindLiveObjects: 0.562000 ms CreateObjectMapping: 0.350700 ms MarkObjects: 9.712000 ms  DeleteObjects: 0.043700 ms)
+Unloading 47 unused Assets to reduce memory usage. Loaded Objects now: 3099.
+Total: 8.710200 ms (FindLiveObjects: 0.274800 ms CreateObjectMapping: 0.107000 ms MarkObjects: 8.291100 ms  DeleteObjects: 0.035600 ms)
 
 AssetImportParameters requested are different than current active one (requested -> active):
   custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
@@ -1198,37 +192,469 @@ AssetImportParameters requested are different than current active one (requested
   custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
   custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
 ========================================================================
+Received Import Request.
+  Time since last request: 303.218647 seconds.
+  path: Assets/Resources/Art/TrianersOverworld/NPCs/HGSS_Falkner.png
+  artifactKey: Guid(810a7fd3102feb349870f39a16be0425) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Art/TrianersOverworld/NPCs/HGSS_Falkner.png using Guid(810a7fd3102feb349870f39a16be0425) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '65920af0002be10f2066900cc7d2c13c') in 0.072657 seconds 
+  Import took 0.104751 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 1.870663 seconds.
+  path: Assets/Resources/Art/TrianersOverworld/NPCs/HGSS_FemaleAceTrainer.png
+  artifactKey: Guid(56298d9e205e5514986394dae4f688ea) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Art/TrianersOverworld/NPCs/HGSS_FemaleAceTrainer.png using Guid(56298d9e205e5514986394dae4f688ea) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '8e61bc5aca737aae4ee92783279c9e8a') in 0.093284 seconds 
+  Import took 0.109806 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.479208 seconds.
+  path: Assets/Resources/Art/TrianersOverworld/NPCs/HGSS_FemaleBellhop.png
+  artifactKey: Guid(7d417379bf0c8ec4fb849321eb2053b9) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Art/TrianersOverworld/NPCs/HGSS_FemaleBellhop.png using Guid(7d417379bf0c8ec4fb849321eb2053b9) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '8eeff3afacf97fd3343d9bc6cfa276de') in 0.049433 seconds 
+  Import took 0.066489 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.519977 seconds.
+  path: Assets/Resources/Art/TrianersOverworld/NPCs/HGSS_FemaleChild.png
+  artifactKey: Guid(b31be4eaa4fd3344e82cd8780a1da996) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Art/TrianersOverworld/NPCs/HGSS_FemaleChild.png using Guid(b31be4eaa4fd3344e82cd8780a1da996) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'f29cbd4e85a84d9c7af728b2d5284dad') in 0.054963 seconds 
+  Import took 0.079857 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.449075 seconds.
+  path: Assets/Resources/Art/TrianersOverworld/NPCs/HGSS_FemalePokéFan.png
+  artifactKey: Guid(7701465e86fe6974d974169bd7cc3244) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Art/TrianersOverworld/NPCs/HGSS_FemalePokéFan.png using Guid(7701465e86fe6974d974169bd7cc3244) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '60489ce794e33a835e8806856a22a371') in 0.049048 seconds 
+  Import took 0.077914 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.600640 seconds.
+  path: Assets/Resources/Art/TrianersOverworld/NPCs/HGSS_FemaleRocket.png
+  artifactKey: Guid(86d20732cc3ef8c41a43361dacbe089f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Art/TrianersOverworld/NPCs/HGSS_FemaleRocket.png using Guid(86d20732cc3ef8c41a43361dacbe089f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '1b41c383119f62a8ae8e504ce5f1eaab') in 0.052359 seconds 
+  Import took 0.091209 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.546356 seconds.
+  path: Assets/Resources/Art/TrianersOverworld/NPCs/HGSS_FemaleSwimmer.png
+  artifactKey: Guid(ce5bdf2c1213cad4f9ffae96662cf603) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Art/TrianersOverworld/NPCs/HGSS_FemaleSwimmer.png using Guid(ce5bdf2c1213cad4f9ffae96662cf603) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '6ed4f8d4f8fd74375c50da85c80d69f8') in 0.047539 seconds 
+  Import took 0.079283 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 1.776748 seconds.
+  path: Assets/Resources/Art/TrianersOverworld/NPCs/HGSS_FireBreather.png
+  artifactKey: Guid(64c8781eb3acf904db433bd63d234685) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Art/TrianersOverworld/NPCs/HGSS_FireBreather.png using Guid(64c8781eb3acf904db433bd63d234685) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'c05a75a519ce3bd15678d537ffe9f31c') in 0.058285 seconds 
+  Import took 0.089938 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 1.254628 seconds.
+  path: Assets/Resources/Art/TrianersOverworld/NPCs/HGSS_Gentleman.png
+  artifactKey: Guid(2786e85ea68a1964ca56872ae2727d87) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Art/TrianersOverworld/NPCs/HGSS_Gentleman.png using Guid(2786e85ea68a1964ca56872ae2727d87) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'af154d77209d9f72cee7be1b2bb652c7') in 0.075000 seconds 
+  Import took 0.117822 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.636542 seconds.
+  path: Assets/Resources/Art/TrianersOverworld/NPCs/HGSS_Giovanni.png
+  artifactKey: Guid(e7d77eb6dbf1fba42a40de5b0c91d789) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Art/TrianersOverworld/NPCs/HGSS_Giovanni.png using Guid(e7d77eb6dbf1fba42a40de5b0c91d789) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'e5f4cf5e65ff0d72fa92892a7ef43bbb') in 0.051542 seconds 
+  Import took 0.078829 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.423961 seconds.
+  path: Assets/Resources/Art/TrianersOverworld/NPCs/HGSS_Guitarist.png
+  artifactKey: Guid(846f8f2cf20d6ec4696e4e1eed280121) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Art/TrianersOverworld/NPCs/HGSS_Guitarist.png using Guid(846f8f2cf20d6ec4696e4e1eed280121) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '373da0eaf36780cc0a7545c092bb1374') in 0.048351 seconds 
+  Import took 0.061181 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.478988 seconds.
+  path: Assets/Resources/Art/TrianersOverworld/NPCs/HGSS_Janine.png
+  artifactKey: Guid(471cbf2a0d5de75429111c29eb10cc3b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Art/TrianersOverworld/NPCs/HGSS_Janine.png using Guid(471cbf2a0d5de75429111c29eb10cc3b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '022c0e44fb46682b7b519d8eb243f7fa') in 0.047235 seconds 
+  Import took 0.129243 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.424988 seconds.
+  path: Assets/Resources/Art/TrianersOverworld/NPCs/HGSS_Jasmine.png
+  artifactKey: Guid(c9b9adae81398944a930594f9fcc366e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Art/TrianersOverworld/NPCs/HGSS_Jasmine.png using Guid(c9b9adae81398944a930594f9fcc366e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'abfc2d5c43a54232494a843c06a9e717') in 0.049870 seconds 
+  Import took 0.078327 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.241684 seconds.
+  path: Assets/Resources/Art/TrianersOverworld/NPCs/HGSS_Juggler.png
+  artifactKey: Guid(5c5c0710db9845d49938967474267da9) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Art/TrianersOverworld/NPCs/HGSS_Juggler.png using Guid(5c5c0710db9845d49938967474267da9) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '8a64a9db442cf1053220a8f1e06230b0') in 0.079041 seconds 
+  Import took 0.116843 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.213904 seconds.
+  path: Assets/Resources/Art/TrianersOverworld/NPCs/HGSS_Karen.png
+  artifactKey: Guid(8301c64db88682440bd5951cfc03d5fc) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Art/TrianersOverworld/NPCs/HGSS_Karen.png using Guid(8301c64db88682440bd5951cfc03d5fc) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'c82f2460f6363cfd38692f25f5686a4b') in 0.058756 seconds 
+  Import took 0.084241 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.171723 seconds.
+  path: Assets/Resources/Art/TrianersOverworld/NPCs/HGSS_KimonoGirl.png
+  artifactKey: Guid(fc4270ba55e558547b4299b08349d051) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Art/TrianersOverworld/NPCs/HGSS_KimonoGirl.png using Guid(fc4270ba55e558547b4299b08349d051) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'aa132ada74040c9662544ec4305df89d') in 0.057535 seconds 
+  Import took 0.079342 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.174321 seconds.
+  path: Assets/Resources/Art/TrianersOverworld/NPCs/HGSS_Koga.png
+  artifactKey: Guid(fe7eee1f062b68847abdb06bcd3b614c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Art/TrianersOverworld/NPCs/HGSS_Koga.png using Guid(fe7eee1f062b68847abdb06bcd3b614c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '7d2cb6303169721c39b49b799f1a17a2') in 0.053806 seconds 
+  Import took 0.084244 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.167605 seconds.
+  path: Assets/Resources/Art/TrianersOverworld/NPCs/HGSS_Kurt.png
+  artifactKey: Guid(24c7635f614d69f4a81d0b1f646a167f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Art/TrianersOverworld/NPCs/HGSS_Kurt.png using Guid(24c7635f614d69f4a81d0b1f646a167f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '35c379499570b365066cc9f54f122d92') in 0.049344 seconds 
+  Import took 0.077100 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.209643 seconds.
+  path: Assets/Resources/Art/TrianersOverworld/NPCs/HGSS_Lance.png
+  artifactKey: Guid(86a23514da2277c4bb7c64fafcc6a56d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Art/TrianersOverworld/NPCs/HGSS_Lance.png using Guid(86a23514da2277c4bb7c64fafcc6a56d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '94ca8c328adf96626a54a03fe84b300d') in 0.052909 seconds 
+  Import took 0.070865 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.152506 seconds.
+  path: Assets/Resources/Art/TrianersOverworld/NPCs/HGSS_Lass.png
+  artifactKey: Guid(96b578c45b617e04f97e1dfdf8e5887d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Art/TrianersOverworld/NPCs/HGSS_Lass.png using Guid(96b578c45b617e04f97e1dfdf8e5887d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '59894a08b3471bf5204236129023f97b') in 0.052196 seconds 
+  Import took 0.132844 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.154477 seconds.
+  path: Assets/Resources/Art/TrianersOverworld/NPCs/HGSS_Lt. Surge.png
+  artifactKey: Guid(e86f0cd61d3e17142ab152d4f9f4cd3d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Art/TrianersOverworld/NPCs/HGSS_Lt. Surge.png using Guid(e86f0cd61d3e17142ab152d4f9f4cd3d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '8bc1cda50e5901c57b4ed1aa44889ed1') in 0.051615 seconds 
+  Import took 0.081619 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.183268 seconds.
+  path: Assets/Resources/Art/TrianersOverworld/NPCs/HGSS_Magnus.png
+  artifactKey: Guid(65e3fd529aaa8384d9f46c80eb95efe3) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Art/TrianersOverworld/NPCs/HGSS_Magnus.png using Guid(65e3fd529aaa8384d9f46c80eb95efe3) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '171e150a723f9d6953919e840354e6b4') in 0.053684 seconds 
+  Import took 0.089931 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.235589 seconds.
+  path: Assets/Resources/Art/TrianersOverworld/NPCs/HGSS_MaleAceTrainer.png
+  artifactKey: Guid(6c6f581166315314ab7d415307ee3bc4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Art/TrianersOverworld/NPCs/HGSS_MaleAceTrainer.png using Guid(6c6f581166315314ab7d415307ee3bc4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'f5d6102dc2d4c18f27b41b4b430676a9') in 0.089759 seconds 
+  Import took 0.107974 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.271571 seconds.
+  path: Assets/Resources/Art/TrianersOverworld/NPCs/HGSS_MaleBellhop.png
+  artifactKey: Guid(19c2b9431c86b2c4cb5097f9c33533ba) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Art/TrianersOverworld/NPCs/HGSS_MaleBellhop.png using Guid(19c2b9431c86b2c4cb5097f9c33533ba) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '9c1d22d10bac9ac8cef37fccb5a4783c') in 0.053449 seconds 
+  Import took 0.077318 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.188528 seconds.
+  path: Assets/Resources/Art/TrianersOverworld/NPCs/HGSS_MaleBellhop1.png
+  artifactKey: Guid(166c1a18f1797f242a6678f755220985) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Art/TrianersOverworld/NPCs/HGSS_MaleBellhop1.png using Guid(166c1a18f1797f242a6678f755220985) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'b54a937ecbc72dfc7e2cecfff2ac9c51') in 0.046476 seconds 
+  Import took 0.074126 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.230155 seconds.
+  path: Assets/Resources/Art/TrianersOverworld/NPCs/HGSS_MaleChild.png
+  artifactKey: Guid(55e14f633b0bddb4e841c37b1f188570) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Art/TrianersOverworld/NPCs/HGSS_MaleChild.png using Guid(55e14f633b0bddb4e841c37b1f188570) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'adec540c7a8399012681b658b0669131') in 0.055257 seconds 
+  Import took 0.071408 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.181168 seconds.
+  path: Assets/Resources/Art/TrianersOverworld/NPCs/HGSS_MalePokéFan.png
+  artifactKey: Guid(df40a839254ca4a4f9e51c2f6c694120) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Art/TrianersOverworld/NPCs/HGSS_MalePokéFan.png using Guid(df40a839254ca4a4f9e51c2f6c694120) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '49d40775c8edfc0d22cdc7c03605d33c') in 0.049397 seconds 
+  Import took 0.081414 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.213230 seconds.
+  path: Assets/Resources/Art/TrianersOverworld/NPCs/HGSS_MaleRocket.png
+  artifactKey: Guid(68d672f44132c624cac203f3d684d9da) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Art/TrianersOverworld/NPCs/HGSS_MaleRocket.png using Guid(68d672f44132c624cac203f3d684d9da) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '81c19f069edb0aec0b21722f87e84322') in 0.058506 seconds 
+  Import took 0.063511 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.202005 seconds.
+  path: Assets/Resources/Art/TrianersOverworld/NPCs/HGSS_MaleSwimmer.png
+  artifactKey: Guid(4d1ea50a2dcbb7d4fa8dc294519cc906) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Art/TrianersOverworld/NPCs/HGSS_MaleSwimmer.png using Guid(4d1ea50a2dcbb7d4fa8dc294519cc906) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '64f2a38d4e31534fb251e57065b858d7') in 0.045057 seconds 
+  Import took 0.058414 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.195960 seconds.
+  path: Assets/Resources/Art/TrianersOverworld/NPCs/HGSS_Mary.png
+  artifactKey: Guid(3220cb07285a1ca4093fe6a6f9967e29) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Art/TrianersOverworld/NPCs/HGSS_Mary.png using Guid(3220cb07285a1ca4093fe6a6f9967e29) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'd139090efb5bee73eeb888df666a0f84') in 0.055846 seconds 
+  Import took 0.077169 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.144747 seconds.
+  path: Assets/Resources/Art/TrianersOverworld/NPCs/HGSS_Misty.png
+  artifactKey: Guid(1426196f5e86cc44282f3ad7080cf5dc) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Art/TrianersOverworld/NPCs/HGSS_Misty.png using Guid(1426196f5e86cc44282f3ad7080cf5dc) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '1c39d351b5c98eb4040e55ad78a2b99f') in 0.056391 seconds 
+  Import took 0.079794 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.214780 seconds.
+  path: Assets/Resources/Art/TrianersOverworld/NPCs/HGSS_Morty.png
+  artifactKey: Guid(a91d5deb98443054abd754e46964ccdf) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Art/TrianersOverworld/NPCs/HGSS_Morty.png using Guid(a91d5deb98443054abd754e46964ccdf) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'b77ccb9ba5e9a9010cf8c4bc645649cd') in 0.065144 seconds 
+  Import took 0.089325 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.176727 seconds.
+  path: Assets/Resources/Art/TrianersOverworld/NPCs/HGSS_Mother.png
+  artifactKey: Guid(83fd081e2865da14da76d8239c8930cd) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Art/TrianersOverworld/NPCs/HGSS_Mother.png using Guid(83fd081e2865da14da76d8239c8930cd) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'f90c326728133640bbacaf200b945440') in 0.052988 seconds 
+  Import took 0.085053 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.222574 seconds.
+  path: Assets/Resources/Art/TrianersOverworld/NPCs/HGSS_Mr.Game.png
+  artifactKey: Guid(61a69e5c111435a41baa497837c3e470) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Art/TrianersOverworld/NPCs/HGSS_Mr.Game.png using Guid(61a69e5c111435a41baa497837c3e470) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '29b4adfaab54506acacc925e57df4571') in 0.049360 seconds 
+  Import took 0.078382 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.202257 seconds.
+  path: Assets/Resources/Art/TrianersOverworld/NPCs/HGSS_OldMan0.png
+  artifactKey: Guid(038a9bbbb8e6bda4dbd6308930b833ca) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Art/TrianersOverworld/NPCs/HGSS_OldMan0.png using Guid(038a9bbbb8e6bda4dbd6308930b833ca) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '3a6e8b7300783706c5646ee358b30a28') in 0.050636 seconds 
+  Import took 0.072989 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.232213 seconds.
+  path: Assets/Resources/Art/TrianersOverworld/NPCs/HGSS_OldWoman.png
+  artifactKey: Guid(9761907c9ecfcce4ebb6f1d5cd76f241) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Art/TrianersOverworld/NPCs/HGSS_OldWoman.png using Guid(9761907c9ecfcce4ebb6f1d5cd76f241) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '0dd291a0cd85060b664d0d2b3a5637ee') in 0.050448 seconds 
+  Import took 0.070654 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.199198 seconds.
+  path: Assets/Resources/Art/TrianersOverworld/NPCs/HGSS_OldWoman1.png
+  artifactKey: Guid(5723409ccc21a8440831b76cd01d9a35) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Art/TrianersOverworld/NPCs/HGSS_OldWoman1.png using Guid(5723409ccc21a8440831b76cd01d9a35) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '09361c02e29c46111c74625b5ffeece5') in 0.047070 seconds 
+  Import took 0.061234 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.253628 seconds.
+  path: Assets/Resources/Art/TrianersOverworld/NPCs/HGSS_OldWomanWithLights.png
+  artifactKey: Guid(069189b22bd990f48b92b1be9c3d8be6) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Art/TrianersOverworld/NPCs/HGSS_OldWomanWithLights.png using Guid(069189b22bd990f48b92b1be9c3d8be6) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '6912c64bf0b38eff73c0df431fbdcedc') in 0.048548 seconds 
+  Import took 0.062475 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.218830 seconds.
+  path: Assets/Resources/Art/TrianersOverworld/NPCs/HGSS_PokéManiac.png
+  artifactKey: Guid(8c635e5212b42db4d8350abe10bf8820) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Art/TrianersOverworld/NPCs/HGSS_PokéManiac.png using Guid(8c635e5212b42db4d8350abe10bf8820) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'd480abdf1b92933ed448a99982141211') in 0.061759 seconds 
+  Import took 0.082135 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.204499 seconds.
+  path: Assets/Resources/Art/TrianersOverworld/NPCs/HGSS_Primo.png
+  artifactKey: Guid(1711fb1b396a8e344a022943228d636e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Art/TrianersOverworld/NPCs/HGSS_Primo.png using Guid(1711fb1b396a8e344a022943228d636e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'bed575ef2c2eee6a29cb5bd33e122d74') in 0.050569 seconds 
+  Import took 0.078088 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.208485 seconds.
+  path: Assets/Resources/Art/TrianersOverworld/NPCs/HGSS_ProfessorElm.png
+  artifactKey: Guid(7f7a124ba8ba9814893e15e63f3968c5) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Art/TrianersOverworld/NPCs/HGSS_ProfessorElm.png using Guid(7f7a124ba8ba9814893e15e63f3968c5) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '15a9970614a9050475cf49ae8891b350') in 0.053275 seconds 
+  Import took 0.072271 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.244525 seconds.
+  path: Assets/Resources/Art/TrianersOverworld/NPCs/HGSS_Pryce.png
+  artifactKey: Guid(a9950ec688f06f94db6975be5e88e60a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Art/TrianersOverworld/NPCs/HGSS_Pryce.png using Guid(a9950ec688f06f94db6975be5e88e60a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '699d3637c526c5a9c046561d48e7634c') in 0.061957 seconds 
+  Import took 0.079788 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.184287 seconds.
+  path: Assets/Resources/Art/TrianersOverworld/NPCs/HGSS_Red.png
+  artifactKey: Guid(bc7330570e55f984cab00976b70f64c2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Art/TrianersOverworld/NPCs/HGSS_Red.png using Guid(bc7330570e55f984cab00976b70f64c2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '00f856a16d981eda8d64af4abea60cf1') in 0.047774 seconds 
+  Import took 0.085081 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.200085 seconds.
+  path: Assets/Resources/Art/TrianersOverworld/NPCs/HGSS_RocketExecutiveArcher.png
+  artifactKey: Guid(d3434e3322e1df44999757ec50ea0004) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Art/TrianersOverworld/NPCs/HGSS_RocketExecutiveArcher.png using Guid(d3434e3322e1df44999757ec50ea0004) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '20bcd1cb448597c07af8d320c86c2eba') in 0.052755 seconds 
+  Import took 0.084571 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.178583 seconds.
+  path: Assets/Resources/Art/TrianersOverworld/NPCs/HGSS_RocketExecutiveAriana.png
+  artifactKey: Guid(fba60bc912f42314c9980271351e7ecd) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Art/TrianersOverworld/NPCs/HGSS_RocketExecutiveAriana.png using Guid(fba60bc912f42314c9980271351e7ecd) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '492634c4d1f42a8eb40072108ca7dd30') in 0.048754 seconds 
+  Import took 0.067132 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.236537 seconds.
+  path: Assets/Resources/Art/TrianersOverworld/NPCs/HGSS_RocketExecutivePetrel.png
+  artifactKey: Guid(f79b8aec042bf084c86e41de24917fc9) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Art/TrianersOverworld/NPCs/HGSS_RocketExecutivePetrel.png using Guid(f79b8aec042bf084c86e41de24917fc9) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'e4208f6eac0dc9cb93474b46224c8f2b') in 0.063843 seconds 
+  Import took 0.088425 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.262724 seconds.
+  path: Assets/Resources/Art/TrianersOverworld/NPCs/HGSS_RocketExecutiveProton.png
+  artifactKey: Guid(44de2c9349d8f9e499c0224738e2fbd9) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Art/TrianersOverworld/NPCs/HGSS_RocketExecutiveProton.png using Guid(44de2c9349d8f9e499c0224738e2fbd9) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '9cf795d95d5f3ba63110dbf2a0a72129') in 0.072173 seconds 
+  Import took 0.076465 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.183096 seconds.
+  path: Assets/Resources/Art/TrianersOverworld/NPCs/HGSS_Sabrina.png
+  artifactKey: Guid(e116224bc40795442acd5ab256c52e87) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Art/TrianersOverworld/NPCs/HGSS_Sabrina.png using Guid(e116224bc40795442acd5ab256c52e87) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'd230bfec6934314a7e559eb63c268ebb') in 0.063843 seconds 
+  Import took 0.068808 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.165132 seconds.
+  path: Assets/Resources/Art/TrianersOverworld/NPCs/HGSS_Sage.png
+  artifactKey: Guid(6299501aabdc1084584db484526888cb) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Art/TrianersOverworld/NPCs/HGSS_Sage.png using Guid(6299501aabdc1084584db484526888cb) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '379e93fa7a98d79901206ee894349626') in 0.048029 seconds 
+  Import took 0.072413 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.131630 seconds.
+  path: Assets/Resources/Art/TrianersOverworld/NPCs/HGSS_Silver.png
+  artifactKey: Guid(596fe2ff9587ccf44ab1077afaf73b49) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Art/TrianersOverworld/NPCs/HGSS_Silver.png using Guid(596fe2ff9587ccf44ab1077afaf73b49) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'bf0847e543736de0a3383f2c4cf3e496') in 0.050503 seconds 
+  Import took 0.069427 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.146807 seconds.
+  path: Assets/Resources/Art/TrianersOverworld/NPCs/HGSS_Snowboarder.png
+  artifactKey: Guid(35b61c2a3406ce840997fa3779f11e08) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Art/TrianersOverworld/NPCs/HGSS_Snowboarder.png using Guid(35b61c2a3406ce840997fa3779f11e08) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'd6e4cbab7b158a44618be8717f8b7b1d') in 0.052047 seconds 
+  Import took 0.078585 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.194575 seconds.
+  path: Assets/Resources/Art/TrianersOverworld/NPCs/HGSS_Steve.png
+  artifactKey: Guid(4e0c235955276f54e9517d477d4607a3) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Art/TrianersOverworld/NPCs/HGSS_Steve.png using Guid(4e0c235955276f54e9517d477d4607a3) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'b7108ce34d735f064eaeb96fcdfc813d') in 0.061643 seconds 
+  Import took 0.081260 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.133064 seconds.
+  path: Assets/Resources/Art/TrianersOverworld/NPCs/HGSS_SuperNerd.png
+  artifactKey: Guid(01514ebfe515ba94091ddd515c86ceec) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Art/TrianersOverworld/NPCs/HGSS_SuperNerd.png using Guid(01514ebfe515ba94091ddd515c86ceec) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'bfeb058a4bf7e0f0b5e705277d791abf') in 0.070030 seconds 
+  Import took 0.091078 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.215358 seconds.
+  path: Assets/Resources/Art/TrianersOverworld/NPCs/HGSS_Unkown0.png
+  artifactKey: Guid(c1d7edddd6e8118459bf118d98a143df) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Art/TrianersOverworld/NPCs/HGSS_Unkown0.png using Guid(c1d7edddd6e8118459bf118d98a143df) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'b9a1e6da2d30b16e86cd767e02714da1') in 0.049766 seconds 
+  Import took 0.070184 seconds .
+
+========================================================================
 Received Prepare
 Registering precompiled user dll's ...
-Registered in 0.006796 seconds.
+Registered in 0.006134 seconds.
 Begin MonoManager ReloadAssembly
 Native extension for WindowsStandalone target not found
-Refreshing native plugins compatible for Editor in 1.76 ms, found 2 plugins.
+Refreshing native plugins compatible for Editor in 1.62 ms, found 2 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Mono: successfully reloaded assembly
-- Completed reload, in  1.388 seconds
+- Completed reload, in  1.224 seconds
 Domain Reload Profiling:
-	ReloadAssembly (1388ms)
-		BeginReloadAssembly (129ms)
+	ReloadAssembly (1224ms)
+		BeginReloadAssembly (133ms)
 			ExecutionOrderSort (0ms)
-			DisableScriptedObjects (8ms)
+			DisableScriptedObjects (9ms)
 			BackupInstance (0ms)
 			ReleaseScriptingObjects (0ms)
-			CreateAndSetChildDomain (41ms)
-		EndReloadAssembly (1077ms)
-			LoadAssemblies (129ms)
+			CreateAndSetChildDomain (43ms)
+		EndReloadAssembly (1025ms)
+			LoadAssemblies (97ms)
 			RebuildTransferFunctionScriptingTraits (0ms)
-			SetupTypeCache (352ms)
+			SetupTypeCache (308ms)
 			ReleaseScriptCaches (1ms)
-			RebuildScriptCaches (72ms)
-			SetupLoadedEditorAssemblies (415ms)
+			RebuildScriptCaches (66ms)
+			SetupLoadedEditorAssemblies (433ms)
 				LogAssemblyErrors (0ms)
 				InitializePlatformSupportModulesInManaged (6ms)
-				SetLoadedEditorAssemblies (1ms)
+				SetLoadedEditorAssemblies (0ms)
 				RefreshPlugins (2ms)
-				BeforeProcessingInitializeOnLoad (107ms)
-				ProcessInitializeOnLoadAttributes (248ms)
-				ProcessInitializeOnLoadMethodAttributes (45ms)
+				BeforeProcessingInitializeOnLoad (125ms)
+				ProcessInitializeOnLoadAttributes (250ms)
+				ProcessInitializeOnLoadMethodAttributes (44ms)
 				AfterProcessingInitializeOnLoad (6ms)
 				EditorAssembliesLoaded (0ms)
 			ExecutionOrderSort2 (0ms)
@@ -1237,76 +663,11 @@ Platform modules already initialized, skipping
 Refreshing native plugins compatible for Editor in 1.75 ms, found 2 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Unloading 2678 Unused Serialized files (Serialized files now loaded: 0)
-System memory in use before: 109.6 MB.
-System memory in use after: 109.9 MB.
+System memory in use before: 109.4 MB.
+System memory in use after: 109.7 MB.
 
-Unloading 49 unused Assets to reduce memory usage. Loaded Objects now: 3109.
-Total: 8.068500 ms (FindLiveObjects: 0.245400 ms CreateObjectMapping: 0.095300 ms MarkObjects: 7.701000 ms  DeleteObjects: 0.025600 ms)
-
-AssetImportParameters requested are different than current active one (requested -> active):
-  custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
-  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
-  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
-  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
-  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
-  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
-  custom:video-codec-MediaFoundation-h265: 746d11721c4dcdbdad8f713fa42b33f4 -> 
-  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
-  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
-  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
-========================================================================
-Received Import Request.
-  Time since last request: 2847.872293 seconds.
-  path: Assets/Resources/Pokedex/Gen4/415 Combee.asset
-  artifactKey: Guid(11a7c9800ab30214fa50985179d93416) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Resources/Pokedex/Gen4/415 Combee.asset using Guid(11a7c9800ab30214fa50985179d93416) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'f500b6dabbeb0c435fc97e724e79b53a') in 0.053033 seconds 
-  Import took 0.080658 seconds .
-
-========================================================================
-Received Prepare
-Registering precompiled user dll's ...
-Registered in 0.562020 seconds.
-Begin MonoManager ReloadAssembly
-Native extension for WindowsStandalone target not found
-Refreshing native plugins compatible for Editor in 1.86 ms, found 2 plugins.
-Preloading 0 native plugins for Editor in 0.00 ms.
-Mono: successfully reloaded assembly
-- Completed reload, in  1.841 seconds
-Domain Reload Profiling:
-	ReloadAssembly (1841ms)
-		BeginReloadAssembly (217ms)
-			ExecutionOrderSort (0ms)
-			DisableScriptedObjects (12ms)
-			BackupInstance (0ms)
-			ReleaseScriptingObjects (0ms)
-			CreateAndSetChildDomain (81ms)
-		EndReloadAssembly (1525ms)
-			LoadAssemblies (165ms)
-			RebuildTransferFunctionScriptingTraits (0ms)
-			SetupTypeCache (462ms)
-			ReleaseScriptCaches (3ms)
-			RebuildScriptCaches (101ms)
-			SetupLoadedEditorAssemblies (652ms)
-				LogAssemblyErrors (0ms)
-				InitializePlatformSupportModulesInManaged (10ms)
-				SetLoadedEditorAssemblies (1ms)
-				RefreshPlugins (2ms)
-				BeforeProcessingInitializeOnLoad (161ms)
-				ProcessInitializeOnLoadAttributes (391ms)
-				ProcessInitializeOnLoadMethodAttributes (77ms)
-				AfterProcessingInitializeOnLoad (9ms)
-				EditorAssembliesLoaded (0ms)
-			ExecutionOrderSort2 (0ms)
-			AwakeInstancesAfterBackupRestoration (13ms)
-Platform modules already initialized, skipping
-Refreshing native plugins compatible for Editor in 2.83 ms, found 2 plugins.
-Preloading 0 native plugins for Editor in 0.00 ms.
-Unloading 2678 Unused Serialized files (Serialized files now loaded: 0)
-System memory in use before: 109.7 MB.
-System memory in use after: 109.9 MB.
-
-Unloading 49 unused Assets to reduce memory usage. Loaded Objects now: 3111.
-Total: 12.486400 ms (FindLiveObjects: 0.306900 ms CreateObjectMapping: 0.135700 ms MarkObjects: 11.964800 ms  DeleteObjects: 0.076100 ms)
+Unloading 49 unused Assets to reduce memory usage. Loaded Objects now: 3101.
+Total: 9.491600 ms (FindLiveObjects: 0.286300 ms CreateObjectMapping: 0.162300 ms MarkObjects: 9.004800 ms  DeleteObjects: 0.037000 ms)
 
 AssetImportParameters requested are different than current active one (requested -> active):
   custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
@@ -1322,113 +683,129 @@ AssetImportParameters requested are different than current active one (requested
 ========================================================================
 Received Prepare
 Registering precompiled user dll's ...
-Registered in 0.006430 seconds.
+Registered in 0.006105 seconds.
 Begin MonoManager ReloadAssembly
 Native extension for WindowsStandalone target not found
-Refreshing native plugins compatible for Editor in 1.53 ms, found 2 plugins.
+Refreshing native plugins compatible for Editor in 1.91 ms, found 2 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Mono: successfully reloaded assembly
-- Completed reload, in  1.363 seconds
+- Completed reload, in  1.210 seconds
 Domain Reload Profiling:
-	ReloadAssembly (1363ms)
-		BeginReloadAssembly (115ms)
+	ReloadAssembly (1211ms)
+		BeginReloadAssembly (138ms)
 			ExecutionOrderSort (0ms)
 			DisableScriptedObjects (7ms)
 			BackupInstance (0ms)
 			ReleaseScriptingObjects (0ms)
-			CreateAndSetChildDomain (38ms)
-		EndReloadAssembly (1187ms)
-			LoadAssemblies (96ms)
+			CreateAndSetChildDomain (39ms)
+		EndReloadAssembly (1006ms)
+			LoadAssemblies (112ms)
 			RebuildTransferFunctionScriptingTraits (0ms)
-			SetupTypeCache (280ms)
+			SetupTypeCache (315ms)
 			ReleaseScriptCaches (2ms)
-			RebuildScriptCaches (60ms)
-			SetupLoadedEditorAssemblies (642ms)
-				LogAssemblyErrors (0ms)
-				InitializePlatformSupportModulesInManaged (5ms)
-				SetLoadedEditorAssemblies (0ms)
-				RefreshPlugins (2ms)
-				BeforeProcessingInitializeOnLoad (107ms)
-				ProcessInitializeOnLoadAttributes (466ms)
-				ProcessInitializeOnLoadMethodAttributes (55ms)
-				AfterProcessingInitializeOnLoad (6ms)
-				EditorAssembliesLoaded (0ms)
-			ExecutionOrderSort2 (0ms)
-			AwakeInstancesAfterBackupRestoration (11ms)
-Platform modules already initialized, skipping
-Refreshing native plugins compatible for Editor in 2.03 ms, found 2 plugins.
-Preloading 0 native plugins for Editor in 0.00 ms.
-Unloading 2678 Unused Serialized files (Serialized files now loaded: 0)
-System memory in use before: 109.7 MB.
-System memory in use after: 109.9 MB.
-
-Unloading 49 unused Assets to reduce memory usage. Loaded Objects now: 3113.
-Total: 7.976100 ms (FindLiveObjects: 0.285000 ms CreateObjectMapping: 0.141500 ms MarkObjects: 7.515200 ms  DeleteObjects: 0.033300 ms)
-
-AssetImportParameters requested are different than current active one (requested -> active):
-  custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
-  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
-  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
-  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
-  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
-  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
-  custom:video-codec-MediaFoundation-h265: 746d11721c4dcdbdad8f713fa42b33f4 -> 
-  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
-  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
-  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
-========================================================================
-Received Import Request.
-  Time since last request: 178.488169 seconds.
-  path: Assets/Resources/Pokedex/Gen4/412 Burmy-Plant.asset
-  artifactKey: Guid(8098967842671404bbc6210cc0a9f64d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Resources/Pokedex/Gen4/412 Burmy-Plant.asset using Guid(8098967842671404bbc6210cc0a9f64d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '3695e5085d952ba425c2ef2264afb8fb') in 0.061908 seconds 
-  Import took 0.077301 seconds .
-
-========================================================================
-Received Prepare
-Registering precompiled user dll's ...
-Registered in 0.471866 seconds.
-Begin MonoManager ReloadAssembly
-Native extension for WindowsStandalone target not found
-Refreshing native plugins compatible for Editor in 2.05 ms, found 2 plugins.
-Preloading 0 native plugins for Editor in 0.00 ms.
-Mono: successfully reloaded assembly
-- Completed reload, in  1.267 seconds
-Domain Reload Profiling:
-	ReloadAssembly (1268ms)
-		BeginReloadAssembly (152ms)
-			ExecutionOrderSort (0ms)
-			DisableScriptedObjects (7ms)
-			BackupInstance (0ms)
-			ReleaseScriptingObjects (0ms)
-			CreateAndSetChildDomain (43ms)
-		EndReloadAssembly (1055ms)
-			LoadAssemblies (128ms)
-			RebuildTransferFunctionScriptingTraits (0ms)
-			SetupTypeCache (302ms)
-			ReleaseScriptCaches (2ms)
-			RebuildScriptCaches (63ms)
-			SetupLoadedEditorAssemblies (478ms)
+			RebuildScriptCaches (62ms)
+			SetupLoadedEditorAssemblies (419ms)
 				LogAssemblyErrors (0ms)
 				InitializePlatformSupportModulesInManaged (6ms)
 				SetLoadedEditorAssemblies (0ms)
 				RefreshPlugins (2ms)
 				BeforeProcessingInitializeOnLoad (111ms)
-				ProcessInitializeOnLoadAttributes (309ms)
-				ProcessInitializeOnLoadMethodAttributes (43ms)
-				AfterProcessingInitializeOnLoad (6ms)
+				ProcessInitializeOnLoadAttributes (249ms)
+				ProcessInitializeOnLoadMethodAttributes (44ms)
+				AfterProcessingInitializeOnLoad (7ms)
 				EditorAssembliesLoaded (0ms)
 			ExecutionOrderSort2 (0ms)
 			AwakeInstancesAfterBackupRestoration (8ms)
 Platform modules already initialized, skipping
-Refreshing native plugins compatible for Editor in 1.65 ms, found 2 plugins.
+Refreshing native plugins compatible for Editor in 1.59 ms, found 2 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Unloading 2678 Unused Serialized files (Serialized files now loaded: 0)
-System memory in use before: 109.7 MB.
-System memory in use after: 109.9 MB.
+System memory in use before: 109.5 MB.
+System memory in use after: 109.7 MB.
 
-Unloading 49 unused Assets to reduce memory usage. Loaded Objects now: 3115.
-Total: 8.301900 ms (FindLiveObjects: 0.253700 ms CreateObjectMapping: 0.102900 ms MarkObjects: 7.902800 ms  DeleteObjects: 0.041300 ms)
+Unloading 49 unused Assets to reduce memory usage. Loaded Objects now: 3103.
+Total: 7.535200 ms (FindLiveObjects: 0.242400 ms CreateObjectMapping: 0.110100 ms MarkObjects: 7.150700 ms  DeleteObjects: 0.031000 ms)
+
+AssetImportParameters requested are different than current active one (requested -> active):
+  custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
+  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
+  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
+  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
+  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
+  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
+  custom:video-codec-MediaFoundation-h265: 746d11721c4dcdbdad8f713fa42b33f4 -> 
+  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
+  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+========================================================================
+Received Import Request.
+  Time since last request: 273.043668 seconds.
+  path: Assets/Scenes/_ToBeDeleted/TestScene.unity
+  artifactKey: Guid(140f10d3a353f7e41bb96fbdccdadcdf) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scenes/_ToBeDeleted/TestScene.unity using Guid(140f10d3a353f7e41bb96fbdccdadcdf) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'bff0b668e2b39499890c4eea3079a286') in 0.031242 seconds 
+  Import took 0.049703 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.589937 seconds.
+  path: Assets/Scenes/_ToBeDeleted/TrainersSaved.unity
+  artifactKey: Guid(2df6a66cf2ba1344b9466abe85faed8b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scenes/_ToBeDeleted/TrainersSaved.unity using Guid(2df6a66cf2ba1344b9466abe85faed8b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '26420c82582400eec15c63074e4daf98') in 0.005985 seconds 
+  Import took 0.033655 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 66.788441 seconds.
+  path: Assets/Resources/SceneData/Route5.asset
+  artifactKey: Guid(3f5e883ac991d2841b78718d0b269423) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/SceneData/Route5.asset using Guid(3f5e883ac991d2841b78718d0b269423) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '40c5d6dbd9a32711311a7dd33ae0239e') in 0.240579 seconds 
+  Import took 0.271012 seconds .
+
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.007821 seconds.
+Begin MonoManager ReloadAssembly
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 1.54 ms, found 2 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Mono: successfully reloaded assembly
+- Completed reload, in  1.130 seconds
+Domain Reload Profiling:
+	ReloadAssembly (1130ms)
+		BeginReloadAssembly (112ms)
+			ExecutionOrderSort (0ms)
+			DisableScriptedObjects (7ms)
+			BackupInstance (0ms)
+			ReleaseScriptingObjects (0ms)
+			CreateAndSetChildDomain (37ms)
+		EndReloadAssembly (951ms)
+			LoadAssemblies (96ms)
+			RebuildTransferFunctionScriptingTraits (0ms)
+			SetupTypeCache (286ms)
+			ReleaseScriptCaches (2ms)
+			RebuildScriptCaches (61ms)
+			SetupLoadedEditorAssemblies (406ms)
+				LogAssemblyErrors (0ms)
+				InitializePlatformSupportModulesInManaged (6ms)
+				SetLoadedEditorAssemblies (0ms)
+				RefreshPlugins (2ms)
+				BeforeProcessingInitializeOnLoad (106ms)
+				ProcessInitializeOnLoadAttributes (244ms)
+				ProcessInitializeOnLoadMethodAttributes (43ms)
+				AfterProcessingInitializeOnLoad (6ms)
+				EditorAssembliesLoaded (0ms)
+			ExecutionOrderSort2 (0ms)
+			AwakeInstancesAfterBackupRestoration (7ms)
+Platform modules already initialized, skipping
+Refreshing native plugins compatible for Editor in 3.20 ms, found 2 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 2678 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 109.6 MB.
+System memory in use after: 109.8 MB.
+
+Unloading 49 unused Assets to reduce memory usage. Loaded Objects now: 3105.
+Total: 7.808600 ms (FindLiveObjects: 0.248600 ms CreateObjectMapping: 0.099000 ms MarkObjects: 7.428400 ms  DeleteObjects: 0.031400 ms)
 
 AssetImportParameters requested are different than current active one (requested -> active):
   custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
