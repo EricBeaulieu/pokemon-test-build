@@ -48584,8 +48584,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_TileSpriteArray.Array.data[1].m_Data
       value: 
-      objectReference: {fileID: -21920710629412485, guid: 87e55015954ba1b4dbee2c298b36761d,
-        type: 3}
+      objectReference: {fileID: 0}
     - target: {fileID: 5028359610990823962, guid: 86f95cf027de4564db51120c5a9aa18e,
         type: 3}
       propertyPath: m_TileSpriteArray.Array.data[2].m_Data
@@ -48682,7 +48681,8 @@ PrefabInstance:
         type: 3}
       propertyPath: m_TileSpriteArray.Array.data[14].m_Data
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: -21920710629412485, guid: 87e55015954ba1b4dbee2c298b36761d,
+        type: 3}
     - target: {fileID: 5028359610990823962, guid: 86f95cf027de4564db51120c5a9aa18e,
         type: 3}
       propertyPath: m_TileSpriteArray.Array.data[15].m_Data
@@ -49433,7 +49433,7 @@ PrefabInstance:
     - target: {fileID: 5028359610990823962, guid: 86f95cf027de4564db51120c5a9aa18e,
         type: 3}
       propertyPath: m_TileSpriteArray.Array.data[1].m_RefCount
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5028359610990823962, guid: 86f95cf027de4564db51120c5a9aa18e,
         type: 3}
@@ -51423,7 +51423,7 @@ PrefabInstance:
     - target: {fileID: 5028359610990823962, guid: 86f95cf027de4564db51120c5a9aa18e,
         type: 3}
       propertyPath: m_TileSpriteArray.Array.data[14].m_RefCount
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5028359610990823962, guid: 86f95cf027de4564db51120c5a9aa18e,
         type: 3}
@@ -54758,7 +54758,7 @@ PrefabInstance:
     - target: {fileID: 5028359610990823962, guid: 86f95cf027de4564db51120c5a9aa18e,
         type: 3}
       propertyPath: m_Tiles.Array.data[174].second.m_TileSpriteIndex
-      value: 1
+      value: 14
       objectReference: {fileID: 0}
     - target: {fileID: 5028359610990823962, guid: 86f95cf027de4564db51120c5a9aa18e,
         type: 3}
@@ -62842,6 +62842,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: LevelManager
+      objectReference: {fileID: 0}
+    - target: {fileID: 1345167899332473230, guid: 21aa3375d03f7d44e953bd68c44a22a7,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4937643954910637712, guid: 21aa3375d03f7d44e953bd68c44a22a7,
         type: 3}

@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public enum WildPokemonEncounterTypes { Walking,Surfing,OldRod,GoodRod,SuperRod,RockSmash,CuttableTree }//headbutting trees, honey trees
+public enum WildPokemonEncounterTypes { Walking, Surfing, OldRod, GoodRod, SuperRod, RockSmash, CuttableTree }//headbutting trees, honey trees
+[RequireComponent(typeof(SpriteRenderer))]
 public class LevelManager : MonoBehaviour
 {
     [SerializeField] BattleFieldLayoutBaseSO currentAreaDetails;
@@ -24,6 +25,11 @@ public class LevelManager : MonoBehaviour
     List<DestroyableObject> allDestroyableObjectsInScene = new List<DestroyableObject>();
     bool loaded;
     [SerializeField] Transform wildPokemonSpawnParent;
+
+    void Reset()
+    {
+        GetComponent<SpriteRenderer>().color = new Color((float)Random.Range(0, 255),(float)Random.Range(0, 255),(float)Random.Range(0, 255),0.2f);
+    }
 
     void Awake()
     {

@@ -100,4 +100,10 @@ public class Notes
     //magnitude and earth power doubles and fissure accuracy increases to 50% while theyre in dig state
     //Hidden Power Attack Power increased to 90, also includes fairy type
 
+
+
+    /*In regards to taking pictures, a screen shot tab has been added, in order to utilize this. the current scene must be open, 
+    it will grab everything that the current camera can see. the size is 16.28 that all photos were taken in.
+    Normally the camera will be set to 6 to keep the players bounds box small
+    */
 }

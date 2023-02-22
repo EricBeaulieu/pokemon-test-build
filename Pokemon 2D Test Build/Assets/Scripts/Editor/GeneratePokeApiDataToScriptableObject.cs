@@ -142,6 +142,9 @@ namespace PokeApi
                 case int n when (n >= 810 && n <= 905):
                     s = "Gen8/";
                     break;
+                case int n when (n >= 906 && n <= 1008):
+                    s = "Gen9/";
+                    break;
                 default:
                     s = null;
                     break;

@@ -933,6 +933,111 @@ public static class PokemonNameList
         "Overqwil",
         "Enamorus",
 
+        //Paldea
+        "Sprigatito",
+        "Floragato",
+        "Meowscarada",
+        "Fuecoco",
+        "Crocalor",
+        "Skeledirge",
+        "Quaxly",
+        "Quaxwell",
+        "Quaquaval",
+        "Lechonk",
+        "Oinkologne",
+        "Tarountula",
+        "Spidops",
+        "Nymble",
+        "Lokix",
+        "Pawmi",
+        "Pawmo",
+        "Pawmot",
+        "Tandemaus",
+        "Maushold",
+        "Fidough",
+        "Dachsbun",
+        "Smoliv",
+        "Dolliv",
+        "Arboliva",
+        "Squawkabilly",
+        "Nacli",
+        "Naclstack",
+        "Garganacl",
+        "Charcadet",
+        "Armarouge",
+        "Ceruledge",
+        "Tadbulb",
+        "Bellibolt",
+        "Wattrel",
+        "Kilowattrel",
+        "Maschiff",
+        "Mabosstiff",
+        "Shroodle",
+        "Grafaiai",
+        "Bramblin",
+        "Brambleghast",
+        "Toedscool",
+        "Toedscruel",
+        "Klawf",
+        "Capsakid",
+        "Scovillain",
+        "Rellor",
+        "Rabsca",
+        "Flittle",
+        "Espathra",
+        "Tinkatink",
+        "Tinkatuff",
+        "Tinkaton",
+        "Wiglett",
+        "Wugtrio",
+        "Bombirdier",
+        "Finizen",
+        "Palafin",
+        "Varoom",
+        "Revavroom",
+        "Cyclizar",
+        "Orthworm",
+        "Glimmet",
+        "Glimmora",
+        "Greavard",
+        "Houndstone",
+        "Flamigo",
+        "Cetoddle",
+        "Cetitan",
+        "Veluza",
+        "Dondozo",
+        "Tatsugiri",
+        "Annihilape",
+        "Clodsire",
+        "Farigiraf",
+        "Dudunsparce",
+        "Kingambit",
+        "Great Tusk",
+        "Scream Tail",
+        "Brute Bonnet",
+        "Flutter Mane",
+        "Slither Wing",
+        "Sandy Shocks",
+        "Iron Treads",
+        "Iron Bundle",
+        "Iron Hands",
+        "Iron Jugulis",
+        "Iron Moth",
+        "Iron Thorns",
+        "Frigibax",
+        "Arctibax",
+        "Baxcalibur",
+        "Gimmighoul",
+        "Gholdengo",
+        "Wo-Chien",
+        "Chien-Pao",
+        "Ting-Lu",
+        "Chi-Yu",
+        "Roaring Moon",
+        "Iron Valiant",
+        "Koraidon",
+        "Miraidon",
+
         //Custom
         "Alakarate",
         "Machost",
@@ -971,7 +1076,7 @@ public static class PokemonNameList
         473,
 
         //Custom
-        906
+        1009
 
 
     };
@@ -1076,11 +1181,11 @@ public static class PokemonNameList
             (pokedexNumber >= 50 && pokedexNumber <= 53) || (pokedexNumber >= 74 && pokedexNumber <= 76) || pokedexNumber == 88 || pokedexNumber == 89 ||
                 pokedexNumber == 103 || pokedexNumber == 103)
         {
-            //if(pokedexNumber == 52)
-            //{
-            //    return new string[] { "Alola","Galarian" };
-            //}
-            return new string[] { "Alola" };
+            if (pokedexNumber == 52)
+            {
+                return new string[] { "alola", "galar" };
+            }
+            return new string[] { "alola" };
         }
         //else if ((pokedexNumber >= 77 && pokedexNumber <= 80) || pokedexNumber == 83 || pokedexNumber == 110 || pokedexNumber == 122 ||
         //(pokedexNumber >= 144 && pokedexNumber <= 146) || pokedexNumber == 199 || pokedexNumber == 222 || (pokedexNumber >= 263 && pokedexNumber <= 264) || 
