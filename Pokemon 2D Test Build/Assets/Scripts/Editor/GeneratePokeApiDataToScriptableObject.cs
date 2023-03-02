@@ -14,6 +14,11 @@ namespace PokeApi
     {
         int startingInteger = 001;
         int endingInteger = 000;
+        static bool callDebug = true;
+        static bool createdOrUpdateDebug = true;
+
+        const int MIN_POKEMON_NUMBER = 1;
+        const int MAX_POKEMON_NUMBER = 1008;
 
         [MenuItem("Tools/GeneratePokemon")]
         public static void ShowWindow()
@@ -26,9 +31,16 @@ namespace PokeApi
             GUILayout.Label("Organize Pokemon Art Name and Numbers", EditorStyles.boldLabel);
             startingInteger = EditorGUILayout.IntField("Starting Number: ", startingInteger);
             endingInteger = EditorGUILayout.IntField("Ending Number: ", endingInteger);
+            callDebug = EditorGUILayout.Toggle("Call Debug: ", callDebug);
+            createdOrUpdateDebug = EditorGUILayout.Toggle("Created/Updated Debug: ", createdOrUpdateDebug);
 
             if (GUILayout.Button("Generate Pokemon"))
             {
+                if(startingInteger < MIN_POKEMON_NUMBER || startingInteger > MAX_POKEMON_NUMBER)
+                {
+                    return;
+                }
+
                 if (endingInteger < startingInteger)
                 {
                     CreateScriptableObjectPokemonBase(startingInteger);
@@ -37,6 +49,11 @@ namespace PokeApi
                 {
                     for (int i = startingInteger; i < endingInteger + 1; i++)
                     {
+                        if(i > MAX_POKEMON_NUMBER)
+                        {
+                            return;
+                        }
+
                         CreateScriptableObjectPokemonBase(i);
                     }
                 }
@@ -60,32 +77,29 @@ namespace PokeApi
             {
                 for (int i = 0; i < alternativeForms.Length; i++)
                 {
-                    pokemonName.Add($"{originalName}-{alternativeForms[i]}");
+                    pokemonName.Add($"{originalName}#{alternativeForms[i]}");
                 }
             }
 
             foreach (string tempPokemonName in pokemonName)
             {
-                string currentPokemonName = tempPokemonName;
+                string currentPokemonName = tempPokemonName.Replace('#', '-');
                 PokemonData pokemon;
-                Debug.Log($"Calling {currentPokemonName}");
+                if (callDebug == true)
+                {
+                    Debug.Log($"Calling {currentPokemonName}");
+                }
                 
-                if(specialCaseNames(pokedexNumber) == true)
+                if(PokemonNameList.specialCaseNames(pokedexNumber) == true)
                 {
                     pokemon = APIHelper.GetPokemonData(pokedexNumber);
+                    pokemon = APIHelper.GetPokemonData(currentPokemonName.Replace(originalName, pokemon.name.UpperFirstChar()));
                 }
                 else
                 {
-                    pokemon = APIHelper.GetPokemonData(currentPokemonName.ToLower());
+                    pokemon = APIHelper.GetPokemonData(currentPokemonName);
                 }
                 pokemon.species = APIHelper.GetPokemonSpecies(pokedexNumber);
-
-                if(specialCaseNames(pokedexNumber) == true)
-                {
-                    Debug.Log($"Before {currentPokemonName}");
-                    currentPokemonName = currentPokemonName.Replace(originalName, pokemon.name.UpperFirstChar());
-                    Debug.Log($"After {currentPokemonName}");
-                }
 
                 string assetPath = $"Pokedex/{GetGenLocation(pokedexNumber)}{pokedexNumber.ToString("000")} {currentPokemonName}";
 
@@ -95,18 +109,31 @@ namespace PokeApi
                 }
 
                 PokemonBase existingPokemon = Resources.Load<PokemonBase>(assetPath);
+                string formName = null;
+
+                if(tempPokemonName.Contains('#'))
+                {
+                    formName = tempPokemonName.Split('#')[1];
+                    //Debug.Log($"Form name provided is {formName}");
+                }
 
                 if (existingPokemon != null)
                 {
-                    Debug.Log($"Updated {pokedexNumber.ToString("000")} {currentPokemonName}");
-                    existingPokemon.Initialization(pokemon, pokedexNumber);
+                    if(createdOrUpdateDebug == true)
+                    {
+                        Debug.Log($"Updated {pokedexNumber.ToString("000")} {currentPokemonName}");
+                    }
+                    existingPokemon.Initialization(pokemon, pokedexNumber, formName);
                     EditorUtility.SetDirty(existingPokemon);
                 }
                 else
                 {
-                    Debug.Log($"Created {pokedexNumber.ToString("000")} {currentPokemonName}");
+                    if (createdOrUpdateDebug == true)
+                    {
+                        Debug.Log($"Created {pokedexNumber.ToString("000")} {currentPokemonName}");
+                    }
                     PokemonBase pokemonBase = ScriptableObject.CreateInstance<PokemonBase>();
-                    pokemonBase.Initialization(pokemon, pokedexNumber);
+                    pokemonBase.Initialization(pokemon, pokedexNumber, formName);
                     AssetDatabase.CreateAsset(pokemonBase, $"Assets/Resources/{assetPath}.asset");
                 }
                 AssetDatabase.SaveAssets();
@@ -150,15 +177,6 @@ namespace PokeApi
                     break;
             }
             return s;
-        }
-
-        static bool specialCaseNames(int pokedexNumber)
-        {
-            if(pokedexNumber == 29 || pokedexNumber == 32 || pokedexNumber == 83 || pokedexNumber == 122 || pokedexNumber == 439)
-            {
-                return true;
-            }
-            return false;
         }
     }
 }

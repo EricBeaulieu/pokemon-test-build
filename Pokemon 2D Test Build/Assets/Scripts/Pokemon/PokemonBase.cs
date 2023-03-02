@@ -77,7 +77,7 @@ public class PokemonBase : ScriptableObject {
 
     #region Initialization 
 
-    public void Initialization(PokeApi.PokemonData pokemonData,int correctPokedexNumber)
+    public void Initialization(PokeApi.PokemonData pokemonData,int correctPokedexNumber,string formName)
     {
         if (pokemonData == null)
         {
@@ -87,8 +87,34 @@ public class PokemonBase : ScriptableObject {
 
         //PokeDex Information
         _pokedexNumber = correctPokedexNumber;//Different forms have different ID numbers
-        //_pokedexDescription;
-        //_classification;
+        
+        if(formName != null)
+        {
+            _form = formName;
+        }
+
+        if(string.IsNullOrEmpty(_pokedexDescription) == true)
+        {
+            for (int i = 0; i < pokemonData.species.flavor_text_entries.Length; i++)
+            {
+                if (pokemonData.species.flavor_text_entries[i].language.name == "en")
+                {
+                    _pokedexDescription = pokemonData.species.flavor_text_entries[i].flavor_text;
+                }
+            }
+        }
+
+        if (string.IsNullOrEmpty(_classification) == true)
+        {
+            for (int i = 0; i < pokemonData.species.genera.Length; i++)
+            {
+                if (pokemonData.species.genera[i].language.name == "en")
+                {
+                    _classification = pokemonData.species.genera[i].genus;
+                }
+            }
+        }
+
         _baseHappiness = pokemonData.species.base_happiness;
         _isBaby = pokemonData.species.is_baby;
         _isLegendary = pokemonData.species.is_legendary;
@@ -130,7 +156,16 @@ public class PokemonBase : ScriptableObject {
         }
 
         //Egg Information
-        _eggGroup1 = DecipherEggGroup(pokemonData.species.egg_groups[0].name);
+        if(pokemonData.species.egg_groups.Length > 0)
+        {
+            _eggGroup1 = DecipherEggGroup(pokemonData.species.egg_groups[0].name);
+        }
+        else
+        {
+            Debug.LogWarning($"{correctPokedexNumber} is missing its egg group");
+            _eggGroup1 = EggGroup.NA;
+        }
+
         if (pokemonData.species.egg_groups.Length > 1)
         {
             _eggGroup2 = DecipherEggGroup(pokemonData.species.egg_groups[1].name);
@@ -217,7 +252,7 @@ public class PokemonBase : ScriptableObject {
             case "overgrow":
                 s = "Overgrown";
                 break;
-            default://fast-then-very-slow
+            default:
                 break;
         }
         //return (AbilityID)System.Enum.Parse(typeof(AbilityID), s, true);
@@ -254,6 +289,11 @@ public class PokemonBase : ScriptableObject {
         return PokemonNameList.GetPokeDexName(_pokedexNumber);
     }
 
+    public string GetForm()
+    {
+        return _form;
+    }
+
     public int GetCatchRate()
     {
         return _captureRate;
@@ -281,7 +321,7 @@ public class PokemonBase : ScriptableObject {
     {
         string spriteName = GetStartingSpriteNameEntry(false);
 
-        return new[] { SpriteAtlas.GetSprite(spriteName + "SpriteA"), SpriteAtlas.GetSprite(spriteName + "SpriteB") };
+        return new[] { SpriteAtlas.GetSprite(spriteName + "SpriteA",true), SpriteAtlas.GetSprite(spriteName + "SpriteB",true) };
     }
 
     #endregion

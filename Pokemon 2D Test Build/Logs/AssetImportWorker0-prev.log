@@ -15,11 +15,11 @@ D:/GitHub/pokemon-test-build/Pokemon 2D Test Build
 -logFile
 Logs/AssetImportWorker0.log
 -srvPort
-50031
+57311
 Successfully changed project path to: D:/GitHub/pokemon-test-build/Pokemon 2D Test Build
 D:/GitHub/pokemon-test-build/Pokemon 2D Test Build
 Using Asset Import Pipeline V2.
-Refreshing native plugins compatible for Editor in 794.86 ms, found 2 plugins.
+Refreshing native plugins compatible for Editor in 180.36 ms, found 2 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Initialize engine version: 2020.3.22f1 (e1a7f79fd887)
 [Subsystems] Discovering subsystems at path C:/Program Files/Unity/Hub/Editor/2020.3.22f1/Editor/Data/Resources/UnitySubsystems
@@ -35,42 +35,590 @@ Initialize mono
 Mono path[0] = 'C:/Program Files/Unity/Hub/Editor/2020.3.22f1/Editor/Data/Managed'
 Mono path[1] = 'C:/Program Files/Unity/Hub/Editor/2020.3.22f1/Editor/Data/MonoBleedingEdge/lib/mono/unityjit'
 Mono config path = 'C:/Program Files/Unity/Hub/Editor/2020.3.22f1/Editor/Data/MonoBleedingEdge/etc'
-Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56744
+Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56972
 Begin MonoManager ReloadAssembly
 Registering precompiled unity dll's ...
 Register platform support module: C:/Program Files/Unity/Hub/Editor/2020.3.22f1/Editor/Data/PlaybackEngines/WindowsStandaloneSupport/UnityEditor.WindowsStandalone.Extensions.dll
-Registered in 0.004973 seconds.
+Registered in 0.001648 seconds.
 Native extension for WindowsStandalone target not found
-Refreshing native plugins compatible for Editor in 157.74 ms, found 2 plugins.
+Refreshing native plugins compatible for Editor in 149.73 ms, found 2 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Mono: successfully reloaded assembly
-- Completed reload, in  3.515 seconds
+- Completed reload, in  1.489 seconds
 Domain Reload Profiling:
-	ReloadAssembly (3515ms)
-		BeginReloadAssembly (58ms)
+	ReloadAssembly (1489ms)
+		BeginReloadAssembly (53ms)
 			ExecutionOrderSort (0ms)
 			DisableScriptedObjects (0ms)
 			BackupInstance (0ms)
 			ReleaseScriptingObjects (0ms)
 			CreateAndSetChildDomain (1ms)
-		EndReloadAssembly (678ms)
-			LoadAssemblies (55ms)
+		EndReloadAssembly (622ms)
+			LoadAssemblies (51ms)
 			RebuildTransferFunctionScriptingTraits (0ms)
-			SetupTypeCache (170ms)
+			SetupTypeCache (172ms)
 			ReleaseScriptCaches (0ms)
-			RebuildScriptCaches (40ms)
-			SetupLoadedEditorAssemblies (354ms)
+			RebuildScriptCaches (38ms)
+			SetupLoadedEditorAssemblies (294ms)
 				LogAssemblyErrors (0ms)
-				InitializePlatformSupportModulesInManaged (4ms)
-				SetLoadedEditorAssemblies (0ms)
-				RefreshPlugins (158ms)
-				BeforeProcessingInitializeOnLoad (21ms)
-				ProcessInitializeOnLoadAttributes (94ms)
-				ProcessInitializeOnLoadMethodAttributes (76ms)
+				InitializePlatformSupportModulesInManaged (5ms)
+				SetLoadedEditorAssemblies (1ms)
+				RefreshPlugins (150ms)
+				BeforeProcessingInitializeOnLoad (20ms)
+				ProcessInitializeOnLoadAttributes (90ms)
+				ProcessInitializeOnLoadMethodAttributes (28ms)
 				AfterProcessingInitializeOnLoad (0ms)
 				EditorAssembliesLoaded (0ms)
 			ExecutionOrderSort2 (0ms)
 			AwakeInstancesAfterBackupRestoration (0ms)
 Platform modules already initialized, skipping
 Registering precompiled user dll's ...
-Registered in 0.297065 seconds.
+Registered in 0.011059 seconds.
+Begin MonoManager ReloadAssembly
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 1.59 ms, found 2 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Mono: successfully reloaded assembly
+- Completed reload, in  1.216 seconds
+Domain Reload Profiling:
+	ReloadAssembly (1217ms)
+		BeginReloadAssembly (139ms)
+			ExecutionOrderSort (0ms)
+			DisableScriptedObjects (5ms)
+			BackupInstance (0ms)
+			ReleaseScriptingObjects (0ms)
+			CreateAndSetChildDomain (18ms)
+		EndReloadAssembly (1012ms)
+			LoadAssemblies (102ms)
+			RebuildTransferFunctionScriptingTraits (0ms)
+			SetupTypeCache (297ms)
+			ReleaseScriptCaches (0ms)
+			RebuildScriptCaches (60ms)
+			SetupLoadedEditorAssemblies (445ms)
+				LogAssemblyErrors (0ms)
+				InitializePlatformSupportModulesInManaged (5ms)
+				SetLoadedEditorAssemblies (0ms)
+				RefreshPlugins (2ms)
+				BeforeProcessingInitializeOnLoad (125ms)
+				ProcessInitializeOnLoadAttributes (255ms)
+				ProcessInitializeOnLoadMethodAttributes (52ms)
+				AfterProcessingInitializeOnLoad (6ms)
+				EditorAssembliesLoaded (0ms)
+			ExecutionOrderSort2 (0ms)
+			AwakeInstancesAfterBackupRestoration (8ms)
+Platform modules already initialized, skipping
+========================================================================
+Worker process is ready to serve import requests
+Launched and connected shader compiler UnityShaderCompiler.exe after 0.05 seconds
+Refreshing native plugins compatible for Editor in 1.60 ms, found 2 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 2687 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 106.7 MB.
+System memory in use after: 106.9 MB.
+
+Unloading 57 unused Assets to reduce memory usage. Loaded Objects now: 3094.
+Total: 7.451100 ms (FindLiveObjects: 0.233500 ms CreateObjectMapping: 0.123400 ms MarkObjects: 7.060800 ms  DeleteObjects: 0.032600 ms)
+
+AssetImportParameters requested are different than current active one (requested -> active):
+  custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
+  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
+  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
+  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
+  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
+  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
+  custom:video-codec-MediaFoundation-h265: 746d11721c4dcdbdad8f713fa42b33f4 -> 
+  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
+  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+========================================================================
+Received Import Request.
+  path: Assets/Art/Pokemon/Specialized/Rhyhorn.png
+  artifactKey: Guid(d0fcc2d2d3682d74f9c5f6d0982070fb) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Art/Pokemon/Specialized/Rhyhorn.png using Guid(d0fcc2d2d3682d74f9c5f6d0982070fb) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '63d5f732099aab5c2b1f600d3f84405b') in 0.129082 seconds 
+  Import took 0.154208 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000708 seconds.
+  path: Assets/Art/Pokemon/Specialized/Meganium.png
+  artifactKey: Guid(51a51d02d91fab94bb5b960eb858387a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Art/Pokemon/Specialized/Meganium.png using Guid(51a51d02d91fab94bb5b960eb858387a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '02bc3c72462e5a27896a6551aba25ad0') in 0.019220 seconds 
+  Import took 0.031572 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 74.975920 seconds.
+  path: Assets/Art/Pokemon/Specialized/Alakarate.png
+  artifactKey: Guid(c1ef671a6c999954f9c977367b27163a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Art/Pokemon/Specialized/Alakarate.png using Guid(c1ef671a6c999954f9c977367b27163a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '777640ea4de6906aef807fe3017a8bfc') in 0.126341 seconds 
+  Import took 0.160889 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 1.202218 seconds.
+  path: Assets/Art/Pokemon/Specialized/Haucker.png
+  artifactKey: Guid(51b0d91f9a0ec6f40b77fc247b3313e0) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Art/Pokemon/Specialized/Haucker.png using Guid(51b0d91f9a0ec6f40b77fc247b3313e0) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '14ae022782034afde3095166fb6c7608') in 0.073932 seconds 
+  Import took 0.094873 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.958926 seconds.
+  path: Assets/Art/Pokemon/Specialized/Gololium.png
+  artifactKey: Guid(c09cd95866672be449a88cf3881724cc) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Art/Pokemon/Specialized/Gololium.png using Guid(c09cd95866672be449a88cf3881724cc) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '80f2097ded55bcab38e62bc7e5289432') in 0.086049 seconds 
+  Import took 0.132991 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 3.882059 seconds.
+  path: Assets/Art/Pokemon/Specialized/Meganium.png
+  artifactKey: Guid(51a51d02d91fab94bb5b960eb858387a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Art/Pokemon/Specialized/Meganium.png using Guid(51a51d02d91fab94bb5b960eb858387a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '615703370dbd5bc0d9cab26569682096') in 0.018436 seconds 
+  Import took 0.040275 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 6.843873 seconds.
+  path: Assets/Art/Pokemon/Specialized/Meganium.png
+  artifactKey: Guid(51a51d02d91fab94bb5b960eb858387a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Art/Pokemon/Specialized/Meganium.png using Guid(51a51d02d91fab94bb5b960eb858387a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '1cbded33a1badc864e8e062ab6c9fc6d') in 0.018524 seconds 
+  Import took 0.040217 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 2.121591 seconds.
+  path: Assets/Art/Pokemon/Specialized/Machost.png
+  artifactKey: Guid(b830534a8cff35847a2b163534f54f61) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Art/Pokemon/Specialized/Machost.png using Guid(b830534a8cff35847a2b163534f54f61) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '9973eb6b2c6f49327b4375869b358596') in 0.125295 seconds 
+  Import took 0.141286 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 22.850099 seconds.
+  path: Assets/Art/Pokemon/Specialized/Rhyhorn.png
+  artifactKey: Guid(d0fcc2d2d3682d74f9c5f6d0982070fb) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Art/Pokemon/Specialized/Rhyhorn.png using Guid(d0fcc2d2d3682d74f9c5f6d0982070fb) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'b16e4a08a538718c4837a003eedf1724') in 0.010466 seconds 
+  Import took 0.061554 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 7295.995135 seconds.
+  path: Assets/Art/Pokemon/Specialized/Totartle.png
+  artifactKey: Guid(901f3bf08b7bd504ca8e0578abf8a161) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Art/Pokemon/Specialized/Totartle.png using Guid(901f3bf08b7bd504ca8e0578abf8a161) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'ba324f359a72cb4548e78686ae1b34e6') in 2.309424 seconds 
+  Import took 3.338031 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 17.490249 seconds.
+  path: Assets/Art/Pokemon/Specialized/Totartle.png
+  artifactKey: Guid(901f3bf08b7bd504ca8e0578abf8a161) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Art/Pokemon/Specialized/Totartle.png using Guid(901f3bf08b7bd504ca8e0578abf8a161) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '6cbba0d5ecfc998184c470e34a947b34') in 0.027475 seconds 
+  Import took 0.074457 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 152.691505 seconds.
+  path: Assets/Art/Pokemon/Specialized/Totartle.png
+  artifactKey: Guid(901f3bf08b7bd504ca8e0578abf8a161) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Art/Pokemon/Specialized/Totartle.png using Guid(901f3bf08b7bd504ca8e0578abf8a161) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '39b9f6ea857834df1532d97c556a316b') in 0.109911 seconds 
+  Import took 0.143044 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 451.100170 seconds.
+  path: Assets/Art/Pokemon/Specialized/Shadeanium.png
+  artifactKey: Guid(4e4c9a6d71353bb4994a3b739284d215) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Art/Pokemon/Specialized/Shadeanium.png using Guid(4e4c9a6d71353bb4994a3b739284d215) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '54c1483eefe6c3c98c56c73c40617fdc') in 0.118991 seconds 
+  Import took 0.158216 seconds .
+
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.725586 seconds.
+Begin MonoManager ReloadAssembly
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 1.65 ms, found 2 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Mono: successfully reloaded assembly
+- Completed reload, in  3.919 seconds
+Domain Reload Profiling:
+	ReloadAssembly (3977ms)
+		BeginReloadAssembly (2555ms)
+			ExecutionOrderSort (9ms)
+			DisableScriptedObjects (520ms)
+			BackupInstance (0ms)
+			ReleaseScriptingObjects (0ms)
+			CreateAndSetChildDomain (1111ms)
+		EndReloadAssembly (1265ms)
+			LoadAssemblies (329ms)
+			RebuildTransferFunctionScriptingTraits (0ms)
+			SetupTypeCache (393ms)
+			ReleaseScriptCaches (1ms)
+			RebuildScriptCaches (68ms)
+			SetupLoadedEditorAssemblies (469ms)
+				LogAssemblyErrors (0ms)
+				InitializePlatformSupportModulesInManaged (22ms)
+				SetLoadedEditorAssemblies (1ms)
+				RefreshPlugins (2ms)
+				BeforeProcessingInitializeOnLoad (130ms)
+				ProcessInitializeOnLoadAttributes (264ms)
+				ProcessInitializeOnLoadMethodAttributes (45ms)
+				AfterProcessingInitializeOnLoad (6ms)
+				EditorAssembliesLoaded (0ms)
+			ExecutionOrderSort2 (0ms)
+			AwakeInstancesAfterBackupRestoration (8ms)
+Platform modules already initialized, skipping
+Refreshing native plugins compatible for Editor in 1.68 ms, found 2 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 2680 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 109.4 MB.
+System memory in use after: 109.6 MB.
+
+Unloading 49 unused Assets to reduce memory usage. Loaded Objects now: 3116.
+Total: 8.701000 ms (FindLiveObjects: 0.257100 ms CreateObjectMapping: 0.122500 ms MarkObjects: 8.276100 ms  DeleteObjects: 0.043400 ms)
+
+AssetImportParameters requested are different than current active one (requested -> active):
+  custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
+  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
+  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
+  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
+  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
+  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
+  custom:video-codec-MediaFoundation-h265: 746d11721c4dcdbdad8f713fa42b33f4 -> 
+  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
+  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+========================================================================
+Received Import Request.
+  Time since last request: 192.120004 seconds.
+  path: Assets/Art/Pokemon/Specialized/Totartle.png
+  artifactKey: Guid(901f3bf08b7bd504ca8e0578abf8a161) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Art/Pokemon/Specialized/Totartle.png using Guid(901f3bf08b7bd504ca8e0578abf8a161) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'd7f6a7667093f2416fbb5020cb425528') in 0.119270 seconds 
+  Import took 0.144834 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 26.617569 seconds.
+  path: Assets/Art/Pokemon/Specialized/Machost.png
+  artifactKey: Guid(b830534a8cff35847a2b163534f54f61) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Art/Pokemon/Specialized/Machost.png using Guid(b830534a8cff35847a2b163534f54f61) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '04d5d4a170b981ebdbd8b0536c35a51b') in 0.067071 seconds 
+  Import took 0.107134 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 50.674883 seconds.
+  path: Assets/Art/Pokemon/Specialized/Totartle.png
+  artifactKey: Guid(901f3bf08b7bd504ca8e0578abf8a161) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Art/Pokemon/Specialized/Totartle.png using Guid(901f3bf08b7bd504ca8e0578abf8a161) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '602d2d543f394b4e34c5809f54608200') in 0.030317 seconds 
+  Import took 0.064665 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 187.010358 seconds.
+  path: Assets/Art/Pokemon/Specialized/Shadeanium.png
+  artifactKey: Guid(4e4c9a6d71353bb4994a3b739284d215) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Art/Pokemon/Specialized/Shadeanium.png using Guid(4e4c9a6d71353bb4994a3b739284d215) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'e85928622c025ebe47dff557517a136b') in 0.065595 seconds 
+  Import took 0.103045 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 55.566294 seconds.
+  path: Assets/Art/Pokemon/Specialized/Shadeanium.png
+  artifactKey: Guid(4e4c9a6d71353bb4994a3b739284d215) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Art/Pokemon/Specialized/Shadeanium.png using Guid(4e4c9a6d71353bb4994a3b739284d215) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '745e48a48d82ae7fcd7c03dddf995906') in 0.057150 seconds 
+  Import took 0.099928 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 24.895799 seconds.
+  path: Assets/Art/Pokemon/Specialized/Shadeanium.png
+  artifactKey: Guid(4e4c9a6d71353bb4994a3b739284d215) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Art/Pokemon/Specialized/Shadeanium.png using Guid(4e4c9a6d71353bb4994a3b739284d215) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '51aa98fbcf98bd7801e7f2bfe59666ab') in 0.074597 seconds 
+  Import took 0.105927 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 32.012529 seconds.
+  path: Assets/Art/Pokemon/Specialized/Shadeanium.png
+  artifactKey: Guid(4e4c9a6d71353bb4994a3b739284d215) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Art/Pokemon/Specialized/Shadeanium.png using Guid(4e4c9a6d71353bb4994a3b739284d215) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'deec31df46cf2a938bf022add8c192ae') in 0.069779 seconds 
+  Import took 0.097568 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 51.201682 seconds.
+  path: Assets/Art/Pokemon/Specialized/Shadeanium.png
+  artifactKey: Guid(4e4c9a6d71353bb4994a3b739284d215) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Art/Pokemon/Specialized/Shadeanium.png using Guid(4e4c9a6d71353bb4994a3b739284d215) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '7f84160b438e63e90915291f20fbf466') in 0.075393 seconds 
+  Import took 0.119507 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 98.697339 seconds.
+  path: Assets/Art/Pokemon/Specialized/Shadeanium.png
+  artifactKey: Guid(4e4c9a6d71353bb4994a3b739284d215) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Art/Pokemon/Specialized/Shadeanium.png using Guid(4e4c9a6d71353bb4994a3b739284d215) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'f68ed1f36c433b4b8a5f113b8dcd3bd8') in 0.060734 seconds 
+  Import took 0.090110 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 46.814449 seconds.
+  path: Assets/Art/Pokemon/Specialized/Shadeanium.png
+  artifactKey: Guid(4e4c9a6d71353bb4994a3b739284d215) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Art/Pokemon/Specialized/Shadeanium.png using Guid(4e4c9a6d71353bb4994a3b739284d215) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '800b41fa9c7c7e225b2fd12865181a4e') in 0.065747 seconds 
+  Import took 0.097174 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 18.790548 seconds.
+  path: Assets/Art/Pokemon/Specialized/Shadeanium.png
+  artifactKey: Guid(4e4c9a6d71353bb4994a3b739284d215) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Art/Pokemon/Specialized/Shadeanium.png using Guid(4e4c9a6d71353bb4994a3b739284d215) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '1baf31e529ce9e889ae9981eca16b15b') in 0.071290 seconds 
+  Import took 0.110016 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 293.402452 seconds.
+  path: Assets/Art/Pokemon/Specialized/Rhyhorn.png
+  artifactKey: Guid(d0fcc2d2d3682d74f9c5f6d0982070fb) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Art/Pokemon/Specialized/Rhyhorn.png using Guid(d0fcc2d2d3682d74f9c5f6d0982070fb) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '4588451606da74efff92d7abdd360aaf') in 0.142168 seconds 
+  Import took 0.174438 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 51.955243 seconds.
+  path: Assets/Resources/Pokedex/Gen2/154 Meganium.asset
+  artifactKey: Guid(0de182fa461919c43a3b04828e18d2a5) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Pokedex/Gen2/154 Meganium.asset using Guid(0de182fa461919c43a3b04828e18d2a5) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'd6fd4e5186bca29cb6a1020d193cfc17') in 0.025704 seconds 
+  Import took 0.030948 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 9.057461 seconds.
+  path: Assets/Resources/Pokedex/Gen2/156 Quilava.asset
+  artifactKey: Guid(ccee57c32ff8ff7458676adace3dc4b4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Pokedex/Gen2/156 Quilava.asset using Guid(ccee57c32ff8ff7458676adace3dc4b4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '30ebd5d38d06d6d307310e9c98e6ee12') in 0.006722 seconds 
+  Import took 0.030413 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 5.656721 seconds.
+  path: Assets/Resources/Pokedex/Gen2/157 Typhlosion-Hisui.asset
+  artifactKey: Guid(78cd3e4c001a19c4dbb2a6faff82f7a4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Pokedex/Gen2/157 Typhlosion-Hisui.asset using Guid(78cd3e4c001a19c4dbb2a6faff82f7a4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '3a092845f3fde60d3c7c34047e252d17') in 0.006403 seconds 
+  Import took 0.020416 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 1.829526 seconds.
+  path: Assets/Resources/Pokedex/Gen2/154 Meganium 1.asset
+  artifactKey: Guid(e7932d0c40307f449b5c45cac87d299a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Pokedex/Gen2/154 Meganium 1.asset using Guid(e7932d0c40307f449b5c45cac87d299a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '211d4a59f4d3109a3cf728c50a4a875d') in 0.006603 seconds 
+  Import took 0.022333 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 22.402107 seconds.
+  path: Assets/Resources/Pokedex/Specialized/1020 Shadeanium.asset
+  artifactKey: Guid(e7932d0c40307f449b5c45cac87d299a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Pokedex/Specialized/1020 Shadeanium.asset using Guid(e7932d0c40307f449b5c45cac87d299a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '3dbf158d5f3f8597499cc01f7d53f932') in 0.006183 seconds 
+  Import took 0.022750 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 11.338840 seconds.
+  path: Assets/Resources/Pokedex/Specialized/1016 Alakarate.asset
+  artifactKey: Guid(ac2069da38ccc4543bccebf722317e55) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Pokedex/Specialized/1016 Alakarate.asset using Guid(ac2069da38ccc4543bccebf722317e55) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '613ada4d7958680eab5c9326be6e87d8') in 0.111592 seconds 
+  Import took 0.138435 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 753.704324 seconds.
+  path: Assets/Resources/Pokedex/Specialized/1020 Shadeanium.asset
+  artifactKey: Guid(e7932d0c40307f449b5c45cac87d299a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Pokedex/Specialized/1020 Shadeanium.asset using Guid(e7932d0c40307f449b5c45cac87d299a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'b0589ec3ecd22308c56d982b4b3b5627') in 0.004989 seconds 
+  Import took 0.046561 seconds .
+
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.150257 seconds.
+Begin MonoManager ReloadAssembly
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 1.92 ms, found 2 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Mono: successfully reloaded assembly
+- Completed reload, in  1.313 seconds
+Domain Reload Profiling:
+	ReloadAssembly (1313ms)
+		BeginReloadAssembly (236ms)
+			ExecutionOrderSort (0ms)
+			DisableScriptedObjects (7ms)
+			BackupInstance (0ms)
+			ReleaseScriptingObjects (0ms)
+			CreateAndSetChildDomain (133ms)
+		EndReloadAssembly (1011ms)
+			LoadAssemblies (125ms)
+			RebuildTransferFunctionScriptingTraits (0ms)
+			SetupTypeCache (287ms)
+			ReleaseScriptCaches (1ms)
+			RebuildScriptCaches (64ms)
+			SetupLoadedEditorAssemblies (447ms)
+				LogAssemblyErrors (0ms)
+				InitializePlatformSupportModulesInManaged (5ms)
+				SetLoadedEditorAssemblies (0ms)
+				RefreshPlugins (2ms)
+				BeforeProcessingInitializeOnLoad (127ms)
+				ProcessInitializeOnLoadAttributes (252ms)
+				ProcessInitializeOnLoadMethodAttributes (55ms)
+				AfterProcessingInitializeOnLoad (6ms)
+				EditorAssembliesLoaded (0ms)
+			ExecutionOrderSort2 (0ms)
+			AwakeInstancesAfterBackupRestoration (8ms)
+Platform modules already initialized, skipping
+Refreshing native plugins compatible for Editor in 1.92 ms, found 2 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 2680 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 109.5 MB.
+System memory in use after: 109.7 MB.
+
+Unloading 49 unused Assets to reduce memory usage. Loaded Objects now: 3119.
+Total: 7.781700 ms (FindLiveObjects: 0.240900 ms CreateObjectMapping: 0.096000 ms MarkObjects: 7.412300 ms  DeleteObjects: 0.031200 ms)
+
+AssetImportParameters requested are different than current active one (requested -> active):
+  custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
+  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
+  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
+  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
+  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
+  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
+  custom:video-codec-MediaFoundation-h265: 746d11721c4dcdbdad8f713fa42b33f4 -> 
+  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
+  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+========================================================================
+Received Import Request.
+  Time since last request: 238.221697 seconds.
+  path: Assets/Resources/Prefabs/Characters/Player.prefab
+  artifactKey: Guid(df0ad118f1b16b94188f1a819d172b55) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Prefabs/Characters/Player.prefab using Guid(df0ad118f1b16b94188f1a819d172b55) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'a9a19bc08ae8897e930f23279a1a4c4a') in 2.392236 seconds 
+  Import took 2.475710 seconds .
+
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.010183 seconds.
+Begin MonoManager ReloadAssembly
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 1.81 ms, found 2 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Mono: successfully reloaded assembly
+- Completed reload, in  1.379 seconds
+Domain Reload Profiling:
+	ReloadAssembly (1380ms)
+		BeginReloadAssembly (170ms)
+			ExecutionOrderSort (0ms)
+			DisableScriptedObjects (6ms)
+			BackupInstance (0ms)
+			ReleaseScriptingObjects (0ms)
+			CreateAndSetChildDomain (86ms)
+		EndReloadAssembly (1125ms)
+			LoadAssemblies (106ms)
+			RebuildTransferFunctionScriptingTraits (0ms)
+			SetupTypeCache (324ms)
+			ReleaseScriptCaches (1ms)
+			RebuildScriptCaches (66ms)
+			SetupLoadedEditorAssemblies (510ms)
+				LogAssemblyErrors (0ms)
+				InitializePlatformSupportModulesInManaged (5ms)
+				SetLoadedEditorAssemblies (0ms)
+				RefreshPlugins (2ms)
+				BeforeProcessingInitializeOnLoad (148ms)
+				ProcessInitializeOnLoadAttributes (301ms)
+				ProcessInitializeOnLoadMethodAttributes (47ms)
+				AfterProcessingInitializeOnLoad (6ms)
+				EditorAssembliesLoaded (0ms)
+			ExecutionOrderSort2 (0ms)
+			AwakeInstancesAfterBackupRestoration (8ms)
+Platform modules already initialized, skipping
+Refreshing native plugins compatible for Editor in 1.70 ms, found 2 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 2680 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 109.6 MB.
+System memory in use after: 109.9 MB.
+
+Unloading 49 unused Assets to reduce memory usage. Loaded Objects now: 3125.
+Total: 7.274200 ms (FindLiveObjects: 0.232800 ms CreateObjectMapping: 0.158800 ms MarkObjects: 6.850400 ms  DeleteObjects: 0.031000 ms)
+
+AssetImportParameters requested are different than current active one (requested -> active):
+  custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
+  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
+  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
+  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
+  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
+  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
+  custom:video-codec-MediaFoundation-h265: 746d11721c4dcdbdad8f713fa42b33f4 -> 
+  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
+  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.010917 seconds.
+Begin MonoManager ReloadAssembly
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 1.76 ms, found 2 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Mono: successfully reloaded assembly
+- Completed reload, in  1.182 seconds
+Domain Reload Profiling:
+	ReloadAssembly (1183ms)
+		BeginReloadAssembly (111ms)
+			ExecutionOrderSort (0ms)
+			DisableScriptedObjects (7ms)
+			BackupInstance (0ms)
+			ReleaseScriptingObjects (0ms)
+			CreateAndSetChildDomain (35ms)
+		EndReloadAssembly (1007ms)
+			LoadAssemblies (103ms)
+			RebuildTransferFunctionScriptingTraits (0ms)
+			SetupTypeCache (285ms)
+			ReleaseScriptCaches (1ms)
+			RebuildScriptCaches (59ms)
+			SetupLoadedEditorAssemblies (441ms)
+				LogAssemblyErrors (0ms)
+				InitializePlatformSupportModulesInManaged (8ms)
+				SetLoadedEditorAssemblies (1ms)
+				RefreshPlugins (2ms)
+				BeforeProcessingInitializeOnLoad (133ms)
+				ProcessInitializeOnLoadAttributes (247ms)
+				ProcessInitializeOnLoadMethodAttributes (45ms)
+				AfterProcessingInitializeOnLoad (6ms)
+				EditorAssembliesLoaded (0ms)
+			ExecutionOrderSort2 (0ms)
+			AwakeInstancesAfterBackupRestoration (7ms)
+Platform modules already initialized, skipping
+Refreshing native plugins compatible for Editor in 1.80 ms, found 2 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 2680 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 109.7 MB.
+System memory in use after: 109.9 MB.
+
+Unloading 49 unused Assets to reduce memory usage. Loaded Objects now: 3127.
+Total: 7.738300 ms (FindLiveObjects: 0.248500 ms CreateObjectMapping: 0.110900 ms MarkObjects: 7.344200 ms  DeleteObjects: 0.033400 ms)
+
+AssetImportParameters requested are different than current active one (requested -> active):
+  custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
+  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
+  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
+  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
+  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
+  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
+  custom:video-codec-MediaFoundation-h265: 746d11721c4dcdbdad8f713fa42b33f4 -> 
+  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
+  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+AssetImportWorkerClient::OnTransportError - code=2 error=End of file

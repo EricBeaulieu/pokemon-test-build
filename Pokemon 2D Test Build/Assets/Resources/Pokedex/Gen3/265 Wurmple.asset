@@ -14,8 +14,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _pokedexNumber: 265
   _form: 
-  _pokedexDescription: 
-  _classification: 
+  _pokedexDescription: 'Likes sap and is abundant in the wild. Why it evolves into
+
+    various
+    different forms is unknown. One cannot tell from a
+
+    Wurmple''s appearance
+    which form it will take when it evolves.'
+  _classification: "Worm Pok\xE9mon"
   _baseHappiness: 70
   _isBaby: 0
   _isLegendary: 0
@@ -40,7 +46,7 @@ MonoBehaviour:
   _specialAttack: 20
   _specialDefense: 30
   _speed: 20
-  firstAbility: 15
+  firstAbility: -1
   secondAbility: -1
   hiddenAbility: -1
   _learnableMoves: []
@@ -52,5 +58,6 @@ MonoBehaviour:
     evolutionStone: {fileID: 0}
     specifiedHoldItem: {fileID: 0}
     timeSpecific: 0
+    genderSpecific: 0
     specifiedMove: {fileID: 0}
   wildPokemonHoldItems: []

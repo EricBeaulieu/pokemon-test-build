@@ -1037,12 +1037,21 @@ public static class PokemonNameList
         "Iron Valiant",
         "Koraidon",
         "Miraidon",
+        "Walking Wake",
+        "Iron Leaves",
+        "Munkidori",
+        "Okidogi",
+        "Fezandipiti",
+        "Ogerpon",
+        "Terapagos",
 
         //Custom
         "Alakarate",
         "Machost",
         "Gololium",
         "Haucker",
+        "Shadeanium",
+        "Totartle",
     };
     public static int[] PokemonDifferentGenderSprites =
     {
@@ -1075,10 +1084,23 @@ public static class PokemonNameList
         459,460,461,464,465,
         473,
 
+        //Unova
+        521,592,593,
+
+        //Kalos
+        668,678,
+
+        //Alola
+        //N/A
+
+        //Galar/Hisui
+        876,902,
+
+        //Paldea
+        916,
+
         //Custom
-        1009
-
-
+        1016,1020
     };
     public static string[] UnownForm =
     {
@@ -1168,7 +1190,12 @@ public static class PokemonNameList
 
     public static bool PokemonDoesntHaveAnOriginalFormName(int pokedexNumber)
     {
-        if(pokedexNumber == 386 || pokedexNumber == 413 || pokedexNumber == 487 || pokedexNumber == 492)
+        if(pokedexNumber == 386 || pokedexNumber == 413 || pokedexNumber == 487 || pokedexNumber == 492 || pokedexNumber == 550
+            || pokedexNumber == 555 || (pokedexNumber >= 641 && pokedexNumber <= 642) || pokedexNumber == 645 || pokedexNumber == 905
+            || (pokedexNumber >= 647 && pokedexNumber <= 648) || pokedexNumber == 678 || pokedexNumber == 681 || (pokedexNumber >= 710 
+            && pokedexNumber <= 711) || pokedexNumber == 718 || pokedexNumber == 741 || (pokedexNumber >= 745 && pokedexNumber <= 746)
+            || pokedexNumber == 774 || pokedexNumber == 778 || pokedexNumber == 849 || (pokedexNumber >= 875 && pokedexNumber <= 877)
+            || pokedexNumber == 892 || pokedexNumber == 902)
         {
             return true;
         }
@@ -1179,25 +1206,47 @@ public static class PokemonNameList
     {
         if (pokedexNumber == 19 || pokedexNumber == 20 || (pokedexNumber >= 26 && pokedexNumber <= 28) || pokedexNumber == 37 || pokedexNumber == 38 ||
             (pokedexNumber >= 50 && pokedexNumber <= 53) || (pokedexNumber >= 74 && pokedexNumber <= 76) || pokedexNumber == 88 || pokedexNumber == 89 ||
-                pokedexNumber == 103 || pokedexNumber == 103)
+                pokedexNumber == 103 || pokedexNumber == 105)
         {
             if (pokedexNumber == 52)
             {
-                return new string[] { "alola", "galar" };
+                return new string[] { "Alola", "Galar" };
             }
-            return new string[] { "alola" };
+            return new string[] { "Alola" };
         }
-        //else if ((pokedexNumber >= 77 && pokedexNumber <= 80) || pokedexNumber == 83 || pokedexNumber == 110 || pokedexNumber == 122 ||
-        //(pokedexNumber >= 144 && pokedexNumber <= 146) || pokedexNumber == 199 || pokedexNumber == 222 || (pokedexNumber >= 263 && pokedexNumber <= 264) || 
-        //(pokedexNumber >= 554 && pokedexNumber <= 555))
-        //{
-        //    return new string[] { "Galarian" };
-        //}//As of Nov 09 2022 Galarian + hisuan forms dont exist for calls, but for some reason origin form dialga palkia exists
+        else if ((pokedexNumber >= 77 && pokedexNumber <= 80) || pokedexNumber == 83 || pokedexNumber == 110 || pokedexNumber == 122 ||
+        (pokedexNumber >= 144 && pokedexNumber <= 146) || pokedexNumber == 199 || pokedexNumber == 222 || (pokedexNumber >= 263 && pokedexNumber <= 264) ||
+        (pokedexNumber >= 554 && pokedexNumber <= 555) || pokedexNumber == 562 || pokedexNumber == 618)
+        {
+            if (pokedexNumber == 555)
+            {
+                return new string[] { "Standard", "Zen", "Galar-Standard", "Galar-Zen" };
+            }
+            return new string[] { "Galar" };
+        }
+        else if ((pokedexNumber >= 58 && pokedexNumber <= 59) || (pokedexNumber >= 100 && pokedexNumber <= 101) || pokedexNumber == 157 ||
+        pokedexNumber == 211 || pokedexNumber == 215 || pokedexNumber == 503 || pokedexNumber == 549 || (pokedexNumber >= 570 && pokedexNumber <= 571) ||
+        pokedexNumber == 628 || (pokedexNumber >= 705 && pokedexNumber <= 706) || pokedexNumber == 713 || pokedexNumber == 724)
+        {
+            return new string[] { "Hisui" };
+        }
+        else if (pokedexNumber == 128 || pokedexNumber == 194)
+        {
+            if (pokedexNumber == 128)
+            {
+                return new string[] { "Paldea-Combat-Breed", "Paldea-Blaze-Breed", "Paldea-Aqua-Breed" };
+            }
+            return new string[] { "Paldea" };
+        }
+        else if (pokedexNumber == 351)
+        {
+            return new string[] { "Sunny", "Rainy", "Snowy" };
+        }
         else if (pokedexNumber == 386)
         {
-            return new string[] { "Normal", "Attack", "Defense" ,"Speed" };
+            return new string[] { "Normal", "Attack", "Defense", "Speed" };
         }
-        else if(pokedexNumber == 413)
+        else if (pokedexNumber == 413)
         {
             return new string[] { "Plant", "Sandy", "Trash" };
         }
@@ -1213,6 +1262,100 @@ public static class PokemonNameList
         {
             return new string[] { "Land", "Sky" };
         }
+        else if (pokedexNumber == 550)
+        {
+            return new string[] { "Red-Striped", "Blue-striped", "White-striped" };
+        }
+        else if ((pokedexNumber >= 641 && pokedexNumber <= 642) || pokedexNumber == 645 || pokedexNumber == 905)//Genies
+        {
+            return new string[] { "Incarnate", "Therian" };
+        }
+        else if (pokedexNumber == 646)
+        {
+            return new string[] { "Black", "White" };
+        }
+        else if (pokedexNumber == 647)
+        {
+            return new string[] { "Ordinary", "Resolute" };
+        }
+        else if (pokedexNumber == 648)
+        {
+            return new string[] { "Aria", "Pirouette" };
+        }
+        else if (pokedexNumber == 658)
+        {
+            return new string[] { "Battle-Bond"};
+        }
+        else if (pokedexNumber == 678 || pokedexNumber == 876 || pokedexNumber == 902)
+        {
+            return new string[] { "Male", "Female" };
+        }
+        else if (pokedexNumber == 681)
+        {
+            return new string[] { "Shield", "Blade" };
+        }
+        else if (pokedexNumber >= 710 && pokedexNumber <= 711)
+        {
+            return new string[] { "Small", "Average", "Large", "Super" };
+        }
+        else if (pokedexNumber == 718)
+        {
+            return new string[] { "10-Power-Construct", "50-Power-Construct", "Complete" };
+        }
+        else if (pokedexNumber == 741)
+        {
+            return new string[] { "Baile", "Pom-Pom", "Pau", "Sensu" };
+        }
+        else if (pokedexNumber == 745)
+        {
+            return new string[] { "Midday", "Midnight", "Dusk" };
+        }
+        else if (pokedexNumber == 746)
+        {
+            return new string[] { "Solo", "School" };
+        }
+        else if (pokedexNumber == 774)
+        {
+            return new string[] { "Red", "Orange", "Yellow", "Green", "Blue", "Indigo", "Violet", "Red-Meteor", "Orange-Meteor",
+                "Yellow-Meteor", "Green-Meteor", "Blue-Meteor", "Indigo-Meteor", "Violet-Meteor" };
+        }
+        else if (pokedexNumber == 778)
+        {
+            return new string[] { "Disguised", "Busted" };
+        }
+        else if (pokedexNumber == 800)
+        {
+            return new string[] { "Dusk", "Dawn", "Ultra" };
+        }
+        else if (pokedexNumber == 849)
+        {
+            return new string[] { "Amped", "Low-Key" };
+        }
+        else if (pokedexNumber == 875)
+        {
+            return new string[] { "Ice", "NoIce" };
+        }
+        else if (pokedexNumber == 877)
+        {
+            return new string[] { "Full-Belly", "Hangry" };
+        }
+        else if (pokedexNumber == 892)
+        {
+            return new string[] { "Single-Strike", "Rapid-Strike" };
+        }
+
         return null;
+    }
+
+    ///This is used within the api caller
+    public static bool specialCaseNames(int pokedexNumber)
+    {
+        if (pokedexNumber == 29 || pokedexNumber == 32 || pokedexNumber == 83 || pokedexNumber == 122 || pokedexNumber == 439
+            || pokedexNumber == 669 || pokedexNumber == 772 || (pokedexNumber >= 785 && pokedexNumber <= 788) || (pokedexNumber >= 865
+            && pokedexNumber <= 866) || (pokedexNumber >= 984 && pokedexNumber <= 995) || (pokedexNumber >= 1005 && pokedexNumber <= 1006))
+        {
+            return true;
+        }
+        return false;
     }
 }

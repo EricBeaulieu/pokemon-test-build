@@ -99,8 +99,8 @@ public class Notes
     //earth power now hits pokemon while theyre semi invernerable while theyre dug underground
     //magnitude and earth power doubles and fissure accuracy increases to 50% while theyre in dig state
     //Hidden Power Attack Power increased to 90, also includes fairy type
-
-
+    //Paradox pokemon will have special evolutions, for the past it will be dawn stone and for the future it will be upgrade
+    //The elite four will exist in this game, but they will also be a specialized type. they will be builds that are geared towards weather varieties
 
     /*In regards to taking pictures, a screen shot tab has been added, in order to utilize this. the current scene must be open, 
     it will grab everything that the current camera can see. the size is 16.28 that all photos were taken in.

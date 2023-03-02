@@ -12,6 +12,7 @@ namespace PokeApi
         public Stats[] stats;
         public PokemonType[] types;
         public PokemonSpecies species;
+        public Sprites sprites;
         public PokemonAbility[] abilities;
     }
 
@@ -57,6 +58,8 @@ namespace PokeApi
         public bool has_gender_differences;
         public GrowthRate growth_rate;
         public EggGroup[] egg_groups;
+        public FlavorText[] flavor_text_entries;
+        public Genera[] genera;
     }
 
     [System.Serializable]
@@ -84,6 +87,39 @@ namespace PokeApi
     public class Ability
     {
         public string name;
+    }
+
+    [System.Serializable]
+    public class FlavorText
+    {
+        public string flavor_text;
+        public Language language;
+    }
+
+    [System.Serializable]
+    public class Language
+    {
+        public string name;
+    }
+
+    [System.Serializable]
+    public class Genera
+    {
+        public string genus;
+        public Language language;
+    }
+
+    [System.Serializable]
+    public class Sprites
+    {
+        public string back_default;
+        public string back_female;
+        public string back_shiny;
+        public string back_shiny_female;
+        public string front_default;
+        public string front_female;
+        public string front_shiny;
+        public string front_shiny_female;
     }
 }
 
