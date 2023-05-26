@@ -20,7 +20,6 @@ public class GameManager : MonoBehaviour
     static PlayerController playerController;
     [SerializeField] GridPositionDisplayerHelper gridPrefab;
     [SerializeField] GameSceneBaseSO startingScene;
-    [SerializeField] Transform defaultSpawnLocation;
     TrainerController trainerController = null;
     [SerializeField] BattleSystem battleSystem;
     [SerializeField] Camera overWorldCamera;
@@ -114,13 +113,7 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-            StartCoroutine(SceneSystem.LoadScenethatPlayerSavedIn(startingScene));
-            SpawnInPlayer();
-        }
-
-        if(startWithPresetBoxes == true)
-        {
-            pCSystem.PresetBoxesWithPresetPokemon();
+            StartCoroutine(GameStartingLoad());
         }
     }
 
@@ -292,7 +285,7 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-            playerController = Instantiate(playerPrefab, defaultSpawnLocation.position, Quaternion.identity);
+            playerController = Instantiate(playerPrefab, startingScene.GetLevelManager.GetSpawnLocation.position, Quaternion.identity);
         }
         
         playerController.OpenStartMenu += () =>
@@ -304,7 +297,7 @@ public class GameManager : MonoBehaviour
         allActiveEntities.Add(playerController);
         overWorldCamera.transform.parent = playerController.transform;
         overWorldCamera.transform.localPosition = Vector3.zero;
-        defaultSpawnLocation.gameObject.SetActive(false);
+        //defaultSpawnLocation.gameObject.SetActive(false);
         partySystem.SetPlayersParty(playerController.pokemonParty);
     }
 
@@ -521,6 +514,17 @@ public class GameManager : MonoBehaviour
                 playersurfableEntityController.gameObject.SetActive(false);
             }
             return playersurfableEntityController; 
+        }
+    }
+
+    IEnumerator GameStartingLoad()
+    {
+        yield return SceneSystem.LoadScenethatPlayerSavedIn(startingScene);
+        SpawnInPlayer();
+
+        if (startWithPresetBoxes == true)
+        {
+            pCSystem.PresetBoxesWithPresetPokemon();
         }
     }
 }

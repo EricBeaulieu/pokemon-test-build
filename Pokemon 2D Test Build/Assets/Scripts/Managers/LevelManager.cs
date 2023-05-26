@@ -20,6 +20,8 @@ public class LevelManager : MonoBehaviour
     [SerializeField] GameSceneBaseSO sceneReference;
     [SerializeField] GridManager currentGrid;
     public GridManager GetGrid { get { return currentGrid; } }
+    [SerializeField] Transform playerSpawnLocation;
+    public Transform GetSpawnLocation { get { return playerSpawnLocation; } }
     List<Portal> allInLevelPortals = new List<Portal>();
     List<Entity> allEntitiesInScene = new List<Entity>();
     List<DestroyableObject> allDestroyableObjectsInScene = new List<DestroyableObject>();
@@ -35,7 +37,12 @@ public class LevelManager : MonoBehaviour
     {
         GetComponent<SpriteRenderer>().color = Color.clear;
 
-        if(currentAreaDetails == null)
+        if(playerSpawnLocation != null)
+        {
+            playerSpawnLocation.GetComponent<SpriteRenderer>().color = Color.clear;
+        }
+
+        if (currentAreaDetails == null)
         {
             Debug.LogWarning("currentAreaDetails not set", gameObject);
         }
@@ -53,10 +60,16 @@ public class LevelManager : MonoBehaviour
             Debug.LogError("Current Scene Reference is missing", gameObject);
         }
 
-        if(currentGrid == null)
+        if (currentGrid == null)
         {
             Debug.LogWarning("Current Grid Reference is missing", gameObject);
         }
+
+        if (playerSpawnLocation == null)
+        {
+            Debug.LogWarning("Current Player Spawn is missing", gameObject);
+        }
+
         sceneReference.SetLevelManager(this);
     }
 
@@ -335,5 +348,25 @@ public class LevelManager : MonoBehaviour
 
         WildPokemonController temp = GameManager.instance.GetWildPokemonPrefab(getWildPokemon(walking));
         Instantiate(temp, spawnLocation, Quaternion.identity,wildPokemonSpawnParent);
+    }
+
+    public void CleanUpLevelSize()
+    {
+        Transform curTransform = GetComponent<Transform>();
+        float xSize = curTransform.localScale.x *2;
+        float ySize = curTransform.localScale.y *2;
+
+        xSize = Mathf.Round(xSize);
+        ySize = Mathf.Round(ySize);
+
+        curTransform.localScale = new Vector3(xSize / 2, ySize / 2, 1);
+
+        xSize = curTransform.localPosition.x * 2;
+        ySize = curTransform.localPosition.y * 2;
+
+        xSize = Mathf.Round(xSize);
+        ySize = Mathf.Round(ySize);
+
+        curTransform.localPosition = new Vector3(xSize / 2, ySize / 2, 1);
     }
 }

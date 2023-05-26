@@ -29,5 +29,15 @@ public class LevelManagerEditor : Editor
         }
 
         GUILayout.EndHorizontal();
+
+        GUILayout.BeginHorizontal();
+
+        if (GUILayout.Button("Auto Set Scaling"))
+        {
+            levelManager.CleanUpLevelSize();
+        }
+
+        GUILayout.EndHorizontal();
+
     }
 }
