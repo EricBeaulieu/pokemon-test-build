@@ -87,7 +87,7 @@ TextureImporter:
       213: 4740562401478045355
     second: Moomoo_Milk
   externalObjects: {}
-  serializedVersion: 11
+  serializedVersion: 12
   mipmaps:
     mipMapMode: 0
     enableMipMap: 0
@@ -104,10 +104,12 @@ TextureImporter:
     externalNormalMap: 0
     heightScale: 0.25
     normalMapFilter: 0
+    flipGreenChannel: 0
   isReadable: 0
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
   vTOnly: 0
+  ignoreMipmapLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -117,8 +119,8 @@ TextureImporter:
   textureSettings:
     serializedVersion: 2
     filterMode: 0
-    aniso: -1
-    mipBias: -100
+    aniso: 1
+    mipBias: 0
     wrapU: 1
     wrapV: 1
     wrapW: 1
@@ -146,6 +148,8 @@ TextureImporter:
   textureFormatSet: 0
   ignorePngGamma: 0
   applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 1
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
@@ -157,6 +161,7 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
@@ -169,6 +174,7 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
@@ -181,6 +187,7 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
@@ -193,6 +200,20 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Server
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
@@ -796,9 +817,37 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-  spritePackingTag: 
+    nameFileIdTable:
+      Antidote: -4257408898996281742
+      Awakening: -7726187841578819271
+      Burn_Heal: 4634314576947937212
+      Elixir: 3883863459859060759
+      Energy_Powder: -7899281853398665155
+      Energy_Root: -1700643138164160311
+      Ether: 3706413969405205894
+      Fresh_Water: -8371039580572214848
+      Full_Heal: -4031146795658805315
+      Full_Restore: 4191451632673016056
+      Heal_Powder: 5671917084268616135
+      Hyper_Potion: -6092004750247142212
+      Ice_Heal: 763166022722896039
+      Lava_Cookie: -5796504887231916334
+      Lemonade: 6327912156314292818
+      Max_Elixir: -2876916149042453628
+      Max_Ether: -5101459004326212239
+      Max_Potion: -954668776948508918
+      Max_Revive: -6613825349735665037
+      Moomoo_Milk: 4740562401478045355
+      Old_Gateau: -9196696058899025973
+      Paralyze_Heal: -6933456266643973576
+      Potion: -7283599022676558201
+      Revival_Herb: -8168505116568072244
+      Revive: -9059532179657560671
+      Sacred_Ash: -5704536061715942537
+      Soda_Pop: -3927098121573452233
+      Super_Potion: -3277463977612151369
+  mipmapLimitGroupName: 
   pSDRemoveMatte: 0
-  pSDShowRemoveMatteOption: 0
   userData: 
   assetBundleName: 
   assetBundleVariant: 

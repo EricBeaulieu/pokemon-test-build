@@ -870,7 +870,7 @@ TextureImporter:
       213: 6563764416462274295
     second: Garbagebin_D
   externalObjects: {}
-  serializedVersion: 11
+  serializedVersion: 12
   mipmaps:
     mipMapMode: 0
     enableMipMap: 0
@@ -887,10 +887,12 @@ TextureImporter:
     externalNormalMap: 0
     heightScale: 0.25
     normalMapFilter: 0
+    flipGreenChannel: 0
   isReadable: 0
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
   vTOnly: 0
+  ignoreMipmapLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -929,6 +931,8 @@ TextureImporter:
   textureFormatSet: 0
   ignorePngGamma: 0
   applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 1
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
@@ -940,6 +944,7 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
@@ -952,6 +957,7 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
@@ -964,6 +970,7 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
@@ -976,6 +983,20 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Server
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
@@ -7039,9 +7060,297 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-  spritePackingTag: 
+    nameFileIdTable:
+      BookShelfC_BottomLeft: -8378408051678698740
+      BookShelfC_BottomRight: -1979529297064503116
+      BookShelfC_MidLeft: 4397257752407064500
+      BookShelfC_MidRight: 7234988409633883967
+      Garbagebin_D: 6563764416462274295
+      IndoorDoodadsSetA_0: 8536943243071890690
+      IndoorDoodadsSetA_1: -4304324330227304092
+      IndoorDoodadsSetA_10: 6240027162353992225
+      IndoorDoodadsSetA_100: 7735107245796324080
+      IndoorDoodadsSetA_101: 6411793202854577085
+      IndoorDoodadsSetA_102: 4079197050333661344
+      IndoorDoodadsSetA_103: -7580708684328237042
+      IndoorDoodadsSetA_104: 6279282467672283299
+      IndoorDoodadsSetA_105: -1858848963998023584
+      IndoorDoodadsSetA_106: -7833590842219712557
+      IndoorDoodadsSetA_107: 4957173620016909338
+      IndoorDoodadsSetA_108: -7954382352102585800
+      IndoorDoodadsSetA_109: -8783926456687452814
+      IndoorDoodadsSetA_11: -3392211607997112832
+      IndoorDoodadsSetA_110: 2058146580575453674
+      IndoorDoodadsSetA_111: 2614599209961261478
+      IndoorDoodadsSetA_112: -8603792997987631299
+      IndoorDoodadsSetA_113: 8533798214320976644
+      IndoorDoodadsSetA_114: 4205200717623565087
+      IndoorDoodadsSetA_115: 5160019197885566253
+      IndoorDoodadsSetA_116: 8118550290387228691
+      IndoorDoodadsSetA_117: -1484218068171626589
+      IndoorDoodadsSetA_118: 6377286933111022710
+      IndoorDoodadsSetA_119: 1095240199602429849
+      IndoorDoodadsSetA_12: -3791454692334517873
+      IndoorDoodadsSetA_120: -1279233268055045479
+      IndoorDoodadsSetA_121: -1669690959025176565
+      IndoorDoodadsSetA_122: -8347829601986587950
+      IndoorDoodadsSetA_123: 1567262847419838887
+      IndoorDoodadsSetA_124: 7342488419359441689
+      IndoorDoodadsSetA_125: -2022014371058490830
+      IndoorDoodadsSetA_126: 4499296959298610425
+      IndoorDoodadsSetA_127: 9116277291091750490
+      IndoorDoodadsSetA_128: -5141486149065221634
+      IndoorDoodadsSetA_129: 6764637223928547157
+      IndoorDoodadsSetA_13: 6681720821990951659
+      IndoorDoodadsSetA_130: -3123604826843112448
+      IndoorDoodadsSetA_131: 7890678766986045821
+      IndoorDoodadsSetA_132: 4461116039432457014
+      IndoorDoodadsSetA_133: 6419305115602683638
+      IndoorDoodadsSetA_134: 3057007870018628668
+      IndoorDoodadsSetA_135: 914325466766908796
+      IndoorDoodadsSetA_136: 2592512384781466386
+      IndoorDoodadsSetA_137: -612097854890769560
+      IndoorDoodadsSetA_138: 432237890572428183
+      IndoorDoodadsSetA_139: -1058393254601285074
+      IndoorDoodadsSetA_14: -8905467202366479081
+      IndoorDoodadsSetA_140: -8377886761631431374
+      IndoorDoodadsSetA_141: -3758156558392716444
+      IndoorDoodadsSetA_142: 1536266201955499747
+      IndoorDoodadsSetA_143: 5625179009934569884
+      IndoorDoodadsSetA_144: 2425040376669577442
+      IndoorDoodadsSetA_145: -5538013987959437335
+      IndoorDoodadsSetA_146: 7994134759578559100
+      IndoorDoodadsSetA_147: 7022878679286463097
+      IndoorDoodadsSetA_148: -8382221261885118222
+      IndoorDoodadsSetA_149: 5517719207251509578
+      IndoorDoodadsSetA_15: 8559972440968092005
+      IndoorDoodadsSetA_150: 482309693845684916
+      IndoorDoodadsSetA_151: -3058797296782167944
+      IndoorDoodadsSetA_152: -3536464342849862790
+      IndoorDoodadsSetA_153: -2187218104360074995
+      IndoorDoodadsSetA_154: 4244887402607738929
+      IndoorDoodadsSetA_155: 508170119306452651
+      IndoorDoodadsSetA_156: 3624814437490455215
+      IndoorDoodadsSetA_157: -4953125616608541422
+      IndoorDoodadsSetA_158: -8645117070450741020
+      IndoorDoodadsSetA_159: -8467606391907511647
+      IndoorDoodadsSetA_160: 6748722883873732553
+      IndoorDoodadsSetA_161: -6547531766104635620
+      IndoorDoodadsSetA_162: 8324270344587054099
+      IndoorDoodadsSetA_163: -7978203626817973046
+      IndoorDoodadsSetA_164: -4154195134706407786
+      IndoorDoodadsSetA_165: -5494695067308009480
+      IndoorDoodadsSetA_166: 4918751553731741623
+      IndoorDoodadsSetA_167: -3145678486077432282
+      IndoorDoodadsSetA_168: -2482612384347310725
+      IndoorDoodadsSetA_169: 8738771026639104661
+      IndoorDoodadsSetA_17: -5767199253139002796
+      IndoorDoodadsSetA_170: 7369197874822202726
+      IndoorDoodadsSetA_171: -3392448406864635911
+      IndoorDoodadsSetA_172: -4001452429894881319
+      IndoorDoodadsSetA_173: -1425611527512041190
+      IndoorDoodadsSetA_174: 56477409102941640
+      IndoorDoodadsSetA_175: 717987584074739586
+      IndoorDoodadsSetA_176: 1548491377688881532
+      IndoorDoodadsSetA_177: -6249142302461973958
+      IndoorDoodadsSetA_178: 7144495620393321979
+      IndoorDoodadsSetA_179: -7177464943549571698
+      IndoorDoodadsSetA_18: 1882410628170877569
+      IndoorDoodadsSetA_180: -5239345761205645388
+      IndoorDoodadsSetA_181: -4661494609882832231
+      IndoorDoodadsSetA_182: -2589764188792315140
+      IndoorDoodadsSetA_183: -3208141120748649357
+      IndoorDoodadsSetA_184: -8238696862934119301
+      IndoorDoodadsSetA_185: 204774445121635185
+      IndoorDoodadsSetA_186: 7353583967810223680
+      IndoorDoodadsSetA_187: 8381457658397037570
+      IndoorDoodadsSetA_188: 3335393154447558088
+      IndoorDoodadsSetA_189: -6354496674214417127
+      IndoorDoodadsSetA_19: -6065316641547305246
+      IndoorDoodadsSetA_190: 5922987653285170400
+      IndoorDoodadsSetA_191: 7393749043150777540
+      IndoorDoodadsSetA_192: -5206406960361743908
+      IndoorDoodadsSetA_193: 3410153833596495669
+      IndoorDoodadsSetA_194: 5701608316871181122
+      IndoorDoodadsSetA_195: 1803260830692479440
+      IndoorDoodadsSetA_196: -2384161946466095270
+      IndoorDoodadsSetA_197: -4087456339429599130
+      IndoorDoodadsSetA_198: 7951378979940335147
+      IndoorDoodadsSetA_199: 4245591399113319064
+      IndoorDoodadsSetA_2: -2970791871547929409
+      IndoorDoodadsSetA_20: 6063344910227073243
+      IndoorDoodadsSetA_200: 9157778153884566232
+      IndoorDoodadsSetA_201: -8484963644122638014
+      IndoorDoodadsSetA_202: -7028656836871130264
+      IndoorDoodadsSetA_203: -6766494552941072412
+      IndoorDoodadsSetA_204: 267279708043263844
+      IndoorDoodadsSetA_205: -4340606752035104790
+      IndoorDoodadsSetA_206: 2136585740932942857
+      IndoorDoodadsSetA_207: -5319316300793457254
+      IndoorDoodadsSetA_208: 3671795662730575625
+      IndoorDoodadsSetA_209: -7556040245574832450
+      IndoorDoodadsSetA_21: -5443247970762409489
+      IndoorDoodadsSetA_210: 7901337848522792612
+      IndoorDoodadsSetA_211: -2554288482616060177
+      IndoorDoodadsSetA_212: -5965851066054098367
+      IndoorDoodadsSetA_213: -8108758473506300986
+      IndoorDoodadsSetA_214: 5486409109415030331
+      IndoorDoodadsSetA_215: 1906922028114175276
+      IndoorDoodadsSetA_216: 5748691943529277028
+      IndoorDoodadsSetA_217: 6449302327443015062
+      IndoorDoodadsSetA_218: -7968394543339959173
+      IndoorDoodadsSetA_219: 5365558074177263723
+      IndoorDoodadsSetA_22: -3793175526972717262
+      IndoorDoodadsSetA_220: 8946714261870583496
+      IndoorDoodadsSetA_221: 7337330900381767147
+      IndoorDoodadsSetA_222: -487957052622203136
+      IndoorDoodadsSetA_223: 8596060211503914368
+      IndoorDoodadsSetA_224: 3438095719683194542
+      IndoorDoodadsSetA_225: 5876372666316975235
+      IndoorDoodadsSetA_226: 5184490077622837647
+      IndoorDoodadsSetA_227: -2988824086388271714
+      IndoorDoodadsSetA_228: 3945348814453017358
+      IndoorDoodadsSetA_229: -6341635054787875581
+      IndoorDoodadsSetA_23: -5835411914355215791
+      IndoorDoodadsSetA_230: 5983425328539910725
+      IndoorDoodadsSetA_231: -4903700297701599312
+      IndoorDoodadsSetA_232: 1022211488964745007
+      IndoorDoodadsSetA_233: 8116372964741092195
+      IndoorDoodadsSetA_234: -1287205956399066629
+      IndoorDoodadsSetA_235: -2515187399071035514
+      IndoorDoodadsSetA_236: 1844773868853243167
+      IndoorDoodadsSetA_237: -8616865830104202720
+      IndoorDoodadsSetA_238: 4243338821457479901
+      IndoorDoodadsSetA_239: 2835104068283424272
+      IndoorDoodadsSetA_24: 1973053586212851338
+      IndoorDoodadsSetA_240: 8819164472559204944
+      IndoorDoodadsSetA_241: -650252581909033951
+      IndoorDoodadsSetA_242: -1021860384350582512
+      IndoorDoodadsSetA_243: -5010508403855370561
+      IndoorDoodadsSetA_244: 8745744940235233738
+      IndoorDoodadsSetA_245: 8416876179720986164
+      IndoorDoodadsSetA_246: 2776619843644987166
+      IndoorDoodadsSetA_247: -8942854851682264368
+      IndoorDoodadsSetA_248: -6588247193267092912
+      IndoorDoodadsSetA_249: -40155096614958568
+      IndoorDoodadsSetA_25: -9155131205853017763
+      IndoorDoodadsSetA_250: -1345873855998492802
+      IndoorDoodadsSetA_251: 3729682528222140595
+      IndoorDoodadsSetA_252: 8110542278475642632
+      IndoorDoodadsSetA_253: -1150907069806032869
+      IndoorDoodadsSetA_254: 7492239036904600819
+      IndoorDoodadsSetA_255: -4861575596620434420
+      IndoorDoodadsSetA_256: -3197957987892314702
+      IndoorDoodadsSetA_257: 5581086929760623314
+      IndoorDoodadsSetA_258: 7021284045197151176
+      IndoorDoodadsSetA_259: 4853940514019267367
+      IndoorDoodadsSetA_26: 3216136994286247150
+      IndoorDoodadsSetA_260: 893036616679142160
+      IndoorDoodadsSetA_261: -6792949587457111691
+      IndoorDoodadsSetA_262: -379449401449162673
+      IndoorDoodadsSetA_263: -8577057033551001639
+      IndoorDoodadsSetA_264: -5691777940841473126
+      IndoorDoodadsSetA_265: -6367096749826347087
+      IndoorDoodadsSetA_266: 4156100211856853404
+      IndoorDoodadsSetA_267: 1156703410198129778
+      IndoorDoodadsSetA_268: -5720591744499381235
+      IndoorDoodadsSetA_269: -3591976189691217075
+      IndoorDoodadsSetA_27: 1026429074059476559
+      IndoorDoodadsSetA_270: 7090847940410296207
+      IndoorDoodadsSetA_271: 4701881550476316623
+      IndoorDoodadsSetA_272: 6051217614859617446
+      IndoorDoodadsSetA_273: 3806118814440258926
+      IndoorDoodadsSetA_274: 8980314115879317536
+      IndoorDoodadsSetA_275: 891991262901034887
+      IndoorDoodadsSetA_276: 7726155120232666262
+      IndoorDoodadsSetA_277: 6520177813454994029
+      IndoorDoodadsSetA_278: 3990748190093567245
+      IndoorDoodadsSetA_279: 6761981350163240110
+      IndoorDoodadsSetA_28: 2605798660434442834
+      IndoorDoodadsSetA_280: 2417635413153216611
+      IndoorDoodadsSetA_281: 7953960105186076862
+      IndoorDoodadsSetA_282: -6755802787268075701
+      IndoorDoodadsSetA_283: -4382443997899565165
+      IndoorDoodadsSetA_284: 6364207800185860634
+      IndoorDoodadsSetA_285: -9074951407455012079
+      IndoorDoodadsSetA_286: 7637719064870101646
+      IndoorDoodadsSetA_287: -6839993558120254449
+      IndoorDoodadsSetA_29: 4180928116055483025
+      IndoorDoodadsSetA_3: -6912874294123866006
+      IndoorDoodadsSetA_30: -7760197517498150848
+      IndoorDoodadsSetA_31: 8840553009650912387
+      IndoorDoodadsSetA_32: 7242698428336916125
+      IndoorDoodadsSetA_33: 33683243005085032
+      IndoorDoodadsSetA_34: 2637563074198685875
+      IndoorDoodadsSetA_35: -3504772124078146925
+      IndoorDoodadsSetA_36: 8617102482851995450
+      IndoorDoodadsSetA_37: 3789978992696846443
+      IndoorDoodadsSetA_38: -7344331922650276883
+      IndoorDoodadsSetA_39: -5175597954323702969
+      IndoorDoodadsSetA_4: -365908027691139290
+      IndoorDoodadsSetA_40: 264883828559011292
+      IndoorDoodadsSetA_41: -9068875749155446073
+      IndoorDoodadsSetA_44: -2443535354796371951
+      IndoorDoodadsSetA_45: -6104553186205835620
+      IndoorDoodadsSetA_46: -7447704735097399187
+      IndoorDoodadsSetA_47: -7565808697364918072
+      IndoorDoodadsSetA_48: 986042722381580548
+      IndoorDoodadsSetA_49: -153322380219090208
+      IndoorDoodadsSetA_50: 3158346262204794203
+      IndoorDoodadsSetA_51: 5529147165319561464
+      IndoorDoodadsSetA_52: 615254108288872068
+      IndoorDoodadsSetA_54: -6543068505086691144
+      IndoorDoodadsSetA_55: -8368350565087412284
+      IndoorDoodadsSetA_56: -5615237630225835629
+      IndoorDoodadsSetA_57: -7411065700118850117
+      IndoorDoodadsSetA_58: -5072744538475279547
+      IndoorDoodadsSetA_59: 4351231125947282808
+      IndoorDoodadsSetA_60: 2610509823208639351
+      IndoorDoodadsSetA_61: -9170170049578213553
+      IndoorDoodadsSetA_62: -4885598617940005325
+      IndoorDoodadsSetA_63: 1106558132247601777
+      IndoorDoodadsSetA_64: 1052882944961434260
+      IndoorDoodadsSetA_65: 7916710549309138173
+      IndoorDoodadsSetA_66: -1421581009660083454
+      IndoorDoodadsSetA_67: -1701718447835789664
+      IndoorDoodadsSetA_68: -584964809997908465
+      IndoorDoodadsSetA_69: 6093178977271571472
+      IndoorDoodadsSetA_7: -4493537166862065093
+      IndoorDoodadsSetA_70: 4358500725919022062
+      IndoorDoodadsSetA_71: -2092381575554580129
+      IndoorDoodadsSetA_72: -2010950223989565286
+      IndoorDoodadsSetA_73: -6441692695964307480
+      IndoorDoodadsSetA_74: -2180982883888711856
+      IndoorDoodadsSetA_75: -2442260024426053435
+      IndoorDoodadsSetA_76: -6232088461127996753
+      IndoorDoodadsSetA_77: 3738118738231774289
+      IndoorDoodadsSetA_78: 7459890201057736898
+      IndoorDoodadsSetA_79: 7677997042064637039
+      IndoorDoodadsSetA_8: 8963414211342448640
+      IndoorDoodadsSetA_80: 2259372653274818224
+      IndoorDoodadsSetA_81: -1528136564719568754
+      IndoorDoodadsSetA_82: 7409527236398696596
+      IndoorDoodadsSetA_83: 7644674692274647753
+      IndoorDoodadsSetA_84: -8154822823206427213
+      IndoorDoodadsSetA_85: 8552091547023605204
+      IndoorDoodadsSetA_86: 7332613508992803430
+      IndoorDoodadsSetA_87: 1240884846200494724
+      IndoorDoodadsSetA_88: -7726239288563999449
+      IndoorDoodadsSetA_89: 3714810706868654626
+      IndoorDoodadsSetA_9: 4473358166499451331
+      IndoorDoodadsSetA_90: 1196015630904076406
+      IndoorDoodadsSetA_91: -6964222401159781275
+      IndoorDoodadsSetA_92: -4167960358913963679
+      IndoorDoodadsSetA_93: 8841986229900424640
+      IndoorDoodadsSetA_94: -5586517790331671415
+      IndoorDoodadsSetA_95: 6189212371797867188
+      IndoorDoodadsSetA_96: 1229501504026367481
+      IndoorDoodadsSetA_97: -5647412669081265372
+      IndoorDoodadsSetA_98: 5091432057762624125
+      IndoorDoodadsSetA_99: -4916630602751854899
+      PC: 4331395768526988512
+  mipmapLimitGroupName: 
   pSDRemoveMatte: 0
-  pSDShowRemoveMatteOption: 0
   userData: 
   assetBundleName: 
   assetBundleVariant: 

@@ -78,7 +78,7 @@ TextureImporter:
       213: 4302815076137425834
     second: BedSheets_Right
   externalObjects: {}
-  serializedVersion: 11
+  serializedVersion: 12
   mipmaps:
     mipMapMode: 0
     enableMipMap: 0
@@ -95,10 +95,12 @@ TextureImporter:
     externalNormalMap: 0
     heightScale: 0.25
     normalMapFilter: 0
+    flipGreenChannel: 0
   isReadable: 0
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
   vTOnly: 0
+  ignoreMipmapLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -137,6 +139,8 @@ TextureImporter:
   textureFormatSet: 0
   ignorePngGamma: 0
   applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 1
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
@@ -148,6 +152,7 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
@@ -160,6 +165,7 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
@@ -172,6 +178,7 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
@@ -184,6 +191,20 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Server
+    maxTextureSize: 256
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
@@ -724,9 +745,34 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-  spritePackingTag: 
+    nameFileIdTable:
+      BedFrame_Left: 3831445416961772014
+      BedFrame_Mid: 92710323685736730
+      BedFrame_Right: -1090335595430883960
+      BedSheets_Left: 7669488361884035628
+      BedSheets_Mid: -943867432201332109
+      BedSheets_Right: 4302815076137425834
+      BookShelfD_BottomLeft: -8128327264746625846
+      BookShelfD_BottomRight: 7386471184937363938
+      BookShelfD_MidLeft: 4459793678136615332
+      BookShelfD_MidRight: -7263531409121846939
+      BookShelfD_TopLeft: 2289586792243523514
+      BookShelfD_TopRight: 4867880057359331626
+      BookWithPencil: -5742834154896584746
+      Doodads 1_2: 3317148733065393745
+      Doodads 1_3: -366378356045867937
+      Matress_Center: -3975434192147238268
+      Matress_Left: 7544835974840741543
+      Matress_Right: -696935055126577826
+      Pencil: -7348620429531850378
+      Pillow: -203354675467525550
+      PottedTree_Bottom: -3326730277075089179
+      PottedTree_Top: 736691977121869919
+      SheetOverlay_Left: -8256952692161318946
+      SheetOverlay_Mid: -4812654992740049428
+      SheetOverlay_Right: 5230184275040335114
+  mipmapLimitGroupName: 
   pSDRemoveMatte: 0
-  pSDShowRemoveMatteOption: 0
   userData: 
   assetBundleName: 
   assetBundleVariant: 

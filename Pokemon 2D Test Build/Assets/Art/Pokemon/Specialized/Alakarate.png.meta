@@ -60,7 +60,7 @@ TextureImporter:
       213: -5647676528197252992
     second: 1016_Alakarate_Shiny_Female_FrontA
   externalObjects: {}
-  serializedVersion: 11
+  serializedVersion: 12
   mipmaps:
     mipMapMode: 0
     enableMipMap: 0
@@ -77,10 +77,12 @@ TextureImporter:
     externalNormalMap: 0
     heightScale: 0.25
     normalMapFilter: 0
+    flipGreenChannel: 0
   isReadable: 0
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
   vTOnly: 0
+  ignoreMipmapLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -119,6 +121,8 @@ TextureImporter:
   textureFormatSet: 0
   ignorePngGamma: 0
   applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 1
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
@@ -130,6 +134,7 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
@@ -142,6 +147,7 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
@@ -154,6 +160,7 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
@@ -166,6 +173,20 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Server
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
@@ -580,9 +601,28 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-  spritePackingTag: 
+    nameFileIdTable:
+      1016_Alakarate_Female_BackA: -3083627423421898547
+      1016_Alakarate_Female_BackB: 2440193215084627489
+      1016_Alakarate_Female_FrontA: 4997586332844224374
+      1016_Alakarate_Female_FrontB: -2932273123855795578
+      1016_Alakarate_FootPrint: -6901823541162410359
+      1016_Alakarate_Male_BackA: -5376801215832066660
+      1016_Alakarate_Male_BackB: -7553562072258542800
+      1016_Alakarate_Male_FrontA: -3275949654007759364
+      1016_Alakarate_Male_FrontB: 111046805776368646
+      1016_Alakarate_Shiny_Female_BackA: 4030591176357260902
+      1016_Alakarate_Shiny_Female_BackB: -5542483777383756396
+      1016_Alakarate_Shiny_Female_FrontA: -5647676528197252992
+      1016_Alakarate_Shiny_Female_FrontB: -8805375751345996329
+      1016_Alakarate_Shiny_Male_BackA: -6863153551267783002
+      1016_Alakarate_Shiny_Male_BackB: -4129539775712069123
+      1016_Alakarate_Shiny_Male_FrontA: 5509500570024203662
+      1016_Alakarate_Shiny_Male_FrontB: -3746240096053743192
+      1016_Alakarate_SpriteA: -3063562306061578150
+      1016_Alakarate_SpriteB: -1767588448080759702
+  mipmapLimitGroupName: 
   pSDRemoveMatte: 0
-  pSDShowRemoveMatteOption: 0
   userData: 
   assetBundleName: 
   assetBundleVariant: 

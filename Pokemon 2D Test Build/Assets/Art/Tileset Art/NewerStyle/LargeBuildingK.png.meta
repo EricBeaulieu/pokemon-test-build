@@ -249,7 +249,7 @@ TextureImporter:
       213: -4793438259705375904
     second: LargeBuildingK_81
   externalObjects: {}
-  serializedVersion: 11
+  serializedVersion: 12
   mipmaps:
     mipMapMode: 0
     enableMipMap: 0
@@ -266,10 +266,12 @@ TextureImporter:
     externalNormalMap: 0
     heightScale: 0.25
     normalMapFilter: 0
+    flipGreenChannel: 0
   isReadable: 0
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
   vTOnly: 0
+  ignoreMipmapLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -308,6 +310,8 @@ TextureImporter:
   textureFormatSet: 0
   ignorePngGamma: 0
   applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 1
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
@@ -319,6 +323,7 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
@@ -331,6 +336,7 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
@@ -343,6 +349,7 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
@@ -355,6 +362,20 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Server
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
@@ -2092,9 +2113,91 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-  spritePackingTag: 
+    nameFileIdTable:
+      LargeBuildingK_0: 4075406584485362765
+      LargeBuildingK_1: 7115947801925617317
+      LargeBuildingK_10: 6548958408246372884
+      LargeBuildingK_11: -9010322627146754556
+      LargeBuildingK_12: 402432402772624947
+      LargeBuildingK_13: 5906160752560476954
+      LargeBuildingK_14: -1384137744949362384
+      LargeBuildingK_15: 1703051565027937547
+      LargeBuildingK_16: 4334081096232331058
+      LargeBuildingK_17: -8130567501213554584
+      LargeBuildingK_18: -4494461538711046184
+      LargeBuildingK_19: -8906280761476059736
+      LargeBuildingK_2: -1428406365478412895
+      LargeBuildingK_20: 4652014703886567330
+      LargeBuildingK_21: -8375175341246700847
+      LargeBuildingK_22: 2421818001379207976
+      LargeBuildingK_23: 4325540795644609872
+      LargeBuildingK_24: -5427701844884289311
+      LargeBuildingK_25: 95753503086996491
+      LargeBuildingK_26: 5967655859538597746
+      LargeBuildingK_27: -4140228300512514301
+      LargeBuildingK_28: -6218144248350201113
+      LargeBuildingK_29: 8946737512462440919
+      LargeBuildingK_3: 7321158010905328461
+      LargeBuildingK_30: -1988929539348809840
+      LargeBuildingK_31: 4441668034396968507
+      LargeBuildingK_32: -4902141693843554480
+      LargeBuildingK_33: -3786834818219177181
+      LargeBuildingK_34: -8808844096623260272
+      LargeBuildingK_35: 3494231650428859010
+      LargeBuildingK_36: -2703858232179883265
+      LargeBuildingK_37: -4932850749396481032
+      LargeBuildingK_38: 5391183740421370415
+      LargeBuildingK_39: -3701700386509712527
+      LargeBuildingK_4: 4302458704536383984
+      LargeBuildingK_40: 2312239443468795034
+      LargeBuildingK_41: -2440407101252794992
+      LargeBuildingK_42: -5393391594838506729
+      LargeBuildingK_43: 4598619440254410123
+      LargeBuildingK_44: -8411798099187126715
+      LargeBuildingK_45: 5319559512624137802
+      LargeBuildingK_46: 3522584108007182187
+      LargeBuildingK_47: 5983584305840126118
+      LargeBuildingK_48: 3886069981733162489
+      LargeBuildingK_49: -1468860363124683429
+      LargeBuildingK_5: -3407524919873361493
+      LargeBuildingK_50: 258801114833399699
+      LargeBuildingK_51: -8258224729327226586
+      LargeBuildingK_52: -7163615186273370880
+      LargeBuildingK_53: 1380600751879056060
+      LargeBuildingK_54: -2778392414949007565
+      LargeBuildingK_55: -7625142908400030221
+      LargeBuildingK_56: 3386459660866068392
+      LargeBuildingK_57: 5403755376361330802
+      LargeBuildingK_58: -9158193511991795798
+      LargeBuildingK_59: 256324983957223753
+      LargeBuildingK_6: -34957703255317743
+      LargeBuildingK_60: 3284673292846009894
+      LargeBuildingK_61: -8138992706858247
+      LargeBuildingK_62: 6133606792534979018
+      LargeBuildingK_63: 7406752714770327361
+      LargeBuildingK_64: 6240636320724741913
+      LargeBuildingK_65: -2628785365075802541
+      LargeBuildingK_66: -7199821311691781000
+      LargeBuildingK_67: -6767544477577319278
+      LargeBuildingK_68: -5997910404127231737
+      LargeBuildingK_69: -5075123009515147384
+      LargeBuildingK_7: -8616399176717915367
+      LargeBuildingK_70: 9072362341806645017
+      LargeBuildingK_71: 1468769772161070069
+      LargeBuildingK_72: 1042306676428277008
+      LargeBuildingK_73: -4659354570330913103
+      LargeBuildingK_74: -8938107416404472602
+      LargeBuildingK_75: -6301085827436020194
+      LargeBuildingK_76: 6596741503954695908
+      LargeBuildingK_77: 52206157964634625
+      LargeBuildingK_78: -7796168182629758743
+      LargeBuildingK_79: -4093228507548490291
+      LargeBuildingK_8: 6736378000389367511
+      LargeBuildingK_80: 2219382502172187906
+      LargeBuildingK_81: -4793438259705375904
+      LargeBuildingK_9: 4581473054875661328
+  mipmapLimitGroupName: 
   pSDRemoveMatte: 0
-  pSDShowRemoveMatteOption: 0
   userData: 
   assetBundleName: 
   assetBundleVariant: 

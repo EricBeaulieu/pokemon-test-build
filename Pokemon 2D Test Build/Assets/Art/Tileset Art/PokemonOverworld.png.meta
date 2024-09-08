@@ -2262,7 +2262,7 @@ TextureImporter:
       213: 21301504
     second: Tileset Art_752
   externalObjects: {}
-  serializedVersion: 11
+  serializedVersion: 12
   mipmaps:
     mipMapMode: 0
     enableMipMap: 0
@@ -2279,10 +2279,12 @@ TextureImporter:
     externalNormalMap: 0
     heightScale: 0.25
     normalMapFilter: 0
+    flipGreenChannel: 0
   isReadable: 0
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
   vTOnly: 0
+  ignoreMipmapLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -2321,6 +2323,8 @@ TextureImporter:
   textureFormatSet: 0
   ignorePngGamma: 0
   applyGammaDecoding: 1
+  swizzle: 50462976
+  cookieLightType: 1
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
@@ -2332,6 +2336,7 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
@@ -2344,6 +2349,7 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
@@ -2356,6 +2362,7 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
@@ -2368,6 +2375,20 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Server
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
@@ -12988,9 +13009,514 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-  spritePackingTag: 
+    nameFileIdTable:
+      AAA: 21300264
+      CalmWater_GroundBottom: 21300104
+      CalmWater_GroundBottomLeft: 21300102
+      CalmWater_GroundBottomRight: 21300106
+      CalmWater_GroundLeft: 21300060
+      CalmWater_GroundRight: 21300064
+      CalmWater_GroundTop: 21300018
+      CalmWater_GroundTopLeft: 21300016
+      CalmWater_GroundTopRight: 21300020
+      CalmWater_Water: 21300062
+      DirtTrail_Bottom: 21300008
+      DirtTrail_BottomLeft: 21300048
+      DirtTrail_BottomRight: 21300050
+      DirtTrail_CornerBottomLeft: 21300092
+      DirtTrail_CornerBottomRight: 21300090
+      DirtTrail_CornerTopLeft: 21300096
+      DirtTrail_CornerTopRight: 21300094
+      DirtTrail_Full: 21300000
+      DirtTrail_Left: 21300002
+      DirtTrail_Right: 21300004
+      DirtTrail_Top: 21300006
+      DirtTrail_TopLeft: 21300052
+      DirtTrail_TopRight: 21300054
+      GrassLand_1: 21300010
+      GrassLand_2: 21300056
+      GrassLand_3: 21300058
+      GrassLand_4: 21300098
+      GrassLand_CuttableTree: 21300014
+      GrassLand_Flower1: 21300100
+      GrassLand_Flower2: 21301362
+      GrassLand_GrassPatch: 21300012
+      GrassLand_LedgeBottom: 21300144
+      GrassLand_LedgeBottomLeft: 21300222
+      GrassLand_LedgeBottomLeftCorner: 21300258
+      GrassLand_LedgeBottomLeftEnd: 21300142
+      GrassLand_LedgeBottomRight: 21300186
+      GrassLand_LedgeBottomRightEnd: 21300146
+      GrassLand_LedgeLeft: 21300224
+      GrassLand_LedgeRight: 21300188
+      GrassLand_LedgeRightTopEnd: 21300190
+      GrassLand_Tree_BottomLeft: 21300726
+      GrassLand_Tree_BottomLeft_TreeInfront: 21300730
+      GrassLand_Tree_BottomRight: 21300728
+      GrassLand_Tree_BottomRight_TreeInfront: 21300732
+      GrassLand_Tree_Left: 21300684
+      GrassLand_Tree_Right: 21300686
+      GrassLand_Tree_TopLeft_TreeBehind: 21300644
+      GrassLand_Tree_TopRight_TreeBehind: 21300646
+      GrassTrail_Bottom: 21300140
+      GrassTrail_BottomLeft: 21300178
+      GrassTrail_BottomRight: 21300180
+      GrassTrail_CornerBottomLeft: 21300216
+      GrassTrail_CornerBottomRight: 21300214
+      GrassTrail_CornerTopLeft: 21300220
+      GrassTrail_CornerTopRight: 21300218
+      GrassTrail_Full: 21300132
+      GrassTrail_Left: 21300134
+      GrassTrail_Right: 21300136
+      GrassTrail_Top: 21300138
+      GrassTrail_TopLeft: 21300182
+      GrassTrail_TopRight: 21300184
+      GymSign_Bottom: 21300244
+      GymSign_Top: 21300208
+      MailBox_Bottom: 21300246
+      MailBox_Top: 21300210
+      PNG_LedgeBottom: 21300290
+      PNG_LedgeBottomLeft: 21300260
+      PNG_LedgeBottomLeftCorner: 21300226
+      PNG_LedgeBottomLeftEnd: 21300288
+      PNG_LedgeBottomRightEnd: 21300292
+      PNG_LedgeLeft: 21300262
+      Tileset Art_100: 21300200
+      Tileset Art_101: 21300202
+      Tileset Art_102: 21300204
+      Tileset Art_103: 21300206
+      Tileset Art_106: 21300212
+      Tileset Art_11: 21300022
+      Tileset Art_116: 21300232
+      Tileset Art_117: 21300234
+      Tileset Art_118: 21300236
+      Tileset Art_119: 21300238
+      Tileset Art_12: 21300024
+      Tileset Art_120: 21300240
+      Tileset Art_121: 21300242
+      Tileset Art_124: 21300248
+      Tileset Art_125: 21300250
+      Tileset Art_126: 21300252
+      Tileset Art_127: 21300254
+      Tileset Art_128: 21300256
+      Tileset Art_13: 21300026
+      Tileset Art_133: 21300266
+      Tileset Art_134: 21300268
+      Tileset Art_135: 21300270
+      Tileset Art_136: 21300272
+      Tileset Art_137: 21300274
+      Tileset Art_138: 21300276
+      Tileset Art_139: 21300278
+      Tileset Art_14: 21300028
+      Tileset Art_140: 21300280
+      Tileset Art_141: 21300282
+      Tileset Art_142: 21300284
+      Tileset Art_143: 21300286
+      Tileset Art_147: 21300294
+      Tileset Art_148: 21300296
+      Tileset Art_149: 21300298
+      Tileset Art_15: 21300030
+      Tileset Art_150: 21300300
+      Tileset Art_151: 21300302
+      Tileset Art_152: 21300304
+      Tileset Art_153: 21300306
+      Tileset Art_154: 21300308
+      Tileset Art_155: 21300310
+      Tileset Art_156: 21300312
+      Tileset Art_157: 21300314
+      Tileset Art_158: 21300316
+      Tileset Art_159: 21300318
+      Tileset Art_16: 21300032
+      Tileset Art_160: 21300320
+      Tileset Art_161: 21300322
+      Tileset Art_162: 21300324
+      Tileset Art_163: 21300326
+      Tileset Art_164: 21300328
+      Tileset Art_165: 21300330
+      Tileset Art_166: 21300332
+      Tileset Art_167: 21300334
+      Tileset Art_168: 21300336
+      Tileset Art_169: 21300338
+      Tileset Art_17: 21300034
+      Tileset Art_170: 21300340
+      Tileset Art_171: 21300342
+      Tileset Art_172: 21300344
+      Tileset Art_173: 21300346
+      Tileset Art_174: 21300348
+      Tileset Art_175: 21300350
+      Tileset Art_176: 21300352
+      Tileset Art_177: 21300354
+      Tileset Art_178: 21300356
+      Tileset Art_179: 21300358
+      Tileset Art_18: 21300036
+      Tileset Art_180: 21300360
+      Tileset Art_181: 21300362
+      Tileset Art_182: 21300364
+      Tileset Art_183: 21300366
+      Tileset Art_184: 21300368
+      Tileset Art_185: 21300370
+      Tileset Art_186: 21300372
+      Tileset Art_187: 21300374
+      Tileset Art_188: 21300376
+      Tileset Art_189: 21300378
+      Tileset Art_19: 21300038
+      Tileset Art_190: 21300380
+      Tileset Art_191: 21300382
+      Tileset Art_192: 21300384
+      Tileset Art_193: 21300386
+      Tileset Art_194: 21300388
+      Tileset Art_195: 21300390
+      Tileset Art_196: 21300392
+      Tileset Art_197: 21300394
+      Tileset Art_198: 21300396
+      Tileset Art_199: 21300398
+      Tileset Art_20: 21300040
+      Tileset Art_200: 21300400
+      Tileset Art_201: 21300402
+      Tileset Art_202: 21300404
+      Tileset Art_203: 21300406
+      Tileset Art_204: 21300408
+      Tileset Art_205: 21300410
+      Tileset Art_209: 21300418
+      Tileset Art_21: 21300042
+      Tileset Art_210: 21300420
+      Tileset Art_211: 21300422
+      Tileset Art_212: 21300424
+      Tileset Art_213: 21300426
+      Tileset Art_214: 21300428
+      Tileset Art_215: 21300430
+      Tileset Art_216: 21300432
+      Tileset Art_217: 21300434
+      Tileset Art_218: 21300436
+      Tileset Art_219: 21300438
+      Tileset Art_22: 21300044
+      Tileset Art_220: 21300440
+      Tileset Art_221: 21300442
+      Tileset Art_222: 21300444
+      Tileset Art_223: 21300446
+      Tileset Art_224: 21300448
+      Tileset Art_228: 21300456
+      Tileset Art_229: 21300458
+      Tileset Art_23: 21300046
+      Tileset Art_230: 21300460
+      Tileset Art_231: 21300462
+      Tileset Art_232: 21300464
+      Tileset Art_233: 21300466
+      Tileset Art_234: 21300468
+      Tileset Art_235: 21300470
+      Tileset Art_236: 21300472
+      Tileset Art_237: 21300474
+      Tileset Art_238: 21300476
+      Tileset Art_239: 21300478
+      Tileset Art_240: 21300480
+      Tileset Art_241: 21300482
+      Tileset Art_242: 21300484
+      Tileset Art_243: 21300486
+      Tileset Art_247: 21300494
+      Tileset Art_248: 21300496
+      Tileset Art_249: 21300498
+      Tileset Art_250: 21300500
+      Tileset Art_251: 21300502
+      Tileset Art_252: 21300504
+      Tileset Art_253: 21300506
+      Tileset Art_254: 21300508
+      Tileset Art_255: 21300510
+      Tileset Art_256: 21300512
+      Tileset Art_257: 21300514
+      Tileset Art_258: 21300516
+      Tileset Art_259: 21300518
+      Tileset Art_260: 21300520
+      Tileset Art_261: 21300522
+      Tileset Art_262: 21300524
+      Tileset Art_266: 21300532
+      Tileset Art_267: 21300534
+      Tileset Art_268: 21300536
+      Tileset Art_269: 21300538
+      Tileset Art_270: 21300540
+      Tileset Art_271: 21300542
+      Tileset Art_272: 21300544
+      Tileset Art_273: 21300546
+      Tileset Art_274: 21300548
+      Tileset Art_281: 21300562
+      Tileset Art_282: 21300564
+      Tileset Art_283: 21300566
+      Tileset Art_284: 21300568
+      Tileset Art_285: 21300570
+      Tileset Art_286: 21300572
+      Tileset Art_287: 21300574
+      Tileset Art_288: 21300576
+      Tileset Art_289: 21300578
+      Tileset Art_290: 21300580
+      Tileset Art_291: 21300582
+      Tileset Art_292: 21300584
+      Tileset Art_293: 21300586
+      Tileset Art_294: 21300588
+      Tileset Art_295: 21300590
+      Tileset Art_296: 21300592
+      Tileset Art_300: 21300600
+      Tileset Art_301: 21300602
+      Tileset Art_303: 21300606
+      Tileset Art_304: 21300608
+      Tileset Art_305: 21300610
+      Tileset Art_306: 21300612
+      Tileset Art_307: 21300614
+      Tileset Art_308: 21300616
+      Tileset Art_309: 21300618
+      Tileset Art_310: 21300620
+      Tileset Art_311: 21300622
+      Tileset Art_312: 21300624
+      Tileset Art_313: 21300626
+      Tileset Art_314: 21300628
+      Tileset Art_318: 21300636
+      Tileset Art_319: 21300638
+      Tileset Art_324: 21300648
+      Tileset Art_325: 21300650
+      Tileset Art_326: 21300652
+      Tileset Art_327: 21300654
+      Tileset Art_328: 21300656
+      Tileset Art_329: 21300658
+      Tileset Art_33: 21300066
+      Tileset Art_330: 21300660
+      Tileset Art_331: 21300662
+      Tileset Art_332: 21300664
+      Tileset Art_333: 21300666
+      Tileset Art_334: 21300668
+      Tileset Art_335: 21300670
+      Tileset Art_336: 21300672
+      Tileset Art_34: 21300068
+      Tileset Art_346: 21300692
+      Tileset Art_347: 21300694
+      Tileset Art_348: 21300696
+      Tileset Art_349: 21300698
+      Tileset Art_35: 21300070
+      Tileset Art_350: 21300700
+      Tileset Art_351: 21300702
+      Tileset Art_352: 21300704
+      Tileset Art_353: 21300706
+      Tileset Art_354: 21300708
+      Tileset Art_355: 21300710
+      Tileset Art_356: 21300712
+      Tileset Art_357: 21300714
+      Tileset Art_36: 21300072
+      Tileset Art_367: 21300734
+      Tileset Art_368: 21300736
+      Tileset Art_369: 21300738
+      Tileset Art_37: 21300074
+      Tileset Art_370: 21300740
+      Tileset Art_371: 21300742
+      Tileset Art_372: 21300744
+      Tileset Art_373: 21300746
+      Tileset Art_374: 21300748
+      Tileset Art_375: 21300750
+      Tileset Art_376: 21300752
+      Tileset Art_377: 21300754
+      Tileset Art_378: 21300756
+      Tileset Art_379: 21300758
+      Tileset Art_38: 21300076
+      Tileset Art_383: 21300766
+      Tileset Art_384: 21300768
+      Tileset Art_385: 21300770
+      Tileset Art_386: 21300772
+      Tileset Art_387: 21300774
+      Tileset Art_388: 21300776
+      Tileset Art_389: 21300778
+      Tileset Art_39: 21300078
+      Tileset Art_390: 21300780
+      Tileset Art_391: 21300782
+      Tileset Art_392: 21300784
+      Tileset Art_393: 21300786
+      Tileset Art_394: 21300788
+      Tileset Art_395: 21300790
+      Tileset Art_396: 21300792
+      Tileset Art_397: 21300794
+      Tileset Art_398: 21300796
+      Tileset Art_399: 21300798
+      Tileset Art_40: 21300080
+      Tileset Art_400: 21300800
+      Tileset Art_401: 21300802
+      Tileset Art_402: 21300804
+      Tileset Art_403: 21300806
+      Tileset Art_404: 21300808
+      Tileset Art_405: 21300810
+      Tileset Art_406: 21300812
+      Tileset Art_407: 21300814
+      Tileset Art_408: 21300816
+      Tileset Art_409: 21300818
+      Tileset Art_41: 21300082
+      Tileset Art_410: 21300820
+      Tileset Art_411: 21300822
+      Tileset Art_412: 21300824
+      Tileset Art_413: 21300826
+      Tileset Art_414: 21300828
+      Tileset Art_415: 21300830
+      Tileset Art_416: 21300832
+      Tileset Art_417: 21300834
+      Tileset Art_418: 21300836
+      Tileset Art_419: 21300838
+      Tileset Art_42: 21300084
+      Tileset Art_420: 21300840
+      Tileset Art_421: 21300842
+      Tileset Art_422: 21300844
+      Tileset Art_423: 21300846
+      Tileset Art_424: 21300848
+      Tileset Art_425: 21300850
+      Tileset Art_426: 21300852
+      Tileset Art_427: 21300854
+      Tileset Art_428: 21300856
+      Tileset Art_429: 21300858
+      Tileset Art_43: 21300086
+      Tileset Art_430: 21300860
+      Tileset Art_431: 21300862
+      Tileset Art_432: 21300864
+      Tileset Art_433: 21300866
+      Tileset Art_434: 21300868
+      Tileset Art_435: 21300870
+      Tileset Art_436: 21300872
+      Tileset Art_437: 21300874
+      Tileset Art_438: 21300876
+      Tileset Art_439: 21300878
+      Tileset Art_44: 21300088
+      Tileset Art_440: 21300880
+      Tileset Art_441: 21300882
+      Tileset Art_445: 21300890
+      Tileset Art_446: 21300892
+      Tileset Art_447: 21300894
+      Tileset Art_448: 21300896
+      Tileset Art_449: 21300898
+      Tileset Art_450: 21300900
+      Tileset Art_451: 21300902
+      Tileset Art_453: 21300906
+      Tileset Art_454: 21300908
+      Tileset Art_455: 21300910
+      Tileset Art_456: 21300912
+      Tileset Art_457: 21300914
+      Tileset Art_466: 21300932
+      Tileset Art_467: 21300934
+      Tileset Art_468: 21300936
+      Tileset Art_469: 21300938
+      Tileset Art_470: 21300940
+      Tileset Art_471: 21300942
+      Tileset Art_472: 21300944
+      Tileset Art_481: 21300962
+      Tileset Art_482: 21300964
+      Tileset Art_483: 21300966
+      Tileset Art_484: 21300968
+      Tileset Art_485: 21300970
+      Tileset Art_486: 21300972
+      Tileset Art_487: 21300974
+      Tileset Art_488: 21300976
+      Tileset Art_489: 21300978
+      Tileset Art_490: 21300980
+      Tileset Art_491: 21300982
+      Tileset Art_492: 21300984
+      Tileset Art_499: 21300998
+      Tileset Art_500: 21301000
+      Tileset Art_501: 21301002
+      Tileset Art_502: 21301004
+      Tileset Art_503: 21301006
+      Tileset Art_504: 21301008
+      Tileset Art_505: 21301010
+      Tileset Art_506: 21301012
+      Tileset Art_507: 21301014
+      Tileset Art_508: 21301016
+      Tileset Art_509: 21301018
+      Tileset Art_510: 21301020
+      Tileset Art_511: 21301022
+      Tileset Art_518: 21301036
+      Tileset Art_519: 21301038
+      Tileset Art_520: 21301040
+      Tileset Art_521: 21301042
+      Tileset Art_522: 21301044
+      Tileset Art_523: 21301046
+      Tileset Art_524: 21301048
+      Tileset Art_525: 21301050
+      Tileset Art_526: 21301052
+      Tileset Art_527: 21301054
+      Tileset Art_534: 21301068
+      Tileset Art_535: 21301070
+      Tileset Art_536: 21301072
+      Tileset Art_537: 21301074
+      Tileset Art_538: 21301076
+      Tileset Art_539: 21301078
+      Tileset Art_54: 21300108
+      Tileset Art_540: 21301080
+      Tileset Art_541: 21301082
+      Tileset Art_542: 21301084
+      Tileset Art_543: 21301086
+      Tileset Art_544: 21301088
+      Tileset Art_545: 21301090
+      Tileset Art_546: 21301092
+      Tileset Art_547: 21301094
+      Tileset Art_548: 21301096
+      Tileset Art_549: 21301098
+      Tileset Art_55: 21300110
+      Tileset Art_550: 21301100
+      Tileset Art_559: 21301118
+      Tileset Art_56: 21300112
+      Tileset Art_560: 21301120
+      Tileset Art_561: 21301122
+      Tileset Art_562: 21301124
+      Tileset Art_563: 21301126
+      Tileset Art_564: 21301128
+      Tileset Art_565: 21301130
+      Tileset Art_57: 21300114
+      Tileset Art_58: 21300116
+      Tileset Art_588: 21301176
+      Tileset Art_59: 21300118
+      Tileset Art_60: 21300120
+      Tileset Art_61: 21300122
+      Tileset Art_62: 21300124
+      Tileset Art_63: 21300126
+      Tileset Art_64: 21300128
+      Tileset Art_65: 21300130
+      Tileset Art_707: 21301414
+      Tileset Art_746: 21301492
+      Tileset Art_747: 21301494
+      Tileset Art_748: 21301496
+      Tileset Art_749: 21301498
+      Tileset Art_750: 21301500
+      Tileset Art_751: 21301502
+      Tileset Art_752: 21301504
+      Tileset Art_77: 21300154
+      Tileset Art_78: 21300156
+      Tileset Art_79: 21300158
+      Tileset Art_80: 21300160
+      Tileset Art_81: 21300162
+      Tileset Art_82: 21300164
+      Tileset Art_83: 21300166
+      Tileset Art_84: 21300168
+      Tileset Art_85: 21300170
+      Tileset Art_86: 21300172
+      Tileset Art_87: 21300174
+      Tileset Art_88: 21300176
+      Tileset Art_98: 21300196
+      Tileset Art_99: 21300198
+      WaterFall_1: 21300530
+      WaterFall_2: 21300560
+      WaterFall_3: 21300604
+      WaterRock_1_BottomLeft: 21300556
+      WaterRock_1_BottomRight: 21300558
+      WaterRock_1_TopLeft: 21300526
+      WaterRock_1_TopRight: 21300528
+      WaterToGroundLedge_Bottom: 21301490
+      WaterToGroundLedge_BottomLeft: 21300228
+      WaterToGroundLedge_BottomRight: 21300230
+      WaterToGroundLedge_Left: 21300192
+      WaterToGroundLedge_Right: 21300194
+      WaterToGroundLedge_Top: 21300150
+      WaterToGroundLedge_TopLeft: 21300148
+      WaterToGroundLedge_TopRight: 21300152
+      WaterWave_1: 21300412
+      WaterWave_2: 21300414
+      WaterWave_3: 21300416
+      WaterWave_4: 21300450
+      WaterWave_5: 21300452
+      WaterWave_6: 21300454
+      WaterWave_7: 21300488
+      WaterWave_8: 21300490
+      WaterWave_9: 21300492
+  mipmapLimitGroupName: 
   pSDRemoveMatte: 0
-  pSDShowRemoveMatteOption: 0
   userData: 
   assetBundleName: 
   assetBundleVariant: 

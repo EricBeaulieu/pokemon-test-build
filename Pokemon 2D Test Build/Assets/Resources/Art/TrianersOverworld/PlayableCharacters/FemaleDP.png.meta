@@ -213,7 +213,7 @@ TextureImporter:
       213: -8870193507178223950
     second: Right_BikeJump_1
   externalObjects: {}
-  serializedVersion: 11
+  serializedVersion: 12
   mipmaps:
     mipMapMode: 0
     enableMipMap: 0
@@ -230,10 +230,12 @@ TextureImporter:
     externalNormalMap: 0
     heightScale: 0.25
     normalMapFilter: 0
+    flipGreenChannel: 0
   isReadable: 0
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
   vTOnly: 0
+  ignoreMipmapLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -272,6 +274,8 @@ TextureImporter:
   textureFormatSet: 0
   ignorePngGamma: 0
   applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 1
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
@@ -283,6 +287,33 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Server
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
@@ -1768,9 +1799,79 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-  spritePackingTag: 
+    nameFileIdTable:
+      Down_Bike_0: 8958794603530863331
+      Down_Bike_1: 9198667476739986813
+      Down_Bike_2: -2193809841614899114
+      Down_Bike_3: -8452857468833189047
+      Down_Fish_0: 7922835826007404281
+      Down_Fish_1: 4132435118214609431
+      Down_Fish_2: 1842412438929802354
+      Down_Fish_3: 123396243009672275
+      Down_Idle: -992397216984684913
+      Down_Run_0: 5812246478261057734
+      Down_Run_1: -1533014041406094197
+      Down_Run_2: -2013268261343791721
+      Down_Surf: 5451105255947416819
+      Down_Walk_0: 7915039318450174929
+      Down_Walk_1: -1287833195095181929
+      HM_0: 8473539910786741843
+      HM_1: 4499121124045871256
+      HM_2: -5256009937875415359
+      HM_3: -790169608766129930
+      Item_0: 7322885499304307244
+      Item_1: -1463922387993793746
+      Left_BikeJump_0: 1722748190663383759
+      Left_BikeJump_1: -4630871734256445487
+      Left_Bike_0: -6700664653083532203
+      Left_Bike_1: 4151743545604106332
+      Left_Bike_2: -8217572456219795098
+      Left_Bike_3: 7933953050704572769
+      Left_Fish_0: 1064480871630206091
+      Left_Fish_1: 1899579602073894130
+      Left_Fish_2: -4036530859634037448
+      Left_Fish_3: 731392459817596842
+      Left_Idle: 2159734486187202502
+      Left_Run_0: -715284519973768551
+      Left_Run_1: 8299722115662974311
+      Left_Run_2: -8010252015982164181
+      Left_Surf: -6814492078509623719
+      Left_Walk_0: 8589675451888786324
+      Left_Walk_1: 1745513361863741258
+      Right_BikeJump_0: 3929259256611826673
+      Right_BikeJump_1: -8870193507178223950
+      Right_Bike_0: 505964133729390259
+      Right_Bike_1: -8882647010561691936
+      Right_Bike_2: 4459290957826161036
+      Right_Bike_3: 2410256769463175183
+      Right_Fish_0: -8375485931518994516
+      Right_Fish_1: 5286747038269355419
+      Right_Fish_2: 6953505589718051225
+      Right_Fish_3: 1142134633281705311
+      Right_Idle: -8051275863562317287
+      Right_Run_0: 2243299267323088479
+      Right_Run_1: -5568524054831833164
+      Right_Run_2: 9078830609444360776
+      Right_Surf: 5514924034045103666
+      Right_Walk_0: -8134295357148833876
+      Right_Walk_1: 6350572106158937266
+      Up_Bike_0: -7993473589247226559
+      Up_Bike_1: 6742633350043256113
+      Up_Bike_2: -8237360392547788222
+      Up_Bike_3: 1378050218523611083
+      Up_Fish_0: -2976621579287548055
+      Up_Fish_1: 4141269704068856152
+      Up_Fish_2: -9159814647882674724
+      Up_Fish_3: -4883368064830843283
+      Up_Idle: -2793714993906345474
+      Up_Run_0: -4987804973976174487
+      Up_Run_1: 73551953532699445
+      Up_Run_2: 4687300304202323975
+      Up_Surf: -6938359044431515012
+      Up_Walk_0: -5128102697597884679
+      Up_Walk_1: 7124718916160210517
+  mipmapLimitGroupName: 
   pSDRemoveMatte: 0
-  pSDShowRemoveMatteOption: 0
   userData: 
   assetBundleName: 
   assetBundleVariant: 

@@ -1353,7 +1353,7 @@ TextureImporter:
       213: -8677324643890575658
     second: OverworldArt2_649
   externalObjects: {}
-  serializedVersion: 11
+  serializedVersion: 12
   mipmaps:
     mipMapMode: 0
     enableMipMap: 0
@@ -1370,10 +1370,12 @@ TextureImporter:
     externalNormalMap: 0
     heightScale: 0.25
     normalMapFilter: 0
+    flipGreenChannel: 0
   isReadable: 0
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
   vTOnly: 0
+  ignoreMipmapLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -1412,6 +1414,8 @@ TextureImporter:
   textureFormatSet: 0
   ignorePngGamma: 0
   applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 1
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
@@ -1423,6 +1427,7 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
@@ -1435,6 +1440,7 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
@@ -1447,6 +1453,7 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
@@ -1459,6 +1466,20 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Server
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
@@ -10882,9 +10903,457 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-  spritePackingTag: 
+    nameFileIdTable:
+      BigTree_Green_0: -4291471648586126361
+      BigTree_Green_1: -5919111208548327905
+      BigTree_Green_2: 757820262279936282
+      BigTree_Green_3: 2435543740488947926
+      BigTree_Green_4: -6181635271798299054
+      BigTree_Green_5: -2347588187830719761
+      BigTree_Green_6: -1641893606861207971
+      BigTree_Green_7: -8344765118701193663
+      BigTree_Green_8: 8733504509257457589
+      BigTree_Green_9: -7426126344061366961
+      BigTree_Yellow_0: -6388239562321619408
+      BigTree_Yellow_1: -3998367027916613818
+      BigTree_Yellow_2: 1066822269040050476
+      BigTree_Yellow_3: 4299745936208476705
+      BigTree_Yellow_4: 3699647710042834108
+      BigTree_Yellow_5: -1421193305423001923
+      BigTree_Yellow_6: -8062379985953612063
+      BigTree_Yellow_7: 2382113016083920041
+      BigTree_Yellow_8: 6778190205465898417
+      BigTree_Yellow_9: -4745152755616610620
+      Grass_00: 1900048529427341122
+      Grass_01: 2710141871985051027
+      Grass_02: -3592670597200565522
+      Grass_03: -8181704133396483116
+      Grass_04: 3018623859228890372
+      Grass_05: -994427409070441003
+      Grass_06: -2635310852257207338
+      Grass_07: -5396955102459084010
+      Grass_08: -4487093381991733980
+      Grass_09: -6873106407733737641
+      Grass_10: 2140316405631317528
+      Grass_11: -467275891433605919
+      Grass_12: 62362483001833135
+      Grass_13: 1622428270664339714
+      Grass_14: 1539742660641884443
+      Grass_15: -6645684960567400696
+      GravelTrail_Center: -7643625205792994071
+      GravelTrail_Down: 8717966847887315689
+      GravelTrail_DownLeft: 1724455630439626895
+      GravelTrail_DownRight: 1332493795359360235
+      GravelTrail_InnerDownLeft: 7307331307070208185
+      GravelTrail_InnerDownRight: 9065696997279286839
+      GravelTrail_InnerUpLeft: 6657320996648127846
+      GravelTrail_InnerUpRight: 3393933040649300746
+      GravelTrail_Left: -7817803804153091180
+      GravelTrail_Right: -1398834753786427784
+      GravelTrail_Up: -1390484779067406160
+      GravelTrail_UpLeft: 6591844700809074847
+      GravelTrail_UpRight: 8073336527829970925
+      OverworldArt2_10: -8411398872257607949
+      OverworldArt2_100: 5475448996406954660
+      OverworldArt2_101: -336735771021190417
+      OverworldArt2_102: 3060630990198094968
+      OverworldArt2_103: 6108961457974640814
+      OverworldArt2_104: 756663311023057571
+      OverworldArt2_105: 5686922951903547629
+      OverworldArt2_107: 3736708191138272218
+      OverworldArt2_11: 4983570373473508730
+      OverworldArt2_112: 8321890187729461509
+      OverworldArt2_113: 5747855295013487005
+      OverworldArt2_115: 7743606387123000894
+      OverworldArt2_116: -2364894560138082807
+      OverworldArt2_117: 170525907735969910
+      OverworldArt2_119: -1159614943700325988
+      OverworldArt2_12: 6199578520325222157
+      OverworldArt2_120: 5021941419843653172
+      OverworldArt2_121: 3426723225810592775
+      OverworldArt2_122: -932097268474288736
+      OverworldArt2_123: -2008546347928023223
+      OverworldArt2_124: 2461114537133029256
+      OverworldArt2_125: -1837025213990556733
+      OverworldArt2_126: 2953133099806212619
+      OverworldArt2_127: 5175397969978341095
+      OverworldArt2_128: 8446951018433169420
+      OverworldArt2_13: 169580273147016131
+      OverworldArt2_138: -5575252290486246186
+      OverworldArt2_139: -7101911458963628845
+      OverworldArt2_14: 519056699890933912
+      OverworldArt2_140: 5959542655111834424
+      OverworldArt2_141: -4024648680788982988
+      OverworldArt2_142: 8736150668842224386
+      OverworldArt2_143: -1601529061039345697
+      OverworldArt2_144: 6309172277036106780
+      OverworldArt2_145: -1064165376533065698
+      OverworldArt2_146: 7215999692629891535
+      OverworldArt2_147: -8685024969038549409
+      OverworldArt2_148: -6255408891336768945
+      OverworldArt2_149: 1676718734582269453
+      OverworldArt2_15: 3477422144261384839
+      OverworldArt2_150: -1180698390979815142
+      OverworldArt2_151: 3161390132759455695
+      OverworldArt2_152: 2960217947911169557
+      OverworldArt2_154: -8327567175910676200
+      OverworldArt2_155: 2111794196263086684
+      OverworldArt2_156: -78053685078230533
+      OverworldArt2_158: 5028684105167173366
+      OverworldArt2_159: 4642588786482182207
+      OverworldArt2_16: -7391755036982233297
+      OverworldArt2_161: 4103090460804772395
+      OverworldArt2_167: 4196097952394373677
+      OverworldArt2_168: -5175711158411128759
+      OverworldArt2_169: 2143894298054374158
+      OverworldArt2_17: 1910869052761488584
+      OverworldArt2_170: 4717962799599157519
+      OverworldArt2_171: 813342130611156320
+      OverworldArt2_172: 3667741129417178074
+      OverworldArt2_173: -9078876147587079665
+      OverworldArt2_175: -734504266140116974
+      OverworldArt2_176: -6547644067509668111
+      OverworldArt2_177: 1647519993171515233
+      OverworldArt2_179: -5748051312677791497
+      OverworldArt2_18: 6682084871779522886
+      OverworldArt2_180: -8342777549031239979
+      OverworldArt2_182: -5273469264984295226
+      OverworldArt2_183: -4874085946870816116
+      OverworldArt2_184: -1400473730765320564
+      OverworldArt2_185: -6501322903150580506
+      OverworldArt2_188: -1862852172303451403
+      OverworldArt2_189: -8060465623002605909
+      OverworldArt2_19: 3186565911263195414
+      OverworldArt2_190: -1572284104910075308
+      OverworldArt2_191: -3986062037934780787
+      OverworldArt2_192: -8633383494069187149
+      OverworldArt2_195: 7603558035168635609
+      OverworldArt2_196: 1556795029839812866
+      OverworldArt2_197: -2169424887170562902
+      OverworldArt2_202: 8163001834639034243
+      OverworldArt2_203: 8822411741978444591
+      OverworldArt2_204: -5259635050625491747
+      OverworldArt2_207: -4505413507393704894
+      OverworldArt2_208: -493356443489893248
+      OverworldArt2_209: -8783252684299593839
+      OverworldArt2_210: 2840933589000434267
+      OverworldArt2_211: 149760363331406770
+      OverworldArt2_218: 8823428842471333510
+      OverworldArt2_219: 457831446987008303
+      OverworldArt2_220: 8392051743235577348
+      OverworldArt2_221: 477169346213689132
+      OverworldArt2_222: 4338882798917973462
+      OverworldArt2_223: 5055366162930495166
+      OverworldArt2_226: 2922519740283229948
+      OverworldArt2_227: 8220503134820037705
+      OverworldArt2_228: 4259774584286717919
+      OverworldArt2_229: 6315229413541161071
+      OverworldArt2_230: -3892893783053395161
+      OverworldArt2_232: 7216579438564327268
+      OverworldArt2_233: -4005110064501410338
+      OverworldArt2_234: 7356477418062039031
+      OverworldArt2_239: 6541081862534874047
+      OverworldArt2_240: 1545656388062746569
+      OverworldArt2_241: -7430881796394816692
+      OverworldArt2_244: 2118728804430940902
+      OverworldArt2_245: -1343241168627434288
+      OverworldArt2_246: 4164026592518790376
+      OverworldArt2_247: -635772069333405715
+      OverworldArt2_248: -6314191194670482686
+      OverworldArt2_249: -3688473217601970219
+      OverworldArt2_251: -7025794199445167989
+      OverworldArt2_252: 4564982017003369073
+      OverworldArt2_253: 6657960042631411168
+      OverworldArt2_255: -7685621347130241194
+      OverworldArt2_256: 2656762020822996755
+      OverworldArt2_26: 247775333148480422
+      OverworldArt2_260: -5468307428946704168
+      OverworldArt2_261: 540287732790923652
+      OverworldArt2_262: -6173865641270723165
+      OverworldArt2_263: -2708240040897595993
+      OverworldArt2_264: -5077270311880523609
+      OverworldArt2_265: 9097300570821834973
+      OverworldArt2_266: 942482002148792578
+      OverworldArt2_267: 7897157908611472043
+      OverworldArt2_268: 2097816225295083756
+      OverworldArt2_27: -2460945530934097675
+      OverworldArt2_270: 6736404430978735904
+      OverworldArt2_271: -1678304192319018193
+      OverworldArt2_272: -2649400717400578589
+      OverworldArt2_274: -2333368258172190051
+      OverworldArt2_275: 150794658499941334
+      OverworldArt2_279: 3956262883009995680
+      OverworldArt2_28: 4325020367677002107
+      OverworldArt2_280: -6770390130629210813
+      OverworldArt2_281: -6888992818081656382
+      OverworldArt2_282: -4338379980606714979
+      OverworldArt2_283: -8476995453092344410
+      OverworldArt2_284: 1075444464703709621
+      OverworldArt2_285: -2242717978229839287
+      OverworldArt2_286: -8736701648191583729
+      OverworldArt2_287: 5510877297529623937
+      OverworldArt2_288: -8482466178961691075
+      OverworldArt2_299: -1836208123103257635
+      OverworldArt2_30: -7924604871180804842
+      OverworldArt2_300: 3622159047067506408
+      OverworldArt2_301: -1462048928506565554
+      OverworldArt2_302: 6053676507459223794
+      OverworldArt2_303: 8086463421965357855
+      OverworldArt2_305: -501926821291445313
+      OverworldArt2_306: 9107407425629337226
+      OverworldArt2_307: 8692189431356680715
+      OverworldArt2_309: -8437221256854454054
+      OverworldArt2_31: -3201203794339519244
+      OverworldArt2_310: -6665489204095324205
+      OverworldArt2_323: 8059735126771907876
+      OverworldArt2_324: -6863729245114975750
+      OverworldArt2_325: 1395629417808574066
+      OverworldArt2_327: 5786682388196962254
+      OverworldArt2_328: -4946236735339324762
+      OverworldArt2_33: 774037436453416051
+      OverworldArt2_330: -3690096308104856817
+      OverworldArt2_331: -3273185858647163805
+      OverworldArt2_333: 8276473242064854395
+      OverworldArt2_334: -5755552042881056128
+      OverworldArt2_335: 4981218956665775827
+      OverworldArt2_336: 5738754317408512589
+      OverworldArt2_337: 5844729566664527314
+      OverworldArt2_338: -3008505490006986165
+      OverworldArt2_34: -2894161611006935908
+      OverworldArt2_340: -6196396476171284785
+      OverworldArt2_341: 9204750802354712166
+      OverworldArt2_342: -545058231777248481
+      OverworldArt2_347: 3955065476855201041
+      OverworldArt2_348: 5631864200381263579
+      OverworldArt2_35: -5269288866714180043
+      OverworldArt2_350: -6772345129889222654
+      OverworldArt2_36: -2148383316661971888
+      OverworldArt2_361: 8050098469373206134
+      OverworldArt2_362: 1509243494480067433
+      OverworldArt2_364: 286011563606705747
+      OverworldArt2_366: 1248397085651220790
+      OverworldArt2_368: -6658075443435443331
+      OverworldArt2_369: -8804485364501259046
+      OverworldArt2_37: 8099104825282676409
+      OverworldArt2_370: -862006041458293347
+      OverworldArt2_371: -3017751781034819935
+      OverworldArt2_372: -6876421742778604074
+      OverworldArt2_374: 8974227493340852225
+      OverworldArt2_375: -3006002508403724800
+      OverworldArt2_376: -4568002153088539277
+      OverworldArt2_38: -2733078552469086819
+      OverworldArt2_385: 5252827888734894801
+      OverworldArt2_387: -4117967044475436467
+      OverworldArt2_388: 58568320827801497
+      OverworldArt2_389: 8343589457156422977
+      OverworldArt2_39: 9204250180606225762
+      OverworldArt2_390: 1608172970692356806
+      OverworldArt2_391: 2309354545221834889
+      OverworldArt2_393: 1180143493959685892
+      OverworldArt2_394: -5149264675909703439
+      OverworldArt2_395: 7565104844707106468
+      OverworldArt2_397: 6289596708396764205
+      OverworldArt2_398: -8427440046303799868
+      OverworldArt2_40: -4871057348164586321
+      OverworldArt2_402: 3816141979786105371
+      OverworldArt2_404: -1303289969760523102
+      OverworldArt2_405: 8322124750594430079
+      OverworldArt2_406: -2490407032572744252
+      OverworldArt2_407: 6185879948565026427
+      OverworldArt2_408: 7785104524297159321
+      OverworldArt2_41: -1076079975775573815
+      OverworldArt2_410: -4099840073530517299
+      OverworldArt2_411: -473256504920135693
+      OverworldArt2_412: 2771542007702659329
+      OverworldArt2_414: 4092184654531078580
+      OverworldArt2_415: -6885997048585758774
+      OverworldArt2_42: 639931653762372649
+      OverworldArt2_424: 4466561684774976208
+      OverworldArt2_426: -8195137555318437833
+      OverworldArt2_427: 5477024702660426458
+      OverworldArt2_428: 2167874529826852139
+      OverworldArt2_429: 5976773611073078497
+      OverworldArt2_43: 6150915171018423044
+      OverworldArt2_430: 7164177272287444422
+      OverworldArt2_445: 5087157337293471059
+      OverworldArt2_446: -8751394376973854102
+      OverworldArt2_447: -7204769085077054960
+      OverworldArt2_462: 1744106001259282704
+      OverworldArt2_463: 280408600165398897
+      OverworldArt2_464: 3694183921992787244
+      OverworldArt2_465: -3786626432117033559
+      OverworldArt2_466: -8403468720617091817
+      OverworldArt2_467: 2013451890353055798
+      OverworldArt2_476: 934385337158476423
+      OverworldArt2_477: 804011048757781346
+      OverworldArt2_478: 5658473476177568454
+      OverworldArt2_479: -4691306519294826905
+      OverworldArt2_480: -2766672479332325508
+      OverworldArt2_489: -8577467815239610835
+      OverworldArt2_490: -4712832579871980570
+      OverworldArt2_491: -9116934578727276601
+      OverworldArt2_492: -6236373458927352341
+      OverworldArt2_493: -847875665437114636
+      OverworldArt2_494: 570778950983056178
+      OverworldArt2_495: -394711351906750331
+      OverworldArt2_496: -2467173169882980867
+      OverworldArt2_497: -4005363586046958549
+      OverworldArt2_498: -2811213737260518721
+      OverworldArt2_499: -9021710544297095308
+      OverworldArt2_50: 4478287337753902913
+      OverworldArt2_505: -4398447706209595412
+      OverworldArt2_506: 3349615093809351186
+      OverworldArt2_507: -7469323584562372522
+      OverworldArt2_508: 2776039193307691075
+      OverworldArt2_509: -466194914001945888
+      OverworldArt2_51: -1070831769093702271
+      OverworldArt2_510: -1553644335931267152
+      OverworldArt2_511: 4306059098070955830
+      OverworldArt2_512: 3317924955322248602
+      OverworldArt2_513: -1298555040626989902
+      OverworldArt2_519: 8409044121330889213
+      OverworldArt2_52: -3525203248135109766
+      OverworldArt2_522: 4092007077586682636
+      OverworldArt2_523: -3758656447955192814
+      OverworldArt2_524: -8762901752175016408
+      OverworldArt2_525: -3142723720718066898
+      OverworldArt2_526: -4607042293649088346
+      OverworldArt2_527: -3111794585632052078
+      OverworldArt2_528: 3661576280439252036
+      OverworldArt2_529: 5821103943811998805
+      OverworldArt2_530: -7521164641242366956
+      OverworldArt2_531: -2356339186037063779
+      OverworldArt2_532: 5461225077049881260
+      OverworldArt2_533: 8508562969283937997
+      OverworldArt2_54: 2988930877501958816
+      OverworldArt2_542: -5120897921389405975
+      OverworldArt2_543: 7671738202491560443
+      OverworldArt2_544: 1260602943332617455
+      OverworldArt2_545: -3111245847889251548
+      OverworldArt2_546: -9060299369166404354
+      OverworldArt2_547: -442956728651161084
+      OverworldArt2_548: 4398595474779724131
+      OverworldArt2_549: -4412257900210117718
+      OverworldArt2_55: -1874733793982560300
+      OverworldArt2_550: 3242292448357596872
+      OverworldArt2_551: 315471151736460436
+      OverworldArt2_552: -8930432028410080776
+      OverworldArt2_553: 5091674214179992945
+      OverworldArt2_562: 7446919111351589461
+      OverworldArt2_563: -7256488625106025851
+      OverworldArt2_564: -1388482583360215177
+      OverworldArt2_565: 7028541908130357008
+      OverworldArt2_566: -1278050185424738948
+      OverworldArt2_567: -4278203420104449584
+      OverworldArt2_568: 3671928398774193878
+      OverworldArt2_569: 6502796122151789079
+      OverworldArt2_57: -2117980249755327302
+      OverworldArt2_570: -5668504112078659688
+      OverworldArt2_571: -5421756467913627005
+      OverworldArt2_572: -3056663141454622850
+      OverworldArt2_58: -6491889891891997445
+      OverworldArt2_581: 5092646913971751909
+      OverworldArt2_582: -7903106034417799971
+      OverworldArt2_583: -277195723846304758
+      OverworldArt2_584: -2548352738705851141
+      OverworldArt2_585: 8857889230682148166
+      OverworldArt2_586: -8251438001164967624
+      OverworldArt2_587: 5239015913508885402
+      OverworldArt2_588: -1595527216339447208
+      OverworldArt2_589: 4366723111386936767
+      OverworldArt2_59: 2369361259797375544
+      OverworldArt2_591: -1194367906020060516
+      OverworldArt2_592: -3603708099212108047
+      OverworldArt2_593: -1999804680002424998
+      OverworldArt2_595: 264031353060565575
+      OverworldArt2_596: -2415178861321734426
+      OverworldArt2_598: 1772549124163437780
+      OverworldArt2_599: -8320650267767760499
+      OverworldArt2_60: 4372166462177557438
+      OverworldArt2_600: -4981479033515467891
+      OverworldArt2_601: -1484092566459972404
+      OverworldArt2_602: -5436336530074632760
+      OverworldArt2_604: -4160697607401789432
+      OverworldArt2_605: 4057951051816946865
+      OverworldArt2_606: -2571829703322625562
+      OverworldArt2_608: -1451942314168550617
+      OverworldArt2_609: -5628355229853602436
+      OverworldArt2_61: 2283290784667442129
+      OverworldArt2_611: 2301091769952245037
+      OverworldArt2_612: 125443090900166268
+      OverworldArt2_613: 4562699384213576602
+      OverworldArt2_614: 829587833025256554
+      OverworldArt2_615: -693804166361442402
+      OverworldArt2_616: 7433418325414811152
+      OverworldArt2_617: -2324921913288940226
+      OverworldArt2_618: 6096388810314470475
+      OverworldArt2_619: -7701910085374864158
+      OverworldArt2_62: 2681168234091134524
+      OverworldArt2_621: 4289499301584353573
+      OverworldArt2_622: -7900097170770093833
+      OverworldArt2_623: 8017499843902467696
+      OverworldArt2_628: -7446436964599244724
+      OverworldArt2_629: 8290789540338268386
+      OverworldArt2_63: 4648982164548656150
+      OverworldArt2_630: -5185407996813234367
+      OverworldArt2_631: 5818874167768202458
+      OverworldArt2_632: 3641641568486419183
+      OverworldArt2_633: -7180081375795375920
+      OverworldArt2_634: -5162489954681256101
+      OverworldArt2_635: 3625647134343721175
+      OverworldArt2_636: 6794275365980808583
+      OverworldArt2_637: 6318948455889247000
+      OverworldArt2_638: -1394830081075635941
+      OverworldArt2_64: 8719396167004830184
+      OverworldArt2_644: 1941580668089666051
+      OverworldArt2_645: 3481736902456296161
+      OverworldArt2_646: 8597615205127394275
+      OverworldArt2_647: 7301084492349544183
+      OverworldArt2_648: 7925835898507339968
+      OverworldArt2_649: -8677324643890575658
+      OverworldArt2_65: 2152245450682055218
+      OverworldArt2_66: -3988153848890372316
+      OverworldArt2_73: -8124290973209798677
+      OverworldArt2_74: -5598947118405683959
+      OverworldArt2_75: -6166555962808933781
+      OverworldArt2_81: 2532732885412364073
+      OverworldArt2_82: 7545129125963264298
+      OverworldArt2_83: -7643199924002926291
+      OverworldArt2_84: -1720131932953972165
+      OverworldArt2_85: 2912120750644575055
+      OverworldArt2_86: 4845881584906956423
+      OverworldArt2_87: 758656753569958376
+      OverworldArt2_88: 5136539188019472313
+      OverworldArt2_89: 7248924755310776731
+      OverworldArt2_90: -6219260397504165050
+      OverworldArt2_98: -4756863896821265481
+      OverworldArt2_99: 903141241219010825
+      StandardTree_0: -5589370085450356743
+      StandardTree_1: 5665452964269488644
+      StandardTree_2: -8842285562185138595
+      StandardTree_3: -3841127485162237041
+      StandardTree_4: 4549171077961199607
+      StandardTree_5: -1112348074349565324
+      StatueBottom: 757563548880975807
+      StatueTop: -2457416672145069786
+      StoneTrail_Center: -7377054085461444822
+      StoneTrail_Down: -1789112072817768433
+      StoneTrail_DownLeft: 4653075270994695558
+      StoneTrail_DownRight: -1464302362429998441
+      StoneTrail_InnerDownLeft: 335872981716204359
+      StoneTrail_InnerDownRight: 913284368131014039
+      StoneTrail_InnerUpLeft: -1351951947613159277
+      StoneTrail_InnerUpRight: -7863955909188119534
+      StoneTrail_Left: -6649175517642752927
+      StoneTrail_Right: -5265874251681346832
+      StoneTrail_Up: 7975828763209121035
+      StoneTrail_UpLeft: -4569144280896967075
+      StoneTrail_UpRight: 7051110663465487244
+      Waterfall_Bottom: 4416695759441074377
+      Waterfall_Mid: -9031804993899961529
+      Waterfall_Top: 4847021691793710233
+  mipmapLimitGroupName: 
   pSDRemoveMatte: 0
-  pSDShowRemoveMatteOption: 0
   userData: 
   assetBundleName: 
   assetBundleVariant: 

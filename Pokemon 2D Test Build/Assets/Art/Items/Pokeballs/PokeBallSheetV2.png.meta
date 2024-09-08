@@ -99,7 +99,7 @@ TextureImporter:
       213: 8042143307151045897
     second: HealBall_Open
   externalObjects: {}
-  serializedVersion: 11
+  serializedVersion: 12
   mipmaps:
     mipMapMode: 0
     enableMipMap: 0
@@ -116,10 +116,12 @@ TextureImporter:
     externalNormalMap: 0
     heightScale: 0.25
     normalMapFilter: 0
+    flipGreenChannel: 0
   isReadable: 0
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
   vTOnly: 0
+  ignoreMipmapLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -158,6 +160,8 @@ TextureImporter:
   textureFormatSet: 0
   ignorePngGamma: 0
   applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 1
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
@@ -169,6 +173,7 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
@@ -181,6 +186,7 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
@@ -193,6 +199,7 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
@@ -205,6 +212,20 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Server
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
@@ -892,9 +913,41 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-  spritePackingTag: 
+    nameFileIdTable:
+      CherishBall: 919533586572627975
+      CherishBall_Open: -6870077152230167632
+      DiveBall: -4654381225068230332
+      DiveBall_Open: -7643664138251565140
+      DuskBall: 2041497928045213617
+      DuskBall_Open: 7786186804096731162
+      GreatBall: -4119574551273586485
+      GreatBall_Open: -7878737159350457859
+      HealBall: -1328240887228661481
+      HealBall_Open: 8042143307151045897
+      LuxuryBall: -4739618404254288202
+      LuxuryBall_Open: 6134198080520764140
+      MasterBall: -6482656498391799953
+      MasterBall_Open: -9006170743055727161
+      NestBall: 6049836693755490529
+      NestBall_Open: 7669616917403305395
+      NetBall: 5750525649161121229
+      NetBall_Open: -6675045071610483882
+      PokeBall: 2097883433226141563
+      PokeBall_Open: 2933333950652496297
+      PremierBall: 2840316194820161986
+      PremierBall_Open: 3249322202281524520
+      QuickBall: -6641747774969291181
+      QuickBall_Open: -4342542669309947112
+      RepeatBall: -5671623688819898614
+      RepeatBall_Open: -2201300856970307113
+      SafariBall: -70799027701263210
+      SafariBall_Open: 282608901386346831
+      TimerBall: 4298839779955364258
+      TimerBall_Open: -5713775667019632233
+      UltraBall: 4646424064333522705
+      UltraBall_Open: 6610255337306894839
+  mipmapLimitGroupName: 
   pSDRemoveMatte: 0
-  pSDShowRemoveMatteOption: 0
   userData: 
   assetBundleName: 
   assetBundleVariant: 

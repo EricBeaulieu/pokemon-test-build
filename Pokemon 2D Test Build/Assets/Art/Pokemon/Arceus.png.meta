@@ -1155,7 +1155,7 @@ TextureImporter:
       213: 3486102270591279778
     second: 493_Arceus_???_SpriteB
   externalObjects: {}
-  serializedVersion: 11
+  serializedVersion: 12
   mipmaps:
     mipMapMode: 0
     enableMipMap: 0
@@ -1172,10 +1172,12 @@ TextureImporter:
     externalNormalMap: 0
     heightScale: 0.25
     normalMapFilter: 0
+    flipGreenChannel: 0
   isReadable: 0
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
   vTOnly: 0
+  ignoreMipmapLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -1214,6 +1216,8 @@ TextureImporter:
   textureFormatSet: 0
   ignorePngGamma: 0
   applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 1
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
@@ -1225,6 +1229,33 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 16384
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Server
+    maxTextureSize: 16384
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
@@ -4327,9 +4358,156 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-  spritePackingTag: 
+    nameFileIdTable:
+      493_Arceus_???_BackA: -5997049291091321460
+      493_Arceus_???_BackB: 8252161748200427696
+      493_Arceus_???_FrontA: 8546530452908072700
+      493_Arceus_???_FrontB: 3760554367619568567
+      493_Arceus_Bug_BackA: 8330495384500244564
+      493_Arceus_Bug_BackB: 446769218793384421
+      493_Arceus_Bug_FrontA: -3060713384680344587
+      493_Arceus_Bug_FrontB: 1343954181563132184
+      493_Arceus_Dark_BackA: 7438154250463027422
+      493_Arceus_Dark_BackB: 4608653481000060309
+      493_Arceus_Dark_FrontA: 266798043919297228
+      493_Arceus_Dark_FrontB: 168139302760536613
+      493_Arceus_Dragon_BackA: -7501994556401592084
+      493_Arceus_Dragon_BackB: -855373360726368370
+      493_Arceus_Dragon_FrontA: 1119706713978019457
+      493_Arceus_Dragon_FrontB: -1294564492411140912
+      493_Arceus_Electric_BackA: 8894764276443046752
+      493_Arceus_Electric_BackB: -634939427297528657
+      493_Arceus_Electric_FrontA: 5013393672351038570
+      493_Arceus_Electric_FrontB: 3092828881539428764
+      493_Arceus_Fighting_BackA: 1690695224591915401
+      493_Arceus_Fighting_BackB: 2277390141331309647
+      493_Arceus_Fighting_FrontA: -8236916319701652391
+      493_Arceus_Fighting_FrontB: -1669105254640714440
+      493_Arceus_Fire_BackA: 8530485745623862857
+      493_Arceus_Fire_BackB: 188486307879344313
+      493_Arceus_Fire_FrontA: -4669991526120536020
+      493_Arceus_Fire_FrontB: 928623202742172757
+      493_Arceus_Flying_BackA: 1434043076899996242
+      493_Arceus_Flying_BackB: -578889782166713439
+      493_Arceus_Flying_FrontA: -558185928019749817
+      493_Arceus_Flying_FrontB: -995588240856348422
+      493_Arceus_Ghost_BackA: -4057770744845092385
+      493_Arceus_Ghost_BackB: -6919832998189878721
+      493_Arceus_Ghost_FrontA: 915731626397577503
+      493_Arceus_Ghost_FrontB: -7640328325518343769
+      493_Arceus_Grass_BackA: -2680194170364700084
+      493_Arceus_Grass_BackB: 42717309090561603
+      493_Arceus_Grass_FrontA: 7165201350615797423
+      493_Arceus_Grass_FrontB: -2460703749124412696
+      493_Arceus_Ground_BackA: 7880195252510276355
+      493_Arceus_Ground_BackB: -1968715654557028427
+      493_Arceus_Ground_FrontA: -402626600783502199
+      493_Arceus_Ground_FrontB: -3624611915485967214
+      493_Arceus_Ice_BackA: 3243860970946478032
+      493_Arceus_Ice_BackB: -2581382345455708417
+      493_Arceus_Ice_FrontA: 2890883042659158813
+      493_Arceus_Ice_FrontB: -7385603113532223837
+      493_Arceus_Normal_BackA: -1315288109433554273
+      493_Arceus_Normal_BackB: -6583301105752542324
+      493_Arceus_Normal_FootPrint: 3014594789408344687
+      493_Arceus_Normal_FrontA: 7338687241162504372
+      493_Arceus_Normal_FrontB: -3423536173470082322
+      493_Arceus_Normal_SpriteA: 5897646986319860909
+      493_Arceus_Normal_SpriteB: -8315501717898435835
+      493_Arceus_Poison_BackA: 6825090428181989455
+      493_Arceus_Poison_BackB: -7122718724663016316
+      493_Arceus_Poison_FrontA: 5851824424165835754
+      493_Arceus_Poison_FrontB: -6419764911279670624
+      493_Arceus_Psychic_BackA: -8352876406739775969
+      493_Arceus_Psychic_BackB: 1791262947577301805
+      493_Arceus_Psychic_FrontA: -1901278827695246857
+      493_Arceus_Psychic_FrontB: 7312246473652898864
+      493_Arceus_Rock_BackA: -2274222889776321718
+      493_Arceus_Rock_BackB: 9126493783558178623
+      493_Arceus_Rock_FrontA: -599943550265391378
+      493_Arceus_Rock_FrontB: 1111495408391984874
+      493_Arceus_Shiny_???_BackA: 6711165667750449232
+      493_Arceus_Shiny_???_BackB: -6722949144290817551
+      493_Arceus_Shiny_???_FrontA: -5589563243135432371
+      493_Arceus_Shiny_???_FrontB: -7505569768835375064
+      493_Arceus_Shiny_Bug_BackA: -6072535988057124548
+      493_Arceus_Shiny_Bug_BackB: 549310624720706334
+      493_Arceus_Shiny_Bug_FrontA: -8747578118619139066
+      493_Arceus_Shiny_Bug_FrontB: 2330816149222290754
+      493_Arceus_Shiny_Dark_BackA: 6051432457401508881
+      493_Arceus_Shiny_Dark_BackB: -4634760220057192086
+      493_Arceus_Shiny_Dark_FrontA: -5317670752758927883
+      493_Arceus_Shiny_Dark_FrontB: -5862033644855395578
+      493_Arceus_Shiny_Dragon_BackA: -8052835005190880442
+      493_Arceus_Shiny_Dragon_BackB: 7980636093082882373
+      493_Arceus_Shiny_Dragon_FrontA: 4158585142112261777
+      493_Arceus_Shiny_Dragon_FrontB: 7921239516080972351
+      493_Arceus_Shiny_Electric_BackA: 4679105997119898513
+      493_Arceus_Shiny_Electric_BackB: 6829852739515140552
+      493_Arceus_Shiny_Electric_FrontA: -6335580360377869265
+      493_Arceus_Shiny_Electric_FrontB: 9095910507700092356
+      493_Arceus_Shiny_Fighting_BackA: 7410157470609723051
+      493_Arceus_Shiny_Fighting_BackB: -8192525097938163763
+      493_Arceus_Shiny_Fighting_FrontA: 4389079913288154455
+      493_Arceus_Shiny_Fighting_FrontB: -6443182211012754823
+      493_Arceus_Shiny_Fire_BackA: -1397393035868008306
+      493_Arceus_Shiny_Fire_BackB: -6434230763054278106
+      493_Arceus_Shiny_Fire_FrontA: -7503980373460850044
+      493_Arceus_Shiny_Fire_FrontB: -1388099664438136770
+      493_Arceus_Shiny_Flying_BackA: -8805338824571764996
+      493_Arceus_Shiny_Flying_BackB: -528506410957261186
+      493_Arceus_Shiny_Flying_FrontA: 4545119674608586165
+      493_Arceus_Shiny_Flying_FrontB: -4768869012141724961
+      493_Arceus_Shiny_Ghost_BackA: 8972050055002292751
+      493_Arceus_Shiny_Ghost_BackB: -1545015513236703720
+      493_Arceus_Shiny_Ghost_FrontA: 3158328713806042666
+      493_Arceus_Shiny_Ghost_FrontB: -6448998275167665876
+      493_Arceus_Shiny_Grass_BackA: 6466734107113138987
+      493_Arceus_Shiny_Grass_BackB: -6903098565358628187
+      493_Arceus_Shiny_Grass_FrontA: 8736987755848590199
+      493_Arceus_Shiny_Grass_FrontB: -3483660284378587416
+      493_Arceus_Shiny_Ground_BackA: 1423043888486729414
+      493_Arceus_Shiny_Ground_BackB: 4837689889900914788
+      493_Arceus_Shiny_Ground_FrontA: -5733691064521426951
+      493_Arceus_Shiny_Ground_FrontB: -7292663513536670532
+      493_Arceus_Shiny_Ice_BackA: 1505445349542064643
+      493_Arceus_Shiny_Ice_BackB: 2172062338577859351
+      493_Arceus_Shiny_Ice_FrontA: 3849288177804578538
+      493_Arceus_Shiny_Ice_FrontB: 2399512970402557804
+      493_Arceus_Shiny_Normal_BackA: 5619041935448994318
+      493_Arceus_Shiny_Normal_BackB: -4047546922555302746
+      493_Arceus_Shiny_Normal_FrontA: -1991620443799656620
+      493_Arceus_Shiny_Normal_FrontB: 7084233752742673688
+      493_Arceus_Shiny_Poison_BackA: -1339588309001006977
+      493_Arceus_Shiny_Poison_BackB: -2901839332101118692
+      493_Arceus_Shiny_Poison_FrontA: 1439033037034799876
+      493_Arceus_Shiny_Poison_FrontB: -1604991311142914549
+      493_Arceus_Shiny_Psychic_BackA: -3958424707686320571
+      493_Arceus_Shiny_Psychic_BackB: -6070602399837566545
+      493_Arceus_Shiny_Psychic_FrontA: 4788943699151136693
+      493_Arceus_Shiny_Psychic_FrontB: -663156807893879523
+      493_Arceus_Shiny_Rock_BackA: -7517162221219315435
+      493_Arceus_Shiny_Rock_BackB: 5639574933145661204
+      493_Arceus_Shiny_Rock_FrontA: -8869801915095757843
+      493_Arceus_Shiny_Rock_FrontB: -6904586822921745814
+      493_Arceus_Shiny_Steel_BackA: -6631071696938049924
+      493_Arceus_Shiny_Steel_BackB: -8534674222427903750
+      493_Arceus_Shiny_Steel_FrontA: 2313228303195551230
+      493_Arceus_Shiny_Steel_FrontB: -7604303385137153127
+      493_Arceus_Shiny_Water_BackA: -6854906340846635611
+      493_Arceus_Shiny_Water_BackB: -5519971530077763573
+      493_Arceus_Shiny_Water_FrontA: -3928755890054123025
+      493_Arceus_Shiny_Water_FrontB: -2394276897958835098
+      493_Arceus_Steel_BackA: -1833420746615953424
+      493_Arceus_Steel_BackB: -7230378616432394117
+      493_Arceus_Steel_FrontA: -8132173654846722561
+      493_Arceus_Steel_FrontB: 1467496495480776728
+      493_Arceus_Water_BackA: -8852833712792273504
+      493_Arceus_Water_BackB: -1713087881745618605
+      493_Arceus_Water_FrontA: 1469022797408857925
+      493_Arceus_Water_FrontB: 838553595805532483
+  mipmapLimitGroupName: 
   pSDRemoveMatte: 0
-  pSDShowRemoveMatteOption: 0
   userData: 
   assetBundleName: 
   assetBundleVariant: 

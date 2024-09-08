@@ -144,7 +144,7 @@ TextureImporter:
       213: -4722977687136697272
     second: PokemonMart_46
   externalObjects: {}
-  serializedVersion: 11
+  serializedVersion: 12
   mipmaps:
     mipMapMode: 0
     enableMipMap: 0
@@ -161,10 +161,12 @@ TextureImporter:
     externalNormalMap: 0
     heightScale: 0.25
     normalMapFilter: 0
+    flipGreenChannel: 0
   isReadable: 0
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
   vTOnly: 0
+  ignoreMipmapLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -174,8 +176,8 @@ TextureImporter:
   textureSettings:
     serializedVersion: 2
     filterMode: 0
-    aniso: -1
-    mipBias: -100
+    aniso: 1
+    mipBias: 0
     wrapU: 1
     wrapV: 1
     wrapW: 1
@@ -203,6 +205,8 @@ TextureImporter:
   textureFormatSet: 0
   ignorePngGamma: 0
   applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 1
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
@@ -214,6 +218,7 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
@@ -226,6 +231,7 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
@@ -238,6 +244,7 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
@@ -250,6 +257,20 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Server
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
@@ -1252,9 +1273,56 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-  spritePackingTag: 
+    nameFileIdTable:
+      PokemonMart_0: 1243489366133800502
+      PokemonMart_1: -6877327291678698849
+      PokemonMart_10: -1503966673356989767
+      PokemonMart_11: -1622381870764112209
+      PokemonMart_12: 5520418313318506308
+      PokemonMart_13: 8647388221637492172
+      PokemonMart_14: 5358405455842854768
+      PokemonMart_15: 8497143291329540947
+      PokemonMart_16: -6781085053419251045
+      PokemonMart_17: 9186352204286525182
+      PokemonMart_18: -1762444332893594167
+      PokemonMart_19: 5712397949183652947
+      PokemonMart_2: -8411439274779873135
+      PokemonMart_20: -1740276289624761477
+      PokemonMart_21: -5410972527959629956
+      PokemonMart_22: -7543613592219911626
+      PokemonMart_23: 6332297547477934074
+      PokemonMart_24: 3428535714285259818
+      PokemonMart_25: -1004942483971251128
+      PokemonMart_26: -8958619255525179432
+      PokemonMart_27: 7140734434758076766
+      PokemonMart_28: 5884934672186808494
+      PokemonMart_29: -6873721334131054171
+      PokemonMart_3: -6267441126520963212
+      PokemonMart_30: -800213438891857662
+      PokemonMart_31: -5851444669398216107
+      PokemonMart_32: -5825845425859496328
+      PokemonMart_33: 7399535070764778317
+      PokemonMart_34: -2066003679468977765
+      PokemonMart_35: 8343019147887325821
+      PokemonMart_36: -5769711347561345181
+      PokemonMart_37: -6388998623114278397
+      PokemonMart_38: 4184481794935763341
+      PokemonMart_39: 6195724198866181707
+      PokemonMart_4: 9166380288268522048
+      PokemonMart_40: -8335934713135163919
+      PokemonMart_41: -3440662611879533934
+      PokemonMart_42: -1243047340148392341
+      PokemonMart_43: 1244868648514923331
+      PokemonMart_44: 7534837208299389585
+      PokemonMart_45: 9062329382611589953
+      PokemonMart_46: -4722977687136697272
+      PokemonMart_5: -4044612896122757000
+      PokemonMart_6: 5701213775496428413
+      PokemonMart_7: -4313046539065507041
+      PokemonMart_8: -1993623315366566617
+      PokemonMart_9: 7001264442702450212
+  mipmapLimitGroupName: 
   pSDRemoveMatte: 0
-  pSDShowRemoveMatteOption: 0
   userData: 
   assetBundleName: 
   assetBundleVariant: 

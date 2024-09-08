@@ -204,7 +204,7 @@ TextureImporter:
       213: 3906470577428444263
     second: Maranga
   externalObjects: {}
-  serializedVersion: 11
+  serializedVersion: 12
   mipmaps:
     mipMapMode: 0
     enableMipMap: 0
@@ -221,10 +221,12 @@ TextureImporter:
     externalNormalMap: 0
     heightScale: 0.25
     normalMapFilter: 0
+    flipGreenChannel: 0
   isReadable: 0
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
   vTOnly: 0
+  ignoreMipmapLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -234,8 +236,8 @@ TextureImporter:
   textureSettings:
     serializedVersion: 2
     filterMode: 0
-    aniso: -1
-    mipBias: -100
+    aniso: 1
+    mipBias: 0
     wrapU: 1
     wrapV: 1
     wrapW: 1
@@ -263,6 +265,8 @@ TextureImporter:
   textureFormatSet: 0
   ignorePngGamma: 0
   applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 1
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
@@ -274,6 +278,7 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
@@ -286,6 +291,7 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
@@ -298,6 +304,7 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
@@ -310,6 +317,20 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Server
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
@@ -1732,9 +1753,76 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-  spritePackingTag: 
+    nameFileIdTable:
+      Aguav: 578188747588768168
+      Apicot: 4718131222638494278
+      Aspear: -2146382912499683421
+      Babiri: -1650036763344755857
+      Belue: 2019411986071013329
+      Bulk: -2309045927772405478
+      Charti: 1591246553171856634
+      Cheri: -1792480258135571260
+      Chesto: -4449444166993443499
+      Chilan: -5531252487923031814
+      Chople: 4176060331928135246
+      Coba: 4982803184888094461
+      Colbur: -8377011356888501854
+      Cornn: 1829348417354282749
+      Custap: -7907482494565446074
+      Durin: -6419795123343379347
+      Enigma: -4261368657043516843
+      Figy: -3731451274518931975
+      Ganlon: -4416039773993658778
+      Grepa: -1441265250845650954
+      Haban: -885194638715324783
+      Hondew: 130355083585169347
+      Iapapa: -3078317212617158557
+      Jaboca: 5980580696326669200
+      Kasib: -7214768339094943914
+      Kebia: -1188658156072215462
+      Kee: 7766004062958749879
+      Kelpsy: 8448876263647759322
+      Lansat: 7829591903321110255
+      Leppa: -2769791561412607538
+      Liechi: -1772639192111421810
+      Lum: -6224495591541005969
+      Mago: 2108018420379239409
+      Magost: 4336002116604568047
+      Maranga: 3906470577428444263
+      Micle: 154319829853531931
+      Nanab: 6987454547974888426
+      Nomel: 366106451864547379
+      Occa: -5238786277230544750
+      Oran: -1096514727103312570
+      Pamtre: -2470495438493191054
+      Passho: -959855419542572788
+      Payapa: 9153724897544060998
+      Pecha: -440757937736749153
+      Persim: -266528845555735036
+      Petaya: -4214315912516161878
+      Pinap: -2606849429599178765
+      Pomeg: 4190397631103543344
+      Qualot: 7961313787541318277
+      Rabuta: 210386469015171335
+      Rawst: -4130933814904027684
+      Razz: -7027469661796102478
+      Rindo: 2759564447439408481
+      Roseli: 8881879562891678567
+      Rowap: -3654831964578395887
+      Salac: 3502179938489477256
+      Shuca: -920455646798886817
+      Sitrus: 593216430280740861
+      Spelon: -5627977889943352163
+      Starf: 2796323334107452354
+      Tamato: -6803628907398064777
+      Tanga: 3111316660492314859
+      Wacan: 6490405907614668190
+      Watmel: -7889973054236014646
+      Wepear: -809608109139772600
+      Wiki: -2086487676592564639
+      Yache: -32214508423446364
+  mipmapLimitGroupName: 
   pSDRemoveMatte: 0
-  pSDShowRemoveMatteOption: 0
   userData: 
   assetBundleName: 
   assetBundleVariant: 

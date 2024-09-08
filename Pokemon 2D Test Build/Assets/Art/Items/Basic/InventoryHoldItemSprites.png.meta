@@ -369,7 +369,7 @@ TextureImporter:
       213: -2190470694135582397
     second: UtilityUmbrella
   externalObjects: {}
-  serializedVersion: 11
+  serializedVersion: 12
   mipmaps:
     mipMapMode: 0
     enableMipMap: 0
@@ -386,10 +386,12 @@ TextureImporter:
     externalNormalMap: 0
     heightScale: 0.25
     normalMapFilter: 0
+    flipGreenChannel: 0
   isReadable: 0
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
   vTOnly: 0
+  ignoreMipmapLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -399,8 +401,8 @@ TextureImporter:
   textureSettings:
     serializedVersion: 2
     filterMode: 0
-    aniso: -1
-    mipBias: -100
+    aniso: 1
+    mipBias: 0
     wrapU: 1
     wrapV: 1
     wrapW: 1
@@ -428,6 +430,8 @@ TextureImporter:
   textureFormatSet: 0
   ignorePngGamma: 0
   applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 1
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
@@ -439,6 +443,7 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
@@ -451,6 +456,7 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
@@ -463,6 +469,7 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
@@ -475,6 +482,20 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Server
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
@@ -2989,9 +3010,128 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-  spritePackingTag: 
+    nameFileIdTable:
+      AbsorbBulb: 2018928458622090298
+      AdamantOrb: -7601306028164416427
+      AirBalloon: 2622285939443845534
+      AmuletCoin: -2362766330381923233
+      Assault Vest: -3687909763402084177
+      BigRoot: 8975572940520568680
+      BindingBand: 7233066569484474720
+      BlackBelt: 6225198775453580294
+      BlackGlasses: -5051456550956547046
+      BlackSludge: -4655245595699082454
+      BlunderPolicy: 1831071974994667186
+      BrightPowder: 8801401268957248764
+      BugGem: 5864869524432929855
+      CellBattery: 5820790376517249470
+      Charcoal: -21322894334559622
+      Choice Band: -3638258468428280516
+      Choice Scarf: 6853110860859410640
+      Choice Specs: 423411070340256126
+      Cleanse Tag: -8341769680865799623
+      DampRock: 4154255073250991014
+      DarkGem: 7397847711738436143
+      DeepSeaScale: -2453774051236489828
+      DeepSeaTooth: 1938802062043680563
+      DestinyKnot: -7929307407999702252
+      DragonFang: -4063673703143669080
+      DragonGem: 987756750601777848
+      EXPShare: 7383466727752639400
+      Eject Button: 427635202654221034
+      Eject Pack: -3132581396694567774
+      ElectricGem: -6739786806008352236
+      Everstone: 442532670857938746
+      Eviolite: -8591116476210183014
+      Expert Belt: 4043641498883959871
+      FairyGem: -6220834911663927799
+      FightingGem: 2101577171018079826
+      FireGem: 2163197167876731815
+      Flame Orb: 8398640627752692536
+      Float Stone: -2590811641290171860
+      FlyingGem: -4275701645300242465
+      Focus Sash: -8138988339547969027
+      FocusBand: -211074150602729566
+      GhostGem: 4352697671397156823
+      GrassGem: -2326049151579329552
+      Grip Claw: -7649675427510851896
+      GroundGem: 949514502561543155
+      HardStone: -5984451383002398365
+      HeatRock: 1599653032668123029
+      Heavy Duty Boots: -3864904743462061592
+      IceGem: 7888815392249166495
+      Icy Rock: 446181545201422178
+      IronBall: -2221064277071336979
+      KingsRock: -7963046058906761694
+      LaggingTail: 6954052792739265446
+      Leek: -8128505621712782719
+      Leftovers: 5094259471680809985
+      Life Orb: 7894222032244855182
+      Light Clay: 4360271049025671440
+      LightBall: -1303940142113824501
+      Lucky Egg: 5834339346315350841
+      LuckyPunch: -1414699023928560567
+      Luminous Moss: 1632819283324874857
+      Lustrous Orb: 5994960609189343560
+      MachoBrace: -3656992301344674256
+      Magnet: 7685136050357622037
+      Mental Herb: -4632405634917303686
+      Metal Coat: -1451581618977684955
+      MetalPowder: -3372066677226458418
+      Metronome: 3231362208050224446
+      MiracleSeed: -7197862701159740732
+      MuscleBand: -3495256386599479682
+      MysticWater: 3882354319188386313
+      NeverMeltIce: -3851047976965164817
+      NormalGem: -4356925538146903126
+      PoisonBarb: 2629606889596330186
+      PoisonGem: -1946614411465265320
+      Power Herb: 2616359839239645570
+      PowerAnkle: 8363734743760045235
+      PowerBand: -3281919813867857969
+      PowerBelt: 5067620782070718247
+      PowerBracer: 4035929742572105750
+      PowerLens: 918251497693528679
+      PowerWeight: -4665964122305598692
+      PsychicGem: 8222955725978519700
+      Quick Powder: 7760431734317159311
+      QuickClaw: 7841770175853769119
+      Razor Claw: -9161776654180804969
+      Razor Fang: 5513459420724038125
+      RedCard: -1814396227483384912
+      Ring Target: 2518261111357412718
+      RockGem: 719394423997560062
+      RockyHelmet: -3521240961724083161
+      Room Service: -348861709240326797
+      Safety Goggles: -3386443770719961810
+      ScopeLens: -391178593025652833
+      SharpBeak: 1460448612395190298
+      Shed Shell: 3487473309812137774
+      Shell Bell: 1166796552645634128
+      SilkScarf: -3097572006750609372
+      Silver Powder: -2441989103178371466
+      SmokeBall: -653581147475351987
+      SmoothRock: -6649850006853855536
+      Snowball: -1054243189445489163
+      Soft Sand: 1793096428390485486
+      Soothe Bell: -3000573385100332241
+      Soul Dew: 4230220200982056627
+      SpellTag: -9219159073463455591
+      SteelGem: -5101510455356706441
+      StickyBarb: 779220829270569253
+      ThroatSpray: -3120885668455509490
+      ToxicOrb: 3351453539679978434
+      TwistedSpoon: -1897949998008015155
+      UpGrade: 3943177868893861001
+      UtilityUmbrella: -2190470694135582397
+      WaterGem: -7750829642272047179
+      Weakness Policy: 688044721807739740
+      WhiteHerb: -8565215367572507626
+      Wide Lens: -6964473653840288338
+      Wise Glasses: 9200012131345583171
+      ZoomLens: -7936758402530239514
+  mipmapLimitGroupName: 
   pSDRemoveMatte: 0
-  pSDShowRemoveMatteOption: 0
   userData: 
   assetBundleName: 
   assetBundleVariant: 

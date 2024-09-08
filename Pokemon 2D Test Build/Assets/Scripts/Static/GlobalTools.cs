@@ -222,7 +222,7 @@ public static class GlobalTools
     public static bool isInPrefabStage()
     {
 #if UNITY_2018_3_OR_NEWER
-        var stage = UnityEditor.Experimental.SceneManagement.PrefabStageUtility.GetCurrentPrefabStage();
+        var stage = UnityEditor.SceneManagement.PrefabStageUtility.GetCurrentPrefabStage();
         return stage != null;
 #else
     return false;

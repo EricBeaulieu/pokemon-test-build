@@ -60,7 +60,7 @@ TextureImporter:
       213: -3552912795389670998
     second: 1020_Shadeanium_SpriteB
   externalObjects: {}
-  serializedVersion: 11
+  serializedVersion: 12
   mipmaps:
     mipMapMode: 0
     enableMipMap: 0
@@ -77,10 +77,12 @@ TextureImporter:
     externalNormalMap: 0
     heightScale: 0.25
     normalMapFilter: 0
+    flipGreenChannel: 0
   isReadable: 0
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
   vTOnly: 0
+  ignoreMipmapLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -119,6 +121,8 @@ TextureImporter:
   textureFormatSet: 0
   ignorePngGamma: 0
   applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 1
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
@@ -130,6 +134,7 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
@@ -142,6 +147,7 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
@@ -154,6 +160,7 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
@@ -166,6 +173,20 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Server
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
@@ -580,9 +601,28 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-  spritePackingTag: 
+    nameFileIdTable:
+      1020_Shadeanium_Female_BackA: 7704667048395336905
+      1020_Shadeanium_Female_BackB: 7507052572250321367
+      1020_Shadeanium_Female_FrontA: -5052314243703772943
+      1020_Shadeanium_Female_FrontB: 7565751453854434441
+      1020_Shadeanium_FootPrint: 490105770497613334
+      1020_Shadeanium_Male_BackA: 7048390581936272423
+      1020_Shadeanium_Male_BackB: 3609920472338209216
+      1020_Shadeanium_Male_FrontA: -3002715530112134500
+      1020_Shadeanium_Male_FrontB: -9039265345611275523
+      1020_Shadeanium_Shiny_Female_BackA: 1813039383391906251
+      1020_Shadeanium_Shiny_Female_BackB: 6619835916367620047
+      1020_Shadeanium_Shiny_Female_FrontA: -3887968927394940092
+      1020_Shadeanium_Shiny_Female_FrontB: 1019810462974834831
+      1020_Shadeanium_Shiny_Male_BackA: -4572207996828199105
+      1020_Shadeanium_Shiny_Male_BackB: 4509671623930796019
+      1020_Shadeanium_Shiny_Male_FrontA: -4311726746550768298
+      1020_Shadeanium_Shiny_Male_FrontB: 6762614561286845634
+      1020_Shadeanium_SpriteA: 8201473024921753248
+      1020_Shadeanium_SpriteB: -3552912795389670998
+  mipmapLimitGroupName: 
   pSDRemoveMatte: 0
-  pSDShowRemoveMatteOption: 0
   userData: 
   assetBundleName: 
   assetBundleVariant: 

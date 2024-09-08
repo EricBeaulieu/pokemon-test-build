@@ -105,7 +105,7 @@ TextureImporter:
       213: 316021595805714087
     second: CaveA_33
   externalObjects: {}
-  serializedVersion: 11
+  serializedVersion: 12
   mipmaps:
     mipMapMode: 0
     enableMipMap: 0
@@ -122,10 +122,12 @@ TextureImporter:
     externalNormalMap: 0
     heightScale: 0.25
     normalMapFilter: 0
+    flipGreenChannel: 0
   isReadable: 0
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
   vTOnly: 0
+  ignoreMipmapLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -135,8 +137,8 @@ TextureImporter:
   textureSettings:
     serializedVersion: 2
     filterMode: 0
-    aniso: -1
-    mipBias: -100
+    aniso: 1
+    mipBias: 0
     wrapU: 1
     wrapV: 1
     wrapW: 1
@@ -164,6 +166,8 @@ TextureImporter:
   textureFormatSet: 0
   ignorePngGamma: 0
   applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 1
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
@@ -175,6 +179,7 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
@@ -187,6 +192,7 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
@@ -199,6 +205,7 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
@@ -211,6 +218,20 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Server
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
@@ -940,9 +961,43 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-  spritePackingTag: 
+    nameFileIdTable:
+      CaveA_0: -6506571082542548251
+      CaveA_1: -5053810329569400236
+      CaveA_10: 8222704368967496114
+      CaveA_11: -1124425439577974962
+      CaveA_12: 1750048241113162760
+      CaveA_13: -4411466552636390630
+      CaveA_14: -1776401952601109225
+      CaveA_15: 7420812983126041927
+      CaveA_16: 2805362902481505577
+      CaveA_17: 5335423762632744249
+      CaveA_18: 5177031772511883135
+      CaveA_19: -3247769013179510904
+      CaveA_2: 1599752671207252526
+      CaveA_20: -8569762334918799819
+      CaveA_21: 2246386543763725242
+      CaveA_22: -4892430458694570097
+      CaveA_23: -3143612246178398917
+      CaveA_24: 1849912072754597921
+      CaveA_25: 1486869585044526324
+      CaveA_26: -5493325015024367843
+      CaveA_27: 3755946185888129067
+      CaveA_28: -2366141436119588895
+      CaveA_29: 8020052520745916992
+      CaveA_3: 1882252747407795177
+      CaveA_30: -1474361801537559385
+      CaveA_31: 3347181217961027930
+      CaveA_32: -717372246271769525
+      CaveA_33: 316021595805714087
+      CaveA_4: -5746845210962143961
+      CaveA_5: -2360668999852428648
+      CaveA_6: -6750068096734906007
+      CaveA_7: -6729315993365613992
+      CaveA_8: -5822665131668954615
+      CaveA_9: 8998435025631491963
+  mipmapLimitGroupName: 
   pSDRemoveMatte: 0
-  pSDShowRemoveMatteOption: 0
   userData: 
   assetBundleName: 
   assetBundleVariant: 

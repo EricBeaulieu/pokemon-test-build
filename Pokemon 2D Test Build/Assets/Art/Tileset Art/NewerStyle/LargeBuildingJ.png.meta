@@ -405,7 +405,7 @@ TextureImporter:
       213: -3887370044390965228
     second: LargeBuildingJ_133
   externalObjects: {}
-  serializedVersion: 11
+  serializedVersion: 12
   mipmaps:
     mipMapMode: 0
     enableMipMap: 0
@@ -422,10 +422,12 @@ TextureImporter:
     externalNormalMap: 0
     heightScale: 0.25
     normalMapFilter: 0
+    flipGreenChannel: 0
   isReadable: 0
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
   vTOnly: 0
+  ignoreMipmapLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -464,6 +466,8 @@ TextureImporter:
   textureFormatSet: 0
   ignorePngGamma: 0
   applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 1
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
@@ -475,6 +479,7 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
@@ -487,6 +492,7 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
@@ -499,6 +505,7 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
@@ -511,6 +518,20 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Server
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
@@ -2857,9 +2878,120 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-  spritePackingTag: 
+    nameFileIdTable:
+      LargeBuildingJ_0: 4895939745670802648
+      LargeBuildingJ_1: 2944567062712156990
+      LargeBuildingJ_101: 384953848628680469
+      LargeBuildingJ_102: -8904419232117776382
+      LargeBuildingJ_103: 551136767783069361
+      LargeBuildingJ_105: -3657598287146074642
+      LargeBuildingJ_106: 2929615256199010692
+      LargeBuildingJ_107: 8689649068762453049
+      LargeBuildingJ_108: -271886029877803297
+      LargeBuildingJ_109: -1253487809710415708
+      LargeBuildingJ_110: -7486504544580254672
+      LargeBuildingJ_111: -6917494266304587995
+      LargeBuildingJ_117: -7296495079481045300
+      LargeBuildingJ_118: 1346734734098049165
+      LargeBuildingJ_119: 1850261403077843245
+      LargeBuildingJ_12: -3905136218397625334
+      LargeBuildingJ_120: -2231429128724814888
+      LargeBuildingJ_121: 1445417356086176794
+      LargeBuildingJ_122: -6191313043709381966
+      LargeBuildingJ_123: -8678262405066589194
+      LargeBuildingJ_124: -8333186458515316255
+      LargeBuildingJ_125: 6221150891319145859
+      LargeBuildingJ_126: 5239666605815875328
+      LargeBuildingJ_127: 2413601952199930965
+      LargeBuildingJ_128: -3845734979076653214
+      LargeBuildingJ_129: -4740082810050755515
+      LargeBuildingJ_13: 3061817142094264182
+      LargeBuildingJ_130: 3343198107188786995
+      LargeBuildingJ_131: -5508993314326741401
+      LargeBuildingJ_132: 7181803166527821588
+      LargeBuildingJ_133: -3887370044390965228
+      LargeBuildingJ_14: 1018176658354852172
+      LargeBuildingJ_15: 1547962935875032487
+      LargeBuildingJ_16: 8280556332112892956
+      LargeBuildingJ_17: -7250402400185668627
+      LargeBuildingJ_18: 3491270049890086557
+      LargeBuildingJ_19: 6064083632047721673
+      LargeBuildingJ_2: 3783850879564558029
+      LargeBuildingJ_20: -3367886695308384560
+      LargeBuildingJ_21: 5641089617242810464
+      LargeBuildingJ_22: 2422623337871941311
+      LargeBuildingJ_23: 6180332134889419404
+      LargeBuildingJ_24: 6378625336527269589
+      LargeBuildingJ_25: -1583633270347781938
+      LargeBuildingJ_26: -8750898223865123806
+      LargeBuildingJ_27: 4196928472057367086
+      LargeBuildingJ_28: -3841327032859515496
+      LargeBuildingJ_29: -5367170598784246145
+      LargeBuildingJ_3: -4359526242894177313
+      LargeBuildingJ_30: 7494047839545610029
+      LargeBuildingJ_31: -275819903679793145
+      LargeBuildingJ_32: -4887307610701684129
+      LargeBuildingJ_33: -4738334253659405102
+      LargeBuildingJ_34: 1695102989712705810
+      LargeBuildingJ_35: -6727179677324468567
+      LargeBuildingJ_36: 6024121807209541376
+      LargeBuildingJ_37: 4693241422823373785
+      LargeBuildingJ_38: 6533131698697111465
+      LargeBuildingJ_39: 5808643335239818126
+      LargeBuildingJ_4: 8742917947877940919
+      LargeBuildingJ_40: 7248254589554882177
+      LargeBuildingJ_41: -1967883070663905351
+      LargeBuildingJ_42: -4781448798307199540
+      LargeBuildingJ_43: -6560038537966562465
+      LargeBuildingJ_44: 7284984774369186130
+      LargeBuildingJ_45: -6896863928636019668
+      LargeBuildingJ_46: -5276434626311063985
+      LargeBuildingJ_47: -6271044647394845558
+      LargeBuildingJ_48: 2483670653984511557
+      LargeBuildingJ_49: -319589670726326086
+      LargeBuildingJ_5: 8842186517225657051
+      LargeBuildingJ_50: 4905371338878479025
+      LargeBuildingJ_51: 6230318628864656825
+      LargeBuildingJ_52: -117695075618495480
+      LargeBuildingJ_53: -6718559782385627755
+      LargeBuildingJ_54: 3268692934390425958
+      LargeBuildingJ_55: 6083518895360704877
+      LargeBuildingJ_56: -8801710316873806150
+      LargeBuildingJ_57: -8574181257283215337
+      LargeBuildingJ_58: -6468130939538295015
+      LargeBuildingJ_59: 5794669398225898457
+      LargeBuildingJ_6: 3409681564931362730
+      LargeBuildingJ_60: 1795080319972701084
+      LargeBuildingJ_61: 8868033017001670228
+      LargeBuildingJ_62: 2393678627281040497
+      LargeBuildingJ_63: -8988468260165757913
+      LargeBuildingJ_64: 5020574616586486051
+      LargeBuildingJ_65: -2229672854400999519
+      LargeBuildingJ_66: -3035129823014564854
+      LargeBuildingJ_67: -5934387249887926915
+      LargeBuildingJ_68: 3063019793626692230
+      LargeBuildingJ_69: 6158719605890437083
+      LargeBuildingJ_70: 7113944879327318190
+      LargeBuildingJ_71: -8157351872204576778
+      LargeBuildingJ_72: 1845238511968676231
+      LargeBuildingJ_73: -2578693717444778603
+      LargeBuildingJ_74: 2729998377619535159
+      LargeBuildingJ_75: -8504326206179535392
+      LargeBuildingJ_76: 6733937210554647931
+      LargeBuildingJ_77: 5938973561574000044
+      LargeBuildingJ_78: -6428123759474388052
+      LargeBuildingJ_83: -5786309869656840241
+      LargeBuildingJ_84: -2530909088117823231
+      LargeBuildingJ_85: -4966966946253458423
+      LargeBuildingJ_86: -6286562688683291031
+      LargeBuildingJ_87: -9170731038821026982
+      LargeBuildingJ_88: 3095668386327691469
+      LargeBuildingJ_89: -4021863078577744631
+      LargeBuildingJ_90: -7859806278984165419
+      LargeBuildingJ_91: 998201710216975412
+      LargeBuildingJ_92: -8048619967459155873
+  mipmapLimitGroupName: 
   pSDRemoveMatte: 0
-  pSDShowRemoveMatteOption: 0
   userData: 
   assetBundleName: 
   assetBundleVariant: 

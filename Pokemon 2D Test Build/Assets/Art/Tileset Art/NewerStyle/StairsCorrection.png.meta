@@ -273,7 +273,7 @@ TextureImporter:
       213: 3124806972138010629
     second: StairsCorrection_89
   externalObjects: {}
-  serializedVersion: 11
+  serializedVersion: 12
   mipmaps:
     mipMapMode: 0
     enableMipMap: 0
@@ -290,10 +290,12 @@ TextureImporter:
     externalNormalMap: 0
     heightScale: 0.25
     normalMapFilter: 0
+    flipGreenChannel: 0
   isReadable: 0
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
   vTOnly: 0
+  ignoreMipmapLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -332,6 +334,8 @@ TextureImporter:
   textureFormatSet: 0
   ignorePngGamma: 0
   applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 1
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
@@ -343,6 +347,7 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
@@ -355,6 +360,7 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
@@ -367,6 +373,7 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
@@ -379,6 +386,20 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Server
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
@@ -2284,9 +2305,99 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-  spritePackingTag: 
+    nameFileIdTable:
+      StairsCorrection_0: -4932078266031454821
+      StairsCorrection_1: 9095138345523567934
+      StairsCorrection_10: 6237891683658526121
+      StairsCorrection_11: -6340667764188542490
+      StairsCorrection_12: -5422506860482277884
+      StairsCorrection_13: -6080261731349894419
+      StairsCorrection_14: -1004609945990992185
+      StairsCorrection_15: 7717918697282644469
+      StairsCorrection_16: 5564920371006953058
+      StairsCorrection_17: -7694504971845542805
+      StairsCorrection_18: -3581665854721648839
+      StairsCorrection_19: 207476294387658885
+      StairsCorrection_2: -4451055540192180191
+      StairsCorrection_20: -927890298706023092
+      StairsCorrection_21: 5229499551673907667
+      StairsCorrection_22: -4988668744168307956
+      StairsCorrection_23: -2545175941379122969
+      StairsCorrection_24: -3244887310209009975
+      StairsCorrection_25: 5377889543451379862
+      StairsCorrection_26: 3654961852120317921
+      StairsCorrection_27: 1511316062227956216
+      StairsCorrection_28: 8862176632297127425
+      StairsCorrection_29: 1846645786779913955
+      StairsCorrection_3: 1691197567066384312
+      StairsCorrection_30: -3433173353144851931
+      StairsCorrection_31: 1810778398589822468
+      StairsCorrection_32: -3990671170971496993
+      StairsCorrection_33: 8172279445522600057
+      StairsCorrection_34: -4622722106852061716
+      StairsCorrection_35: 8437556603861454363
+      StairsCorrection_36: 2930179232668114670
+      StairsCorrection_37: 4322149047634701703
+      StairsCorrection_38: -4138989006914088737
+      StairsCorrection_39: -475237050174421826
+      StairsCorrection_4: -1469333432323632359
+      StairsCorrection_40: -4093774322195477306
+      StairsCorrection_41: -3684674357126121451
+      StairsCorrection_42: -7299738622216780281
+      StairsCorrection_43: 877443337955737083
+      StairsCorrection_44: 4619983427774329402
+      StairsCorrection_45: -4079834748812726128
+      StairsCorrection_46: -751243406214634785
+      StairsCorrection_47: -947795620305060343
+      StairsCorrection_48: 7917157817589617211
+      StairsCorrection_49: 1737982913911210764
+      StairsCorrection_5: -4460763607453151412
+      StairsCorrection_50: 8566769273594303509
+      StairsCorrection_51: 5186148044424491017
+      StairsCorrection_52: 3176349155418449537
+      StairsCorrection_53: 6992503982964775576
+      StairsCorrection_54: 9150364752203939405
+      StairsCorrection_55: 7842249954346252971
+      StairsCorrection_56: 5011147233317866255
+      StairsCorrection_57: -8559442309828156502
+      StairsCorrection_58: 3398411611282840172
+      StairsCorrection_59: -3492313528970117526
+      StairsCorrection_6: -9206654229951919370
+      StairsCorrection_60: -9158750548693895607
+      StairsCorrection_61: 2534319385308083095
+      StairsCorrection_62: -2385566307914338493
+      StairsCorrection_63: 7720632129864967256
+      StairsCorrection_64: -4278659669367655937
+      StairsCorrection_65: 8436184443377984852
+      StairsCorrection_66: 4304337336156275137
+      StairsCorrection_67: 8517787540076547816
+      StairsCorrection_68: 4896984596476524221
+      StairsCorrection_69: 3479256553843698555
+      StairsCorrection_7: -657791738450086572
+      StairsCorrection_70: 3497211437570632082
+      StairsCorrection_71: 31269285868943120
+      StairsCorrection_72: 6579490969204019133
+      StairsCorrection_73: 467916894386848820
+      StairsCorrection_74: -3301513791398961057
+      StairsCorrection_75: 5133139641388341938
+      StairsCorrection_76: -6089467954216809344
+      StairsCorrection_77: -8539779121645195790
+      StairsCorrection_78: -4542123462655163157
+      StairsCorrection_79: -3597923687121325470
+      StairsCorrection_8: 5468013172616474434
+      StairsCorrection_80: 5179722351425936649
+      StairsCorrection_81: -6441674143770930303
+      StairsCorrection_82: 1355386876664475086
+      StairsCorrection_83: 5532404472203381759
+      StairsCorrection_84: 8485832948790316981
+      StairsCorrection_85: -7802783763786220621
+      StairsCorrection_86: 2772280548424369246
+      StairsCorrection_87: -1566637927894711823
+      StairsCorrection_88: 1063492180528469972
+      StairsCorrection_89: 3124806972138010629
+      StairsCorrection_9: -626393811899100192
+  mipmapLimitGroupName: 
   pSDRemoveMatte: 0
-  pSDShowRemoveMatteOption: 0
   userData: 
   assetBundleName: 
   assetBundleVariant: 

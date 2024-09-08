@@ -144,7 +144,7 @@ TextureImporter:
       213: -9108969065367316448
     second: PokemonCenterIndoorTileset_46
   externalObjects: {}
-  serializedVersion: 11
+  serializedVersion: 12
   mipmaps:
     mipMapMode: 0
     enableMipMap: 0
@@ -161,10 +161,12 @@ TextureImporter:
     externalNormalMap: 0
     heightScale: 0.25
     normalMapFilter: 0
+    flipGreenChannel: 0
   isReadable: 0
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
   vTOnly: 0
+  ignoreMipmapLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -174,8 +176,8 @@ TextureImporter:
   textureSettings:
     serializedVersion: 2
     filterMode: 0
-    aniso: -1
-    mipBias: -100
+    aniso: 1
+    mipBias: 0
     wrapU: 1
     wrapV: 1
     wrapW: 1
@@ -203,6 +205,8 @@ TextureImporter:
   textureFormatSet: 0
   ignorePngGamma: 0
   applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 1
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
@@ -214,6 +218,7 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
@@ -226,6 +231,7 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
@@ -238,6 +244,7 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
@@ -250,6 +257,20 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Server
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
@@ -1252,9 +1273,56 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-  spritePackingTag: 
+    nameFileIdTable:
+      PokemonCenterIndoorTileset_0: 9097133255686669485
+      PokemonCenterIndoorTileset_1: -4024197489583561391
+      PokemonCenterIndoorTileset_10: 1780087564575799947
+      PokemonCenterIndoorTileset_11: 7105702694447162550
+      PokemonCenterIndoorTileset_12: 5819278783187240792
+      PokemonCenterIndoorTileset_13: -5056735274265654722
+      PokemonCenterIndoorTileset_14: 8587729971224572543
+      PokemonCenterIndoorTileset_15: 7030541081045978970
+      PokemonCenterIndoorTileset_16: 5538056857727586069
+      PokemonCenterIndoorTileset_17: -289775013606098247
+      PokemonCenterIndoorTileset_18: 9208855883540002591
+      PokemonCenterIndoorTileset_19: -4769180233832017352
+      PokemonCenterIndoorTileset_2: -4338649305570084487
+      PokemonCenterIndoorTileset_20: -2048528231691684043
+      PokemonCenterIndoorTileset_21: 967703098740210807
+      PokemonCenterIndoorTileset_22: -2623862226391101838
+      PokemonCenterIndoorTileset_23: 1483047623955995427
+      PokemonCenterIndoorTileset_24: -5783179302570293947
+      PokemonCenterIndoorTileset_25: -6423332498478506498
+      PokemonCenterIndoorTileset_26: 7660537532861776362
+      PokemonCenterIndoorTileset_27: 4078084997556072860
+      PokemonCenterIndoorTileset_28: 3325096437426241313
+      PokemonCenterIndoorTileset_29: -1440551832043641326
+      PokemonCenterIndoorTileset_3: -1615833742456124697
+      PokemonCenterIndoorTileset_30: 2788806487965994869
+      PokemonCenterIndoorTileset_31: -1887396954593170645
+      PokemonCenterIndoorTileset_32: 822445037849280403
+      PokemonCenterIndoorTileset_33: -1652270387475117686
+      PokemonCenterIndoorTileset_34: -2927202132569923190
+      PokemonCenterIndoorTileset_35: -4750691739758500467
+      PokemonCenterIndoorTileset_36: -5621612226568672586
+      PokemonCenterIndoorTileset_37: -2988125315296883027
+      PokemonCenterIndoorTileset_38: -2252415212756401424
+      PokemonCenterIndoorTileset_39: -3654291862585452562
+      PokemonCenterIndoorTileset_4: -5126495516555694637
+      PokemonCenterIndoorTileset_40: -6034323840908951568
+      PokemonCenterIndoorTileset_41: -60258423426717882
+      PokemonCenterIndoorTileset_42: -4965646337452833892
+      PokemonCenterIndoorTileset_43: 6087254342707347012
+      PokemonCenterIndoorTileset_44: -451766082123774226
+      PokemonCenterIndoorTileset_45: 8826330311989699571
+      PokemonCenterIndoorTileset_46: -9108969065367316448
+      PokemonCenterIndoorTileset_5: 7131682703091666111
+      PokemonCenterIndoorTileset_6: -6103286592716677460
+      PokemonCenterIndoorTileset_7: 5624245370629621054
+      PokemonCenterIndoorTileset_8: -387666786004810356
+      PokemonCenterIndoorTileset_9: -7207903020456590792
+  mipmapLimitGroupName: 
   pSDRemoveMatte: 0
-  pSDShowRemoveMatteOption: 0
   userData: 
   assetBundleName: 
   assetBundleVariant: 

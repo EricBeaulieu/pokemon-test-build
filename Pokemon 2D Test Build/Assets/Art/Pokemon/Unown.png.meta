@@ -762,7 +762,7 @@ TextureImporter:
       213: -6900079021478144042
     second: 201_Unown_?_SpriteB
   externalObjects: {}
-  serializedVersion: 11
+  serializedVersion: 12
   mipmaps:
     mipMapMode: 0
     enableMipMap: 0
@@ -779,10 +779,12 @@ TextureImporter:
     externalNormalMap: 0
     heightScale: 0.25
     normalMapFilter: 0
+    flipGreenChannel: 0
   isReadable: 0
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
   vTOnly: 0
+  ignoreMipmapLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -821,6 +823,8 @@ TextureImporter:
   textureFormatSet: 0
   ignorePngGamma: 0
   applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 1
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
@@ -832,6 +836,33 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 16384
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Server
+    maxTextureSize: 16384
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
@@ -4396,9 +4427,178 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-  spritePackingTag: 
+    nameFileIdTable:
+      201_Unown_!_BackA: -7492189093200007979
+      201_Unown_!_FrontA: -3674497291792413406
+      201_Unown_!_Shiny_BackA: 6314516982234071486
+      201_Unown_!_Shiny_FrontA: -5078825419264990385
+      201_Unown_!_SpriteA: 5310334145021134088
+      201_Unown_!_SpriteB: 482738203236018977
+      201_Unown_?_BackA: -6864936846791219034
+      201_Unown_?_FrontA: 3742888046723185598
+      201_Unown_?_Shiny_BackA: 6025680083463450175
+      201_Unown_?_Shiny_FrontA: -8903318742540285769
+      201_Unown_?_SpriteA: -6417333508999547436
+      201_Unown_?_SpriteB: -6900079021478144042
+      201_Unown_A_BackA: -6772400331693258451
+      201_Unown_A_FrontA: -4016453620084402331
+      201_Unown_A_Shiny_BackA: -7779645544974331613
+      201_Unown_A_Shiny_FrontA: 7965556574608532423
+      201_Unown_A_SpriteA: -5221616012286326274
+      201_Unown_A_SpriteB: 9145986009614409271
+      201_Unown_B_BackA: -5699209061274822351
+      201_Unown_B_FrontA: 5803471098380676851
+      201_Unown_B_Shiny_BackA: -6118091022354354478
+      201_Unown_B_Shiny_FrontA: -5832999838812044443
+      201_Unown_B_SpriteA: 3559333389487196198
+      201_Unown_B_SpriteB: 1178956773750580727
+      201_Unown_C_BackA: -7304581060611555898
+      201_Unown_C_FrontA: -5075441900566959402
+      201_Unown_C_Shiny_BackA: 8030277385168171582
+      201_Unown_C_Shiny_FrontA: -4005875740604132231
+      201_Unown_C_SpriteA: 2014051559451735347
+      201_Unown_C_SpriteB: 6641176957619115095
+      201_Unown_D_BackA: -3950457193859069193
+      201_Unown_D_FrontA: 1309004063312344128
+      201_Unown_D_Shiny_BackA: -2665197435754922955
+      201_Unown_D_Shiny_FrontA: -7603406339077689687
+      201_Unown_D_SpriteA: 8353764810336406404
+      201_Unown_D_SpriteB: 8256791492150296353
+      201_Unown_E_BackA: -5364714517388913150
+      201_Unown_E_FrontA: -580473696950749302
+      201_Unown_E_Shiny_BackA: 2204903387592441703
+      201_Unown_E_Shiny_FrontA: -3233384862797577199
+      201_Unown_E_SpriteA: 5117164521421520567
+      201_Unown_E_SpriteB: 1256937912483395168
+      201_Unown_F_BackA: 5291284920536554803
+      201_Unown_F_FrontA: -8067413700864358291
+      201_Unown_F_Shiny_BackA: -6671806199150583045
+      201_Unown_F_Shiny_FrontA: 1931418785826291569
+      201_Unown_F_SpriteA: -5227776837286476456
+      201_Unown_F_SpriteB: 3762811900208688101
+      201_Unown_FootPrint: -2201809953493346983
+      201_Unown_G_BackA: -182779874263250826
+      201_Unown_G_FrontA: 8177274578365910978
+      201_Unown_G_Shiny_BackA: -957136239244321780
+      201_Unown_G_Shiny_FrontA: -2287448470759861360
+      201_Unown_G_SpriteA: -4510975771280786871
+      201_Unown_G_SpriteB: -2237477289563349210
+      201_Unown_H_BackA: -5323755287604469507
+      201_Unown_H_FrontA: 8950523520546768416
+      201_Unown_H_Shiny_BackA: -2264229395734111610
+      201_Unown_H_Shiny_FrontA: 4999995327168352683
+      201_Unown_H_SpriteA: 3350975218589618433
+      201_Unown_H_SpriteB: 6401059078349605686
+      201_Unown_I_BackA: -1861470752724303384
+      201_Unown_I_FrontA: 7878192867235504180
+      201_Unown_I_Shiny_BackA: -2023456363958812653
+      201_Unown_I_Shiny_FrontA: 6074462752488725001
+      201_Unown_I_SpriteA: -7668967141839145595
+      201_Unown_I_SpriteB: -1599939952583783957
+      201_Unown_J_BackA: -7726964203037953059
+      201_Unown_J_FrontA: -5506350451135119298
+      201_Unown_J_Shiny_BackA: 1951303120210455114
+      201_Unown_J_Shiny_FrontA: -3102513708767355523
+      201_Unown_J_SpriteA: 1586403834647711357
+      201_Unown_J_SpriteB: 5329853286834208346
+      201_Unown_K_BackA: 2644941723455144683
+      201_Unown_K_FrontA: 3841334797200646312
+      201_Unown_K_Shiny_BackA: -3738056488247650365
+      201_Unown_K_Shiny_FrontA: -468744939819647474
+      201_Unown_K_SpriteA: -7197310072021284046
+      201_Unown_K_SpriteB: -1749790677283034804
+      201_Unown_L_BackA: -7636208812179930634
+      201_Unown_L_FrontA: -1669560642722019626
+      201_Unown_L_Shiny_BackA: 1065244160540369555
+      201_Unown_L_Shiny_FrontA: 4840393909900227877
+      201_Unown_L_SpriteA: 2971165591859062577
+      201_Unown_L_SpriteB: -6187524922499293246
+      201_Unown_M_BackA: 7520740234587654906
+      201_Unown_M_FrontA: -4900415603604001545
+      201_Unown_M_Shiny_BackA: -743269684801325083
+      201_Unown_M_Shiny_FrontA: 1893138369059311196
+      201_Unown_M_SpriteA: 9075381516846132834
+      201_Unown_M_SpriteB: -4268891443033961428
+      201_Unown_N_BackA: 303621965997844312
+      201_Unown_N_FrontA: 8758959207041948326
+      201_Unown_N_Shiny_BackA: 8265000150889179265
+      201_Unown_N_Shiny_FrontA: 530843730674246151
+      201_Unown_N_SpriteA: -3000147106222794192
+      201_Unown_N_SpriteB: -1248298165497088722
+      201_Unown_O_BackA: 3531302369384462912
+      201_Unown_O_FrontA: 7280073154499837911
+      201_Unown_O_Shiny_BackA: -3283576956321013921
+      201_Unown_O_Shiny_FrontA: -3385100005235946300
+      201_Unown_O_SpriteA: -8178121957690585273
+      201_Unown_O_SpriteB: 7038821668181171226
+      201_Unown_P_BackA: 951746303858112656
+      201_Unown_P_FrontA: -7309525622950603142
+      201_Unown_P_Shiny_BackA: 6165094155117565313
+      201_Unown_P_Shiny_FrontA: 8217066840485513
+      201_Unown_P_SpriteA: 8788721575715971840
+      201_Unown_P_SpriteB: -3430507880882162387
+      201_Unown_Q_BackA: -1024623008668371644
+      201_Unown_Q_FrontA: 5110008875791303553
+      201_Unown_Q_Shiny_BackA: 8841490818546258518
+      201_Unown_Q_Shiny_FrontA: 7290375328235549771
+      201_Unown_Q_SpriteA: -3123742883276950283
+      201_Unown_Q_SpriteB: 4888151126764860391
+      201_Unown_R_BackA: -806593333072209706
+      201_Unown_R_FrontA: -991677569814141443
+      201_Unown_R_Shiny_BackA: -488146640026050528
+      201_Unown_R_Shiny_FrontA: 6142048373087621671
+      201_Unown_R_SpriteA: 3626764673683411919
+      201_Unown_R_SpriteB: 1380963378878990435
+      201_Unown_S_BackA: 4354020487064290443
+      201_Unown_S_FrontA: -2986176996738959637
+      201_Unown_S_Shiny_BackA: -8743939705568800032
+      201_Unown_S_Shiny_FrontA: -8962867732144260642
+      201_Unown_S_SpriteA: 9199315680325922219
+      201_Unown_S_SpriteB: 5954088019768942471
+      201_Unown_T_BackA: -4447631802753312793
+      201_Unown_T_FrontA: -6870798526781122421
+      201_Unown_T_Shiny_BackA: -8794328359500047064
+      201_Unown_T_Shiny_FrontA: 4304951551822604817
+      201_Unown_T_SpriteA: -2357447774071222326
+      201_Unown_T_SpriteB: 8706775065394741633
+      201_Unown_U_BackA: 8780361015440727813
+      201_Unown_U_FrontA: -557934884215569290
+      201_Unown_U_Shiny_BackA: 2215585088681784427
+      201_Unown_U_Shiny_FrontA: 1326143321266487761
+      201_Unown_U_SpriteA: -5677533433167962026
+      201_Unown_U_SpriteB: 5464047330952629929
+      201_Unown_V_BackA: -7179847988149660562
+      201_Unown_V_FrontA: 8509943472555006483
+      201_Unown_V_Shiny_BackA: -8858497069369334005
+      201_Unown_V_Shiny_FrontA: -1420351490618160333
+      201_Unown_V_SpriteA: 8258699055003261944
+      201_Unown_V_SpriteB: -3207445681764365145
+      201_Unown_W_BackA: 4231214157902701244
+      201_Unown_W_FrontA: 3648152366003335051
+      201_Unown_W_Shiny_BackA: -2348880239081269386
+      201_Unown_W_Shiny_FrontA: 7962717027862899657
+      201_Unown_W_SpriteA: -7457927990225028744
+      201_Unown_W_SpriteB: -8656024847952887052
+      201_Unown_X_BackA: 6379193434979694797
+      201_Unown_X_FrontA: -6253771839480493478
+      201_Unown_X_Shiny_BackA: -2215752334965260467
+      201_Unown_X_Shiny_FrontA: 5450262846685824608
+      201_Unown_X_SpriteA: 3474729045129536818
+      201_Unown_X_SpriteB: 6454926142035762677
+      201_Unown_Y_BackA: -3768488182359840400
+      201_Unown_Y_FrontA: 6657623369003217097
+      201_Unown_Y_Shiny_BackA: 4659784115954310477
+      201_Unown_Y_Shiny_FrontA: 5911451235372936887
+      201_Unown_Y_SpriteA: -6480351244890844713
+      201_Unown_Y_SpriteB: -7843461258379500970
+      201_Unown_Z_BackA: 8712720841232777522
+      201_Unown_Z_FrontA: 2257588234715580417
+      201_Unown_Z_Shiny_BackA: 5594982612624038897
+      201_Unown_Z_Shiny_FrontA: 5065634869117737761
+      201_Unown_Z_SpriteA: -681159081142210887
+      201_Unown_Z_SpriteB: 4587137681744713305
+  mipmapLimitGroupName: 
   pSDRemoveMatte: 0
-  pSDShowRemoveMatteOption: 0
   userData: 
   assetBundleName: 
   assetBundleVariant: 

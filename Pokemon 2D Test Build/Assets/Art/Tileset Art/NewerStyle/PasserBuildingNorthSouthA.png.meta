@@ -135,7 +135,7 @@ TextureImporter:
       213: 2885811861827383534
     second: PasserBuildingNorthSouthA_43
   externalObjects: {}
-  serializedVersion: 11
+  serializedVersion: 12
   mipmaps:
     mipMapMode: 0
     enableMipMap: 0
@@ -152,10 +152,12 @@ TextureImporter:
     externalNormalMap: 0
     heightScale: 0.25
     normalMapFilter: 0
+    flipGreenChannel: 0
   isReadable: 0
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
   vTOnly: 0
+  ignoreMipmapLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -194,6 +196,8 @@ TextureImporter:
   textureFormatSet: 0
   ignorePngGamma: 0
   applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 1
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
@@ -205,6 +209,7 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
@@ -217,6 +222,7 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
@@ -229,6 +235,7 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
@@ -241,6 +248,20 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Server
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
@@ -1180,9 +1201,53 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-  spritePackingTag: 
+    nameFileIdTable:
+      PasserBuildingNorthSouthA_0: 8408386025374596462
+      PasserBuildingNorthSouthA_1: -5317115046463247880
+      PasserBuildingNorthSouthA_10: 8384998422092372608
+      PasserBuildingNorthSouthA_11: 9209570852095247603
+      PasserBuildingNorthSouthA_12: 3892454539466100900
+      PasserBuildingNorthSouthA_13: -4936550846771320227
+      PasserBuildingNorthSouthA_14: -5482962641125882611
+      PasserBuildingNorthSouthA_15: 1294970335461612387
+      PasserBuildingNorthSouthA_16: 3310395001598900656
+      PasserBuildingNorthSouthA_17: -1191763594288485683
+      PasserBuildingNorthSouthA_18: 7009197294905392681
+      PasserBuildingNorthSouthA_19: -3930872634736363316
+      PasserBuildingNorthSouthA_2: -7756655986070196425
+      PasserBuildingNorthSouthA_20: -8201558111629755769
+      PasserBuildingNorthSouthA_21: 7946886291872823319
+      PasserBuildingNorthSouthA_22: 3363203335478163308
+      PasserBuildingNorthSouthA_23: 1561306935557660138
+      PasserBuildingNorthSouthA_24: 2843072572820806704
+      PasserBuildingNorthSouthA_25: 3932925678775686216
+      PasserBuildingNorthSouthA_26: 1302052344139847970
+      PasserBuildingNorthSouthA_27: -8057312560406045736
+      PasserBuildingNorthSouthA_28: -8176700425014841591
+      PasserBuildingNorthSouthA_29: 1907379597027846187
+      PasserBuildingNorthSouthA_3: 8680675094634135272
+      PasserBuildingNorthSouthA_30: -5337846579324167622
+      PasserBuildingNorthSouthA_31: -6839792939027862500
+      PasserBuildingNorthSouthA_32: -391011778131491027
+      PasserBuildingNorthSouthA_33: 3827792155153205784
+      PasserBuildingNorthSouthA_34: -7125692225133709229
+      PasserBuildingNorthSouthA_35: 5424190290250411097
+      PasserBuildingNorthSouthA_36: -8747959350743236750
+      PasserBuildingNorthSouthA_37: -583007966756782624
+      PasserBuildingNorthSouthA_38: -2505638849334147826
+      PasserBuildingNorthSouthA_39: 4204153601776606607
+      PasserBuildingNorthSouthA_4: -5976533485307799291
+      PasserBuildingNorthSouthA_40: -2988557757317769060
+      PasserBuildingNorthSouthA_41: -4707838830204488494
+      PasserBuildingNorthSouthA_42: -613093440156904557
+      PasserBuildingNorthSouthA_43: 2885811861827383534
+      PasserBuildingNorthSouthA_5: -8613089973826032802
+      PasserBuildingNorthSouthA_6: 8115629131134391347
+      PasserBuildingNorthSouthA_7: -4788602578509709420
+      PasserBuildingNorthSouthA_8: 3190731660288863742
+      PasserBuildingNorthSouthA_9: 4261261343891491850
+  mipmapLimitGroupName: 
   pSDRemoveMatte: 0
-  pSDShowRemoveMatteOption: 0
   userData: 
   assetBundleName: 
   assetBundleVariant: 
